@@ -1,0 +1,439 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="en.xlf">
+        <body>
+            <trans-unit id="1">
+                <source>Tenant</source>
+                <target>Tenant</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>User Name</source>
+                <target>User Name</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Forgot Password?</source>
+                <target>Forgot Password?</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Log In</source>
+                <target>Log In</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Log out</source>
+                <target>Log out</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Single Sign-On</source>
+                <target>Single Sign-On</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>You are logged in as %user_name%</source>
+                <target>You are logged in as %user_name%</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Your tenant id is %tenant%</source>
+                <target>Your tenant id is %tenant%</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Authentication provider - %provider%</source>
+                <target>Authentication provider - %provider%</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Application not verified</source>
+                <target>Application not verified</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>This app hasn't been verified by SugarCRM admin yet and confirmed it's authentic.</source>
+                <target>This app hasn't been verified by SugarCRM admin yet and confirmed it's authentic.</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Unverified apps may pose a threat to your personal data.</source>
+                <target>Unverified apps may pose a threat to your personal data.</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Back to Safety</source>
+                <target>Back to Safety</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Application is asking for permission</source>
+                <target>Application is asking for permission</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>"%client%" is asking for access.</source>
+                <target>"%client%" is asking for access.</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>"%client%" would like to:</source>
+                <target>"%client%" would like to:</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Do you want to allow this access?</source>
+                <target>Do you want to allow this access?</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>No, Thanks</source>
+                <target>No, Thanks</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Allow access</source>
+                <target>Allow access</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Sorry, service is not able to process the request.</source>
+                <target>Sorry, service is not able to process the request.</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>error</source>
+                <target>error</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Return to Home</source>
+                <target>Return to Home</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Can't log in? Forget your password?</source>
+                <target>Can't log in? Forget your password?</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>Enter your email address below and we'll send you password reset instructions.</source>
+                <target>Enter your email address below and we'll send you password reset instructions.</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Required</source>
+                <target>Required</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Cancel</source>
+                <target>Cancel</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>Send</source>
+                <target>Send</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Reset your password</source>
+                <target>Reset your password</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Please choose a new password to finish log in.</source>
+                <target>Please choose a new password to finish log in.</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>Read some tips on %link%creating a secure password.%endlink%</source>
+                <target>Read some tips on %link%creating a secure password.%endlink%</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>New password</source>
+                <target>New password</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>Confirm password</source>
+                <target>Confirm password</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>Change password</source>
+                <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>Password reset successful</source>
+                <target>Password reset successful</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>Awesome, you've successfully updated your password.</source>
+                <target>Awesome, you've successfully updated your password.</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>Now you can log in and check if %link%your profile%endlink% is correct.</source>
+                <target>Now you can log in and check if %link%your profile%endlink% is correct.</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>Password reset email sent</source>
+                <target>Password reset email sent</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>An email has been sent to following address %emailaddress%.</source>
+                <target>An email has been sent to following address %emailaddress%.</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>Follow the direction in the email to reset your password.</source>
+                <target>Follow the direction in the email to reset your password.</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>Done</source>
+                <target>Done</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>Login using SAML</source>
+                <target>Login using SAML</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>User is logged out</source>
+                <target>User is logged out</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>Back</source>
+                <target>Back</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>Invalid tenant ID</source>
+                <target>Invalid tenant ID</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>All fields are required</source>
+                <target>All fields are required</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>Invalid credentials</source>
+                <target>Invalid credentials</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>Password expired</source>
+                <target>Password expired</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>Invalid scope</source>
+                <target>Invalid scope</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>Authentication SAML request is not valid</source>
+                <target>Authentication SAML request is not valid</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>Authentication SAML response is not valid</source>
+                <target>Authentication SAML response is not valid</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>Too many failed login attempts.</source>
+                <target>Too many failed login attempts.</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>Please contact the system administrator.</source>
+                <target>Please contact the system administrator.</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>You can try logging in again in</source>
+                <target>You can try logging in again in</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>days</source>
+                <target>days</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>hours</source>
+                <target>hours</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>minutes</source>
+                <target>minutes</target>
+            </trans-unit>
+            <trans-unit id="58">
+                <source>seconds</source>
+                <target>seconds</target>
+            </trans-unit>
+            <trans-unit id="59">
+                <source>Private key and x509cert should be defined</source>
+                <target>Private key and x509cert should be defined</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>Invalid IdP configuration</source>
+                <target>Invalid IdP configuration</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>Invalid authentication services configuration</source>
+                <target>Invalid authentication services configuration</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>LDAP config option groupDn must not be empty</source>
+                <target>LDAP config option groupDn must not be empty</target>
+            </trans-unit>
+            <trans-unit id="63">
+                <source>LDAP groupAttribute must not be empty</source>
+                <target>LDAP groupAttribute must not be empty</target>
+            </trans-unit>
+            <trans-unit id="64">
+                <source>LDAP baseDn must not be empty</source>
+                <target>LDAP baseDn must not be empty</target>
+            </trans-unit>
+            <trans-unit id="65">
+                <source>Consent not found</source>
+                <target>Consent not found</target>
+            </trans-unit>
+            <trans-unit id="66">
+                <source>Consent session not found</source>
+                <target>Consent session not found</target>
+            </trans-unit>
+            <trans-unit id="67">
+                <source>Failed to send email for password recovery. Please try again.</source>
+                <target>Failed to send email for password recovery. Please try again.</target>
+            </trans-unit>
+            <trans-unit id="68">
+                <source>SAML is not configured for given tenant</source>
+                <target>SAML is not configured for given tenant</target>
+            </trans-unit>
+            <trans-unit id="69">
+                <source>Invalid SAML configuration</source>
+                <target>Invalid SAML configuration</target>
+            </trans-unit>
+            <trans-unit id="70">
+                <source>SAML metadata validation failed:</source>
+                <target>SAML metadata validation failed:</target>
+            </trans-unit>
+            <trans-unit id="71">
+                <source>Invalid SAML logout data</source>
+                <target>Invalid SAML logout data</target>
+            </trans-unit>
+            <trans-unit id="72">
+                <source>Required parameters missing</source>
+                <target>Required parameters missing</target>
+            </trans-unit>
+            <trans-unit id="73">
+                <source>Invalid parameters</source>
+                <target>Invalid parameters</target>
+            </trans-unit>
+            <trans-unit id="74">
+                <source>Password is empty</source>
+                <target>Password is empty</target>
+            </trans-unit>
+            <trans-unit id="75">
+                <source>Password is too short. It should have {{ limit }} characters or more.</source>
+                <target>Password is too short. It should have {{ limit }} characters or more.</target>
+            </trans-unit>
+            <trans-unit id="76">
+                <source>Password is too long. It should have {{ limit }} characters or less.</source>
+                <target>Password is too long. It should have {{ limit }} characters or less.</target>
+            </trans-unit>
+            <trans-unit id="77">
+                <source>Password should contains at least one upper-case letter</source>
+                <target>Password should contains at least one upper-case letter</target>
+            </trans-unit>
+            <trans-unit id="78">
+                <source>Password should contains at least one lower-case letter</source>
+                <target>Password should contains at least one lower-case letter</target>
+            </trans-unit>
+            <trans-unit id="79">
+                <source>Password should contains at least one number</source>
+                <target>Password should contains at least one number</target>
+            </trans-unit>
+            <trans-unit id="80">
+                <source>Password should contains at least one special character</source>
+                <target>Password should contains at least one special character</target>
+            </trans-unit>
+            <trans-unit id="81">
+                <source>Password confirmation is empty</source>
+                <target>Password confirmation is empty</target>
+            </trans-unit>
+            <trans-unit id="82">
+                <source>Password and password confirmation don't match</source>
+                <target>Password and password confirmation don't match</target>
+            </trans-unit>
+            <trans-unit id="83">
+                <source>One time token not found</source>
+                <target>One time token not found</target>
+            </trans-unit>
+            <trans-unit id="84">
+                <source>Tenant not found</source>
+                <target>Tenant not found</target>
+            </trans-unit>
+            <trans-unit id="85">
+                <source>User not found</source>
+                <target>User not found</target>
+            </trans-unit>
+            <trans-unit id="86">
+                <source>View</source>
+                <target>View</target>
+            </trans-unit>
+            <trans-unit id="87">
+                <source>email</source>
+                <target>email</target>
+            </trans-unit>
+            <trans-unit id="88">
+                <source>address</source>
+                <target>address</target>
+            </trans-unit>
+            <trans-unit id="89">
+                <source>phone number</source>
+                <target>phone number</target>
+            </trans-unit>
+            <trans-unit id="90">
+                <source>Access all of the above information at any time</source>
+                <target>Access all of the above information at any time</target>
+            </trans-unit>
+            <trans-unit id="91">
+                <source>View your Sugar user profile which includes first name and last name</source>
+                <target>View your Sugar user profile which includes first name and last name</target>
+            </trans-unit>
+            <trans-unit id="92">
+                <source>Authenticate using OpenID Connect</source>
+                <target>Authenticate using OpenID Connect</target>
+            </trans-unit>
+            <trans-unit id="93">
+                <source>View and update any Sugar data (Accounts, Contacts, Leads, etc.) that you are permitted to access</source>
+                <target>View and update any Sugar data (Accounts, Contacts, Leads, etc.) that you are permitted to access</target>
+            </trans-unit>
+            <trans-unit id="94">
+                <source>View and manage your Identity and Access Management (IAM) objects</source>
+                <target>View and manage your Identity and Access Management (IAM) objects</target>
+            </trans-unit>
+            <trans-unit id="95">
+                <source>Only authorized users can change password</source>
+                <target>Only authorized users can change password</target>
+            </trans-unit>
+            <trans-unit id="96">
+                <source>Only local users can change password</source>
+                <target>Only local users can change password</target>
+            </trans-unit>
+            <trans-unit id="97">
+                <source>Change your password</source>
+                <target>Change your password</target>
+            </trans-unit>
+            <trans-unit id="98">
+                <source>Please enter your old password and choose a new password.</source>
+                <target>Please enter your old password and choose a new password.</target>
+            </trans-unit>
+            <trans-unit id="99">
+                <source>Old password</source>
+                <target>Old password</target>
+            </trans-unit>
+            <trans-unit id="100">
+                <source>Old password is empty</source>
+                <target>Old password is empty</target>
+            </trans-unit>
+            <trans-unit id="101">
+                <source>Old password isn't valid</source>
+                <target>Old password isn't valid</target>
+            </trans-unit>
+            <trans-unit id="102">
+                <source>No user is found</source>
+                <target>No user is found</target>
+            </trans-unit>
+            <trans-unit id="103">
+                <source>Password changed successful</source>
+                <target>Password changed successful</target>
+            </trans-unit>
+            <trans-unit id="104">
+                <source>Continue</source>
+                <target>Continue</target>
+            </trans-unit>
+            <trans-unit id="105">
+                <source>Tenant not exists or deleted</source>
+                <target>Tenant not exists or deleted</target>
+            </trans-unit>
+            <trans-unit id="106">
+                <source>Tenant isn't active</source>
+                <target>Tenant isn't active</target>
+            </trans-unit>
+            <trans-unit id="107">
+                <source>New password must be different from previous password</source>
+                <target>New password must be different from previous password</target>
+            </trans-unit>
+            <trans-unit id="108">
+                <source>Show log in form</source>
+                <target>Show log in form</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

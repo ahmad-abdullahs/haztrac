@@ -1,0 +1,76 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class='hint-preview-contacts'>
+    {{#if isHintRequestLoading}}
+        <div class= 'loading'><span>{{str 'LBL_HINT_LOADING'}}</span></div>    
+    {{else}}
+    {{#if collection.dataFetched}}
+    <ul class='unstyled hint-preview-contacts-list'>
+        {{#each collection.models}}
+        <li id='{{this.attributes.id}}' class='item'>
+            {{#if this.attributes._src}}
+                <span class='hint-preview-contacts-src'>
+                    <div class='image_field image_detail image_rounded'>
+                        <div class='image_preview'>
+                            <img src='{{this.attributes._src}}'>
+                        </div>
+                    </div>
+                </span>
+            {{else}}
+                <span class='label label-module label-module-lg label-Contacts'
+                    rel='tooltip' title='' data-placement='right' data-original-title='Contact'>
+                    Co
+                </span>
+            {{/if}}
+            <div class='hint-preview-contacts-nameandphone'>
+                <div class='span4 ellipsis_inline name' title="{{this.attributes.name}}">
+                    <a href='{{this.attributes._link}}'>
+                        <span id='first_name_erased' class='label hidden' rel='tooltip' data-placement='bottom' title='' data-original-title="{{str 'LBL_HINT_VALUE_ERASED_TOOLTIP'}}">{{str 'LBL_HINT_VALUE_ERASED'}}</span>
+                        <span> {{this.attributes.first_name}}</span>
+                        <span id='last_name_erased' class='label hidden' rel='tooltip' data-placement='bottom' title='' data-original-title="{{str 'LBL_HINT_VALUE_ERASED_TOOLTIP'}}">{{str 'LBL_HINT_VALUE_ERASED'}}</span>
+                        <span> {{this.attributes.last_name}}</span>
+                    </a>
+                </div>
+                <div class='span8 ellipsis_inline phone' title='{{this.attributes.phone_mobile}}'>
+                {{this.attributes.phone_mobile}}
+                    <div class='phone_erased hidden' style='float: right;'>
+                        <span class='label' rel='tooltip' data-placement='bottom' title='' data-original-title="{{str 'LBL_HINT_VALUE_ERASED_TOOLTIP'}}">{{str 'LBL_HINT_VALUE_ERASED'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class='hint-preview-contacts-titleandmail'>
+                <div class='span4 ellipsis_inline title' title="{{this.attributes.title}}">{{this.attributes.title}}
+                    <div class='title_erased hidden' style='float: left;'>
+                        <span class='label' rel='tooltip' data-placement='bottom' title='' data-original-title="{{str 'LBL_HINT_VALUE_ERASED_TOOLTIP'}}">{{str 'LBL_HINT_VALUE_ERASED'}}</span>
+                    </div>
+                </div>
+                <div class='span8 ellipsis_inline email' title='{{this.attributes.email1}}'>
+                    <a href='javascript:void(0)' data-action='email' data-email-to='{{this.attributes.email1}}'>{{this.attributes.email1}}
+                    </a>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+        {{#if _showMore}}
+            <li class='show_more'>
+                <button class='btn-link' data-action='show_more'>{{str 'LBL_SHOW_MORE'}}...</button>
+            </li>
+        {{/if}}
+        {{#unless collection.models}}
+            <li class='item'><span>{{str 'LBL_HINT_CONTACTS_NONE'}}</span></li>
+        {{/unless}}
+        
+    </ul>
+    {{/if}}
+    {{/if}}
+</div>

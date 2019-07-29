@@ -1,0 +1,149 @@
+{
+    "name" : "sugarcrm/sugarcrm",
+    "description" : "SugarCRM",
+    "type" : "project",
+    "license" : "proprietary",
+    "homepage" : "http://www.sugarcrm.com",
+    "support": {
+        "wiki" : "http://support.sugarcrm.com",
+        "forum": "https://community.sugarcrm.com/sugarcrm",
+        "irc": "irc://irc.freenode.org/sugarcrm"
+    },
+    "config" : {
+        "vendor-dir" : "vendor",
+        "prepend-autoloader" : false,
+        "autoloader-suffix" : "Sugar",
+        "notify-on-install" : false,
+        "discard-changes" : true,
+        "preferred-install" : "dist",
+        "use-include-path" : false,
+        "platform": {
+            "php": "7.1.0"
+        }
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": {
+            "HTMLPurifier_": "vendor/HTMLPurifier/standalone",
+            "UltraLite\\Container\\": "vendor/ultra-lite/container/src",
+            "Zend_": "vendor"
+        },
+        "psr-4": {
+            "Sugarcrm\\Sugarcrm\\": [
+                "src/",
+                ""
+            ],
+            "Sugarcrm\\Sugarcrm\\custom\\": [
+                "custom/src/",
+                "custom/"
+            ],
+            "Sugarcrm\\Sugarcrm\\inc\\": "include/",
+            "Sugarcrm\\Sugarcrm\\custom\\inc\\": "custom/include/"
+        },
+        "classmap": [
+            "api/",
+            "clients/",
+            "custom/",
+            "data/",
+            "include/",
+            "install/",
+            "jssource/",
+            "modules/",
+            "ModuleInstall/",
+            "service/",
+            "soap/",
+            "src/Dbal/Compat/PDO.php",
+            "themes/",
+            "upgrade/",
+            "vendor/lessphp",
+            "vendor/HTMLPurifier/HTMLPurifier.standalone.php",
+            "vendor/Pear",
+            "vendor/nusoap",
+            "vendor/Smarty",
+            "vendor/XTemplate",
+            "vendor/oauth2-php"
+        ],
+        "exclude-from-classmap": [
+            "/include/SearchForm/SearchForm.php",
+            "/include/SearchForm/SearchForm2.php",
+            "/include/EditView/EditView.php",
+            "/include/EditView/EditView2.php",
+            "/modules/*/Popup_picker.php",
+            "/modules/*/SubPanelViewTeams.php",
+            "/modules/*/views/view.index.php",
+            "/modules/HealthCheck/**",
+            "/upgrade/scripts/**",
+            "**/upgrade/scripts/**",
+            "**/test/**",
+            "**/tests/**",
+            "**/Test/**",
+            "**/Tests/**"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/{old}"
+        ],
+        "exclude-from-classmap": [
+            "tests/{old}/src"
+        ],
+        "psr-4": {
+            "Sugarcrm\\SugarcrmTests\\": [
+                "tests/{old}/src/"
+            ],
+            "Sugarcrm\\SugarcrmTestsUnit\\": [
+                "tests/unit-php/src/",
+                "tests/unit-php/"
+            ],
+            "Sugarcrm\\SugarcrmTestsUnit\\inc\\": "tests/unit-php/include/",
+            "Sugarcrm\\SugarcrmTestsUnit\\custom\\": "custom/tests/unit-php/",
+            "Sugarcrm\\SugarcrmTestsBehat\\": "tests/behat"
+        }
+    },
+    "require": {
+        "doctrine/dbal": "v2.9.2",
+        "etechnika/idna-convert" : "1.0.3",
+        "ext-openssl": "*",
+        "google/apiclient": "1.1.4",
+        "league/oauth2-client": "2.2.1",
+        "monolog/monolog": "1.22.0",
+        "moontoast/math": "1.1.0",
+        "parsecsv/php-parsecsv": "0.4.5",
+        "php": "^7.1",
+        "phpmailer/phpmailer" : "v5.2.22",
+        "psr/container": "^1.0",
+        "psr/log": "1.0.0",
+        "psr/simple-cache": "^1.0",
+        "ramsey/uuid": "3.8.0",
+        "ruflin/elastica" : "6.0.1",
+        "aws/aws-sdk-php": "3.55.3",
+        "sugarcrm/identity-provider": "1.5.1",
+        "symfony/cache": "v3.4.16",
+        "symfony/console": "v3.4.16",
+        "symfony/framework-bundle": "v3.4.16",
+        "symfony/security-core": "v3.4.16",
+        "symfony/security-csrf": "v3.4.16",
+        "symfony/translation": "v3.4.16",
+        "symfony/validator": "v3.4.16",
+        "tedivm/jshrink": "v1.3.1",
+        "vanderlee/php-stable-sort-functions": "2.0.2",
+        "symfony/process": "v3.4.11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "7.5.1",
+        "behat/behat": "3.4.3"
+    },
+    "repositories": [
+        {
+            "packagist.org": false
+        },
+        {
+            "type": "path",
+            "url": "dist/identity-provider"
+        },
+        {
+            "type": "composer",
+            "url": "https://satis.sugardev.team"
+        }
+    ]
+}

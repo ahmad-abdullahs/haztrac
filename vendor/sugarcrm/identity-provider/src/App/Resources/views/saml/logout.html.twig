@@ -1,0 +1,27 @@
+{#
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+#}
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <div class="thumbnail idm-consent">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            {{ 'User is logged out'|trans }}
+        </section>
+        <nav class="nav tcenter">
+            <form action="{{ path('samlRender') }}"  method="get" >
+                <button id="logout_btn" class="btn btn-primary">{{ 'Back'|trans }}</button>
+            </form>
+        </nav>
+    </div>
+{% endblock %}

@@ -1,0 +1,164 @@
+# Your installation or use of this SugarCRM file is subject to the applicable
+# terms available at
+# http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+# If you do not agree to all of the applicable terms or do not have the
+# authority to bind the entity as an authorized representative, then do not
+# install or use this SugarCRM file.
+#
+# Copyright (C) SugarCRM Inc. All rights reserved.
+
+default:
+  autoload:
+    'Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap': '%paths.base%/bootstrap'
+
+  suites:
+    default:
+      paths:
+        features: '%paths.base%/Default'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\FeatureContext:
+            sugarAdmin:
+              username: admin
+              password: admin
+            screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+    portal:
+      paths:
+        features: '%paths.base%/IDM'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\IDMContext:
+            sugarAdmin:
+              username: admin
+              password: admin
+            screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+    saml:
+      paths:
+        features: '%paths.base%/Saml'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\SamlFeatureContext:
+            samlServer: "http://saml-server/simplesaml"
+            sugarAdmin:
+              username: admin
+              password: admin
+            mangoInstances:
+              behat-tests-mango-saml-base: "http://behat-tests-mango-saml-base"
+              behat-tests-mango-saml-same-window: "http://behat-tests-mango-saml-same-window"
+              behat-tests-mango-saml-same-window-no-user-provision: "http://behat-tests-mango-saml-same-window-no-user-provision"
+            defaultInstance: behat-tests-mango-saml-base
+            screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+    ldap:
+      paths:
+        features: '%paths.base%/Ldap'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\LdapFeatureContext:
+            sugarAdmin:
+              username: admin
+              password: admin
+            ldapConfig:
+              servers:
+                ldap: %%LDAP_HOST%%
+                ldap_ssl: ldaps://%%LDAP_HOST%%
+            screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+    oidc:
+      paths:
+        features: '%paths.base%/OIDC'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\OIDCFeatureContext:
+            sugarAdmin:
+              username: admin
+              password: admin
+            oidcClients:
+              default:
+                clientId: srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a
+                clientSecret: mangoOIDCClientSecret
+                redirectUrl: http://localhost/consumer
+                accessTokenFile:
+                accessTokenRefreshUrl:
+              native:
+                clientId: srn:cloud:iam:eu:0000000001:app:native:806bfb76-ee57-43ea-9022-aa91e6b6c617
+                clientSecret: NativeOIDCClientSecret
+                redirectUrl: http://localhost/consumer
+                accessTokenFile:
+                accessTokenRefreshUrl:
+            loginServiceUrl: '%%IDP_SERVICE_URL%%'
+            screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+        - Ubirak\RestApiBehatExtension\RestApiContext
+        - Ubirak\RestApiBehatExtension\Json\JsonContext
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\MangoIDMRestFeatureContext:
+            sugarAdmin:
+              username: admin
+              password: admin
+
+    rest:
+      paths:
+        features: '%paths.base%/Rest'
+      contexts:
+        - Ubirak\RestApiBehatExtension\RestApiContext
+        - Ubirak\RestApiBehatExtension\Json\JsonContext
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\AuthenticationRestContext:
+            oidcClient:
+              clientId: srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a
+              clientSecret: mangoOIDCClientSecret
+              redirectUrl: http://localhost/consumer
+              accessTokenFile:
+              accessTokenRefreshUrl:
+            oidcUrl: '%%HYDRA_URL%%'
+
+    soap:
+      paths:
+        features: '%paths.base%/SOAP'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\SOAPFeatureContext:
+            mangoInstances:
+              behat-tests-mango: "http://behat-tests-mango"
+              behat-tests-mango-oidc: "http://behat-tests-mango-oidc.%%IDM_NS%%"
+            sugarAdmin:
+              username: admin
+              password: admin
+    LoginService:
+      paths:
+        features: '%paths.base%/LoginService'
+      contexts:
+        - Sugarcrm\IdentityProvider\IntegrationTests\Bootstrap\LoginServiceFeatureContext:
+            base_url: '%%IDP_SERVICE_URL%%'
+            screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+
+  formatters:
+    pretty:
+    html:
+      output_path: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%"
+
+  extensions:
+    Behat\MinkExtension:
+      browser_name: chrome
+      default_session: selenium2
+      base_url: '%%MANGO_URL%%'
+      selenium2:
+        browser: chrome
+        wd_host: "http://%%SELENIUM_HOST%%:4444/wd/hub"
+        capabilities:
+          chrome:
+            switches:
+              - "--disable-popup-blocking"
+              - "--headless"
+      sessions:
+        default:
+          goutte: ~
+    Ubirak\RestApiBehatExtension\Extension:
+      rest:
+        base_url: '%%REST_SERVICE_URL%%'
+        store_response: true
+    Behat\SoapExtension:
+      # An associative array as second argument for \SoapClient::__soapCall().
+      options: {}
+      # An associative array as parameters for \DOMXpath::registerNamespace().
+      namespaces: {}
+    elkan\BehatFormatter\BehatFormatterExtension:
+      name: html
+      renderer: Twig,Behat2
+      file_name: index
+      print_args: true
+      print_outp: true
+      loop_break: true
+      show_tags: true
+      screenShotPath: "%paths.base%/../../var/htmlreport/%%BEHAT_SUITE%%/assets/screenshots"
+    SensioLabs\Behat\PageObjectExtension: ~

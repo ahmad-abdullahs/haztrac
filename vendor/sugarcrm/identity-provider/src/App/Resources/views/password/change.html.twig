@@ -1,0 +1,44 @@
+{% extends "index-with-alerts.html.twig" %}
+
+{% block content %}
+    <div class="thumbnail idm-set-password">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            <h3>{{ 'Change your password'|trans }}</h3>
+            <p>{{ 'Please enter your old password and choose a new password.'|trans }}
+                {% set link = '<a href="http://support.sugarcrm.com/" target="_blank">' %}
+                {% set endlink = '</a>' %}
+                {{ 'Read some tips on %link%creating a secure password.%endlink%'|trans({'%link%': link, '%endlink%': endlink})|raw }}
+            </p>
+            {#TODO set valid link to secure password tips#}
+            <form name="password" id="submit_section" method="post" action="{{ path
+                ('changePassword') }}" class="tcenter">
+                <div class="control-group">
+                    <span class="edit">
+                      <input type="password" name="oldPassword" id="oldPassword" placeholder="{{ 'Old password'|trans }}"
+                             class="inherit-width" aria-label="oldPassword">
+                    </span>
+                </div>
+                <div class="control-group">
+                    <span class="edit">
+                      <input type="password" name="newPassword" id="newPassword" placeholder="{{ 'New password'|trans }}"
+                             class="inherit-width" aria-label="newPassword">
+                    </span>
+                </div>
+                <div class="control-group">
+                    <span class="edit">
+                      <input type="password" name="confirmPassword" id="confirmPassword" value=""
+                             placeholder="{{ 'Confirm password'|trans }}"
+                             aria-label="confirmPassword">
+                    </span>
+                </div>
+                <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">
+            </form>
+        </section>
+        <nav class="nav tcenter">
+            <a href="javascript:void(0);" id="submit_btn">
+                <button id="set-new-password-btn" class="btn btn-primary">{{ 'Change password'|trans }}</button>
+            </a>
+        </nav>
+    </div>
+{% endblock %}

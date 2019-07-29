@@ -1,0 +1,9 @@
+.create-leads-layout input[name='first_name'],
+.create-leads-layout input[name='last_name'],
+.create-leads-layout [data-name='email'] input,
+.create-contacts-layout input[name='first_name'],
+.create-contacts-layout input[name='last_name'],
+.create-contacts-layout [data-name='email'] input {
+    border-color: #0066cc !important;
+    background-color: #cce5ff !important;
+}

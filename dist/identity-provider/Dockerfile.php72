@@ -1,0 +1,74 @@
+# Your installation or use of this SugarCRM file is subject to the applicable
+# terms available at
+# http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+# If you do not agree to all of the applicable terms or do not have the
+# authority to bind the entity as an authorized representative, then do not
+# install or use this SugarCRM file.
+#
+# Copyright (C) SugarCRM Inc. All rights reserved.
+
+FROM php:7.2-apache-stretch
+
+RUN apt-get update && apt-get install -y \
+        apt-utils \
+        apt-transport-https \
+        lsb-release \
+        gnupg2 \
+        wget \
+        libxml2-dev \
+        libzip-dev \
+        libssl-dev \
+        libldap2-dev \
+        libsasl2-dev \
+        libgmp-dev \
+        unzip \
+        libaio1 \
+        --no-install-recommends \
+    && ln -fs /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/ \
+    && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+    && docker-php-ext-configure ldap --with-ldap-sasl --with-ldap \
+    && docker-php-ext-install zip mysqli pdo_mysql gmp ldap soap \
+    && pecl install apcu \
+    && pecl install apcu_bc \
+    && pecl install grpc \
+    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
+    && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini \
+    && docker-php-ext-enable grpc \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o \
+    APT::AutoRemove::SuggestsImportant=false
+
+
+# MySQL set up
+RUN echo 'mysql-apt-config mysql-apt-config/select-tools select MySQL Server (Currently selected: mysql-5.7)' | debconf-set-selections && \
+    echo 'mysql-apt-config mysql-apt-config/select-preview select mysql-5.7' | debconf-set-selections && \
+    echo 'mysql-apt-config mysql-apt-config/select-server select mysql-5.7' | debconf-set-selections && \
+    echo 'mysql-apt-config mysql-apt-config/select-product select Ok' | debconf-set-selections && \
+    echo 'mysql-server mysql-server/root_password password Sugar123' | debconf-set-selections && \
+    echo 'mysql-server mysql-server/root_password_again password Sugar123' | debconf-set-selections && \
+    echo 'mysql-community-server mysql-community-server/root-pass password Sugar123' | debconf-set-selections && \
+    echo 'mysql-community-server mysql-community-server/re-root-pass password Sugar123' | debconf-set-selections && \
+    wget http://dev.mysql.com/get/mysql-apt-config_0.8.3-1_all.deb && \
+    DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.3-1_all.deb && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server
+
+
+RUN echo -e "\ndate.timezone = \"UTC\"\n" >> /usr/local/etc/php/php.ini
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+WORKDIR /var/www/html
+
+COPY . /var/www/html
+
+# chown to get rid of "Can't open and lock privilege tables: Table 'mysql.host' doesn't exist"
+# fatal error on mysql start
+# Done via ENTRYPOINT to fix problems with aufs that stops us from doing in via RUN
+RUN echo "#!/bin/sh" >> /startup.sh && \
+    echo "rm /var/run/mysqld/mysqld.sock.lock" >> /startup.sh && \
+    echo "chown -R mysql:mysql /var/lib/mysql && chown -R mysql:mysql /var/log/mysql && service mysql restart" >> /startup.sh && \
+    echo 'exec "$@"' >> /startup.sh && \
+    chmod 755 /startup.sh
+
+RUN composer install
+
+ENTRYPOINT ["/startup.sh"]

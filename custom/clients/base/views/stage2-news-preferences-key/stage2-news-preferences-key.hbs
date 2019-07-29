@@ -1,0 +1,40 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class='preview-data'>
+    <div class='record-cell field-row'>
+        {{#each keys}}
+            <div class='stage2-notification-key'>
+                <div class='stage2-notification-key-left'>
+                    <div class='stage2-notification-icon fa-stack'>
+                        <i class='fa fa-stack-1x fa-{{icon}} {{disabledClass}}'></i>
+                        {{#if iconStack}}
+                            <span class='fa-stack-1x {{disabledClass}} text-fa'>{{iconStack}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class='stage2-notification-key-right'>
+                    {{#if title}}
+                        <div class='stage2-notification-key-title'>
+                            {{title}}
+                        </div>
+                    {{/if}}
+                    {{#if details}}
+                        <div class='stage2-notification-key-text'>
+                            {{details}}
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

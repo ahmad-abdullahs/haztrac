@@ -1,0 +1,52 @@
+{{!--
+/*
+* Your installation or use of this SugarCRM file is subject to the applicable
+* terms available at
+* http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+* If you do not agree to all of the applicable terms or do not have the
+* authority to bind the entity as an authorized representative, then do not
+* install or use this SugarCRM file.
+*
+* Copyright (C) SugarCRM Inc. All rights reserved.
+*/
+--}}
+{{#unless stage2errorCode}}
+<div class='stage2-news'>
+    {{#if isHintRequestLoading}}
+        <img src='custom/Stage2/opt_render_3.jpg'>
+    {{else}}
+        <div class='hint-news-dashlet-auto-notifier vanished'>{{str 'LBL_NEW_NOTIFICATIONS'}}</div>
+        <div id='newsarea'>
+            {{#if displayNews}}
+                <ul class='unstyled stage2-news-list'>
+                    {{#each news}}
+                        {{#unless hide}}
+                            <li class='item'>
+                                <div class='details'>
+                                    <span class='publisher'>
+                                        {{#if logoUrl}}
+                                            <img src='{{logoUrl}}' name='companyLogo'>
+                                        {{else}}
+                                            <span class='{{publisher}}' name='publisher'>{{publisher}}</span>
+                                        {{/if}}
+                                    </span>
+                                    <span class='news_date' name='date' title='{{date}}'>
+                                        {{relativeTime date class='date'}}
+                                    </span>
+                                </div>
+                                <span class='title'>
+                                    <a target='_blank' href='{{sourceUrl}}' data-action='newsClick'>
+                                        <div>{{title}}</div>
+                                    </a>
+                                </span>
+                            </li>
+                        {{/unless}}
+                    {{/each}}
+                </ul>
+            {{else}}
+                <div class='empty_news'>{{str 'LBL_HINT_NEWS_NONE'}}</div>
+            {{/if}}
+        </div>
+    {{/if}}
+</div>
+{{/unless}}

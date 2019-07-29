@@ -1,0 +1,54 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <div class="thumbnail idm-set-password">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            <h3>{{ 'Reset your password'|trans }}</h3>
+            <p>{{ 'Please choose a new password to finish log in.'|trans }}
+                {% set link = '<a href="http://support.sugarcrm.com/" target="_blank">' %}
+                {% set endlink = '</a>' %}
+                {{ 'Read some tips on %link%creating a secure password.%endlink%'|trans({'%link%': link, '%endlink%': endlink})|raw }}
+            </p>
+            {#TODO set valid link to secure password tips#}
+            <form name="password" id="submit_section" method="post" action="{{ path
+                ('setPassword') }}" class="tcenter">
+                <input type="hidden" name="tid" value="{{ tid }}">
+                <input type="hidden" name="token" value="{{ token }}">
+                <div class="control-group">
+                    <span class="edit">
+                      <input type="password" name="newPassword" id="newPassword" placeholder="{{ 'New password'|trans }}"
+                             class="inherit-width" aria-label="newPassword">
+                    </span>
+                </div>
+                <div class="control-group">
+                    <span class="edit">
+                      <input type="password" name="confirmPassword" id="confirmPassword" value=""
+                             placeholder="{{ 'Confirm password'|trans }}"
+                             aria-label="confirmPassword">
+                    </span>
+                </div>
+                <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">
+            </form>
+        </section>
+        <nav class="nav tcenter">
+            <a href="javascript:void(0);" id="submit_btn">
+                <button id="set-new-password-btn" class="btn btn-primary">{{ 'Change password'|trans }}</button>
+            </a>
+        </nav>
+    </div>
+{% endblock %}
+{% block alert %}
+    {% set alert = app.getSession().getFlashBag().get('error') %}
+    {% if alert is not empty %}
+        <div class="alert alert-danger alert-block closeable">
+            <div class="indicator">
+                <i class="fa fa-exclamation-circle"></i>
+            </div>
+            <button class="close btn btn-link btn-invisible" onclick="javascript:void(0);" id="close_alert_btn">
+                <i class="fa fa-times"></i>
+            </button>
+            <span class="text">{{ alert|translate_array|join('. ') }}</span>
+        </div>
+    {% endif %}
+{% endblock %}

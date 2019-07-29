@@ -1,0 +1,61 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SugarCRM Identity Provider</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="stylesheet" href="{{ asset('idm.css', 'css') }}" type="text/css">
+    <script type="text/javascript" src="{{ asset('main.js', 'js') }}"></script>
+</head>
+<body>
+<div id="sugarcrm">
+    <div id="sidecar">
+        <div id="alerts" class="alert-top">
+            <div class="alert-wrapper">
+                {% block alert %}{% endblock %}
+            </div>
+        </div>
+        <div id="content">
+            <div>
+                <div>
+                    <div class="welcome">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            {% block marketing %}{% endblock %}
+        </div>
+        <div id="footer">
+            <footer>
+                <div class="table-row">
+                    <div class="table-cell">
+                        <a href="#Home" title="SugarCRM" class="logo"><img data-metadata="logo"
+                                                                           src="{{ asset('img/company_logo.png') }}"
+                                                                           alt="SugarCRM"></a>
+                    </div>
+                    <div class="table-cell">
+                        <div class="btn-toolbar pull-right">
+                            {% include 'languages.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>

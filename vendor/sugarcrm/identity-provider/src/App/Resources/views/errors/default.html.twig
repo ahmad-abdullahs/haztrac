@@ -1,0 +1,14 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <div class="thumbnail idm-consent">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            <h3>{{ 'Sorry, service is not able to process the request.'|trans }}</h3>
+            <h4>{{ error_code }} {{ 'error'|trans|capitalize }}.</h4>
+        </section>
+        <nav class="nav tcenter">
+            <a href="{{ url('loginRender') }}"><button id="home_btn" class="btn btn-primary">{{ 'Return to Home'|trans }}</button></a>
+        </nav>
+    </div>
+{% endblock %}

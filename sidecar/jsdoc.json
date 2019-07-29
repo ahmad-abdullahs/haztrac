@@ -1,0 +1,22 @@
+{
+    "opts": {
+        "destination": "./docs",
+        "encoding": "utf8",
+        "package": "docs-template/package-info.json",
+        "readme": "docs-template/API.md",
+        "recurse": true,
+        "template": "node_modules/ink-docstrap/template",
+        "tutorials": "./tutorials"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "default": {
+            "layoutFile": "docs-template/layout.tmpl"
+        },
+        "navType": "vertical",
+        "systemName" : "Sidecar API Reference"
+    }
+
+}

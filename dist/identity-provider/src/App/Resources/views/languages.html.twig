@@ -1,0 +1,19 @@
+{% set currentRoute = app.request_stack.currentrequest.attributes.get('_route') %}
+{% set currentParams = app.request_stack.currentrequest.query.all %}
+
+{% if locales and currentRoute in ['loginRender', 'forgotPasswordRender', 'showSetPasswordForm'] %}
+    <span class="dropdown" data-action="languageList" id="languageList">
+            <button title="Language / Sprache / Idioma" aria-label="Language / Sprache / Idioma"
+                    class="btn btn-invisible dropdown-toggle" data-toggle="dropdown" role="button"
+                    type="button" id="languageButton">
+                <i class="fa fa-globe"></i><span class="action-label">Language / Sprache / Idioma</span>
+            </button>
+            <div class="dropdown-menu bottom-up" id="languageDropdown" style="display: none">
+                <ul role="menu" id="languageMenu">
+                    {% for key, value in locales %}
+                        <li><a href="{{ path(currentRoute, currentParams|merge({'locale': key})) }}">{{ value }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+    </span>
+{% endif %}

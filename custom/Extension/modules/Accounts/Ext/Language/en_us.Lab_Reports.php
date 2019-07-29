@@ -1,0 +1,5 @@
+<?php
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_LR_LAB_REPORTS_ACCOUNTS_FROM_LR_LAB_REPORTS_TITLE'] = 'Lab Reports';
+$mod_strings['LBL_LR_LAB_REPORTS_ACCOUNTS_FROM_ACCOUNTS_TITLE'] = 'Lab Reports';
+$mod_strings['LBL_ROLE'] = 'Role';

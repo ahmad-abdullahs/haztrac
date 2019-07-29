@@ -1,0 +1,50 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class='hint-preview-history'>
+{{#if isHintRequestLoading}}
+    <div class='loading'> <span> {{str 'LBL_HINT_LOADING'}} </span></div>    
+{{else}}
+{{#if collection.dataFetched}}
+<ul class='unstyled hint-preview-history-list'>
+    {{#each collection.models}}
+        <li class='hint-preview-history-item item {{this.attributes._icon}}{{#if attributes._highlight}} highlight{{/if}}'>
+            <i class='fa fa-2x fa-{{this.attributes._icon}}'></i>
+
+            <span class='ellipsis_inline' title="{{this.attributes.name}}">
+                <a href="{{this.attributes._link}}">{{this.attributes.name}}</a>
+            </span>
+
+            <div class='details' title="{{this.attributes.description}}">
+                <span class='hint-preview-history-item-status'>
+                    {{toUpperCase this.attributes.status}}
+                </span>
+                {{#if this.attributes.description}}
+                    <span class='hint-preview-history-item-description ellipsis_inline'>
+                        - {{this.attributes.description}}
+                    </span>
+                {{/if}}
+                <span class='hint-preview-history-item-date' title="{{attributes._date_record}}">
+                    {{relativeTime attributes._date_record class='date'}}
+                </span>
+            </div>
+        </li>
+    {{/each}}
+    {{#unless collection.models}}
+        <li class='hint-preview-history-item item'>
+            <span>{{str 'LBL_HINT_HISTORY_NONE'}}</span>
+        </li>
+    {{/unless}}
+</ul>
+{{/if}}
+{{/if}}
+</div>

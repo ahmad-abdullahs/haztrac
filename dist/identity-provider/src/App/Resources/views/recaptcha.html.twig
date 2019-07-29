@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    var onloadRecaptcha = function() {
+        grecaptcha.render('forgot-recaptcha', {
+            'sitekey': '{{ recaptcha_sitekey }}',
+            'theme': 'light',
+            'size': 'normal'
+        });
+    };
+</script>
+<div id="forgot-recaptcha"></div>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadRecaptcha&render=explicit" async defer></script>

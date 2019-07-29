@@ -1,0 +1,20 @@
+{% extends "index.html.twig" %}
+{% block content %}
+    <div class="thumbnail idm-set-password">
+        <div class="tcenter">
+            {% include 'logo.html.twig' %}
+        </div>
+        <section class="content">
+            <div class="indicator">
+                <i class="fa fa-check-circle"></i>
+            </div>
+            <h3>{{ 'Password reset email sent'|trans }}</h3>
+            <p>{{ 'An email has been sent to following address %emailaddress%.'|trans({'%emailaddress%': sentEmail}) }}
+                {{ 'Follow the direction in the email to reset your password.'|trans }}</p>
+        </section>
+
+        <div class="login-footer" style="text-align: center">
+            <a href="{{ path('loginRender') }}" class="btn btn-primary" role="button" tabindex="0">{{ 'Done'|trans }}</a>
+        </div>
+    </div>
+{% endblock %}

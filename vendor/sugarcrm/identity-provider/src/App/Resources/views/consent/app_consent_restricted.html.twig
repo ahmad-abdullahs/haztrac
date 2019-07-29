@@ -1,0 +1,17 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <div class="thumbnail idm-consent">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            <h3>{{ 'Application not verified'|trans }}</h3>
+            {{ "This app hasn't been verified by SugarCRM admin yet and confirmed it's authentic."|trans }}
+            {{ 'Unverified apps may pose a threat to your personal data.'|trans }}
+        </section>
+        <nav class="nav tcenter">
+            <a href="{{ path('consentCancel') }}" id="app-consent-restricted-btn">
+                <button id="restricted_btn" class="btn btn-primary">{{ 'Back to Safety'|trans }}</button>
+            </a>
+        </nav>
+    </div>
+{% endblock %}

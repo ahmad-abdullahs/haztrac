@@ -1,0 +1,33 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+<div class="thumbnail idm-consent">
+    {% include 'logo.html.twig' %}
+    <section class="content">
+        <h3>{{ 'Application is asking for permission'|trans }}</h3>
+        {% if are_scopes_empty %}
+            <p>
+                {{ '"%client%" is asking for access.'|raw|trans({'%client%': client}) }}
+            </p>
+        {% else %}
+            <p>
+                {{ '"%client%" would like to:'|raw|trans({'%client%': client}) }}
+                <ul>
+                    {% for scope in scopes %}
+                        <li> {{ scope }} </li>
+                    {% endfor %}
+                </ul>
+            </p>
+        {% endif %}
+        <p>{{ 'Do you want to allow this access?'|trans }}<br/><br/></p>
+    </section>
+    <nav class="nav tcenter">
+        <a href="{{ path('consentCancel') }}" id="consent_cancel_btn" tabindex="5" track="click:external_login">
+            <button class="btn btn-secondary">{{ 'No, Thanks'|trans }}</button>
+        </a>
+        <a href="{{ path('consentFinish') }}" id="consent_continue_btn" track="click:consent_">
+            <button class="btn btn-primary">{{ 'Allow access'|trans }}</button>
+        </a>
+    </nav>
+</div>
+{% endblock %}

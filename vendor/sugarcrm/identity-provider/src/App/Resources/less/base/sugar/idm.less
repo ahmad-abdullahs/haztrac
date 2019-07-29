@@ -1,0 +1,132 @@
+.welcome {
+	.idm-consent {
+		position: relative;
+    width: 420px;
+    min-height: 278px;
+	  margin: 0 auto;
+	  padding: 20px;
+	  margin-top: 4px;
+	  background: @white;
+    box-sizing: border-box;
+    border-radius: 0;
+
+		div.brand {
+			.brand {
+				margin: 0;
+			}
+		}
+
+		div.alert {
+			all: initial;
+			text-align: center;
+			width: 100%;
+			display: block;
+			color: @red;
+	    margin-top: 48px;
+
+			i.indicator {
+				color: #E41E26;
+				font-size: 64px;
+				width: initial;
+			}
+
+			&:not(:empty) + section.content {
+				padding-top: 44px;
+			}
+
+			&:empty {
+				display: none;
+			}
+		}
+
+    section.content {
+    	font-size: 14px;
+	    padding-top: 28px;
+        padding-bottom: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+    	h3 {
+				font-size: 16px;
+				font-weight: 600;
+		    margin-bottom: 14px;
+		    margin-top: 0;
+    	}
+    }
+
+    nav.nav {
+    	position: absolute;
+    	width: 100%;
+			bottom: 40px;
+			left: 0;
+
+    	.btn {
+				height: 35px;
+				min-width: 120px;
+				font-size: 14px;
+    	}
+    }
+	}
+
+  .idm-set-password {
+    width: 420px;
+    padding: 20px;
+    position: relative;
+    min-height: 278px;
+    margin: 0 auto;
+    margin-top: 4px;
+    background: @white;
+    box-sizing: border-box;
+    border-radius: 0;
+
+    section.content {
+      margin-left: 10px;
+      padding: 20px 0 12px 0;
+      h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        margin-top: 0;
+      }
+      p {
+        font-size: 14px;
+      }
+      .indicator {
+        color: #54CB14;
+        font-size: 80px;
+        text-align: center;
+      }
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 353px;
+    }
+    .btn {
+      min-width: 55px;
+      font-size: 12px;
+      height: 28px;
+    }
+    button.btn {
+      height: 28px;
+    }
+    a.btn {
+      height: 20px;
+    }
+  }
+}
+
+#forgot-recaptcha {
+  div {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.alert {
+  display: -ms-flexbox;
+  .text {
+    display: -ms-flexbox;
+    -ms-flex: 1;
+    -ms-flex-flow: column wrap;
+  }
+}

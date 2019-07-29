@@ -1,0 +1,14 @@
+{% set image = asset('img/company_logo.png') %}
+{% set name = 'SugarCRM' %}
+
+{% set tenant = tenant() %}
+{% if tenant is not null %}
+    {% set image = tenant.Logo %}
+    {% set name = tenant.DisplayName %}
+{% endif %}
+
+{% if image is empty %}
+    {% set image = asset('img/company_logo.png') %}
+{% endif %}
+
+<div class="brand tcenter"><h2 class="brand"><img src="{{ image }}" alt="{{ name }}"></h2></div>

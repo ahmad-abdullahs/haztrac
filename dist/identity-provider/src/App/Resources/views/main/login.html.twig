@@ -1,0 +1,82 @@
+{#
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+#}
+{% extends "index-with-alerts.html.twig" %}
+
+{% block content %}
+<div class="thumbnail login">
+    <div class="tcenter">
+        {% include 'logo.html.twig' %}
+    </div>
+
+    {% if ssoLogin %}
+        <form name="ssoLogin" id="ssoLoginForm" class="tcenter">
+            <p>&nbsp;</p>
+            <p class="wide">
+                <a class="btn btn-block btn-primary " name="external_login_button" title="Log In" tabindex="-1"
+                   href="{{ path('samlInit') }}">{{ 'Log In'|trans }}</a>
+            </p>
+            <p class="wide">
+                <a class="btn btn-link btn-invisible" name="login_form_button" id="show_login_form_btn"
+                   title="Show log in form" tabindex="-1">{{ 'Show log in form'|trans }}</a>
+            </p>
+        </form>
+    {% endif %}
+
+    <form name="login" id="submit_section" class="tcenter" method="post" action="{{ path('loginProcess') }}"
+          style="display: {{ ssoLogin ? 'none' : 'block' }}">
+        {% if tid %}
+            <input type="hidden" name="tid" value="{{ tid }}">
+        {% endif %}
+        {% if tid is empty %}
+            <div class="control-group">
+            <span class="edit">
+              <input type="text" name="tid" id="tid" value="" placeholder="{{ 'Tenant'|trans }}" class="inherit-width"
+                     aria-label="tenant">
+            </span>
+            </div>
+        {% endif %}
+        <div class="control-group">
+            <span class="edit">
+              <input type="text" name="user_name" id="username" value="{{ user_name }}" placeholder="{{ 'User Name'|trans }}"
+                     class="inherit-width" aria-label="username">
+            </span>
+        </div>
+        <div class="control-group">
+            <span class="edit">
+              <input type="password" name="password" id="password" value="" placeholder="{{ 'Password'|trans }}"
+                     aria-label="password" onkeydown="onInputKeyDown(event);">
+            </span>
+        </div>
+            <p class="help-block">
+                <a href="{{ url('forgotPasswordRender') }}" class="btn btn-link btn-invisible">{{ 'Forgot Password?'|trans }}</a>
+            </p>
+        <div class="login-footer">
+            <span class="edit">
+              <a href="javascript:void(0);" class="btn btn-primary" role="button" tabindex="0"
+                 name="login_button" id="submit_btn">{{ 'Log In'|trans }}</a>
+            </span>
+        </div>
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">
+        <input type="submit" id="submit-from" style="display: none">
+    </form>
+    {% if show_sso_button %}
+        <div class="tright login-footer">
+            <a href="{{ path('samlInit') }}" class="btn btn-primary" role="button"
+               name="sso_button" id="sso_btn">{{ 'Single Sign-On'|trans }}</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+{% block marketing %}
+    {% include 'marketing.html.twig' %}
+{% endblock %}

@@ -1,0 +1,15 @@
+<div class="record-label" style="margin-left: 0px;">
+    {{str 'LBL_MANIFESTS' 'LR_Lab_Reports'}}
+</div>
+
+<span class="normal index">
+    <span class="detail" style="padding-left: 0px;">
+        <ul>
+{{#each value}}
+        <li>
+            <a href="#HT_Manifest/{{id}}">{{name}}</a>
+        </li>
+{{/each}}
+        </ul>
+    </span>
+</span>

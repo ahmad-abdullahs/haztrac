@@ -1,0 +1,457 @@
+<?php
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+
+
+$mod_strings = array (
+  'LBL_MODULE_NAME' => '流程定义',
+  'LBL_MODULE_TITLE' => '流程定义',
+  'LBL_MODULE_NAME_SINGULAR' => '流程定义',
+
+  'LNK_LIST' => '查看流程定义',
+  'LNK_NEW_PMSE_PROJECT' => '新增流程定义',
+  'LNK_IMPORT_PMSE_PROJECT' => '导入流程定义',
+
+  'LBL_PRJ_STATUS' => '状态',
+  'LBL_PRJ_MODULE' => '目标模块',
+  'LBL_PMSE_BUTTON_SAVE' => '保存',
+  'LBL_PMSE_BUTTON_CANCEL' => '取消',
+  'LBL_PMSE_BUTTON_YES' => '是',
+  'LBL_PMSE_BUTTON_NO' => '否',
+  'LBL_PMSE_BUTTON_OK' => '确定',
+    'LBL_PMSE_FORM_ERROR' => '安装前，请先解决全部错误。',
+
+    'LBL_PMSE_LABEL_DESIGN' => '设计',
+    'LBL_PMSE_LABEL_EXPORT' => '导出',
+    'LBL_PMSE_LABEL_DELETE' => '删除',
+    'LBL_PMSE_LABEL_ENABLE' => '启用',
+    'LBL_PMSE_LABEL_DISABLE' => '禁用',
+
+    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => '保存与设计',
+    'LBL_PMSE_IMPORT_BUTTON_LABEL' => '导入',
+
+    'LBL_PMSE_MY_PROCESS_DEFINITIONS' => '我的流程定义',
+    'LBL_PMSE_ALL_PROCESS_DEFINITIONS' => '全部流程定义',
+
+    'LBL_PMSE_PROCESS_DEFINITIONS_ENABLED' => '已启用',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DISABLED' => '禁用',
+    'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => '有一些活动的流程违反了该流程定义。更新该流程定义可能会影响这些流程。是否仍要编辑该流程定义？',
+    'LBL_PMSE_DISABLE_CONFIRMATION_PD' => '有一些活动的流程违反了该流程定义。更新该流程定义可能会影响这些流程。是否仍要禁用该流程定义？',
+
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => '上传 .bpm 文件以导入流程定义。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => '流程定义已成功导入系统。',
+    'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => '请选择有效的 *.bpm 文件。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '已导入流程定义，但该流程定义含有一个或多个商务规则动作（尚未选择商务规则）。',
+    'LBL_BPM_IMPORT_SELECT' => '此流程定义含有以下商务规则和电子邮件模板。'
+        . '请选择您要导入的项目。',
+    'LBL_BUSINESS_RULES' => '商务规则',
+    'LBL_EMAIL_TEMPLATES' => '电子邮件模板',
+
+
+//    /*PMSE*/
+
+//    'LBL_PMSE_LABEL_TERMINATE_CASES' => 'Terminate Process',
+
+//    'LBL_PMSE_LABEL_CUSTOM_FORM_MODULE' => 'Custom Form Module',
+//    'LBL_PMSE_LABEL_CUSTOM_FORM_PROCESS' => 'Custom Form Process',
+//    'LBL_PMSE_LABEL_CUSTOM_FORM_NAME' => 'Custom Form name',
+//    'LBL_PMSE_LABEL_CUSTOM_FORM_DESC' => 'Custom Form description',
+//    'LBL_PMSE_LABEL_LOADING' => 'Loading, please wait...',
+//    'LBL_PMSE_LABEL_CASETAKEN' => 'This Process was already taken by another User',
+//    'LBL_PMSE_LABEL_CASECOMPLETED' => 'The Process is already closed',
+//    'LBL_PMSE_LABEL_UNASSIGNED' => 'Unassigned',
+//    'LBL_PMSE_LABEL_SEARCHBYDUEDATE' => 'Search By Due Date',
+//    'LBL_PMSE_LABEL_SETTINGSEARCHBYDUEDATE' => 'Setting Search by  Due Date',
+//    'LBL_PMSE_LABEL_SEARCH' => 'Search',
+//    'LBL_PMSE_LABEL_DELETED_RECORD'=>'The records related to this Process has been removed',
+
+
+    /**TOOLBAR**/
+    'LBL_PMSE_ADAM_DESIGNER_LEADS' => '潜在客户',
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY' => '商业机会',
+    'LBL_PMSE_ADAM_DESIGNER_DOCUMENTS' => '文档',
+    'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULES' => '目标模块',
+    'LBL_PMSE_ADAM_DESIGNER_WAIT' => '稍等',
+    'LBL_PMSE_ADAM_DESIGNER_RECEIVE_MESSAGE' => '接收信息',
+    'LBL_PMSE_ADAM_DESIGNER_SEND_MESSAGE' => '发送信息',
+    'LBL_PMSE_ADAM_DESIGNER_USER_TASK' => '活动',
+    'LBL_PMSE_ADAM_DESIGNER_EXCLUSIVE' => '独有',
+    'LBL_PMSE_ADAM_DESIGNER_PARALLEL' => '并行',
+    'LBL_PMSE_ADAM_DESIGNER_COMMENT' => '评论',
+    'LBL_PMSE_ADAM_DESIGNER_UNDO' => '取消',
+    'LBL_PMSE_ADAM_DESIGNER_REDO' => '重做',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE' => '保存',
+    'LBL_PMSE_ADAM_DESIGNER_VALIDATE' => '验证',
+    'LBL_PMSE_ADAM_DESIGNER_SAVE_AND_VALIDATE' => '保存并验证',
+    'LBL_PMSE_ADAM_DESIGNER_VIEW_ERRORS' => '运行验证以检查错误',
+
+    /**ELEMENTS NAMES**/
+    'LBL_PMSE_ADAM_DESIGNER_TASK' => '活动',
+    'LBL_PMSE_ADAM_DESIGNER_ACTION' => '动作',
+    'LBL_PMSE_ADAM_DESIGNER_LEAD_START_EVENT' => '潜在客户开始事件',
+    'LBL_PMSE_ADAM_DESIGNER_OPPORTUNITY_START_EVENT' => '商业机会开始事件' ,
+    'LBL_PMSE_ADAM_DESIGNER_DOCUMENT_START_EVENT' => '文档开始事件',
+    'LBL_PMSE_ADAM_DESIGNER_OTHER_MODULE_EVENT' => '开始事件',
+    'LBL_PMSE_ADAM_DESIGNER_WAIT_EVENT' => '稍等事件',
+    'LBL_PMSE_ADAM_DESIGNER_MESSAGE_EVENT' => '信息事件',
+//    'LBL_PMSE_ADAM_DESIGNER_BOUNDARY_EVENT' => 'Boundary Event',
+    'LBL_PMSE_ADAM_DESIGNER_EXCLUSIVE_GATEWAY' => '独有关卡',
+    'LBL_PMSE_ADAM_DESIGNER_PARALLEL_GATEWAY' => '并行网关',
+    'LBL_PMSE_ADAM_DESIGNER_END_EVENT' => '结束事件',
+    'LBL_PMSE_ADAM_DESIGNER_TEXT_ANNOTATION' => '文本附注',
+
+
+    /**GENERAL**/
+    'LBL_PMSE_MESSAGE_CANCEL_CONFIRM' => ' 某些设置已变更。您是否要舍弃变更？',
+    'LBL_PMSE_MESSAGE_REMOVE_ALL_START_CRITERIA' => '模块将变更，条件也会移除，因为其与新模块没有字段关系。',
+    'LBL_PMSE_MESSAGE_INVALID_CONNECTION' => '无效连接',
+
+    'LBL_PMSE_CONTEXT_MENU_SETTINGS' => '设置…',
+    'LBL_PMSE_CONTEXT_MENU_DELETE' => '删除',
+
+    'LBL_PMSE_FORM_LABEL_MODULE' => '模块',
+    'LBL_PMSE_FORM_LABEL_FILTER' => '筛选器',
+    'LBL_PMSE_FORM_LABEL_RELATED' => '关联到',
+    'LBL_PMSE_FORM_LABEL_CRITERIA' => '条件',
+    'LBL_PMSE_FORM_LABEL_DURATION' => '持续时间',
+    'LBL_PMSE_FORM_LABEL_UNIT' => '单元',
+
+    'LBL_PMSE_FORM_OPTION_SELECT' => '选择……',
+    'LBL_PMSE_FORM_OPTION_TARGET_MODULE' => '目标模块',
+    'LBL_PMSE_FORM_OPTION_DAYS' => '天',
+    'LBL_PMSE_FORM_OPTION_HOURS' => '小时',
+    'LBL_PMSE_FORM_OPTION_MINUTES' => '分钟',
+    'LBL_PMSE_MESSAGE_CANNOTDROPOUTSIDECANVAS' => '无法将元素置于画布之外',
+    'LBL_PMSE_FORM_TOOLTIP_DURATION' => '定义计时事件的持续时间',
+
+    /**PROCESSDEFINTION**/
+    // CONTEXT MENU
+    'LBL_PMSE_CONTEXT_MENU_PROCESS_DEFINITION' => '流程定义',
+    'LBL_PMSE_CONTEXT_MENU_SAVE' => '保存',
+    'LBL_PMSE_CONTEXT_MENU_REFRESH' => '更新',
+    'LBL_PMSE_CONTEXT_MENU_ZOOM' => '缩放',
+    'LBL_PMSE_CONTEXT_MENU_50' => '50%',
+    'LBL_PMSE_CONTEXT_MENU_75' => '75%',
+    'LBL_PMSE_CONTEXT_MENU_100' => '100%',
+    'LBL_PMSE_CONTEXT_MENU_125' => '125%',
+    'LBL_PMSE_CONTEXT_MENU_150' => '150%',
+    // FORMS
+    'LBL_PMSE_LABEL_PROCESS_NAME' => '流程名称',
+    'LBL_PMSE_LABEL_DESCRIPTION' => '说明',
+    'LBL_PMSE_LABEL_TERMINATE_PROCESS' => '终止流程',
+    'LBL_PMSE_LABEL_LOCKED_FIELDS' => '锁定字段',
+
+    /**TASKS**/
+    // CONTEXT MENU
+    'LBL_PMSE_CONTEXT_MENU_FORMS' => '表格…',
+    'LBL_PMSE_CONTEXT_MENU_USERS' => '用户…',
+    'LBL_PMSE_CONTEXT_MENU_ACTION_TYPE' => '动作类型',
+    'LBL_PMSE_CONTEXT_MENU_UNASSIGNED' => '[Unassigned]',
+    'LBL_PMSE_CONTEXT_MENU_BUSINESS_RULE' => '商务规则',
+    'LBL_PMSE_CONTEXT_MENU_ASSIGN_USER' => '分配用户',
+    'LBL_PMSE_CONTEXT_MENU_ASSIGN_TEAM' => '循环制',
+    'LBL_PMSE_CONTEXT_MENU_CHANGE_FIELD' => '变更字段',
+    'LBL_PMSE_CONTEXT_MENU_ADD_RELATED_RECORD' => '新增相关记录',
+    // CONFIRMATIONS
+    'LBL_PMSE_CHANGE_ACTION_TYPE_CONFIRMATION' => '通过更动操作类型将丢失对这次行动的所有以前的设置。您要继续吗？',
+    // FORMS
+    'LBL_PMSE_FORM_TITLE_ACTIVITY' => '活动',
+    'LBL_PMSE_FORM_LABEL_READ_ONLY_FIELDS' => '只读字段',
+    'LBL_PMSE_FORM_LABEL_REQUIRED_FIELDS' => '必需字段',
+    'LBL_PMSE_FORM_LABEL_GENERAL_SETTINGS' => '常规',
+    'LBL_PMSE_FORM_LABEL_EXPECTED_TIME' => '预计时间',
+    'LBL_PMSE_FORM_LABEL_FORM_TYPE' => '表格类型',
+    'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => '表格按钮',
+    'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => '批准/拒绝',
+    'LBL_PMSE_FORM_OPTION_ROUTE' => '流转',
+    'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => '其他流转选项',
+    'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => '更改分配给用户',
+    'LBL_PMSE_FORM_LABEL_TEAM' => '团队',
+    'LBL_PMSE_FORM_LABEL_REASSIGN' => '选择新流程用户',
+
+    'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => '用户定义',
+    'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => '分配方法',
+    'LBL_PMSE_FORM_OPTION_ROUND_ROBIN' => '循环制',
+    'LBL_PMSE_FORM_OPTION_SELF_SERVICE' => '自助',
+    'LBL_PMSE_FORM_OPTION_STATIC_ASSIGNMENT' => '静态分配',
+    'LBL_PMSE_FORM_LABEL_ASSIGN_TO_TEAM' => '分配给团队',
+    'LBL_PMSE_FORM_LABEL_ASSIGN_TO_USER' => '分配给用户',
+    'LBL_PA_FORM_COMBO_ASSIGN_TO_USER_HELP_TEXT' => '选择……',
+    'LBL_PA_FORM_COMBO_NO_MATCHES_FOUND' => '未找到匹配项',
+    'LBL_PA_FORM_LABEL_ASSIGN_TO_TEAM' => '从团队中选择流程用户',
+    'LBL_PA_FORM_LABEL_ASSIGN_TO_USER' => '选择流程用户',
+    'LBL_PMSE_FORM_OPTION_CURRENT_USER' => '当前用户',
+    'LBL_PMSE_FORM_OPTION_RECORD_OWNER' => '记录拥有者',
+    'LBL_PMSE_FORM_OPTION_SUPERVISOR' => '主管',
+    'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => '由用户创建',
+    'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '最新用户修改',
+
+    'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => '商务规则',
+    'LBL_PMSE_LABEL_RULE' => '规则',
+
+    'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => '分配用户',
+    'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '更新记录上的“负责人”',
+
+    'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => '新增相关记录',
+    'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => '相关模块',
+    'LBL_PMSE_FORM_LABEL_FIELDS' => '字段',
+
+    'LBL_PMSE_FORM_TITLE_CHANGE_FIELDS' => '变更字段',
+
+    'LBL_PMSE_FORM_TITLE_ASSIGN_TEAM' => '循环制',
+
+    'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '活动名称为空。',
+    'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '形状组合中已包含此名称 "%s"。',
+
+    /**EVENTS**/
+    // CONTEXT MENU
+    'LBL_PMSE_CONTEXT_MENU_ACTION' => '动作',
+    'LBL_PMSE_CONTEXT_MENU_RECEIVE_MESSAGE' => '接收信息',
+    'LBL_PMSE_CONTEXT_MENU_SEND_MESSAGE' => '发送信息',
+    'LBL_PMSE_CONTEXT_MENU_TIMER' => '计时器',
+    'LBL_PMSE_CONTEXT_MENU_RESULT' => '结果',
+    'LBL_PMSE_CONTEXT_MENU_DO_NOTHING' => '不操作',
+    'LBL_PMSE_CONTEXT_MENU_TERMINATE_PROCESS' => '终止流程',
+    'LBL_PMSE_CONTEXT_MENU_LISTEN' => '聆听',
+
+    // FORMS
+    'LBL_PMSE_FORM_TITLE_LABEL_EVENT' => '事件',
+    'LBL_PMSE_FORM_LABEL_APPLIES_TO' => '用于',
+    'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => '仅新增记录',
+    'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => '仅已更新的记录（首次更新 - 请参阅帮助文本）',
+    'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => '仅已更新的记录（所有更新 - 请参阅帮助文本）',
+
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '选择流程开始的时间。<br><br>新的：创建新记录后，运行流程。<br><br>首次更新：仅当现有记录满足首次条件时，运行流程。<br><br>所有更新：现有记录每次满足时，运行流程。',
+    'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => '选择 SugarCRM 模块来应用事件触发器 ',
+
+    'LBL_PMSE_FORM_LABEL_FIXED_DATE' => '指定日期',
+
+    'LBL_PMSE_FORM_LABEL_EMAIL_TEMPLATE' => '电子邮件模板',
+
+    'LBL_PMSE_FORM_LABEL_EMAIL_TO' => '到',
+    'LBL_PMSE_FORM_LABEL_EMAIL_CC' => '抄送',
+    'LBL_PMSE_FORM_LABEL_EMAIL_BCC' => '密件抄送',
+
+    //ROLES IN EXPRESSION BUILDER
+    'LBL_PMSE_FORM_OPTION_ADMINISTRATOR' => '管理员',
+
+    /**GATEWAYS**/
+    // CONTEXT MENU
+    'LBL_PMSE_CONTEXT_MENU_DIRECTION' => '指示……',
+    'LBL_PMSE_CONTEXT_MENU_CONVERGING' => '汇集……',
+    'LBL_PMSE_CONTEXT_MENU_DIVERGING' => '分流……',
+    'LBL_PMSE_CONTEXT_MENU_CONVERT' => '转换……',
+    'LBL_PMSE_CONTEXT_MENU_EXCLUSIVE_GATEWAY' => '独有关卡',
+    'LBL_PMSE_CONTEXT_MENU_PARELLEL_GATEWAY' => '并行网关',
+    'LBL_PMSE_CONTEXT_MENU_INCLUSIVE_GATEWAY' => '包含在内的网关',
+    'LBL_PMSE_CONTEXT_MENU_EVENT_BASED_GATEWAY' => '基于事件的网关',
+    'LBL_PMSE_CONTEXT_MENU_DEFAULT_FLOW' => '默认流',
+    'LBL_PMSE_CONTEXT_MENU_NONE' => '无',
+
+    // FORMS
+    'LBL_PMSE_FORM_TITLE_GATEWAY' => '网关',
+
+    'LBL_PMSE_CONTEXT_MENU_DEFAULT_TASK' => '（活动）',
+    'LBL_PMSE_CONTEXT_MENU_DEFAULT_EVENT' => '（事件）',
+    'LBL_PMSE_CONTEXT_MENU_DEFAULT_GATEWAY' => '（网关）',
+
+    'LBL_PMSE_BPMN_WARNING_PANEL_TITLE' => '元素错误',
+    'LBL_PMSE_BPMN_WARNING_LABEL' => ' 错误',
+    'LBL_PMSE_BPMN_WARNING_SINGULAR_LABEL' => ' 错误',
+
+    /**CRITERIA BUILDER**/
+    'LBL_PMSE_EXPCONTROL_VARIABLES_PANEL_TITLE' => '字段',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_TITLE' => '模块字段评估',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_MODULE' => '模块',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_RELATED' => '关联到',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VARIABLE' => '字段',
+    'LBL_PMSE_EXPCONTROL_MODULE_FIELD_EVALUATION_VALUE' => '值',
+    'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_TITLE' => '表格反应评估',
+    'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_FORM' => '表格',
+    'LBL_PMSE_EXPCONTROL_FORM_RESPONSE_EVALUATION_STATUS' => '状态',
+    'LBL_PMSE_EXPCONTROL_BUSINESS_RULES_EVALUATION_TITLE' => '商务规则评估',
+    'LBL_PMSE_EXPCONTROL_BUSINESS_RULES_EVALUATION_BR' => '商务规则',
+    'LBL_PMSE_EXPCONTROL_BUSINESS_RULES_EVALUATION_RESPONSE' => '反应',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_TITLE' => '用户评估',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_USER' => '用户',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_CURRENT' => '当前用户',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_SUPERVISOR' => '主管',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_OWNER' => '记录拥有者',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_OPERATOR' => '运算符',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_ADMIN' => '是管理员',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_ADMIN_FULL' => '%TARGET% 是管理员',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_ROLE' => '拥有角色',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_ROLE_FULL' => '%TARGET% 拥有 %VALUE% 角色',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_USER' => '是用户',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_USER_FULL' => '%TARGET% 是用户 %VALUE%',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_NOT_ADMIN' => '不是管理员',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_NOT_ADMIN_FULL' => '%TARGET% 不是管理员',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_NOT_ROLE' => '没有角色',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_NOT_ROLE_FULL' => '%TARGET% 没有 %VALUE% 角色',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_NOT_USER' => '不是用户',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_IS_NOT_USER_FULL' => '%TARGET% 不是用户 %VALUE%',
+    'LBL_PMSE_EXPCONTROL_USER_EVALUATION_VALUE' => '值',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_FIXED_DATE' => '指定日期',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_FIXED_DATETIME' => '指定日期时间',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_TITLE' => '时间段',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_AMOUNT' => '值',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_UNIT' => '单元',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_YEARS' => '年',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MONTHS' => '月',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_WEEKS' => '周',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => '天',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => '小时',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => '分钟',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => '字符串、数字和 Boolean',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => '编号',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => '值',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_ADD_STRING' => '新增字符串',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_ADD_NUMBER' => '新增数字',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_ADD_BOOLEAN' => '新增 boolean',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_CURRENCY' => '货币',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_CURRENCY_CURRENCY' => '货币',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_CURRENCY_AMOUNT' => '金额',
+    'LBL_PMSE_EXPCONTROL_EVALUATIONS_TITLE' => '评估',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TITLE' => '常数',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN' => '小于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN_DATE' => '前',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_THAN' => '小于或等于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL' => '等于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL_TEXT' => '是',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL' => '大于或等于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR' => '大于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_DATE' => '后',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_STARTS_TEXT' => '开始于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_ENDS_TEXT' => '结束于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_CONTAINS_TEXT' => '包含',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_CONTAINS_TEXT' => '不包含',
+
+    'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES' => '变更',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => '变更前内容：',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => '变更后内容：',
+
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => '当日或之后',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => '当日或之前',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '不等于',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '不是',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '不等于',
+
+    'LBL_PMSE_EXPCONTROL_ALL_RELATED_RECORDS' => '所有相关记录',
+    'LBL_PMSE_EXPCONTROL_ANY_RELATED_RECORDS' => '任何相关记录',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => '运行时',
+
+    'LBL_PMSE_FORMPANEL_SUBMIT' => '添加',
+    'LBL_PMSE_FORMPANEL_CLOSE' => '关闭',
+
+    'LBL_PMSE_EMAILPICKER_TEAMS' => '团队',
+    'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% 关联到 %MODULE%',
+    'LBL_PMSE_EMAILPICKER_USER_CREATED' => '创建 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIED' => '最后修改 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASSIGNED' => '分配至 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_USER_WAS_ASSIGNED' => '分配至 %MODULE% 的用户',
+    'LBL_PMSE_EMAILPICKER_MANAGER_CREATED' => '%MODULE% 创建者的经理',
+    'LBL_PMSE_EMAILPICKER_MANAGER_LAST_MODIFIED' => '最后修改 %MODULE% 之人的经理',
+    'LBL_PMSE_EMAILPICKER_MANAGER_IS_ASSIGNED' => '分配至 %MODULE% 之人的经理',
+    'LBL_PMSE_EMAILPICKER_MANAGER_WAS_ASSIGNED' => '分配至 %MODULE% 之人的经理',
+    'LBL_PMSE_EMAILPICKER_ROLE_ITEM' => '角色：%ROLE%',
+    'LBL_PMSE_EMAILPICKER_TEAM_ITEM' => '团队：%TEAM%',
+    'LBL_PMSE_EMAILPICKER_SUGGESTIONS' => '建议',
+    'LBL_PMSE_EMAILPICKER_RESULTS_TITLE' => '关于 "%TEXT%" 的 %NUMBER% 个建议',
+    'LBL_PMSE_EMAILPICKER_USER_RECORD_CREATOR' => '创建记录',
+    'LBL_PMSE_EMAILPICKER_USER_LAST_MODIFIER' => '最后修改记录',
+    'LBL_PMSE_EMAILPICKER_USER_IS_ASIGNEE' => '分配至记录',
+
+    'LBL_PMSE_UPDATERFIELD_VARIABLES_LIST_TITLE' => '%MODULE% 字段',
+    'LBL_PMSE_UPDATERFIELD_ADD_TEAM' => '添加团队……',
+
+    //ERRORS ELEMENTS MESSAGE
+    'LBL_PMSE_MESSAGE_ERROR_START_EVENT_OUTGOING' => '开始事件必须有一个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_END_EVENT_INCOMING' => '结束事件必须有一个传入序列流',
+    'LBL_PMSE_MESSAGE_ERROR_INTERMEDIATE_EVENT_INCOMING' => '中间事件必须有一个或多个传入序列流',
+    'LBL_PMSE_MESSAGE_ERROR_INTERMEDIATE_EVENT_OUTGOING' => '中间事件必须有一个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_BOUNDARY_EVENT_OUTGOING' => '界限事件必须有一个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_ACTIVITY_INCOMING' => '活动必须有一个传入序列流',
+    'LBL_PMSE_MESSAGE_ERROR_ACTIVITY_OUTGOING' => '活动必须有一个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_ACTIVITY_SCRIPT_TASK' => '脚本任务必须拥有与 [Unassigned] 不同的有效类型',
+    'LBL_PMSE_MESSAGE_ERROR_GATEWAY_DIVERGING_INCOMING' => '网关可以有一个或多个传入序列流',
+    'LBL_PMSE_MESSAGE_ERROR_GATEWAY_DIVERGING_OUTGOING' => '网关必须有两个或多个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_GATEWAY_CONVERGING_INCOMING' => '网关必须有两个或多个传入序列流',
+    'LBL_PMSE_MESSAGE_ERROR_GATEWAY_CONVERGING_OUTGOING' => '网关不可有一个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_GATEWAY_MIXED_INCOMING' => '网关必须有两个或多个传入序列流',
+    'LBL_PMSE_MESSAGE_ERROR_GATEWAY_MIXED_OUTGOING' => '网关必须有两个或多个传出序列流',
+    'LBL_PMSE_MESSAGE_ERROR_ANNOTATION' => '文本注释必须有关联行',
+
+    'LBL_PMSE_IMPORT_PROCESS_DEFINITION_FAILURE' => '无法从文件创建流程定义',
+    'LBL_PMSE_CANNOT_CONFIGURE_ADD_RELATED_RECORD' => '该目标模块没有可用的相关模块',
+    'LBL_PMSE_PROJECT_NAME_EMPTY' => '不应将过程定义名称保存为空白，因其是必填字段。',
+
+    'LBL_PMSE_INVALID_EXPRESSION_SYNTAX' => '无效的表达式语法。',
+    'LBL_PMSE_MESSAGE_ERROR_CURRENCIES_MIX' => 'Can&#39;t use two different currencies in the same expression.',
+
+    // PMSE Validation tool strings
+
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_RETRIEVING' => '验证流程定义：检索元素设置',
+    'LBL_PMSE_VALIDATOR_IN_PROGRESS_VALIDATING' => '验证流程定义：验证元素设置',
+    'LBL_PMSE_VALIDATOR_REFRESH_ERROR_LIST' => '正在刷新错误列表......',
+    'LBL_PMSE_VALIDATOR_COMPLETE' => '验证已完成！发现问题：',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_ISSUES' => '问题',
+    'LBL_PMSE_VALIDATOR_TOOLTIP_IN_PROGRESS' => '正在进行验证',
+    'LBL_PMSE_VALIDATOR_WARNING_INFO' => '警告：此流程可能会停止此元素或产生其他意料之外的影响',
+    'LBL_PMSE_VALIDATOR_ERROR_INFO' => '错误：此流程将无法在此元素中运行',
+
+    'LBL_PMSE_ERROR_UNABLE_TO_VALIDATE' => '无法验证元素',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM' => '元素不满足传入流的最小数量',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MINIMUM_INFO' => '此元素必须具备最小数量的传入路径。请检查连接到此元素的路径数量，确保达到最小数量。',
+
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM' => '元素超过传入流的最大数量',
+    'LBL_PMSE_ERROR_FLOW_INCOMING_MAXIMUM_INFO' => '此元素具有不超过最大数量的传入路径。请检查连接到此元素的路径数量，确保不超过最大数量。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM' => '元素不满足传出流的最小数量',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MINIMUM_INFO' => '此元素必须具备最小数量的传出路径。请检查连接到此元素的路径数量，确保达到最小数量。',
+
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM' => '元素超过传出流的最大数量',
+    'LBL_PMSE_ERROR_FLOW_OUTGOING_MAXIMUM_INFO' => '此元素具有不超过最大数量的传出路径。请检查连接到此元素的路径数量，确保不超过最大数量。',
+
+    'LBL_PMSE_ERROR_FIELD_REQUIRED' => '未设置必填字段',
+    'LBL_PMSE_ERROR_FIELD_REQUIRED_INFO' => '此元素包含必填字段，但还未进行设置。请检查元素设置，确保字段已正确设置，然后请务必点击“保存”按钮。',
+
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND' => '系统当前不存在数据',
+    'LBL_PMSE_ERROR_DATA_NOT_FOUND_INFO' => '此元素的设置引用了数据库中不存在的某个具体数据段。请检查元素设置，确保引用的所有数据均存在于数据库中（比如具体用户、模块字段、团队等等）。',
+
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE' => '条件框表达式求值永远不会为真',
+    'LBL_PMSE_ERROR_LOGIC_IMPOSSIBLE_INFO' => '条件框包含逻辑与/或/非表达式。此错误表示元素设置中的一个条件框已经应用此种配置，表达式求值永远不会为真。请勾选条件框，消除所有阻止表达式求值为真的逻辑矛盾。',
+
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE' => '元素无法到达',
+    'LBL_PMSE_ERROR_ELEMENT_UNREACHABLE_INFO' => '为了在流程中执行某个元素，必须具备连接到此元素的路径。连接到此元素的路径链必须从启动元素开始。检查连接到此元素的传入路径链，确保路径链从启动元素开始。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME' => '等待时间条件必须只包含一个日期时间常数',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ONE_DATETIME_INFO' => '此等待事件元素已使用 "固定日期" 条件框进行配置。此条件框必须只包含一个 "固定日期时间" 常数或“日期时间”字段引用。表达式的所有其他部分必须是数学运算符 (+/) 或 "时间跨度" 常数。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION' => '指定的持续时间值不能为零',
+    'LBL_PMSE_ERROR_WAIT_EVENT_ZERO_DURATION_INFO' => '此等待事件元素已使用“持续时间”设置进行配置。此设置不能等于零，否则就会出现错误。请检查元素设置，确保“持续时间”没有设置为零。',
+
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS' => '未设置等待时间参数',
+    'LBL_PMSE_ERROR_WAIT_EVENT_NO_PARAMETERS_INFO' => '此等待事件元素还未配置任何设置。请检查元素设置，确保已选择“持续时间”或“固定日期”，输入所需的值，然后点击“保存”按钮。',
+
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME' => '预计时间小于零',
+    'LBL_PMSE_ERROR_ACTIVITY_EXPECTED_TIME_INFO' => '在此活动元素“表单”设置的下方，预计时间被设为负值，这会导致流程在到达此元素时冻结。请打开此元素的“表单”设置，将预计时间改为非负数。',
+
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED' => '操作类型为[Unassigned]',
+    'LBL_PMSE_ERROR_ACTION_UNASSIGNED_INFO' => '此操作元素没有指定的类型。可以通过右键点击操作元素，然后从“操作类型”清单中选择一个类型来进行更改。',
+
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH' => '不保证路径被选择',
+    'LBL_PMSE_ERROR_GATEWAY_NO_GUARANTEED_PATH_INFO' => '出现此错误信息是因为此网关元素中的任何路径都未被选择，这将导致流程终止。建议设置一个默认选择路径，以防元素设置中的任何条件框表达式都不满足要求。可以通过右键点击网关元素，在“默认流”菜单下选择一个元素来进行设置。如果未指定默认路径，则应更改元素设置中的条件框表达式，以确保流程运行时至少有一个表达式为真。',
+
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '合并网关类型与传入流的网关类型不匹配',
+    'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '拆分网关将流程扩展到多个分支。当使用合并网关再次将这些分支合并成一条路径时，必须使用正确的合并网关类型，具体取决于创建分支时使用的拆分网关类型。对于利用排他或基于事件的拆分网关创建的分支，则使用排他合并网关重新进行合并。对于利用并行或包容拆分网关创建的分支，则使用并行合并网关重新进行合并。',
+);

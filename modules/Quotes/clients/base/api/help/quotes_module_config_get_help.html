@@ -1,0 +1,2125 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<h2>Overview</h2>
+<span class="lead">
+    Quote Config GET Help
+</span>
+
+<h2>Summary</h2>
+<span class="lead">
+    This endpoint returns dependent and related fields for all fields used in the Quoted Line Items
+    area of the Quote record.
+</span>
+
+<h2>Request Arguments</h2>
+<span class="lead">
+    This endpoint does not accept any request arguments.
+</span>
+
+<h2>Response Arguments</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tr>
+        <td>
+            &lt;config field&gt;
+        </td>
+        <td>
+            &lt;config field type&gt;
+        </td>
+        <td>
+            The list of config fields will be returned.
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Response</h3>
+<pre class="pre-scrollable">
+{
+    "summary_columns": [
+        {
+            "name": "deal_tot",
+            "label": "LBL_LIST_DEAL_TOT",
+            "css_class": "quote-totals-row-item",
+            "related_fields": [
+                "deal_tot_discount_percentage"
+            ],
+            "type": "currency",
+            "labelModule": "Quotes"
+        },
+        {
+            "name": "new_sub",
+            "css_class": "quote-totals-row-item",
+            "type": "currency",
+            "label": "LBL_NEW_SUB",
+            "labelModule": "Quotes"
+        },
+        {
+            "name": "tax",
+            "label": "LBL_TAX_TOTAL",
+            "css_class": "quote-totals-row-item",
+            "type": "currency",
+            "labelModule": "Quotes"
+        },
+        {
+            "name": "shipping",
+            "css_class": "quote-totals-row-item",
+            "type": "currency",
+            "label": "LBL_SHIPPING",
+            "labelModule": "Quotes"
+        },
+        {
+            "name": "total",
+            "label": "LBL_LIST_GRAND_TOTAL",
+            "css_class": "quote-totals-row-item",
+            "type": "currency",
+            "labelModule": "Quotes"
+        }
+    ],
+    "worksheet_columns": [
+        {
+            "name": "line_num",
+            "label": null,
+            "widthClass": "cell-xsmall",
+            "css_class": "line_num tcenter",
+            "type": "line-num",
+            "readonly": true
+        },
+        {
+            "name": "quantity",
+            "label": "LBL_QUANTITY",
+            "widthClass": "cell-small",
+            "css_class": "quantity",
+            "type": "float",
+            "labelModule": "Products"
+        },
+        {
+            "name": "product_template_name",
+            "label": "LBL_ITEM_NAME",
+            "widthClass": "cell-large",
+            "type": "quote-data-relate",
+            "required": true,
+            "labelModule": "Quotes"
+        },
+        {
+            "name": "mft_part_num",
+            "label": "LBL_MFT_PART_NUM",
+            "type": "base",
+            "labelModule": "Products"
+        },
+        {
+            "name": "discount_price",
+            "label": "LBL_DISCOUNT_PRICE",
+            "type": "currency",
+            "convertToBase": true,
+            "showTransactionalAmount": true,
+            "related_fields": [
+                "discount_price",
+                "currency_id",
+                "base_rate"
+            ],
+            "labelModule": "Products"
+        },
+        {
+            "name": "discount",
+            "type": "fieldset",
+            "css_class": "quote-discount-percent",
+            "label": "LBL_DISCOUNT_AMOUNT",
+            "fields": [
+                {
+                    "name": "discount_amount",
+                    "label": "LBL_DISCOUNT_AMOUNT",
+                    "type": "discount",
+                    "convertToBase": true,
+                    "showTransactionalAmount": true
+                },
+                {
+                    "type": "discount-select",
+                    "name": "discount_select",
+                    "no_default_action": true,
+                    "buttons": [
+                        {
+                            "type": "rowaction",
+                            "name": "select_discount_amount_button",
+                            "label": "LBL_DISCOUNT_AMOUNT",
+                            "event": "button:discount_select_change:click"
+                        },
+                        {
+                            "type": "rowaction",
+                            "name": "select_discount_percent_button",
+                            "label": "LBL_DISCOUNT_PERCENT",
+                            "event": "button:discount_select_change:click"
+                        }
+                    ],
+                    "label": "LBL_DISCOUNT_AS_PERCENT"
+                }
+            ],
+            "labelModule": "Products"
+        },
+        {
+            "name": "total_amount",
+            "label": "LBL_LINE_ITEM_TOTAL",
+            "type": "currency",
+            "widthClass": "cell-medium",
+            "showTransactionalAmount": true,
+            "related_fields": [
+                "total_amount",
+                "currency_id",
+                "base_rate"
+            ],
+            "labelModule": "Quotes"
+        }
+    ],
+    "footer_rows": [
+        {
+            "name": "new_sub",
+            "type": "currency"
+        },
+        {
+            "name": "tax",
+            "type": "currency"
+        },
+        {
+            "name": "shipping",
+            "type": "quote-footer-currency",
+            "css_class": "quote-footer-currency",
+            "default": "0.00"
+        },
+        {
+            "name": "total",
+            "type": "currency",
+            "css_class": "grand-total"
+        }
+    ],
+    "summary_columns_related_fields": [
+        "base_rate",
+        "deal_tot",
+        "deal_tot_usdollar",
+        "shipping",
+        "subtotal",
+        "subtotal_usdollar",
+        "tax",
+        "taxable_subtotal"
+    ],
+    "worksheet_columns_related_fields": [
+        "base_rate",
+        "deal_calc",
+        "discount_amount",
+        "discount_price",
+        "discount_select",
+        "quantity",
+        "subtotal",
+        "tax_class",
+        "total_amount",
+        "description",
+        "quote_id",
+        "name",
+        "product_template_id",
+        "product_template_name"
+    ],
+    "footer_rows_related_fields": [
+        "deal_tot",
+        "deal_tot_usdollar",
+        "shipping",
+        "subtotal",
+        "subtotal_usdollar",
+        "tax",
+        "taxable_subtotal"
+    ],
+    "dependentFields": {
+        "Quotes": {
+            "currency_id": {
+                "related": {
+                    "subtotal": {
+                        "module": "Quotes",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "discount": {
+                        "module": "Quotes",
+                        "field": "discount",
+                        "reason": "related_fields"
+                    },
+                    "new_sub": {
+                        "module": "Quotes",
+                        "field": "new_sub",
+                        "reason": "related_fields"
+                    },
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    },
+                    "shipping": {
+                        "module": "Quotes",
+                        "field": "shipping",
+                        "reason": "related_fields"
+                    },
+                    "subtotal_usdollar": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "base_rate": {
+                "related": {
+                    "subtotal": {
+                        "module": "Quotes",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "discount": {
+                        "module": "Quotes",
+                        "field": "discount",
+                        "reason": "related_fields"
+                    },
+                    "new_sub": {
+                        "module": "Quotes",
+                        "field": "new_sub",
+                        "reason": "related_fields"
+                    },
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    },
+                    "shipping": {
+                        "module": "Quotes",
+                        "field": "shipping",
+                        "reason": "related_fields"
+                    },
+                    "subtotal_usdollar": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "related_fields"
+                    }
+                },
+                "locked": {
+                    "subtotal_usdollar": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "formula"
+                    },
+                    "deal_tot_usdollar": {
+                        "module": "Quotes",
+                        "field": "deal_tot_usdollar",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "taxable_subtotal": {
+                "locked": {
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "taxrate_value": {
+                "locked": {
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "subtotal_usdollar": {
+                "locked": {
+                    "deal_tot_discount_percentage": {
+                        "module": "Quotes",
+                        "field": "deal_tot_discount_percentage",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "subtotal": {
+                "locked": {
+                    "subtotal_usdollar": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "deal_tot_usdollar": {
+                "locked": {
+                    "deal_tot_discount_percentage": {
+                        "module": "Quotes",
+                        "field": "deal_tot_discount_percentage",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "deal_tot": {
+                "locked": {
+                    "deal_tot_usdollar": {
+                        "module": "Quotes",
+                        "field": "deal_tot_usdollar",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "tax": {
+                "locked": {
+                    "total": {
+                        "module": "Quotes",
+                        "field": "total",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "shipping": {
+                "locked": {
+                    "total": {
+                        "module": "Quotes",
+                        "field": "total",
+                        "reason": "formula"
+                    }
+                }
+            }
+        },
+        "ProductBundles": {
+            "subtotal": {
+                "locked": {
+                    "new_sub": {
+                        "module": "ProductBundles",
+                        "field": "new_sub",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "currency_id": {
+                "related": {
+                    "subtotal": {
+                        "module": "ProductBundles",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "deal_tot": {
+                        "module": "ProductBundles",
+                        "field": "deal_tot",
+                        "reason": "related_fields"
+                    },
+                    "new_sub": {
+                        "module": "ProductBundles",
+                        "field": "new_sub",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "base_rate": {
+                "related": {
+                    "subtotal": {
+                        "module": "ProductBundles",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "deal_tot": {
+                        "module": "ProductBundles",
+                        "field": "deal_tot",
+                        "reason": "related_fields"
+                    },
+                    "new_sub": {
+                        "module": "ProductBundles",
+                        "field": "new_sub",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "new_sub": {
+                "locked": {
+                    "new_sub": {
+                        "module": "Quotes",
+                        "field": "new_sub",
+                        "reason": "rollup"
+                    },
+                    "total": {
+                        "module": "Quotes",
+                        "field": "total",
+                        "reason": "rollup"
+                    }
+                }
+            },
+            "deal_tot": {
+                "locked": {
+                    "new_sub": {
+                        "module": "ProductBundles",
+                        "field": "new_sub",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "taxable_subtotal": {
+                "locked": {
+                    "taxable_subtotal": {
+                        "module": "Quotes",
+                        "field": "taxable_subtotal",
+                        "reason": "rollup"
+                    }
+                }
+            }
+        },
+        "Products": {
+            "subtotal": {
+                "locked": {
+                    "subtotal": {
+                        "module": "ProductBundles",
+                        "field": "subtotal",
+                        "reason": "rollup"
+                    }
+                }
+            },
+            "quantity": {
+                "locked": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "discount_price": {
+                "locked": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "currency_id": {
+                "related": {
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "discount_price",
+                        "reason": "related_fields"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "discount_amount",
+                        "reason": "related_fields"
+                    },
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "base_rate": {
+                "related": {
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "discount_price",
+                        "reason": "related_fields"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "discount_amount",
+                        "reason": "related_fields"
+                    },
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "deal_calc": {
+                "locked": {
+                    "deal_tot": {
+                        "module": "ProductBundles",
+                        "field": "deal_tot",
+                        "reason": "rollup"
+                    }
+                }
+            },
+            "discount_select": {
+                "related": {
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "discount_amount",
+                        "reason": "related_fields"
+                    },
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                },
+                "locked": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "discount_amount": {
+                "locked": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "total_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "total_amount": {
+                "locked": {
+                    "taxable_subtotal": {
+                        "module": "ProductBundles",
+                        "field": "taxable_subtotal",
+                        "reason": "rollup"
+                    }
+                }
+            },
+            "tax_class": {
+                "locked": {
+                    "taxable_subtotal": {
+                        "module": "ProductBundles",
+                        "field": "taxable_subtotal",
+                        "reason": "rollup"
+                    }
+                }
+            }
+        }
+    },
+    "relatedFields": {
+        "Products": {
+            "name": {
+                "locked": {
+                    "product_template_name": {
+                        "module": "Products",
+                        "field": "name",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "subtotal": {
+                "locked": {
+                    "quantity": {
+                        "module": "Products",
+                        "field": "subtotal",
+                        "reason": "formula"
+                    },
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "subtotal",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "quantity": {
+                        "module": "Products",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "total_amount": {
+                "locked": {
+                    "quantity": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    },
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    },
+                    "discount_select": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    },
+                    "quantity": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    },
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    },
+                    "discount_select": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "total_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "manufacturer_name": {
+                "related": {
+                    "manufacturer_id": {
+                        "module": "Products",
+                        "field": "manufacturer_name",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "cost_price": {
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "cost_price",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "cost_price",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "discount_price": {
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "discount_price",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "discount_price",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "discount_amount": {
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "discount_amount",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "discount_amount",
+                        "reason": "related_fields"
+                    },
+                    "discount_select": {
+                        "module": "Products",
+                        "field": "discount_amount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "discount_rate_percent": {
+                "locked": {
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "discount_rate_percent",
+                        "reason": "formula"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "discount_rate_percent",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "discount_amount_usdollar": {
+                "locked": {
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "discount_amount_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "discount_amount_usdollar",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "deal_calc": {
+                "locked": {
+                    "discount_select": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "formula"
+                    },
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "formula"
+                    },
+                    "quantity": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "formula"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "related_fields"
+                    },
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "related_fields"
+                    },
+                    "quantity": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "related_fields"
+                    },
+                    "discount_amount": {
+                        "module": "Products",
+                        "field": "deal_calc",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "deal_calc_usdollar": {
+                "locked": {
+                    "deal_calc": {
+                        "module": "Products",
+                        "field": "deal_calc_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "deal_calc_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "deal_calc_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "deal_calc_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "list_price": {
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "list_price",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "list_price",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "cost_usdollar": {
+                "locked": {
+                    "cost_price": {
+                        "module": "Products",
+                        "field": "cost_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "cost_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "cost_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "cost_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "discount_usdollar": {
+                "locked": {
+                    "discount_price": {
+                        "module": "Products",
+                        "field": "discount_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "discount_usdollar",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "list_usdollar": {
+                "locked": {
+                    "list_price": {
+                        "module": "Products",
+                        "field": "list_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "list_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "list_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "list_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "book_value": {
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "book_value",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "book_value",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "book_value_usdollar": {
+                "locked": {
+                    "book_value": {
+                        "module": "Products",
+                        "field": "book_value_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "book_value_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Products",
+                        "field": "book_value_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Products",
+                        "field": "book_value_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "date_closed_timestamp": {
+                "locked": {
+                    "date_closed": {
+                        "module": "Products",
+                        "field": "date_closed_timestamp",
+                        "reason": "formula"
+                    }
+                }
+            }
+        },
+        "Quotes": {
+            "subtotal": {
+                "locked": {
+                    "product_bundles": {
+                        "module": "Quotes",
+                        "field": "subtotal",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "subtotal",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "subtotal_usdollar": {
+                "locked": {
+                    "subtotal": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "subtotal_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "shipping": {
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "shipping",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "shipping",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "shipping_usdollar": {
+                "locked": {
+                    "shipping": {
+                        "module": "Quotes",
+                        "field": "shipping_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "shipping_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "shipping_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "shipping_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "discount": {
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "discount",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "discount",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "deal_tot": {
+                "locked": {
+                    "product_bundles": {
+                        "module": "Quotes",
+                        "field": "deal_tot",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "deal_tot_discount_percentage": {
+                "locked": {
+                    "subtotal_usdollar": {
+                        "module": "Quotes",
+                        "field": "deal_tot_discount_percentage",
+                        "reason": "formula"
+                    },
+                    "deal_tot_usdollar": {
+                        "module": "Quotes",
+                        "field": "deal_tot_discount_percentage",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "deal_tot_usdollar": {
+                "locked": {
+                    "deal_tot": {
+                        "module": "Quotes",
+                        "field": "deal_tot_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "deal_tot_usdollar",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "new_sub": {
+                "locked": {
+                    "product_bundles": {
+                        "module": "Quotes",
+                        "field": "new_sub",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "new_sub",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "new_sub",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "new_sub_usdollar": {
+                "locked": {
+                    "new_sub": {
+                        "module": "Quotes",
+                        "field": "new_sub_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "new_sub_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "new_sub_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "new_sub_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "taxable_subtotal": {
+                "locked": {
+                    "product_bundles": {
+                        "module": "Quotes",
+                        "field": "taxable_subtotal",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "tax": {
+                "locked": {
+                    "taxable_subtotal": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "formula"
+                    },
+                    "taxrate_value": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    },
+                    "taxrate_value": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    },
+                    "taxable_subtotal": {
+                        "module": "Quotes",
+                        "field": "tax",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "tax_usdollar": {
+                "locked": {
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "tax_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "tax_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "tax_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "tax_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            },
+            "total": {
+                "locked": {
+                    "product_bundles": {
+                        "module": "Quotes",
+                        "field": "total",
+                        "reason": "formula"
+                    },
+                    "tax": {
+                        "module": "Quotes",
+                        "field": "total",
+                        "reason": "formula"
+                    },
+                    "shipping": {
+                        "module": "Quotes",
+                        "field": "total",
+                        "reason": "formula"
+                    }
+                }
+            },
+            "total_usdollar": {
+                "locked": {
+                    "total": {
+                        "module": "Quotes",
+                        "field": "total_usdollar",
+                        "reason": "formula"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "total_usdollar",
+                        "reason": "formula"
+                    }
+                },
+                "related": {
+                    "currency_id": {
+                        "module": "Quotes",
+                        "field": "total_usdollar",
+                        "reason": "related_fields"
+                    },
+                    "base_rate": {
+                        "module": "Quotes",
+                        "field": "total_usdollar",
+                        "reason": "related_fields"
+                    }
+                }
+            }
+        }
+    },
+    "productsFields": {
+        "date_entered": {
+            "type": "datetime",
+            "studio": {
+                "portaleditview": false
+            },
+            "readonly": true,
+            "label": "LBL_DATE_ENTERED"
+        },
+        "date_modified": {
+            "type": "datetime",
+            "studio": {
+                "portaleditview": false
+            },
+            "readonly": true,
+            "label": "LBL_DATE_MODIFIED"
+        },
+        "modified_by_name": {
+            "type": "relate",
+            "link": "modified_user_link",
+            "readonly": true,
+            "label": "LBL_MODIFIED"
+        },
+        "created_by_name": {
+            "type": "relate",
+            "link": "created_by_link",
+            "readonly": true,
+            "label": "LBL_CREATED"
+        },
+        "description": {
+            "type": "text",
+            "label": "LBL_DESCRIPTION"
+        },
+        "revenuelineitem_name": {
+            "type": "relate",
+            "link": "revenuelineitems",
+            "studio": "visible",
+            "label": "LBL_REVENUELINEITEM_NAME"
+        },
+        "product_template_name": {
+            "type": "relate",
+            "link": "product_templates_link",
+            "studio": {
+                "editview": false,
+                "detailview": false,
+                "quickcreate": false
+            },
+            "label": "LBL_PRODUCT_TEMPLATE"
+        },
+        "subtotal": {
+            "type": "currency",
+            "default": "0",
+            "related_fields": [
+                "currency_id",
+                "base_rate",
+                "discount_price",
+                "quantity"
+            ],
+            "label": "LBL_SUBTOTAL"
+        },
+        "total_amount": {
+            "default": "0.00",
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate",
+                "quantity",
+                "discount_price",
+                "discount_select",
+                "discount_amount"
+            ],
+            "label": "LBL_CALCULATED_LINE_ITEM_AMOUNT"
+        },
+        "contact_name": {
+            "type": "relate",
+            "link": "contact_link",
+            "label": "LBL_CONTACT_NAME"
+        },
+        "manufacturer_name": {
+            "type": "relate",
+            "link": "manufacturers",
+            "related_fields": [
+                "manufacturer_id"
+            ],
+            "label": "LBL_MANUFACTURER_NAME"
+        },
+        "category_name": {
+            "type": "relate",
+            "link": "product_categories_link",
+            "studio": {
+                "editview": false,
+                "detailview": false,
+                "quickcreate": false
+            },
+            "label": "LBL_CATEGORY_NAME"
+        },
+        "mft_part_num": {
+            "type": "varchar",
+            "label": "LBL_MFT_PART_NUM"
+        },
+        "vendor_part_num": {
+            "type": "varchar",
+            "label": "LBL_VENDOR_PART_NUM"
+        },
+        "date_purchased": {
+            "type": "date",
+            "label": "LBL_DATE_PURCHASED"
+        },
+        "discount_rate_percent": {
+            "type": "decimal",
+            "label": "LBL_DISCOUNT_RATE"
+        },
+        "discount_amount_usdollar": {
+            "type": "currency",
+            "studio": {
+                "editview": false,
+                "mobile": false
+            },
+            "label": "LBL_DISCOUNT_RATE_USDOLLAR"
+        },
+        "discount_select": {
+            "type": "bool",
+            "default": true,
+            "label": "LBL_DISCOUNT_AS_PERCENT"
+        },
+        "deal_calc": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate",
+                "discount_price",
+                "quantity",
+                "discount_amount"
+            ],
+            "label": "LBL_DISCOUNT_TOTAL"
+        },
+        "deal_calc_usdollar": {
+            "type": "currency",
+            "studio": {
+                "editview": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_DISCOUNT_TOTAL_USDOLLAR"
+        },
+        "list_price": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_LIST_PRICE"
+        },
+        "cost_usdollar": {
+            "type": "currency",
+            "studio": {
+                "editview": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_COST_USDOLLAR"
+        },
+        "discount_usdollar": {
+            "type": "currency",
+            "studio": {
+                "editview": false,
+                "mobile": false
+            },
+            "label": "LBL_DISCOUNT_USDOLLAR"
+        },
+        "list_usdollar": {
+            "type": "currency",
+            "studio": {
+                "editview": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_LIST_USDOLLAR"
+        },
+        "tax_class": {
+            "type": "enum",
+            "default": "Taxable",
+            "label": "LBL_TAX_CLASS"
+        },
+        "website": {
+            "type": "varchar",
+            "label": "LBL_URL"
+        },
+        "weight": {
+            "type": "decimal",
+            "label": "LBL_WEIGHT"
+        },
+        "quantity": {
+            "type": "decimal",
+            "default": true,
+            "label": "LBL_QUANTITY"
+        },
+        "support_name": {
+            "type": "varchar",
+            "label": "LBL_SUPPORT_NAME"
+        },
+        "support_description": {
+            "type": "varchar",
+            "label": "LBL_SUPPORT_DESCRIPTION"
+        },
+        "support_contact": {
+            "type": "varchar",
+            "label": "LBL_SUPPORT_CONTACT"
+        },
+        "support_term": {
+            "type": "varchar",
+            "label": "LBL_SUPPORT_TERM"
+        },
+        "date_support_expires": {
+            "type": "date",
+            "label": "LBL_DATE_SUPPORT_EXPIRES"
+        },
+        "date_support_starts": {
+            "type": "date",
+            "label": "LBL_DATE_SUPPORT_STARTS"
+        },
+        "pricing_formula": {
+            "type": "varchar",
+            "label": "LBL_PRICING_FORMULA"
+        },
+        "pricing_factor": {
+            "type": "int",
+            "label": "LBL_PRICING_FACTOR"
+        },
+        "serial_number": {
+            "type": "varchar",
+            "label": "LBL_SERIAL_NUMBER"
+        },
+        "asset_number": {
+            "type": "varchar",
+            "label": "LBL_ASSET_NUMBER"
+        },
+        "book_value": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_BOOK_VALUE"
+        },
+        "book_value_usdollar": {
+            "type": "currency",
+            "studio": {
+                "editview": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_BOOK_VALUE_USDOLLAR"
+        },
+        "book_value_date": {
+            "type": "date",
+            "label": "LBL_BOOK_VALUE_DATE"
+        },
+        "date_closed": {
+            "type": "date",
+            "label": "LBL_DATE_CLOSED"
+        },
+        "next_step": {
+            "type": "varchar",
+            "label": "LBL_NEXT_STEP"
+        },
+        "campaign_name": {
+            "type": "relate",
+            "link": "campaign_products",
+            "label": "LBL_CAMPAIGN"
+        },
+        "opportunity_name": {
+            "type": "relate",
+            "link": "opportunities",
+            "label": "LBL_OPPORTUNITY_NAME"
+        },
+        "type_name": {
+            "type": "relate",
+            "link": "product_types_link",
+            "label": "LBL_TYPE"
+        },
+        "tag": {
+            "type": "tag",
+            "link": "tag_link",
+            "studio": {
+                "portal": false,
+                "base": {
+                    "popuplist": false
+                },
+                "mobile": {
+                    "wirelesseditview": true,
+                    "wirelessdetailview": true
+                }
+            },
+            "sortable": false,
+            "label": "LBL_TAGS"
+        },
+        "team_name": {
+            "type": "relate",
+            "link": "team_link",
+            "studio": {
+                "portallistview": false,
+                "portalrecordview": false
+            },
+            "label": "LBL_TEAMS"
+        },
+        "base_rate": {
+            "type": "text",
+            "label": "LBL_CURRENCY_RATE"
+        },
+        "name": {
+            "type": "name",
+            "link": true,
+            "label": "LBL_NAME",
+            "default": true
+        },
+        "account_name": {
+            "type": "relate",
+            "link": "account_link",
+            "label": "LBL_ACCOUNT_NAME",
+            "related_fields": [
+                "account_id"
+            ]
+        },
+        "status": {
+            "type": "enum",
+            "default": "",
+            "label": "LBL_STATUS"
+        },
+        "quote_name": {
+            "type": "relate",
+            "link": true,
+            "label": "LBL_ASSOCIATED_QUOTE",
+            "related_fields": [
+                "quote_id"
+            ],
+            "default": true
+        },
+        "discount_price": {
+            "type": "currency",
+            "default": "0",
+            "related_fields": [
+                "discount_price",
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_DISCOUNT_PRICE"
+        },
+        "cost_price": {
+            "type": "currency",
+            "related_fields": [
+                "cost_price",
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_COST_PRICE"
+        },
+        "discount_amount": {
+            "type": "discount",
+            "default": "0",
+            "related_fields": [
+                "discount_select",
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_DISCOUNT_AMOUNT"
+        },
+        "assigned_user_name": {
+            "link": "assigned_user_link",
+            "type": "relate",
+            "label": "LBL_ASSIGNED_TO"
+        }
+    },
+    "quotesFields": {
+        "modified_by_name": {
+            "type": "relate",
+            "link": "modified_user_link",
+            "readonly": true,
+            "label": "LBL_MODIFIED"
+        },
+        "created_by_name": {
+            "type": "relate",
+            "link": "created_by_link",
+            "readonly": true,
+            "label": "LBL_CREATED"
+        },
+        "description": {
+            "type": "text",
+            "label": "LBL_DESCRIPTION"
+        },
+        "shipper_name": {
+            "type": "relate",
+            "link": "shippers",
+            "label": "LBL_SHIPPING_PROVIDER"
+        },
+        "taxrate_name": {
+            "type": "relate",
+            "link": "taxrates",
+            "label": "LBL_TAXRATE"
+        },
+        "show_line_nums": {
+            "type": "bool",
+            "default": 1,
+            "label": "LBL_SHOW_LINE_NUMS"
+        },
+        "quote_type": {
+            "type": "enum",
+            "label": "LBL_QUOTE_TYPE"
+        },
+        "original_po_date": {
+            "type": "date",
+            "label": "LBL_ORIGINAL_PO_DATE"
+        },
+        "payment_terms": {
+            "type": "enum",
+            "label": "LBL_PAYMENT_TERMS"
+        },
+        "date_quote_closed": {
+            "type": "date",
+            "label": "LBL_DATE_QUOTE_CLOSED"
+        },
+        "date_order_shipped": {
+            "type": "date",
+            "label": "LBL_LIST_DATE_QUOTE_CLOSED"
+        },
+        "order_stage": {
+            "type": "enum",
+            "label": "LBL_ORDER_STAGE"
+        },
+        "purchase_order_num": {
+            "type": "varchar",
+            "label": "LBL_PURCHASE_ORDER_NUM"
+        },
+        "subtotal": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_SUBTOTAL"
+        },
+        "subtotal_usdollar": {
+            "type": "currency",
+            "studio": {
+                "wirelesseditview": false,
+                "wirelessdetailview": false,
+                "wirelesslistview": false,
+                "wireless_basic_search": false,
+                "wireless_advanced_search": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_SUBTOTAL_USDOLLAR"
+        },
+        "shipping": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "default": "0",
+            "label": "LBL_SHIPPING"
+        },
+        "shipping_usdollar": {
+            "type": "currency",
+            "studio": {
+                "wirelesseditview": false,
+                "wirelessdetailview": false,
+                "wirelesslistview": false,
+                "wireless_basic_search": false,
+                "wireless_advanced_search": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_SHIPPING_USDOLLAR"
+        },
+        "discount": {
+            "type": "currency",
+            "default": "0",
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_DISCOUNT_TOTAL"
+        },
+        "deal_tot": {
+            "type": "currency",
+            "label": "LBL_DEAL_TOT"
+        },
+        "deal_tot_discount_percentage": {
+            "type": "float",
+            "default": "0",
+            "label": "LBL_DEAL_TOT_PERCENTAGE"
+        },
+        "deal_tot_usdollar": {
+            "type": "currency",
+            "studio": {
+                "wirelesseditview": false,
+                "wirelessdetailview": false,
+                "wirelesslistview": false,
+                "wireless_basic_search": false,
+                "wireless_advanced_search": false,
+                "mobile": false
+            },
+            "label": "LBL_DEAL_TOT_USDOLLAR"
+        },
+        "new_sub": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_NEW_SUB"
+        },
+        "new_sub_usdollar": {
+            "type": "currency",
+            "studio": {
+                "wirelesseditview": false,
+                "wirelessdetailview": false,
+                "wirelesslistview": false,
+                "wireless_basic_search": false,
+                "wireless_advanced_search": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_NEW_SUB_USDOLLAR"
+        },
+        "taxable_subtotal": {
+            "type": "currency",
+            "label": "LBL_TAXABLE_SUBTOTAL"
+        },
+        "tax": {
+            "type": "currency",
+            "related_fields": [
+                "currency_id",
+                "base_rate",
+                "taxrate_value",
+                "taxable_subtotal"
+            ],
+            "default": "0",
+            "label": "LBL_TAX"
+        },
+        "tax_usdollar": {
+            "type": "currency",
+            "studio": {
+                "wirelesseditview": false,
+                "wirelessdetailview": false,
+                "wirelesslistview": false,
+                "wireless_basic_search": false,
+                "wireless_advanced_search": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_TAX_USDOLLAR"
+        },
+        "billing_address_street": {
+            "type": "text",
+            "label": "LBL_BILLING_ADDRESS_STREET"
+        },
+        "billing_address_city": {
+            "type": "varchar",
+            "label": "LBL_BILLING_ADDRESS_CITY"
+        },
+        "billing_address_state": {
+            "type": "varchar",
+            "label": "LBL_BILLING_ADDRESS_STATE"
+        },
+        "billing_address_postalcode": {
+            "type": "varchar",
+            "label": "LBL_BILLING_ADDRESS_POSTAL_CODE"
+        },
+        "billing_address_country": {
+            "type": "varchar",
+            "label": "LBL_BILLING_ADDRESS_COUNTRY"
+        },
+        "shipping_address_street": {
+            "type": "text",
+            "label": "LBL_SHIPPING_ADDRESS_STREET"
+        },
+        "shipping_address_city": {
+            "type": "varchar",
+            "label": "LBL_SHIPPING_ADDRESS_CITY"
+        },
+        "shipping_address_state": {
+            "type": "varchar",
+            "label": "LBL_SHIPPING_ADDRESS_STATE"
+        },
+        "shipping_address_postalcode": {
+            "type": "varchar",
+            "label": "LBL_SHIPPING_ADDRESS_POSTAL_CODE"
+        },
+        "shipping_address_country": {
+            "type": "varchar",
+            "label": "LBL_SHIPPING_ADDRESS_COUNTRY"
+        },
+        "shipping_account_name": {
+            "type": "relate",
+            "link": "shipping_accounts",
+            "label": "LBL_SHIPPING_ACCOUNT_NAME"
+        },
+        "shipping_contact_name": {
+            "type": "relate",
+            "link": "shipping_contacts",
+            "label": "LBL_SHIPPING_CONTACT_NAME"
+        },
+        "shipping_contact_id": {
+            "type": "relate",
+            "link": "shipping_contacts",
+            "label": "LBL_SHIPPING_CONTACT_ID"
+        },
+        "billing_contact_name": {
+            "type": "relate",
+            "link": "billing_contacts",
+            "label": "LBL_BILLING_CONTACT_NAME"
+        },
+        "billing_contact_id": {
+            "type": "relate",
+            "link": "billing_contacts",
+            "label": "LBL_BILLING_CONTACT_ID"
+        },
+        "bundles": {
+            "type": "collection",
+            "label": "LBL_PRODUCT_BUNDLES"
+        },
+        "opportunity_name": {
+            "type": "relate",
+            "link": "opportunities",
+            "label": "LBL_OPPORTUNITY_NAME"
+        },
+        "opportunity_id": {
+            "type": "relate",
+            "link": "opportunities",
+            "label": "LBL_OPPORTUNITY_ID"
+        },
+        "tag": {
+            "type": "tag",
+            "link": "tag_link",
+            "studio": {
+                "portal": false,
+                "base": {
+                    "popuplist": false
+                },
+                "mobile": {
+                    "wirelesseditview": true,
+                    "wirelessdetailview": true
+                }
+            },
+            "sortable": false,
+            "label": "LBL_TAGS"
+        },
+        "team_name": {
+            "type": "relate",
+            "link": "team_link",
+            "studio": {
+                "portallistview": false,
+                "portalrecordview": false
+            },
+            "label": "LBL_TEAMS"
+        },
+        "base_rate": {
+            "type": "text",
+            "label": "LBL_CURRENCY_RATE"
+        },
+        "quote_num": {
+            "type": "int",
+            "readonly": true,
+            "label": "LBL_LIST_QUOTE_NUM",
+            "default": true
+        },
+        "name": {
+            "type": "name",
+            "label": "LBL_LIST_QUOTE_NAME",
+            "default": true,
+            "link": true
+        },
+        "billing_account_name": {
+            "type": "relate",
+            "link": "billing_accounts",
+            "label": "LBL_LIST_ACCOUNT_NAME",
+            "default": true,
+            "sortable": false
+        },
+        "quote_stage": {
+            "type": "enum",
+            "label": "LBL_QUOTE_STAGE",
+            "default": true
+        },
+        "total": {
+            "type": "currency",
+            "label": "LBL_TOTAL",
+            "default": true,
+            "related_fields": [
+                "currency_id"
+            ]
+        },
+        "total_usdollar": {
+            "type": "currency",
+            "studio": {
+                "wirelesseditview": false,
+                "wirelessdetailview": false,
+                "wirelesslistview": false,
+                "wireless_basic_search": false,
+                "wireless_advanced_search": false,
+                "mobile": false
+            },
+            "related_fields": [
+                "currency_id",
+                "base_rate"
+            ],
+            "label": "LBL_LIST_AMOUNT_USDOLLAR",
+            "default": true
+        },
+        "date_quote_expected_closed": {
+            "type": "date",
+            "label": "LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED",
+            "default": true
+        },
+        "assigned_user_name": {
+            "link": "assigned_user_link",
+            "type": "relate",
+            "label": "LBL_LIST_ASSIGNED_TO_NAME",
+            "default": true,
+            "sortable": false
+        },
+        "date_modified": {
+            "type": "datetime",
+            "studio": {
+                "portaleditview": false
+            },
+            "readonly": true,
+            "default": true,
+            "label": "LBL_DATE_MODIFIED"
+        },
+        "date_entered": {
+            "type": "datetime",
+            "studio": {
+                "portaleditview": false
+            },
+            "readonly": true,
+            "default": true,
+            "label": "LBL_DATE_ENTERED"
+        }
+    }
+}
+</pre>
+
+<h2>Change Log</h2>
+<table class="table table-hover">
+    <tr>
+        <th>Version</th>
+        <th>Change</th>
+    </tr>
+    <tr>
+        <td>
+            v11.3
+        </td>
+        <td>
+            Added <code>/Quotes/config</code> GET endpoint.
+        </td>
+    </tr>
+</table>

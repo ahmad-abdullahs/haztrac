@@ -1,0 +1,187 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<h2>Overview</h2>
+<span class="lead">
+    [ADMIN] Fetch auth settings.
+</span>
+
+<h2>Summary</h2>
+<span class="lead">
+    This endpoint will return auth settings. This endpoint is only available to administrators when IDM migration is turned on.
+</span>
+
+<h3>Response if enabled only local auth provider</h3>
+<pre class="pre-scrollable">
+{
+  "enabledProviders": [
+    "local"
+  ],
+  "local": {
+        "password_requirements": {
+            "minimum_length": 6,
+            "maximum_length": 0,
+            "require_upper": true,
+            "require_lower": true,
+            "require_number": true,
+            "require_special": false,
+            "password_regex": "",
+            "regex_description": ""
+        },
+        "password_expiration": {
+            "time": 0,
+            "attempt": 0
+        }
+    }
+}
+</pre>
+
+<h3>Response if enabled local and ldap auth providers</h3>
+<pre class="pre-scrollable">
+{
+    "enabledProviders": [
+        "local",
+        "ldap"
+    ],
+    "local": {
+        "password_requirements": {
+            "minimum_length": 6,
+            "maximum_length": 0,
+            "require_upper": true,
+            "require_lower": true,
+            "require_number": true,
+            "require_special": false,
+            "password_regex": "",
+            "regex_description": ""
+        },
+        "password_expiration": {
+            "time": 0,
+            "attempt": 0
+        }
+    },
+    "ldap": {
+        "user": {
+            "mapping": {
+                "givenName": "first_name",
+                "sn": "last_name",
+                "mail": "email1",
+                "telephoneNumber": "phone_work",
+                "facsimileTelephoneNumber": "phone_fax",
+                "mobile": "phone_mobile",
+                "street": "address_street",
+                "l": "address_city",
+                "st": "address_state",
+                "postalCode": "address_postalcode",
+                "c": "address_country"
+            }
+        },
+        "adapter_config": {
+            "host": "127.0.0.1",
+            "port": "389",
+            "options": {
+                "network_timeout": 60,
+                "timelimit": 60
+            },
+            "encryption": "none"
+        },
+        "adapter_connection_protocol_version": 3,
+        "baseDn": "dc=openldap,dc=com",
+        "uidKey": "uid",
+        "filter": "({uid_key}={username})",
+        "dnString": null,
+        "entryAttribute": null,
+        "autoCreateUser": "1",
+        "searchDn": "cn=admin,ou=admins,dc=openldap,dc=com",
+        "searchPassword": "admin&password"
+    }
+}
+</pre>
+<h3>Response if enabled local and saml auth providers</h3>
+<pre class="pre-scrollable">
+{
+    "enabledProviders": [
+        "local",
+        "saml"
+    ],
+    "local": {
+        "password_requirements": {
+            "minimum_length": 6,
+            "maximum_length": 0,
+            "require_upper": true,
+            "require_lower": true,
+            "require_number": true,
+            "require_special": false,
+            "password_regex": "",
+            "regex_description": ""
+        },
+        "password_expiration": {
+            "time": 0,
+            "attempt": 0
+        }
+    },
+    "saml": {
+        "strict": true,
+        "debug": false,
+        "sp": {
+            "entityId": "logoutFlowWithRedirectBinding",
+            "assertionConsumerService": {
+                "url": "http://localhost/index.php?module=Users&action=Authenticate",
+                "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+            },
+            "singleLogoutService": {
+                "url": "http://localhost/index.php?module=Users&action=Logout",
+                "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            },
+            "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+            "x509cert": "",
+            "privateKey": "",
+            "provisionUser": true,
+            "sugarCustom": []
+        },
+        "idp": {
+            "entityId": "http://localhost:8080/simplesaml/saml2/idp/metadata.php",
+            "singleSignOnService": {
+                "url": "http://localhost:8080/simplesaml/saml2/idp/SSOService.php",
+                "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            },
+            "singleLogoutService": {
+                "url": "http://localhost:8080/simplesaml/saml2/idp/SingleLogoutService.php",
+                "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            },
+            "x509cert": "-----BEGIN CERTIFICATE-----\n --x509cert-- \n-----END CERTIFICATE-----"
+        },
+        "security": {
+            "authnRequestsSigned": false,
+            "logoutRequestSigned": false,
+            "logoutResponseSigned": false,
+            "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+            "validateRequestId": false
+        }
+    }
+}
+</pre>
+
+<h2>Change Log</h2>
+<table class="table table-hover">
+    <tr>
+        <th>Version</th>
+        <th>Change</th>
+    </tr>
+    <tr>
+        <td>
+            v11_2
+        </td>
+        <td>
+            Added <code>/Administration/settings/auth</code> GET endpoint.
+        </td>
+    </tr>
+</table>

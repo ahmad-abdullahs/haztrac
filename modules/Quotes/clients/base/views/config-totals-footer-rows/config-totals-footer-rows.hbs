@@ -1,0 +1,66 @@
+{{!
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+}}
+<div class="quote-data-container quote-data-config-container">
+    <div class="quote-data-grand-totals-footer">
+        <div class="footer-fields">
+            <div class="{{sortableFieldsContainerClass}} connected-containers"
+                 data-group-type="{{fieldTotalKey}}">
+                {{#each footerFields}}
+                    <div class="sortable-item"
+                         data-field-name="{{name}}"
+                         data-field-type="{{../fieldTotalKey}}">
+                        {{field ../this model=../model template=../action}}
+                    </div>
+                {{/each}}
+                {{#eq footerFields.length 0}}
+                    <div class="empty-config-footer-row-field">
+                        <div>
+                            {{str 'LBL_CONFIG_FOOTER_ROWS_EMPTY_TOTAL_1' 'Quotes'}}
+                        </div>
+                        <div>
+                            {{str 'LBL_CONFIG_FOOTER_ROWS_EMPTY_TOTAL_2' 'Quotes'}}
+                        </div>
+                    </div>
+                {{/eq}}
+            </div>
+
+            <div class="grand-total">
+                <div class="quote-footer-item"></div>
+            </div>
+
+            <div class="{{sortableGrandTotalFieldsContainerClass}} grand-totals connected-containers"
+                 data-group-type="{{fieldGrandTotalKey}}">
+                {{#each footerGrandTotalFields}}
+                    <div class="sortable-item"
+                         data-field-name="{{name}}"
+                         data-field-type="{{../fieldGrandTotalKey}}">
+                        {{field ../this model=../model template=../action}}
+                    </div>
+                {{/each}}
+                {{#eq footerGrandTotalFields.length 0}}
+                    <div class="empty-config-footer-row-field">
+                        <div>
+                            {{str 'LBL_CONFIG_FOOTER_ROWS_EMPTY_GRAND_TOTAL_1' 'Quotes'}}
+                        </div>
+                        <div>
+                            {{str 'LBL_CONFIG_FOOTER_ROWS_EMPTY_GRAND_TOTAL_2' 'Quotes'}}
+                        </div>
+                        <div>
+                            {{str 'LBL_CONFIG_FOOTER_ROWS_EMPTY_GRAND_TOTAL_3' 'Quotes'}}
+                        </div>
+                    </div>
+                {{/eq}}
+            </div>
+        </div>
+    </div>
+</div>

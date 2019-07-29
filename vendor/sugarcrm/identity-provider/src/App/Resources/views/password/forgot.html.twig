@@ -1,0 +1,46 @@
+{% extends "index-with-alerts.html.twig" %}
+
+{% block content %}
+<div class="thumbnail idm-set-password">
+    <div class="tcenter">
+        {% include 'logo.html.twig' %}
+    </div>
+    <section class="content">
+        <h3>{{ "Can't log in? Forget your password?"|trans }}</h3>
+        <p>{{ "Enter your email address below and we'll send you password reset instructions."|trans }}</p>
+    </section>
+    <form name="forgot-password" id="submit_section"  method="post" action="{{ path('forgotPasswordProcess') }}" class="tcenter">
+        {% if tid %}
+            <input type="hidden" name="tid" value="{{ tid }}">
+        {% endif %}
+        {% if tid is empty %}
+            <div class="control-group">
+            <span class="edit">
+              <input type="text" name="tid" id="tid" value="" placeholder="{{ 'Tenant'|trans }} ({{ 'Required'|trans }})" class="inherit-width"
+                     aria-label="tenant">
+            </span>
+            </div>
+        {% endif %}
+        <div class="control-group">
+            <span class="edit">
+              <input type="text" name="user_name" id="username" value="" placeholder="{{ 'User Name'|trans }} ({{ 'Required'|trans }})"
+                     class="inherit-width" aria-label="username">
+            </span>
+        </div>
+        <div class="control-group" style="text-align: right">
+            {% include 'recaptcha.html.twig' %}
+        </div>
+        {% include 'honeypot.html.twig' %}
+        <div class="login-footer">
+            <span class="edit">
+             <a href="{{ path('loginRender') }}" class="btn btn-secondary"
+                 name="login_button" id="login_button">{{ 'Cancel'|trans }}</a>
+              <a href="javascript:void(0);" class="btn btn-primary" role="button" tabindex="0"
+                 name="login_button" id="submit_btn">{{ 'Send'|trans }}</a>
+            </span>
+        </div>
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">
+        <input type="submit" id="submit-from" style="display: none">
+    </form>
+</div>
+{% endblock %}

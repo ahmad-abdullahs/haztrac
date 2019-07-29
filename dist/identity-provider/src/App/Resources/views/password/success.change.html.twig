@@ -1,0 +1,18 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <div class="thumbnail idm-set-password">
+        {% include 'logo.html.twig' %}
+        <section class="content">
+            <h3>{{ 'Password changed successful'|trans }}</h3>
+            <p>
+                {{ "Awesome, you've successfully updated your password."|trans }}
+            </p>
+        </section>
+        <nav class="nav tcenter">
+            <a href="{{ path('loginRender') }}" id="login_link">
+                <button id="set-new-password-btn" class="btn btn-primary">{{ 'Continue'|trans }}</button>
+            </a>
+        </nav>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+<style>
+    .jstree li > a > ins.jstree-icon::before {
+        content: '' !important;
+    }
+    .jstree li.jstree-open > ins.jstree-icon {
+        background: url("styleguide/assets/img/d.png") -37px -55px no-repeat !important;
+        margin-left: 10px !important;
+        -webkit-transform:rotate(90deg);
+        -moz-transform:rotate(90deg);
+    }
+    .jstree li.jstree-closed > ins.jstree-icon {
+        background: url("styleguide/assets/img/d.png") -37px -55px no-repeat !important;
+        margin-left: 10px !important;
+    }
+
+    .jstree li[rel="default"] > ins.jstree-icon {
+        background: none !important;
+    }
+</style>
+<div id="folder_tree_wrapper" style="height: 200px;">
+</div>

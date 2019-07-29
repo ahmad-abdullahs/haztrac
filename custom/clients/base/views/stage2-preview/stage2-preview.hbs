@@ -1,0 +1,114 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class='hint-preview'>
+
+<div class='headline'>
+    <div class='hintLogo'></div>
+    {{#unless _stage2ErrorCode}}
+        <div class='{{#if isHintRequestLoading}}hint-preview-icon--loading{{/if}}'
+            aria-hidden='true' data-name='saveAll' data-action='copy' rel='tooltip'>
+        </div>
+    {{/unless}}
+</div>
+
+{{#if _stage2ErrorCode}}
+    <div class='hint-preview-errors-container'>
+        <div class='span4 record-cell err_message_col1'>{{str 'LBL_HINT_PREVIEW_TITLE'}}</div>
+        {{#eq _stage2ErrorCode '402'}}
+            {{#eq _stage2ErrorMsg 'license_expired'}}
+                <div class='span8 record-cell err_message_col2'>
+                    {{str 'LBL_HINT_PREVIEW_LICENSE_EXPIRED'}}
+                </div>
+            {{else}}
+                <div class='span8 record-cell err_message_col2'>
+                    {{str 'LBL_HINT_PREVIEW_QUESTION'}}
+                </div>
+            {{/eq}}
+        {{else}}
+            <div class='span8 record-cell err_message_col2'>
+                {{str 'LBL_HINT_PREVIEW_QUESTION'}}
+            </div>
+        {{/eq}}
+    </div>
+{{else}}
+    <div>
+        {{#if isHintRequestLoading}}
+            {{#eq moduleName 'Accounts'}}
+                <img src='custom/Stage2/opt_render_2.jpg'>
+            {{else}}
+                <img src='custom/Stage2/opt_render.jpg'>
+            {{/eq}}
+        {{else}}
+{{#each meta.panels}}
+    {{#eq name 'panel_header'}}
+        <div class='hint-preview-contact'>
+            {{#each ../fields}}
+                <div class='hint-preview-field-value record-cell record-cell--{{name}}'
+                    data-type='{{type}}' name='{{name}}' data-name='{{name}}'>
+                    {{field ../../../this model=model}}
+                    <button class='hidden hint-preview-icon--cloud'
+                        data-name='{{name}}' data-action='copy' rel='tooltip'
+                        data-placement='left' data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
+                    </button>
+                    <button class='hidden hint-preview-icon--locked' data-name='{{name}}' data-action='lock'></button>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class='panel{{#if ../hide}}{{#if ../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}'>
+            {{#each fields}}
+                <div class='row-fluid{{#if ../../hide}}{{#if ../../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}'>
+                    {{#unless dismiss_label}}
+                        <div class='hint-preview-field-label span4 ellipsis_inline record-label--{{name}}' data-name='{{name}}'>
+                            {{str ../label ../../../../model.module}}
+                        </div>
+                    {{/unless}}
+                    <div class="hint-preview-field-value record-cell record-cell--{{name}} {{#eq name 'hint_account_logo_c'}}span4{{else}}span8{{/eq}}"
+                        data-type='{{type}}' name='{{name}}' data-name='{{name}}'>
+                        {{#eq name 'hint_account_website_c'}}
+                            <div id='hint_website_erased' class='hidden' style='float: right;'>
+                                <span class='label' rel='tooltip' data-placement='bottom' title=''
+                                    data-original-title="{{str 'LBL_HINT_VALUE_ERASED_TOOLTIP'}}">
+                                    {{str 'LBL_HINT_VALUE_ERASED'}}
+                                </span>
+                            </div>
+                        {{/eq}}
+                        {{field ../../../this model=model}}
+                        <button class='hidden hint-preview-icon--cloud'
+                            data-name='{{name}}'
+                            data-action='copy' rel='tooltip' data-placement='left'
+                            data-title="{{str 'LBL_HINT_PREVIEW_CLICK_TO_SAVE'}}">
+                        </button>
+                        <button class='hidden hint-preview-icon--locked' data-name='{{name}}' data-action='lock'>
+                        </button>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{/eq}}
+{{/each}}
+
+<div class='{{#unless hiddenPanelExists}}hide {{/unless}}show-hide-toggle'>
+    <button class='btn btn-link btn-invisible more{{#if hideMoreButton}} hide{{/if}}'
+        data-moreless='more' data-target='.panel_hidden'>
+        {{str 'LBL_SHOW_MORE'}}...
+    </button>
+    <button class='btn btn-link btn-invisible less{{#if hideLessButton}} hide{{/if}}'
+        data-moreless='less' data-target='.panel_hidden'>
+        {{str 'LBL_SHOW_LESS'}}...
+    </button>
+</div>
+    {{/if}}
+</div>
+    {{/if}}
+</div>

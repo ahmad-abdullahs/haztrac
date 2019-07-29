@@ -1,0 +1,29 @@
+{% extends "index.html.twig" %}
+
+{% block alert %}
+    {% set error = app.getSession().getFlashBag().get('error') %}
+    {% if error is not empty %}
+        <div class="alert alert-danger alert-block closeable">
+            <div class="indicator">
+                <i class="fa fa-exclamation-circle"></i>
+            </div>
+            <button class="close btn btn-link btn-invisible" onclick="javascript:void(0);" id="close_alert_btn">
+                <i class="fa fa-times"></i>
+            </button>
+            <span class="text">{{ error|translate_array|join('. ') }}</span>
+        </div>
+    {% endif %}
+
+    {% set success = app.getSession().getFlashBag().get('success') %}
+    {% if success is not empty and error is empty %}
+        <div class="alert alert-success alert-block closeable">
+            <div class="indicator">
+                <i class="fa fa-exclamation-circle"></i>
+            </div>
+            <button class="close btn btn-link btn-invisible" onclick="javascript:void(0);" id="close_alert_btn">
+                <i class="fa fa-times"></i>
+            </button>
+            <span class="text">{{ success|translate_array|join('. ') }}</span>
+        </div>
+    {% endif %}
+{% endblock %}

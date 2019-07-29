@@ -1,0 +1,19 @@
+<div class="record-label" style="margin-left: 0px;">
+    {{str 'LBL_MANIFESTS' 'LR_Lab_Reports'}}
+</div>
+
+{{#each value}}
+<span class="span12" style="margin-left: 0px;">
+    <span class="normal index">
+        <span class="edit span10">
+            <input type="hidden" name="{{../name}}" class="select2 inherit-width" value="{{id}}" data-rname="{{name}}" data-index="{{@index}}">
+        </span>
+        {{#if remove_button}}
+            <button type="button" class="btn second" name="remove" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_REMOVE"}} {{str 'LBL_MANIFESTS' 'LR_Lab_Reports'}}"><i class="fa fa-minus"></i></button>
+        {{/if}}
+        {{#if add_button}}
+            <button type="button" class="btn first" name="add" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ADD"}} {{str 'LBL_MANIFESTS' 'LR_Lab_Reports'}}"><i class="fa fa-plus"></i></button>
+        {{/if}}
+    </span>
+</span>
+{{/each}}
