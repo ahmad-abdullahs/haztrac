@@ -1,4 +1,5 @@
 <?php
+
 $viewdefs['base']['view']['lab-tests'] = array(
     'dashlets' => array(
         array(
@@ -10,7 +11,6 @@ $viewdefs['base']['view']['lab-tests'] = array(
                 'module' => array(
                     'LR_Lab_Reports',
                 ),
-                
             ),
         ),
     ),
