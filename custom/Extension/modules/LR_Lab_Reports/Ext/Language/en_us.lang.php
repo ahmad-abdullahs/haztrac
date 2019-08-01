@@ -267,3 +267,4 @@ $mod_strings['LBL_PROJECT_LR_LAB_REPORTS_1_FROM_PROJECT_TITLE'] = 'Lab Project N
 $mod_strings['LBL_LR_LAB_REPORTS_SALES_AND_SERVICES_1_FROM_SALES_AND_SERVICES_TITLE'] = 'Sales & Service';
 $mod_strings['LBL_EMAILS_TITLE'] = 'Emails';
 $mod_strings['LBL_ANALYSIS_METALS'] = 'Analysis Metals';
+$mod_strings['LBL_LAB_ANALYSIS'] = 'Lab Analysis';
