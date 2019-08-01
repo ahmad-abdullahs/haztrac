@@ -16,11 +16,15 @@
                                             </div>
                                         </div>
                                         <div data-dashlet="dashlet" class="dashlet-content">
-                                            <div>
+                                            <div class="tags" style="padding-top: 5px;padding-left: 5px;">
                                                 {{#each tests}}
-                                                    <div style="display: inline-block;border: 1px solid #000; padding: 5px; background: #0679c8; color: #fff; margin-bottom: 5px;">
-                                                        {{this}}
-                                                    </div>
+                                                    <span class="tag-wrapper" style="background: {{this.color}};">
+                                                        <span class="tag-name ellipsis_inline" rel="tooltip" data-placement="bottom" title="" data-original-title="{{this.text}}" style="font-size: 15px;line-height: 20px;">
+                                                            <a class="tag-name ellipsis-inline" data-action="tag-search" data-tag="{{this.text}}">
+                                                                {{this.text}}
+                                                            </a>
+                                                        </span>
+                                                    </span>
                                                 {{/each}}
                                             </div>
                                         </div>
