@@ -689,3 +689,4 @@ $viewdefs['LR_Lab_Reports'] = array(
         ),
     ),
 );
+
