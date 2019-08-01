@@ -144,7 +144,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'width' => 42,
                                 'height' => 42,
                                 'dismiss_label' => true,
-//                'readonly' => true,
+//                                'readonly' => true,
                             ),
                             1 => 'document_name',
                             2 =>
@@ -368,6 +368,9 @@ $viewdefs['LR_Lab_Reports'] = array(
                             array(
                                 'name' => 'wpm_waste_profile_module_lr_lab_reports_name',
                             ),
+                            27 =>
+                            array(
+                            ),
                         ),
                     ),
                     2 =>
@@ -573,101 +576,107 @@ $viewdefs['LR_Lab_Reports'] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'analysis_metals_c',
+                                'label' => 'LBL_ANALYSIS_METALS',
+                            ),
+                            1 =>
+                            array(
                                 'name' => 'metal_aluminum_c',
                                 'label' => 'LBL_METAL_ALUMINUM',
                             ),
-                            1 =>
+                            2 =>
                             array(
                                 'name' => 'metal_arsenic_c',
                                 'label' => 'LBL_METAL_ARSENIC',
                             ),
-                            2 =>
+                            3 =>
                             array(
                                 'name' => 'metal_barium_c',
                                 'label' => 'LBL_METAL_BARIUM',
                             ),
-                            3 =>
+                            4 =>
                             array(
                                 'name' => 'metal_cadmium_c',
                                 'label' => 'LBL_METAL_CADMIUM',
                             ),
-                            4 =>
+                            5 =>
                             array(
                                 'name' => 'metal_calcium_c',
                                 'label' => 'LBL_METAL_CALCIUM',
                             ),
-                            5 =>
+                            6 =>
                             array(
                                 'name' => 'metal_chromium_c',
                                 'label' => 'LBL_METAL_CHROMIUM',
                             ),
-                            6 =>
+                            7 =>
                             array(
                                 'name' => 'metal_chromium_vi_c',
                                 'label' => 'LBL_METAL_CHROMIUM_VI',
                             ),
-                            7 =>
+                            8 =>
                             array(
                                 'name' => 'metal_copper_c',
                                 'label' => 'LBL_METAL_COPPER',
                             ),
-                            8 =>
+                            9 =>
                             array(
                                 'name' => 'metal_iron_c',
                                 'label' => 'LBL_METAL_IRON',
                             ),
-                            9 =>
+                            10 =>
                             array(
                                 'name' => 'metal_lead_c',
                                 'label' => 'LBL_METAL_LEAD',
                             ),
-                            10 =>
+                            11 =>
                             array(
                                 'name' => 'metal_mercury_c',
                                 'label' => 'LBL_METAL_MERCURY',
                             ),
-                            11 =>
+                            12 =>
                             array(
                                 'name' => 'metal_nickel_c',
                                 'label' => 'LBL_METAL_NICKEL',
                             ),
-                            12 =>
+                            13 =>
                             array(
                                 'name' => 'metal_phosphorus_c',
                                 'label' => 'LBL_METAL_PHOSPHORUS',
                             ),
-                            13 =>
+                            14 =>
                             array(
                                 'name' => 'metal_selenium_c',
                                 'label' => 'LBL_METAL_SELENIUM',
                             ),
-                            14 =>
+                            15 =>
                             array(
                                 'name' => 'metal_silicon_c',
                                 'label' => 'LBL_METAL_SILICON',
                             ),
-                            15 =>
+                            16 =>
                             array(
                                 'name' => 'metal_silver_c',
                                 'label' => 'LBL_METAL_SILVER',
                             ),
-                            16 =>
+                            17 =>
                             array(
                                 'name' => 'metal_sodium_c',
                                 'label' => 'LBL_METAL_SODIUM',
                             ),
-                            17 =>
+                            18 =>
                             array(
                                 'name' => 'metal_vanadium_c',
                                 'label' => 'LBL_METAL_VANADIUM',
                             ),
-                            18 =>
+                            19 =>
                             array(
                                 'name' => 'metal_zinc_c',
                                 'label' => 'LBL_METAL_ZINC',
                             ),
-                            19 =>
+                            20 =>
                             array(
+                                'span' => 12,
                             ),
                         ),
                     ),
