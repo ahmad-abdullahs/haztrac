@@ -7,7 +7,6 @@
      * @inheritdoc
      */
     initialize: function (options) {
-        console.log('fffffffffffff');
         this._super('initialize', [options]);
 
         var context = this.context || this.context.parent;
