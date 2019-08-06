@@ -348,35 +348,13 @@ array (
               ),
               3 => 
               array (
-                'name' => 'epa_code_4_c',
-                'label' => 'LBL_EPA_CODE_4',
-                'span' => 12,
-              ),
-              4 => 
-              array (
                 'name' => 'waste_state_codes_c',
                 'label' => 'LBL_WASTE_STATE_CODES',
               ),
-              5 => 
+              4 => 
               array (
-                'name' => 'epa_code_1_c',
-                'label' => 'LBL_EPA_CODE_1',
-              ),
-              6 => 
-              array (
-                'name' => 'state_code_3_c',
-                'label' => 'LBL_STATE_CODE_3',
-              ),
-              7 => 
-              array (
-                'name' => 'epa_code_3_c',
-                'label' => 'LBL_EPA_CODE_3',
-              ),
-              8 => 
-              array (
-                'name' => 'epa_code_2_c',
-                'label' => 'LBL_EPA_CODE_2',
-                'span' => 12,
+                'name' => 'epa_waste_codes_c',
+                'label' => 'LBL_EPA_WASTE_CODES',
               ),
             ),
           ),

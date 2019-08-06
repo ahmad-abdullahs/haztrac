@@ -1,0 +1,97 @@
+ .quote-block{
+     background: rgba(255,255,255,0.9); 
+     box-shadow: 2px 2px 12px #879; 
+     color: #666; display: inline-block; 
+     left: 0;
+     margin: auto; 
+     height: auto; 
+     max-height:90px; 
+     min-height:40px; 
+     padding: 10px 10px 10px; 
+     position: absolute; 
+     right: 0; 
+     text-align: center; 
+     top: 30px; 
+     vertical-align: middle; 
+     width: 50%; z-index: 1; 
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     border-radius: 5px; 
+  }
+ .quote{
+     color: #4e5857; 
+     font-family: cursive; font-size: 18px; font-weight: bold; 
+     margin-bottom: 0;  
+     font-style: italic;
+     margin-top: 0; 
+     text-align: center; 
+     width: 100%; 
+ }
+.quote-img-right img{margin-top:10px; padding-left: 10px;}
+.quote-img-left img{margin-top: -20px; padding-right: 10px;}
+        
+@media only screen and (max-width: 767px) {
+    .quote-block{width: 90%;}
+}
+
+@media only screen and (max-width: 480px) {
+    .login-form {width: 300px; top: 90px;}
+    .login-form .header {width: 250px;}
+    .login-form .content {padding: 5px 25px;  }
+    .login-form .content h2 { margin-bottom: 10px; }
+    .quote { font-size: 12px;}
+}
+.login-form{
+     
+     left: 0;
+     margin: auto; 
+     height: auto; 
+     max-height:390px; 
+     min-height:40px; 
+     padding: 10px 10px 10px; 
+     position: absolute; 
+     right: 0; 
+     text-align: center; 
+     top: 230px; 
+     vertical-align: middle; 
+     width: 50%; z-index: 1; 
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     border-radius: 5px; 
+      
+}
+.login-footer-main div{
+  float:left;
+  display:inline;
+}
+.login-form{
+  border:1px solid #d8d8d8; 
+  border-radius:5px;
+  width:240px;
+  background-color:#fff; 
+  height:auto;
+  position: 'absolute';
+  padding: '20px';
+  box-shadow: '0px 2px 1px rgba(0, 0, 0, 0.1)';
+  position:'absolute';
+}
+
+#content { top: 0; }
+.bxslider{margin:0 !important;}
+/*.bx-controls-direction{top: inherit !important;}*/
+
+.login-slider{
+    left: 0;
+     margin: auto; 
+     height: auto; 
+     max-height:100%;  
+     position: absolute; 
+     right: 0; 
+     text-align: center; 
+     vertical-align: middle; 
+     width: 100%; 
+     -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+     z-index:-1;
+}
+
