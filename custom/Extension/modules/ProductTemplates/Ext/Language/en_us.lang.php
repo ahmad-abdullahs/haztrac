@@ -26,3 +26,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Support';
 $mod_strings['LBL_VENDOR_PRODUCT_SVC_DESCRP'] = 'Vendor Product Discription (Buy)';
 $mod_strings['LBL_RECORDVIEW_PANEL5'] = 'State Proper Shipping Name';
 $mod_strings['LBL_SHIPPING_CA_NAME'] = 'CA Shipping Name';
+$mod_strings['LBL_WASTE_STATE_CODES'] = 'State Waste Codes';
