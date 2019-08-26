@@ -1,0 +1,58 @@
+<div class="dashboard quotes-create">
+    <div class="cols row-fluid">
+        <ul class="dashlets row-fluid">
+            <li class="row-fluid">
+                <div class="rows well well-invisible">
+                    <ul class="dashlet-cell rows row-fluid">
+                        <li class="dashlet-container span12">
+                            <div class="thumbnail dashlet" data-type="dashlet">
+                                <div data-dashlet="toolbar">
+                                    <div class="dashlet-header">
+                                        <div class="btn-toolbar pull-right"></div>
+                                        <h4 data-toggle="dashlet" class="dashlet-title">
+                                            {{str 'LBL_RELATED_RLIS' 'RevenueLineItems'}}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div data-dashlet="dashlet" class="dashlet-content">
+                                    <div class="list-view">
+                                        {{#each meta.panels}}
+                                        <table class="table table-striped dataTable">
+                                            <thead>
+                                                <tr>
+                                                {{#each fields}}
+                                                    <th class="list-row-header {{#if widthClass}} {{widthClass}}{{/if}}" {{#if styles}} style="{{styles}}"{{/if}}>
+                                                         <span>
+                                                             {{str label 'sales_and_services'}}
+                                                         </span>
+                                                    </th>
+                                                {{/each}}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each ../raRLIs.models}}
+                                                    <tr class="single">
+                                                        {{#each ../fields}}
+                                                            <td{{#if align}} class="{{align}}"{{/if}}>
+                                                                {{#eq @index 0}}
+                                                                    {{#eq ../../this.attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>
+                                                                    {{/eq}}
+                                                                {{/eq}}
+                                                                {{field ../../../this model=../this template='detail'}}
+                                                            </td>
+                                                        {{/each}}
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

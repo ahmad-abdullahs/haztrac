@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_STATUS'] = 'Status';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Address Panel';
@@ -44,3 +45,10 @@ $mod_strings['LNK_IMPORT_SALES_AND_SERVICES'] = 'Import Sales &amp; Service';
 $mod_strings['LBL_LIST_FORM_TITLE'] = 'Sales &amp; ServiceList';
 $mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Search Sales &amp; Service';
 $mod_strings['LBL_SALES_AND_SERVICES_SUBPANEL_TITLE'] = 'Sales &amp; Service';
+$mod_strings['LBL_SALES_AND_SERVICE_TOTAL'] = 'Sales Total';
+$mod_strings['LBL_ESTIMATED_QUANTITY'] = 'Estimated Quantity';
+$mod_strings['LBL_QUANTITY'] = 'Actual Quantity';
+$mod_strings['LBL_UNIT_OF_MEASURE'] = 'Unit Of Measure';
+$mod_strings['LBL_DISCOUNT_PRICE'] = 'Unit Price';
+$mod_strings['LBL_CALCULATED_LINE_ITEM_AMOUNT'] = 'Calculated Revenue Line Item Amount';
+$mod_strings['LBL_BUNDLE_TOTAL'] = 'Bundle Total';

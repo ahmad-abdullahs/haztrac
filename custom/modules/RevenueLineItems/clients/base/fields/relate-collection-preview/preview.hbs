@@ -1,0 +1,16 @@
+
+
+{{#if value.records.length}}
+    <ul class="activitystream-list results">
+        {{#each value.records}}
+            <li class="activitystream-posts-comments-container">
+                <div class="label label-module label-module-md label-RevenueLineItems pull-left" rel="tooltip" data-placement="right" title="" data-original-title="Related Revenue Line Item" style="border-radius: 0px;">
+                    R-RL
+                </div>
+                <div style="margin-top: 6px;">
+                    <span class="tagged">Related RLI : <a href="#RevenueLineItems/{{id}}"> {{name}}</a></span>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+{{/if}}

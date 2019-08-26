@@ -137,6 +137,10 @@ $viewdefs['ProductTemplates'] = array(
                             2 =>
                             array(
                                 'name' => 'name',
+                                0 =>
+                                array(
+                                    0 => 'is_bundle_product_c',
+                                ),
                             ),
                         ),
                     ),
@@ -215,7 +219,13 @@ $viewdefs['ProductTemplates'] = array(
                             13 =>
                             array(
                                 'name' => 'tag',
-                                'span' => 12,
+                                'span' => 6,
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'bundle_total_c',
+                                'label' => 'LBL_BUNDLE_TOTAL',
+                                'span' => 6,
                             ),
                         ),
                     ),
