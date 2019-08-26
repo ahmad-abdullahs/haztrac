@@ -170,14 +170,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'generator_c',
-                'studio' => 'visible',
-                'label' => 'LBL_GENERATOR',
+                'name' => 'submission_type_c',
+                'label' => 'LBL_SUBMISSION_TYPE',
               ),
               1 => 
               array (
-                'name' => 'wp_usepa_id_c',
-                'label' => 'LBL_WP_USEPA_ID',
+                'name' => 'generator_type_c',
+                'label' => 'LBL_GENERATOR_TYPE',
               ),
               2 => 
               array (
@@ -187,16 +186,36 @@ array (
               ),
               3 => 
               array (
+                'name' => 'waste_profile_num_c',
+                'label' => 'LBL_WASTE_PROFILE_NUM',
               ),
-              4 => 'assigned_user_name',
-              5 => 'team_name',
+              4 => 
+              array (
+                'name' => 'generator_c',
+                'studio' => 'visible',
+                'label' => 'LBL_GENERATOR',
+              ),
+              5 => 
+              array (
+                'name' => 'wp_usepa_id_c',
+                'label' => 'LBL_WP_USEPA_ID',
+              ),
               6 => 
               array (
                 'name' => 'tag',
+                'span' => 12,
               ),
               7 => 
               array (
-                'name' => 'wpm_waste_profile_module_accounts_1_name',
+              ),
+              8 => 
+              array (
+              ),
+              9 => 
+              array (
+              ),
+              10 => 
+              array (
               ),
             ),
           ),
@@ -213,25 +232,30 @@ array (
             array (
               0 => 
               array (
-                'name' => 'parent_name',
-                'studio' => 'visible',
-                'label' => 'LBL_FLEX_TEST',
-              ),
-              1 => 
-              array (
-                'name' => 'wp_test_mul_c',
-                'label' => 'LBL_WP_TEST_MUL',
-              ),
-              2 => 
-              array (
                 'name' => 'wp_waste_name_c',
                 'label' => 'LBL_WP_WASTE_NAME',
               ),
-              3 => 
+              1 => 
+              array (
+              ),
+              2 => 
               array (
                 'name' => 'wp_generating_process_c',
                 'studio' => 'visible',
                 'label' => 'LBL_WP_GENERATING_PROCESS',
+              ),
+              3 => 
+              array (
+                'name' => 'generator_knowledge_c',
+                'label' => 'LBL_GENERATOR_KNOWLEDGE',
+              ),
+              4 => 
+              array (
+                'name' => 'service_frequency_c',
+                'label' => 'LBL_SERVICE_FREQUENCY',
+              ),
+              5 => 
+              array (
               ),
             ),
           ),
@@ -249,64 +273,63 @@ array (
             array (
               0 => 
               array (
-                'name' => 'wp_color_c',
-                'label' => 'LBL_WP_COLOR',
+                'name' => 'physical_state_c',
+                'label' => 'LBL_PHYSICAL_STATE',
               ),
               1 => 
               array (
+                'name' => 'wp_color_c',
+                'label' => 'LBL_WP_COLOR',
               ),
               2 => 
               array (
-                'name' => 'description',
-                'span' => 12,
+                'name' => 'describe_appearance_c',
+                'label' => 'LBL_DESCRIBE_APPEARANCE',
               ),
               3 => 
               array (
-                'name' => 'date_modified_by',
-                'readonly' => true,
-                'inline' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_MODIFIED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_modified',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'modified_by_name',
-                  ),
-                ),
+                'name' => 'number_of_phases_c',
+                'label' => 'LBL_NUMBER_OF_PHASES',
               ),
               4 => 
               array (
-                'name' => 'date_entered_by',
-                'readonly' => true,
-                'inline' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_ENTERED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_entered',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'created_by_name',
-                  ),
-                ),
+                'name' => 'odor_c',
+                'label' => 'LBL_ODOR',
+              ),
+              5 => 
+              array (
+                'name' => 'odor_description_c',
+                'label' => 'LBL_ODOR_DESCRIPTION',
+              ),
+              6 => 
+              array (
+                'name' => 'flash_point_c',
+                'label' => 'LBL_FLASH_POINT',
+              ),
+              7 => 
+              array (
+                'name' => 'btu_c',
+                'label' => 'LBL_BTU',
+              ),
+              8 => 
+              array (
+                'name' => 'ash_content_c',
+                'label' => 'LBL_ASH_CONTENT',
+              ),
+              9 => 
+              array (
+                'name' => 'ph_c',
+                'label' => 'LBL_PH',
+              ),
+              10 => 
+              array (
+                'name' => 'viscosity_c',
+                'label' => 'LBL_VISCOSITY',
+              ),
+              11 => 
+              array (
+                'name' => 'specific_gravity_c',
+                'label' => 'LBL_SPECIFIC_GRAVITY',
               ),
             ),
           ),
@@ -404,6 +427,56 @@ array (
               ),
               1 => 
               array (
+              ),
+            ),
+          ),
+          9 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL7',
+            'label' => 'LBL_RECORDVIEW_PANEL7',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 'assigned_user_name',
+              1 => 'team_name',
+              2 => 
+              array (
+                'name' => 'created_by_name',
+                'readonly' => true,
+                'label' => 'LBL_CREATED',
+              ),
+              3 => 
+              array (
+                'name' => 'date_entered',
+                'comment' => 'Date record created',
+                'studio' => 
+                array (
+                  'portaleditview' => false,
+                ),
+                'readonly' => true,
+                'label' => 'LBL_DATE_ENTERED',
+              ),
+              4 => 
+              array (
+                'name' => 'date_modified',
+                'comment' => 'Date record last modified',
+                'studio' => 
+                array (
+                  'portaleditview' => false,
+                ),
+                'readonly' => true,
+                'label' => 'LBL_DATE_MODIFIED',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
+                'span' => 12,
               ),
             ),
           ),

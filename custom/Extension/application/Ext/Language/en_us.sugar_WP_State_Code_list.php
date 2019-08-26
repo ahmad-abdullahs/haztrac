@@ -1,12 +1,12 @@
 <?php
- // created: 2019-08-05 10:02:39
+ // created: 2019-08-06 20:18:24
 
 $app_list_strings['WP_State_Code_list']=array (
   '' => '',
   'CA121' => 'CA121 - Alkaline solution (pH ≤ 12.5) with metals (antimony, arsenic, barium, beryllium, cadmium, chromium, cobalt, copper, lead, mercury, molybdenum, nickel, selenium, silver, thallium, vanadium, and zinc)',
   'CA122' => 'CA122 - Alkaline solution without metals (pH > 12.5)',
   'CA123' => 'CA123 - Unspecified alkaline solution',
-  'CA1310' => 'CA131 - Aqueous solution (2 ',
+  'CA131' => 'Aqueous solution (2 ',
   'CA132' => 'CA132 - Aqueous solution with metals (restricted levels and see waste code 121 for a list of metals)',
   'CA133' => 'CA133 - Aqueous solution with 10% or more total organic residues',
   'CA134' => 'CA134 - 	 Aqueous solution with less than 10% total organic residues',

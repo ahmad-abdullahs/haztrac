@@ -196,9 +196,9 @@ array (
             array (
               0 => 
               array (
-                'name' => 'project_name_c',
-                'label' => 'LBL_PROJECT_NAME',
-                'tabindex' => '2',
+                'name' => 'sample_id_number_c',
+                'label' => 'LBL_SAMPLE_ID_NUMBER',
+                'tabindex' => '30',
               ),
               1 => 
               array (
@@ -208,36 +208,195 @@ array (
               ),
               2 => 
               array (
+                'name' => 'accounts_lr_lab_reports_1_name',
+                'tabindex' => '9',
+              ),
+              3 => 
+              array (
+                'name' => 'accounts_lr_lab_reports_2_name',
+                'tabindex' => '10',
+              ),
+              4 => 
+              array (
+                'name' => 'v_vendors_lr_lab_reports_1_name',
+                'tabindex' => '8',
+              ),
+              5 => 
+              array (
+                'name' => 'lab_ref_number_c',
+                'label' => 'LBL_LAB_REF_NUMBER',
+                'tabindex' => '50',
+              ),
+              6 => 
+              array (
+                'name' => 'project_name_c',
+                'label' => 'LBL_PROJECT_NAME',
+                'tabindex' => '2',
+              ),
+              7 => 
+              array (
+                'name' => 'project_lr_lab_reports_1_name',
+              ),
+              8 => 
+              array (
                 'name' => 'commodity_c',
                 'label' => 'LBL_COMMODITY',
                 'tabindex' => '4',
               ),
-              3 => 
-              array (
-                'name' => 'sample_id_number_c',
-                'label' => 'LBL_SAMPLE_ID_NUMBER',
-                'tabindex' => '30',
-              ),
-              4 => 
-              array (
-                'name' => 'project_lr_lab_reports_1_name',
-              ),
-              5 => 
-              array (
-              ),
-              6 => 
+              9 => 
               array (
                 'name' => 'object_number_c',
                 'label' => 'LBL_OBJECT_NUMBER',
                 'tabindex' => '5',
               ),
-              7 => 
+              10 => 
               array (
-                'name' => 'lab_ref_number_c',
-                'label' => 'LBL_LAB_REF_NUMBER',
-                'tabindex' => '9',
+                'name' => 'uploadfile',
+                'populate_list' => 
+                array (
+                  0 => 'document_name',
+                ),
+                'span' => 6,
               ),
-              8 => 
+              11 => 
+              array (
+                'name' => 'other_ref_number_c',
+                'label' => 'LBL_OTHER_REF_NUMBER',
+                'tabindex' => '11',
+                'span' => 6,
+              ),
+              12 => 
+              array (
+                'name' => 'assigned_user_name',
+                'tabindex' => '13',
+              ),
+              13 => 
+              array (
+                'name' => 'team_name',
+                'tabindex' => '14',
+              ),
+            ),
+          ),
+          3 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL4',
+            'label' => 'LBL_RECORDVIEW_PANEL4',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'sample_date_time_c',
+                'label' => 'LBL_SAMPLE_DATE_TIME',
+                'tabindex' => '6',
+              ),
+              1 => 
+              array (
+                'name' => 'sent_via_c',
+                'label' => 'LBL_SENT_VIA',
+                'tabindex' => '7',
+              ),
+              2 => 
+              array (
+                'name' => 'sample_size_c',
+                'label' => 'LBL_SAMPLE_SIZE',
+              ),
+              3 => 
+              array (
+                'name' => 'sample_physical_state_c',
+                'label' => 'LBL_SAMPLE_PHYSICAL_STATE',
+              ),
+              4 => 
+              array (
+              ),
+              5 => 
+              array (
+              ),
+            ),
+          ),
+          4 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL3',
+            'label' => 'LBL_RECORDVIEW_PANEL3',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'analysis_templates_c',
+                'label' => 'LBL_ANALYSIS_TEMPLATES',
+                'tabindex' => '16',
+              ),
+              1 => 
+              array (
+                'name' => 'analysis_date_c',
+                'label' => 'LBL_ANALYSIS_DATE',
+                'tabindex' => '17',
+              ),
+              2 => 
+              array (
+                'name' => 'lab_analysis_c',
+                'label' => 'LBL_LAB_ANALYSIS',
+                'span' => 12,
+              ),
+              3 => 
+              array (
+                'name' => 'analysis_metals_c',
+                'label' => 'LBL_ANALYSIS_METALS',
+                'span' => 12,
+              ),
+              4 => 
+              array (
+                'name' => 'special_instructions_c',
+                'studio' => 'visible',
+                'label' => 'LBL_SPECIAL_INSTRUCTIONS',
+                'tabindex' => '11',
+              ),
+              5 => 
+              array (
+                'name' => 'instructions_c',
+                'studio' => 'visible',
+                'label' => 'LBL_INSTRUCTIONS',
+                'tabindex' => '12',
+              ),
+            ),
+          ),
+          5 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL5',
+            'label' => 'LBL_RECORDVIEW_PANEL5',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'description',
+                'tabindex' => '15',
+                'span' => 6,
+              ),
+              1 => 
+              array (
+                'name' => 'tag',
+                'tabindex' => '27',
+                'span' => 6,
+              ),
+              2 => 
+              array (
+                'name' => 'wpm_waste_profile_module_lr_lab_reports_name',
+              ),
+              3 => 
               array (
                 'name' => 'manifests',
                 'type' => 'manifests',
@@ -245,96 +404,7 @@ array (
                 'dismiss_label' => true,
                 'tabindex' => '10',
               ),
-              9 => 
-              array (
-                'name' => 'other_ref_number_c',
-                'label' => 'LBL_OTHER_REF_NUMBER',
-                'tabindex' => '11',
-              ),
-              10 => 
-              array (
-                'name' => 'sample_date_time_c',
-                'label' => 'LBL_SAMPLE_DATE_TIME',
-                'tabindex' => '6',
-              ),
-              11 => 
-              array (
-                'name' => 'sent_via_c',
-                'label' => 'LBL_SENT_VIA',
-                'tabindex' => '7',
-              ),
-              12 => 
-              array (
-                'name' => 'v_vendors_lr_lab_reports_1_name',
-                'tabindex' => '8',
-              ),
-              13 => 
-              array (
-                'name' => 'uploadfile',
-                'populate_list' => 
-                array (
-                  0 => 'document_name',
-                ),
-              ),
-              14 => 
-              array (
-                'name' => 'analysis_templates_c',
-                'label' => 'LBL_ANALYSIS_TEMPLATES',
-                'tabindex' => '16',
-              ),
-              15 => 
-              array (
-                'name' => 'analysis_date_c',
-                'label' => 'LBL_ANALYSIS_DATE',
-                'tabindex' => '17',
-              ),
-              16 => 
-              array (
-                'name' => 'accounts_lr_lab_reports_1_name',
-                'tabindex' => '9',
-              ),
-              17 => 
-              array (
-                'name' => 'accounts_lr_lab_reports_2_name',
-                'tabindex' => '10',
-              ),
-              18 => 
-              array (
-                'name' => 'special_instructions_c',
-                'studio' => 'visible',
-                'label' => 'LBL_SPECIAL_INSTRUCTIONS',
-                'tabindex' => '11',
-              ),
-              19 => 
-              array (
-                'name' => 'instructions_c',
-                'studio' => 'visible',
-                'label' => 'LBL_INSTRUCTIONS',
-                'tabindex' => '12',
-              ),
-              20 => 
-              array (
-                'name' => 'assigned_user_name',
-                'tabindex' => '13',
-              ),
-              21 => 
-              array (
-                'name' => 'team_name',
-                'tabindex' => '14',
-              ),
-              22 => 
-              array (
-                'name' => 'description',
-                'tabindex' => '15',
-                'span' => 12,
-              ),
-              23 => 
-              array (
-                'name' => 'tag',
-                'tabindex' => '27',
-                'span' => 12,
-              ),
-              24 => 
+              4 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -358,7 +428,7 @@ array (
                   ),
                 ),
               ),
-              25 => 
+              5 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -381,38 +451,6 @@ array (
                     'name' => 'created_by_name',
                   ),
                 ),
-              ),
-              26 => 
-              array (
-                'name' => 'wpm_waste_profile_module_lr_lab_reports_name',
-              ),
-              27 => 
-              array (
-              ),
-            ),
-          ),
-          3 => 
-          array (
-            'newTab' => false,
-            'panelDefault' => 'expanded',
-            'name' => 'LBL_RECORDVIEW_PANEL3',
-            'label' => 'LBL_RECORDVIEW_PANEL3',
-            'columns' => 2,
-            'labelsOnTop' => 1,
-            'placeholders' => 1,
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'lab_analysis_c',
-                'label' => 'LBL_LAB_ANALYSIS',
-                'span' => 12,
-              ),
-              1 => 
-              array (
-                'name' => 'analysis_metals_c',
-                'label' => 'LBL_ANALYSIS_METALS',
-                'span' => 12,
               ),
             ),
           ),

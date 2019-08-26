@@ -1,5 +1,5 @@
 <?php
- // created: 2019-08-05 10:02:39
+ // created: 2019-08-06 20:18:24
 
 $app_list_strings['WP_State_Code_list']=array (
   'CA135' => 'CA135',
@@ -80,5 +80,5 @@ $app_list_strings['WP_State_Code_list']=array (
   'CA791' => '791 - Liquids with pH ',
   'CA792' => '792 - Liquids with pH ',
   'CA801' => '801 - Waste potentially containing dioxins',
-  'CA1310' => 'CA131 - Aqueous solution (2 ',
+  'CA131' => 'Aqueous solution (2 ',
 );

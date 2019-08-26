@@ -28,3 +28,7 @@ $mod_strings['LBL_PROJECTS_SUBPANEL_TITLE'] = 'Lab Projects';
 $mod_strings['LBL_ACCOUNT_NUMBER'] = 'Account Number';
 $mod_strings['LBL_COMPANY_SCAC_CODE'] = 'Company SCAC/ABRV Code';
 $mod_strings['LBL_AC_USEPA_ID'] = 'EPA ID No. ';
+$mod_strings['LBL_LON'] = 'Longitude';
+$mod_strings['LBL_LAT'] = 'Latitude';
+$mod_strings['LBL_EIN_TAXID'] = 'EIN / Foreign TaxID ';
+$mod_strings['LBL_CONTRACT_NAME'] = 'Contract Name';
