@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICES_QUOTES'] = 'Sales/Services Quotes';
 $mod_strings['LBL_NAME'] = 'Product Svc Name';
@@ -8,3 +9,7 @@ $mod_strings['LBL_ESTIMATED_QUANTITY'] = 'Estimated Quantity';
 $mod_strings['LBL_UNIT_OF_MEASURE'] = 'Unit Of Measure';
 $mod_strings['LBL_CHARGE'] = 'Charge';
 $mod_strings['LBL_CLOSE_AMOUNT'] = 'Close Amount (%)';
+$mod_strings['LBL_IS_BUNDLE_PRODUCT'] = 'Is Bundle Product';
+$mod_strings['LBL_RELATED_RLIS'] = 'Related Revenue Line Items';
+$mod_strings['LBL_RELATED_RLI_TOTAL'] = 'Related RLI Total';
+$mod_strings['LBL_CURRENCY_0'] = 'LBL_CURRENCY';
