@@ -1,7 +1,7 @@
 <?php
 
-$viewdefs['Accounts']['base']['layout']['subpanels'] = array (
-    'components' => array (
+$viewdefs['Accounts']['base']['layout']['subpanels'] = array(
+    'components' => array(
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
@@ -10,43 +10,44 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
                 'link' => 'contacts',
             ),
         ),
-		array(
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
             'context' => array(
                 'link' => 'calls',
             ),
         ),
-		array(
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
             'context' => array(
                 'link' => 'tasks',
             ),
         ),
-		array(
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_ACCOUNTS_SALES_AND_SERVICES_1_FROM_SALES_AND_SERVICES_TITLE',
-            'context' => 
-            array (
+            'context' =>
+            array(
                 'link' => 'accounts_sales_and_services_1',
             ),
         ),
-		array (
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_LR_LAB_REPORTS_ACCOUNTS_FROM_LR_LAB_REPORTS_TITLE',
-            'context' => 
-            array (
+            'context' =>
+            array(
                 'link' => 'lr_lab_reports_accounts',
             ),
         ),
-		array(
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_RLI_SUBPANEL_TITLE',
             'override_subpanel_list_view' => 'subpanel-for-accounts',
             'context' => array(
                 'link' => 'revenuelineitems',
             ),
+            'override_paneltop_view' => 'panel-top-for-accounts',
         ),
         array(
             'layout' => 'subpanel',
@@ -64,7 +65,7 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
                 'link' => 'cases',
             ),
         ),
-		array(
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_QUOTES_BILLTO',
             'override_paneltop_view' => 'panel-top-for-accounts',

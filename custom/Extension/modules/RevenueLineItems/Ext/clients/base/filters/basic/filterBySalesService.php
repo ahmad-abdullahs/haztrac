@@ -4,10 +4,10 @@ $viewdefs['RevenueLineItems']['base']['filter']['basic']['filters'][] = array(
     'id' => 'filterBySalesService',
     'name' => 'LBL_FILTER_BY_SALES_SERVICES',
     'filter_definition' => array(
-		array(
+        array(
             'sales_and_services_revenuelineitems_1sales_and_services_ida' => array(
-				'$in' => array(),
-			),
+                '$in' => array(),
+            ),
         )
     ),
     'editable' => true,

@@ -1,6 +1,7 @@
 <?php
 
 // created: 2019-08-26 15:47:54
+// subpanel of RevenueLineItems shown in Sales and service record view
 $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-sales_and_services_revenuelineitems_1'] = array(
     'panels' =>
     array(
@@ -10,7 +11,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
             'label' => 'LBL_PANEL_1',
             'fields' =>
             array(
-                0 =>
                 array(
                     'default' => true,
                     'label' => 'LBL_LIST_NAME',
@@ -22,10 +22,15 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     array(
                         0 => 'currency_id',
                         1 => 'base_rate',
-                        1 => 'is_bundle_product_c',
+                        2 => 'is_bundle_product_c',
                     ),
                 ),
-                1 =>
+                array(
+                    'name' => 'account_name',
+                    'link' => true,
+                    'enabled' => true,
+                    'default' => true,
+                ),
                 array(
                     'type' => 'relate',
                     'link' => true,
@@ -36,7 +41,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'enabled' => true,
                     'name' => 'ht_manifest_revenuelineitems_1_name',
                 ),
-                2 =>
                 array(
                     'type' => 'decimal',
                     'default' => true,
@@ -44,7 +48,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'enabled' => true,
                     'name' => 'estimated_quantity_c',
                 ),
-                3 =>
                 array(
                     'default' => true,
                     'label' => 'LBL_QUANTITY',
@@ -52,7 +55,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'name' => 'quantity',
                     'type' => 'decimal',
                 ),
-                4 =>
                 array(
                     'type' => 'enum',
                     'default' => true,
@@ -60,7 +62,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'enabled' => true,
                     'name' => 'unit_of_measure_c',
                 ),
-                5 =>
                 array(
                     'name' => 'discount_price',
                     'label' => 'LBL_DISCOUNT_PRICE',
@@ -74,15 +75,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'currency_format' => true,
                     'default' => true,
                 ),
-                6 =>
-//                array(
-//                    'type' => 'currency',
-//                    'default' => true,
-//                    'label' => 'LBL_CHARGE',
-//                    'enabled' => true,
-//                    'name' => 'charge_c',
-//                ),
-//                7 =>
                 array(
                     'type' => 'currency',
                     'default' => true,
@@ -90,7 +82,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'enabled' => true,
                     'name' => 'total_amount',
                 ),
-                7 =>
                 array(
                     'type' => 'decimal',
                     'default' => true,

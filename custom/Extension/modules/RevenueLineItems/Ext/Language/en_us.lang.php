@@ -13,3 +13,5 @@ $mod_strings['LBL_IS_BUNDLE_PRODUCT'] = 'Is Bundle Product';
 $mod_strings['LBL_RELATED_RLIS'] = 'Related Revenue Line Items';
 $mod_strings['LBL_RELATED_RLI_TOTAL'] = 'Related RLI Total';
 $mod_strings['LBL_CURRENCY_0'] = 'LBL_CURRENCY';
+$mod_strings['LBL_RLI_TYPE'] = 'RLI TYPE';
+$mod_strings['LBL_FILTER_BY_ACCOUNT_ID'] = 'Filter By Account';

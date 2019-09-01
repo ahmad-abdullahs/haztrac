@@ -8,4 +8,5 @@ $viewdefs['RevenueLineItems']['base']['layout']['subpanels']['components'][] = a
     array(
         'link' => 'revenuelineitems_revenuelineitems_1',
     ),
+    'override_paneltop_view' => 'panel-top-for-revenuelineitems',
 );
