@@ -8,7 +8,24 @@ require_once("clients/base/api/ModuleApi.php");
 class CustomSASModuleApi extends ModuleApi {
 
     public function registerApiRest() {
-        return parent::registerApiRest();
+        return array_merge(parent::registerApiRest(), array(
+            'create' => array(
+                'reqType' => 'POST',
+                'path' => array('sales_and_services'),
+                'pathVars' => array('module'),
+                'method' => 'createRecord',
+                'shortHelp' => 'This method creates a new record of the specified type',
+                'longHelp' => 'include/api/help/module_post_help.html',
+            ),
+            'update' => array(
+                'reqType' => 'PUT',
+                'path' => array('sales_and_services', '?'),
+                'pathVars' => array('module', 'record'),
+                'method' => 'updateRecord',
+                'shortHelp' => 'This method updates a record of the specified type',
+                'longHelp' => 'include/api/help/module_record_put_help.html',
+            ),
+        ));
     }
 
     /**
@@ -27,7 +44,8 @@ class CustomSASModuleApi extends ModuleApi {
                     'module' => $bean->module_name,
                     'record' => $bean->id,
                     'link_name' => $linkName), array(
-                    'account_id' => $bean->accounts_sales_and_services_1accounts_ida)
+                    'account_id' => $bean->accounts_sales_and_services_1accounts_ida
+                                )
                 ));
             }
         }

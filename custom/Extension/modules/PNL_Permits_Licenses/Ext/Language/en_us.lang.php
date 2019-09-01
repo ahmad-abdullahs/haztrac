@@ -9,3 +9,5 @@ $mod_strings['LBL_DAYS_PRIOR_RENEWAL'] = 'Renew Days Prior to Exp';
 $mod_strings['LBL_ISSUED_TO_PARTY'] = 'Issued to Party';
 $mod_strings['LBL_ISSUING_ACOUNT'] = 'Issuing Agency / Authority';
 $mod_strings['LBL_ID_NUMBER'] = 'ID Number';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'License Preview';
+$mod_strings['LBL_LICENSE_PREVIEW'] = 'License Preview';

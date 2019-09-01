@@ -1,14 +1,32 @@
 <?php
 
-// created: 2019-08-26 21:22:00
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['duplicate_merge_dom_value'] = 0;
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['labelValue'] = 'Related RLI Total';
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['full_text_search'] = array(
-    'enabled' => '0',
-    'boost' => '1',
-    'searchable' => false,
+$dictionary['RevenueLineItem']['fields']['related_rli_total_c'] = array(
+    'duplicate_merge_dom_value' => 0,
+    'labelValue' => 'Related RLI Total',
+    'calculated' => '1',
+    'formula' => 'rollupSum($revenuelineitems_revenuelineitems_1,"total_amount")',
+    'enforced' => '1',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'custom_fields',
+    'name' => 'related_rli_total_c',
+    'vname' => 'LBL_RELATED_RLI_TOTAL',
+    'type' => 'decimal',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'false',
+    'duplicate_merge' => 'disabled',
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'pii' => false,
+    'len' => 18,
+    'size' => '20',
+    'enable_range_search' => false,
+    'precision' => 2,
+//    'id' => 'RevenueLineItemsrelated_rli_total_c',
+    'custom_module' => 'RevenueLineItems',
 );
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['calculated'] = '1';
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['formula'] = 'rollupSum($revenuelineitems_revenuelineitems_1,"total_amount")';
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['enforced'] = '1';
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['dependency'] = '';

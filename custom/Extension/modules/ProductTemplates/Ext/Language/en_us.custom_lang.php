@@ -2,6 +2,8 @@
 
 $mod_strings['LBL_PRODUCTTEMPLATES_PANEL_TITLE'] = 'Bundle Products';
 $mod_strings['LBL_IS_BUNDLE_PRODUCT'] = 'Is bundle Product';
+//$mod_strings['LBL_FILTER_BUNDLE_PRODUCTS'] = 'Bundle Products / Prarent Products';
+//$mod_strings['LBL_FILTER_CHILD_PRODUCTS'] = 'Child Products';
 $mod_strings['LBL_FILTER_BUNDLE_PRODUCTS'] = 'Bundle Products';
 $mod_strings['LBL_PRODUCTTEMPLATES_PRODUCTTEMPLATES_1_FROM_PRODUCTTEMPLATES_L_TITLE'] = 'Related Product Catalog';
 $mod_strings['LBL_BUNDLE_TOTAL'] = 'Bundle Total';

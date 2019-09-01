@@ -31,7 +31,6 @@
      */
     hasRliAccess: true,
 
-
     /**
      * If subpanel models are valid
      */
@@ -40,7 +39,7 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
+    initialize: function (options) {
         this.plugins = _.union(this.plugins, ['LinkedModel']);
 
         this.hasRliAccess = app.acl.hasAccess('edit', 'RevenueLineItems');
@@ -51,21 +50,21 @@
     /**
      * @inheritdoc
      */
-    initiateSave: function(callback) {
+    initiateSave: function (callback) {
         this.disableButtons();
         async.waterfall([
-            _.bind(function(cb) {
+            _.bind(function (cb) {
                 async.parallel([
                     _.bind(this.validateSubpanelModelsWaterfall, this),
                     _.bind(this.validateModelWaterfall, this)
-                ], function(err) {
+                ], function (err) {
                     // err is undefined if no errors
                     cb(!_.isUndefined(err));
                 });
             }, this),
             _.bind(this.dupeCheckWaterfall, this),
             _.bind(this.createRecordWaterfall, this)
-        ], _.bind(function(error) {
+        ], _.bind(function (error) {
             this.enableButtons();
             if (error && error.status == 412 && !error.request.metadataRetry) {
                 this.handleMetadataSyncError(error);
@@ -81,10 +80,10 @@
      *
      * @inheritdoc
      */
-    validateModelWaterfall: function(callback) {
+    validateModelWaterfall: function (callback) {
         // override this.model.doValidate() to display error if subpanel model validation failed
         this.model.trigger('validation:start');
-        this.model.isValidAsync(this.getFields(this.module), _.bind(function(isValid, errors) {
+        this.model.isValidAsync(this.getFields(this.module), _.bind(function (isValid, errors) {
             if (this.validSubpanelModels && isValid) {
                 this.model.trigger('validation:success');
             } else if (!this.validSubpanelModels) {
@@ -101,21 +100,21 @@
      *
      * @inheritdoc
      */
-    validateSubpanelModelsWaterfall: function(callback) {
+    validateSubpanelModelsWaterfall: function (callback) {
         this.hasSubpanelModels = false;
         this.validSubpanelModels = true;
-        _.each(this.context.children, function(child) {
+        _.each(this.context.children, function (child) {
             if (child.get('isCreateSubpanel')) {
                 this.hasSubpanelModels = true;
                 this.context.trigger('subpanel:validateCollection:' + child.get('link'),
-                    _.bind(function(notValid) {
-                        if (this.validSubpanelModels && notValid) {
-                            this.validSubpanelModels = false;
-                        }
-                        callback(notValid);
-                    }, this),
-                    true
-                );
+                        _.bind(function (notValid) {
+                            if (this.validSubpanelModels && notValid) {
+                                this.validSubpanelModels = false;
+                            }
+                            callback(notValid);
+                        }, this),
+                        true
+                        );
             }
         }, this);
 
@@ -125,13 +124,12 @@
         }
     },
 
-
     /**
      * Custom logic to make sure that none of the rli records have changed
      *
      * @inheritdoc
      */
-    hasUnsavedChanges: function() {
+    hasUnsavedChanges: function () {
         var ret = this._super('hasUnsavedChanges');
 
         // now lets check for RLI's
@@ -148,13 +146,13 @@
             // if there is only one model, we need to verify that the model is not dirty.
             // check the non default attributes to make sure they are not empty.
             var model = rli_context.get('collection').at(0),
-                attr_keys = _.difference(_.keys(model.attributes), ['id']),
-                // if the value is not empty and it doesn't equal the default value
-                // we have a dirty model
-                unsavedRliChanges = _.find(attr_keys, function(attr) {
-                    var val = model.get(attr);
-                    return (!_.isEmpty(val) && (model._defaults[attr] !== val));
-                });
+                    attr_keys = _.difference(_.keys(model.attributes), ['id']),
+                    // if the value is not empty and it doesn't equal the default value
+                    // we have a dirty model
+                    unsavedRliChanges = _.find(attr_keys, function (attr) {
+                        var val = model.get(attr);
+                        return (!_.isEmpty(val) && (model._defaults[attr] !== val));
+                    });
 
             ret = (!_.isUndefined(unsavedRliChanges));
         }
@@ -165,7 +163,7 @@
     /**
      * @inheritdoc
      */
-    getCustomSaveOptions: function(options) {
+    getCustomSaveOptions: function (options) {
         this.createdModel = this.model;
         // since we are in a drawer
         this.listContext = this.context.parent || this.context;
@@ -181,7 +179,7 @@
             }
         }
 
-        var success = _.bind(function(model) {
+        var success = _.bind(function (model) {
             this.originalSuccess(model);
         }, this);
 
@@ -191,9 +189,78 @@
     },
 
     /**
+     * Create a new record
+     * @param success
+     * @param error
+     */
+    saveModel: function (success, error) {
+        var self = this,
+                options;
+        options = {
+            success: success,
+            error: error,
+            viewed: true,
+            relate: (self.model.link) ? true : null,
+            //Show alerts for this request
+            showAlerts: {
+                'process': true,
+                'success': false,
+                'error': false //error callback implements its own error handler
+            },
+            lastSaveAction: this.context.lastSaveAction
+        };
+        this.applyAfterCreateOptions(options);
+
+        // Check if this has subpanel create models
+        if (this.hasSubpanelModels) {
+            _.each(this.context.children, function (child) {
+                if (child.get('isCreateSubpanel')) {
+                    // create the child collection JSON structure to save
+                    var childCollection = {
+                        create: []
+                    },
+                            linkName = child.get('link');
+                    if (this.model.has(linkName)) {
+                        // the model already has the link name, there must be rollup formulas
+                        // on the create form between the model and the subpanel
+                        childCollection = this.model.get(linkName);
+                        // make sure there is a create key on the childCollection
+                        if (!_.has(childCollection, 'create')) {
+                            childCollection['create'] = [];
+                        }
+                    }
+
+                    // ++
+                    // If there is only one RLI while Accounts creation and 
+                    // it's name is empty then ignore it, don't save it.
+                    // Otherwise it will create a RLI without name which is so annoying.
+                    if (linkName == 'revenuelineitems' && child.get('collection').models.length == 1) {
+                        if (_.isEmpty(child.get('collection').models[0].get('name'))) {
+                            // continue
+                            return;
+                        }
+                    }
+
+                    // loop through the models in the collection and push each model's JSON
+                    // data to the 'create' array
+                    _.each(child.get('collection').models, function (model) {
+                        childCollection.create.push(model.toJSON());
+                    }, this);
+
+                    // set the child JSON collection data to the model
+                    this.model.set(linkName, childCollection);
+                }
+            }, this);
+        }
+
+        options = _.extend({}, options, self.getCustomSaveOptions(options));
+        self.model.save(null, options);
+    },
+
+    /**
      * @inheritdoc
      */
-    _dispose: function() {
+    _dispose: function () {
         if (this.alert) {
             this.alert.getCloseSelector().off('click');
         }
