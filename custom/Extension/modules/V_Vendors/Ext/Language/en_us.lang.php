@@ -11,3 +11,4 @@ $mod_strings['LBL_LIST_FORM_TITLE'] = 'Sites List';
 $mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Search Site';
 $mod_strings['LBL_V_VENDORS_SUBPANEL_TITLE'] = 'Vendors';
 $mod_strings['LBL_HOMEPAGE_TITLE'] = 'My Vendors';
+$mod_strings['LBL_TEST4'] = 'test4';

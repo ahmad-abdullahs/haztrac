@@ -29,3 +29,4 @@ $mod_strings['LBL_SHIPPING_CA_NAME'] = 'CA Shipping Name';
 $mod_strings['LBL_WASTE_STATE_CODES'] = 'State Waste Codes';
 $mod_strings['LBL_EPA_WASTE_CODES'] = 'EPA Waste Codes';
 $mod_strings['LBL_LIST_NAME'] = 'List Name';
+$mod_strings['LBL_ADDITIONAL_INFO_ACK'] = 'Additional Info / Acknowledgement ';
