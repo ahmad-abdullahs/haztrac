@@ -10,5 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$app_list_strings['moduleList']['HRM_Employee_Training'] = 'Training';
-$app_list_strings['moduleListSingular']['HRM_Employee_Training'] = 'Train';
+$app_list_strings['moduleList']['HRM_Employee_Training'] = 'Employee Training';
+$app_list_strings['moduleList']['HRM_Employee'] = 'Employees';
+$app_list_strings['moduleList']['HRM_Employee_Info'] = 'Employees';
+$app_list_strings['moduleListSingular']['HRM_Employee_Training'] = 'Employee Training';
+$app_list_strings['moduleListSingular']['HRM_Employee'] = 'Employee';
+$app_list_strings['moduleListSingular']['HRM_Employee_Info'] = 'Employee';

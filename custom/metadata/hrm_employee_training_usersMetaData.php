@@ -1,5 +1,5 @@
 <?php
-// created: 2019-09-01 05:58:15
+// created: 2019-09-01 14:02:17
 $dictionary["hrm_employee_training_users"] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 
