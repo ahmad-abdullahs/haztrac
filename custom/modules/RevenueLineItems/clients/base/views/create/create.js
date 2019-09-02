@@ -24,7 +24,8 @@
         bean = app.data.createBean('RevenueLineItems');
         bean.set(data);
         bean._module = bean.attributes._module = 'RevenueLineItems';
-        bean.id = bean.attributes.id = '';
+        delete bean.attributes.id;
+        delete bean.id;
 
         // check the parent record to see if an assigned user ID/name has been set
         if (this.context && this.context.has('model')) {
