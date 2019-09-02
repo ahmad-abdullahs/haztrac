@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICES_QUOTES'] = 'Sales/Services Quotes';
 $mod_strings['LBL_NAME'] = 'Product Svc Name';
@@ -15,3 +14,6 @@ $mod_strings['LBL_RELATED_RLI_TOTAL'] = 'Related RLI Total';
 $mod_strings['LBL_CURRENCY_0'] = 'LBL_CURRENCY';
 $mod_strings['LBL_RLI_TYPE'] = 'RLI TYPE';
 $mod_strings['LBL_FILTER_BY_ACCOUNT_ID'] = 'Filter By Account';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Shipping and Transport';
+$mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Pricing';
+$mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Old Fields';
