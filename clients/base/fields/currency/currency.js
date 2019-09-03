@@ -104,11 +104,6 @@
      * @private
      */
     _render: function() {
-        if (this.name == 'discount_price' && this.hideCurrencyDropdown == false && this.tplName == 'disabled') {
-            this.tplName = 'edit';
-            this.action = 'edit';
-            delete this._previousAction;
-        }
         if (this._currencyField) {
             this._currencyField.dispose();
             this._currencyField = null;

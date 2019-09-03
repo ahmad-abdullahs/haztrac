@@ -145,7 +145,7 @@ array (
                 'height' => 42,
                 'dismiss_label' => true,
               ),
-              1 => 'document_name',
+              1 => 'name',
               2 => 
               array (
                 'name' => 'favorite',

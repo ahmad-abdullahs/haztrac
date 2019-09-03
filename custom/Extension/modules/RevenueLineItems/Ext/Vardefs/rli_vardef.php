@@ -62,36 +62,3 @@ $dictionary["RevenueLineItem"]["fields"]['is_bundle_product_c'] = array(
 //      'id' => 'RevenueLineItemsis_bundle_product_c',
     'custom_module' => 'RevenueLineItems',
 );
-
-// 'RevenueLineItemsis_bundle_product_c', 'is_bundle_product_c', 'LBL_IS_BUNDLE_PRODUCT', NULL, NULL, 'RevenueLineItems', 'enum', '100', '0', NULL, '2019-08-17 17:51:55', '0', '0', '1', '1', '0', 'false', 'is_bundle_product_list', '', '', NULL
-
-/*'is_bundle_product_c' => 
-    array (
-      'labelValue' => 'Is Bundle Product',
-      'dependency' => '',
-      'visibility_grid' => '',
-      'required' => false,
-      'source' => 'custom_fields',
-      'name' => 'is_bundle_product_c',
-      'vname' => 'LBL_IS_BUNDLE_PRODUCT',
-      'type' => 'enum',
-      'massupdate' => true,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'false',
-      'duplicate_merge' => 'enabled',
-      'duplicate_merge_dom_value' => 1,
-      'audited' => false,
-      'reportable' => false,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'pii' => false,
-      'calculated' => false,
-      'len' => 100,
-      'size' => '20',
-      'options' => 'is_bundle_product_list',
-      'default' => NULL,
-      'id' => 'RevenueLineItemsis_bundle_product_c',
-      'custom_module' => 'RevenueLineItems',
-    ),*/

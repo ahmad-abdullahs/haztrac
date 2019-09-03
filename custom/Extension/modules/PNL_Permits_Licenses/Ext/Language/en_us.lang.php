@@ -1,5 +1,7 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
+$mod_strings['LBL_NAME'] = 'Name';
 $mod_strings['LBL_ISSUING_DATE'] = 'issuing date';
 $mod_strings['LBL_PNL_PERMITS_LICENSES_ACCOUNTS_FROM_ACCOUNTS_TITLE'] = 'Account / Issued Party';
 $mod_strings['LBL_CARE_OF_PARTY'] = 'Care of Party';
