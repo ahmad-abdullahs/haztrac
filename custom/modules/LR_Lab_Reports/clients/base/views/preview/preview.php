@@ -1,12 +1,11 @@
 <?php
 
-$module_name = 'PNL_Permits_Licenses';
-$viewdefs[$module_name] = array(
+$viewdefs['LR_Lab_Reports'] = array(
     'base' =>
     array(
         'view' =>
         array(
-            'record' =>
+            'preview' =>
             array(
                 'buttons' =>
                 array(
@@ -69,7 +68,6 @@ $viewdefs[$module_name] = array(
                                 'name' => 'email-pdf',
                                 'label' => 'LBL_PDF_EMAIL',
                                 'action' => 'email',
-                                'acl_action' => 'view',
                             ),
                             4 =>
                             array(
@@ -89,7 +87,7 @@ $viewdefs[$module_name] = array(
                                 'event' => 'button:duplicate_button:click',
                                 'name' => 'duplicate_button',
                                 'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                                'acl_module' => 'PNL_Permits_Licenses',
+                                'acl_module' => 'LR_Lab_Reports',
                                 'acl_action' => 'create',
                             ),
                             7 =>
@@ -146,9 +144,8 @@ $viewdefs[$module_name] = array(
                                 'width' => 42,
                                 'height' => 42,
                                 'dismiss_label' => true,
-                                'readonly' => true,
                             ),
-                            1 => 'document_name',
+                            1 => 'name',
                             2 =>
                             array(
                                 'name' => 'favorite',
@@ -180,8 +177,8 @@ $viewdefs[$module_name] = array(
                         array(
                             0 =>
                             array(
-                                'name' => 'license_preview_c',
-                                'label' => 'LBL_LICENSE_PREVIEW',
+                                'name' => 'lab_report_preview_c',
+                                'label' => 'LBL_LAB_REPORT_PREVIEW',
                                 'span' => 12,
                             ),
                         ),
@@ -197,89 +194,218 @@ $viewdefs[$module_name] = array(
                         'panelDefault' => 'expanded',
                         'fields' =>
                         array(
-                            0 => 'category_id',
-                            1 => 'subcategory_id',
-                            2 =>
+                            0 =>
                             array(
-                                'name' => 'pnl_permits_licenses_accounts_name',
+                                'name' => 'sample_id_number_c',
+                                'label' => 'LBL_SAMPLE_ID_NUMBER',
+                                'tabindex' => '30',
+                                'readonly' => true,
                             ),
-                            3 =>
-                            array(
-                                'name' => 'issuing_acount_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_ISSUING_ACOUNT',
-                            ),
-                            4 =>
+                            1 =>
                             array(
                                 'name' => 'status_id',
                                 'label' => 'LBL_DOC_STATUS',
+                                'tabindex' => '3',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'accounts_lr_lab_reports_1_name',
+                                'tabindex' => '9',
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'accounts_lr_lab_reports_2_name',
+                                'tabindex' => '10',
+                            ),
+                            4 =>
+                            array(
+                                'name' => 'v_vendors_lr_lab_reports_1_name',
+                                'tabindex' => '8',
                             ),
                             5 =>
                             array(
-                                'name' => 'id_number_c',
-                                'label' => 'LBL_ID_NUMBER',
+                                'name' => 'lab_ref_number_c',
+                                'label' => 'LBL_LAB_REF_NUMBER',
+                                'tabindex' => '50',
                             ),
                             6 =>
                             array(
-                                'name' => 'issuing_date_c',
-                                'label' => 'LBL_ISSUING_DATE',
+                                'name' => 'project_name_c',
+                                'label' => 'LBL_PROJECT_NAME',
+                                'tabindex' => '2',
                             ),
                             7 =>
                             array(
-                                'name' => 'exp_date',
-                                'label' => 'LBL_DOC_EXP_DATE',
+                                'name' => 'project_lr_lab_reports_1_name',
                             ),
                             8 =>
                             array(
-                                'name' => 'days_prior_renewal_c',
-                                'label' => 'LBL_DAYS_PRIOR_RENEWAL',
+                                'name' => 'commodity_c',
+                                'label' => 'LBL_COMMODITY',
+                                'tabindex' => '4',
                             ),
                             9 =>
                             array(
-                                'name' => 'renewal_date_c',
-                                'label' => 'LBL_RENEWAL_DATE',
+                                'name' => 'object_number_c',
+                                'label' => 'LBL_OBJECT_NUMBER',
+                                'tabindex' => '5',
                             ),
                             10 =>
-                            array(
-                                'name' => 'renewal_instructions_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_RENEWAL_INSTRUCTIONS',
-                                'span' => 12,
-                            ),
-                            11 =>
                             array(
                                 'name' => 'uploadfile',
                                 'populate_list' =>
                                 array(
                                     0 => 'document_name',
                                 ),
+                                'span' => 6,
+                            ),
+                            11 =>
+                            array(
+                                'name' => 'other_ref_number_c',
+                                'label' => 'LBL_OTHER_REF_NUMBER',
+                                'tabindex' => '11',
+                                'span' => 6,
                             ),
                             12 =>
                             array(
-                                'name' => 'care_of_party_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_CARE_OF_PARTY',
+                                'name' => 'assigned_user_name',
+                                'tabindex' => '13',
                             ),
                             13 =>
                             array(
-                                'name' => 'description',
-                                'span' => 12,
+                                'name' => 'team_name',
+                                'tabindex' => '14',
                             ),
                         ),
                     ),
                     3 =>
                     array(
-                        'name' => 'panel_hidden',
-                        'label' => 'LBL_SHOW_MORE',
-                        'hide' => true,
-                        'columns' => 2,
-                        'labelsOnTop' => true,
-                        'placeholders' => true,
                         'newTab' => false,
                         'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL4',
+                        'label' => 'LBL_RECORDVIEW_PANEL4',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
                         'fields' =>
                         array(
                             0 =>
+                            array(
+                                'name' => 'sample_date_time_c',
+                                'label' => 'LBL_SAMPLE_DATE_TIME',
+                                'tabindex' => '6',
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'sent_via_c',
+                                'label' => 'LBL_SENT_VIA',
+                                'tabindex' => '7',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'sample_size_c',
+                                'label' => 'LBL_SAMPLE_SIZE',
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'sample_physical_state_c',
+                                'label' => 'LBL_SAMPLE_PHYSICAL_STATE',
+                            ),
+                            4 =>
+                            array(
+                            ),
+                            5 =>
+                            array(
+                            ),
+                        ),
+                    ),
+                    4 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL3',
+                        'label' => 'LBL_RECORDVIEW_PANEL3',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'analysis_templates_c',
+                                'label' => 'LBL_ANALYSIS_TEMPLATES',
+                                'tabindex' => '16',
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'analysis_date_c',
+                                'label' => 'LBL_ANALYSIS_DATE',
+                                'tabindex' => '17',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'lab_analysis_c',
+                                'label' => 'LBL_LAB_ANALYSIS',
+                                'span' => 12,
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'analysis_metals_c',
+                                'label' => 'LBL_ANALYSIS_METALS',
+                                'span' => 12,
+                            ),
+                            4 =>
+                            array(
+                                'name' => 'special_instructions_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_SPECIAL_INSTRUCTIONS',
+                                'tabindex' => '11',
+                            ),
+                            5 =>
+                            array(
+                                'name' => 'instructions_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_INSTRUCTIONS',
+                                'tabindex' => '12',
+                            ),
+                        ),
+                    ),
+                    5 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL5',
+                        'label' => 'LBL_RECORDVIEW_PANEL5',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'description',
+                                'tabindex' => '15',
+                                'span' => 6,
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'tag',
+                                'tabindex' => '27',
+                                'span' => 6,
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'wpm_waste_profile_module_lr_lab_reports_name',
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'manifests',
+                                'type' => 'manifests',
+                                'label' => 'LBL_MANIFESTS',
+                                'dismiss_label' => true,
+                                'tabindex' => '10',
+                            ),
+                            4 =>
                             array(
                                 'name' => 'date_modified_by',
                                 'readonly' => true,
@@ -303,7 +429,7 @@ $viewdefs[$module_name] = array(
                                     ),
                                 ),
                             ),
-                            1 =>
+                            5 =>
                             array(
                                 'name' => 'date_entered_by',
                                 'readonly' => true,
@@ -326,30 +452,6 @@ $viewdefs[$module_name] = array(
                                         'name' => 'created_by_name',
                                     ),
                                 ),
-                            ),
-                            2 => 'assigned_user_name',
-                            3 => 'team_name',
-                            4 =>
-                            array(
-                                'name' => 'commentlog',
-                                'displayParams' =>
-                                array(
-                                    'type' => 'commentlog',
-                                    'fields' =>
-                                    array(
-                                        0 => 'entry',
-                                        1 => 'date_entered',
-                                        2 => 'created_by_name',
-                                    ),
-                                    'max_num' => 100,
-                                ),
-                                'studio' =>
-                                array(
-                                    'listview' => false,
-                                    'recordview' => true,
-                                ),
-                                'label' => 'LBL_COMMENTLOG',
-                                'span' => 12,
                             ),
                         ),
                     ),
