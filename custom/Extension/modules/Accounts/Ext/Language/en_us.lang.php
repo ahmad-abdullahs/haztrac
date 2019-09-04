@@ -32,3 +32,4 @@ $mod_strings['LBL_LON'] = 'Longitude';
 $mod_strings['LBL_LAT'] = 'Latitude';
 $mod_strings['LBL_EIN_TAXID'] = 'EIN / Foreign TaxID ';
 $mod_strings['LBL_CONTRACT_NAME'] = 'Contract Name';
+$mod_strings['LBL_HOUR_OPERATIONS'] = 'Hours of Operations';

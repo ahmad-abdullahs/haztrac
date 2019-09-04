@@ -44,3 +44,12 @@ $viewdefs['HRM_Employee_Training']['mobile']['layout']['subpanels']['components'
     'link' => 'hrm_employee_training_users',
   ),
 );
+
+$viewdefs['HRM_Employee_Training']['mobile']['layout']['subpanels']['components'][] = array (
+  'layout' => 'subpanel',
+  'label' => 'LBL_HRM_EMPLOYEE_TRAINING_USERS_FROM_USERS_TITLE',
+  'context' => 
+  array (
+    'link' => 'hrm_employee_training_users',
+  ),
+);

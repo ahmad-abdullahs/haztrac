@@ -1,5 +1,5 @@
 <?php
-// created: 2019-09-01 14:02:17
+// created: 2019-09-02 19:05:15
 $dictionary["HRM_Employee_Training"]["fields"]["hrm_employee_training_users"] = array (
   'name' => 'hrm_employee_training_users',
   'type' => 'link',

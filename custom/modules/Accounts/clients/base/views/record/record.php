@@ -401,6 +401,9 @@ array (
               array (
                 'name' => 'pnl_permits_licenses_accounts_name',
               ),
+              17 => 
+              array (
+              ),
             ),
           ),
           2 => 
@@ -522,6 +525,8 @@ array (
               ),
               5 => 
               array (
+                'name' => 'hour_operations_c',
+                'label' => 'LBL_HOUR_OPERATIONS',
               ),
               6 => 
               array (
