@@ -16,15 +16,35 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
      * @throws SugarApiExceptionError
      */
     protected function getBeanCollection(SugarBean $bean, array $field, array $displayParams, ServiceBase $service) {
-        $args = array_merge(array(
-            // make sure "fields" argument is always passed to the API
-            // since otherwise it will return all fields by default
-            'fields' => array('id', 'date_modified', 'name'),
-                ), $displayParams, array(
-            'module' => $bean->module_name,
-            'record' => $bean->id,
-            'link_name' => $field['name'],
-        ));
+        if ($displayParams['type'] == 'relate-collection-preview') {
+            $args = array_merge(array(
+                // make sure "fields" argument is always passed to the API
+                // since otherwise it will return all fields by default
+                'fields' => array(
+                    'id',
+                    'date_modified',
+                    'name',
+                    'discount_price',
+                    'quantity',
+                    'unit_of_measure_c',
+                    'total_amount',
+                ),
+                    ), $displayParams, array(
+                'module' => $bean->module_name,
+                'record' => $bean->id,
+                'link_name' => $field['name'],
+            ));
+        } else {
+            $args = array_merge(array(
+                // make sure "fields" argument is always passed to the API
+                // since otherwise it will return all fields by default
+                'fields' => array('id', 'date_modified'),
+                    ), $displayParams, array(
+                'module' => $bean->module_name,
+                'record' => $bean->id,
+                'link_name' => $field['name'],
+            ));
+        }
 
         $response = $this->getRelateApi()->filterRelated($service, $args);
 
