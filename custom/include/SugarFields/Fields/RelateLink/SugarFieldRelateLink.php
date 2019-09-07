@@ -16,7 +16,7 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
      * @throws SugarApiExceptionError
      */
     protected function getBeanCollection(SugarBean $bean, array $field, array $displayParams, ServiceBase $service) {
-        if ($displayParams['type'] == 'relate-collection-preview') {
+        if ($displayParams['type'] == 'relate-collection-preview' || $field['name'] == 'revenuelineitems_revenuelineitems_1') {
             $args = array_merge(array(
                 // make sure "fields" argument is always passed to the API
                 // since otherwise it will return all fields by default

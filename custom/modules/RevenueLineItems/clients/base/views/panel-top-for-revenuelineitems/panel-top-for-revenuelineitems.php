@@ -32,8 +32,8 @@ $viewdefs['RevenueLineItems']['base']['view']['panel-top-for-revenuelineitems'] 
                     'type' => 'link-action',
                     'name' => 'select_button',
                     'label' => 'LBL_ASSOC_RELATED_RECORD',
-                    'initial_filter' => 'filterByAccountId',
-                    'initial_filter_label' => 'LBL_FILTER_BY_ACCOUNT_ID',
+                    'initial_filter' => 'filterByAccountIdAndBundle',
+                    'initial_filter_label' => 'LBL_FILTER_BY_ACCOUNT_ID_AND_BUNDLE',
                     //the dynamic filters to pass to the templates filter definition
                     //please note the index of the array will be for the field the data is being pulled from
                     'filter_relate' => array(
@@ -45,6 +45,17 @@ $viewdefs['RevenueLineItems']['base']['view']['panel-top-for-revenuelineitems'] 
                     'type' => 'copy-link-action',
                     'name' => 'copy_select_button',
                     'label' => 'LBL_COPY_RELATED_RECORD',
+                    'initial_filter' => 'filterByBundle',
+                    'initial_filter_label' => 'LBL_FILTER_BY_BUNDLE',
+                    //the dynamic filters to pass to the templates filter definition
+                    //please note the index of the array will be for the field the data is being pulled from
+                    // To me it is really confusing, I believe there is no need of adding ('parent' => 'is_bundle_product_c')
+                    // because parent is not any field, how Sugar will get the value of that and copy to is_bundle_product_c.
+                    // If we remove this this filter does not work. 
+                    'filter_relate' => array(
+                        //'field_to_pull_data_from' => 'field_to_populate_data_to'
+                        'parent' => 'is_bundle_product_c',
+                    )
                 ),
             ),
         ),

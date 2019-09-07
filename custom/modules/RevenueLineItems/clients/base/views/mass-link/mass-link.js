@@ -10,17 +10,19 @@
  */
 /**
  * @class View.Views.Base.MassLinkView
- * @alias SUGAR.App.view.views.BaseMassLinkView
+ * @alias SUGAR.app.view.views.BaseMassLinkView
  * @extends View.Views.Base.MassupdateView
  */
 ({
     extendsFrom: 'MassLinkView',
+    copyCount: 0,
     massUpdateViewName: 'masslink-progress',
     _defaultLinkSettings: {
         mass_link_chunk_size: 20
     },
 
     initialize: function (options) {
+        this.copyCount = 0;
         this._super('initialize', [options]);
     },
 
@@ -31,16 +33,198 @@
         this.layout.on('list:masslink:fire', _.bind(this.beginMassLink, this));
     },
 
-// Only in case of Sales and Service, Add the (Account ID) field in that 
-// to link the RLIs with S&S and Account 
-// /var/www/html/haztrac/clients/base/api/RelateRecordApi.php (Need to customize this API)
-    /*linkData = {
-     link_name: link,
-     ids: _.union(_.pluck(this.chunks, 'id'), relatedIds)
-     },*/
+    handleAlerts: function (action, level) {
+        switch (level) {
+            case 1:
+                app.alert[action]('copying_record', {
+                    level: 'process',
+                    title: 'Copying'
+                });
+                break;
+            case 2:
+                app.alert[action]('copyed', {
+                    level: 'success',
+                    messages: "Record Copyed",
+                    autoClose: true, autoCloseDelay: 8000
+                });
+                break;
+            case 3:
+                $('#sugarcrm').after('<div id="tutorial"><div id="mask" class="mask"></div></div>');
+                break;
+            case 4:
+                $('#sugarcrm').siblings('div#tutorial').remove();
+                break;
+            case 5:
+                app.alert.show('copy_failed', {
+                    level: 'error',
+                    messages: 'Copy Failed',
+                    autoClose: true,
+                    autoCloseDelay: 8000
+                });
+                $('#sugarcrm').siblings('div#tutorial').remove();
+                break;
+        }
+    },
 
+    getRliAndRelatedRLIs: function (massLink) {
+        var rliAndRelatedRLIs = [];
+        _.each(massLink.models, function (model) {
+            var relatedIds = [];
+            if (!_.isEmpty(model.get('revenuelineitems_revenuelineitems_1').records)) {
+                _.each(model.get('revenuelineitems_revenuelineitems_1').records, function (relatedRLI) {
+                    if (relatedRLI.id) {
+                        this.copyCount++;
+                        relatedIds.push({
+                            'id': relatedRLI.id,
+                        });
+                    }
+                }, this);
+            }
+            this.copyCount++;
+            rliAndRelatedRLIs.push({
+                [model.get('id')]: relatedIds
+            });
+        }, this);
+        return rliAndRelatedRLIs;
+    },
 
+    setParentModelRelations: function (createView, parentModel, bundleID) {
+        // We have to make the Opportunity empty otherwise new account id was not attaching.
+        if (parentModel.get('_module') == 'RevenueLineItems') {
+            createView.model.set({
+                'opportunity_id': '',
+                'account_id': parentModel.get('account_id'),
+                'sales_and_services_revenuelineitems_1sales_and_services_ida': parentModel.get('sales_and_services_revenuelineitems_1sales_and_services_ida'),
+                'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? parentModel.get('id') : bundleID
+            });
+        } else if (parentModel.get('_module') == 'sales_and_services') {
+            createView.model.set({
+                'opportunity_id': '',
+                'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida'),
+                'sales_and_services_revenuelineitems_1sales_and_services_ida': parentModel.get('id'),
+                'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? '' : bundleID
+            });
+        } else if (parentModel.get('_module') == 'Accounts') {
+            createView.model.set({
+                'opportunity_id': '',
+                'account_id': parentModel.get('id'),
+                'sales_and_services_revenuelineitems_1sales_and_services_ida': '',
+                'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? '' : bundleID
+            });
+        }
+    },
 
+    makeChildRLICopies: function (id, parentModel, justCreatedBundleRLIModel) {
+        var self = this;
+        var rli = app.data.createBean('RevenueLineItems', {id: id});
+        rli.fetch({
+            'showAlerts': false,
+            'success': _.bind(function (model) {
+                var prefill = app.data.createBean('RevenueLineItems');
+                prefill.copy(model);
+                this._copyNestedCollections(model, prefill);
+                prefill.unset('id');
+
+                var createView = app.view.createView({
+                    // layout: 'create',
+                    // name: 'create',
+                    create: true,
+                    model: prefill,
+                    copiedFromModelId: model.get('id')
+                });
+
+                this.setParentModelRelations(createView, parentModel, justCreatedBundleRLIModel.get('id'));
+
+                var options = {
+                    success: function (_model) {
+                        self.copyCount--;
+                        if (self.copyCount == 0) {
+                            self.handleAlerts('dismiss', 1);
+                            self.handleAlerts('show', 2);
+                            self.handleAlerts(null, 4);
+                            app.drawer.close(false, {});
+                            app.router.refresh();
+                        }
+                    },
+                    error: function (err) {
+                        self.handleAlerts(null, 5);
+                    },
+                    viewed: true,
+                    params: {
+                        'after_create': {
+                            'copy_rel_from': model.get('id')
+                        },
+                    },
+                };
+                createView.model.save({silent: true}, options);
+            }, this)
+        }, this);
+    },
+
+    makeRLICopies: function (massLink, parentModel) {
+        var self = this;
+        var rliAndRelatedRLIsArr = this.getRliAndRelatedRLIs(massLink);
+
+        self.handleAlerts('show', 1);
+        self.handleAlerts(null, 3);
+
+        _.each(rliAndRelatedRLIsArr, function (rliAndRelatedRLIs, key) {
+            _.each(rliAndRelatedRLIs, function (relatedRLIsIds, parentRLIid) {
+                var rli = app.data.createBean('RevenueLineItems', {id: parentRLIid});
+                rli.fetch({
+                    'showAlerts': false,
+                    'success': _.bind(function (model) {
+                        var prefill = app.data.createBean('RevenueLineItems');
+                        prefill.copy(model);
+                        this._copyNestedCollections(model, prefill);
+                        prefill.unset('id');
+
+                        var createView = app.view.createView({
+                            // layout: 'create',
+                            // name: 'create',
+                            create: true,
+                            model: prefill,
+                            copiedFromModelId: model.get('id')
+                        });
+
+                        // Set the Account Id, Sales and Service ID and parent Revenue Line Item according to the record on which the drawer is opened.
+                        this.setParentModelRelations(createView, parentModel, null);
+
+                        // On model save success we have to call the child RLIs to be created to matain the bundle relationship.
+                        var options = {
+                            success: function (_model) {
+                                _.each(relatedRLIsIds, function (val, key) {
+                                    if (!_.isEmpty(val)) {
+                                        if (!_.isEmpty(val.id)) {
+                                            self.makeChildRLICopies(val.id, parentModel, _model);
+                                        }
+                                    }
+                                }, this);
+                                self.copyCount--;
+                                if (self.copyCount == 0) {
+                                    self.handleAlerts('dismiss', 1);
+                                    self.handleAlerts('show', 2);
+                                    self.handleAlerts(null, 4);
+                                    app.drawer.close(false, {});
+                                    app.router.refresh();
+                                }
+                            },
+                            error: function (err) {
+                                self.handleAlerts(null, 5);
+                            },
+                            viewed: true,
+                            params: {
+                                'after_create': {
+                                    'copy_rel_from': model.get('id')
+                                },
+                            },
+                        };
+                        createView.model.save({silent: true}, options);
+                    }, this)
+                }, this)
+            }, this)
+        }, this)
+    },
 
     /**
      * Link multiple records in chunks
@@ -54,87 +238,140 @@
 
         massLink.setChunkSize(this._settings.mass_link_chunk_size);
 
-        //Extend existing model with a link function
-        massLink = _.extend({}, massLink, {
-            maxLinkAllowAttempt: options && options.maxLinkAllowAttempt || this.maxAllowAttempt,
-            link: function (options) {
-                //Slice a new chunk of models from the mass collection
-                this.updateChunk();
-                var relatedIds = [];
-                _.each(this.chunks, function (model) {
-                    if (!_.isEmpty(model.get('revenuelineitems_revenuelineitems_1').records)) {
-                        _.each(model.get('revenuelineitems_revenuelineitems_1').records, function (relatedRLI) {
-                            if (relatedRLI.id) {
-                                relatedIds.push({
-                                    'id': relatedRLI.id,
-                                    // This OR condition is added to populate the account_id in both the cases.
-                                    // 1. When RevenueLineItems records is selected in selection drawer from sales and service record view.
-                                    // 2. When RevenueLineItems records is selected in selection drawer from RevenueLineItems record view.
-                                    'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida') || parentModel.get('account_id'),
-                                });
-                            }
-                        });
-                    }
-                });
-
-                _.each(_.pluck(this.chunks, 'id'), function (id) {
-                    relatedIds.push({
-                        'id': id,
-                        'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida') || parentModel.get('account_id'),
-                    });
-                });
-
-                var model = this,
-                        apiMethod = 'create',
-                        // ++ 
-                        // Custom API to hit copy_and_link...
-                        linkCmd = self.context.get('copyLinkRecords') ? 'copy_and_link' : 'link',
-                        parentData = {
-                            id: parentModel.id
-                        },
-                        url = app.api.buildURL(parentModel.module, linkCmd, parentData),
-                        linkData = {
-                            link_name: link,
-                            ids: relatedIds,
-                            copyLinkRecords: self.context.get('copyLinkRecords') ? true : false,
-                        },
-                        callbacks = {
-                            success: function (data, response) {
-                                model.attempt = 0;
-                                model.updateProgress();
-                                if (model.length === 0) {
-                                    model.trigger('massupdate:end');
-                                    if (_.isFunction(options.success)) {
-                                        options.success(model, data, response);
-                                    }
-                                } else {
-                                    model.trigger('massupdate:always');
-                                    model.link(options);
-                                }
-                            },
-                            error: function () {
-                                model.attempt++;
-                                model.trigger('massupdate:fail');
-                                if (model.attempt <= this.maxLinkAllowAttempt) {
-                                    model.link(options);
-                                } else {
-                                    app.alert.show('error_while_mass_link', {
-                                        level: 'error',
-                                        title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
-                                        messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
+        if (self.context.get('copyLinkRecords')) {
+            this.copyCount = 0;
+            this.makeRLICopies(massLink, parentModel);
+        } else {
+            //Extend existing model with a link function
+            massLink = _.extend({}, massLink, {
+                maxLinkAllowAttempt: options && options.maxLinkAllowAttempt || this.maxAllowAttempt,
+                link: function (options) {
+                    //Slice a new chunk of models from the mass collection
+                    this.updateChunk();
+                    var relatedIds = [];
+                    _.each(this.chunks, function (model) {
+                        if (!_.isEmpty(model.get('revenuelineitems_revenuelineitems_1').records)) {
+                            _.each(model.get('revenuelineitems_revenuelineitems_1').records, function (relatedRLI) {
+                                if (relatedRLI.id) {
+                                    relatedIds.push({
+                                        'id': relatedRLI.id,
+                                        // This OR condition is added to populate the account_id in both the cases.
+                                        // 1. When RevenueLineItems records is selected in selection drawer from sales and service record view.
+                                        // 2. When RevenueLineItems records is selected in selection drawer from RevenueLineItems record view.
+                                        'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida') || parentModel.get('account_id'),
                                     });
                                 }
-                            }
-                        };
-                app.api.call(apiMethod, url, linkData, callbacks);
-            }
-        });
+                            });
+                        }
+                    });
 
-        progressView.initCollection(massLink);
-        massLink.link({
-            success: _.bind(function (model, data, response) {
-                this.layout.trigger('list:masslink:complete', model, data, response);
-            }, this)
+                    _.each(_.pluck(this.chunks, 'id'), function (id) {
+                        relatedIds.push({
+                            'id': id,
+                            'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida') || parentModel.get('account_id'),
+                        });
+                    });
+
+                    var model = this,
+                            apiMethod = 'create',
+                            // ++ 
+                            // Custom API to hit copy_and_link...
+                            linkCmd = 'link',
+                            parentData = {
+                                id: parentModel.id
+                            },
+                            url = app.api.buildURL(parentModel.module, linkCmd, parentData),
+                            linkData = {
+                                link_name: link,
+                                ids: relatedIds,
+                            },
+                            callbacks = {
+                                success: function (data, response) {
+                                    model.attempt = 0;
+                                    model.updateProgress();
+                                    if (model.length === 0) {
+                                        model.trigger('massupdate:end');
+                                        if (_.isFunction(options.success)) {
+                                            options.success(model, data, response);
+                                        }
+                                    } else {
+                                        model.trigger('massupdate:always');
+                                        model.link(options);
+                                    }
+                                },
+                                error: function () {
+                                    model.attempt++;
+                                    model.trigger('massupdate:fail');
+                                    if (model.attempt <= this.maxLinkAllowAttempt) {
+                                        model.link(options);
+                                    } else {
+                                        app.alert.show('error_while_mass_link', {
+                                            level: 'error',
+                                            title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                                            messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
+                                        });
+                                    }
+                                }
+                            };
+                    app.api.call(apiMethod, url, linkData, callbacks);
+                }
+            });
+
+            progressView.initCollection(massLink);
+            massLink.link({
+                success: _.bind(function (model, data, response) {
+                    this.layout.trigger('list:masslink:complete', model, data, response);
+                }, this)
+            });
+        }
+    },
+
+    _copyNestedCollections: function (source, target) {
+        var collections, view;
+        if (!_.isFunction(source.getCollectionFieldNames)) {
+            return;
+        }
+        view = this;
+        function cloneModel(model) {
+            var attributes = _.chain(model.attributes).clone().omit('_action').value();
+            return app.data.createBean(model.module, attributes);
+        }
+        function copyCollection(collection) {
+            var field, relatedFields, options;
+            function done(sourceCollection, options) {
+                var targetCollection = target.get(collection.fieldName);
+
+                if (!targetCollection) {
+                    return;
+                }
+
+                targetCollection.add(sourceCollection.map(cloneModel));
+            }
+
+            field = view.getField(collection.fieldName, source);
+            relatedFields = [];
+
+            if (field.def.fields) {
+                relatedFields = _.map(field.def.fields, function (def) {
+                    return _.isObject(def) ? def.name : def;
+                });
+            }
+
+            options = {success: done};
+
+            // request the related fields from the field definition if possible
+            if (relatedFields.length > 0) {
+                options.fields = relatedFields;
+            }
+
+            collection.fetchAll(options);
+        }
+
+        // get all attributes from the source model that are collections
+        collections = _.intersection(source.getCollectionFieldNames(), _.keys(source.attributes));
+
+        _.each(collections, function (name) {
+            copyCollection(source.get(name));
         });
     },
 })

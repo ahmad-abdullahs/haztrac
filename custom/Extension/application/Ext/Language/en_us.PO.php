@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,3 +15,6 @@ $app_list_strings['moduleList']['HT_PO'] = 'POs';
 $app_list_strings['moduleListSingular']['HT_PO'] = 'PO';
 $app_list_strings['po_status_list']['Open'] = 'Open';
 $app_list_strings['po_status_list']['Closed'] = 'Closed';
+
+$app_list_strings['moduleList']['ProductTemplates'] = 'Product Catalog';
+$app_list_strings['moduleListSingular']['ProductTemplates'] = 'Product Catalog';
