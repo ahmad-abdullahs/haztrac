@@ -207,52 +207,56 @@ array (
               array (
                 'name' => 'serial_vin_c',
                 'label' => 'LBL_SERIAL_VIN',
-                'span' => 12,
               ),
               7 => 
+              array (
+                'name' => 'license_number_c',
+                'label' => 'LBL_LICENSE_NUMBER',
+              ),
+              8 => 
               array (
                 'name' => 'object_no_c',
                 'label' => 'LBL_OBJECT_NO',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'ins_exp_c',
                 'label' => 'LBL_INS_EXP',
               ),
-              9 => 'assigned_user_name',
-              10 => 'team_name',
-              11 => 
+              10 => 'assigned_user_name',
+              11 => 'team_name',
+              12 => 
               array (
                 'name' => 'tag',
                 'span' => 12,
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'weight_gvw_lb_c',
                 'label' => 'LBL_WEIGHT_GVW_LB',
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'weight_tare_lb_c',
                 'label' => 'LBL_WEIGHT_TARE_LB',
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'weight_load_limit_c',
                 'label' => 'LBL_WEIGHT_LOAD_LIMIT',
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'asset_location_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ASSET_LOCATION',
               ),
-              16 => 
+              17 => 
               array (
                 'name' => 'volume_gallons_c',
                 'label' => 'LBL_VOLUME_GALLONS',
               ),
-              17 => 
+              18 => 
               array (
                 'name' => 'volume_bbl_c',
                 'label' => 'LBL_VOLUME_BBL',

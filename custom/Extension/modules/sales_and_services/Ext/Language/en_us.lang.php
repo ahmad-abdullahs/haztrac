@@ -1,16 +1,15 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_STATUS'] = 'Status';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Address Panel';
 $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Billing Details';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Service Info';
 $mod_strings['LBL_TAXABLE'] = 'Taxable';
-$mod_strings['LBL_AUTO_TRUCK_SERVICE_NUMBER'] = 'Auto Truck / SVC Number';
+$mod_strings['LBL_AUTO_TRUCK_SERVICE_NUMBER'] = 'SVC Number (Auto)';
 $mod_strings['LBL_ACCOUNT_TERMS'] = 'Account Terms';
-$mod_strings['LBL_INTERNAL_NOTES'] = 'Internal Notes';
+$mod_strings['LBL_INTERNAL_NOTES'] = 'Internal Notes (No Print)';
 $mod_strings['LBL_PRINT_NOTES'] = 'Print Notes';
-$mod_strings['LBL_DESCRIPTION'] = 'Notes';
+$mod_strings['LBL_DESCRIPTION'] = 'Description';
 $mod_strings['LBL_BILLING_ADDRESS'] = 'Billing Address';
 $mod_strings['LBL_SHIPPING_ADDRESS'] = 'Shipping Address';
 $mod_strings['LBL_BILLING_ADDRESS_CITY'] = 'Billing Address City';
@@ -52,3 +51,12 @@ $mod_strings['LBL_UNIT_OF_MEASURE'] = 'Unit Of Measure';
 $mod_strings['LBL_DISCOUNT_PRICE'] = 'Unit Price';
 $mod_strings['LBL_CALCULATED_LINE_ITEM_AMOUNT'] = 'Calculated Revenue Line Item Amount';
 $mod_strings['LBL_BUNDLE_TOTAL'] = 'Bundle Total';
+$mod_strings['LBL_TRANSPORTER_CARRIER_ACCOUNT_ID'] = 'Transporter / Carrier (related Account ID)';
+$mod_strings['LBL_TRANSPORTER_CARRIER'] = 'Transporter / Carrier';
+$mod_strings['LBL_DESTINATION_SHIP_TO_ACCOUNT_ID'] = 'Ship To / TSDF (related Account ID)';
+$mod_strings['LBL_DESTINATION_SHIP_TO'] = 'Ship To / TSDF';
+$mod_strings['LBL_NOTES_PRINT'] = 'Site Instru. Notes (Prints)';
+$mod_strings['LBL_NOTES_INTERNAL'] = 'Internal Note (Non-Print)';
+$mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Completion ';
+$mod_strings['LBL_CLOSING_NOTES'] = 'Closing Notes';
+$mod_strings['LBL_INSTRUCTIONS_NOTES'] = 'Instructions / Notes (Prints)';

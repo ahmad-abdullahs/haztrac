@@ -26,3 +26,4 @@ $mod_strings['LBL_VOLUME_BBL'] = 'Total Barrel Qty (BBL)';
 $mod_strings['LBL_VOLUME_GALLONS'] = 'Total Gallons Qty (G)';
 $mod_strings['LBL_ASSET_LOCATION'] = 'Asset Location';
 $mod_strings['LBL_ASSET_OBJECT_MARKING_NO'] = 'Equipment / Marking No.';
+$mod_strings['LBL_LICENSE_NUMBER'] = 'License Number';
