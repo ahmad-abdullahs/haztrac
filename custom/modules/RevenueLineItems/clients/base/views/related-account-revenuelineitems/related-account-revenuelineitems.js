@@ -66,6 +66,9 @@
                     is_bundle_product_c: {
                         '$not_in': ['child']
                     },
+                    rli_as_template_c: {
+                        '$equals': 1
+                    },
                 }];
             options.params.view = 'related-account-revenuelineitems';
 

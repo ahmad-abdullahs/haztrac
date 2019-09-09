@@ -31,6 +31,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     4 => 'discount_amount',
                                     5 => 'discount_price',
                                     6 => 'is_bundle_product_c',
+                                    7 => 'rli_as_template_c',
                                 ),
                             ),
                             1 =>
@@ -56,41 +57,51 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'probability',
+                                'name' => 'sales_and_services_revenuelineitems_1_name',
+                                'label' => 'LBL_SALES_AND_SERVICES_REVENUELINEITEMS_1_FROM_SALES_AND_SERVICES_TITLE',
                                 'enabled' => true,
+                                'id' => 'SALES_AND_SERVICES_REVENUELINEITEMS_1SALES_AND_SERVICES_IDA',
+                                'link' => true,
+                                'sortable' => false,
                                 'default' => true,
                             ),
                             5 =>
                             array(
-                                'name' => 'date_closed',
+                                'name' => 'probability',
                                 'enabled' => true,
                                 'default' => true,
                             ),
                             6 =>
                             array(
-                                'name' => 'commit_stage',
+                                'name' => 'date_closed',
                                 'enabled' => true,
                                 'default' => true,
                             ),
                             7 =>
                             array(
-                                'name' => 'product_template_name',
+                                'name' => 'commit_stage',
                                 'enabled' => true,
                                 'default' => true,
                             ),
                             8 =>
                             array(
-                                'name' => 'category_name',
+                                'name' => 'product_template_name',
                                 'enabled' => true,
                                 'default' => true,
                             ),
                             9 =>
                             array(
-                                'name' => 'quantity',
+                                'name' => 'category_name',
                                 'enabled' => true,
                                 'default' => true,
                             ),
                             10 =>
+                            array(
+                                'name' => 'quantity',
+                                'enabled' => true,
+                                'default' => true,
+                            ),
+                            11 =>
                             array(
                                 'name' => 'worst_case',
                                 'type' => 'currency',
@@ -103,6 +114,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     4 => 'discount_amount',
                                     5 => 'discount_price',
                                     6 => 'is_bundle_product_c',
+                                    7 => 'rli_as_template_c',
                                 ),
                                 'convertToBase' => true,
                                 'currency_field' => 'currency_id',
@@ -110,7 +122,7 @@ $viewdefs['RevenueLineItems'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            11 =>
+                            12 =>
                             array(
                                 'name' => 'likely_case',
                                 'type' => 'currency',
@@ -129,7 +141,7 @@ $viewdefs['RevenueLineItems'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            12 =>
+                            13 =>
                             array(
                                 'name' => 'best_case',
                                 'type' => 'currency',
@@ -148,7 +160,7 @@ $viewdefs['RevenueLineItems'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            13 =>
+                            14 =>
                             array(
                                 'name' => 'quote_name',
                                 'label' => 'LBL_ASSOCIATED_QUOTE',
@@ -160,19 +172,26 @@ $viewdefs['RevenueLineItems'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            14 =>
+                            15 =>
+                            array(
+                                'name' => 'rli_as_template_c',
+                                'label' => 'LBL_RLI_AS_TEMPLATE',
+                                'enabled' => true,
+                                'default' => true,
+                            ),
+                            16 =>
                             array(
                                 'name' => 'assigned_user_name',
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            15 =>
+                            17 =>
                             array(
                                 'name' => 'date_modified',
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            16 =>
+                            18 =>
                             array(
                                 'name' => 'date_entered',
                                 'enabled' => true,

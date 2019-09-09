@@ -11,8 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['RevenueLineItems']['base']['view']['panel-top-for-sales-and-service'] = array(
-    'type' => 'panel-top-for-sales-and-service',
+$viewdefs['RevenueLineItems']['base']['view']['panel-top-for-opportunities-rli'] = array(
+    // If we put the type panel-top-for-sales-and-service, it will call that js but use this meta.
+    'type' => 'panel-top',
     'buttons' => array(
         array(
             'type' => 'actiondropdown',
@@ -37,7 +38,7 @@ $viewdefs['RevenueLineItems']['base']['view']['panel-top-for-sales-and-service']
 //                    //please note the index of the array will be for the field the data is being pulled from
 //                    'filter_relate' => array(
 //                        //'field_to_pull_data_from' => 'field_to_populate_data_to'
-//                        'accounts_sales_and_services_1accounts_ida' => 'account_id',
+//                        'id' => 'account_id',
 //                    )
 //                ),
                 array(

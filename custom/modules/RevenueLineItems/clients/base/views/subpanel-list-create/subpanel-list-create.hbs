@@ -90,6 +90,13 @@
                         </td>
                     {{/each}}
                     {{#eq attributes.is_bundle_product_c "parent"}}
+                        {{#each ../../../_fields.visible}}
+                            {{#eq name "primary_rli"}}
+                                <td{{#if align}} class="{{align}} {{../../../../this._backgroundColorClass}}" {{else}} class="{{../../../../this._backgroundColorClass}}" {{/if}} data-type="{{type}}">
+                                    {{field ../../../../../this model=../../../this template="detail"}}
+                                </td>
+                            {{/eq}}
+                        {{/each}}
                         <td data-type="name" colspan="4" class="{{../this._backgroundColorClass}}" style="text-align: center;">
                             <div class="quote-data-group-title">
                                 <span class="group-name list">{{attributes.name}}</span>

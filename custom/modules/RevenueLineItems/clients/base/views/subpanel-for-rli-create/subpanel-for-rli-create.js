@@ -37,6 +37,7 @@
         var createInPreferred = userCurrency.currency_create_in_preferred;
         var currencyFields;
         var currencyFromRate;
+        var parentModel = this.context.parent.get('model');
 
         if (bean.has('sales_stage')) {
             dom = app.lang.getAppListStrings('sales_probability_dom');
@@ -63,8 +64,7 @@
                     attrs[field.name] = app.currency.convertWithRate(
                             bean.get(field.name),
                             currencyFromRate,
-                            userCurrency.currency_rate
-                            );
+                            userCurrency.currency_rate);
                 }
             }, this);
         } else if (!skipCurrency) {
@@ -95,6 +95,25 @@
             }, {'silent': true});
         }, this);
 
+        // Only keep one checkbox checked at a time... and unset all the others
+        bean.on('change:primary_rli', function (model) {
+            if (model.get('primary_rli')) {
+                _.each(this.collection.models, function (_model) {
+                    if (_model.get('primary_rli') && _model.get('id') != model.get('id')) {
+                        _model.set('primary_rli', false);
+                    } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
+                        parentModel.set('name', _model.get('name'));
+                    }
+                });
+            }
+        }, this);
+
+        // if RLI name is changed and it is the primary rli update the sales and service name as well...
+        bean.on('change:name', function (model) {
+            if (model.get('primary_rli')) {
+                parentModel.set('name', model.get('name'));
+            }
+        }, this);
         return bean;
     },
 

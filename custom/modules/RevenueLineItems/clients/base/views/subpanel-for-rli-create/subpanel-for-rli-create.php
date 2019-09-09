@@ -23,7 +23,15 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
             'fields' => array(
-                0 =>
+                array(
+                    'name' => 'primary_rli',
+                    'label' => '',
+                    'enabled' => true,
+                    'sortable' => false,
+                    'default' => true,
+                    'type' => 'bool',
+                    'width' => '24',
+                ),
                 array(
                     'name' => 'name',
                     'link' => true,
@@ -61,13 +69,13 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
                         'assigned_user_id',
                         'assigned_user_name',
                         'is_bundle_product_c',
+                        'rli_as_template_c',
                         'unit_of_measure_c',
                         'ht_manifest_revenuelineitems_1_name',
                         'ht_manifest_revenuelineitems_1',
                         'ht_manifest_revenuelineitems_1ht_manifest_ida',
                     ),
                 ),
-                1 =>
                 array(
                     'name' => 'ht_manifest_revenuelineitems_1_name',
                     'label' => 'LBL_HT_MANIFEST_REVENUELINEITEMS_1_FROM_HT_MANIFEST_TITLE',
@@ -77,33 +85,28 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
                     'sortable' => false,
                     'default' => true,
                 ),
-                2 =>
                 array(
                     'name' => 'type_name',
                     'enabled' => true,
                     'default' => true,
                 ),
-                3 =>
                 array(
                     'name' => 'estimated_quantity_c',
                     'label' => 'LBL_ESTIMATED_QUANTITY',
                     'enabled' => true,
                     'default' => true,
                 ),
-                4 =>
                 array(
                     'name' => 'quantity',
                     'enabled' => true,
                     'default' => true,
                 ),
-                5 =>
                 array(
                     'name' => 'unit_of_measure_c',
                     'label' => 'LBL_UNIT_OF_MEASURE',
                     'enabled' => true,
                     'default' => true,
                 ),
-                6 =>
                 array(
                     'name' => 'discount_price',
                     'type' => 'currency',
@@ -118,7 +121,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
                     'enabled' => true,
                     'default' => true,
                 ),
-                7 =>
 //                array(
 //                    'name' => 'charge_c',
 //                    'label' => 'LBL_CHARGE',
@@ -131,7 +133,6 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
 //                    'currency_format' => true,
 //                    'default' => true,
 //                ),
-//                8 =>
                 array(
                     'name' => 'total_amount',
                     'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
@@ -141,11 +142,11 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
                         0 => 'currency_id',
                         1 => 'base_rate',
                         2 => 'is_bundle_product_c',
+                        3 => 'rli_as_template_c',
                     ),
                     'currency_format' => true,
                     'default' => true,
                 ),
-                8 =>
                 array(
                     'name' => 'assigned_user_name',
                     'enabled' => true,

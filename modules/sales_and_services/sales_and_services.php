@@ -1,4 +1,5 @@
 <?PHP
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,22 +14,25 @@
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
 require_once('modules/sales_and_services/sales_and_services_sugar.php');
+
 class sales_and_services extends sales_and_services_sugar {
+
     public function save($check_notify = false) {
         // if lat long are not calculated or address changed
         if (
-            empty($this->lat_c) ||
-            $this->fetched_row['shipping_address_street_c'] != $this->shipping_address_street_c || 
-            $this->fetched_row['shipping_address_city_c'] != $this->shipping_address_city_c || 
-            $this->fetched_row['shipping_address_state_c'] != $this->shipping_address_state_c || 
-            $this->fetched_row['shipping_address_postalcode_c'] != $this->shipping_address_postalcode_c || 
-            $this->fetched_row['shipping_address_country_c'] != $this->shipping_address_country_c
+                empty($this->lat_c) ||
+                $this->fetched_row['shipping_address_street_c'] != $this->shipping_address_street_c ||
+                $this->fetched_row['shipping_address_city_c'] != $this->shipping_address_city_c ||
+                $this->fetched_row['shipping_address_state_c'] != $this->shipping_address_state_c ||
+                $this->fetched_row['shipping_address_postalcode_c'] != $this->shipping_address_postalcode_c ||
+                $this->fetched_row['shipping_address_country_c'] != $this->shipping_address_country_c
         ) {
             $this->getLatLon();
         }
 
         if (empty($this->ss_number)) {
             $this->ss_number = 'S-' . $this->getUniqueNumber();
+            $this->ss_number = $this->ss_number . ' ' . $this->name;
         }
 
         return parent::save($check_notify);
@@ -57,10 +61,10 @@ class sales_and_services extends sales_and_services_sugar {
 
     private function getLatLon() {
         $address = urlencode($this->shipping_address_street_c . ', ' .
-            $this->shipping_address_city_c . ', ' .
-            $this->shipping_address_state_c . ', ' .
-            $this->shipping_address_postalcode_c . ', ' .
-            $this->shipping_address_country_c);
+                $this->shipping_address_city_c . ', ' .
+                $this->shipping_address_state_c . ', ' .
+                $this->shipping_address_postalcode_c . ', ' .
+                $this->shipping_address_country_c);
 
         if (!empty($address)) {
             $url = "https://api.opencagedata.com/geocode/v1/json?q={$address}&key=bb98ad0c915e4f479e3b11678e355461";
@@ -91,4 +95,5 @@ class sales_and_services extends sales_and_services_sugar {
             }
         }
     }
+
 }

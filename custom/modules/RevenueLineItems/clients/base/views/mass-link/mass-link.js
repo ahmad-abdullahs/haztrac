@@ -93,6 +93,7 @@
         if (parentModel.get('_module') == 'RevenueLineItems') {
             createView.model.set({
                 'opportunity_id': '',
+                'rli_as_template_c': '',
                 'account_id': parentModel.get('account_id'),
                 'sales_and_services_revenuelineitems_1sales_and_services_ida': parentModel.get('sales_and_services_revenuelineitems_1sales_and_services_ida'),
                 'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? parentModel.get('id') : bundleID
@@ -100,6 +101,7 @@
         } else if (parentModel.get('_module') == 'sales_and_services') {
             createView.model.set({
                 'opportunity_id': '',
+                'rli_as_template_c': '',
                 'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida'),
                 'sales_and_services_revenuelineitems_1sales_and_services_ida': parentModel.get('id'),
                 'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? '' : bundleID
@@ -107,11 +109,35 @@
         } else if (parentModel.get('_module') == 'Accounts') {
             createView.model.set({
                 'opportunity_id': '',
+                'rli_as_template_c': '',
                 'account_id': parentModel.get('id'),
                 'sales_and_services_revenuelineitems_1sales_and_services_ida': '',
                 'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? '' : bundleID
             });
+        } else if (parentModel.get('_module') == 'Opportunities') {
+            createView.model.set({
+                'opportunity_id': parentModel.get('id'),
+                'rli_as_template_c': '',
+                'account_id': parentModel.get('account_id'),
+                'sales_and_services_revenuelineitems_1sales_and_services_ida': '',
+                'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? '' : bundleID
+            });
         }
+    },
+
+    getAdditionalParams: function (parentModel) {
+        var addToParam = {};
+        if (parentModel.get('_module') == 'RevenueLineItems') {
+            addToParam = {'copy_from_rli': true};
+        } else if (parentModel.get('_module') == 'sales_and_services') {
+            addToParam = {'copy_from_sas': true};
+        } else if (parentModel.get('_module') == 'Accounts') {
+            addToParam = {'copy_from_account': true};
+        } else if (parentModel.get('_module') == 'Opportunities') {
+            addToParam = {'copy_from_opp': true};
+        }
+
+        return addToParam;
     },
 
     makeChildRLICopies: function (id, parentModel, justCreatedBundleRLIModel) {
@@ -135,6 +161,8 @@
 
                 this.setParentModelRelations(createView, parentModel, justCreatedBundleRLIModel.get('id'));
 
+                var addToParam = this.getAdditionalParams(parentModel);
+
                 var options = {
                     success: function (_model) {
                         self.copyCount--;
@@ -154,6 +182,7 @@
                         'after_create': {
                             'copy_rel_from': model.get('id')
                         },
+                        addToParam,
                     },
                 };
                 createView.model.save({silent: true}, options);
@@ -190,6 +219,8 @@
                         // Set the Account Id, Sales and Service ID and parent Revenue Line Item according to the record on which the drawer is opened.
                         this.setParentModelRelations(createView, parentModel, null);
 
+                        var addToParam = this.getAdditionalParams(parentModel);
+
                         // On model save success we have to call the child RLIs to be created to matain the bundle relationship.
                         var options = {
                             success: function (_model) {
@@ -217,6 +248,7 @@
                                 'after_create': {
                                     'copy_rel_from': model.get('id')
                                 },
+                                addToParam,
                             },
                         };
                         createView.model.save({silent: true}, options);
@@ -255,9 +287,10 @@
                                 if (relatedRLI.id) {
                                     relatedIds.push({
                                         'id': relatedRLI.id,
-                                        // This OR condition is added to populate the account_id in both the cases.
+                                        // This OR condition is added to populate the account_id in all the cases.
                                         // 1. When RevenueLineItems records is selected in selection drawer from sales and service record view.
                                         // 2. When RevenueLineItems records is selected in selection drawer from RevenueLineItems record view.
+                                        // 3. When RevenueLineItems records is selected in selection drawer from Opportunities record view.
                                         'account_id': parentModel.get('accounts_sales_and_services_1accounts_ida') || parentModel.get('account_id'),
                                     });
                                 }

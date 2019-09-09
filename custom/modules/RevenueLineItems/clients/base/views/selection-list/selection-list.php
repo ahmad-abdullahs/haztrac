@@ -29,6 +29,7 @@ $viewdefs['RevenueLineItems'] = array(
                                 'related_fields' =>
                                 array(
                                     0 => 'revenuelineitems_revenuelineitems_1',
+                                    1 => 'rli_as_template_c',
                                 ),
                             ),
                             array(
@@ -42,6 +43,15 @@ $viewdefs['RevenueLineItems'] = array(
                                 'label' => 'LBL_HT_MANIFEST_REVENUELINEITEMS_1_FROM_HT_MANIFEST_TITLE',
                                 'enabled' => true,
                                 'id' => 'HT_MANIFEST_REVENUELINEITEMS_1HT_MANIFEST_IDA',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => true,
+                            ),
+                            array(
+                                'name' => 'sales_and_services_revenuelineitems_1_name',
+                                'label' => 'LBL_SALES_AND_SERVICES_REVENUELINEITEMS_1_FROM_SALES_AND_SERVICES_TITLE',
+                                'enabled' => true,
+                                'id' => 'SALES_AND_SERVICES_REVENUELINEITEMS_1SALES_AND_SERVICES_IDA',
                                 'link' => true,
                                 'sortable' => false,
                                 'default' => true,

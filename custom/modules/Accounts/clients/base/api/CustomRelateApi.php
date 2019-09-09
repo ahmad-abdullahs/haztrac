@@ -70,7 +70,10 @@ class CustomRelateApi extends RelateApi {
             array_push($args['filter'], array(
                 'is_bundle_product_c' => array(
                     '$not_in' => array('child'),
-                )
+                ),
+                'rli_as_template_c' => array(
+                    '$equals' => true,
+                ),
             ));
         }
         return $args;

@@ -161,6 +161,13 @@ $viewdefs['RevenueLineItems'] = array(
                             array(
                                 'name' => 'name',
                                 'label' => 'LBL_MODULE_NAME_SINGULAR',
+                                'related_fields' =>
+                                array(
+                                    0 => 'discount_price',
+                                    1 => 'currency_id',
+                                    2 => 'base_rate',
+                                    3 => 'rli_as_template_c',
+                                ),
                             ),
                             2 =>
                             array(
@@ -712,6 +719,11 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             12 =>
                             array(
+                                'name' => 'rli_as_template_c',
+                                'label' => 'LBL_RLI_AS_TEMPLATE',
+                            ),
+                            13 =>
+                            array(
                                 'name' => 'date_modified_by',
                                 'readonly' => true,
                                 'type' => 'fieldset',
@@ -734,7 +746,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     ),
                                 ),
                             ),
-                            13 =>
+                            14 =>
                             array(
                                 'name' => 'date_entered_by',
                                 'readonly' => true,

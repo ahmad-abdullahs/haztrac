@@ -44,6 +44,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         'assigned_user_id',
                         'assigned_user_name',
                         'is_bundle_product_c',
+                        'rli_as_template_c',
                         'unit_of_measure_c',
                         'ht_manifest_revenuelineitems_1_name',
                         'ht_manifest_revenuelineitems_1',

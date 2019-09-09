@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICES_QUOTES'] = 'Sales/Services Quotes';
 $mod_strings['LBL_NAME'] = 'Product Svc Name';
@@ -20,3 +19,4 @@ $mod_strings['LBL_FILTER_BY_BUNDLE'] = 'Exclude Bundles';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Shipping and Transport';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Pricing';
 $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Old Fields';
+$mod_strings['LBL_RLI_AS_TEMPLATE'] = 'RLI as Template';

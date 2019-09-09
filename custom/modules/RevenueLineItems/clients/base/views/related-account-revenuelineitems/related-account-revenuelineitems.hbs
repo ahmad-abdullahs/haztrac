@@ -37,6 +37,8 @@
                                                                 {{#eq @index 0}}
                                                                     {{#eq ../../this.attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>
                                                                     {{/eq}}
+                                                                    {{#if ../../this.attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>
+                                                                    {{/if}}
                                                                 {{/eq}}
                                                                 {{field ../../../this model=../this template='detail'}}
                                                             </td>

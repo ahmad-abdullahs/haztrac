@@ -11,6 +11,7 @@ $subpanel_layout['list_fields'] = array(
         'related_fields' =>
         array(
             0 => 'is_bundle_product_c',
+            1 => 'rli_as_template_c',
         ),
     ),
     'account_name' =>

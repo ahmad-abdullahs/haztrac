@@ -20,6 +20,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-sales_and_services_subpa
                     'related_fields' =>
                     array(
                         0 => 'is_bundle_product_c',
+                        1 => 'rli_as_template_c',
                     ),
                 ),
                 array(

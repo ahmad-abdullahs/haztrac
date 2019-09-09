@@ -70,7 +70,8 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     array(
                         0 => 'currency_id',
                         1 => 'base_rate',
-                        1 => 'is_bundle_product_c',
+                        2 => 'is_bundle_product_c',
+                        3 => 'rli_as_template_c',
                     ),
                     'currency_format' => true,
                     'default' => true,

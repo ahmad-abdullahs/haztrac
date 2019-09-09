@@ -18,6 +18,9 @@ $viewdefs['RevenueLineItems']['base']['filter']['default'] = array(
         array(
             'type' => 'enum'
         ),
+        'rli_as_template_c' =>
+        array(
+        ),
         'sales_stage' =>
         array(
         ),

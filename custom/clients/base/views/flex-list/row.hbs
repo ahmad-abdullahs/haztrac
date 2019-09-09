@@ -18,7 +18,7 @@
     {{/each}}
     {{#each view._fields.visible}}
         <td{{#if align}} class="{{align}} {{../../model.attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../model.attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../model.attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../model.attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}" data-column="{{name}}">
-            {{#eq @index 0}}{{#eq ../../model.attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{/eq}}
+            {{#eq @index 0}}{{#eq ../../model.attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{#if ../../model.attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>{{/if}}{{/eq}}
             {{field ../view model=../model template=../view.viewName}}
         </td>
     {{/each}}

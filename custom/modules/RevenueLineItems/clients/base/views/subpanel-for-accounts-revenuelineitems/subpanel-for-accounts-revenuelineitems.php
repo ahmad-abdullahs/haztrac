@@ -104,6 +104,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                         0 => 'currency_id',
                         1 => 'base_rate',
                         2 => 'is_bundle_product_c',
+                        3 => 'rli_as_template_c',
                     ),
                     'currency_format' => true,
                     'default' => true,

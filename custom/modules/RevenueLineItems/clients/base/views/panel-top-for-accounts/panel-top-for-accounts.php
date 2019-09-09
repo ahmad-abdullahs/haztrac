@@ -28,19 +28,19 @@ $viewdefs['RevenueLineItems']['base']['view']['panel-top-for-accounts'] = array(
                     'acl_action' => 'create',
                     'tooltip' => 'LBL_CREATE_BUTTON_LABEL',
                 ),
-                array(
-                    'type' => 'link-action',
-                    'name' => 'select_button',
-                    'label' => 'LBL_ASSOC_RELATED_RECORD',
-                    'initial_filter' => 'filterByAccountId',
-                    'initial_filter_label' => 'LBL_FILTER_BY_ACCOUNT_ID',
-                    //the dynamic filters to pass to the templates filter definition
-                    //please note the index of the array will be for the field the data is being pulled from
-                    'filter_relate' => array(
-                        //'field_to_pull_data_from' => 'field_to_populate_data_to'
-                        'id' => 'account_id',
-                    )
-                ),
+//                array(
+//                    'type' => 'link-action',
+//                    'name' => 'select_button',
+//                    'label' => 'LBL_ASSOC_RELATED_RECORD',
+//                    'initial_filter' => 'filterByAccountId',
+//                    'initial_filter_label' => 'LBL_FILTER_BY_ACCOUNT_ID',
+//                    //the dynamic filters to pass to the templates filter definition
+//                    //please note the index of the array will be for the field the data is being pulled from
+//                    'filter_relate' => array(
+//                        //'field_to_pull_data_from' => 'field_to_populate_data_to'
+//                        'id' => 'account_id',
+//                    )
+//                ),
                 array(
                     'type' => 'copy-link-action',
                     'name' => 'copy_select_button',
