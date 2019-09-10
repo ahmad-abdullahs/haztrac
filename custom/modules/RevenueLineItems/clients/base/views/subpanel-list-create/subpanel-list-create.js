@@ -137,6 +137,36 @@
 
             bean = this._addCustomFieldsToBean(bean, addAtZeroIndex);
 
+            // ++ Code is added to keep the Line number of the revenue line item while creation 
+            // from the Sales and service, Accounts or Opportunities
+            // This line number will be firther used for the printing in work orders or manifest
+            var collectionRowIds = [];
+            var htmlRowIds = [];
+
+            // get the collection row ids
+            _.each(this.collection.models, function (model) {
+                collectionRowIds.push(model.get('id'));
+            }, this);
+
+            // get the html row ids
+            _.each(this.$('tbody > tr'), function (tr) {
+                var name = $(tr).attr('name').split('_');
+                var id = name[1];
+                htmlRowIds.push(id);
+            }, this);
+
+            // If collection row ids are not same as html row ids, means the order is changed on the view
+            // through drag and drop. We have reindex all the models in the collection and assigned them new indexes
+            if (!_.isEqual(collectionRowIds, htmlRowIds)) {
+                var resetIndex = 1;
+                _.each(htmlRowIds, function (id) {
+                    var model = this.collection.get(id);
+                    model._rowIndex = resetIndex;
+                    model.set('line_number', resetIndex);
+                    resetIndex++;
+                }, this);
+            }
+
             // must add to this.collection so the bean shows up in the subpanel list
             if (addAtZeroIndex) {
                 this.collection.unshift(bean);

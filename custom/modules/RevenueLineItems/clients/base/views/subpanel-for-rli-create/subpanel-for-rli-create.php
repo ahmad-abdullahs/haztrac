@@ -41,6 +41,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
                     'related_fields' =>
                     array(
                         'name',
+                        'line_number',
                         'description',
                         'product_template_id',
                         'product_template_name',
