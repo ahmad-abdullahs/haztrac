@@ -21,94 +21,12 @@ class CustomSASRelateApi extends RelateApi {
         ));
     }
 
-    public function filterRelatedSetup(ServiceBase $api, array $args) {
-        // Load the parent bean.
-        $record = BeanFactory::retrieveBean($args['module'], $args['record']);
-
-        if (empty($record)) {
-            throw new SugarApiExceptionNotFound(
-            sprintf(
-                    'Could not find parent record %s in module: %s', $args['record'], $args['module']
-            )
-            );
-        }
-
-        // Load the relationship.
-        $linkName = $args['link_name'];
-        if (!$record->load_relationship($linkName)) {
-            // The relationship did not load.
-            throw new SugarApiExceptionNotFound('Could not find a relationship named: ' . $args['link_name']);
-        }
-        $linkModuleName = $record->$linkName->getRelatedModuleName();
-        $linkSeed = BeanFactory::newBean($linkModuleName);
-        if (!$linkSeed->ACLAccess('list')) {
-            throw new SugarApiExceptionNotAuthorized('No access to list records for module: ' . $linkModuleName);
-        }
-
-        $options = $this->parseArguments($api, $args, $linkSeed);
-
-        // If they don't have fields selected we need to include any link fields
-        // for this relationship
-        if (empty($args['fields']) && is_array($linkSeed->field_defs)) {
-            $relatedLinkName = $record->$linkName->getRelatedModuleLinkName();
-            $options['linkDataFields'] = array();
-            foreach ($linkSeed->field_defs as $field => $def) {
-                if (empty($def['rname_link']) || empty($def['link'])) {
-                    continue;
-                }
-                if ($def['link'] != $relatedLinkName) {
-                    continue;
-                }
-                // It's a match
-                $options['linkDataFields'][] = $field;
-                $options['select'][] = $field;
-            }
-        }
-
-        // In case the view parameter is set, reflect those fields in the
-        // fields argument as well so formatBean only takes those fields
-        // into account instead of every bean property.
-        if (!empty($args['view'])) {
-            $args['fields'] = $options['select'];
-        } elseif (!empty($args['fields'])) {
-            $args['fields'] = $this->normalizeFields($args['fields'], $options['displayParams']);
-        }
-
-
-        $q = self::getQueryObject($linkSeed, $options);
-
-        // Some relationships want the role column ignored
-        if (!empty($args['ignore_role'])) {
-            $ignoreRole = true;
-        } else {
-            $ignoreRole = false;
-        }
-
-        $q->joinSubpanel($record, $linkName, array('joinType' => 'INNER', 'ignoreRole' => $ignoreRole));
-
-        $q->setJoinOn(array('baseBeanId' => $record->id));
-
-        if (!isset($args['filter']) || !is_array($args['filter'])) {
-            $args['filter'] = array();
-        }
-        self::addFilters($args['filter'], $q->where(), $q);
-
-        if (!sizeof($q->order_by)) {
-            self::addOrderBy($q, $this->defaultOrderBy);
-        }
-
-        if (isset($options['relate_collections'])) {
-            $options = $this->removeRelateCollectionsFromSelect($options);
-        }
-
-        // fixing duplicates in the query is not needed since even if it selects many-to-many related records,
-        // they are still filtered by one primary record, so the subset is at most one-to-many
-        $options['skipFixQuery'] = true;
-
-        return array($args, $q, $options, $linkSeed);
-    }
-
     public function filterRelated(ServiceBase $api, array $args) {
+
+        $GLOBALS['log']->fatal('$args kaka : ' . print_r($args, 1));
+
+        $args['order_by'] = 'line_number:asc';
+
         if ($args['link_name'] == 'sales_and_services_revenuelineitems_1') {
             $args['max_num'] = -1;
         }
@@ -117,9 +35,20 @@ class CustomSASRelateApi extends RelateApi {
 
         list($args, $q, $options, $linkSeed) = $this->filterRelatedSetup($api, $args);
 
+        //get the compiled prepared statement
+        $preparedStmt = $q->compile();
+
+        //Retrieve the Parameterized SQL
+        $sql = $preparedStmt->getSQL();
+        $GLOBALS['log']->fatal('$sql' . print_r($sql, 1));
+        //Retrieve the parameters as an array
+        $parameters = $preparedStmt->getParameters();
+        $GLOBALS['log']->fatal('$parameters' . print_r($parameters, 1));
+
         $returnData = $this->runQuery($api, $args, $q, $options, $linkSeed);
 
         $originalAllRLIIds = array();
+        // get the bundle ids and all the ids od records shown in this subpanel
         $bundleIds = array();
         foreach ($returnData['records'] as $key => $value) {
             if ($value['is_bundle_product_c'] == 'parent') {
@@ -128,14 +57,22 @@ class CustomSASRelateApi extends RelateApi {
             array_push($originalAllRLIIds, $value['id']);
         }
 
+        // yes we have the bundles in the data set
+        // then get the related ids of revenue line items related to bundle
         if (!empty($bundleIds)) {
             global $db;
             $sql = "SELECT 
-                    *
-                FROM
-                    revenuelineitems_revenuelineitems_1_c
-                WHERE
-                    revenuelineitems_revenuelineitems_1revenuelineitems_ida IN ('" . implode("','", $bundleIds) . "') AND deleted = '0'";
+                revenuelineitems_revenuelineitems_1_c.id,
+                revenuelineitems_revenuelineitems_1revenuelineitems_ida,
+                revenuelineitems_revenuelineitems_1revenuelineitems_idb
+            FROM
+                revenuelineitems_revenuelineitems_1_c
+                    LEFT JOIN
+                revenue_line_items ON revenuelineitems_revenuelineitems_1_c.revenuelineitems_revenuelineitems_1revenuelineitems_idb = revenue_line_items.id
+            WHERE
+                revenuelineitems_revenuelineitems_1revenuelineitems_ida IN ('" . implode("','", $bundleIds) . "')
+                    AND revenue_line_items.deleted = '0'
+            ORDER BY revenue_line_items.line_number";
 
             $result = $db->query($sql);
 
@@ -193,6 +130,10 @@ class CustomSASRelateApi extends RelateApi {
         }
         return null;
     }
+
+    /*
+     * Take multi dimentional array and return the single dimension array.
+     */
 
     public function array_values_recursive($ary) {
         $lst = array();
