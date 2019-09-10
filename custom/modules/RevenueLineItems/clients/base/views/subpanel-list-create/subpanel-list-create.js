@@ -157,7 +157,7 @@
 
             // If collection row ids are not same as html row ids, means the order is changed on the view
             // through drag and drop. We have reindex all the models in the collection and assigned them new indexes
-            if (!_.isEqual(collectionRowIds, htmlRowIds)) {
+//            if (!_.isEqual(collectionRowIds, htmlRowIds)) {
                 var resetIndex = 1;
                 _.each(htmlRowIds, function (id) {
                     var model = this.collection.get(id);
@@ -165,7 +165,7 @@
                     model.set('line_number', resetIndex);
                     resetIndex++;
                 }, this);
-            }
+//            }
 
             // must add to this.collection so the bean shows up in the subpanel list
             if (addAtZeroIndex) {
