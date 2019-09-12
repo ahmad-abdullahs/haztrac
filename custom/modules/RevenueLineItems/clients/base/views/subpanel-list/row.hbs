@@ -19,7 +19,7 @@ It will be called for the number of records in the list view or in subpanel
 --}}
 {{#if rowModel}}
     {{#with rowModel}}
-        <tr name="{{module}}_{{attributes.id}}" class="single">
+        <tr name="{{module}}_{{attributes.id}}" class="single sortable">
             {{#each ../leftColumns}}
                 <td>
                     {{field ../../this model=../this template=../../viewName}}
@@ -39,7 +39,7 @@ It will be called for the number of records in the list view or in subpanel
         </tr>
     {{/with}}
 {{else}}
-    <tr name="{{module}}_{{model.id}}" class="single">
+    <tr name="{{module}}_{{model.id}}" class="single sortable">
         {{#each view.leftColumns}}
             <td>
                 {{field ../view model=../model template=../view.viewName}}

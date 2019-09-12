@@ -89,9 +89,14 @@
         _.each(this.$('tbody > tr'), function (tr) {
             var name = $(tr).attr('name').split('_');
             var id = name[1];
-            this.collection.get(id).set('line_number', lineNumber);
+            this.collection.get(id).set('line_number', lineNumber, {'silent': true});
+            this.collection.get(id)._rowIndex = lineNumber;
             lineNumber++;
         }, this);
+
+        // this sort is added to keep the collection sorted, 
+        // without that, if user delete the row sorting of collection disturbs.
+        this.collection.sort();
     },
 
     _onGroupDragTriggerOver: function (evt, ui) {

@@ -22,9 +22,6 @@ class CustomSASRelateApi extends RelateApi {
     }
 
     public function filterRelated(ServiceBase $api, array $args) {
-
-        $GLOBALS['log']->fatal('$args kaka : ' . print_r($args, 1));
-
         $args['order_by'] = 'line_number:asc';
 
         if ($args['link_name'] == 'sales_and_services_revenuelineitems_1') {
@@ -34,16 +31,6 @@ class CustomSASRelateApi extends RelateApi {
         $api->action = 'list';
 
         list($args, $q, $options, $linkSeed) = $this->filterRelatedSetup($api, $args);
-
-        //get the compiled prepared statement
-        $preparedStmt = $q->compile();
-
-        //Retrieve the Parameterized SQL
-        $sql = $preparedStmt->getSQL();
-        $GLOBALS['log']->fatal('$sql' . print_r($sql, 1));
-        //Retrieve the parameters as an array
-        $parameters = $preparedStmt->getParameters();
-        $GLOBALS['log']->fatal('$parameters' . print_r($parameters, 1));
 
         $returnData = $this->runQuery($api, $args, $q, $options, $linkSeed);
 
