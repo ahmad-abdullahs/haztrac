@@ -390,20 +390,6 @@ array (
                 'name' => 'team_name',
                 'tabindex' => '14',
               ),
-              14 => 
-              array (
-                'name' => 'wpm_waste_profile_module_accounts_1_name',
-              ),
-              15 => 
-              array (
-              ),
-              16 => 
-              array (
-                'name' => 'pnl_permits_licenses_accounts_name',
-              ),
-              17 => 
-              array (
-              ),
             ),
           ),
           2 => 
