@@ -140,7 +140,6 @@ $viewdefs['sales_and_services'] = array(
                             1 =>
                             array(
                                 'name' => 'name',
-                                'readonly' => true,
                             ),
                             2 =>
                             array(
