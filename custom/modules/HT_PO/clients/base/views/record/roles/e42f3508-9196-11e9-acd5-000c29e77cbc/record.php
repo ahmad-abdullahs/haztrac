@@ -175,9 +175,7 @@ array (
             array (
               0 => 
               array (
-                'name' => 'account_issuer_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ACCOUNT_ISSUER',
+                'name' => 'ht_po_accounts_name',
                 'span' => 12,
               ),
               1 => 
@@ -185,34 +183,25 @@ array (
                 'name' => 'po_status',
                 'studio' => true,
                 'label' => 'LBL_PO_STATUS',
+                'span' => 12,
               ),
               2 => 
-              array (
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'name' => 'po_amount_c',
-                'label' => 'LBL_PO_AMOUNT',
-              ),
-              3 => 
               array (
                 'name' => 'po_date',
                 'label' => 'LBL_PO_DATE',
               ),
-              4 => 
+              3 => 
               array (
                 'name' => 'expire_date',
                 'label' => 'LBL_EXPIRE_DATE',
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              6 => 'assigned_user_name',
-              7 => 'team_name',
+              5 => 'assigned_user_name',
+              6 => 'team_name',
             ),
           ),
           2 => 

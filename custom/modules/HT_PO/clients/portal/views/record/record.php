@@ -1,7 +1,7 @@
 <?php
 $viewdefs['HT_PO'] = 
 array (
-  'base' => 
+  'portal' => 
   array (
     'view' => 
     array (
@@ -154,12 +154,6 @@ array (
                 'readonly' => true,
                 'dismiss_label' => true,
               ),
-              4 => 
-              array (
-                'name' => 'po_status',
-                'studio' => 'visible',
-                'label' => 'LBL_PO_STATUS',
-              ),
             ),
           ),
           1 => 
@@ -169,50 +163,15 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
-            'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 
-              array (
-                'name' => 'account_issuer_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ACCOUNT_ISSUER',
-                'span' => 12,
-              ),
-              1 => 
-              array (
-                'name' => 'po_status',
-                'studio' => true,
-                'label' => 'LBL_PO_STATUS',
-              ),
+              0 => 'assigned_user_name',
+              1 => 'team_name',
               2 => 
               array (
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'name' => 'po_amount_c',
-                'label' => 'LBL_PO_AMOUNT',
-              ),
-              3 => 
-              array (
-                'name' => 'po_date',
-                'label' => 'LBL_PO_DATE',
-              ),
-              4 => 
-              array (
-                'name' => 'expire_date',
-                'label' => 'LBL_EXPIRE_DATE',
-              ),
-              5 => 
-              array (
-                'name' => 'description',
+                'name' => 'tag',
                 'span' => 12,
               ),
-              6 => 'assigned_user_name',
-              7 => 'team_name',
             ),
           ),
           2 => 
@@ -223,13 +182,11 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
-            'panelDefault' => 'collapsed',
             'fields' => 
             array (
               0 => 
               array (
-                'name' => 'tag',
+                'name' => 'description',
                 'span' => 12,
               ),
               1 => 
@@ -282,11 +239,6 @@ array (
               ),
             ),
           ),
-        ),
-        'templateMeta' => 
-        array (
-          'useTabs' => false,
-          'maxColumns' => '2',
         ),
       ),
     ),
