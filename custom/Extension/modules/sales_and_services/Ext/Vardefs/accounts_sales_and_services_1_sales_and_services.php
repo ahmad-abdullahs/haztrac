@@ -38,6 +38,7 @@ $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1_name"
         'shipping_address_postalcode' => 'shipping_address_postalcode_c',
         'shipping_address_country' => 'shipping_address_postalcode_c',
         'account_terms_c' => 'account_terms_c',
+        'team_name' => 'team_name',
     ),
 );
 $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1accounts_ida"] = array(

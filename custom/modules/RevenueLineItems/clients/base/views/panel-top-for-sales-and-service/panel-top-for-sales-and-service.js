@@ -64,6 +64,10 @@
         if (parentModule == "RevenueLineItems") {
             model.set('account_name', parentModel.get('account_name'));
             model.set('account_id', parentModel.get('account_id'));
+            model.set('revenuelineitems_revenuelineitems_1revenuelineitems_ida', parentModel.get('id'));
+            model.set('revenuelineitems_revenuelineitems_1_name', parentModel.get('name'));
+            model.set('sales_and_services_revenuelineitems_1_name', parentModel.get('sales_and_services_revenuelineitems_1_name'));
+            model.set('sales_and_services_revenuelineitems_1sales_and_services_ida', parentModel.get('sales_and_services_revenuelineitems_1sales_and_services_ida'));
         }
 
         app.drawer.open({
