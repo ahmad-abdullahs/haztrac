@@ -16,50 +16,47 @@ array (
             array (
               0 => 
               array (
-                'name' => 'document_name',
-                'label' => 'LBL_NAME',
-                'link' => true,
-                'default' => true,
+                'name' => 'sample_id_number_c',
+                'label' => 'LBL_SAMPLE_ID_NUMBER',
                 'enabled' => true,
-                'width' => '40',
+                'default' => true,
+                'width' => '12',
               ),
               1 => 
-              array (
-                'name' => 'commodity_c',
-                'label' => 'LBL_COMMODITY',
-                'enabled' => true,
-                'default' => true,
-              ),
-              2 => 
-              array (
-                'name' => 'status_id',
-                'label' => 'LBL_DOC_STATUS',
-                'enabled' => true,
-                'default' => true,
-              ),
-              3 => 
               array (
                 'name' => 'date_entered',
                 'label' => 'LBL_DATE_ENTERED',
                 'enabled' => true,
                 'readonly' => true,
                 'default' => true,
+                'width' => '10',
+              ),
+              2 => 
+              array (
+                'name' => 'document_name',
+                'label' => 'LBL_NAME',
+                'link' => true,
+                'default' => true,
+                'enabled' => true,
+                'width' => '25',
+              ),
+              3 => 
+              array (
+                'name' => 'commodity_c',
+                'label' => 'LBL_COMMODITY',
+                'enabled' => true,
+                'default' => true,
+                'width' => '25',
               ),
               4 => 
               array (
-                'name' => 'sample_id_number_c',
-                'label' => 'LBL_SAMPLE_ID_NUMBER',
+                'name' => 'status_id',
+                'label' => 'LBL_DOC_STATUS',
                 'enabled' => true,
                 'default' => true,
+                'width' => 'small',
               ),
               5 => 
-              array (
-                'name' => 'lab_ref_number_c',
-                'label' => 'LBL_LAB_REF_NUMBER',
-                'enabled' => true,
-                'default' => true,
-              ),
-              6 => 
               array (
                 'name' => 'v_vendors_lr_lab_reports_1_name',
                 'label' => 'LBL_V_VENDORS_LR_LAB_REPORTS_1_FROM_V_VENDORS_TITLE',
@@ -68,8 +65,28 @@ array (
                 'link' => true,
                 'sortable' => false,
                 'default' => true,
+                'width' => '25',
+              ),
+              6 => 
+              array (
+                'name' => 'lab_ref_number_c',
+                'label' => 'LBL_LAB_REF_NUMBER',
+                'enabled' => true,
+                'default' => true,
+                'width' => '15',
               ),
               7 => 
+              array (
+                'name' => 'accounts_lr_lab_reports_1_name',
+                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_1_FROM_ACCOUNTS_TITLE',
+                'enabled' => true,
+                'id' => 'ACCOUNTS_LR_LAB_REPORTS_1ACCOUNTS_IDA',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+                'width' => '25',
+              ),
+              8 => 
               array (
                 'name' => 'category_id',
                 'default' => false,
@@ -77,7 +94,7 @@ array (
                 'width' => '40',
                 'label' => 'LBL_LIST_CATEGORY',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'modified_by_name',
                 'label' => 'LBL_MODIFIED_USER',
@@ -91,7 +108,7 @@ array (
                 'enabled' => true,
                 'width' => '10',
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'subcategory_id',
                 'default' => false,
@@ -99,7 +116,7 @@ array (
                 'width' => '40',
                 'label' => 'LBL_LIST_SUBCATEGORY',
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'created_by_name',
                 'label' => 'LBL_LIST_LAST_REV_CREATOR',
@@ -108,7 +125,7 @@ array (
                 'enabled' => true,
                 'width' => '2',
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'active_date',
                 'default' => false,
@@ -116,7 +133,7 @@ array (
                 'width' => '10',
                 'label' => 'LBL_LIST_ACTIVE_DATE',
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'exp_date',
                 'default' => false,
@@ -124,7 +141,7 @@ array (
                 'width' => '10',
                 'label' => 'LBL_LIST_EXP_DATE',
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_LIST_TEAM',

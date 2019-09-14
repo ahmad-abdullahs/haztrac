@@ -60,3 +60,7 @@ $mod_strings['LBL_NOTES_INTERNAL'] = 'Internal Note (Non-Print)';
 $mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Completion ';
 $mod_strings['LBL_CLOSING_NOTES'] = 'Closing Notes';
 $mod_strings['LBL_INSTRUCTIONS_NOTES'] = 'Instructions / Notes (Prints)';
+$mod_strings['LBL_RECORD_BODY'] = 'Schedule';
+$mod_strings['LBL_LAB_RESULT_LR_LAB_REPORTS_ID'] = 'Lab Result / COA (related Lab Report ID)';
+$mod_strings['LBL_LAB_RESULT'] = 'Lab Result / COA';
+$mod_strings['LBL_COMPLETE_DATE'] = 'Complete / Close Date';
