@@ -174,6 +174,15 @@
                 this.collection.add(bean);
             }
 
+            // set checkbox checked and mark the first item name as the sales and service name 
+            if (this.collection.length == 1) {
+                if (this.context.parent && this.context.parent.has('model')) {
+                    var parentModel = this.context.parent.get('model');
+                    parentModel.set('name', this.collection.at(0).get('name'));
+                    this.collection.at(0).set('primary_rli', 1);
+                }
+            }
+
             this.collection.comparator = function (model) {
                 return model._rowIndex;
             };
