@@ -215,15 +215,25 @@ array (
               ),
               7 => 
               array (
+                'name' => 'account_terms_c',
+                'label' => 'LBL_ACCOUNT_TERMS',
+              ),
+              8 => 
+              array (
+                'name' => 'ac_usepa_id_c',
+                'label' => 'LBL_AC_USEPA_ID',
+              ),
+              9 => 
+              array (
                 'name' => 'industry',
                 'tabindex' => '9',
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'account_type',
                 'tabindex' => '10',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'billing_address',
                 'type' => 'fieldset',
@@ -264,7 +274,7 @@ array (
                 ),
                 'tabindex' => '11',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'shipping_address',
                 'type' => 'fieldset',
@@ -319,7 +329,7 @@ array (
                 ),
                 'tabindex' => '12',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'physical_address',
                 'type' => 'fieldset',
@@ -380,12 +390,23 @@ array (
                 ),
                 'span' => 12,
               ),
-              12 => 
+              14 => 
+              array (
+                'name' => 'hour_operations_c',
+                'label' => 'LBL_HOUR_OPERATIONS',
+              ),
+              15 => 
+              array (
+                'name' => 'service_instruction_c',
+                'studio' => 'visible',
+                'label' => 'LBL_SERVICE_INSTRUCTION',
+              ),
+              16 => 
               array (
                 'name' => 'assigned_user_name',
                 'tabindex' => '13',
               ),
-              13 => 
+              17 => 
               array (
                 'name' => 'team_name',
                 'tabindex' => '14',
@@ -406,66 +427,75 @@ array (
             array (
               0 => 
               array (
+                'name' => 'account_number_c',
+                'label' => 'LBL_ACCOUNT_NUMBER',
+              ),
+              1 => 
+              array (
+                'name' => 'service_level',
+              ),
+              2 => 
+              array (
                 'name' => 'legal_business_name_c',
                 'label' => 'LBL_LEGAL_BUSINESS_NAME',
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'ein_taxid_c',
                 'label' => 'LBL_EIN_TAXID',
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'company_scac_code_c',
                 'label' => 'LBL_COMPANY_SCAC_CODE',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'contract_name_c',
                 'label' => 'LBL_CONTRACT_NAME',
               ),
-              4 => 'ownership',
-              5 => 
+              6 => 'ownership',
+              7 => 
               array (
                 'name' => 'parent_company_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PARENT_COMPANY',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'hint_account_fiscal_year_end_c',
                 'label' => 'LBL_HINT_COMPANY_FISCAL_YEAR_END',
               ),
-              8 => 'ticker_symbol',
-              9 => 'annual_revenue',
-              10 => 'employees',
-              11 => 'sic_code',
-              12 => 
+              10 => 'ticker_symbol',
+              11 => 'annual_revenue',
+              12 => 'employees',
+              13 => 'sic_code',
+              14 => 
               array (
                 'name' => 'hint_account_naics_code_lbl_c',
                 'label' => 'LBL_HINT_COMPANY_NAICS_CODE_LABEL',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'duns_num',
                 'readonly' => true,
                 'span' => 12,
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'twitter',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'hint_account_facebook_handle_c',
                 'label' => 'LBL_HINT_COMPANY_FACEBOOK',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'role_assigned_c',
                 'label' => 'LBL_ROLE_ASSIGNED',
@@ -474,59 +504,6 @@ array (
             ),
           ),
           3 => 
-          array (
-            'newTab' => true,
-            'panelDefault' => 'expanded',
-            'name' => 'LBL_RECORDVIEW_PANEL1',
-            'label' => 'LBL_RECORDVIEW_PANEL1',
-            'columns' => 2,
-            'labelsOnTop' => 1,
-            'placeholders' => 1,
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'service_level',
-              ),
-              1 => 
-              array (
-                'name' => 'account_terms_c',
-                'label' => 'LBL_ACCOUNT_TERMS',
-              ),
-              2 => 
-              array (
-                'name' => 'account_number_c',
-                'label' => 'LBL_ACCOUNT_NUMBER',
-              ),
-              3 => 
-              array (
-                'name' => 'ac_usepa_id_c',
-                'label' => 'LBL_AC_USEPA_ID',
-              ),
-              4 => 
-              array (
-                'name' => 'service_instruction_c',
-                'studio' => 'visible',
-                'label' => 'LBL_SERVICE_INSTRUCTION',
-              ),
-              5 => 
-              array (
-                'name' => 'hour_operations_c',
-                'label' => 'LBL_HOUR_OPERATIONS',
-              ),
-              6 => 
-              array (
-                'name' => 'lat_c',
-                'label' => 'LBL_LAT',
-              ),
-              7 => 
-              array (
-                'name' => 'lon_c',
-                'label' => 'LBL_LON',
-              ),
-            ),
-          ),
-          4 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',

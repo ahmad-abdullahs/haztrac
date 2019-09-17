@@ -20,3 +20,5 @@ $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Shipping and Transport';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Pricing';
 $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Old Fields';
 $mod_strings['LBL_RLI_AS_TEMPLATE'] = 'RLI as Template';
+$mod_strings['LBL_ERG_NO'] = 'ERG No';
+$mod_strings['LBL_MANDATORY_PRINT_TEXT'] = 'Mandatory Print Text';

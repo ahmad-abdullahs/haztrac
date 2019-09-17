@@ -210,27 +210,35 @@ array (
               11 => 
               array (
                 'name' => 'description',
-                'span' => 12,
+                'span' => 6,
               ),
               12 => 
+              array (
+                'name' => 'mandatory_print_text_c',
+                'studio' => 'visible',
+                'label' => 'LBL_MANDATORY_PRINT_TEXT',
+                'span' => 6,
+              ),
+              13 => 
               array (
                 'name' => 'waste_profile_rqrd_c',
                 'label' => 'LBL_WASTE_PROFILE_RQRD',
                 'span' => 12,
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'weight',
                 'span' => 12,
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'product_uom_c',
                 'label' => 'LBL_PRODUCT_UOM',
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'tag',
+                'span' => 12,
               ),
             ),
           ),
@@ -367,11 +375,19 @@ array (
               ),
               3 => 
               array (
+                'name' => 'erg_no_c',
+                'label' => 'LBL_ERG_NO',
+              ),
+              4 => 
+              array (
+              ),
+              5 => 
+              array (
                 'name' => 'waste_state_codes_c',
                 'label' => 'LBL_WASTE_STATE_CODES',
                 'type' => 'enum-same-key-and-value',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'epa_waste_codes_c',
                 'label' => 'LBL_EPA_WASTE_CODES',

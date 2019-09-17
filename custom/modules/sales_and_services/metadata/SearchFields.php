@@ -1,5 +1,5 @@
 <?php
-// created: 2019-09-13 21:49:57
+// created: 2019-09-15 21:05:44
 $searchFields['sales_and_services'] = array (
   'name' => 
   array (
@@ -82,6 +82,24 @@ $searchFields['sales_and_services'] = array (
     'is_date_field' => true,
   ),
   'end_range_on_date' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'range_on_date_c' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_on_date_c' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_on_date_c' => 
   array (
     'query_type' => 'default',
     'enable_range_search' => true,

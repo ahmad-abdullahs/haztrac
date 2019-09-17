@@ -235,84 +235,19 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_DESTINATION_SHIP_TO',
               ),
-            ),
-          ),
-          2 => 
-          array (
-            'newTab' => false,
-            'panelDefault' => 'expanded',
-            'name' => 'LBL_RECORDVIEW_PANEL2',
-            'label' => 'LBL_RECORDVIEW_PANEL2',
-            'columns' => 2,
-            'labelsOnTop' => 1,
-            'placeholders' => 1,
-            'fields' => 
-            array (
-              0 => 
+              12 => 
               array (
                 'name' => 'taxable_c',
                 'label' => 'LBL_TAXABLE',
               ),
-              1 => 
-              array (
-                'name' => 'description',
-              ),
-              2 => 
-              array (
-                'name' => 'payment_status_c',
-                'label' => 'LBL_PAYMENT_STATUS',
-              ),
-              3 => 
-              array (
-                'name' => 'payment_reference_c',
-                'label' => 'LBL_PAYMENT_REFERENCE',
-              ),
-              4 => 
+              13 => 
               array (
                 'name' => 'rli_total_c',
                 'label' => 'LBL_RLI_TOTAL',
               ),
-              5 => 
-              array (
-                'name' => 'sales_and_service_total_c',
-                'label' => 'LBL_SALES_AND_SERVICE_TOTAL',
-              ),
             ),
           ),
-          3 => 
-          array (
-            'newTab' => false,
-            'panelDefault' => 'collapsed',
-            'name' => 'LBL_RECORDVIEW_PANEL3',
-            'label' => 'LBL_RECORDVIEW_PANEL3',
-            'columns' => 2,
-            'labelsOnTop' => 1,
-            'placeholders' => 1,
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'ss_number',
-                'readonly' => true,
-                'comment' => 'Visual unique identifier',
-                'studio' => 
-                array (
-                  'quickcreate' => false,
-                ),
-                'label' => 'LBL_SS_NUMBER',
-              ),
-              1 => 
-              array (
-              ),
-              2 => 
-              array (
-                'name' => 'svc_type_c',
-                'label' => 'LBL_SVC_TYPE',
-                'span' => 12,
-              ),
-            ),
-          ),
-          4 => 
+          2 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
@@ -325,6 +260,11 @@ array (
             'fields' => 
             array (
               0 => 
+              array (
+                'name' => 'description',
+                'span' => 12,
+              ),
+              1 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -348,7 +288,7 @@ array (
                   ),
                 ),
               ),
-              1 => 
+              2 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -374,7 +314,7 @@ array (
               ),
             ),
           ),
-          5 => 
+          3 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -387,36 +327,86 @@ array (
             array (
               0 => 
               array (
+                'name' => 'complete_date_c',
+                'label' => 'LBL_COMPLETE_DATE',
+                'span' => 12,
+              ),
+              1 => 
+              array (
+                'name' => 'payment_status_c',
+                'label' => 'LBL_PAYMENT_STATUS',
+              ),
+              2 => 
+              array (
+                'name' => 'payment_reference_c',
+                'label' => 'LBL_PAYMENT_REFERENCE',
+              ),
+              3 => 
+              array (
                 'name' => 'closing_notes_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CLOSING_NOTES',
                 'span' => 12,
               ),
+              4 => 
+              array (
+                'name' => 'lab_result_c',
+                'studio' => 'visible',
+                'label' => 'LBL_LAB_RESULT',
+              ),
+              5 => 
+              array (
+                'name' => 'sales_and_service_total_c',
+                'label' => 'LBL_SALES_AND_SERVICE_TOTAL',
+              ),
+            ),
+          ),
+          4 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL5',
+            'label' => 'LBL_RECORDVIEW_PANEL5',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'ss_number',
+                'readonly' => true,
+                'comment' => 'Visual unique identifier',
+                'studio' => 
+                array (
+                  'quickcreate' => false,
+                ),
+                'label' => 'LBL_SS_NUMBER',
+              ),
               1 => 
               array (
-                'name' => 'quotes_sales_and_services_1_name',
-                'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
+                'name' => 'svc_type_c',
+                'label' => 'LBL_SVC_TYPE',
               ),
               2 => 
+              array (
+                'name' => 'profile_no_c',
+                'label' => 'LBL_PROFILE_NO',
+              ),
+              3 => 
               array (
                 'name' => 'svc_days_c',
                 'label' => 'LBL_SVC_DAYS',
               ),
-              3 => 
-              array (
-              ),
               4 => 
               array (
-                'name' => 'profile_no_c',
-                'label' => 'LBL_PROFILE_NO',
+                'name' => 'quotes_sales_and_services_1_name',
+                'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
               ),
               5 => 
               array (
                 'name' => 'contracts_sales_and_services_1_name',
                 'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
-              ),
-              6 => 
-              array (
               ),
             ),
           ),

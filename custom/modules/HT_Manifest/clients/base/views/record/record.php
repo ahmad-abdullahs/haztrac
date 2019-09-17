@@ -170,9 +170,8 @@ array (
             array (
               0 => 
               array (
-                'name' => 'manifest_number',
-                'readonly' => true,
-                'label' => 'LBL_MANIFEST_NUMBER',
+                'name' => 'manifest_no_actual_c',
+                'label' => 'LBL_MANIFEST_NO_ACTUAL',
               ),
               1 => 
               array (
@@ -213,51 +212,9 @@ array (
               ),
               8 => 
               array (
-                'name' => 'shipping_address',
-                'type' => 'fieldset',
-                'css_class' => 'address',
-                'label' => 'LBL_SHIPPING_ADDRESS',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'shipping_address_street_c',
-                    'css_class' => 'address_street',
-                    'placeholder' => 'LBL_SHIPPING_ADDRESS_STREET',
-                  ),
-                  1 => 
-                  array (
-                    'name' => 'shipping_address_city_c',
-                    'css_class' => 'address_city',
-                    'placeholder' => 'LBL_SHIPPING_ADDRESS_CITY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'shipping_address_state_c',
-                    'css_class' => 'address_state',
-                    'placeholder' => 'LBL_SHIPPING_ADDRESS_STATE',
-                  ),
-                  3 => 
-                  array (
-                    'name' => 'shipping_address_postalcode_c',
-                    'css_class' => 'address_zip',
-                    'placeholder' => 'LBL_SHIPPING_ADDRESS_POSTALCODE',
-                  ),
-                  4 => 
-                  array (
-                    'name' => 'shipping_address_country_c',
-                    'css_class' => 'address_country',
-                    'placeholder' => 'LBL_SHIPPING_ADDRESS_COUNTRY',
-                  ),
-                ),
               ),
               9 => 'assigned_user_name',
               10 => 'team_name',
-              11 => 
-              array (
-                'name' => 'tag',
-                'span' => 12,
-              ),
             ),
           ),
           2 => 
@@ -274,10 +231,19 @@ array (
             array (
               0 => 
               array (
+                'name' => 'manifest_number',
+                'readonly' => true,
+                'label' => 'LBL_MANIFEST_NUMBER',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -301,7 +267,7 @@ array (
                   ),
                 ),
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,

@@ -1,27 +1,27 @@
 <?php
 // created: 2019-09-15 20:47:45
-$viewdefs['RevenueLineItems']['base']['menu']['quickcreate'] = array (
+$viewdefs['Leads']['base']['menu']['quickcreate'] = array (
   'layout' => 'create',
-  'label' => 'LNK_NEW_REVENUELINEITEM',
+  'label' => 'LNK_NEW_LEAD',
   'visible' => true,
+  'order' => 6,
   'icon' => 'fa-plus',
   'related' => 
   array (
     0 => 
     array (
       'module' => 'Accounts',
-      'link' => 'revenuelineitems',
+      'link' => 'leads',
     ),
     1 => 
     array (
       'module' => 'Contacts',
-      'link' => 'revenuelineitems',
+      'link' => 'leads',
     ),
     2 => 
     array (
       'module' => 'Opportunities',
-      'link' => 'revenuelineitems',
+      'link' => 'leads',
     ),
   ),
-  'order' => 14,
 );

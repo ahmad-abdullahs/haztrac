@@ -14,3 +14,4 @@ $mod_strings['LBL_START_DATE'] = 'Start Date';
 $mod_strings['LBL_COMPLETE_DATE'] = 'Complete Date';
 $mod_strings['LBL_TRANSPORTER'] = 'Transporter';
 $mod_strings['LBL_TRANSFER_DATE'] = 'Transfer Date';
+$mod_strings['LBL_MANIFEST_NO_ACTUAL'] = 'Manifest Number';

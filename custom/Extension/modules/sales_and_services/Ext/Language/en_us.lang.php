@@ -64,3 +64,4 @@ $mod_strings['LBL_RECORD_BODY'] = 'Schedule';
 $mod_strings['LBL_LAB_RESULT_LR_LAB_REPORTS_ID'] = 'Lab Result / COA (related Lab Report ID)';
 $mod_strings['LBL_LAB_RESULT'] = 'Lab Result / COA';
 $mod_strings['LBL_COMPLETE_DATE'] = 'Complete / Close Date';
+$mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Details';
