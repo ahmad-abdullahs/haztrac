@@ -22,6 +22,23 @@
      */
     initialize: function (options) {
         this._super("initialize", [options]);
+        if (this.module == 'RevenueLineItems' && this.context.get('parentModule') == 'sales_and_services') {
+            // Call the edit button trigger for subpanel row
+            this.context.parent.on('edit:full:subpanel:cstm', this.editClicked, this);
+        }
+    },
+
+    addFavorite: function () {
+        // Don't add the favorite button incase of revenuelineitems subpannel under sales_and_services record view
+        if (this.module == 'RevenueLineItems' && this.context.get('parentModule') == 'sales_and_services') {
+            return;
+        }
+
+        var favoritesEnabled = app.metadata.getModule(this.module, "favoritesEnabled");
+        if (favoritesEnabled !== false
+                && this.meta.favorite && this.leftColumns[0] && _.isArray(this.leftColumns[0].fields)) {
+            this.leftColumns[0].fields.push({type: 'favorite'});
+        }
     },
 
     /**

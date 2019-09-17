@@ -1,7 +1,33 @@
 <?php
- // created: 2019-07-25 14:50:15
-$dictionary['HT_Assets_and_Objects']['fields']['volume_gallons_c']['labelValue']='Total Gallons Qty';
-$dictionary['HT_Assets_and_Objects']['fields']['volume_gallons_c']['enforced']='';
-$dictionary['HT_Assets_and_Objects']['fields']['volume_gallons_c']['dependency']='';
 
- ?>
+$dictionary['HT_Assets_and_Objects']['fields']['volume_gallons_c'] = array(
+    'labelValue' => 'Total Gallons Qty',
+    'enforced' => '',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'custom_fields',
+    'name' => 'volume_gallons_c',
+    'vname' => 'LBL_VOLUME_GALLONS',
+    'type' => 'float',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'enabled',
+    'duplicate_merge_dom_value' => 1,
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'pii' => false,
+    'calculated' => false,
+    'enable_range_search' => false,
+    'precision' => 0,
+    'default' => '0',
+    'dbType' => 'decimal',
+    'type' => 'float',
+    'len' => '26,2',
+    'id' => 'HT_Assets_and_Objectsvolume_gallons_c',
+    'custom_module' => 'HT_Assets_and_Objects',
+);
