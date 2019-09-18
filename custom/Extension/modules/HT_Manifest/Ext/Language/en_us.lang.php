@@ -15,3 +15,5 @@ $mod_strings['LBL_COMPLETE_DATE'] = 'Complete Date';
 $mod_strings['LBL_TRANSPORTER'] = 'Transporter';
 $mod_strings['LBL_TRANSFER_DATE'] = 'Transfer Date';
 $mod_strings['LBL_MANIFEST_NO_ACTUAL'] = 'Manifest Number';
+$mod_strings['LBL_DESIGNATED_FACILITY_ACCOUNT_ID'] = 'Designated Facility / TSDF (related Account ID)';
+$mod_strings['LBL_DESIGNATED_FACILITY'] = 'Designated Facility / TSDF';

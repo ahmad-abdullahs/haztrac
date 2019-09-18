@@ -1,7 +1,5 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
-
 $mod_strings['LBL_NAME'] = 'Name';
 $mod_strings['LBL_PROJECT_NAME'] = 'Project Name ';
 $mod_strings['LBL_SAMPLE_ID_NUMBER'] = 'Sample ID No (AutoNum)';
@@ -273,3 +271,5 @@ $mod_strings['LBL_ANALYSIS_METALS'] = 'Analysis Metals';
 $mod_strings['LBL_LAB_ANALYSIS'] = 'Lab Analysis';
 $mod_strings['LBL_RECORD_BODY'] = 'PARTY DETAILS';
 $mod_strings['LBL_DESCRIPTION'] = 'Description / Internal Notes';
+$mod_strings['LBL_LABORATORY_VENDOR_ACCOUNT_ID'] = 'Laboratory / Vendor (related Account ID)';
+$mod_strings['LBL_LABORATORY_VENDOR'] = 'Laboratory / Vendor';

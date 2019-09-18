@@ -170,24 +170,32 @@ array (
             array (
               0 => 
               array (
+                'name' => 'status_c',
+                'label' => 'LBL_STATUS',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'manifest_no_actual_c',
                 'label' => 'LBL_MANIFEST_NO_ACTUAL',
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'consolidate_c',
                 'label' => 'LBL_CONSOLIDATE',
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'accounts_ht_manifest_1_name',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'start_date_c',
                 'label' => 'LBL_START_DATE',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'transporter',
                 'type' => 'transporter',
@@ -195,23 +203,16 @@ array (
                 'dismiss_label' => true,
                 'span' => 12,
               ),
-              5 => 
-              array (
-                'name' => 'ht_manifest_v_vendors_name',
-                'label' => 'LBL_HT_MANIFEST_V_VENDORS_FROM_V_VENDORS_TITLE',
-              ),
-              6 => 
-              array (
-                'name' => 'complete_date_c',
-                'label' => 'LBL_COMPLETE_DATE',
-              ),
               7 => 
               array (
-                'name' => 'status_c',
-                'label' => 'LBL_STATUS',
+                'name' => 'designated_facility_c',
+                'studio' => 'visible',
+                'label' => 'LBL_DESIGNATED_FACILITY',
               ),
               8 => 
               array (
+                'name' => 'complete_date_c',
+                'label' => 'LBL_COMPLETE_DATE',
               ),
               9 => 'assigned_user_name',
               10 => 'team_name',
