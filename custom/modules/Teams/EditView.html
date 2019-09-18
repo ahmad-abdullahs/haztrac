@@ -1,0 +1,89 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<!-- BEGIN: main -->
+{ERROR_STRING}
+<form name="EditView" method="POST" action="index.php">
+    {sugar_csrf_form_token}
+    <input type="hidden" name="module" value="Teams">
+    <input type="hidden" name="record" value="{ID}">
+    <input type="hidden" name="action">
+    <input type="hidden" name="return_module" value="{RETURN_MODULE}">
+    <input type="hidden" name="return_id" value="{RETURN_ID}">
+    <input type="hidden" name="return_action" value="{RETURN_ACTION}">
+    <input type="hidden" name="isDuplicate" value="{IS_DUPLICATE}">
+
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td>
+                <input title="{APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{APP.LBL_SAVE_BUTTON_KEY}" class="button primary" onclick="this.form.action.value = 'Save'; return check_form('EditView');" type="submit" id="btn_save" value="{APP.LBL_SAVE_BUTTON_LABEL}" >
+                <input title="{APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{APP.LBL_CANCEL_BUTTON_KEY}" class="button" onclick="this.form.action.value = '{RETURN_ACTION}'; this.form.module.value = '{RETURN_MODULE}'; this.form.record.value = '{RETURN_ID}'" type="submit" id="btn_cancel" value="{APP.LBL_CANCEL_BUTTON_LABEL}"></td>
+            <td align="right" nowrap><span class="required">{APP.LBL_REQUIRED_SYMBOL}</span> {APP.NTC_REQUIRED}</td>
+            <td align='right'>{ADMIN_EDIT}</td>
+        </tr>
+    </table>
+
+    <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view" class="actionsContainer">
+        <tr>
+            <td width="15%" scope="row"><slot>{MOD.LBL_NAME} <span class="required">{APP.LBL_REQUIRED_SYMBOL}</span></slot></td>
+        <td width="35%" ><slot><input name="name" type="text" value="{NAME}" tabindex="1"></slot></td>
+        <td width="15%" scope="row"><slot>{MOD.LBL_DEFAULT_TRANSPORTER}</slot></td>
+        <td id="defaultvaluepicker_74" nowrap="nowrap" style="">
+            <input type="text" name="transporter_carrier_c" class="sqsEnabled" tabindex="1" id="transporter_carrier_c" size="" value="{TRANSPORTER_CARRIER_C}" title="" autocomplete="off">
+            <input type="hidden" name="account_id_c" id="account_id_c" value="{ACCOUNT_ID_C}">
+            <span class="id-ff multiple">
+                <button type="button" name="btn_transporter_carrier_c" id="btn_transporter_carrier_c" tabindex="1" title="Select Account" class="button firstChild" value="Select Account" onclick="open_popup(
+                                'Accounts',
+                                600,
+                                400,
+                                '',
+                                true,
+                                false,
+                                {
+                                    'call_back_function': 'set_return', 'form_name': 'EditView', 'field_to_name_array': {
+                                        'id': 'account_id_c', 'name': 'transporter_carrier_c'
+                                    }
+                                },
+                                'single',
+                                true
+                                );">
+                    <img src="themes/default/images/id-ff-select.png?v=od_iHHnXG4uB9UO_PdDhOg">
+                </button>
+                <button type="button" name="btn_clr_transporter_carrier_c" id="btn_clr_transporter_carrier_c" tabindex="1" title="Clear Account" class="button lastChild" onclick="SUGAR.clearRelateField(this.form, 'transporter_carrier_c', 'account_id_c');" value="Clear Account">
+                    <img src="themes/default/images/id-ff-clear.png?v=od_iHHnXG4uB9UO_PdDhOg">
+                </button>
+            </span>
+            <script type="text/javascript">
+                SUGAR.util.doWhen(
+                        "typeof(sqs_objects) != 'undefined' && typeof(sqs_objects['EditView_transporter_carrier_c']) != 'undefined'",
+                        enableQS
+                        );
+            </script>
+        </td>
+        </tr>
+        <tr>
+            <td width="15%" scope="row"><slot>{MOD.LBL_DESCRIPTION}</slot></td>
+            <td width="35%"><slot><textarea name="description" rows="4" cols="60" tabindex="1">{DESCRIPTION}</textarea></slot></td>
+            <td width="15%" scope="row"><slot></slot></td>
+            <td width="35%"><slot></slot></td>
+        </tr>
+    </table>
+
+    {ACTION_BUTTON}
+</form>
+
+<script language="JavaScript" type="text/javascript">
+    function set_focus() {
+        document.EditView.name.focus();
+    }
+</script>
+<!-- END: main -->

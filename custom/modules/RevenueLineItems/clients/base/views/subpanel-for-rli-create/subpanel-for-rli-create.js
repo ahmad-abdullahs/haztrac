@@ -185,9 +185,11 @@
                     if (_model.get('primary_rli') && _model.get('id') != model.get('id')) {
                         _model.set('primary_rli', false);
                     } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
+                        // Set the sales and service name as primary selected RLI
                         parentModel.set('name', _model.get('name'));
+                        this.setTSDFFacility(_model, parentModel);
                     }
-                });
+                }, this);
             }
         }, this);
 
@@ -195,9 +197,28 @@
         bean.on('change:name', function (model) {
             if (model.get('primary_rli')) {
                 parentModel.set('name', model.get('name'));
+                this.setTSDFFacility(model, parentModel);
             }
         }, this);
         return bean;
+    },
+
+    /*
+     * If the selected RLI is Hazardous Material (Y) or State Regulated (Y)
+     then populate the vendor from this line into the sales and service `Ship To / TSDF` field.
+     */
+    setTSDFFacility: function (model, parentModel) {
+        if (model.get('shipping_hazardous_materia_c') || model.get('state_regulated_c')) {
+            parentModel.set({
+                'account_id1_c': model.get('v_vendors_id_c'),
+                'destination_ship_to_c': model.get('product_vendor_c')
+            });
+        } else {
+            parentModel.set({
+                'account_id1_c': '',
+                'destination_ship_to_c': ''
+            });
+        }
     },
 
     /**
