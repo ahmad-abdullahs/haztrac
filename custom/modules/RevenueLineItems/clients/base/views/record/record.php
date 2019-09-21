@@ -475,7 +475,7 @@ array (
               ),
               5 => 
               array (
-                'name' => 'unit_of_measure_c',
+                'name' => 'product_uom_c',
                 'label' => 'LBL_UNIT_OF_MEASURE',
               ),
               6 => 'sales_stage',

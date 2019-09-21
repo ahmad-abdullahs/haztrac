@@ -24,3 +24,5 @@ $mod_strings['LBL_ERG_NO'] = 'ERG No';
 $mod_strings['LBL_MANDATORY_PRINT_TEXT'] = 'Mandatory Print Text';
 $mod_strings['LBL_ACCOUNT_ACCOUNT_ID'] = 'Account (related Account ID)';
 $mod_strings['LBL_ACCOUNT'] = 'Account';
+$mod_strings['LBL_PRODUCT_UOM'] = 'Unit Of Measure';
+$mod_strings['LBL_UNIT_OF_MEASURE'] = 'Unit Of Measure';

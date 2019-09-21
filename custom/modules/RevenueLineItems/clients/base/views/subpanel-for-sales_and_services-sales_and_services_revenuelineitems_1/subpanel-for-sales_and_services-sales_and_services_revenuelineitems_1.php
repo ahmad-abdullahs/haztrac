@@ -60,7 +60,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'default' => true,
                     'label' => 'LBL_UNIT_OF_MEASURE',
                     'enabled' => true,
-                    'name' => 'unit_of_measure_c',
+                    'name' => 'product_uom_c',
                 ),
                 array(
                     'name' => 'discount_price',

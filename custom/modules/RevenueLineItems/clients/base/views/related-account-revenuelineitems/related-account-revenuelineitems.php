@@ -45,7 +45,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         'assigned_user_name',
                         'is_bundle_product_c',
                         'rli_as_template_c',
-                        'unit_of_measure_c',
+                        'product_uom_c',
                         'ht_manifest_revenuelineitems_1_name',
                         'ht_manifest_revenuelineitems_1',
                         'ht_manifest_revenuelineitems_1ht_manifest_ida',
@@ -70,7 +70,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'default' => true,
                 ),
                 array(
-                    'name' => 'unit_of_measure_c',
+                    'name' => 'product_uom_c',
                     'label' => 'LBL_UNIT_OF_MEASURE',
                     'enabled' => true,
                     'default' => true,

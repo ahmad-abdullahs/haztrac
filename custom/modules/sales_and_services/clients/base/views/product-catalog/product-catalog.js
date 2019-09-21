@@ -590,7 +590,10 @@
                 if (data.is_bundle_product_c == 'parent') {
                     data.date_closed = (this.getExpectedCloseDate()).substring(0, 10);
                 }
-                data.unit_of_measure_c = data.product_uom_c;
+                
+                // Here is the field mapping to map the product template field to revenue line item
+                // Now we are using the same fields product_uom_c on both side so code is commented.
+//                data.unit_of_measure_c = data.product_uom_c;
 
                 var viewDetails = this.closestComponent('record') ?
                         this.closestComponent('record') :

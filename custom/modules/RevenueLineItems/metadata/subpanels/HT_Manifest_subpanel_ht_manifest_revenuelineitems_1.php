@@ -33,7 +33,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
-  'unit_of_measure_c' => 
+  'product_uom_c' => 
   array (
     'type' => 'enum',
     'default' => true,

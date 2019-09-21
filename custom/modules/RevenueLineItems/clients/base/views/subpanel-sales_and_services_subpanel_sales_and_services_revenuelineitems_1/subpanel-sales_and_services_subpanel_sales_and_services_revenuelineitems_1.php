@@ -58,7 +58,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-sales_and_services_subpa
                     'default' => true,
                     'label' => 'LBL_UNIT_OF_MEASURE',
                     'enabled' => true,
-                    'name' => 'unit_of_measure_c',
+                    'name' => 'product_uom_c',
                 ),
                 array(
                     'type' => 'currency',

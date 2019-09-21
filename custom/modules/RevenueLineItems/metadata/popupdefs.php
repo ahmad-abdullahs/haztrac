@@ -110,7 +110,7 @@ $popupMeta = array (
     'default' => true,
     'label' => 'LBL_UNIT_OF_MEASURE',
     'width' => 10,
-    'name' => 'unit_of_measure_c',
+    'name' => 'product_uom_c',
   ),
   'DISCOUNT_PRICE' => 
   array (

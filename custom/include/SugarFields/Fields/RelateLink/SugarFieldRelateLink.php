@@ -26,7 +26,7 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
                     'name',
                     'discount_price',
                     'quantity',
-                    'unit_of_measure_c',
+                    'product_uom_c',
                     'total_amount',
                     'rli_as_template_c',
                 ),

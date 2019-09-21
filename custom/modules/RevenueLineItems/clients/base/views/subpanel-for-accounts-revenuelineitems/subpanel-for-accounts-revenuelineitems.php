@@ -82,7 +82,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                 ),
                 7 =>
                 array(
-                    'name' => 'unit_of_measure_c',
+                    'name' => 'product_uom_c',
                     'label' => 'LBL_UNIT_OF_MEASURE',
                     'enabled' => true,
                     'default' => true,
