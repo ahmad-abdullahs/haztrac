@@ -26,15 +26,15 @@ array (
               ),
               1 => 
               array (
-                'name' => 'billing_address_city',
-                'label' => 'LBL_LIST_CITY',
+                'name' => 'shipping_address_city',
+                'label' => 'LBL_SHIPPING_ADDRESS_CITY',
                 'enabled' => true,
                 'default' => true,
               ),
               2 => 
               array (
-                'name' => 'billing_address_country',
-                'label' => 'LBL_BILLING_ADDRESS_COUNTRY',
+                'name' => 'shipping_address_state',
+                'label' => 'LBL_SHIPPING_ADDRESS_STATE',
                 'enabled' => true,
                 'default' => true,
               ),
@@ -47,20 +47,27 @@ array (
               ),
               4 => 
               array (
+                'name' => 'ac_usepa_id_c',
+                'label' => 'LBL_AC_USEPA_ID',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
+              array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_LIST_ASSIGNED_USER',
                 'id' => 'ASSIGNED_USER_ID',
                 'enabled' => true,
                 'default' => true,
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_EMAIL_ADDRESS',
                 'enabled' => true,
                 'default' => true,
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAMS',
@@ -70,13 +77,13 @@ array (
                 'sortable' => false,
                 'default' => true,
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => true,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'date_entered',
                 'type' => 'datetime',
@@ -84,6 +91,20 @@ array (
                 'enabled' => true,
                 'default' => true,
                 'readonly' => true,
+              ),
+              10 => 
+              array (
+                'name' => 'billing_address_city',
+                'label' => 'LBL_LIST_CITY',
+                'enabled' => true,
+                'default' => false,
+              ),
+              11 => 
+              array (
+                'name' => 'billing_address_country',
+                'label' => 'LBL_BILLING_ADDRESS_COUNTRY',
+                'enabled' => true,
+                'default' => false,
               ),
             ),
           ),

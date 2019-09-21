@@ -211,8 +211,9 @@ array (
               0 => 'type_name',
               1 => 
               array (
-                'name' => 'website',
-                'type' => 'url',
+                'name' => 'account_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ACCOUNT',
               ),
               2 => 
               array (
@@ -276,22 +277,9 @@ array (
               array (
                 'name' => 'waste_profile_rqrd_c',
                 'label' => 'LBL_WASTE_PROFILE_RQRD',
-                'span' => 12,
               ),
               14 => 
               array (
-                'name' => 'weight',
-                'span' => 12,
-              ),
-              15 => 
-              array (
-                'name' => 'product_uom_c',
-                'label' => 'LBL_PRODUCT_UOM',
-              ),
-              16 => 
-              array (
-                'name' => 'tag',
-                'span' => 12,
               ),
             ),
           ),
@@ -308,15 +296,6 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tax_class',
-              ),
-              1 => 
-              array (
-                'name' => 'base_rate',
-                'label' => 'LBL_CURRENCY_RATE',
-              ),
-              2 => 
-              array (
                 'name' => 'discount_price',
                 'type' => 'currency',
                 'related_fields' => 
@@ -330,11 +309,43 @@ array (
                 'currency_field' => 'currency_id',
                 'base_rate_field' => 'base_rate',
               ),
+              1 => 
+              array (
+                'name' => 'product_uom_c',
+                'label' => 'LBL_PRODUCT_UOM',
+              ),
+              2 => 
+              array (
+                'name' => 'pricing_formula',
+                'comment' => 'Pricing formula (ex: Fixed, Markup over Cost)',
+                'label' => 'LBL_PRICING_FORMULA',
+              ),
               3 => 
+              array (
+                'name' => 'weight',
+              ),
+              4 => 
+              array (
+                'name' => 'cost_usdollar',
+                'comment' => 'Cost expressed in USD',
+                'studio' => 
+                array (
+                  'editview' => false,
+                  'mobile' => false,
+                ),
+                'readonly' => true,
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'label' => 'LBL_COST_USDOLLAR',
+              ),
+              5 => 
               array (
                 'name' => 'date_cost_price',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'discount_usdollar',
                 'comment' => 'Discount price expressed in USD',
@@ -351,10 +362,19 @@ array (
                 ),
                 'label' => 'LBL_DISCOUNT_USDOLLAR',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'related_rli_total_c',
                 'label' => 'LBL_RELATED_RLI_TOTAL',
+              ),
+              8 => 
+              array (
+                'name' => 'tax_class',
+              ),
+              9 => 
+              array (
+                'name' => 'base_rate',
+                'label' => 'LBL_CURRENCY_RATE',
               ),
             ),
           ),
@@ -634,6 +654,14 @@ array (
                 'name' => 'is_bundle_product_c',
                 'label' => 'LBL_IS_BUNDLE_PRODUCT',
                 'readonly' => true,
+              ),
+              28 => 
+              array (
+                'name' => 'website',
+                'type' => 'url',
+              ),
+              29 => 
+              array (
               ),
             ),
           ),

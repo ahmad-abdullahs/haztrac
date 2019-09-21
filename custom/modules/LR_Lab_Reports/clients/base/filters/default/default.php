@@ -1,5 +1,5 @@
 <?php
-// created: 2019-07-21 11:14:30
+// created: 2019-09-19 12:03:08
 $viewdefs['LR_Lab_Reports']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -8,6 +8,9 @@ $viewdefs['LR_Lab_Reports']['base']['filter']['default'] = array (
     array (
     ),
     'category_id' => 
+    array (
+    ),
+    'laboratory_vendor_c' => 
     array (
     ),
     'subcategory_id' => 

@@ -34,3 +34,4 @@ $mod_strings['LBL_EIN_TAXID'] = 'EIN / Foreign TaxID ';
 $mod_strings['LBL_CONTRACT_NAME'] = 'Contract Name';
 $mod_strings['LBL_HOUR_OPERATIONS'] = 'Hours of Operations';
 $mod_strings['LBL_ACCOUNT_TYPE_CST'] = 'Account Type';
+$mod_strings['LBL_BILLING_ADDRESS_STREET'] = '==== Billing Street ====';

@@ -195,4 +195,8 @@ $searchFields['Accounts'] = array (
   array (
     'query_type' => 'default',
   ),
+  'billing_address_street' => 
+  array (
+    'query_type' => 'default',
+  ),
 );

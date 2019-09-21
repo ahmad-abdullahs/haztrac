@@ -1,5 +1,5 @@
 <?php
- // created: 2019-09-14 10:53:54
+ // created: 2019-09-18 15:00:51
 $dictionary['Account']['fields']['billing_address_country']['len']='255';
 $dictionary['Account']['fields']['billing_address_country']['audited']=false;
 $dictionary['Account']['fields']['billing_address_country']['massupdate']=false;
@@ -9,7 +9,7 @@ $dictionary['Account']['fields']['billing_address_country']['duplicate_merge_dom
 $dictionary['Account']['fields']['billing_address_country']['merge_filter']='disabled';
 $dictionary['Account']['fields']['billing_address_country']['full_text_search']=array (
   'enabled' => true,
-  'boost' => '1.5',
+  'boost' => '3',
   'searchable' => true,
 );
 $dictionary['Account']['fields']['billing_address_country']['calculated']=false;

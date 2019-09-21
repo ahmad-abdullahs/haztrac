@@ -24,6 +24,14 @@ array (
               ),
               1 => 
               array (
+                'name' => 'lab_ref_number_c',
+                'label' => 'LBL_LAB_REF_NUMBER',
+                'enabled' => true,
+                'default' => true,
+                'width' => '15',
+              ),
+              2 => 
+              array (
                 'name' => 'date_entered',
                 'label' => 'LBL_DATE_ENTERED',
                 'enabled' => true,
@@ -31,7 +39,7 @@ array (
                 'default' => true,
                 'width' => '10',
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'document_name',
                 'label' => 'LBL_NAME',
@@ -40,7 +48,17 @@ array (
                 'enabled' => true,
                 'width' => '25',
               ),
-              3 => 
+              4 => 
+              array (
+                'name' => 'laboratory_vendor_c',
+                'label' => 'LBL_LABORATORY_VENDOR',
+                'enabled' => true,
+                'id' => 'ACCOUNT_ID_C',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              5 => 
               array (
                 'name' => 'commodity_c',
                 'label' => 'LBL_COMMODITY',
@@ -48,32 +66,13 @@ array (
                 'default' => true,
                 'width' => '25',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'status_id',
                 'label' => 'LBL_DOC_STATUS',
                 'enabled' => true,
                 'default' => true,
                 'width' => 'small',
-              ),
-              5 => 
-              array (
-                'name' => 'v_vendors_lr_lab_reports_1_name',
-                'label' => 'LBL_V_VENDORS_LR_LAB_REPORTS_1_FROM_V_VENDORS_TITLE',
-                'enabled' => true,
-                'id' => 'V_VENDORS_LR_LAB_REPORTS_1V_VENDORS_IDA',
-                'link' => true,
-                'sortable' => false,
-                'default' => true,
-                'width' => '25',
-              ),
-              6 => 
-              array (
-                'name' => 'lab_ref_number_c',
-                'label' => 'LBL_LAB_REF_NUMBER',
-                'enabled' => true,
-                'default' => true,
-                'width' => '15',
               ),
               7 => 
               array (
