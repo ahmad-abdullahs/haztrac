@@ -23,6 +23,7 @@ $dictionary["LR_Lab_Reports"]["fields"]["v_vendors_lr_lab_reports_1_name"] = arr
   'table' => 'v_vendors',
   'module' => 'V_Vendors',
   'rname' => 'name',
+  'massupdate' => false,
 );
 $dictionary["LR_Lab_Reports"]["fields"]["v_vendors_lr_lab_reports_1v_vendors_ida"] = array (
   'name' => 'v_vendors_lr_lab_reports_1v_vendors_ida',
