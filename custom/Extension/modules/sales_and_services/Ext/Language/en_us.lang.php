@@ -65,3 +65,6 @@ $mod_strings['LBL_LAB_RESULT_LR_LAB_REPORTS_ID'] = 'Lab Result / COA (related La
 $mod_strings['LBL_LAB_RESULT'] = 'Lab Result / COA';
 $mod_strings['LBL_COMPLETE_DATE'] = 'Complete / Close Date';
 $mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Details';
+$mod_strings['LBL_AC_USEPA_ID_C'] = 'EPA ID No. ';
+$mod_strings['LBL_ACCOUNT_NUMBER'] = 'Account Number';
+$mod_strings['LBL_ACCOUNT_STATUS'] = 'Account Status';

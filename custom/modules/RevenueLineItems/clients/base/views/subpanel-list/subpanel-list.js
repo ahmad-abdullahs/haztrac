@@ -27,6 +27,38 @@
 
         //Override the recordlist row template
         this.rowTemplate = app.template.getView('subpanel-list.row', 'RevenueLineItems');
+
+        if (this.module == 'RevenueLineItems' && this.context.get('parentModule') == 'sales_and_services') {
+            // Call the edit button trigger for subpanel row
+            this.context.parent.on('edit:full:subpanel:cstm', this.editClicked, this);
+        }
+    },
+
+    addFavorite: function () {
+        // Don't add the favorite button incase of revenuelineitems subpannel under sales_and_services record view
+        if (this.module == 'RevenueLineItems' && this.context.get('parentModule') == 'sales_and_services') {
+            return;
+        }
+
+        var favoritesEnabled = app.metadata.getModule(this.module, "favoritesEnabled");
+        if (favoritesEnabled !== false
+                && this.meta.favorite && this.leftColumns[0] && _.isArray(this.leftColumns[0].fields)) {
+            this.leftColumns[0].fields.push({type: 'favorite'});
+        }
+    },
+
+    addActions: function () {
+        this._super("addActions");
+
+        // We change the type of cancel button inorder to add the listner in that so, it should 
+        // hear the parent record cancel event and cancel all the subpanel rows. 
+        if (!_.isUndefined(this.leftColumns[0])) {
+            _.each(this.leftColumns[0].fields, function (field) {
+                if (field.name == 'inline-cancel' && field.type == 'editablelistbutton') {
+                    field.type = 'ears-up-editablelistbutton';
+                }
+            });
+        }
     },
 
     _render: function () {

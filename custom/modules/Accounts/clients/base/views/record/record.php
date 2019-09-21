@@ -484,18 +484,22 @@ array (
               array (
                 'name' => 'duns_num',
                 'readonly' => true,
-                'span' => 12,
               ),
               16 => 
               array (
-                'name' => 'twitter',
+                'name' => 'account_status_c',
+                'label' => 'LBL_ACCOUNT_STATUS',
               ),
               17 => 
+              array (
+                'name' => 'twitter',
+              ),
+              18 => 
               array (
                 'name' => 'hint_account_facebook_handle_c',
                 'label' => 'LBL_HINT_COMPANY_FACEBOOK',
               ),
-              18 => 
+              19 => 
               array (
                 'name' => 'role_assigned_c',
                 'label' => 'LBL_ROLE_ASSIGNED',

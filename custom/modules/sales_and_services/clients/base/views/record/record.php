@@ -137,7 +137,17 @@ $viewdefs['sales_and_services'] = array(
                                 'dismiss_label' => true,
                                 'readonly' => true,
                             ),
-                            1 => 'name',
+                            1 =>
+                            array(
+                                'name' => 'name',
+                                'label' => 'LBL_NAME',
+                                'related_fields' =>
+                                array(
+                                    0 => 'ac_usepa_id_c',
+                                    1 => 'account_number_c',
+                                    2 => 'account_status_c',
+                                ),
+                            ),
                             2 =>
                             array(
                                 'name' => 'favorite',

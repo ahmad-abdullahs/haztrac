@@ -40,6 +40,9 @@ $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1_name"
         'account_terms_c' => 'account_terms_c',
         'team_name' => 'team_name',
         'service_instruction_c' => 'instructions_notes_c',
+        'ac_usepa_id_c' => 'ac_usepa_id_c',
+        'account_number_c' => 'account_number_c',
+        'account_status_c' => 'account_status_c',
     ),
 );
 $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1accounts_ida"] = array(

@@ -15,6 +15,24 @@ $viewdefs['sales_and_services']['base']['layout']['create-preview'] = array(
             'context' => array(
                 'module' => 'RevenueLineItems',
             ),
+        ),
+        array(
+            'view' => array(
+                'type' => 'account-point-of-attention',
+            ),
+            'context' => array(
+                'module' => 'sales_and_services',
+            ),
+        ),
+        array(
+            'view' => array(
+                'type' => 'financial-point-of-attention',
+            ),
+            'context' => array(
+                'module' => 'sales_and_services',
+            ),
+        ),
+        array(
             'width' => 12,
         ),
     ),

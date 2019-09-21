@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_PHYSICAL_ADDRESS'] = '3rd Party/Broker';
 $mod_strings['LBL_PHYSICAL_ADDRESS_ACCOUNT_ID'] = '3rd Party/Broker ID';
@@ -34,4 +35,5 @@ $mod_strings['LBL_EIN_TAXID'] = 'EIN / Foreign TaxID ';
 $mod_strings['LBL_CONTRACT_NAME'] = 'Contract Name';
 $mod_strings['LBL_HOUR_OPERATIONS'] = 'Hours of Operations';
 $mod_strings['LBL_ACCOUNT_TYPE_CST'] = 'Account Type';
+$mod_strings['LBL_ACCOUNT_STATUS'] = 'Account Status';
 $mod_strings['LBL_BILLING_ADDRESS_STREET'] = '==== Billing Street ====';
