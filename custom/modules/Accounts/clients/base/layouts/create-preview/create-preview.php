@@ -5,7 +5,8 @@ $viewdefs['Accounts']['base']['layout']['create-preview'] = array(
         array(
             'view' => 'product-catalog',
             'context' => array(
-                'module' => 'Quotes',
+//                'module' => 'Quotes',
+                'module' => 'sales_and_services',
             ),
         ),
     ),

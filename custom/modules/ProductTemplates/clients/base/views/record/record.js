@@ -41,7 +41,6 @@
      * @inheritdoc
      */
     initialize: function (options) {
-        console.log('ProductTemplates record');
         this.plugins = _.union(this.plugins, ['LinkedModel']);
 
         this.hasRliAccess = app.acl.hasAccess('edit', 'RevenueLineItems');

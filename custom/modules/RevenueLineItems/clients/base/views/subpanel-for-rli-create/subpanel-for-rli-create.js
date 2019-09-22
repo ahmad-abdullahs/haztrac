@@ -18,6 +18,9 @@
 ({
     // This list is used on the Sales and Service create view for RLI bundle creation...
     // @see screenshots 2.png
+
+    // This file is used for sales_and_services, Opportunities and Accounts.
+    // So you may found checks specific to module for few functionalities.
     extendsFrom: 'RevenueLineItemsCustomSubpanelListCreateView',
 
     initialize: function (options) {
@@ -187,7 +190,9 @@
                     } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
                         // Set the sales and service name as primary selected RLI
                         parentModel.set('name', _model.get('name'));
-                        this.setTSDFFacility(_model, parentModel);
+                        if (this.context.parent.get('model') == 'sales_and_services') {
+                            this.setTSDFFacility(_model, parentModel);
+                        }
                     }
                 }, this);
             }
@@ -197,7 +202,9 @@
         bean.on('change:name', function (model) {
             if (model.get('primary_rli')) {
                 parentModel.set('name', model.get('name'));
-                this.setTSDFFacility(model, parentModel);
+                if (this.context.parent.get('model') == 'sales_and_services') {
+                    this.setTSDFFacility(model, parentModel);
+                }
             }
         }, this);
         return bean;

@@ -25,6 +25,15 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
             'fields' =>
             array(
                 array(
+                    'name' => 'row_holder',
+                    'label' => '',
+                    'enabled' => true,
+                    'sortable' => false,
+                    'default' => true,
+                    'type' => 'non-html-field',
+                    'width' => '24',
+                ),
+                array(
                     'name' => 'name',
                     'link' => true,
                     'enabled' => true,
@@ -72,6 +81,7 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                     'default' => true,
                     'related_fields' =>
                     array(
+                        "line_number",
                         "description",
                         "type_id",
                         "manufacturer_id",

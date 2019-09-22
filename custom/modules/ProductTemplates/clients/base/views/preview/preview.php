@@ -61,7 +61,14 @@ $viewdefs['ProductTemplates']['base']['view']['preview'] = array(
             'panelDefault' => 'expanded',
             'fields' =>
             array(
-                0 => 'type_name',
+                0 =>
+                array(
+                    'name' => 'type_name',
+                    'related_fields' =>
+                    array(
+                        0 => 'line_number',
+                    ),
+                ),
                 1 =>
                 array(
                     'name' => 'website',

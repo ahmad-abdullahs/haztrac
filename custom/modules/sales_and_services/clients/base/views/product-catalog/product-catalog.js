@@ -588,9 +588,10 @@
 //                    data.date_closed = (this.getExpectedCloseDate()).substring(0, 10);
 //                }
                 if (data.is_bundle_product_c == 'parent') {
+                    // Set expected close date of next month...
                     data.date_closed = (this.getExpectedCloseDate()).substring(0, 10);
                 }
-                
+
                 // Here is the field mapping to map the product template field to revenue line item
                 // Now we are using the same fields product_uom_c on both side so code is commented.
 //                data.unit_of_measure_c = data.product_uom_c;
@@ -1670,7 +1671,6 @@
      * @protected
      */
     _sendItemToRecord: function (data) {
-        console.log('_sendItemToRecord data : ', data);
         this._massageDataBeforeSendingToRecord(data);
 
         var viewDetails = this.closestComponent('record') ?

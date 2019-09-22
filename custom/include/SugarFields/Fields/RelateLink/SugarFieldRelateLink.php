@@ -29,6 +29,7 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
                     'product_uom_c',
                     'total_amount',
                     'rli_as_template_c',
+                    'line_number',
                 ),
                     ), $displayParams, array(
                 'module' => $bean->module_name,

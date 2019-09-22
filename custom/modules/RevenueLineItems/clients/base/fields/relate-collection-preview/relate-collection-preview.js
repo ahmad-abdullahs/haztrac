@@ -19,6 +19,9 @@
                     var valueToDisplay = ddList[record.product_uom_c];
                     record.product_uom_c = valueToDisplay;
                 }, this);
+
+                // Sort the list on basis of line number
+                value['records'] = _.sortBy(value['records'], 'line_number');
             }
         }
         return value;
