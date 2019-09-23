@@ -32,3 +32,6 @@ $mod_strings['LBL_LIST_NAME'] = 'List Name';
 $mod_strings['LBL_ADDITIONAL_INFO_ACK'] = 'Additional Info / Acknowledgement ';
 $mod_strings['LBL_ERG_NO'] = 'ERG No';
 $mod_strings['LBL_MANDATORY_PRINT_TEXT'] = 'Mandatory Print Text';
+$mod_strings['LBL_MANIFEST_CONTAINER_TYPE'] = 'Manifest Container Type';
+$mod_strings['LBL_MANIFEST_UOM'] = 'Manifest UOM';
+$mod_strings['LBL_MANIFEST_HAZMAT_HANDLE_CODE'] = 'Manifest Hazmat Handle Code';

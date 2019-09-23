@@ -211,9 +211,9 @@ array (
               0 => 'type_name',
               1 => 
               array (
-                'name' => 'account_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ACCOUNT',
+                'name' => 'category_name',
+                'type' => 'relate',
+                'label' => 'LBL_CATEGORY',
               ),
               2 => 
               array (
@@ -244,34 +244,34 @@ array (
               7 => 'vendor_part_num',
               8 => 
               array (
-                'name' => 'additional_info_ack_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ADDITIONAL_INFO_ACK',
-                'span' => 12,
-              ),
-              9 => 
-              array (
                 'name' => 'vendor_product_svc_descrp_c',
                 'studio' => 'visible',
                 'label' => 'LBL_VENDOR_PRODUCT_SVC_DESCRP',
               ),
-              10 => 
+              9 => 
               array (
                 'name' => 'product_svc_description_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PRODUCT_SVC_DESCRIPTION',
               ),
-              11 => 
+              10 => 
               array (
                 'name' => 'description',
                 'span' => 6,
               ),
-              12 => 
+              11 => 
               array (
                 'name' => 'mandatory_print_text_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MANDATORY_PRINT_TEXT',
                 'span' => 6,
+              ),
+              12 => 
+              array (
+                'name' => 'additional_info_ack_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ADDITIONAL_INFO_ACK',
+                'span' => 12,
               ),
               13 => 
               array (
@@ -312,7 +312,7 @@ array (
               1 => 
               array (
                 'name' => 'product_uom_c',
-                'label' => 'LBL_PRODUCT_UOM',
+                'label' => 'LBL_UNIT_OF_MEASURE',
               ),
               2 => 
               array (
@@ -495,14 +495,12 @@ array (
                 ),
                 'span' => 6,
               ),
-              10 => 'product_template_name',
-              11 => 
+              10 => 
               array (
-                'name' => 'category_name',
-                'type' => 'relate',
-                'label' => 'LBL_CATEGORY',
+                'name' => 'product_template_name',
+                'span' => 12,
               ),
-              12 => 
+              11 => 
               array (
                 'name' => 'discount_amount',
                 'type' => 'currency',
@@ -517,7 +515,7 @@ array (
                 'currency_field' => 'currency_id',
                 'base_rate_field' => 'base_rate',
               ),
-              13 => 
+              12 => 
               array (
                 'name' => 'total_amount',
                 'type' => 'currency',
@@ -534,7 +532,7 @@ array (
                 'currency_field' => 'currency_id',
                 'base_rate_field' => 'base_rate',
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'likely_case',
                 'type' => 'currency',
@@ -549,7 +547,7 @@ array (
                 'currency_field' => 'currency_id',
                 'base_rate_field' => 'base_rate',
               ),
-              15 => 
+              14 => 
               array (
                 'name' => 'quote_name',
                 'label' => 'LBL_ASSOCIATED_QUOTE',
@@ -559,21 +557,21 @@ array (
                 ),
                 'readonly' => true,
               ),
-              16 => 
+              15 => 
               array (
                 'name' => 'tag',
                 'span' => 6,
               ),
-              17 => 
+              16 => 
               array (
                 'name' => 'sales_and_services_revenuelineitems_1_name',
                 'span' => 6,
               ),
-              18 => 
+              17 => 
               array (
                 'name' => 'ht_manifest_revenuelineitems_1_name',
               ),
-              19 => 
+              18 => 
               array (
                 'name' => 'list_price',
                 'readonly' => true,
@@ -589,16 +587,16 @@ array (
                 'currency_field' => 'currency_id',
                 'base_rate_field' => 'base_rate',
               ),
-              20 => 
+              19 => 
               array (
                 'name' => 'revenuelineitems_revenuelineitems_1_name',
               ),
-              21 => 
+              20 => 
               array (
                 'name' => 'related_rli_total_c',
                 'label' => 'LBL_RELATED_RLI_TOTAL',
               ),
-              22 => 
+              21 => 
               array (
                 'name' => 'deal_calc_usdollar',
                 'comment' => 'deal_calc_usdollar',
@@ -614,7 +612,7 @@ array (
                 ),
                 'label' => 'LBL_DISCOUNT_TOTAL_USDOLLAR',
               ),
-              23 => 
+              22 => 
               array (
                 'name' => 'discount_amount_usdollar',
                 'studio' => 
@@ -624,7 +622,7 @@ array (
                 ),
                 'label' => 'LBL_DISCOUNT_RATE_USDOLLAR',
               ),
-              24 => 
+              23 => 
               array (
                 'name' => 'deal_calc',
                 'comment' => 'deal_calc',
@@ -639,28 +637,28 @@ array (
                 ),
                 'label' => 'LBL_DISCOUNT_TOTAL',
               ),
-              25 => 
+              24 => 
               array (
                 'name' => 'discount_rate_percent',
                 'label' => 'LBL_DISCOUNT_AS_PERCENT',
               ),
-              26 => 
+              25 => 
               array (
                 'name' => 'rli_type_c',
                 'label' => 'LBL_RLI_TYPE',
               ),
-              27 => 
+              26 => 
               array (
                 'name' => 'is_bundle_product_c',
                 'label' => 'LBL_IS_BUNDLE_PRODUCT',
                 'readonly' => true,
               ),
-              28 => 
+              27 => 
               array (
                 'name' => 'website',
                 'type' => 'url',
               ),
-              29 => 
+              28 => 
               array (
               ),
             ),

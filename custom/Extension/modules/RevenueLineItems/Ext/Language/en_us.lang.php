@@ -25,4 +25,6 @@ $mod_strings['LBL_MANDATORY_PRINT_TEXT'] = 'Mandatory Print Text';
 $mod_strings['LBL_ACCOUNT_ACCOUNT_ID'] = 'Account (related Account ID)';
 $mod_strings['LBL_ACCOUNT'] = 'Account';
 $mod_strings['LBL_PRODUCT_UOM'] = 'Unit Of Measure';
-$mod_strings['LBL_UNIT_OF_MEASURE'] = 'Unit Of Measure';
+$mod_strings['LBL_MANIFEST_CONTAINER_TYPE'] = 'Manifest Container Type';
+$mod_strings['LBL_MANIFEST_UOM'] = 'Manifest UOM';
+$mod_strings['LBL_MANIFEST_HAZMAT_HANDLE_CODE'] = 'Manifest Hazmat Handle Code';
