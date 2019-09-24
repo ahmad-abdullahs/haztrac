@@ -12,3 +12,6 @@ $dictionary['ProductTemplate']['fields']['bundle_total_c']['calculated'] = 'true
 $dictionary['ProductTemplate']['fields']['bundle_total_c']['formula'] = 'rollupSum($product_templates_product_templates_1,"discount_price")';
 $dictionary['ProductTemplate']['fields']['bundle_total_c']['enforced'] = 'true';
 $dictionary['ProductTemplate']['fields']['bundle_total_c']['dependency'] = '';
+$dictionary['ProductTemplate']['fields']['bundle_total_c']['type'] = 'decimal';
+$dictionary['ProductTemplate']['fields']['bundle_total_c']['len'] = 18;
+$dictionary['ProductTemplate']['fields']['bundle_total_c']['precision'] = 2;

@@ -4,3 +4,4 @@
 $dictionary['ProductTemplate']['fields']['is_bundle_product_c']['labelValue'] = 'Is bundle Product';
 $dictionary['ProductTemplate']['fields']['is_bundle_product_c']['dependency'] = '';
 $dictionary['ProductTemplate']['fields']['is_bundle_product_c']['visibility_grid'] = '';
+$dictionary['ProductTemplate']['fields']['is_bundle_product_c']['readonly'] = true;
