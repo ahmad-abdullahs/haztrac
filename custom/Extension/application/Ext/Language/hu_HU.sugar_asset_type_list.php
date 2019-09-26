@@ -1,8 +1,7 @@
 <?php
- // created: 2019-07-25 12:39:28
+ // created: 2019-09-24 22:14:04
 
 $app_list_strings['asset_type_list']=array (
-  'Trucks' => 'Trucks',
   'Facility Items' => 'Facility Items',
   '' => '',
   'Truck Tanker' => 'Truck Tanker',
@@ -12,4 +11,6 @@ $app_list_strings['asset_type_list']=array (
   'Railcar Tankcar' => 'Railcar Tankcar',
   'Storage Tank' => 'Storage Tank',
   'Marine Barge' => 'Marine Barge',
+  'Auto' => 'Automobile',
+  'Semi' => 'Semi Truck',
 );
