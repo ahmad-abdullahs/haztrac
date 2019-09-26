@@ -36,7 +36,8 @@
 
     addFavorite: function () {
         // Don't add the favorite button incase of revenuelineitems subpannel under sales_and_services record view
-        if (this.module == 'RevenueLineItems' && this.context.get('parentModule') == 'sales_and_services') {
+        if (this.module == 'RevenueLineItems' && (this.context.get('parentModule') == 'sales_and_services'
+                || this.context.get('parentModule') == 'accounts')) {
             return;
         }
 
