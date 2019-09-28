@@ -69,6 +69,7 @@
      * @param {Object} data The ProductCatalog Data
      */
     onAddFromProductCatalog: function (data) {
+        // mama
         var existingModel = this.collection.length === 1 && this.collection.at(0);
         var isEmpty = existingModel &&
                 _.isEmpty(existingModel.changedAttributes()) &&

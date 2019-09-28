@@ -38,7 +38,8 @@
                 // Fetched in descending order because when the items are added in the subpanel-for-producttemplates-create
                 // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
                 params: {
-                    order_by: "line_number:desc"
+                    order_by: "line_number:desc",
+                    view: 'list',
                 },
                 success: function (coll) {
                     _.each(coll.models, function (model) {

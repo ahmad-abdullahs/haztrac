@@ -75,6 +75,10 @@ $subpanel_layout['list_fields'] = array(
         'widget_class' => 'SubPanelDetailViewLink',
         'target_module' => 'Accounts',
         'target_record_key' => 'v_vendors_id_c',
+        'related_fields' =>
+        array(
+            "v_vendors_id_c",
+        ),
     ),
     'discount_usdollar' =>
     array(

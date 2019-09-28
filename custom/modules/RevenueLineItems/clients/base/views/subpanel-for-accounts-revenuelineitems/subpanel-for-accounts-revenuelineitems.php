@@ -89,11 +89,15 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                     'name' => 'product_vendor_c',
                     'label' => 'LBL_PRODUCT_VENDOR',
                     'enabled' => true,
-                    'id' => 'V_VENDORS_ID_C',
+                    'id' => 'v_vendors_id_c',
                     'link' => true,
                     'sortable' => false,
                     'default' => true,
                     'width' => 'medium',
+                    'related_fields' =>
+                    array(
+                        "v_vendors_id_c",
+                    ),
                 ),
             ),
         ),

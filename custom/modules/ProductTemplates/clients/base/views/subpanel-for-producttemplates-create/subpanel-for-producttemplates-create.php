@@ -38,47 +38,6 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
-                ),
-                array(
-                    'name' => 'mft_part_num',
-                    'label' => 'LBL_MFT_PART_NUM',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'type_name',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'discount_price',
-                    'type' => 'currency',
-                    'related_fields' =>
-                    array(
-                        0 => 'discount_usdollar',
-                        1 => 'currency_id',
-                        2 => 'base_rate',
-                    ),
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'product_uom_c',
-                    'label' => 'LBL_PRODUCT_UOM',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'product_vendor_c',
-                    'label' => 'LBL_PRODUCT_VENDOR',
-                    'enabled' => true,
-                    'type' => 'relate',
-                    'id' => 'V_VENDORS_ID_C',
-                    'link' => true,
-                    'sortable' => false,
-                    'default' => true,
                     'related_fields' =>
                     array(
                         "line_number",
@@ -154,6 +113,51 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                         "worst_case",
                         "status",
                         "pricing_formula",
+                    ),
+                ),
+                array(
+                    'name' => 'mft_part_num',
+                    'label' => 'LBL_MFT_PART_NUM',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'type_name',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'discount_price',
+                    'type' => 'currency',
+                    'related_fields' =>
+                    array(
+                        0 => 'discount_usdollar',
+                        1 => 'currency_id',
+                        2 => 'base_rate',
+                    ),
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'product_uom_c',
+                    'label' => 'LBL_PRODUCT_UOM',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'product_vendor_c',
+                    'label' => 'LBL_PRODUCT_VENDOR',
+                    'enabled' => true,
+                    'type' => 'relate',
+                    'id' => 'V_VENDORS_ID_C',
+                    'link' => true,
+                    'sortable' => false,
+                    'default' => true,
+                    'related_fields' =>
+                    array(
+                        "v_vendors_id_c",
                     ),
                 ),
             ),
