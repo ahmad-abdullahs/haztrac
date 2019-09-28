@@ -1,5 +1,5 @@
 <?php
- // created: 2019-09-21 21:39:11
+ // created: 2019-09-28 10:38:47
 
 $app_list_strings['unit_of_measure_c_list']=array (
   'ea Gal' => 'ea Gal',
@@ -18,4 +18,5 @@ $app_list_strings['unit_of_measure_c_list']=array (
   'ea 30DM' => 'ea DM (30G)',
   'ea Short Ton' => 'ea Ton',
   'ea Hr' => 'ea Hr',
+  'ea Long Ton' => 'ea\\LGTon',
 );
