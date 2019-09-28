@@ -101,29 +101,29 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
     'selection' =>
     array(
     ),
-    'rowactions' =>
-    array(
-        'css_class' => 'pull-right',
-        'actions' =>
-        array(
-            0 =>
-            array(
-                'type' => 'rowaction',
-                'css_class' => 'btn',
-                'tooltip' => 'LBL_PREVIEW',
-                'event' => 'list:preview:fire',
-                'icon' => 'fa-eye',
-                'acl_action' => 'view',
-            ),
-            1 =>
-            array(
-                'type' => 'rowaction',
-                'name' => 'edit_button',
-                'icon' => 'fa-pencil',
-                'label' => 'LBL_EDIT_BUTTON',
-                'event' => 'list:editrow:fire',
-                'acl_action' => 'edit',
-            ),
-        ),
-    ),
+//    'rowactions' =>
+//    array(
+//        'css_class' => 'pull-right',
+//        'actions' =>
+//        array(
+//            0 =>
+//            array(
+//                'type' => 'rowaction',
+//                'css_class' => 'btn',
+//                'tooltip' => 'LBL_PREVIEW',
+//                'event' => 'list:preview:fire',
+//                'icon' => 'fa-eye',
+//                'acl_action' => 'view',
+//            ),
+//            1 =>
+//            array(
+//                'type' => 'rowaction',
+//                'name' => 'edit_button',
+//                'icon' => 'fa-pencil',
+//                'label' => 'LBL_EDIT_BUTTON',
+//                'event' => 'list:editrow:fire',
+//                'acl_action' => 'edit',
+//            ),
+//        ),
+//    ),
 );

@@ -23,7 +23,17 @@ class CustomRLIRelateApi extends RelateApi {
 
     public function filterRelated(ServiceBase $api, array $args) {
         if ($args['link_name'] == 'revenuelineitems_revenuelineitems_1') {
-            $args['order_by'] = 'line_number:asc';
+            // If order by is already set to line_number:desc || line_number:asc, it's fine. Otherwise set the order to line_number:asc
+            if (isset($args['order_by'])) {
+                $orderBy = explode(':', $args['order_by']);
+                if (count($orderBy)) {
+                    if ($orderBy[0] != 'line_number') {
+                        $args['order_by'] = 'line_number:asc';
+                    }
+                } else {
+                    $args['order_by'] = 'line_number:asc';
+                }
+            }
         }
         return parent::filterRelated($api, $args);
     }

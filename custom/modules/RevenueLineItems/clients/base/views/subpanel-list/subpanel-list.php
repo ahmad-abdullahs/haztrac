@@ -37,6 +37,13 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-list'] = array(
                 'icon' => 'fa-chain-broken',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
+            array(
+                'type' => 'convertbutton',
+                'icon' => 'fa-exchange',
+                'name' => 'record_convert',
+                'label' => 'LBL_CONVERT_BUTTON_TITLE',
+                'acl_action' => 'edit',
+            ),
         ),
     ),
     'last_state' => array(

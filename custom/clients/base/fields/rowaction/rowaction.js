@@ -30,8 +30,24 @@
         this._super('initialize', [options]);
     },
 
+    /*
+     * We disabled the edit button in case the row is the parent bandle...
+     * We can even hide the button through the function
+     * _render: function () {
+     *       if (model.get('is_bundle_product_c') == 'parent') {
+     *           this.hide();
+     *       } else {
+     *           this._super('_render');
+     *       }
+     *   }, 
+     */
     _render: function () {
         this._super('_render');
-        this.disableEditListControl(this, this.model);
+
+        if (this.model.get('is_bundle_product_c') == 'parent') {
+            this.disableListControl(this, {
+                'name': 'edit_button',
+            }, this.model);
+        }
     },
 })

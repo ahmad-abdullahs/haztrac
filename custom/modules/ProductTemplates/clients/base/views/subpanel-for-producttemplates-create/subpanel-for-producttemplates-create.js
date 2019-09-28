@@ -25,7 +25,58 @@
 
         // undo flex-list's hardcoding and re-hardcode to use the subpanel-list-create.hbs
         this.template = app.template.getView(this.name, 'ProductTemplates');
+        var _self = this;
+
+        // This is called only for the convert-create view drawer, which is checked on the basis of options.context.parent.get('parentModelId')
+        // Once the view is initialized, fetch the related RLIs to populate in the subpanel-for-producttemplates-create
+        if (options.context.parent.get('parentModelId')) {
+            var rliModel = app.data.createBean('RevenueLineItems', {id: options.context.parent.get('parentModelId')});
+            var rliRelatedRLIColl = app.data.createRelatedCollection(rliModel, 'revenuelineitems_revenuelineitems_1');
+            rliRelatedRLIColl = rliRelatedRLIColl.fetch({
+                relate: true,
+                limit: -1,
+                // Fetched in descending order because when the items are added in the subpanel-for-producttemplates-create
+                // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
+                params: {
+                    order_by: "line_number:desc"
+                },
+                success: function (coll) {
+                    _.each(coll.models, function (model) {
+                        _self._massageDataBeforeSendingToRecord(model.attributes);
+
+                        var viewDetails = _self.closestComponent('convert-create');
+                        if (!_.isUndefined(viewDetails)) {
+                            app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
+                        }
+                    })
+                },
+            });
+        }
     },
+
+    _massageDataBeforeSendingToRecord: function (data) {
+        data.position = 0;
+        data._forcePosition = true;
+
+        // remove ID/etc since we dont want Template ID to be the record id
+        delete data.id;
+        delete data.status;
+        delete data.date_entered;
+        delete data.date_modified;
+        delete data.pricing_formula;
+    },
+
+    bindDataChange: function () {
+        this._super('bindDataChange');
+
+        if (this.context.parent.get('parentModelId')) {
+            var viewDetails = this.closestComponent('convert-create');
+            if (!_.isUndefined(viewDetails)) {
+                app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add', this.onAddFromProductCatalog, this);
+            }
+        }
+    },
+
     /**
      * Click handler for the Add (+) button.
      * Validates each model on the collection and if they all validate, calls
@@ -193,6 +244,12 @@
 
     _onGroupDragTriggerOut: function (evt, ui) {
         // console.log('_onGroupDragTriggerOut : ', this, evt, ui);
+    },
+
+    resetSubpanel: function () {
+        this.collection.reset();
+        // Code added to avoid the first autopopulated line in the subpanel-for-producttemplates-create 
+        this._addBeanToList(false);
     },
 
     /**
