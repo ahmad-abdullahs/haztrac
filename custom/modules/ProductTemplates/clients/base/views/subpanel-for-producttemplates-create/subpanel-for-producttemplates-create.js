@@ -19,12 +19,18 @@
 // @see screenshots 4.png
 ({
     extendsFrom: 'SubpanelListCreateView',
+    _isEdit: null,
 
     initialize: function (options) {
+        this._isEdit = null;
         this._super('initialize', [options]);
 
         // undo flex-list's hardcoding and re-hardcode to use the subpanel-list-create.hbs
         this.template = app.template.getView(this.name, 'ProductTemplates');
+
+        this.context.parent.on('edit:full:subpanel-for-producttemplates-create:cstm', this._toggleFields, this);
+        this.context.parent.on('cancel:full:subpanel-for-producttemplates-create:cstm', this._toggleFields, this);
+
         var _self = this;
 
         // This is called only for the convert-create view drawer, which is checked on the basis of options.context.parent.get('parentModelId')
@@ -83,6 +89,7 @@
      * Validates each model on the collection and if they all validate, calls
      */
     onAddRow: function () {
+        this._isEdit = 'edit';
         this._super('onAddRow');
         app.events.trigger('setButtonStates');
     },
@@ -93,11 +100,13 @@
      * @param model
      */
     onDeleteRow: function (model) {
+        this._isEdit = 'edit';
         this._super('onDeleteRow', [model]);
         app.events.trigger('setButtonStates');
     },
 
     onAddFromProductCatalog: function (data) {
+        this._isEdit = 'edit';
         this._super('onAddFromProductCatalog', [data]);
         app.events.trigger('setButtonStates');
     },
@@ -161,6 +170,42 @@
         bean.set('is_bundle_product_c', 'child');
 
         return bean;
+    },
+
+    _toggleFields: function (isEdit) {
+        if (this._isEdit == 'edit') {
+            isEdit = 'edit';
+        }
+        var _isEdit = isEdit;
+        // If its the custom trigger fired with edit directive, so each field needs to be editable.
+        isEdit = isEdit == 'edit' ? true : isEdit == 'cancel' ? false : isEdit;
+        isEdit = isEdit || false;
+
+        // toggle the fields in the list to be in edit mode
+        _.each(this.collection.models, function (model) {
+            // We are stopping all fields in the panel to be in editable form, only let the 
+            // subpanel-for-producttemplates-create [+] [-] buttons to be in 
+            // editable form (when the record view is in detail view)
+            // If record view is in edit view, make each field of 
+            // subpanel-for-producttemplates-create in edit mode.
+            var fieldsList = this.rowFields[model.get('id')];
+            if (_isEdit != 'edit') {
+                fieldsList = _.filter(this.rowFields[model.get('id')], function (field) {
+                    if (field.def.type == 'fieldset') {
+                        return true;
+                    }
+                    return false;
+                });
+            }
+
+            this.toggleFields(fieldsList, isEdit);
+            if (isEdit) {
+                // this is a subpanel specific logic: when the subpanel is back to edit mode,
+                // manually fire the dependency trigger on all its models
+                this.context.trigger("list:editrow:fire", model, {def: {}});
+            }
+        }, this);
+        this._isEdit = null;
     },
 
     _render: function () {

@@ -66,9 +66,19 @@
         }, this), this);
     },
 
+    toggleEdit: function (isEdit) {
+        this._super('toggleEdit', [isEdit]);
+        // On the ProductTemplates record view, when the edit button is clicked
+        // make all the rows in subpanel-for-producttemplates-create editable.
+        if (isEdit) {
+            this.context.trigger('edit:full:subpanel-for-producttemplates-create:cstm', 'edit');
+        }
+    },
+
     cancelClicked: function () {
         this._super('cancelClicked');
         this.fetchProductBundle();
+//        this.context.trigger('cancel:full:subpanel-for-producttemplates-create:cstm', 'cancel');
     },
 
     fetchProductBundle: function () {
