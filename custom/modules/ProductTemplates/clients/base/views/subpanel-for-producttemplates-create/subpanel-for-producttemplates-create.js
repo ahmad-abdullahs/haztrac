@@ -172,6 +172,16 @@
         return bean;
     },
 
+    bindDataChange: function () {
+        this._super("bindDataChange");
+        var self = this;
+        if (this.collection) {
+            this.collection.on('reset', function () {
+                this.render();
+            }, this);
+        }
+    },
+
     _toggleFields: function (isEdit) {
         if (this._isEdit == 'edit') {
             isEdit = 'edit';
@@ -199,7 +209,7 @@
             }
 
             this.toggleFields(fieldsList, isEdit);
-            if (isEdit) {
+            if (_isEdit == 'edit') {
                 // this is a subpanel specific logic: when the subpanel is back to edit mode,
                 // manually fire the dependency trigger on all its models
                 this.context.trigger("list:editrow:fire", model, {def: {}});
