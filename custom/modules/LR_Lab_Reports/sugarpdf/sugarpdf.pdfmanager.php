@@ -288,7 +288,7 @@ class LR_Lab_ReportsSugarpdfPdfmanager extends SugarpdfPdfmanager {
                         $multienums_value[] = $multienum;
                     }
                 }
-                $fields_module[$name] = '[' . implode(']   [', $multienums_value) . ']';
+                $fields_module[$name] = '<li>' . implode('</li><li>', $multienums_value) . '</li>';
                 $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
             } elseif ($recursive &&
                     isset($module_instance->field_defs[$name]['type']) &&
