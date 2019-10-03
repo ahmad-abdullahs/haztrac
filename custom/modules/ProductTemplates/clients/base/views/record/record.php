@@ -351,8 +351,8 @@ array (
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
-            'name' => 'LBL_RECORDVIEW_PANEL1',
-            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'name' => 'LBL_RECORDVIEW_PANEL5',
+            'label' => 'LBL_RECORDVIEW_PANEL5',
             'columns' => 2,
             'labelsOnTop' => 1,
             'placeholders' => 1,
@@ -368,47 +368,60 @@ array (
                 'name' => 'state_regulated_c',
                 'label' => 'LBL_STATE_REGULATED',
               ),
-              2 => 
+            ),
+          ),
+          4 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
               array (
                 'name' => 'proper_shipping_name_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROPER_SHIPPING_NAME',
                 'span' => 12,
               ),
-              3 => 
+              1 => 
               array (
                 'name' => 'waste_state_codes_c',
                 'label' => 'LBL_WASTE_STATE_CODES',
                 'type' => 'enum-same-key-and-value',
               ),
-              4 => 
+              2 => 
               array (
                 'name' => 'epa_waste_codes_c',
                 'label' => 'LBL_EPA_WASTE_CODES',
               ),
-              5 => 
+              3 => 
               array (
                 'name' => 'erg_no_c',
                 'label' => 'LBL_ERG_NO',
               ),
-              6 => 
+              4 => 
               array (
                 'name' => 'manifest_hazmat_handle_code_c',
                 'label' => 'LBL_MANIFEST_HAZMAT_HANDLE_CODE',
               ),
-              7 => 
+              5 => 
               array (
                 'name' => 'manifest_container_type_c',
                 'label' => 'LBL_MANIFEST_CONTAINER_TYPE',
               ),
-              8 => 
+              6 => 
               array (
                 'name' => 'manifest_uom_c',
                 'label' => 'LBL_MANIFEST_UOM',
               ),
             ),
           ),
-          4 => 
+          5 => 
           array (
             'newTab' => true,
             'panelDefault' => 'collapsed',
@@ -439,7 +452,7 @@ array (
               ),
             ),
           ),
-          5 => 
+          6 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
