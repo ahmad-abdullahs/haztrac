@@ -1,5 +1,5 @@
 <?php
- // created: 2019-07-31 21:12:13
+ // created: 2019-10-02 14:16:50
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -33,4 +33,5 @@ $app_list_strings['lab_analysis_list']=array (
   'Total Acid Number' => 'Total Acid Number (TAN), Mg_KOH/gm',
   'Water by Distillation' => 'Water by Distillation, Vol%',
   'Water by Karl Fisher' => 'Water by Karl Fisher, Vol%',
+  'Visc 50' => 'Viscosity CST @ 50C',
 );

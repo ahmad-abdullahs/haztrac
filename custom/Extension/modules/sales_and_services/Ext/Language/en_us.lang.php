@@ -68,3 +68,5 @@ $mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Details';
 $mod_strings['LBL_AC_USEPA_ID_C'] = 'EPA ID No. ';
 $mod_strings['LBL_ACCOUNT_NUMBER'] = 'Account Number';
 $mod_strings['LBL_ACCOUNT_STATUS'] = 'Account Status';
+$mod_strings['LBL_RECURRING_SALE'] = 'Recurring Sale';
+$mod_strings['LBL_RECURRING_DAYS'] = 'Recurring Days';
