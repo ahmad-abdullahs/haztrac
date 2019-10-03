@@ -16,9 +16,25 @@ $viewdefs['sales_and_services']['base']['layout']['create-preview'] = array(
                 'module' => 'RevenueLineItems',
             ),
         ),
+//        array(
+//            'view' => array(
+//                'type' => 'account-point-of-attention',
+//            ),
+//            'context' => array(
+//                'module' => 'sales_and_services',
+//            ),
+//        ),
+//        array(
+//            'view' => array(
+//                'type' => 'financial-point-of-attention',
+//            ),
+//            'context' => array(
+//                'module' => 'sales_and_services',
+//            ),
+//        ),
         array(
             'view' => array(
-                'type' => 'account-point-of-attention',
+                'type' => 'account-point-of-attention-lv',
             ),
             'context' => array(
                 'module' => 'sales_and_services',
@@ -26,7 +42,7 @@ $viewdefs['sales_and_services']['base']['layout']['create-preview'] = array(
         ),
         array(
             'view' => array(
-                'type' => 'financial-point-of-attention',
+                'type' => 'financial-point-of-attention-lv',
             ),
             'context' => array(
                 'module' => 'sales_and_services',

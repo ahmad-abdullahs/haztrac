@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_STATUS'] = 'Status';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Address Panel';
@@ -70,3 +71,5 @@ $mod_strings['LBL_ACCOUNT_NUMBER'] = 'Account Number';
 $mod_strings['LBL_ACCOUNT_STATUS'] = 'Account Status';
 $mod_strings['LBL_RECURRING_SALE'] = 'Recurring Sale';
 $mod_strings['LBL_RECURRING_DAYS'] = 'Recurring Days';
+$mod_strings['LBL_ACCOUNT_DETAILS'] = 'Account Details';
+$mod_strings['LBL_FINANCIAL_DETAILS'] = 'Financial Details';
