@@ -190,7 +190,7 @@
                     } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
                         // Set the sales and service name as primary selected RLI
                         parentModel.set('name', _model.get('name'));
-                        if (this.context.parent.get('model') == 'sales_and_services') {
+                        if (this.context.parent.get('module') == 'sales_and_services') {
                             this.setTSDFFacility(_model, parentModel);
                         }
                     }
@@ -202,7 +202,7 @@
         bean.on('change:name', function (model) {
             if (model.get('primary_rli')) {
                 parentModel.set('name', model.get('name'));
-                if (this.context.parent.get('model') == 'sales_and_services') {
+                if (this.context.parent.get('module') == 'sales_and_services') {
                     this.setTSDFFacility(model, parentModel);
                 }
             }
