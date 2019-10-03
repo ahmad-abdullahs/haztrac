@@ -9,6 +9,10 @@ class LR_Lab_ReportsSugarpdfPdfmanager extends SugarpdfPdfmanager {
 
         SugarpdfSmarty::preDisplay();
 
+        //set margins
+        // $this->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $this->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
+
         /**/
         // settings for disable smarty php tags
         $this->ss->security_settings['PHP_TAGS'] = false;
@@ -140,8 +144,7 @@ class LR_Lab_ReportsSugarpdfPdfmanager extends SugarpdfPdfmanager {
         $this->ss->assign('fields', $fields);
         /**/
 
-
-
+        $this->ss->assign('PDF_MARGIN_TOP', 0);
 
         if (!empty($_REQUEST['pdf_template_id']) && $_REQUEST['pdf_template_id'] == $sugar_config['coc_pdf_template']) {
             $filenameParts = array('COC');
@@ -353,4 +356,3 @@ class LR_Lab_ReportsSugarpdfPdfmanager extends SugarpdfPdfmanager {
     }
 
 }
-
