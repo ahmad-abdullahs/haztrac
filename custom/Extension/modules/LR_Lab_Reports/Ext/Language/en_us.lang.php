@@ -203,6 +203,7 @@ $mod_strings['LBL_V_VENDORS_LR_LAB_REPORTS_1_FROM_LR_LAB_REPORTS_TITLE'] = 'Labo
 $mod_strings['LBL_V_VENDORS_LR_LAB_REPORTS_1_FROM_V_VENDORS_TITLE'] = 'Laboratory';
 $mod_strings['LBL_SENT_VIA'] = 'Sent Via';
 $mod_strings['LBL_ACCOUNTS_LR_LAB_REPORTS_2_FROM_ACCOUNTS_TITLE'] = 'Bill To Party';
+$mod_strings['LBL_ACCOUNTS_LR_LAB_REPORTS_3_FROM_ACCOUNTS_TITLE'] = 'Laboratory / Vendor';
 $mod_strings['LBL_ACCOUNTS_LR_LAB_REPORTS_1_FROM_ACCOUNTS_TITLE'] = 'Requesting Party';
 $mod_strings['LBL_ROLE_CONTACT'] = 'Role';
 $mod_strings['LBL_INSTRUCTIONS'] = 'Lab Instructions';

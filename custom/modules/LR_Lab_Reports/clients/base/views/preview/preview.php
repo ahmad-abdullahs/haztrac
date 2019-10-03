@@ -219,7 +219,8 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'v_vendors_lr_lab_reports_1_name',
+                                'name' => 'accounts_lr_lab_reports_3_name',
+//                                'name' => 'v_vendors_lr_lab_reports_1_name',
                                 'tabindex' => '8',
                             ),
                             5 =>

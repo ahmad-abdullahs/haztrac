@@ -219,9 +219,9 @@ array (
               ),
               4 => 
               array (
-                'name' => 'laboratory_vendor_c',
+                'name' => 'accounts_lr_lab_reports_3_name',
                 'studio' => 'visible',
-                'label' => 'LBL_LABORATORY_VENDOR',
+                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_3_FROM_ACCOUNTS_TITLE',
               ),
               5 => 
               array (
