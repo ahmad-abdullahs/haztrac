@@ -28,3 +28,6 @@ $mod_strings['LBL_PRODUCT_UOM'] = 'Unit Of Measure';
 $mod_strings['LBL_MANIFEST_CONTAINER_TYPE'] = 'Manifest Container Type';
 $mod_strings['LBL_MANIFEST_UOM'] = 'Manifest UOM';
 $mod_strings['LBL_MANIFEST_HAZMAT_HANDLE_CODE'] = 'Manifest Hazmat Handle Code';
+$mod_strings['LBL_MANIFEST_REQUIRED'] = 'Manifest Required';
+$mod_strings['LBL_WASTE_PROFILE'] = 'Waste Profile';
+$mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Required';

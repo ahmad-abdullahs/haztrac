@@ -242,7 +242,7 @@ $viewdefs['RevenueLineItems'] = array(
                                 'label' => 'LBL_PRODUCT_VENDOR',
                                 'related_fields' =>
                                 array(
-                                    "v_vendors_id_c",
+                                    0 => 'v_vendors_id_c',
                                 ),
                             ),
                             7 => 'vendor_part_num',
@@ -386,9 +386,9 @@ $viewdefs['RevenueLineItems'] = array(
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
-                        'name' => 'LBL_RECORDVIEW_PANEL1',
-                        'label' => 'LBL_RECORDVIEW_PANEL1',
-                        'columns' => 2,
+                        'name' => 'LBL_RECORDVIEW_PANEL5',
+                        'label' => 'LBL_RECORDVIEW_PANEL5',
+                        'columns' => 4,
                         'labelsOnTop' => 1,
                         'placeholders' => 1,
                         'fields' =>
@@ -405,10 +405,45 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             2 =>
                             array(
+                                'name' => 'manifest_required_c',
+                                'label' => 'LBL_MANIFEST_REQUIRED',
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'waste_profile_c',
+                                'label' => 'LBL_WASTE_PROFILE',
+                            ),
+                        ),
+                    ),
+                    4 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL1',
+                        'label' => 'LBL_RECORDVIEW_PANEL1',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
                                 'name' => 'proper_shipping_name_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PROPER_SHIPPING_NAME',
                                 'span' => 12,
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'waste_state_codes_c',
+                                'label' => 'LBL_WASTE_STATE_CODES',
+                                'type' => 'enum-same-key-and-value',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'epa_waste_codes_c',
+                                'label' => 'LBL_EPA_WASTE_CODES',
+                                'type' => 'enum-same-key-and-value',
                             ),
                             3 =>
                             array(
@@ -417,21 +452,25 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             4 =>
                             array(
+                                'name' => 'manifest_hazmat_handle_code_c',
+                                'label' => 'LBL_MANIFEST_HAZMAT_HANDLE_CODE',
+                                'type' => 'enum-same-key-and-value',
                             ),
                             5 =>
                             array(
-                                'name' => 'waste_state_codes_c',
-                                'label' => 'LBL_WASTE_STATE_CODES',
+                                'name' => 'manifest_container_type_c',
+                                'label' => 'LBL_MANIFEST_CONTAINER_TYPE',
                                 'type' => 'enum-same-key-and-value',
                             ),
                             6 =>
                             array(
-                                'name' => 'epa_waste_codes_c',
-                                'label' => 'LBL_EPA_WASTE_CODES',
+                                'name' => 'manifest_uom_c',
+                                'label' => 'LBL_MANIFEST_UOM',
+                                'type' => 'enum-same-key-and-value',
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'name' => 'LBL_RECORDVIEW_PANEL2',
                         'label' => 'LBL_RECORDVIEW_PANEL2',
@@ -667,7 +706,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_RECORD_SHOWMORE',

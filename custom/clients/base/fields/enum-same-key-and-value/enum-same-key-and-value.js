@@ -62,7 +62,7 @@
 
         // make key and value same.
         if (this.action === 'detail' && this.tplName === 'detail' && !_.isEmpty(this.items)) {
-            var newItemList = this.items;
+            var newItemList = _.clone(this.items);
             _.each(this.items, function (_val, _key) {
                 newItemList[_key] = _key;
             });

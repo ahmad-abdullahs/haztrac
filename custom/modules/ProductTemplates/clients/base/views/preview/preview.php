@@ -272,6 +272,7 @@ $viewdefs['ProductTemplates']['base']['view']['preview'] = array(
                 array(
                     'name' => 'epa_waste_codes_c',
                     'label' => 'LBL_EPA_WASTE_CODES',
+                    'type' => 'enum-same-key-and-value',
                 ),
             ),
         ),
