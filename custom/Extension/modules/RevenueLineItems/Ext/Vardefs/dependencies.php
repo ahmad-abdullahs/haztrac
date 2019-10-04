@@ -24,3 +24,8 @@ $dictionary['RevenueLineItem']['fields']['proper_shipping_name_c']['dependency']
 $dictionary['RevenueLineItem']['fields']['erg_no_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['waste_state_codes_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['epa_waste_codes_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['manifest_hazmat_handle_code_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['manifest_container_type_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['manifest_uom_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['manifest_required_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['waste_profile_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
