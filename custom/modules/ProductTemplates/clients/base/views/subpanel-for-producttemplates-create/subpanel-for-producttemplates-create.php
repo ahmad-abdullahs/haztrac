@@ -113,6 +113,7 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                         "worst_case",
                         "status",
                         "pricing_formula",
+                        "mft_part_num",
                     ),
                 ),
                 array(

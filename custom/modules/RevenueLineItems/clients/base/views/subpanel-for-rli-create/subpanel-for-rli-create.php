@@ -25,7 +25,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
             'fields' => array(
                 array(
                     'name' => 'primary_rli',
-                    'label' => '',
+                    'label' => 'Primary',
                     'enabled' => true,
                     'sortable' => false,
                     'default' => true,
@@ -97,11 +97,11 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
                     'enabled' => true,
                     'default' => true,
                 ),
-                array(
-                    'name' => 'quantity',
-                    'enabled' => true,
-                    'default' => true,
-                ),
+//                array(
+//                    'name' => 'quantity',
+//                    'enabled' => true,
+//                    'default' => true,
+//                ),
                 array(
                     'name' => 'product_uom_c',
                     'label' => 'LBL_PRODUCT_UOM',

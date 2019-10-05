@@ -93,6 +93,7 @@ $viewdefs['ProductTemplates'] = array(
                                     68 => 'best_case',
                                     69 => 'worst_case',
                                     70 => 'line_number',
+                                    71 => 'mft_part_num',
                                 ),
                             ),
                             1 =>

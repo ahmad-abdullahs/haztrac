@@ -168,6 +168,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     1 => 'currency_id',
                                     2 => 'base_rate',
                                     3 => 'rli_as_template_c',
+                                    4 => 'mft_part_num',
                                 ),
                             ),
                             2 =>

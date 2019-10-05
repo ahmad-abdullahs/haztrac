@@ -49,6 +49,11 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         'ht_manifest_revenuelineitems_1_name',
                         'ht_manifest_revenuelineitems_1',
                         'ht_manifest_revenuelineitems_1ht_manifest_ida',
+                        'product_vendor_c',
+                        'v_vendors_id_c',
+                        'shipping_hazardous_materia_c',
+                        'state_regulated_c',
+                        'mft_part_num',
                     ),
                 ),
                 array(

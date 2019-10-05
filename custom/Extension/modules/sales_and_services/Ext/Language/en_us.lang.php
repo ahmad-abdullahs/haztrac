@@ -73,3 +73,4 @@ $mod_strings['LBL_RECURRING_SALE'] = 'Recurring Sale';
 $mod_strings['LBL_RECURRING_DAYS'] = 'Recurring Days';
 $mod_strings['LBL_ACCOUNT_DETAILS'] = 'Account Details';
 $mod_strings['LBL_FINANCIAL_DETAILS'] = 'Financial Details';
+$mod_strings['LBL_MFT_PART_NUM'] = 'Product Category Number';

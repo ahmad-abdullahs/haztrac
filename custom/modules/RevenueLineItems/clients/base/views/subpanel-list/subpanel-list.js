@@ -17,7 +17,12 @@
  */
 ({
     extendsFrom: 'SubpanelListView',
-
+    contextEvents: {
+        "list:editall:fire": "toggleEdit",
+        "list:editrow:fire": "editClicked",
+        "list:unlinkrow:fire": "warnUnlink",
+        "list:deleterow:fire": "warnDelete"
+    },
     /**
      * @override
      * @param {Object} options
@@ -102,18 +107,18 @@
                 }
 
                 // wrap in container div for scrolling
-                if (!this.$el.parent().hasClass('flex-list-view-content')) {
-                    cssClasses = 'flex-list-view-content';
-                    if (this.isCreateView) {
-                        cssClasses += ' create-view';
-                    }
-                    this.$el.wrap(
-                            '<div class="' + cssClasses + '"></div>'
-                            );
-                    this.$el.parent().wrap(
-                            '<div class="flex-list-view left-actions quote-data-table-scrollable"></div>'
-                            );
-                }
+//                if (!this.$el.parent().hasClass('flex-list-view-content')) {
+//                    cssClasses = 'flex-list-view-content';
+//                    if (this.isCreateView) {
+//                        cssClasses += ' create-view';
+//                    }
+//                    this.$el.wrap(
+//                            '<div class="' + cssClasses + '"></div>'
+//                            );
+//                    this.$el.parent().wrap(
+//                            '<div class="flex-list-view left-actions quote-data-table-scrollable"></div>'
+//                            );
+//                }
             }
         }
     },

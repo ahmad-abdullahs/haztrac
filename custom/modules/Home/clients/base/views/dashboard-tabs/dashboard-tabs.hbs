@@ -26,27 +26,31 @@
                 {{#eq type 'divider'}}
                     <li class="divider"></li>
                 {{else}}
-                    <li class="tab"><a class="ellipsis_inline" tabindex="-1"
-                           data-navbar-menu-item="{{label}}"
-                        {{#if event}}
-                           href="javascript:void(0);"
-                           data-event="{{event}}"
-                           track="click:{{event}}"
-                        {{else}}
-                           href="{{route}}"
-                           data-route="{{route}}"
-                           {{#if openwindow}}
-                           data-openwindow="true"
-                           {{/if}}
-                           track="click:{{route}}"
-                        {{/if}} style="border: 1px solid rgba(0,0,0,0.1);">{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}
-                        {{#if label_module}}
-                            {{str label label_module}}
-                        {{else}}
-                            {{str label ../../../module}}
-                        {{/if}}
-                        </a>
-                    </li>
+                    {{#eq type 'display_none'}}
+                        {{!-- Display Nothing --}}
+                    {{else}}
+                        <li class="tab"><a class="ellipsis_inline" tabindex="-1"
+                               data-navbar-menu-item="{{label}}"
+                            {{#if event}}
+                               href="javascript:void(0);"
+                               data-event="{{event}}"
+                               track="click:{{event}}"
+                            {{else}}
+                               href="{{route}}"
+                               data-route="{{route}}"
+                               {{#if openwindow}}
+                               data-openwindow="true"
+                               {{/if}}
+                               track="click:{{route}}"
+                            {{/if}} style="border: 1px solid rgba(0,0,0,0.1);">{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}
+                            {{#if label_module}}
+                                {{str label label_module}}
+                            {{else}}
+                                {{str label ../../../../module}}
+                            {{/if}}
+                            </a>
+                        </li>
+                    {{/eq}} 
                 {{/eq}}
             {{/each}}
             <li class="divider" data-container="dashboards"></li>

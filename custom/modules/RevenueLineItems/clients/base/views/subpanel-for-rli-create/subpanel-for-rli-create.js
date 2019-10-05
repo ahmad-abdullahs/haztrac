@@ -67,18 +67,18 @@
         }
 
         //wrap in container div for scrolling
-        if (!this.$el.parent().hasClass('flex-list-view-content')) {
-            cssClasses = 'flex-list-view-content';
-            if (this.isCreateView) {
-                cssClasses += ' create-view';
-            }
-            this.$el.wrap(
-                    '<div class="' + cssClasses + '"></div>'
-                    );
-            this.$el.parent().wrap(
-                    '<div class="flex-list-view left-actions quote-data-table-scrollable"></div>'
-                    );
-        }
+//        if (!this.$el.parent().hasClass('flex-list-view-content')) {
+//            cssClasses = 'flex-list-view-content';
+//            if (this.isCreateView) {
+//                cssClasses += ' create-view';
+//            }
+//            this.$el.wrap(
+//                    '<div class="' + cssClasses + '"></div>'
+//                    );
+//            this.$el.parent().wrap(
+//                    '<div class="flex-list-view left-actions quote-data-table-scrollable"></div>'
+//                    );
+//        }
     },
 
     _onDragStart: function (evt, ui) {
@@ -166,6 +166,12 @@
             bean.set(attrs);
         }
 
+//        if (bean) {
+//            if (bean.get('quantity') == 0) {
+//                bean.set('quantity', '');
+//            }
+//        }
+
         bean.on('change:discount_price', function (model) {
             model.set({
                 'discount_usdollar': model.get('discount_price'),
@@ -190,6 +196,7 @@
                     } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
                         // Set the sales and service name as primary selected RLI
                         parentModel.set('name', _model.get('name'));
+                        parentModel.set('mft_part_num', _model.get('mft_part_num'));
                         if (this.context.parent.get('module') == 'sales_and_services') {
                             this.setTSDFFacility(_model, parentModel);
                         }
@@ -202,6 +209,7 @@
         bean.on('change:name', function (model) {
             if (model.get('primary_rli')) {
                 parentModel.set('name', model.get('name'));
+                parentModel.set('mft_part_num', model.get('mft_part_num'));
                 if (this.context.parent.get('module') == 'sales_and_services') {
                     this.setTSDFFacility(model, parentModel);
                 }

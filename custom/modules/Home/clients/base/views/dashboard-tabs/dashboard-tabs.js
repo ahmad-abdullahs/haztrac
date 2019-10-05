@@ -130,6 +130,29 @@
     },
 
     /**
+     * Filters menu actions by ACLs for the current user.
+     *
+     * @param {Array} meta The menu metadata to check access.
+     * @return {Array} Returns only the list of actions the user has access.
+     */
+    // Code is overriden to stop rendering the ActivityStream, Manage Dashboard and Create Dashoards from the Dashboard-Tabs.
+    filterByAccess: function (meta) {
+        var result = [];
+
+        _.each(meta, function (menuItem) {
+            if (app.acl.hasAccess(menuItem.acl_action, menuItem.acl_module)) {
+                // in case of divider menuItem.type is already set to divider.
+                if (!_.has(menuItem, 'type')) {
+                    menuItem.type = 'display_none';
+                }
+                result.push(menuItem);
+            }
+        });
+
+        return result;
+    },
+
+    /**
      * @override
      *
      * Populates all available dashboards when opening the menu. We override

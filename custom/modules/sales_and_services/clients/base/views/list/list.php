@@ -44,13 +44,20 @@ array (
               ),
               2 => 
               array (
+                'name' => 'mft_part_num',
+                'label' => 'LBL_MFT_PART_NUM',
+                'enabled' => true,
+                'default' => true,
+              ),
+              3 => 
+              array (
                 'name' => 'status_c',
                 'label' => 'LBL_STATUS',
                 'enabled' => true,
                 'default' => true,
                 'width' => 'xsmall',
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'accounts_sales_and_services_1_name',
                 'label' => 'LBL_ACCOUNTS_SALES_AND_SERVICES_1_FROM_ACCOUNTS_TITLE',
@@ -61,7 +68,7 @@ array (
                 'default' => true,
                 'width' => 'medium',
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'on_date_c',
                 'label' => 'LBL_ON_DATE',
@@ -69,7 +76,7 @@ array (
                 'default' => true,
                 'width' => 'xsmall',
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'on_time_c',
                 'label' => 'LBL_ON_TIME',
@@ -77,7 +84,7 @@ array (
                 'default' => true,
                 'width' => 'xsmall',
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'svc_days_c',
                 'label' => 'LBL_SVC_DAYS',
@@ -85,7 +92,7 @@ array (
                 'default' => true,
                 'width' => 'xxsmall',
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'rli_total_c',
                 'label' => 'LBL_RLI_TOTAL',
@@ -93,7 +100,7 @@ array (
                 'default' => true,
                 'width' => 'xxsmall',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'payment_status_c',
                 'label' => 'LBL_PAYMENT_STATUS',
@@ -101,7 +108,7 @@ array (
                 'default' => true,
                 'width' => 'xsmall',
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'contracts_sales_and_services_1_name',
                 'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
@@ -111,19 +118,19 @@ array (
                 'sortable' => false,
                 'default' => false,
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'date_entered',
                 'enabled' => true,
                 'default' => false,
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => false,
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'quotes_sales_and_services_1_name',
                 'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
@@ -133,14 +140,14 @@ array (
                 'sortable' => false,
                 'default' => false,
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'po_number_c',
                 'label' => 'LBL_PO_NUMBER',
                 'enabled' => true,
                 'default' => false,
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'contacts_sales_and_services_1_name',
                 'label' => 'LBL_CONTACTS_SALES_AND_SERVICES_1_FROM_CONTACTS_TITLE',
@@ -150,14 +157,14 @@ array (
                 'sortable' => false,
                 'default' => false,
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'svc_type_c',
                 'label' => 'LBL_SVC_TYPE',
                 'enabled' => true,
                 'default' => false,
               ),
-              16 => 
+              17 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',

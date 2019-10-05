@@ -67,6 +67,7 @@ $viewdefs['ProductTemplates']['base']['view']['preview'] = array(
                     'related_fields' =>
                     array(
                         0 => 'line_number',
+                        1 => 'mft_part_num',
                     ),
                 ),
                 1 =>

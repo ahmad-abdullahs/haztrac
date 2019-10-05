@@ -27,6 +27,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                         2 => 'is_bundle_product_c',
                         3 => 'sales_and_services_revenuelineitems_1_name',
                         4 => 'rli_as_template_c',
+                        5 => 'mft_part_num',
                     ),
                     'width' => 'medium',
                 ),

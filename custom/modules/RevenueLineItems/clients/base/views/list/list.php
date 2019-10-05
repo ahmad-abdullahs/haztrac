@@ -101,6 +101,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     "worst_case",
                                     "status",
                                     "pricing_formula",
+                                    "mft_part_num",
                                 ),
                             ),
                             1 =>
