@@ -172,13 +172,29 @@
         return bean;
     },
 
+//    bindDataChange: function () {
+//        this._super("bindDataChange");
+//        var self = this;
+//        if (this.collection) {
+//            this.collection.on('reset', function () {
+//                this.render();
+//            }, this);
+//        }
+//    },
+
+    /* Above bindDataChange is commneted, not sure why the above function was added in the commit
+     * https://github.com/ahmad-abdullahs/haztrac/commit/5af966c2e408c21853df300705451a103461aaea#diff-a030e9bc298892cd361fa612a6618af9
+     * Later, issue was reported to and code reverted for this function back to commit
+     * https://github.com/ahmad-abdullahs/haztrac/commit/e30845527807fe48b443a69faecb05ace606ebc7#diff-a030e9bc298892cd361fa612a6618af9
+     * */
     bindDataChange: function () {
-        this._super("bindDataChange");
-        var self = this;
-        if (this.collection) {
-            this.collection.on('reset', function () {
-                this.render();
-            }, this);
+        this._super('bindDataChange');
+
+        if (this.context.parent.get('parentModelId')) {
+            var viewDetails = this.closestComponent('convert-create');
+            if (!_.isUndefined(viewDetails)) {
+                app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add', this.onAddFromProductCatalog, this);
+            }
         }
     },
 
