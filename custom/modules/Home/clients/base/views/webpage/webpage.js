@@ -23,7 +23,7 @@
         // Remove the class which restrict the height of dashlet.
         if (!_.isUndefined(this.meta) && this.meta.type == 'webpage') {
             var url = this.meta.url;
-            if (url.includes('vivifyscrum')) {
+            if (url.includes('vivifyscrum') || url.includes('petroleum')) {
                 this.$el.parent().removeClass();
                 this.$el.children().find('iframe').height($(document).height() - 200);
             }

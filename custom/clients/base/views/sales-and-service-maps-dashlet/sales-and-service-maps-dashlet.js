@@ -11,7 +11,7 @@
     /**
      * @inheritdoc
      */
-    initDashlet: function(view) {
+    initDashlet: function (view) {
         this._super('initDashlet', [view]);
         this.settings.on('change:filter', _.bind(this.reApplyFilter, this), this);
     },
@@ -19,7 +19,7 @@
     /**
      * @Override
      */
-    reApplyFilter: function() {
+    reApplyFilter: function () {
         if (this.disposed || this.meta.config) {
             return;
         }
@@ -30,12 +30,12 @@
     /**
      * @Override
      */
-    _displayDashlet: function(filterDef) {
+    _displayDashlet: function (filterDef) {
         filterDef = [{
-            'on_date_c' : {
-                '$dateRange': this.settings.get('filter')
-            }
-        }];
+                'on_date_c': {
+                    '$dateRange': this.settings.get('filter')
+                }
+            }];
 
         this._super('_displayDashlet', [filterDef]);
     },
@@ -43,7 +43,7 @@
     /**
      * @Override
      */
-    updateDashletFilterAndSave: function(filterModel) {
+    updateDashletFilterAndSave: function (filterModel) {
         var componentType = this.dashModel.get('componentType') || 'view';
 
         // Adding a new dashlet requires componentType to be set on the model.
@@ -58,16 +58,16 @@
     /**
      * @Override
      */
-    _addFilterComponent: function() {},
+    _addFilterComponent: function () {},
 
     /**
      * @Override
      */
-    render: function() {
+    render: function () {
         this._super('render');
 
         // loading maps api if not loaded
-        if (typeof(google) == "undefined" && !this.mapsApiAdded) {
+        if (typeof (google) == "undefined" && !this.mapsApiAdded) {
             var script = document.createElement('script');
             script.src = "//maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o";
             script.onload = _.bind(this.loadMap, this);
@@ -84,8 +84,8 @@
     /**
      * loads the map and displays the markers
      */
-    loadMap: function() {
-        if (typeof(google) == "undefined") {
+    loadMap: function () {
+        if (typeof (google) == "undefined") {
             return;
         }
 
@@ -97,31 +97,56 @@
         map.setTilt(45);
 
         // set default center to NY, USA
-        map.setCenter({lat:40.7128, lng:-74.0060})
+        map.setCenter({lat: 40.7128, lng: -74.0060})
         map.setZoom(8);
 
         // if markers are available then show them
         if (this.collection.models.length > 0) {
             var bounds = new google.maps.LatLngBounds();
 
-            _.each(this.collection.models, function(model){
-                var address = model.get('shipping_address_street_c') + ', ' +
-                    model.get('shipping_address_city_c') + ', ' +
-                    model.get('shipping_address_state_c') + ', ' +
-                    model.get('shipping_address_postalcode_c') + ', ' +
-                    model.get('shipping_address_country_c');
+            _.each(this.collection.models, function (model) {
+                var address = [];
 
-                var position = new google.maps.LatLng(
-                    model.get('lat_c'),
-                    model.get('lon_c')
-                );
-                new google.maps.Marker({
+                _.each(['shipping_address_street_c',
+                    'shipping_address_city_c',
+                    'shipping_address_state_c',
+                    'shipping_address_postalcode_c',
+                    'shipping_address_country_c'], function (val, key) {
+                    address.push(model.get(val));
+                });
+
+                address = _.compact(address);
+                address = address.toString();
+
+                var name = !_.isEmpty(model.get('name')) ? model.get('name') + "\n" : '';
+                var accountName = !_.isEmpty(model.get('accounts_sales_and_services_1_name')) ? model.get('accounts_sales_and_services_1_name') + "\n" : '';
+                var title = name + accountName + address;
+
+                var position = new google.maps.LatLng(model.get('lat_c'), model.get('lon_c'));
+                var _marker = new google.maps.Marker({
                     map: map,
                     position: position,
-                    title: model.get('name') + "\n" + address
+                    title: title,
+                    recordID: model.get('id'),
+                    moduleName: model.get('_module'),
+                    recordModel: model,
+                    // url: 'www.google.com',
                 });
 
                 bounds.extend(position);
+
+                google.maps.event.addListener(_marker, 'click', function () {
+                    // window.open(this.url, '_blank');
+                    app.drawer.open({
+                        layout: 'record',
+                        context: {
+                            module: this.moduleName,
+                            model: this.recordModel,
+                            modelId: this.recordID,
+                            initiatedByMapView: true,
+                        }
+                    });
+                });
             }, this);
 
             map.fitBounds(bounds);
