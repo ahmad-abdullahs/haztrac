@@ -3,6 +3,9 @@
 if (isset($dependencies['RevenueLineItems'])) {
     $fields = array(
         'discount_price',
+        'weight',
+        'probability',
+        'category_name',
     );
     if (isset($dependencies['RevenueLineItems']['read_only_fields']['actions'])) {
         foreach ($fields as $field) {
