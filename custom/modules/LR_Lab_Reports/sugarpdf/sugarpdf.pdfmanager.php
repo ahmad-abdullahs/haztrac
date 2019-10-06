@@ -340,6 +340,19 @@ class LR_Lab_ReportsSugarpdfPdfmanager extends SugarpdfPdfmanager {
                     ($module_instance->field_defs[$name]['type'] == 'image')
             ) {
                 $fields_module[$name] = $GLOBALS['sugar_config']['upload_dir'] . "/" . $value;
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'datetimecombo')
+            ) {
+                // ++ Customcode added to handle the datetimecombo field to convert the time according to the user preferences.
+                global $current_user;
+                // Instantiate the TimeDate Class
+                $timeDate = new TimeDate();
+                // Sample date saved in database
+                $dbDate = $value;
+                // Call the function
+                $localDate = $timeDate->to_display_date_time($dbDate, true, true, $current_user);
+                $fields_module[$name] = $localDate;
             } elseif (is_string($value)) {
                 $value = nl2br(stripslashes($value));
 
