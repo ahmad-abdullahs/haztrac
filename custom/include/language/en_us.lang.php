@@ -1,7 +1,20 @@
 <?php
 
 $app_strings['LBL_COPY_RELATED_RECORD'] = 'Copy Existing Record';
+$app_strings['LBL_ADD_MULTIPLE_RLI_RECORD'] = 'Add Multiple Items';
 $app_strings['LBL_COPY_RLI_BUTTON'] = 'Copy';
+//
+$app_strings['LBL_PRINT_BUTTON_LABEL'] = 'Print';
+$app_strings['LBL_PRINT_PAPERWORK'] = 'Print Paperwork';
+$app_strings['LBL_CANCEL_PRINT_PAPERWORK'] = 'Cancel';
+$app_strings['LBL_SAVE_PRINT_PAPERWORK'] = 'Save';
+$app_strings['LBL_TASK_FOLLOWUP'] = 'Print Paperwork';
+$app_strings['LBL_PRINT_PAPERWORD_TODAY'] = 'Print Paperwork Today';
+$app_strings['LBL_PRINT_PAPERWORD_TOMORROW'] = 'Print Paperwork Tomorrow';
+$app_strings['LBL_PRINT_PAPERWORD_AFTER_PAYMENT'] = 'Print Paperwork After Payment Approval';
+$app_strings['LBL_PRINT_PAPERWORD_START_DATE'] = 'Print Paperwork Start Date';
+$app_strings['LBL_PRINT_PAPERWORD_END_DATE'] = 'Print Paperwork End Date';
+//
 $app_strings['LBL_CONVERT_BUTTON_TITLE'] = 'Add to Product Catalog';
 $app_strings['LBL_RECORD_DETAILS'] = 'Record Details';
 $app_strings['LBL_CLOSE_DRAWER_BUTTON_LABEL'] = 'Close';
