@@ -1,5 +1,5 @@
 <?php
- // created: 2019-10-02 14:16:49
+ // created: 2019-10-10 16:37:11
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -34,4 +34,5 @@ $app_list_strings['lab_analysis_list']=array (
   'Water by Distillation' => 'Water by Distillation, Vol%',
   'Water by Karl Fisher' => 'Water by Karl Fisher, Vol%',
   'Visc 50' => 'Viscosity CST @ 50C',
+  'Flash Point PMCC D93 400f' => 'Flash Point, PMCC, ',
 );

@@ -1,5 +1,5 @@
 <?php
-// created: 2019-07-25 14:50:52
+// created: 2019-10-05 11:24:30
 $searchFields['HT_Assets_and_Objects'] = array (
   'name' => 
   array (

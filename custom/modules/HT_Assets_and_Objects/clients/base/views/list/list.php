@@ -1,6 +1,5 @@
 <?php
-$module_name = 'HT_Assets_and_Objects';
-$viewdefs[$module_name] = 
+$viewdefs['HT_Assets_and_Objects'] = 
 array (
   'base' => 
   array (
@@ -22,6 +21,7 @@ array (
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
+                'width' => '32',
               ),
               1 => 
               array (
@@ -32,10 +32,9 @@ array (
               ),
               2 => 
               array (
-                'name' => 'asset_number',
-                'label' => 'LBL_ASSET_NUMBER',
+                'name' => 'asset_object_marking_no_c',
+                'label' => 'LBL_ASSET_OBJECT_MARKING_NO',
                 'enabled' => true,
-                'readonly' => true,
                 'default' => true,
               ),
               3 => 
@@ -68,30 +67,50 @@ array (
               ),
               7 => 
               array (
+                'name' => 'asset_location_c',
+                'label' => 'LBL_ASSET_LOCATION',
+                'enabled' => true,
+                'id' => 'ACCOUNT_ID_C',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              8 => 
+              array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
                 'default' => false,
                 'enabled' => true,
+                'width' => '9',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => false,
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'date_entered',
                 'enabled' => true,
                 'default' => false,
               ),
-              10 => 
+              11 => 
+              array (
+                'name' => 'asset_number',
+                'label' => 'LBL_ASSET_NUMBER',
+                'enabled' => true,
+                'readonly' => true,
+                'default' => false,
+              ),
+              12 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO_NAME',
                 'default' => false,
                 'enabled' => true,
                 'link' => true,
+                'width' => '9',
               ),
             ),
           ),

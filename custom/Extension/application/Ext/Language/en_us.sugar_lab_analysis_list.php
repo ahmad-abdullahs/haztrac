@@ -1,5 +1,5 @@
 <?php
- // created: 2019-10-02 14:16:50
+ // created: 2019-10-10 16:37:11
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -12,7 +12,8 @@ $app_list_strings['lab_analysis_list']=array (
   'Density' => 'Density',
   'Density lbgal' => 'Density, lb/gal',
   'Distillation of Petroleum D1160' => 'Distillation of Petroleum (D1160)',
-  'Flash Point PMCC F D93' => 'Flash Point, PMCC, °F (D93)',
+  'Flash Point PMCC D93 400f' => 'Flash Point, PMCC, ',
+  'Flash Point PMCC F D93' => 'Flash Point, PMCC, ',
   'Flash Point COC F D92' => 'Flash Point, COC, °F (D92)',
   'FAME Content Wt' => 'FAME Content, Wt%',
   'Hydrogen Sulfide PPM' => 'Hydrogen Sulfide, PPM',
