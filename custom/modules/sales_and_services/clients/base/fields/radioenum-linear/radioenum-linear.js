@@ -13,16 +13,16 @@
         // Show the radio buttons list in linear fashion...
         this.$el.css('display', 'flex');
     },
-//    bindDomChange: function() {
-//        if (this.tplName === 'list-edit') {
-//            this._super("bindDomChange");
-//        } else {
-//            if (!(this.model instanceof Backbone.Model)) return;
-//            var self = this;
-//            var el = this.$el.find(this.fieldTag);
-//            el.on("change", function() {
-//                self.model.set(self.name, self.unformat(self.$(self.fieldTag+":radio:checked").val()));
-//            });
-//        }
-//    },
+    bindDomChange: function () {
+        this._super("bindDomChange");
+        if (this.model.get(this.name) == 'Daily') {
+            // Hide all others
+            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=daily_repeat_on].record-cell').removeClass('vis_action_hidden');
+        } else if (this.model.get(this.name) == 'Weekly') {
+            // Hide all others
+            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=weekly_repeat_on].record-cell').removeClass('vis_action_hidden');
+        }
+    },
 })
