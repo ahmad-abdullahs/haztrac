@@ -17,12 +17,19 @@
         this._super("bindDomChange");
         if (this.model.get(this.name) == 'Daily') {
             // Hide all others
-            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
             $('div[data-name=daily_repeat_on].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on].record-cell').addClass('vis_action_hidden');
         } else if (this.model.get(this.name) == 'Weekly') {
             // Hide all others
-            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
             $('div[data-name=weekly_repeat_on].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on].record-cell').addClass('vis_action_hidden');
+        } else if (this.model.get(this.name) == 'Monthly') {
+            // Hide all others
+            $('div[data-name=monthly_repeat_on].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
         }
     },
 })

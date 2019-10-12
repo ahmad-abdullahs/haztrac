@@ -517,6 +517,52 @@ $viewdefs['sales_and_services'] = array(
                                     ),
                                 ),
                             ),
+                            array(
+                                'name' => 'monthly_repeat_on',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'monthly_repeats_on_c',
+                                        'label' => 'LBL_MONTHLY_REPEATS_ON',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span4 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'filler_field',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'vis_action_hidden',
+                                    ),
+                                    array(
+                                        'name' => 'filler_field',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'vis_action_hidden',
+                                    ),
+                                    array(
+                                        'name' => 'after_no_of_months_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     4 =>

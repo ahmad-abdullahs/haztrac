@@ -86,3 +86,5 @@ $mod_strings['LBL_BY_DAY_OF_THE_WEEK'] = 'By Day of the Week';
 $mod_strings['LBL_AFTER_NO_OF_DAYS'] = 'After no of days';
 $mod_strings['LBL_FILLER'] = ' ';
 $mod_strings['LBL_AFTER_NO_OF_WEEKS'] = 'After no of weeks';
+$mod_strings['LBL_MONTHLY_REPEATS_ON'] = 'Repeats on';
+$mod_strings['LBL_AFTER_NO_OF_MONTHS'] = 'After no of months';

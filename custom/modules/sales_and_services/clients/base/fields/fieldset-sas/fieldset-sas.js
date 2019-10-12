@@ -90,6 +90,20 @@
                     }
                 }
             }, this);
+        } else if (this.name == 'monthly_repeat_on') {
+            _.each(fields, function (field) {
+                if (this.model.get('monthly_repeats_on_c') == 'Every next no of month') {
+                    if (!(field.name == 'monthly_repeats_on_c' || field.name == 'after_no_of_months_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                } else {
+                    if (!(field.name == 'monthly_repeats_on_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                }
+            }, this);
         }
     },
 })
