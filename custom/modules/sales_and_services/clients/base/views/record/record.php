@@ -9,6 +9,7 @@ $viewdefs['sales_and_services'] = array(
             array(
                 'buttons' =>
                 array(
+                    0 =>
                     array(
                         'type' => 'button',
                         'name' => 'cancel_button',
@@ -20,6 +21,7 @@ $viewdefs['sales_and_services'] = array(
                             'click' => 'button:cancel_button:click',
                         ),
                     ),
+                    1 =>
                     array(
                         'type' => 'rowaction',
                         'event' => 'button:save_button:click',
@@ -29,6 +31,7 @@ $viewdefs['sales_and_services'] = array(
                         'showOn' => 'edit',
                         'acl_action' => 'edit',
                     ),
+                    2 =>
                     array(
                         'type' => 'button',
                         'name' => 'close_drawer_button',
@@ -40,6 +43,7 @@ $viewdefs['sales_and_services'] = array(
                             'click' => 'button:close_drawer_button:click',
                         ),
                     ),
+                    3 =>
                     array(
                         'type' => 'actiondropdown',
                         'name' => 'main_dropdown',
@@ -121,6 +125,7 @@ $viewdefs['sales_and_services'] = array(
                             ),
                         ),
                     ),
+                    4 =>
                     array(
                         'name' => 'sidebar_toggle',
                         'type' => 'sidebartoggle',
@@ -352,6 +357,172 @@ $viewdefs['sales_and_services'] = array(
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL6',
+                        'label' => 'LBL_RECORDVIEW_PANEL6',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => true,
+                        'fields' =>
+                        array(
+                            array(
+                                'name' => 'recurring_start_date_c',
+                                'label' => 'LBL_RECURRING_START_DATE',
+                                'span' => 6,
+                            ),
+                            array(
+                                'name' => 'timings',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 6,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'end_date_option_c',
+                                        'label' => 'LBL_END_DATE_OPTION',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                    ),
+                                    array(
+                                        'name' => 'recurring_end_date_c',
+                                        'label' => 'LBL_RECURRING_END_DATE',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'occurrences_c',
+                                        'label' => 'LBL_OCCURRENCES',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'occurs_c',
+                                'type' => 'radioenum-linear',
+                                'style' => 'width: 100%;',
+                                'label' => 'LBL_OCCURS',
+                                'span' => 6,
+                            ),
+                            array(
+                                'span' => 6,
+                            ),
+                            array(
+                                'name' => 'daily_repeat_on',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'daily_repeats_on_c',
+                                        'label' => 'LBL_DAILY_REPEATS_ON',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'skip_weekends_c',
+                                        'label' => 'LBL_SKIP_WEEKENDS',
+                                        'span' => 3,
+                                        'exclude_inline' => true,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span4 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'filler_field',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'vis_action_hidden',
+                                    ),
+                                    array(
+                                        'name' => 'filler_field',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'vis_action_hidden',
+                                    ),
+                                    array(
+                                        'name' => 'after_no_of_days_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'weekly_repeat_on',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'weekly_repeats_on_c',
+                                        'label' => 'LBL_WEEKLY_REPEATS_ON',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'by_day_of_the_week_c',
+                                        'label' => 'LBL_BY_DAY_OF_THE_WEEK',
+                                        'type' => 'multicheckbox-linear',
+                                        'style' => 'width: 100%;',
+                                        'exclude_inline' => true,
+//                                        'span' => 6,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span4 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'filler_field',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'vis_action_hidden',
+                                    ),
+                                    array(
+                                        'name' => 'filler_field',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'vis_action_hidden',
+                                    ),
+                                    array(
+                                        'name' => 'after_no_of_weeks_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                    4 =>
+                    array(
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL4',
                         'label' => 'LBL_RECORDVIEW_PANEL4',
                         'columns' => 2,
@@ -395,7 +566,7 @@ $viewdefs['sales_and_services'] = array(
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',

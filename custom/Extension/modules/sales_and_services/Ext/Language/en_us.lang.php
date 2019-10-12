@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_STATUS'] = 'Status';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Address Panel';
@@ -74,3 +73,16 @@ $mod_strings['LBL_RECURRING_DAYS'] = 'Recurring Days';
 $mod_strings['LBL_ACCOUNT_DETAILS'] = 'Account Details';
 $mod_strings['LBL_FINANCIAL_DETAILS'] = 'Financial Details';
 $mod_strings['LBL_MFT_PART_NUM'] = 'Product Category Number';
+$mod_strings['LBL_RECURRING_START_DATE'] = 'Start date';
+$mod_strings['LBL_RECURRING_END_DATE'] = 'End date';
+$mod_strings['LBL_END_DATE_OPTION'] = 'End date option';
+$mod_strings['LBL_OCCURS'] = 'Occurs';
+$mod_strings['LBL_DAILY_REPEATS_ON'] = 'Repeats on';
+$mod_strings['LBL_RECORDVIEW_PANEL6'] = 'Recurring';
+$mod_strings['LBL_OCCURRENCES'] = 'Occurrences';
+$mod_strings['LBL_SKIP_WEEKENDS'] = 'Skip Weekends';
+$mod_strings['LBL_WEEKLY_REPEATS_ON'] = 'Repeats on';
+$mod_strings['LBL_BY_DAY_OF_THE_WEEK'] = 'By Day of the Week';
+$mod_strings['LBL_AFTER_NO_OF_DAYS'] = 'After no of days';
+$mod_strings['LBL_FILLER'] = ' ';
+$mod_strings['LBL_AFTER_NO_OF_WEEKS'] = 'After no of weeks';
