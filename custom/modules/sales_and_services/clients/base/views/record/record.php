@@ -488,7 +488,6 @@ $viewdefs['sales_and_services'] = array(
                                         'type' => 'multicheckbox-linear',
                                         'style' => 'width: 100%;',
                                         'exclude_inline' => true,
-//                                        'span' => 6,
                                     ),
                                     array(
                                         'name' => 'grid_end',
@@ -518,7 +517,7 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                             ),
                             array(
-                                'name' => 'monthly_repeat_on',
+                                'name' => 'monthly_repeat_on_one',
                                 'type' => 'fieldset-sas',
                                 'inline' => true,
                                 'equal_spacing' => true,
@@ -556,6 +555,222 @@ $viewdefs['sales_and_services'] = array(
                                     ),
                                     array(
                                         'name' => 'after_no_of_months_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'monthly_repeat_on_two',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'on_the_specific_day_of_month_c',
+                                        'label' => 'LBL_ON_THE_SPECIFIC_DAY_OF_MONTH',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span4 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'specific_day_of_month_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'monthly_repeat_on_three',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'by_day_of_week_on_c',
+                                        'label' => 'LBL_BY_DAY_OF_WEEK_ON',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'week_no_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'month_day_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'yearly_repeat_on_one',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_repeat_every_year_c',
+                                        'label' => 'LBL_YEARLY_REPEAT_EVERY_YEAR',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'yearly_repeat_on_two',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_on_specific_date_c',
+                                        'label' => 'LBL_YEARLY_ON_SPECIFIC_DATE',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_on_specific_month_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_date_of_month_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'name' => 'yearly_repeat_on_three',
+                                'type' => 'fieldset-sas',
+                                'inline' => true,
+                                'equal_spacing' => true,
+                                'show_child_labels' => true,
+                                'span' => 12,
+                                'fields' =>
+                                array(
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span5 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_by_day_of_the_week_c',
+                                        'label' => 'LBL_YEARLY_BY_DAY_OF_THE_WEEK',
+                                        'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_week_no_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_by_day_of_the_week_li_c',
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'grid_end',
+                                    ),
+                                    array(
+                                        'name' => 'grid_start',
+                                        'label' => 'LBL_FILLER',
+                                        'css_class' => 'span2 record-cell',
+                                    ),
+                                    array(
+                                        'name' => 'yearly_by_day_of_week_month_c',
                                         'span' => 2,
                                     ),
                                     array(

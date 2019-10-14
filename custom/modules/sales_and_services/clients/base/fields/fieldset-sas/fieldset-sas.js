@@ -90,7 +90,7 @@
                     }
                 }
             }, this);
-        } else if (this.name == 'monthly_repeat_on') {
+        } else if (this.name == 'monthly_repeat_on_one') {
             _.each(fields, function (field) {
                 if (this.model.get('monthly_repeats_on_c') == 'Every next no of month') {
                     if (!(field.name == 'monthly_repeats_on_c' || field.name == 'after_no_of_months_c' || field.def.exclude_inline)) {
@@ -99,6 +99,69 @@
                     }
                 } else {
                     if (!(field.name == 'monthly_repeats_on_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                }
+            }, this);
+        } else if (this.name == 'monthly_repeat_on_two') {
+            _.each(fields, function (field) {
+                if (this.model.get('on_the_specific_day_of_month_c') == 'On the specific day of month') {
+                    if (!(field.name == 'on_the_specific_day_of_month_c' || field.name == 'specific_day_of_month_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                } else {
+                    if (!(field.name == 'on_the_specific_day_of_month_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                }
+            }, this);
+        } else if (this.name == 'monthly_repeat_on_three') {
+            _.each(fields, function (field) {
+                if (this.model.get('by_day_of_week_on_c') == 'On') {
+                    if (!(field.name == 'by_day_of_week_on_c' || field.name == 'week_no_c' || field.name == 'month_day_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                } else {
+                    if (!(field.name == 'by_day_of_week_on_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                }
+            }, this);
+        } else if (this.name == 'yearly_repeat_on_one') {
+            _.each(fields, function (field) {
+                if (!(field.name == 'yearly_repeat_every_year_c' || field.def.exclude_inline)) {
+                    field.$el.addClass('vis_action_hidden');
+                    this.model.set(field.name, '');
+                }
+            }, this);
+        } else if (this.name == 'yearly_repeat_on_two') {
+            _.each(fields, function (field) {
+                if (this.model.get('yearly_on_specific_date_c') == 'On') {
+                    if (!(field.name == 'yearly_on_specific_date_c' || field.name == 'yearly_on_specific_month_c' || field.name == 'yearly_date_of_month_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                } else {
+                    if (!(field.name == 'yearly_on_specific_date_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                }
+            }, this);
+        } else if (this.name == 'yearly_repeat_on_three') {
+            _.each(fields, function (field) {
+                if (this.model.get('yearly_by_day_of_the_week_c') == 'On') {
+                    if (!(field.name == 'yearly_by_day_of_the_week_c' || field.name == 'yearly_week_no_c' || field.name == 'yearly_by_day_of_the_week_li_c' || field.name == 'yearly_by_day_of_week_month_c' || field.def.exclude_inline)) {
+                        field.$el.addClass('vis_action_hidden');
+                        this.model.set(field.name, '');
+                    }
+                } else {
+                    if (!(field.name == 'yearly_by_day_of_the_week_c' || field.def.exclude_inline)) {
                         field.$el.addClass('vis_action_hidden');
                         this.model.set(field.name, '');
                     }

@@ -19,15 +19,40 @@
             // Hide all others
             $('div[data-name=daily_repeat_on].record-cell').removeClass('vis_action_hidden');
             $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_one].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_two].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_three].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_one].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_two].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_three].record-cell').addClass('vis_action_hidden');
         } else if (this.model.get(this.name) == 'Weekly') {
             // Hide all others
             $('div[data-name=weekly_repeat_on].record-cell').removeClass('vis_action_hidden');
             $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_one].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_two].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_three].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_one].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_two].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_three].record-cell').addClass('vis_action_hidden');
         } else if (this.model.get(this.name) == 'Monthly') {
             // Hide all others
-            $('div[data-name=monthly_repeat_on].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_one].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_two].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_three].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_one].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_two].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_three].record-cell').addClass('vis_action_hidden');
+        } else if (this.model.get(this.name) == 'Yearly') {
+            // Hide all others
+            $('div[data-name=yearly_repeat_on_one].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_two].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=yearly_repeat_on_three].record-cell').removeClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_one].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_two].record-cell').addClass('vis_action_hidden');
+            $('div[data-name=monthly_repeat_on_three].record-cell').addClass('vis_action_hidden');
             $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
             $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
         }
