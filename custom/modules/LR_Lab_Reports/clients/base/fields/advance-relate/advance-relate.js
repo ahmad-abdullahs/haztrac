@@ -35,10 +35,11 @@
                 this.iconVisibility = true;
             }
 
-            if (!_.isEmpty(this.view.labReportCustomerInfo[id])) {
-                // if (this.view.labReportCustomerInfo[id].id == this.model.get(id))
-                this.linked = true;
-            }
+            if (!_.isUndefined(this.view.labReportCustomerInfo))
+                if (!_.isEmpty(this.view.labReportCustomerInfo[id])) {
+                    // if (this.view.labReportCustomerInfo[id].id == this.model.get(id))
+                    this.linked = true;
+                }
         }
         this._super("_render");
     },

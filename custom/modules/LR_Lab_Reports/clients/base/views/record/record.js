@@ -50,4 +50,29 @@
             })
         });
     },
+
+    duplicateClicked: function () {
+        var self = this,
+                prefill = app.data.createBean(this.model.module);
+
+        prefill.copy(this.model);
+        this._copyNestedCollections(this.model, prefill);
+        self.model.trigger('duplicate:before', prefill);
+        prefill.unset('id');
+        prefill.unset('sample_id_number_c');
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                model: prefill,
+                copiedFromModelId: this.model.get('id')
+            }
+        }, function (context, newModel) {
+            if (newModel && newModel.id) {
+                app.router.navigate(self.model.module + '/' + newModel.id, {trigger: true});
+            }
+        });
+
+        prefill.trigger('duplicate:field', self.model);
+    },
 })

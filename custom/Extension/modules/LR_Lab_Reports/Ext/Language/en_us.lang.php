@@ -274,3 +274,4 @@ $mod_strings['LBL_RECORD_BODY'] = 'PARTY DETAILS';
 $mod_strings['LBL_DESCRIPTION'] = 'Description / Internal Notes';
 $mod_strings['LBL_LABORATORY_VENDOR_ACCOUNT_ID'] = 'Laboratory / Vendor (related Account ID)';
 $mod_strings['LBL_LABORATORY_VENDOR'] = 'Laboratory / Vendor';
+$mod_strings['LBL_PROJECT_DESCRIPTION'] = 'Project Description';
