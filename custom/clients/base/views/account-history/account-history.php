@@ -108,6 +108,7 @@ $viewdefs['base']['view']['account-history'] = array(
     ),
     'tabs' => array(
         array(
+            'active' => true,
             'filter_applied_to' => 'on_date_c',
             'filters' => array(
                 'status_c' => array('$in' => array('Complete', 'LostSale')),
@@ -136,7 +137,6 @@ $viewdefs['base']['view']['account-history'] = array(
             ),
         ),
         array(
-            'active' => true,
             'filter_applied_to' => 'date_start',
             'filters' => array(
                 'status' => array('$in' => array('Held', 'Not Held')),

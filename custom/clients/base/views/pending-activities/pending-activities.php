@@ -133,6 +133,7 @@ $viewdefs['base']['view']['pending-activities'] = array(
     ),
     'tabs' => array(
         array(
+            'active' => true,
             'filter_applied_to' => 'on_date_c',
             'filters' => array(
                 'status_c' => array('$not_in' => array('Complete', 'LostSale')),
@@ -176,7 +177,6 @@ $viewdefs['base']['view']['pending-activities'] = array(
             ),
         ),
         array(
-            'active' => true,
             'filter_applied_to' => 'date_start',
             'filters' => array(
                 'status' => array('$not_in' => array('Held', 'Not Held')),
