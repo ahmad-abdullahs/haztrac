@@ -7,12 +7,12 @@ $viewdefs['base']['view']['account-history'] = array(
             'description' => 'LBL_ACCOUNT_HISTORY_DASHLET_DESCRIPTION',
             'config' => array(
                 'limit' => '10',
-                'filter' => '7',
+                'filter' => '0',
                 'visibility' => 'user',
             ),
             'preview' => array(
                 'limit' => '10',
-                'filter' => '7',
+                'filter' => '0',
                 'visibility' => 'user',
             ),
             'filter' => array(
@@ -81,7 +81,7 @@ $viewdefs['base']['view']['account-history'] = array(
                     'name' => 'filter',
                     'label' => 'LBL_DASHLET_CONFIGURE_FILTERS',
                     'type' => 'enum',
-                    'options' => 'history_filter_options',
+                    'options' => 'history_filter_options_cstm',
                 ),
                 array(
                     'name' => 'visibility',
@@ -103,10 +103,38 @@ $viewdefs['base']['view']['account-history'] = array(
             'name' => 'filter',
             'label' => 'LBL_FILTER',
             'type' => 'enum',
-            'options' => 'history_filter_options'
+            'options' => 'history_filter_options_cstm'
         ),
     ),
     'tabs' => array(
+        array(
+            'filter_applied_to' => 'on_date_c',
+            'filters' => array(
+                'status_c' => array('$in' => array('Complete', 'LostSale')),
+            ),
+            'link' => 'accounts_sales_and_services_1',
+            'module' => 'sales_and_services',
+            'order_by' => 'on_date_c:desc',
+            'record_date' => 'on_date_c',
+            'row_actions' => array(
+                array(
+                    'type' => 'unlink-action',
+                    'icon' => 'fa-chain-broken',
+                    'css_class' => 'btn btn-mini',
+                    'event' => 'tabbed-dashlet:unlink-record:fire',
+                    'target' => 'view',
+                    'tooltip' => 'LBL_UNLINK_BUTTON',
+                    'acl_action' => 'edit',
+                ),
+            ),
+            'include_child_items' => true,
+            'fields' => array(
+                'name',
+                'assigned_user_id',
+                'assigned_user_name',
+                'on_date_c',
+            ),
+        ),
         array(
             'active' => true,
             'filter_applied_to' => 'date_start',
@@ -194,34 +222,6 @@ $viewdefs['base']['view']['account-history'] = array(
                 'assigned_user_id',
                 'assigned_user_name',
                 'date_start',
-            ),
-        ),
-        array(
-            'filter_applied_to' => 'on_date_c',
-            'filters' => array(
-                'status_c' => array('$in' => array('Complete', 'LostSale')),
-            ),
-            'link' => 'accounts_sales_and_services_1',
-            'module' => 'sales_and_services',
-            'order_by' => 'on_date_c:desc',
-            'record_date' => 'on_date_c',
-            'row_actions' => array(
-                array(
-                    'type' => 'unlink-action',
-                    'icon' => 'fa-chain-broken',
-                    'css_class' => 'btn btn-mini',
-                    'event' => 'tabbed-dashlet:unlink-record:fire',
-                    'target' => 'view',
-                    'tooltip' => 'LBL_UNLINK_BUTTON',
-                    'acl_action' => 'edit',
-                ),
-            ),
-            'include_child_items' => true,
-            'fields' => array(
-                'name',
-                'assigned_user_id',
-                'assigned_user_name',
-                'on_date_c',
             ),
         ),
     ),

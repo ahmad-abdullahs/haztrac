@@ -19,3 +19,12 @@ $app_strings['LBL_CONVERT_BUTTON_TITLE'] = 'Add to Product Catalog';
 $app_strings['LBL_RECORD_DETAILS'] = 'Record Details';
 $app_strings['LBL_CLOSE_DRAWER_BUTTON_LABEL'] = 'Close';
 $app_strings['LBL_SHORTCUT_DRAWER_CLOSE'] = 'Close the Record View opened in the Drawer.';
+$app_strings['LBL_MULTIPLE_REVENUELINEITEMS'] = 'Add Multiple Revenue Line Items';
+
+
+$app_list_strings['history_filter_options_cstm'] = array(
+    0 => 'All',
+    7 => 'Last 7 Days',
+    30 => 'Last 30 Days',
+    90 => 'Last Quarter',
+);
