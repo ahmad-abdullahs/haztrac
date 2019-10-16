@@ -85,13 +85,20 @@ array (
               ),
               8 => 
               array (
+                'name' => 'analysis_templates_c',
+                'label' => 'LBL_ANALYSIS_TEMPLATES',
+                'enabled' => true,
+                'default' => false,
+              ),
+              9 => 
+              array (
                 'name' => 'category_id',
                 'default' => false,
                 'enabled' => true,
                 'width' => '40',
                 'label' => 'LBL_LIST_CATEGORY',
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'modified_by_name',
                 'label' => 'LBL_MODIFIED_USER',
@@ -105,7 +112,7 @@ array (
                 'enabled' => true,
                 'width' => '10',
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'subcategory_id',
                 'default' => false,
@@ -113,7 +120,7 @@ array (
                 'width' => '40',
                 'label' => 'LBL_LIST_SUBCATEGORY',
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'created_by_name',
                 'label' => 'LBL_LIST_LAST_REV_CREATOR',
@@ -122,7 +129,7 @@ array (
                 'enabled' => true,
                 'width' => '2',
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'active_date',
                 'default' => false,
@@ -130,7 +137,7 @@ array (
                 'width' => '10',
                 'label' => 'LBL_LIST_ACTIVE_DATE',
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'exp_date',
                 'default' => false,
@@ -138,7 +145,7 @@ array (
                 'width' => '10',
                 'label' => 'LBL_LIST_EXP_DATE',
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_LIST_TEAM',
