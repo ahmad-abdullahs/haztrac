@@ -1,0 +1,26 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{!--{{log duplicateItemsList}}--}}
+{{#each items}}
+    <input type="checkbox" class="{{../name}}" {{#has this ../value}}checked{{/has}} data-value="{{this}}">
+    <label class="checkbox-label" data-identifier="{{this}}">{{@key}}</label></input><br />
+    {{setParentKey @key ../this}}
+    {{#each ../duplicateItemsList}}
+        {{#eq ../../parentKey this}}
+            {{#notEq ../../this @key}}
+                <input type="checkbox" class="{{../../../../name}}" {{#has @key ../../../../value}}checked{{/has}} data-value="{{@key}}">
+                <label class="checkbox-label" data-identifier="{{@key}}">{{this}}</label></input><br />                    
+            {{/notEq}}
+        {{/eq}}
+    {{/each}}
+{{/each}}

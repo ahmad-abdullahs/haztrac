@@ -357,7 +357,7 @@ $viewdefs['sales_and_services'] = array(
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
-                        'name' => 'LBL_RECORDVIEW_PANEL6',
+                        'name' => 'panel_recurring',
                         'label' => 'LBL_RECORDVIEW_PANEL6',
                         'columns' => 2,
                         'labelsOnTop' => 1,
@@ -431,7 +431,7 @@ $viewdefs['sales_and_services'] = array(
                                         'span' => 3,
                                     ),
                                     array(
-                                        'name' => 'skip_weekends_c',
+                                        'name' => 'daily_skip_weekends_c',
                                         'label' => 'LBL_SKIP_WEEKENDS',
                                         'span' => 3,
                                         'exclude_inline' => true,
@@ -455,7 +455,7 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'vis_action_hidden',
                                     ),
                                     array(
-                                        'name' => 'after_no_of_days_c',
+                                        'name' => 'daily_after_no_of_days_c',
                                         'span' => 2,
                                     ),
                                     array(
@@ -483,9 +483,9 @@ $viewdefs['sales_and_services'] = array(
                                         'span' => 3,
                                     ),
                                     array(
-                                        'name' => 'by_day_of_the_week_c',
+                                        'name' => 'weekly_by_day_of_the_week_c',
                                         'label' => 'LBL_BY_DAY_OF_THE_WEEK',
-                                        'type' => 'multicheckbox-linear',
+                                        'type' => 'multienum-checkbox',
                                         'style' => 'width: 100%;',
                                         'exclude_inline' => true,
                                     ),
@@ -508,7 +508,7 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'vis_action_hidden',
                                     ),
                                     array(
-                                        'name' => 'after_no_of_weeks_c',
+                                        'name' => 'weekly_after_no_of_weeks_c',
                                         'span' => 2,
                                     ),
                                     array(
@@ -554,7 +554,7 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'vis_action_hidden',
                                     ),
                                     array(
-                                        'name' => 'after_no_of_months_c',
+                                        'name' => 'monthly_after_no_of_months_c',
                                         'span' => 2,
                                     ),
                                     array(
@@ -577,9 +577,17 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'span5 record-cell',
                                     ),
                                     array(
-                                        'name' => 'on_the_specific_day_of_month_c',
+                                        'name' => 'monthly_on_the_specific_day_of_month_c',
                                         'label' => 'LBL_ON_THE_SPECIFIC_DAY_OF_MONTH',
+                                        'type' => 'single-radioenum',
+                                        'dependent_radio' => 'monthly_by_day_of_week_on_c',
                                         'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'monthly_skip_weekends_c',
+                                        'label' => 'LBL_MONTHLY_SKIP_WEEKENDS',
+                                        'span' => 3,
+                                        'exclude_inline' => true,
                                     ),
                                     array(
                                         'name' => 'grid_end',
@@ -590,7 +598,7 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'span4 record-cell',
                                     ),
                                     array(
-                                        'name' => 'specific_day_of_month_c',
+                                        'name' => 'monthly_specific_day_of_month_c',
                                         'span' => 2,
                                     ),
                                     array(
@@ -613,8 +621,10 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'span5 record-cell',
                                     ),
                                     array(
-                                        'name' => 'by_day_of_week_on_c',
+                                        'name' => 'monthly_by_day_of_week_on_c',
                                         'label' => 'LBL_BY_DAY_OF_WEEK_ON',
+                                        'type' => 'single-radioenum',
+                                        'dependent_radio' => 'monthly_on_the_specific_day_of_month_c',
                                         'span' => 3,
                                     ),
                                     array(
@@ -626,7 +636,7 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'span2 record-cell',
                                     ),
                                     array(
-                                        'name' => 'week_no_c',
+                                        'name' => 'monthly_week_no_c',
                                         'span' => 2,
                                     ),
                                     array(
@@ -638,7 +648,7 @@ $viewdefs['sales_and_services'] = array(
                                         'css_class' => 'span2 record-cell',
                                     ),
                                     array(
-                                        'name' => 'month_day_c',
+                                        'name' => 'monthly_month_day_c',
                                         'span' => 2,
                                     ),
                                     array(
@@ -687,7 +697,15 @@ $viewdefs['sales_and_services'] = array(
                                     array(
                                         'name' => 'yearly_on_specific_date_c',
                                         'label' => 'LBL_YEARLY_ON_SPECIFIC_DATE',
+                                        'type' => 'single-radioenum',
+                                        'dependent_radio' => 'yearly_by_day_of_the_week_c',
                                         'span' => 3,
+                                    ),
+                                    array(
+                                        'name' => 'yearly_skip_weekends_c',
+                                        'label' => 'LBL_YEARLY_SKIP_WEEKENDS',
+                                        'span' => 3,
+                                        'exclude_inline' => true,
                                     ),
                                     array(
                                         'name' => 'grid_end',
@@ -735,6 +753,8 @@ $viewdefs['sales_and_services'] = array(
                                     array(
                                         'name' => 'yearly_by_day_of_the_week_c',
                                         'label' => 'LBL_YEARLY_BY_DAY_OF_THE_WEEK',
+                                        'type' => 'single-radioenum',
+                                        'dependent_radio' => 'yearly_on_specific_date_c',
                                         'span' => 3,
                                     ),
                                     array(
@@ -784,7 +804,7 @@ $viewdefs['sales_and_services'] = array(
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
-                        'name' => 'LBL_RECORDVIEW_PANEL4',
+                        'name' => 'panel_completion',
                         'label' => 'LBL_RECORDVIEW_PANEL4',
                         'columns' => 2,
                         'labelsOnTop' => 1,

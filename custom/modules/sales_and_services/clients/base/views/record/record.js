@@ -5,6 +5,47 @@
         this._super('initialize', [options]);
         // Add listener for custom button
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
+        this.model.on('change:recurring_sale_c', this.takeUserToRecurringTab, this);
+    },
+
+    takeUserToRecurringTab: function (model, fieldValue) {
+        // If Recurring Sale checkbox is checked, take user to that tab
+        if (fieldValue) {
+            this.$('li.tab.panel_recurring > a').click();
+        }
+    },
+
+    _render: function () {
+        this._super('_render');
+        var self = this;
+        // Make the Revenue Line Items subpanel in non-editable mode when schedule tab is clicked
+        this.$('li.tab.panel_body > a').on('click', function () {
+            self.context.trigger('cancel:full:subpanel:cstm');
+        });
+
+        // Make the Revenue Line Items subpanel in editable mode when completion tab is clicked
+        this.$('li.tab.panel_completion > a').on('click', function () {
+            $.when(self.triggerEdit()).then(function () {
+                // Make the Actual quantity, Unit of Measure and Unit price fields coloured.
+                if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+                    // simple decimal field 
+                    $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#f4e429');
+                    // drop down field
+                    $('tr[name*=RevenueLineItems_] input[name=product_uom_c]').siblings('div').children('a').css('background-color', '#f4e429');
+                    // currency field
+                    $('tr[name*=RevenueLineItems_] input[name=discount_price]').css('background-color', '#f4e429');
+                    $('tr[name*=RevenueLineItems_] input[name=discount_price]').siblings('span').children('div').children('a').css('background-color', '#f4e429');
+                }
+            });
+        });
+    },
+
+    triggerEdit: function () {
+        if (this.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+            _.each(this.model._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model) {
+                this.context.trigger('edit:full:subpanel:cstm', model, {'def': {}});
+            }, this);
+        }
     },
 
     registerShortcuts: function () {
@@ -41,13 +82,13 @@
         this._super('toggleEdit', [isEdit]);
         // On the sales_and_services record view, when the _relatedCollections revenuelineitems subpannel is fetched.
         // make all the rows in that pannel editable.
-        if (isEdit) {
-            if (this.model._relatedCollections.sales_and_services_revenuelineitems_1) {
-                _.each(this.model._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model) {
-                    this.context.trigger('edit:full:subpanel:cstm', model, {'def': {}});
-                }, this)
-            }
-        }
+//        if (isEdit) {
+//            if (this.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+//                _.each(this.model._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model) {
+//                    this.context.trigger('edit:full:subpanel:cstm', model, {'def': {}});
+//                }, this)
+//            }
+//        }
     },
 
     cancelClicked: function () {

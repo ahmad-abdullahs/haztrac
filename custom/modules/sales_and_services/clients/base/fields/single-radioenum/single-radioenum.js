@@ -17,15 +17,22 @@
     // On list-edit template,
     // we want the radio buttons to be replaced by a select so each method must call the EnumField method instead.
     extendsFrom: 'RadioenumField',
+    plugins: ["ListEditable"],
+    fieldTag: "input",
 
     _render: function () {
-        this._super("_render");
-
-        // Show the multicheck box list in linear fashion...
-        this.$el.css('display', 'flex');
+        this.loadEnumOptions(false, function () {
+            if (!this.disposed) {
+                this.render();
+            }
+        }
+        );
+        app.view.Field.prototype._render.call(this);
+        if (this.tplName === 'list-edit') {
+            this._super("_render");
+        }
     },
     bindDomChange: function () {
-        multicheckbox = this;
         if (this.tplName === 'list-edit') {
             this._super("bindDomChange");
         } else {
@@ -34,7 +41,15 @@
             var self = this;
             var el = this.$el.find(this.fieldTag);
             el.on("change", function () {
-                self.model.set(self.name, self.unformat(self.$(self.fieldTag + ":checkbox:checked").val()));
+                self.model.set(self.name, self.unformat(self.$(self.fieldTag + ":radio:checked").val()));
+                var dependentField = self.def.dependent_radio;
+                $('[name=' + dependentField + ']').prop('checked', false);
+                self.model.set(dependentField, '');
+            });
+            el.on("click", function () {
+                var dependentField = self.def.dependent_radio;
+                $('[name=' + dependentField + ']').prop('checked', false);
+                self.model.set(dependentField, '');
             });
         }
     },

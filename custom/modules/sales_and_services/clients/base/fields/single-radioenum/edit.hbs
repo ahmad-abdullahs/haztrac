@@ -10,15 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#eachOptions items}}
-    <p style="{{../def.style}}">
-        <label>
-            <input type="checkbox" name="{{../name}}" value="{{key}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} {{#eq key ../value}}checked{{/eq}}> {{value}}
-        </label>
-    </p>
-{{/eachOptions}}
-{{#unless hideHelp}}
-    {{#if def.help}}
-        <p class="help-block">{{str def.help module}}</p>
-    {{/if}}
-{{/unless}}
+        {{#eachOptions items}}
+        <p><label><input type="radio" name="{{../name}}" value="{{key}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} {{#eq key ../value}}checked{{/eq}}> {{value}}</label></p>
+        {{/eachOptions}}
+        {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

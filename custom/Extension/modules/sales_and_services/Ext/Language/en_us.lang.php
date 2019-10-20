@@ -101,3 +101,5 @@ $mod_strings['LBL_YEARLY_BY_DAY_OF_THE_WEEK'] = 'On';
 $mod_strings['LBL_YEARLY_WEEK_NO'] = 'Week no';
 $mod_strings['LBL_YEARLY_BY_DAY_OF_THE_WEEK_LI'] = 'Day';
 $mod_strings['LBL_YEARLY_BY_DAY_OF_WEEK_MONTH'] = 'Month';
+$mod_strings['LBL_MONTHLY_SKIP_WEEKENDS'] = 'Skip weekends';
+$mod_strings['LBL_YEARLY_SKIP_WEEKENDS'] = 'Skip weekends';
