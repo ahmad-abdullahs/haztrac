@@ -10,27 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span style="display: inline-flex;">
-    {{#notEq this.view.name "multi-selection-list-link"}}
-        {{#notEq name "created_by_name"}}
-            {{#notEq name "modified_by_name"}}
-                {{#notEq name "assigned_user_name"}}
-                    {{#notEq value ""}}
-                        <a name="advance-relate-preview-list" class="rowaction" style="padding-right: 1px;">
-                            <i rel="tooltip" title="Preview Record" class="fa fa-eye">
-                            </i>
-                        </a>
-                    {{/notEq}}
-                {{/notEq}}
-            {{/notEq}}
-        {{/notEq}}
-    {{/notEq}}
-    <div class="ellipsis_inline" data-placement="bottom" data-container="body"
-         title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}">
-        {{# if href}}
-            <a href="{{href}}">{{value}}</a>
-        {{else}}
-            {{value}}
-        {{/if}}
-    </div>
-</span>
+<div class="ellipsis_inline relate-populate-rli" data-placement="bottom" data-container="body"
+     title="{{#unless value}}{{#if def.placeholder}}{{str def.placeholder this.model.module}}{{/if}}{{/unless}}{{value}}">
+    {{# if href}}
+        <a>{{value}}</a>
+    {{else}}
+        {{value}}
+    {{/if}}
+</div>
