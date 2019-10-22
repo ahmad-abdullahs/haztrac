@@ -28,7 +28,7 @@ This upper if is responsible for rendering the fields in the subpanel list...
                 </td>
             {{/each}}
             {{#each ../_fields.visible}}
-                <td{{#if align}} class="{{align}} {{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}">
+                <td name={{name}} {{#if align}} class="{{align}} {{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}">
                     {{#eq @index 0}}{{#eq ../../attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{!--{{#if ../../attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>{{/if}}--}}{{/eq}}
                     {{field ../../this model=../this template=../../viewName}}
                 </td>

@@ -6,6 +6,26 @@
         // Add listener for custom button
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
         this.model.on('change:recurring_sale_c', this.takeUserToRecurringTab, this);
+        this.model.on('data:sync:complete', function (options) {
+            if (!_.isNull(this.model._relatedCollections))
+                this.model._relatedCollections.sales_and_services_revenuelineitems_1.on('data:sync:complete', _.bind(this.colourTheFields, this));
+        }, this);
+    },
+
+    colourTheFields: function () {
+        if (this.model._relatedCollections.sales_and_services_revenuelineitems_1.length) {
+            var activeTab = app.user.lastState.get(app.user.lastState.key('activeTab', this));
+            if (activeTab != '#panel_completion') {
+                // simple decimal field 
+                $('tr[name*=RevenueLineItems_] td[name=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
+                // drop down field
+                $('tr[name*=RevenueLineItems_] td[name=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
+                // simple decimal field 
+                $('tr[name*=RevenueLineItems_] td[data-column=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
+                // drop down field
+                $('tr[name*=RevenueLineItems_] td[data-column=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
+            }
+        }
     },
 
     takeUserToRecurringTab: function (model, fieldValue) {
@@ -17,6 +37,9 @@
 
     _render: function () {
         this._super('_render');
+        // Get all the tabs with class like panel_
+        // $('#recordTab > li.tab [class*=panel_]');
+
         var self = this;
         // Make the Revenue Line Items subpanel in non-editable mode when schedule tab is clicked
         this.$('li.tab.panel_body > a').on('click', function () {
@@ -26,7 +49,7 @@
         // Make the Revenue Line Items subpanel in editable mode when completion tab is clicked
         this.$('li.tab.panel_completion > a').on('click', function () {
             $.when(self.triggerEdit()).then(function () {
-                // Make the Actual quantity, Unit of Measure and Unit price fields coloured.
+                //*** Make the Actual quantity, Unit of Measure and Unit price fields coloured.
                 if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
                     // simple decimal field 
                     $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#f4e429');
@@ -35,6 +58,26 @@
                     // currency field
                     $('tr[name*=RevenueLineItems_] input[name=discount_price]').css('background-color', '#f4e429');
                     $('tr[name*=RevenueLineItems_] input[name=discount_price]').siblings('span').children('div').children('a').css('background-color', '#f4e429');
+
+                    //*** Remove the background color from Estimated Quantity and Unit of Measure from <td>
+                    // simple decimal field 
+                    $('tr[name*=RevenueLineItems_] td[name=estimated_quantity_c]').attr('style', '');
+                    // drop down field
+                    $('tr[name*=RevenueLineItems_] td[name=product_uom_c]').attr('style', '');
+                    // simple decimal field 
+                    $('tr[name*=RevenueLineItems_] td[data-column=estimated_quantity_c]').attr('style', '');
+                    // drop down field
+                    $('tr[name*=RevenueLineItems_] td[data-column=product_uom_c]').attr('style', '');
+                }
+            });
+        });
+
+        // Make the Revenue Line Items subpanel in editable mode when completion tab is clicked
+        this.$('li.tab[class*=panel_]:not(.panel_completion) > a').on('click', function () {
+            $.when(self.context.trigger('cancel:full:subpanel:cstm')).then(function () {
+                //*** Make the Estimated Quantity and Unit of Measure fields coloured.
+                if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+                    self.colourTheFields();
                 }
             });
         });
