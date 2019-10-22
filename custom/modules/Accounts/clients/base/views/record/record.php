@@ -180,60 +180,46 @@ array (
               array (
                 'name' => 'tag',
                 'tabindex' => '2',
-                'span' => 12,
+                'span' => 6,
               ),
               1 => 
               array (
                 'name' => 'website',
                 'tabindex' => '6',
+                'span' => 6,
               ),
               2 => 
-              array (
-                'name' => 'phone_office',
-                'tabindex' => '3',
-              ),
-              3 => 
               array (
                 'name' => 'email',
                 'tabindex' => '7',
               ),
+              3 => 
+              array (
+                'name' => 'phone_office',
+                'tabindex' => '3',
+              ),
               4 => 
+              array (
+                'name' => 'account_type_cst_c',
+                'label' => 'LBL_ACCOUNT_TYPE_CST',
+              ),
+              5 => 
               array (
                 'name' => 'phone_alternate',
                 'label' => 'LBL_PHONE_ALT',
                 'tabindex' => '4',
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'parent_name',
                 'tabindex' => '8',
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'phone_fax',
                 'tabindex' => '5',
               ),
-              7 => 
-              array (
-                'name' => 'account_terms_c',
-                'label' => 'LBL_ACCOUNT_TERMS',
-              ),
               8 => 
-              array (
-                'name' => 'ac_usepa_id_c',
-                'label' => 'LBL_AC_USEPA_ID',
-              ),
-              9 => 
-              array (
-                'name' => 'industry',
-                'tabindex' => '9',
-              ),
-              10 => 
-              array (
-                'name' => 'account_type',
-                'tabindex' => '10',
-              ),
-              11 => 
               array (
                 'name' => 'billing_address',
                 'type' => 'fieldset',
@@ -274,7 +260,7 @@ array (
                 ),
                 'tabindex' => '11',
               ),
-              12 => 
+              9 => 
               array (
                 'name' => 'shipping_address',
                 'type' => 'fieldset',
@@ -329,7 +315,7 @@ array (
                 ),
                 'tabindex' => '12',
               ),
-              13 => 
+              10 => 
               array (
                 'name' => 'physical_address',
                 'type' => 'fieldset',
@@ -390,23 +376,12 @@ array (
                 ),
                 'span' => 12,
               ),
-              14 => 
-              array (
-                'name' => 'hour_operations_c',
-                'label' => 'LBL_HOUR_OPERATIONS',
-              ),
-              15 => 
-              array (
-                'name' => 'service_instruction_c',
-                'studio' => 'visible',
-                'label' => 'LBL_SERVICE_INSTRUCTION',
-              ),
-              16 => 
+              11 => 
               array (
                 'name' => 'assigned_user_name',
                 'tabindex' => '13',
               ),
-              17 => 
+              12 => 
               array (
                 'name' => 'team_name',
                 'tabindex' => '14',
@@ -414,6 +389,102 @@ array (
             ),
           ),
           2 => 
+          array (
+            'newTab' => true,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL4',
+            'label' => 'LBL_RECORDVIEW_PANEL4',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'account_number_c',
+                'label' => 'LBL_ACCOUNT_NUMBER',
+              ),
+              1 => 
+              array (
+                'name' => 'ac_usepa_id_c',
+                'label' => 'LBL_AC_USEPA_ID',
+              ),
+              2 => 
+              array (
+                'name' => 'service_level',
+              ),
+              3 => 
+              array (
+                'name' => 'account_terms_c',
+                'label' => 'LBL_ACCOUNT_TERMS',
+              ),
+              4 => 
+              array (
+                'name' => 'hour_operations_c',
+                'label' => 'LBL_HOUR_OPERATIONS',
+              ),
+              5 => 
+              array (
+                'name' => 'service_instruction_c',
+                'studio' => 'visible',
+                'label' => 'LBL_SERVICE_INSTRUCTION',
+              ),
+              6 => 
+              array (
+                'name' => 'hint_account_industry_c',
+                'label' => 'LBL_HINT_COMPANY_INDUSTRY',
+              ),
+              7 => 
+              array (
+                'name' => 'hint_account_industry_tags_c',
+                'label' => 'LBL_HINT_COMPANY_INDUSTRY_TAGS',
+              ),
+            ),
+          ),
+          3 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'collapsed',
+            'name' => 'LBL_RECORDVIEW_PANEL5',
+            'label' => 'LBL_RECORDVIEW_PANEL5',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'rail_cif_num_c',
+                'label' => 'LBL_RAIL_CIF_NUM',
+              ),
+              1 => 
+              array (
+                'name' => 'rail_track_num_c',
+                'label' => 'LBL_RAIL_TRACK_NUM',
+              ),
+              2 => 
+              array (
+                'name' => 'rail_served_c',
+                'label' => 'LBL_RAIL_SERVED',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
+                'name' => 'rail_address_street_c',
+                'studio' => 'visible',
+                'label' => 'LBL_RAIL_ADDRESS_STREET',
+              ),
+              5 => 
+              array (
+                'name' => 'rail_notes_c',
+                'studio' => 'visible',
+                'label' => 'LBL_RAIL_NOTES',
+              ),
+            ),
+          ),
+          4 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
@@ -427,12 +498,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'account_number_c',
-                'label' => 'LBL_ACCOUNT_NUMBER',
+                'name' => 'industry',
+                'tabindex' => '9',
               ),
               1 => 
               array (
-                'name' => 'service_level',
+                'name' => 'account_type',
+                'tabindex' => '10',
               ),
               2 => 
               array (
@@ -507,7 +579,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          5 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
