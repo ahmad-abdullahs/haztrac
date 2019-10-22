@@ -10,12 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span style="display: inline-flex;">
-    {{#if iconVisibility}}
-        <a name="advance-relate-preview" class="rowaction" style="padding-right: 5px;">
-            <i rel="tooltip" title="Preview Record" class="fa fa-eye">
-            </i>
-        </a>
-    {{/if}}
-    {{#if href}}<a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}">{{value}}</a>{{else}}{{value}}{{/if}}
-</span>
+{{#each selectOptions}}
+    <option value="{{fieldValue this "id"}}" {{#eq @index 0}}selected="selected"{{/eq}}>{{fieldValue this "name"}}</option>
+{{/each}}
+{{#eq selectOptions.length 0}}
+    <option data-empty="true">{{str "MSG_LIST_VIEW_NO_RESULTS_BASIC"}}</option>
+{{/eq}}
+<option data-searchmore="true" value="{{str "LBL_SEARCH_FOR_MORE"}}" class="more">{{str "LBL_SEARCH_FOR_MORE"}}</option>

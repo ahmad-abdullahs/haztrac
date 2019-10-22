@@ -10,12 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span style="display: inline-flex;">
-    {{#if iconVisibility}}
-        <a name="advance-relate-preview" class="rowaction" style="padding-right: 5px;">
-            <i rel="tooltip" title="Preview Record" class="fa fa-eye">
-            </i>
-        </a>
-    {{/if}}
-    {{#if href}}<a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}">{{value}}</a>{{else}}{{value}}{{/if}}
+<span class="information-underline"
+      rel="tooltip"
+      data-container="body" data-placement="bottom" data-html="true" data-trigger="click"
+      title="{{str 'LBL_OVERWRITE_POPULATED_DATA_FROM'}}: {{before}} <br> {{str 'LBL_OVERWRITE_POPULATED_DATA_TO'}}: {{after}}">
+    {{field_label}}
 </span>

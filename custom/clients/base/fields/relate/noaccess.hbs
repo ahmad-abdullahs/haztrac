@@ -10,12 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span style="display: inline-flex;">
-    {{#if iconVisibility}}
-        <a name="advance-relate-preview" class="rowaction" style="padding-right: 5px;">
-            <i rel="tooltip" title="Preview Record" class="fa fa-eye">
-            </i>
-        </a>
-    {{/if}}
-    {{#if href}}<a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}">{{value}}</a>{{else}}{{value}}{{/if}}
-</span>
+<span class="label">{{str "LBL_NO_FIELD_ACCESS" this.module}}</span>

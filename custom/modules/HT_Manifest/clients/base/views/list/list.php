@@ -25,20 +25,27 @@ array (
               ),
               1 => 
               array (
+                'name' => 'manifest_no_actual_c',
+                'label' => 'LBL_MANIFEST_NO_ACTUAL',
+                'enabled' => true,
+                'default' => true,
+              ),
+              2 => 
+              array (
                 'name' => 'manifest_number',
                 'label' => 'LBL_MANIFEST_NUMBER',
                 'enabled' => true,
                 'readonly' => true,
                 'default' => true,
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'consolidate_c',
                 'label' => 'LBL_CONSOLIDATE',
                 'enabled' => true,
                 'default' => true,
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'accounts_ht_manifest_1_name',
                 'label' => 'LBL_ACCOUNTS_HT_MANIFEST_1_FROM_ACCOUNTS_TITLE',
@@ -48,14 +55,14 @@ array (
                 'sortable' => false,
                 'default' => true,
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'start_date_c',
                 'label' => 'LBL_START_DATE',
                 'enabled' => true,
                 'default' => true,
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'ht_manifest_v_vendors_name',
                 'label' => 'LBL_HT_MANIFEST_V_VENDORS_FROM_V_VENDORS_TITLE',
@@ -65,28 +72,28 @@ array (
                 'sortable' => false,
                 'default' => true,
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'complete_date_c',
                 'label' => 'LBL_COMPLETE_DATE',
                 'enabled' => true,
                 'default' => true,
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'status_c',
                 'label' => 'LBL_STATUS',
                 'enabled' => true,
                 'default' => true,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
                 'default' => false,
                 'enabled' => true,
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO_NAME',
@@ -94,13 +101,13 @@ array (
                 'enabled' => true,
                 'link' => true,
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'date_entered',
                 'enabled' => true,
                 'default' => false,
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,

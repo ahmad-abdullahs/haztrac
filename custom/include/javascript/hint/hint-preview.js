@@ -15,7 +15,7 @@
  * to the existing preview layout so the users would be able to view
  * enriched data more easily.
  */
-(function(app) {
+(function (app) {
     /**
      * Check the type of the main layout.
      * 
@@ -54,7 +54,7 @@
     function getPreview() {
         var previewCmpPath = ['sidebar', 'preview-pane', 'preview'];
         return getView(app.drawer, ['create'].concat(previewCmpPath)) ||
-            getView(app.controller.layout, previewCmpPath);
+                getView(app.controller.layout, previewCmpPath);
     }
 
     /**
@@ -95,6 +95,9 @@
      * of the active record view.
      */
     function isTriggeredOnSubpanel(model) {
+        if (model.byPassHint == true) {
+            return false;
+        }
         var hasModelFromSubpanel = false;
         var recordModel = app.controller.layout.model;
         var moduleLink = model.link && model.link.name;
@@ -117,6 +120,9 @@
      * @returns {Boolean} True if the preview meant to be rendered on a list view.
      */
     function isTriggeredOnListview(preview) {
+        if (preview.byPassHint == true) {
+            return false;
+        }
         return isGivenLayout('records') && !isInMergeView(preview);
     }
 
@@ -149,12 +155,16 @@
      * @returns {Boolean} True if the preview has been triggered by the Hint dashboard button.
      */
     function isEnrichedRecordView(model) {
+        if (model.byPassHint == true) {
+            return false;
+        }
+
         var isEnrichedRecord = isGivenLayout('record') && isEnrichedModel(model);
         var dashBoardHeaderPath = ['sidebar', 'dashboard-pane', 'dashboard', 'dashboard-headerpane'];
         var dashBoardHeader = getView(app.controller.layout, dashBoardHeaderPath);
 
         if (isEnrichedRecord && dashBoardHeader) {
-            var dashboardTitle = _.findWhere(dashBoardHeader.fields, { type: 'hint-dashboardtitle' });
+            var dashboardTitle = _.findWhere(dashBoardHeader.fields, {type: 'hint-dashboardtitle'});
             isEnrichedRecord = dashboardTitle && dashboardTitle.getHintState(dashboardTitle.hintStateKey);
         }
 
@@ -179,7 +189,7 @@
         var doesHintApply = false;
         if (isEnrichedModel(model)) {
             doesHintApply = isCreateLayout() || isGivenLayout('search') ||
-                isTriggeredOnListview(preview) || isTriggeredOnSubpanel(model) || isEnrichedRecordView(model);
+                    isTriggeredOnListview(preview) || isTriggeredOnSubpanel(model) || isEnrichedRecordView(model);
         }
         return doesHintApply;
     }
@@ -252,6 +262,10 @@
 
         if (!preview || !preview._isActive()) {
             return;
+        }
+
+        if (model.byPassHint == true) {
+            preview.byPassHint = true;
         }
 
         var hasComponents = !_.isEmpty(preview._components);

@@ -10,12 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span style="display: inline-flex;">
-    {{#if iconVisibility}}
-        <a name="advance-relate-preview" class="rowaction" style="padding-right: 5px;">
-            <i rel="tooltip" title="Preview Record" class="fa fa-eye">
-            </i>
-        </a>
+<input type="hidden"
+    name="{{name}}"
+    class="select2 inherit-width"
+    value="{{formattedIds}}"
+    {{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}
+    data-rname="{{#if hasErasedPlaceholder}}{{str 'LBL_VALUE_ERASED' module}}{{else}}{{formattedRname}}{{/if}}">
+{{#unless hideHelp}}
+    {{#if def.help}}
+        <p class="help-block">{{str def.help module}}</p>
     {{/if}}
-    {{#if href}}<a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}">{{value}}</a>{{else}}{{value}}{{/if}}
-</span>
+{{/unless}}

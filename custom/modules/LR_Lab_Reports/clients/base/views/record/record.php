@@ -212,18 +212,20 @@ array (
                 'name' => 'accounts_lr_lab_reports_1_name',
                 'tabindex' => '9',
                 'type' => 'advance-relate',
+                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_1_FROM_ACCOUNTS_TITLE_CST',
               ),
               3 => 
               array (
                 'name' => 'accounts_lr_lab_reports_2_name',
                 'tabindex' => '10',
                 'type' => 'advance-relate',
+                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_2_FROM_ACCOUNTS_TITLE_CST',
               ),
               4 => 
               array (
                 'name' => 'accounts_lr_lab_reports_3_name',
                 'studio' => 'visible',
-                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_3_FROM_ACCOUNTS_TITLE',
+                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_3_FROM_ACCOUNTS_TITLE_CST',
                 'type' => 'advance-relate',
               ),
               5 => 

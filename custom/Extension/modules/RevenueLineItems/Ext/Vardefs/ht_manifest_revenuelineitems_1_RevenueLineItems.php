@@ -22,7 +22,7 @@ $dictionary["RevenueLineItem"]["fields"]["ht_manifest_revenuelineitems_1_name"] 
   'link' => 'ht_manifest_revenuelineitems_1',
   'table' => 'ht_manifest',
   'module' => 'HT_Manifest',
-  'rname' => 'manifest_number',
+  'rname' => 'manifest_no_actual_c',
 );
 $dictionary["RevenueLineItem"]["fields"]["ht_manifest_revenuelineitems_1ht_manifest_ida"] = array (
   'name' => 'ht_manifest_revenuelineitems_1ht_manifest_ida',
