@@ -17,7 +17,7 @@
     /**
      * @inheritdoc
      */
-    _render: function() {
+    _render: function () {
         if (this._hasDatePicker) {
             this.$(this.dateTag).datepicker('hide');
         }
@@ -56,7 +56,7 @@
         }
 
         var index = this._currentIndex,
-            record = this.value;
+                record = this.value;
         record[index || 0].id = model.id;
         record[index || 0].name = model.value;
 
@@ -73,16 +73,16 @@
         var self = this;
         this.$(this.dateTag).each(function (index, el) {
             var dateVal = app.date(
-                self.$(el).val(), 
-                app.date.convertFormat(self.getUserDateFormat()),
-                true
-            );
+                    self.$(el).val(),
+                    app.date.convertFormat(self.getUserDateFormat()),
+                    true
+                    );
 
             if (!_.isUndefined(value[index])) {
                 if (dateVal.isValid()) {
                     value[index]['transfer_date'] = dateVal.formatServer(true);
                 } else {
-                    value[index][transfer_date] = '';
+                    value[index]['transfer_date'] = '';
                 }
             }
         });
@@ -96,7 +96,7 @@
      *
      * @return {String} User date format.
      */
-    getUserDateFormat: function() {
+    getUserDateFormat: function () {
         return app.user.getPreference('datepref');
     },
 
@@ -106,13 +106,13 @@
      *
      * @private
      */
-    _patchPickerMeta: function() {
+    _patchPickerMeta: function () {
         var pickerMap = [], pickerMapKey, calMapIndex, mapLen, domCalKey,
-            calProp, appListStrings, calendarPropsMap, i, filterIterator;
+                calProp, appListStrings, calendarPropsMap, i, filterIterator;
 
         appListStrings = app.metadata.getStrings('app_list_strings');
 
-        filterIterator = function(v, k, l) {
+        filterIterator = function (v, k, l) {
             return v[1] !== "";
         };
 
@@ -122,7 +122,7 @@
         for (calMapIndex = 0, mapLen = calendarPropsMap.length; calMapIndex < mapLen; calMapIndex++) {
 
             domCalKey = calendarPropsMap[calMapIndex];
-            calProp  = appListStrings[domCalKey];
+            calProp = appListStrings[domCalKey];
 
             // Patches the metadata to work w/datepicker; initially, "calProp" will look like:
             // {0: "", 1: "Sunday", 2: "Monday", 3: "Tuesday", 4: "Wednesday", 5: "Thursday", 6: "Friday", 7: "Saturday"}
@@ -131,7 +131,7 @@
             if (!_.isUndefined(calProp) && !_.isNull(calProp)) {
                 // Reject the first 0: "" element and then map out the new language tuple
                 // so it's back to an array of strings
-                calProp = _.filter(calProp, filterIterator).map(function(prop) {
+                calProp = _.filter(calProp, filterIterator).map(function (prop) {
                     return prop[1];
                 });
                 //e.g. pushed the Sun in front to end (as required by datepicker)
@@ -167,15 +167,15 @@
      *
      * @protected
      */
-    _setupDatePicker: function(el) {
+    _setupDatePicker: function (el) {
         var self = this;
         var $field = this.$(el),
-            userDateFormat = this.getUserDateFormat(),
-            options = {
-                format: app.date.toDatepickerFormat(userDateFormat),
-                languageDictionary: this._patchPickerMeta(),
-                weekStart: parseInt(app.user.getPreference('first_day_of_week'), 10)
-            };
+                userDateFormat = this.getUserDateFormat(),
+                options = {
+                    format: app.date.toDatepickerFormat(userDateFormat),
+                    languageDictionary: this._patchPickerMeta(),
+                    weekStart: parseInt(app.user.getPreference('first_day_of_week'), 10)
+                };
 
         var appendToTarget = this._getAppendToTarget();
         if (appendToTarget) {
@@ -195,10 +195,10 @@
      *   be appended to, `undefined` if none.
      * @private
      */
-    _getAppendToTarget: function() {
+    _getAppendToTarget: function () {
         var component = this.closestComponent('main-pane') ||
-            this.closestComponent('drawer') ||
-            this.closestComponent('preview-pane');
+                this.closestComponent('drawer') ||
+                this.closestComponent('preview-pane');
 
         if (component) {
             return component.$el;
@@ -218,7 +218,7 @@
         }
 
         if (_.isArray(value) && !_.isEmpty(value)) {
-            _.each(value, function(record, index, list) {
+            _.each(value, function (record, index, list) {
                 delete record.remove_button;
                 delete record.add_button;
 
@@ -239,7 +239,7 @@
      * @inheritdoc
      */
     getSearchModule: function () {
-        return 'HT_Assets_and_Objects';
+        return 'Accounts';
     },
 
     /**
@@ -254,7 +254,7 @@
             this._updateAndTriggerChange(this.value);
         }
     }, 0),
-    
+
     /**
      * Removes a transporter to the list
      */
@@ -278,11 +278,11 @@
     /**
      * @inheritdoc
      */
-    bindDomChange: function() {
+    bindDomChange: function () {
         var $el = this.$(this.dateTag);
         if ($el.length) {
             var self = this;
-            $el.on('change', function() {
+            $el.on('change', function () {
                 self._updateAndTriggerChange(self.value);
             });
         }
@@ -292,7 +292,7 @@
     /**
      * @inheritdoc
      */
-    unbindDom: function() {
+    unbindDom: function () {
         this.$(this.dateTag).off();
         this._super('unbindDom');
     },
@@ -300,11 +300,25 @@
     /**
      * @inheritdoc
      */
-    _dispose: function() {
-         if (this._hasDatePicker) {
-            $(window).off('resize', this.$(this.fieldTag).data('datepicker').place);
+    _dispose: function () {
+        if (this._hasDatePicker) {
+            if (!_.isUndefined(this.$(this.fieldTag).data('datepicker')))
+                $(window).off('resize', this.$(this.fieldTag).data('datepicker').place);
         }
 
         this._super('_dispose');
+    },
+
+    getFilterOptions: function (force) {
+        this._filterOptions = new app.utils.FilterOptions()
+                .config({
+                    'initial_filter': 'filterByTransporterTag',
+                    'initial_filter_label': 'LBL_FILTER_BY_TRANSPORTER_TAG',
+                    'filter_populate': {
+                        'tag': ['Transporter'],
+                    }
+                })
+                .format();
+        return this._filterOptions;
     },
 })

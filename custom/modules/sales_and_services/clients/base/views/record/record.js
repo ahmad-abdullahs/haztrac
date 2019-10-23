@@ -14,17 +14,17 @@
 
     colourTheFields: function () {
         if (this.model._relatedCollections.sales_and_services_revenuelineitems_1.length) {
-            var activeTab = app.user.lastState.get(app.user.lastState.key('activeTab', this));
-            if (activeTab != '#panel_completion') {
-                // simple decimal field 
-                $('tr[name*=RevenueLineItems_] td[name=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
-                // drop down field
-                $('tr[name*=RevenueLineItems_] td[name=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
-                // simple decimal field 
-                $('tr[name*=RevenueLineItems_] td[data-column=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
-                // drop down field
-                $('tr[name*=RevenueLineItems_] td[data-column=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
-            }
+//            var activeTab = app.user.lastState.get(app.user.lastState.key('activeTab', this));
+//            if (activeTab != '#panel_completion') {
+            // simple decimal field 
+            $('tr[name*=RevenueLineItems_] td[name=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
+            // drop down field
+            $('tr[name*=RevenueLineItems_] td[name=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
+            // simple decimal field 
+            $('tr[name*=RevenueLineItems_] td[data-column=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
+            // drop down field
+            $('tr[name*=RevenueLineItems_] td[data-column=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
+//            }
         }
     },
 

@@ -48,3 +48,4 @@ $mod_strings['LBL_RAIL_ADDRESS_COUNTRY'] = 'Rail Address Country';
 $mod_strings['LBL_RAIL_TRACK_NUM'] = 'Track Number';
 $mod_strings['LBL_RAIL_SERVED'] = 'Rail Served By';
 $mod_strings['LBL_RAIL_NOTES'] = 'Rail Description/Notes';
+$mod_strings['LBL_FILTER_BY_TRANSPORTER_TAG'] = 'Transporters';

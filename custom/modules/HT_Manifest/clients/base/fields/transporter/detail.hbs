@@ -16,7 +16,7 @@
         </div>
         <span class="normal index">
             <span class="detail">
-                {{formatDate transfer_date ../dateOptions}}
+                {{#if transfer_date}}{{formatDate transfer_date ../../dateOptions}}{{/if}}
             </span>
         </span>
     </span>

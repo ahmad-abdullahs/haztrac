@@ -17,7 +17,7 @@
         <span class="normal index">
             <span class="edit span10">
                 <div class="input-append date">
-                    <input type="text" data-type="date" name="{{../name}}" class="datepicker" value="{{formatDate transfer_date ../dateOptions}}" data-index="{{@index}}">
+                    <input type="text" data-type="date" name="{{../name}}" class="datepicker" {{#if transfer_date}}value="{{formatDate transfer_date ../../dateOptions}}"{{else}}value=""{{/if}} data-index="{{@index}}">
                     <span class="add-on" data-icon="calendar"><i class="fa fa-calendar"></i></span>
                 </div>
             </span>
