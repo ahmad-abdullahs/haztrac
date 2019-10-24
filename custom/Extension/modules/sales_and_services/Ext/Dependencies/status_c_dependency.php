@@ -15,13 +15,5 @@ $dependencies['sales_and_services']['set_on_date_and_time_required_on_status_sch
                 'value' => 'equal($status_c, "Scheduled")',
             ),
         ),
-        array(
-            'name' => 'SetRequired',
-            'params' => array(
-                'target' => 'on_time_c',
-                'label' => 'on_time_c_label',
-                'value' => 'equal($status_c, "Scheduled")',
-            ),
-        ),
     ),
 );

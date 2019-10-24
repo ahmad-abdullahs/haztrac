@@ -8,7 +8,7 @@ require_once("clients/base/api/ModuleApi.php");
 class CustomSASModuleApi extends ModuleApi {
 
     public function registerApiRest() {
-        return array_merge(parent::registerApiRest(), array(
+        return array_merge(parent::registerApiRest()/*, array(
             'create' => array(
                 'reqType' => 'POST',
                 'path' => array('sales_and_services'),
@@ -25,7 +25,7 @@ class CustomSASModuleApi extends ModuleApi {
                 'shortHelp' => 'This method updates a record of the specified type',
                 'longHelp' => 'include/api/help/module_record_put_help.html',
             ),
-        ));
+        )*/);
     }
 
     /**
