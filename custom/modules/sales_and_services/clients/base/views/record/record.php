@@ -354,12 +354,16 @@ $viewdefs['sales_and_services'] = array(
                         'placeholders' => true,
                         'fields' =>
                         array(
-                            0 =>
+                            array(
+                                'name' => 'recurring_sale_c',
+                                'label' => 'LBL_RECURRING_SALE',
+                            ),
+                            array(
+                            ),
                             array(
                                 'name' => 'recurring_start_date_c',
                                 'label' => 'LBL_RECURRING_START_DATE',
                             ),
-                            1 =>
                             array(
                                 'name' => 'timings',
                                 'type' => 'fieldset-sas',
@@ -396,17 +400,14 @@ $viewdefs['sales_and_services'] = array(
                                     ),
                                 ),
                             ),
-                            2 =>
                             array(
                                 'name' => 'occurs_c',
                                 'type' => 'radioenum-linear',
                                 'style' => 'width: 100%;',
                                 'label' => 'LBL_OCCURS',
                             ),
-                            3 =>
                             array(
                             ),
-                            4 =>
                             array(
                                 'name' => 'daily_repeat_on',
                                 'type' => 'fieldset-sas',
@@ -468,7 +469,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            5 =>
                             array(
                                 'name' => 'weekly_repeat_on',
                                 'type' => 'fieldset-sas',
@@ -531,7 +531,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            6 =>
                             array(
                                 'name' => 'monthly_repeat_on_one',
                                 'type' => 'fieldset-sas',
@@ -586,7 +585,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            7 =>
                             array(
                                 'name' => 'monthly_repeat_on_two',
                                 'type' => 'fieldset-sas',
@@ -638,7 +636,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            8 =>
                             array(
                                 'name' => 'monthly_repeat_on_three',
                                 'type' => 'fieldset-sas',
@@ -698,7 +695,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            9 =>
                             array(
                                 'name' => 'yearly_repeat_on_one',
                                 'type' => 'fieldset-sas',
@@ -726,7 +722,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            10 =>
                             array(
                                 'name' => 'yearly_repeat_on_two',
                                 'type' => 'fieldset-sas',
@@ -793,7 +788,6 @@ $viewdefs['sales_and_services'] = array(
                                 ),
                                 'span' => 12,
                             ),
-                            11 =>
                             array(
                                 'name' => 'yearly_repeat_on_three',
                                 'type' => 'fieldset-sas',
@@ -881,36 +875,33 @@ $viewdefs['sales_and_services'] = array(
                         'placeholders' => 1,
                         'fields' =>
                         array(
-                            0 =>
                             array(
                                 'name' => 'complete_date_c',
                                 'label' => 'LBL_COMPLETE_DATE',
-                                'span' => 12,
                             ),
-                            1 =>
+                            array(
+                                'name' => 'status_c',
+                                'label' => 'LBL_STATUS',
+                            ),
                             array(
                                 'name' => 'payment_status_c',
                                 'label' => 'LBL_PAYMENT_STATUS',
                             ),
-                            2 =>
                             array(
                                 'name' => 'payment_reference_c',
                                 'label' => 'LBL_PAYMENT_REFERENCE',
                             ),
-                            3 =>
                             array(
                                 'name' => 'closing_notes_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_CLOSING_NOTES',
                                 'span' => 12,
                             ),
-                            4 =>
                             array(
                                 'name' => 'lab_result_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_LAB_RESULT',
                             ),
-                            5 =>
                             array(
                                 'name' => 'sales_and_service_total_c',
                                 'label' => 'LBL_SALES_AND_SERVICE_TOTAL',
