@@ -331,20 +331,8 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'cost_usdollar',
-                                'comment' => 'Cost expressed in USD',
-                                'studio' =>
-                                array(
-                                    'editview' => false,
-                                    'mobile' => false,
-                                ),
-                                'readonly' => true,
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                ),
-                                'label' => 'LBL_COST_USDOLLAR',
+                                'name' => 'related_rli_total_c',
+                                'label' => 'LBL_RELATED_RLI_TOTAL',
                             ),
                             5 =>
                             array(
@@ -352,31 +340,9 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             6 =>
                             array(
-                                'name' => 'discount_usdollar',
-                                'comment' => 'Discount price expressed in USD',
-                                'studio' =>
-                                array(
-                                    'editview' => false,
-                                    'mobile' => false,
-                                ),
-                                'readonly' => true,
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                ),
-                                'label' => 'LBL_DISCOUNT_USDOLLAR',
-                            ),
-                            7 =>
-                            array(
-                                'name' => 'related_rli_total_c',
-                                'label' => 'LBL_RELATED_RLI_TOTAL',
-                            ),
-                            8 =>
-                            array(
                                 'name' => 'tax_class',
                             ),
-                            9 =>
+                            7 =>
                             array(
                                 'name' => 'base_rate',
                                 'label' => 'LBL_CURRENCY_RATE',
@@ -547,34 +513,8 @@ $viewdefs['RevenueLineItems'] = array(
                                 'label' => 'LBL_ESTIMATED_QUANTITY',
                             ),
                             3 => 'quantity',
-                            4 =>
-                            array(
-                                'name' => 'discount_price',
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'discount_price',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                            ),
+                            4 => 'sales_stage',
                             5 =>
-                            array(
-                                'name' => 'product_uom_c',
-                                'label' => 'LBL_UNIT_OF_MEASURE',
-                            ),
-                            6 => 'sales_stage',
-                            7 => 'probability',
-                            8 =>
-                            array(
-                                'name' => 'commit_stage',
-                                'span' => 6,
-                            ),
-                            9 =>
                             array(
                                 'name' => 'date_closed',
                                 'related_fields' =>
@@ -582,29 +522,23 @@ $viewdefs['RevenueLineItems'] = array(
                                     0 => 'date_closed_timestamp',
                                     1 => 'revenuelineitems_revenuelineitems_1',
                                 ),
-                                'span' => 6,
                             ),
-                            10 =>
+                            6 =>
                             array(
                                 'name' => 'product_template_name',
                                 'span' => 12,
                             ),
-                            11 =>
+                            7 =>
                             array(
-                                'name' => 'discount_amount',
-                                'type' => 'currency',
+                                'name' => 'quote_name',
+                                'label' => 'LBL_ASSOCIATED_QUOTE',
                                 'related_fields' =>
                                 array(
-                                    0 => 'discount_amount',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
+                                    0 => 'mft_part_num',
                                 ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
+                                'readonly' => true,
                             ),
-                            12 =>
+                            8 =>
                             array(
                                 'name' => 'total_amount',
                                 'type' => 'currency',
@@ -621,134 +555,44 @@ $viewdefs['RevenueLineItems'] = array(
                                 'currency_field' => 'currency_id',
                                 'base_rate_field' => 'base_rate',
                             ),
-                            13 =>
-                            array(
-                                'name' => 'likely_case',
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'likely_case',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                            ),
-                            14 =>
-                            array(
-                                'name' => 'quote_name',
-                                'label' => 'LBL_ASSOCIATED_QUOTE',
-                                'related_fields' =>
-                                array(
-                                    0 => 'mft_part_num',
-                                ),
-                                'readonly' => true,
-                            ),
-                            15 =>
+                            9 =>
                             array(
                                 'name' => 'tag',
                                 'span' => 6,
                             ),
-                            16 =>
+                            10 =>
                             array(
                                 'name' => 'sales_and_services_revenuelineitems_1_name',
                                 'span' => 6,
                             ),
-                            17 =>
+                            11 =>
                             array(
                                 'name' => 'ht_manifest_revenuelineitems_1_name',
                             ),
-                            18 =>
-                            array(
-                                'name' => 'list_price',
-                                'readonly' => true,
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'list_price',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                            ),
-                            19 =>
-                            array(
-                                'name' => 'revenuelineitems_revenuelineitems_1_name',
-                            ),
-                            20 =>
-                            array(
-                                'name' => 'related_rli_total_c',
-                                'label' => 'LBL_RELATED_RLI_TOTAL',
-                            ),
-                            21 =>
-                            array(
-                                'name' => 'deal_calc_usdollar',
-                                'comment' => 'deal_calc_usdollar',
-                                'studio' =>
-                                array(
-                                    'editview' => false,
-                                    'mobile' => false,
-                                ),
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                ),
-                                'label' => 'LBL_DISCOUNT_TOTAL_USDOLLAR',
-                            ),
-                            22 =>
-                            array(
-                                'name' => 'discount_amount_usdollar',
-                                'studio' =>
-                                array(
-                                    'editview' => false,
-                                    'mobile' => false,
-                                ),
-                                'label' => 'LBL_DISCOUNT_RATE_USDOLLAR',
-                            ),
-                            23 =>
-                            array(
-                                'name' => 'deal_calc',
-                                'comment' => 'deal_calc',
-                                'customCode' => '{$fields.currency_symbol.value}{$fields.deal_calc.value}&nbsp;',
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                    2 => 'discount_select',
-                                    3 => 'discount_amount',
-                                    4 => 'discount_price',
-                                ),
-                                'label' => 'LBL_DISCOUNT_TOTAL',
-                            ),
-                            24 =>
-                            array(
-                                'name' => 'discount_rate_percent',
-                                'label' => 'LBL_DISCOUNT_AS_PERCENT',
-                            ),
-                            25 =>
-                            array(
-                                'name' => 'rli_type_c',
-                                'label' => 'LBL_RLI_TYPE',
-                            ),
-                            26 =>
-                            array(
-                                'name' => 'is_bundle_product_c',
-                                'label' => 'LBL_IS_BUNDLE_PRODUCT',
-                                'readonly' => true,
-                            ),
-                            27 =>
+                            12 =>
                             array(
                                 'name' => 'website',
                                 'type' => 'url',
                             ),
-                            28 =>
+                            13 =>
                             array(
+                                'name' => 'revenuelineitems_revenuelineitems_1_name',
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'related_rli_total_c',
+                                'label' => 'LBL_RELATED_RLI_TOTAL',
+                            ),
+                            15 =>
+                            array(
+                                'name' => 'rli_type_c',
+                                'label' => 'LBL_RLI_TYPE',
+                            ),
+                            16 =>
+                            array(
+                                'name' => 'is_bundle_product_c',
+                                'label' => 'LBL_IS_BUNDLE_PRODUCT',
+                                'readonly' => true,
                             ),
                         ),
                     ),
@@ -766,112 +610,24 @@ $viewdefs['RevenueLineItems'] = array(
                         array(
                             0 =>
                             array(
-                                'name' => 'best_case',
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'best_case',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
+                                'name' => 'rli_as_template_c',
+                                'label' => 'LBL_RLI_AS_TEMPLATE',
                             ),
-                            1 =>
-                            array(
-                                'name' => 'worst_case',
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'worst_case',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                            ),
-                            2 => 'next_step',
-                            3 => 'product_type',
-                            4 => 'lead_source',
-                            5 => 'campaign_name',
-                            6 => 'assigned_user_name',
-                            7 => 'team_name',
-                            8 =>
+                            1 => 'product_type',
+                            2 => 'lead_source',
+                            3 => 'campaign_name',
+                            4 => 'assigned_user_name',
+                            5 => 'team_name',
+                            6 =>
                             array(
                                 'name' => 'description',
                             ),
-                            9 =>
+                            7 =>
                             array(
                                 'name' => 'tax_class',
                                 'span' => 6,
                             ),
-                            10 =>
-                            array(
-                                'name' => 'cost_price',
-                                'readonly' => true,
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'cost_price',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                            ),
-                            11 =>
-                            array(
-                                'name' => 'discount_usdollar',
-                                'comment' => 'Discount price expressed in USD',
-                                'studio' =>
-                                array(
-                                    'editview' => false,
-                                    'mobile' => false,
-                                ),
-                                'readonly' => true,
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                ),
-                                'label' => 'LBL_DISCOUNT_USDOLLAR',
-                            ),
-                            12 =>
-                            array(
-                                'name' => 'rli_as_template_c',
-                                'label' => 'LBL_RLI_AS_TEMPLATE',
-                            ),
-                            13 =>
-                            array(
-                                'name' => 'date_modified_by',
-                                'readonly' => true,
-                                'type' => 'fieldset',
-                                'inline' => true,
-                                'label' => 'LBL_DATE_MODIFIED',
-                                'fields' =>
-                                array(
-                                    0 =>
-                                    array(
-                                        'name' => 'date_modified',
-                                    ),
-                                    1 =>
-                                    array(
-                                        'type' => 'label',
-                                        'default_value' => 'LBL_BY',
-                                    ),
-                                    2 =>
-                                    array(
-                                        'name' => 'modified_by_name',
-                                    ),
-                                ),
-                            ),
-                            14 =>
+                            8 =>
                             array(
                                 'name' => 'date_entered_by',
                                 'readonly' => true,
@@ -895,8 +651,29 @@ $viewdefs['RevenueLineItems'] = array(
                                     ),
                                 ),
                             ),
-                            15 =>
+                            9 =>
                             array(
+                                'name' => 'date_modified_by',
+                                'readonly' => true,
+                                'type' => 'fieldset',
+                                'inline' => true,
+                                'label' => 'LBL_DATE_MODIFIED',
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'date_modified',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'type' => 'label',
+                                        'default_value' => 'LBL_BY',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'modified_by_name',
+                                    ),
+                                ),
                             ),
                         ),
                     ),
