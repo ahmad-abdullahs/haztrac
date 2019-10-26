@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_PHYSICAL_ADDRESS'] = '3rd Party/Broker';
 $mod_strings['LBL_PHYSICAL_ADDRESS_ACCOUNT_ID'] = '3rd Party/Broker ID';
@@ -49,3 +50,4 @@ $mod_strings['LBL_RAIL_TRACK_NUM'] = 'Track Number';
 $mod_strings['LBL_RAIL_SERVED'] = 'Rail Served By';
 $mod_strings['LBL_RAIL_NOTES'] = 'Rail Description/Notes';
 $mod_strings['LBL_FILTER_BY_TRANSPORTER_TAG'] = 'Transporters';
+$mod_strings['LBL_LIST_TRANSFER_DATE'] = 'Transfer Date';

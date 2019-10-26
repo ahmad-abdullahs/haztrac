@@ -1,3 +1,4 @@
+{{log this}}
 {{#each value}}
 <div>
     <span class="span6">
@@ -6,14 +7,10 @@
                 {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
             </div>
         {{/eq}}
-        <span style="display: inline-flex;">
-            {{#if iconVisibility}}
-                <a name="advance-relate-preview" class="rowaction" data-href="{{../href}}" style="padding-right: 5px;">
-                    <i rel="tooltip" title="Preview Record" class="fa fa-eye">
-                    </i>
-                </a>
-            {{/if}}
-            {{#if href}}<a class="ellipsis_inline" data-placement="bottom" title="{{../name}}" href="{{../href}}">{{../name}}</a>{{else}}{{../name}}{{/if}}
+        <span class="normal index">
+            <span class="detail" style="padding-left: 0px;">
+                {{name}}
+            </span>
         </span>
     </span>
     <span class="span6">

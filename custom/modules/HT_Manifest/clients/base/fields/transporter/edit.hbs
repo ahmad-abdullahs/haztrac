@@ -1,9 +1,11 @@
 {{#each value}}
 <div>
     <span class="span6">
-        <div class="record-label" style="margin-left: 0px;">
-            {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
-        </div>
+        {{#eq @index 0}}
+            <div class="record-label" style="margin-left: 0px;">
+                {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
+            </div>
+        {{/eq}}
         <span class="normal index">
             <span class="edit" style="padding-left: 0px;">
                 <input type="hidden" name="{{../name}}" class="select2 inherit-width" value="{{id}}" data-rname="{{name}}" data-index="{{@index}}">
@@ -11,13 +13,15 @@
         </span>
     </span>
     <span class="span6">
-        <div class="record-label">
-            {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
-        </div>
+        {{#eq @index 0}}
+            <div class="record-label">
+                {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
+            </div>
+        {{/eq}}
         <span class="normal index">
             <span class="edit span10">
                 <div class="input-append date">
-                    <input type="text" data-type="date" name="{{../name}}" class="datepicker" {{#if transfer_date}}value="{{formatDate transfer_date ../../dateOptions}}"{{else}}value=""{{/if}} data-index="{{@index}}">
+                    <input type="text" data-type="date" name="{{../name}}" class="datepicker" placeholder="{{../fieldPlaceholder}}" {{#if transfer_date}}value="{{formatDate transfer_date ../../dateOptions}}"{{else}}value=""{{/if}} data-index="{{@index}}">
                     <span class="add-on" data-icon="calendar"><i class="fa fa-calendar"></i></span>
                 </div>
             </span>

@@ -7,11 +7,33 @@
     },
 
     dateTag: 'input[data-type=date]',
+    fieldPlaceholder: '',
 
     dateOptions: {
         hash: {
             dateOnly: true
         }
+    },
+
+    initialize: function (options) {
+        this._super('initialize', [options]);
+        this._initPlaceholderAttribute();
+    },
+
+    _initPlaceholderAttribute: function () {
+        var placeholder = app.date.toDatepickerFormat(this.getUserDateFormat());
+
+        this.fieldPlaceholder = this.def.placeholder && app.lang.get(
+                this.def.placeholder,
+                this.module,
+                {format: placeholder}
+        ) || placeholder;
+
+        return this;
+    },
+
+    getUserDateFormat: function () {
+        return app.user.getPreference('datepref');
     },
 
     /**
@@ -23,6 +45,8 @@
         }
 
         this._super('_render');
+
+        this.$el.parents('[data-type=' + this.name + ']').css('background-color', 'whitesmoke');
 
         if (this.tplName !== 'edit' && this.tplName !== 'massupdate') {
             this._hasDatePicker = false;
@@ -55,8 +79,7 @@
             return;
         }
 
-        var index = this._currentIndex,
-                record = this.value;
+        var index = this._currentIndex, record = this.value;
         record[index || 0].id = model.id;
         record[index || 0].name = model.value;
 
@@ -232,7 +255,44 @@
             });
         }
 
+        if (this.action !== 'edit' && !this.context.get('create')) {
+            _.each(value, function (eachTransfer, index) {
+                this.buildRoute(this.getSearchModule(), eachTransfer['id'], value, index);
+            }, this);
+        }
+
         return value;
+    },
+
+    buildRoute: function (module, id, value, index) {
+        if (_.isUndefined(id)) {
+            return;
+        }
+
+        var oldModule = module;
+        // This is a workaround until bug 61478 is resolved to keep parity with 6.7
+        if (module === 'Users' && this.context.get('module') !== 'Users') {
+            module = 'Employees';
+        }
+
+        if (_.isEmpty(module)) {
+            return;
+        }
+
+        var relatedRecord = this.model.get('ht_manifest_accounts_1');
+        var action = this.viewDefs.route ? this.viewDefs.route.action : 'view';
+
+        if (relatedRecord && app.acl.hasAccess(action, oldModule, {acls: relatedRecord._acl})) {
+            this.href = '#' + app.router.buildRoute(module, id);
+            //FIXME SC-6128 will remove this deprecated block.
+        } else if (!relatedRecord) {
+            value[index]['href'] = '#' + app.router.buildRoute(module, id);
+            value[index]['iconVisibility'] = true;
+        } else {
+            // if no access to module, remove the href
+            value[index]['href'] = undefined;
+            value[index]['iconVisibility'] = false;
+        }
     },
 
     /**
@@ -271,7 +331,10 @@
             }
 
             this.value.splice(index, 1);
-            this._updateAndTriggerChange(this.value);
+            // this._updateAndTriggerChange(this.value);
+
+            this.model.unset(this.name, {silent: true}).set(this.name, this.value);
+            this.render();
         }
     }, 0),
 

@@ -31,9 +31,17 @@
             showPreview: function (ele) {
                 var href = $(ele.delegateTarget).find('a:last').prop('href');
                 href = href.replace("#", "").split("/");
+                var manifestTransferFieldFlag = false;
+
+                if (ele.handleObj.selector == "a[name=advance-relate-preview]" && !_.isUndefined($(ele.currentTarget).data('href'))) {
+                    href = $(ele.currentTarget).data('href');
+                    href = href.replace("#", "").split("/");
+                    manifestTransferFieldFlag = true;
+                }
+
                 var id = _.uniqueId('pre');
 
-                if (href.length > 2) {
+                if (href.length > 2 || manifestTransferFieldFlag) {
                     // Show alert 
                     app.alert.show('fetching_related_record', {
                         level: 'process',
