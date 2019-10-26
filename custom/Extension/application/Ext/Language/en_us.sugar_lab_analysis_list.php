@@ -1,5 +1,5 @@
 <?php
- // created: 2019-10-16 16:12:24
+ // created: 2019-10-25 21:40:41
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -9,18 +9,18 @@ $app_list_strings['lab_analysis_list']=array (
   'Organic Chlorides' => 'Organic Chlorides, PPM',
   'Inorganic Chlorides' => 'Inorganic Chlorides, PPM',
   'Color ASTM' => 'Color ASTM',
-  'Density' => 'Density',
-  'Density lbgal' => 'Density, lb/gal',
+  'Density' => 'Density @ 60°F, g/ml (D4052)',
+  'Density lbgal' => 'Density, lb/gal (Calc)',
   'Distillation of Petroleum D1160' => 'Distillation of Petroleum (D1160)',
   'Flash Point PMCC D93 400f' => 'Flash Point, PMCC, >400°F (D93)',
   'Flash Point PMCC F D93' => 'Flash Point, PMCC, >200°F (D93)',
   'Flash Point COC F D92' => 'Flash Point, COC, °F (D92)',
   'FAME Content Wt' => 'FAME Content, Wt%',
-  'Hydrogen Sulfide PPM' => 'Hydrogen Sulfide, PPM',
-  'Total Halogens PPM' => 'Total Halogens, PPM',
-  'Compatibility With 6 Oil 5050' => 'Compatibility With 6 Oil, 50/50',
-  'Heat of Combustion BTUGal' => 'Heat of Combustion, BTU/Gal',
-  'Heat of Combustion BTUlb' => 'Heat of Combustion, BTU/lb',
+  'Hydrogen Sulfide PPM' => 'Hydrogen Sulfide, PPM (IP570)',
+  'Total Halogens PPM' => 'Total Halogens, PPM (SW9075)',
+  'Compatibility With 6 Oil 5050' => 'Compatibility With 6 Oil, 50/50 (D4740)',
+  'Heat of Combustion BTUGal' => 'Heat of Combustion, BTU/Gal (D240)',
+  'Heat of Combustion BTUlb' => 'Heat of Combustion, BTU/lb (D240)',
   'Phenol' => 'Phenol, PPM',
   'Physical Hydrogen' => 'pH',
   'Polychlorinated Biphenyls' => 'Polychlorinated Biphenyls, ug/g',
@@ -30,7 +30,7 @@ $app_list_strings['lab_analysis_list']=array (
   'Vapor Pressure  60 F PSIA' => 'Vapor Pressure @ 60°F, PSIA',
   'Sediment by Extraction Wt' => 'Sediment by Extraction, Wt%',
   'Styrene PPM' => 'Styrene, PPM',
-  'Sulfur Wt' => 'Sulfur, Wt%',
+  'Sulfur Wt' => 'Sulfur, Wt% (',
   'Total Acid Number' => 'Total Acid Number (TAN), Mg_KOH/gm',
   'Water by Distillation' => 'Water by Distillation, Vol%',
   'Water by Karl Fisher' => 'Water by Karl Fisher, Vol%',

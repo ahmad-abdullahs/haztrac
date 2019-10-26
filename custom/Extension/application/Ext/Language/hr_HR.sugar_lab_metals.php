@@ -1,5 +1,5 @@
 <?php
- // created: 2019-07-31 07:33:40
+ // created: 2019-10-25 23:31:06
 
 $app_list_strings['lab_metals']=array (
   'Aluminum' => 'Aluminum (Al), PPM',
@@ -21,4 +21,5 @@ $app_list_strings['lab_metals']=array (
   'Sodium' => 'Sodium (Na), PPM',
   'Vanadium' => 'Vanadium (V), PPM',
   'Zinc' => 'Zinc (Zn), PPM',
+  'Al and Si' => 'Al+Si, PPM (IP501)',
 );
