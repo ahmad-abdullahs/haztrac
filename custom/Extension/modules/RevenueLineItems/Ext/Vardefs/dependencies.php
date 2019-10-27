@@ -29,3 +29,5 @@ $dictionary['RevenueLineItem']['fields']['manifest_container_type_c']['dependenc
 $dictionary['RevenueLineItem']['fields']['manifest_uom_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['manifest_required_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['waste_profile_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['estimated_quantity_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['quantity']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';

@@ -20,6 +20,15 @@
     {{/each}}
 </div>
 <div class="subpanel-controls btn-toolbar pull-right">
+    <span class="detail" tabindex="-1">
+        <a href="javascript:void(0);" class="rowaction btn btn-primary" role="button" tabindex="0" name="cancel_all_button" track="click:cancel_all_button" style="width: 50px !important; display: none;">Cancel</a>
+    </span>
+    <span class="detail">
+        <a href="javascript:void(0);" class="rowaction btn btn-primary" data-event="button:save_all_button:click" role="button" tabindex="0" name="save_all_button" track="click:save_all_button" style="width: 50px !important; display: none;">Save</a>
+    </span>
+    <span class="detail">
+        <a href="javascript:void(0);" class="rowaction btn btn-primary" data-event="button:edit_all_button:click" role="button" tabindex="0" name="edit_all_button" track="click:edit_all_button" style="width: 60px !important;">Edit All</a>
+    </span>
     {{#each meta.buttons}}
         {{field ../this}}
     {{/each}}

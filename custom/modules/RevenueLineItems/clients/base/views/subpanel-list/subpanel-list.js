@@ -60,8 +60,15 @@
         // hear the parent record cancel event and cancel all the subpanel rows. 
         if (!_.isUndefined(this.leftColumns[0])) {
             _.each(this.leftColumns[0].fields, function (field) {
-                if (field.name == 'inline-cancel' && field.type == 'editablelistbutton') {
-                    field.type = 'ears-up-editablelistbutton';
+                if ((field.name == 'inline-cancel') && field.type == 'editablelistbutton') {
+                    field.type = 'cancel-ears-up-editablelistbutton';
+                }
+            });
+        }
+        if (!_.isUndefined(this.rightColumns[0])) {
+            _.each(this.rightColumns[0].fields, function (field) {
+                if ((field.name == 'inline-save') && field.type == 'editablelistbutton') {
+                    field.type = 'save-ears-up-editablelistbutton';
                 }
             });
         }

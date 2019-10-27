@@ -35,6 +35,9 @@
     events: {
         'click': 'togglePanel',
         'click a[name=create_button]:not(".disabled")': 'createRelatedClicked',
+        'click a[name=edit_all_button]:not(".disabled")': 'editAllRowClicked',
+        'click a[name=save_all_button]:not(".disabled")': 'saveAllRowClicked',
+        'click a[name=cancel_all_button]:not(".disabled")': 'cancelAllRowClicked',
         'keydown [data-a11y=toggle]': '_handleKeyClick'
     },
 
@@ -45,6 +48,69 @@
      */
     initialize: function (options) {
         this._super('initialize', [options]);
+    },
+
+    bindDataChange: function () {
+        this._super("bindDataChange");
+        if (this.collection) {
+            this.collection.on('reset', function () {
+                this.$el.find('a[name*=_all_button]:not("a[name=edit_all_button]")').hide();
+                this.$el.find('a[name=edit_all_button]').show();
+            }, this);
+        }
+    },
+
+    editAllRowClicked: function (ele) {
+        var self = this;
+        $.when(this.triggerEdit()).then(function () {
+            if (self.collection.models) {
+                self.$(ele.target).hide();
+                self.$(ele.target).parent().parent().find('a[name="save_all_button"]').show();
+                self.$(ele.target).parent().parent().find('a[name="cancel_all_button"]').show();
+            }
+        });
+    },
+
+    triggerEdit: function () {
+        if (this.collection.models) {
+            _.each(this.collection.models, function (model) {
+                this.context.parent.trigger('edit:full:subpanel:cstm', model, {'def': {}});
+            }, this);
+        }
+    },
+
+    saveAllRowClicked: function (ele) {
+        var self = this;
+        $.when(this.triggerSave()).then(function () {
+            if (self.collection.models) {
+                self.$(ele.target).hide();
+                self.$(ele.target).parent().parent().find('a[name="cancel_all_button"]').hide();
+                self.$(ele.target).parent().parent().find('a[name="edit_all_button"]').show();
+            }
+        });
+    },
+
+    triggerSave: function () {
+        if (this.collection.models) {
+            this.context.parent.trigger('save:full:subpanel:cstm');
+        }
+    },
+
+    cancelAllRowClicked: function (ele) {
+        var self = this;
+        $.when(this.triggerCancel()).then(function () {
+            if (self.collection.models) {
+                self.$(ele.target).hide();
+                self.$(ele.target).parent().parent().find('a[name="save_all_button"]').hide();
+                self.$(ele.target).parent().parent().find('a[name="edit_all_button"]').show();
+            }
+        });
+    },
+
+    triggerCancel: function () {
+        if (this.collection.models) {
+            this.context.parent.trigger('cancel:full:subpanel:cstm');
+        }
     },
 
     openCreateDrawer: function (module, link) {

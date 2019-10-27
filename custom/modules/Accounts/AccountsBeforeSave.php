@@ -15,7 +15,6 @@ class AccountsBeforeSave {
             $sq->select->fieldRaw('MAX(account_number_c)', 'account_number_c');
 
             $account_number_c = $sq->getOne();
-            $GLOBALS['log']->fatal('Data : ' . $account_number_c);
             $max_id = '';
             if (empty($account_number_c)) {
                 $max_id = 'A17940';

@@ -72,7 +72,8 @@
             });
         });
 
-        // Make the Revenue Line Items subpanel in editable mode when completion tab is clicked
+        // Make the Revenue Line Items subpanel in non editable mode when any tab 
+        // other than completion tab is clicked
         this.$('li.tab[class*=panel_]:not(.panel_completion) > a').on('click', function () {
             $.when(self.context.trigger('cancel:full:subpanel:cstm')).then(function () {
                 //*** Make the Estimated Quantity and Unit of Measure fields coloured.
@@ -155,6 +156,10 @@
         if (this.disposed) {
             return;
         }
+
+        // Call the trigger to notify the RevenueLineItem Subpanel to save all the items in the subpanel
+        this.context.trigger('save:full:subpanel:cstm');
+
         this._saveModel();
         this.$('.record-save-prompt').hide();
 
