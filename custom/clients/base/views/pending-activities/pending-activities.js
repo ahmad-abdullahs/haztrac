@@ -11,6 +11,30 @@
     /**
      * @inheritdoc
      */
+    _getFilters: function(index) {
+
+        var today = app.date().formatServer(true);
+        var tab = this.tabs[index];
+        var filter = {};
+        var filterNotEmpty = {};
+        var filters = [];
+        var defaultFilters = {
+                today: {$lte: today},
+                future: {$gt: today}
+            };
+
+        filter[tab.filter_applied_to] = defaultFilters[this.getDate()];
+        filters.push(filter);
+
+        filterNotEmpty[tab.filter_applied_to] = {$empty: ''}
+        filters.push(filterNotEmpty);
+
+        return [{$or: filters}];
+    },
+
+    /**
+     * @inheritdoc
+     */
     heldActivity: function(model) {
         var self = this;
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
