@@ -1,0 +1,44 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{#if filterCollection.models.length}}
+    <div class="scroll" style="">
+        <ul class="nav nav-tabs custom-dashlet-tabs" role="menu" style="
+                    white-space: nowrap;
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                    width: 100%;
+                    height: 47px;
+                    position: inherit;
+                    margin-bottom: 0px;">
+            {{#each filterCollection.models}}
+                {{#eq ../_currentFilterId attributes.id}}
+                    <li style="margin: 0 0%;">
+                        <a class="ellipsis_inline" tabindex="-1" data-id="{{attributes.id}}" href="javascript:void(0);" data-route="javascript:void(0);" 
+                        style="border: 1px solid rgba(0,0,0,0.5);" data-original-title="" title="">
+                            <i class="fa fa-check"></i>
+                            {{attributes.name}}
+                        </a>
+                    </li>
+                {{else}}
+                    <li style="margin: 0 0%;">
+                        <a class="ellipsis_inline" tabindex="-1" data-id="{{attributes.id}}" href="javascript:void(0);" data-route="javascript:void(0);" 
+                        style="border: 1px solid rgba(0,0,0,0.5);" data-original-title="" title="">
+                            <i class="fa fa-filter"></i>
+                            {{attributes.name}}
+                        </a>
+                    </li>
+                {{/eq}}
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}
