@@ -70,16 +70,88 @@
         });
     },
 
+    _onSelect2Change: function (e) {
+        var $el = $(e.target);
+        var plugin = $el.data('select2');
+        var id = e.val;
+        var _index = $(e.target).closest('div').index();
+
+        if (_.isUndefined(id)) {
+            return;
+        }
+
+        // For multiselect fields, we update the data-rname attributes
+        // so it stays in sync with the id list, and allows us to use
+        // 'setValue' method. The use of 'setValue' method is required
+        // to re-render the field.
+        if (this.def.isMultiSelect) {
+            var dataRname = plugin.opts.element.data('rname');
+            dataRname = dataRname ? dataRname.split(this._separator) : [];
+            var ids = $el.select2('val');
+
+            if (e.added) {
+                dataRname.push(e.added.text);
+            } else if (e.removed) {
+                dataRname = _.without(dataRname, e.removed.text);
+            } else {
+                return;
+            }
+            var models = _.map(ids, function (id, index) {
+                return {id: id, value: dataRname[index]};
+            });
+
+            this.setValue(models);
+            return;
+        }
+
+        var value = (id) ? plugin.selection.find('span').text() : $el.data('rname');
+        var collection = plugin.context;
+        var attributes = {};
+        if (collection && !_.isEmpty(id)) {
+            // if we have search results use that to set new values
+            var model = collection.get(id);
+            attributes.id = model.id;
+            attributes.value = model.get(this.getRelatedModuleField());
+            _.each(model.attributes, function (value, field) {
+                if (app.acl.hasAccessToModel('view', model, field)) {
+                    attributes[field] = attributes[field] || model.get(field);
+                }
+            });
+        } else if (e.currentTarget.value && value) {
+            // if we have previous values keep them
+            attributes.id = value;
+            attributes.value = e.currentTarget.value;
+        } else {
+            // default to empty
+            attributes.id = '';
+            attributes.value = '';
+        }
+
+        // _index is added to fix the bug, In edit mode when user hit the cross x icon on the relate field
+        // despite of clearing the respective field, it clears the 0th index of field which was a bug
+        // It is fixed through getting the index of div in the span.
+        // <span>
+        //      <div>Relate Field 1</div>
+        //      <div>Relate Field 2</div>
+        //      <div>Relate Field 3</div>
+        // </span>
+        this.setValue(attributes, _index);
+    },
+
     /**
      * Called to update value when a selection is made from options view dialog
      * @param model New value for teamset
      */
-    setValue: function (model) {
+    setValue: function (model, _index) {
         if (!model) {
             return;
         }
 
         var index = this._currentIndex, record = this.value;
+        if (!_.isUndefined(_index) && !_.isNull(_index)) {
+            index = _index;
+        }
+
         record[index || 0].id = model.id;
         record[index || 0].name = model.value;
 
