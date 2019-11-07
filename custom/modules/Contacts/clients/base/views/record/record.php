@@ -223,7 +223,7 @@ $viewdefs['Contacts'] = array(
                                 'name' => 'accounts_and_roles_widget',
                                 'type' => 'accounts_and_roles_widget',
                                 'dismiss_label' => true,
-                                'span' => 8,
+                                'span' => 9,
                                 'related_fields' => array(
                                     'accounts_and_roles_widget',
                                 ),
@@ -233,12 +233,11 @@ $viewdefs['Contacts'] = array(
                                         'css_class' => 'accounts_and_roles_widget_name',
                                         'label' => 'LBL_ACCOUNTS_AND_ROLES_WIDGET_ACCOUNT',
                                         'rname' => 'name',
-//                                        'type' => 'drawer-relate',
                                         'type' => 'relate',
                                         'id_name' => 'accounts_and_roles_widget_name_id',
                                         'module' => 'Accounts',
                                         'link' => true,
-                                        'span' => 4,
+                                        'span' => 5,
                                         'sortable' => false,
                                     ),
                                     array(
