@@ -9,3 +9,7 @@ $mod_strings['LBL_ICEMESSENGER'] = 'ICE IM Handle';
 $mod_strings['LBL_ROLE_CONTACT'] = 'Role';
 $mod_strings['LBL_PROJECTS_SUBPANEL_TITLE'] = 'Lab Projects';
 $mod_strings['LBL_CONTACTS_SALES_AND_SERVICES_1_FROM_SALES_AND_SERVICES_TITLE'] = 'Sales &amp; Service';
+$mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET'] = 'Account Name';
+$mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ACCOUNT'] = 'Account Name';
+$mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ROLE'] = 'Role';
+$mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_PRIMARY'] = 'Primary';

@@ -1,0 +1,30 @@
+{{log "preview"}}
+{{#notEq this.carrier_pm_records null}}
+    {{#if ../this.carrier_pm_records.name}}
+        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{#if ../this.carrier_pm_records.name}}{{../this.carrier_pm_records.name}}{{/if}}">
+            <a href="#Accounts/{{../this.carrier_pm_records.id}}">{{../this.carrier_pm_records.name}}</a>
+        </div>
+    {{/if}}
+    {{#if ../this.carrier_pm_records.phone}}
+        <table>
+            {{#each ../this.carrier_pm_records.phone}}  
+                <tr data-placement="bottom" title="" data-original-title="{{this.number}}{{#if this.ext}} x{{this.ext}}{{/if}}">
+                    <td style="width:40%">{{this.type}}</td>
+                    <td tyle="width:40%">{{this.number}}</td>
+                    <td style="width:20%">{{#if this.ext}} x{{this.ext}}{{else}}{{/if}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    {{/if}}    
+    {{#if ../this.carrier_pm_records.email}}
+        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{../this.carrier_pm_records.email}}">
+            {{../this.carrier_pm_records.email}}
+        </div>
+    {{/if}}
+{{/notEq}}
+{{#eq this.carrier_pm_records null}}
+	<span>
+		Loading Carrier PM 
+		<img src="custom/themes/default/images/inline_loading.gif" style="vertical-align: sub;">
+	</span>
+{{/eq}}
