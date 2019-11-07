@@ -28,7 +28,11 @@
         // This code has fixed the issue but it stops loading the subpanel on refresh list button.
         // Need to figure this out in future, how this piece of code is stoping it to fetch the subpanel on 
         // refresh list button click.
-        options.context.set('modelId', this.model.get('id'));
+        // options.context.set('modelId', this.model.get('id'));
+
+        /*Above code is commented after adding the if (!_.isNull(this.model)) 
+         * condition in saveModel and cancelEdit function
+         * in custom/clients/base/fields/editablelistbutton/editablelistbutton.js*/
 
         // Listen the Cancel/Save event call on the parent record view and Cancel/Save all the subpanel 
         // records in edit mode.

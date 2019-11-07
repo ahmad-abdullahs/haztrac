@@ -32,52 +32,47 @@
     },
     bindDomChange: function () {
         this._super("bindDomChange");
-        if (this.model.get(this.name) == 'Daily') {
-            // Hide all others
-            $('div[data-name=daily_repeat_on].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_one].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_two].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_three].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_one].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_two].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_three].record-cell').addClass('vis_action_hidden');
-            // Make the hidden fields empty
-            this.makeFieldsEmptyExcepty('Daily');
+        var divsList = [
+            "daily_repeat_on",
+            "weekly_repeat_on",
+            "monthly_repeat_on_one",
+            "monthly_repeat_on_two",
+            "monthly_repeat_on_three",
+            "yearly_repeat_on_one",
+            "yearly_repeat_on_two",
+            "yearly_repeat_on_three",
+        ], divsToHide = [], divsToShow = [], except = '';
+
+        if (_.isEmpty(this.model.get(this.name))) {
+            // Hide all occurances.
+            divsToHide = divsList;
+        } else if (this.model.get(this.name) == 'Daily') {
+            divsToShow = ["daily_repeat_on"];
+            divsToHide = _.difference(divsList, divsToShow);
         } else if (this.model.get(this.name) == 'Weekly') {
-            // Hide all others
-            $('div[data-name=weekly_repeat_on].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_one].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_two].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_three].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_one].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_two].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_three].record-cell').addClass('vis_action_hidden');
-            this.makeFieldsEmptyExcepty('Weekly');
+            divsToShow = ["weekly_repeat_on"];
+            divsToHide = _.difference(divsList, divsToShow);
         } else if (this.model.get(this.name) == 'Monthly') {
-            // Hide all others
-            $('div[data-name=monthly_repeat_on_one].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_two].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_three].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_one].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_two].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_three].record-cell').addClass('vis_action_hidden');
-            this.makeFieldsEmptyExcepty('Monthly');
+            divsToShow = ["monthly_repeat_on_one", "monthly_repeat_on_two", "monthly_repeat_on_three"];
+            divsToHide = _.difference(divsList, divsToShow);
         } else if (this.model.get(this.name) == 'Yearly') {
-            // Hide all others
-            $('div[data-name=yearly_repeat_on_one].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_two].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=yearly_repeat_on_three].record-cell').removeClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_one].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_two].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=monthly_repeat_on_three].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=daily_repeat_on].record-cell').addClass('vis_action_hidden');
-            $('div[data-name=weekly_repeat_on].record-cell').addClass('vis_action_hidden');
-            this.makeFieldsEmptyExcepty('Yearly');
+            divsToShow = ["yearly_repeat_on_one", "yearly_repeat_on_two", "yearly_repeat_on_three"];
+            divsToHide = _.difference(divsList, divsToShow);
         }
+
+        except = this.model.get(this.name);
+        // By default Hide all occurances.
+        this.handleVisibility(divsToHide, divsToShow);
+        // By default make all occurances empty.
+        this.makeFieldsEmptyExcepty(except);
+    },
+    handleVisibility: function (divsToHide, divsToShow) {
+        _.each(divsToHide, function (name) {
+            $('div[data-name=' + name + '].record-cell').addClass('vis_action_hidden');
+        });
+        _.each(divsToShow, function (name) {
+            $('div[data-name=' + name + '].record-cell').removeClass('vis_action_hidden');
+        });
     },
     makeFieldsEmptyExcepty: function (except) {
         _.each(this.fieldMappingForOccurance, function (occurance, key) {
