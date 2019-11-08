@@ -117,6 +117,7 @@ $viewdefs['Contacts']['portal']['view']['record'] = array(
                     'name' => 'accounts_and_roles_widget',
                     'type' => 'accounts_and_roles_widget',
                     'dismiss_label' => true,
+                    'readonly' => true,
                     'span' => 9,
                     'related_fields' => array(
                         'accounts_and_roles_widget',
