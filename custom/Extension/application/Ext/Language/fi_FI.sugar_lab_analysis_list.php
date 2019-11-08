@@ -1,5 +1,5 @@
 <?php
- // created: 2019-10-25 21:40:41
+ // created: 2019-10-27 20:24:25
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -36,4 +36,5 @@ $app_list_strings['lab_analysis_list']=array (
   'Visc 50' => 'Viscosity CST @ 50C',
   'Flash Point PMCC D93 400f' => 'Flash Point, PMCC, ',
   'Carbon Residue Micro Method' => 'Carbon Residue / Micro Method, Vol% (D4530)',
+  'Visc 40' => 'Viscosity cSt @ 40C (D445)',
 );
