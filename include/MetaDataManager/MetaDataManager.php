@@ -2906,7 +2906,7 @@ class MetaDataManager implements LoggerAwareInterface
         foreach ( $oldModuleList as $module ) {
             $moduleList[$module] = $module;
         }
-
+        $moduleList['Accounts'] = 'Accounts';
         $moduleList['_hash'] = $this->hashChunk($moduleList);
         return $moduleList;
     }

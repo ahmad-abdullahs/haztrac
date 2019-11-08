@@ -1,0 +1,12 @@
+--------------------------------------------------------------------------------
+*******************************Non Upgrade Safe Changes*************************
+--------------------------------------------------------------------------------
+
+// This change is make to allow the Accounts module shown in the Portal
+// This can be done in upgrade safe way by getting more in details into the ACL implemented
+// This takes time, in-order to done the task we made this change.
+// According to SugarCRM this can be done easily through metadata in SugarENT 9.2.0.0
+// For more details visit this link and read out the attached PDF 
+// https://community.sugarcrm.com/community/developer/tags#/?tags=sugar%209.2
+
+include/MetaDataManager/MetaDataManager.php Line# 2909 $moduleList['Accounts'] = 'Accounts';
