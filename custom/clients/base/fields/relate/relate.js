@@ -30,7 +30,7 @@
             var fieldIdName = this.fieldDefs.id_name;
             if (!_.isEmpty(fieldIdName)) {
                 var id = this.model.get(fieldIdName);
-                if (!_.isEmpty(id)) {
+                if (!_.isEmpty(id) && this.def['eye-icon'] != false) {
                     this.iconVisibility = true;
                 }
             }

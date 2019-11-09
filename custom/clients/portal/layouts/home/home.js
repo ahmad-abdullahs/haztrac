@@ -17,6 +17,8 @@
         // Figure out the modules that are available to the user. omit home because it doesn't exist
         this.module_list = _.without(app.metadata.getModuleNames({filter: 'display_tab', access: 'list'}), 'Home');
         this.module_list.push('Accounts');
+        this.module_list.push('sales_and_services');
+        this.module_list.reverse();
         options.meta.components = [];
         // Add components metadata as specified in the module list
         _.each(this.module_list, function(module) {
