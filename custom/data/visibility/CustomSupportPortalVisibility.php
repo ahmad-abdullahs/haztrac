@@ -19,32 +19,6 @@ require_once 'data/visibility/SupportPortalVisibility.php';
  */
 class CustomSupportPortalVisibility extends SupportPortalVisibility {
 
-    protected $wherePart = '';
-    protected static $accountIds;
-
-    /**
-     * Pull the list of account id's for a particular contact, we can't cache this because
-     * there are requirements about the account id's changing fairly often for a contact.
-     */
-    public function getAccountIds() {
-        if (!isset(self::$accountIds)) {
-            $db = DBManagerFactory::getInstance();
-
-            if (!empty($_SESSION['contact_id'])) {
-                // Using a raw query here, if we attempt to load in a bean and relationships
-                // we end up back here again trying to load the same data.
-                $ret = $db->query("SELECT accounts_contacts.account_id FROM accounts_contacts INNER JOIN accounts ON accounts_contacts.account_id = accounts.id WHERE accounts_contacts.contact_id = '" . $db->quote($_SESSION['contact_id']) . "' AND accounts_contacts.deleted = 0 AND accounts.deleted = 0");
-                self::$accountIds = array();
-                while ($row = $db->fetchByAssoc($ret)) {
-                    self::$accountIds[] = $row['account_id'];
-                }
-            } else {
-                self::$accountIds = array();
-            }
-        }
-        return self::$accountIds;
-    }
-
     /**
      * This function is here so we can put all the rules in one local section and just have it return the part of the query for that particular type
      * @param $query string The query string (probably shouldn't need to modify it here, but just in case)
@@ -116,15 +90,32 @@ class CustomSupportPortalVisibility extends SupportPortalVisibility {
                     if ($queryType == 'where') {
                         $queryPart = " accounts_sales_and_services_1_pv.id IN $accountIn ";
                     }
-                } else {
-//                    if ( $queryType == 'from' ) {
-//                        $this->bean->load_relationship('accounts_sales_and_services_1');
-//                        $queryPart = $this->bean->accounts_sales_and_services_1->getJoin(
-//                                        array(
-//                                            'join_table_alias' => 'accounts_sales_and_services_1', 'ignore_role' => true
-//                                        )
-//                                ) . " AND accounts_sales_and_services_1.accounts_sales_and_services_1accounts_ida IN $accountIn ";
-//                    }
+                }
+                break;
+            case 'WPM_Waste_Profile_Module':
+                // WPM_Waste_Profile_Module: Any WPM_Waste_Profile_Module related to the account list
+                if (count($accountIds) != 0) {
+                    if ($queryType == 'where') {
+                        $queryPart = " wpm_waste_profile_module_accounts_pv.id IN $accountIn ";
+                    }
+                }
+                break;
+            case 'HT_PO':
+                // HT_PO: Any HT_PO related to the account list
+                if (count($accountIds) != 0) {
+                    if ($queryType == 'where') {
+                        $queryPart = " ht_po_accounts_pv.id IN $accountIn ";
+                        $queryPart .= " OR ht_po_cstm.account_id_c IN $accountIn ";
+                        $queryPart .= " OR ht_po.portal_viewable = 1  ";
+                    }
+                }
+                break;
+            case 'WT_Waste_Tracking':
+                // HT_PO: Any HT_PO related to the account list
+                if (count($accountIds) != 0) {
+                    if ($queryType == 'where') {
+                        $queryPart = " wt_waste_tracking.portal_viewable = 1 ";
+                    }
                 }
                 break;
             case 'Accounts':
@@ -241,21 +232,6 @@ class CustomSupportPortalVisibility extends SupportPortalVisibility {
         return $queryPart;
     }
 
-    public function addVisibilityFrom(&$query) {
-        $query .= $this->addVisibilityPortal($query, 'from');
-        return;
-    }
-
-    public function addVisibilityWhere(&$query) {
-        $queryPart = $this->addVisibilityPortal($query, 'where');
-        if (!empty($query) && !empty($queryPart)) {
-            $query .= " AND " . $queryPart;
-        } else if (!empty($queryPart)) {
-            $query .= $queryPart;
-        }
-        return;
-    }
-
     /**
      * Add Visibility to a SugarQuery Object
      *
@@ -328,30 +304,21 @@ class CustomSupportPortalVisibility extends SupportPortalVisibility {
                 $join = $this->bean->accounts_sales_and_services_1->buildJoinSugarQuery(
                         $sugarQuery, array('joinTableAlias' => 'accounts_sales_and_services_1_pv', 'ignoreRole' => true)
                 );
-//                $join['accounts_sales_and_services_1_pv']->in('accounts_sales_and_services_1_pv.accounts_sales_and_services_1accounts_ida', $accountIds);
-//                $join = $this->bean->accounts_sales_and_services_1->buildJoinSugarQuery(
-//                        $sugarQuery,
-//                        array('joinTableAlias' => 'accounts_sales_and_services_1_pv', 'joinType' => 'LEFT')
-//                    );
-//                    $join->on()->equalsField('sales_and_services.id', 'accounts_sales_and_services_1_pv.accounts_sales_and_services_1sales_and_services_idb')
-//                        ->in('accounts_sales_and_services_1_pv.accounts_sales_and_services_1accounts_ida', $accountIds);
-
-
                 break;
-        }
-        return $sugarQuery;
-    }
-
-    /**
-     * Add Visibility to a SugarQuery Object
-     * @param SugarQuery $sugarQuery
-     * @param array $options
-     * @return object|SugarQuery
-     */
-    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, $options = array()) {
-        $where = $this->addVisibilityPortal('', 'where');
-        if (!empty($where)) {
-            $sugarQuery->whereRaw($where);
+            case 'WPM_Waste_Profile_Module':
+                // WPM_Waste_Profile_Module: Any WPM_Waste_Profile_Module related to the account list
+                $this->bean->load_relationship('wpm_waste_profile_module_accounts');
+                $join = $this->bean->wpm_waste_profile_module_accounts->buildJoinSugarQuery(
+                        $sugarQuery, array('joinTableAlias' => 'wpm_waste_profile_module_accounts_pv', 'ignoreRole' => true)
+                );
+                break;
+            case 'HT_PO':
+                // HT_PO: Any HT_PO related to the account list
+                $this->bean->load_relationship('ht_po_accounts');
+                $join = $this->bean->ht_po_accounts->buildJoinSugarQuery(
+                        $sugarQuery, array('joinTableAlias' => 'ht_po_accounts_pv', 'ignoreRole' => true, 'joinType' => 'LEFT')
+                );
+                break;
         }
         return $sugarQuery;
     }

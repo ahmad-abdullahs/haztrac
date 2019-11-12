@@ -9,19 +9,23 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 ({
-    initialize: function(options) {
+    initialize: function (options) {
         // the home module doesn't have a proper module on the context because it has a context
         // of mixed module types
         // set the current module to home to get the mega menu to highlight correctly
         app.controller.context.set('module', 'Home');
         // Figure out the modules that are available to the user. omit home because it doesn't exist
         this.module_list = _.without(app.metadata.getModuleNames({filter: 'display_tab', access: 'list'}), 'Home');
-        this.module_list.push('Accounts');
-        this.module_list.push('sales_and_services');
-        this.module_list.reverse();
+        this.module_list = _.union([
+            "Accounts",
+            "sales_and_services",
+            "WPM_Waste_Profile_Module",
+            "WT_Waste_Tracking",
+            "HT_PO"
+        ], this.module_list);
         options.meta.components = [];
         // Add components metadata as specified in the module list
-        _.each(this.module_list, function(module) {
+        _.each(this.module_list, function (module) {
             options.meta.components.push({
                 layout: 'portal-list',
                 context: {limit: 5, module: module}
@@ -43,7 +47,7 @@
      * @private
      * @override
      */
-    _placeComponent: function(component) {
+    _placeComponent: function (component) {
         var dashboardEl = this.$('[data-section]');
         var css = this.context.get('create') ? ' edit' : '';
 
@@ -52,11 +56,11 @@
                 'class': 'cols row-fluid'
             });
             this.$el.append(
-                $('<div></div>')
+                    $('<div></div>')
                     .addClass('dashboard' + css)
                     .attr({'data-section': 'true'})
                     .append(dashboardEl)
-            );
+                    );
         } else {
             dashboardEl = dashboardEl.children('.row-fluid');
         }

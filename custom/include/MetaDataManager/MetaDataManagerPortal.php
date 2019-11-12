@@ -33,6 +33,9 @@ class CustomMetaDataManagerPortal extends MetaDataManagerPortal {
         $modules[] = 'Filters';
         $modules[] = 'Accounts';
         $modules[] = 'sales_and_services';
+        $modules[] = 'WPM_Waste_Profile_Module';
+        $modules[] = 'WT_Waste_Tracking';
+        $modules[] = 'HT_PO';
         return $modules;
     }
 

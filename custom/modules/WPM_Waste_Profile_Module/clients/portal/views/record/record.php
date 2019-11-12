@@ -49,41 +49,6 @@ array (
               ),
               1 => 
               array (
-                'type' => 'shareaction',
-                'name' => 'share',
-                'label' => 'LBL_RECORD_SHARE_BUTTON',
-                'acl_action' => 'view',
-              ),
-              2 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'download-pdf',
-                'label' => 'LBL_PDF_VIEW',
-                'action' => 'download',
-                'acl_action' => 'view',
-              ),
-              3 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'email-pdf',
-                'label' => 'LBL_PDF_EMAIL',
-                'action' => 'email',
-                'acl_action' => 'view',
-              ),
-              4 => 
-              array (
-                'type' => 'divider',
-              ),
-              5 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:find_duplicates_button:click',
-                'name' => 'find_duplicates_button',
-                'label' => 'LBL_DUP_MERGE',
-                'acl_action' => 'edit',
-              ),
-              6 => 
-              array (
                 'type' => 'rowaction',
                 'event' => 'button:duplicate_button:click',
                 'name' => 'duplicate_button',
@@ -91,19 +56,7 @@ array (
                 'acl_module' => 'WPM_Waste_Profile_Module',
                 'acl_action' => 'create',
               ),
-              7 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:audit_button:click',
-                'name' => 'audit_button',
-                'label' => 'LNK_VIEW_CHANGE_LOG',
-                'acl_action' => 'view',
-              ),
-              8 => 
-              array (
-                'type' => 'divider',
-              ),
-              9 => 
+              3 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:delete_button:click',
@@ -126,6 +79,11 @@ array (
             'name' => 'panel_header',
             'label' => 'LBL_RECORD_HEADER',
             'header' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
             'fields' => 
             array (
               0 => 
@@ -137,8 +95,15 @@ array (
                 'dismiss_label' => true,
                 'readonly' => true,
               ),
-              1 => 'name',
+              1 => 
+              array (
+              ),
               2 => 
+              array (
+                'name' => 'name',
+                'span' => 12,
+              ),
+              3 => 
               array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
@@ -146,7 +111,7 @@ array (
                 'readonly' => true,
                 'dismiss_label' => true,
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'follow',
                 'label' => 'LBL_FOLLOW',
@@ -163,82 +128,24 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' => 
-            array (
-              0 => 'assigned_user_name',
-              1 => 'team_name',
-              2 => 
-              array (
-                'name' => 'tag',
-                'span' => 12,
-              ),
-            ),
-          ),
-          2 => 
-          array (
-            'name' => 'panel_hidden',
-            'label' => 'LBL_SHOW_MORE',
-            'hide' => true,
-            'columns' => 2,
-            'labelsOnTop' => true,
-            'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
               array (
-                'name' => 'description',
-                'span' => 12,
+                'name' => 'waste_profile_num_c',
+                'label' => 'LBL_WASTE_PROFILE_NUM',
               ),
               1 => 
               array (
-                'name' => 'date_modified_by',
-                'readonly' => true,
-                'inline' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_MODIFIED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_modified',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'modified_by_name',
-                  ),
-                ),
-              ),
-              2 => 
-              array (
-                'name' => 'date_entered_by',
-                'readonly' => true,
-                'inline' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_ENTERED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_entered',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'created_by_name',
-                  ),
-                ),
               ),
             ),
           ),
+        ),
+        'templateMeta' => 
+        array (
+          'useTabs' => false,
         ),
       ),
     ),

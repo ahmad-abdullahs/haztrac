@@ -232,34 +232,6 @@ $viewdefs['Accounts']['portal']['view']['record'] = array(
                     ),
                     'span' => 12,
                 ),
-                array(
-                    'name' => 'date_entered_by',
-                    'readonly' => true,
-                    'inline' => true,
-                    'type' => 'fieldset',
-                    'label' => 'LBL_DATE_ENTERED',
-                    'fields' => array(
-                        array(
-                            'name' => 'date_entered',
-                        ),
-                    ),
-                ),
-                array(
-                    'name' => 'date_modified_by',
-                    'readonly' => true,
-                    'inline' => true,
-                    'type' => 'fieldset',
-                    'label' => 'LBL_DATE_MODIFIED',
-                    'fields' => array(
-                        array(
-                            'name' => 'date_modified',
-                        ),
-                    ),
-                ),
-                array(
-                    'name' => 'assigned_user_name',
-                    'link' => false,
-                ),
             ),
         ),
     ),

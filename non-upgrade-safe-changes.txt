@@ -2,6 +2,7 @@
 *******************************Non Upgrade Safe Changes*************************
 --------------------------------------------------------------------------------
 
+[[--
 /*Discarded now, these changes are moved to Non Upgrade Safe Change # 1*/
 // This change is make to allow the Accounts module shown in the Portal
 // This can be done in upgrade safe way by getting more in details into the ACL implemented
@@ -14,7 +15,13 @@
 // include/MetaDataManager/MetaDataManagerPortal.php Line# 32, 33
 // $modules[] = 'Accounts';
 // $modules[] = 'sales_and_services';
+--]]
 
 -----------------------------------------1--------------------------------------
 **************************** Non Upgrade Safe Change # 1 ***********************
 --------------------------------------------------------------------------------
+
+// Below mentioned both functions are customized, in future try to make them in upgrade safe manner...
+modules/ACL/SugarACLSupportPortal.php 
+protected function isPortalOwner
+protected function portalAccess

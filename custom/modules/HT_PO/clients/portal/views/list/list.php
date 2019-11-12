@@ -24,18 +24,17 @@ array (
               ),
               1 => 
               array (
-                'name' => 'team_name',
-                'label' => 'LBL_TEAM',
-                'default' => true,
+                'name' => 'po_status',
+                'label' => 'LBL_PO_STATUS',
                 'enabled' => true,
+                'default' => true,
               ),
               2 => 
               array (
-                'name' => 'assigned_user_name',
-                'label' => 'LBL_ASSIGNED_TO_NAME',
-                'default' => true,
+                'name' => 'expire_date',
+                'label' => 'LBL_EXPIRE_DATE',
                 'enabled' => true,
-                'link' => true,
+                'default' => true,
               ),
             ),
           ),

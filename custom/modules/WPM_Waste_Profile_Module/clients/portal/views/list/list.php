@@ -24,18 +24,10 @@ array (
               ),
               1 => 
               array (
-                'name' => 'team_name',
-                'label' => 'LBL_TEAM',
-                'default' => true,
+                'name' => 'waste_profile_num_c',
+                'label' => 'LBL_WASTE_PROFILE_NUM',
                 'enabled' => true,
-              ),
-              2 => 
-              array (
-                'name' => 'assigned_user_name',
-                'label' => 'LBL_ASSIGNED_TO_NAME',
                 'default' => true,
-                'enabled' => true,
-                'link' => true,
               ),
             ),
           ),

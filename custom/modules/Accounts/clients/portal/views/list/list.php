@@ -56,13 +56,6 @@ $viewdefs['Accounts']['portal']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
-                array(
-                    'name' => 'date_entered',
-                    'label' => 'LBL_DATE_ENTERED',
-                    'enabled' => true,
-                    'default' => true,
-                    'readonly' => true,
-                ),
             ),
         ),
     ),
