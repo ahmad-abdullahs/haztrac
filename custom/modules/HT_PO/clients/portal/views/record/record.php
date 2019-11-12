@@ -89,7 +89,6 @@ array (
             'placeholders' => 1,
             'fields' => 
             array (
-              0 => 
               array (
                 'name' => 'picture',
                 'type' => 'avatar',
@@ -98,15 +97,10 @@ array (
                 'dismiss_label' => true,
                 'readonly' => true,
               ),
-              1 => 
-              array (
-              ),
-              2 => 
               array (
                 'name' => 'name',
                 'span' => 12,
               ),
-              3 => 
               array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
@@ -114,7 +108,6 @@ array (
                 'readonly' => true,
                 'dismiss_label' => true,
               ),
-              4 => 
               array (
                 'name' => 'follow',
                 'label' => 'LBL_FOLLOW',
