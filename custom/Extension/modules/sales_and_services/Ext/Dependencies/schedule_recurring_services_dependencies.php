@@ -232,3 +232,60 @@ $dependencies['sales_and_services']['yearly_repeat_on_three_panel_dep'] = array(
     ),
 );
 
+//----------------------------------------------------
+// ********** Business Logic Dependencies ************
+//----------------------------------------------------
+
+$dependencies['sales_and_services']['schedule_recurring_services_recurring_start_date_c_field_dep'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('recurring_sale_c'),
+    'onload' => true,
+    //Actions is a list of actions to fire when the trigger is true
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'recurring_start_date_c',
+                'label' => 'recurring_start_date_c_label',
+                'value' => 'equal($recurring_sale_c, true)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['sales_and_services']['schedule_recurring_services_end_date_option_c_field_dep'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('recurring_start_date_c', 'recurring_sale_c'),
+    'onload' => true,
+    //Actions is a list of actions to fire when the trigger is true
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'end_date_option_c',
+                'label' => 'end_date_option_c_label',
+                'value' => 'and(not(equal($recurring_start_date_c, "")), equal($recurring_sale_c, true))',
+            ),
+        ),
+    ),
+);
+
+$dependencies['sales_and_services']['schedule_recurring_services_occurs_c_field_dep_2'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('end_date_option_c'),
+    'onload' => true,
+    //Actions is a list of actions to fire when the trigger is true
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'occurs_c',
+                'label' => 'occurs_c_label',
+                'value' => 'equal($end_date_option_c, "No end date")',
+            ),
+        ),
+    ),
+);

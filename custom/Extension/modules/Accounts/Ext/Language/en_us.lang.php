@@ -51,3 +51,4 @@ $mod_strings['LBL_RAIL_SERVED'] = 'Rail Served By';
 $mod_strings['LBL_RAIL_NOTES'] = 'Rail Description/Notes';
 $mod_strings['LBL_FILTER_BY_TRANSPORTER_TAG'] = 'Transporters';
 $mod_strings['LBL_LIST_TRANSFER_DATE'] = 'Transfer Date';
+$mod_strings['LBL_PO_REQUIRED'] = 'PO Required';

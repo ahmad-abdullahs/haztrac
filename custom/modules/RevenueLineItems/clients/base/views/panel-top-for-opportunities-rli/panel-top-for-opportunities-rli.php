@@ -46,6 +46,11 @@ $viewdefs['RevenueLineItems']['base']['view']['panel-top-for-opportunities-rli']
                     'name' => 'copy_select_button',
                     'label' => 'LBL_COPY_RELATED_RECORD',
                 ),
+                array(
+                    'type' => 'add-multiple-rli-action',
+                    'name' => 'add_multiple_rli_button',
+                    'label' => 'LBL_ADD_MULTIPLE_RLI_RECORD',
+                ),
             ),
         ),
     ),

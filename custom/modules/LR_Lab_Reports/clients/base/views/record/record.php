@@ -230,9 +230,9 @@ array (
               ),
               5 => 
               array (
-                'name' => 'lab_ref_number_c',
-                'label' => 'LBL_LAB_REF_NUMBER',
-                'tabindex' => '50',
+                'name' => 'generator_c',
+                'studio' => 'visible',
+                'label' => 'LBL_GENERATOR',
               ),
               6 => 
               array (
@@ -242,7 +242,9 @@ array (
               ),
               7 => 
               array (
-                'name' => 'project_lr_lab_reports_1_name',
+                'name' => 'lab_ref_number_c',
+                'label' => 'LBL_LAB_REF_NUMBER',
+                'tabindex' => '50',
               ),
               8 => 
               array (
@@ -252,18 +254,21 @@ array (
               ),
               9 => 
               array (
-                'name' => 'object_number_c',
-                'label' => 'LBL_OBJECT_NUMBER',
-                'tabindex' => '5',
+                'name' => 'project_lr_lab_reports_1_name',
               ),
               10 => 
               array (
                 'name' => 'project_description_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROJECT_DESCRIPTION',
-                'span' => 12,
               ),
               11 => 
+              array (
+                'name' => 'object_number_c',
+                'label' => 'LBL_OBJECT_NUMBER',
+                'tabindex' => '5',
+              ),
+              12 => 
               array (
                 'name' => 'uploadfile',
                 'populate_list' => 
@@ -272,19 +277,19 @@ array (
                 ),
                 'span' => 6,
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'other_ref_number_c',
                 'label' => 'LBL_OTHER_REF_NUMBER',
                 'tabindex' => '11',
                 'span' => 6,
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'assigned_user_name',
                 'tabindex' => '13',
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'team_name',
                 'tabindex' => '14',
@@ -343,17 +348,10 @@ array (
             'placeholders' => 1,
             'fields' => 
             array (
-                
               0 => 
               array (
                 'name' => 'lr_lab_reports_templates_lr_lab_reports_1_name',
               ),
-//              0 => 
-//              array (
-//                'name' => 'analysis_templates_c',
-//                'label' => 'LBL_ANALYSIS_TEMPLATES',
-//                'tabindex' => '16',
-//              ),
               1 => 
               array (
                 'name' => 'analysis_date_c',

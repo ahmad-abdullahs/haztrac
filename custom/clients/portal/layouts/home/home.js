@@ -78,6 +78,14 @@
                     );
             // Append the tabs in the dashboardsList div
             dashboardEl.append(this.tabsHTML);
+            var liButton = $('<li data-identifier="All" class="active">' +
+                    '<a class="ellipsis_inline" tabindex="-1" href="javascript:void(0);" data-route="javascript:void(0);" style="border: 1px solid rgba(0,0,0,0.1);" data-original-title="" title="Home">' +
+                    '<i class="fa fas fa-dashboard-default"></i>' +
+                    'Home' +
+                    '</a>' +
+                    '</li>');
+            $('#tabsUL').append(liButton);
+            this.bindOnClick(liButton);
         } else {
             dashboardEl = dashboardEl.children('.row-fluid');
         }
@@ -87,25 +95,25 @@
         // Get Style for tabs
         var style = this.getStyleConfig(component);
         var liButton = $('<li data-identifier="' + component.module + '" class="' + style.liClass + '">' +
-                '<a class="ellipsis_inline" tabindex="-1" href="javascript:void(0);" data-route="javascript:void(0);" style="border: 1px solid rgba(0,0,0,0.1);" data-original-title="" title="">' +
+                '<a class="ellipsis_inline" tabindex="-1" href="javascript:void(0);" data-route="javascript:void(0);" style="border: 1px solid rgba(0,0,0,0.1);" data-original-title="" title="' + app.lang.getModuleName(component.module) + '">' +
                 '<i class="' + style.tabIcon + '"></i>' +
                 app.lang.getModuleName(component.module) +
                 '</a>' +
                 '</li>');
         $('#tabsUL').append(liButton);
 
-        if (component.module != 'Accounts') {
-            component.$el.hide();
-        }
+//        if (component.module != 'Accounts') {
+//            component.$el.hide();
+//        }
 
         this.bindOnClick(liButton);
     },
 
     getStyleConfig: function (component) {
         var liClass = '';
-        if (component.module == 'Accounts') {
-            liClass = "active";
-        }
+//        if (component.module == 'Accounts') {
+//            liClass = "active";
+//        }
 
         var tabIcon = 'fa fa-th';
         if (_.contains(['Cases', 'Bugs', 'HT_PO'], component.module)) {
@@ -119,10 +127,10 @@
     },
 
     bindOnClick: function (liButton) {
-        liButton.on('click', _.bind(function (ele) {
+        liButton.on('click', _.bind(function (_ele) {
             // Make rest of the tab in-active except for the clicked one
             _.each($('li[data-identifier!=""][data-identifier]'), function (e) {
-                if ($(e).data('identifier') != $(ele.currentTarget).data('identifier')) {
+                if ($(e).data('identifier') != $(_ele.currentTarget).data('identifier')) {
                     $(e).removeClass('active');
                 } else {
                     // Make the current clicked tab active
@@ -130,12 +138,16 @@
                 }
             });
             // Show the appropriate panel for that tab and hide the others
-            var panelIdentifier = $(ele.currentTarget).data('identifier');
+            var panelIdentifier = $(_ele.currentTarget).data('identifier');
             _.each($('div.thumbnail'), function (ele) {
-                if ($(ele).find('a[href="#' + panelIdentifier + '"]').length) {
+                if (panelIdentifier == 'All') {
                     $(ele).show();
                 } else {
-                    $(ele).hide();
+                    if ($(ele).find('a[href="#' + panelIdentifier + '"]').length) {
+                        $(ele).show();
+                    } else {
+                        $(ele).hide();
+                    }
                 }
             });
         }));

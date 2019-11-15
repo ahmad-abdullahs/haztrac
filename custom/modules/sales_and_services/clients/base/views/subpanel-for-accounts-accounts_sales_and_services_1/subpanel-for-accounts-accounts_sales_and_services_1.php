@@ -21,8 +21,8 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                 ),
                 1 =>
                 array(
-                    'name' => 'sales_and_service_total_c',
-                    'label' => 'LBL_SALES_AND_SERVICE_TOTAL',
+                    'name' => 'estimated_rli_total',
+                    'label' => 'LBL_ESTIMATED_RLI_TOTAL',
                     'enabled' => true,
                     'default' => true,
                 ),

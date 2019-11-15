@@ -72,7 +72,7 @@
         // or complex field, and build the filter object accordingly
         _.each(fieldNames, function(name) {
             if (!_.isArray(name)) {
-                var filter = this._buildFilterDef(name, '$starts', searchTerm);
+                var filter = this._buildFilterDef(name, '$contains', searchTerm);
                 if (filter) {
                     // Simple filters are pushed to `filterList`
                     filterList.push(filter);
@@ -84,7 +84,7 @@
                 app.logger.error('Cannot have more than 1 split term filter');
                 return;
             }
-            splitTermFilter = this._buildSplitTermFilterDef(name, '$starts', searchTerm);
+            splitTermFilter = this._buildSplitTermFilterDef(name, '$contains', searchTerm);
         }, this);
 
         // Push the split term filter

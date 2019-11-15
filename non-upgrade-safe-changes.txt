@@ -25,3 +25,15 @@
 modules/ACL/SugarACLSupportPortal.php 
 protected function isPortalOwner
 protected function portalAccess
+
+-----------------------------------------2--------------------------------------
+**************************** Non Upgrade Safe Change # 2 ***********************
+--------------------------------------------------------------------------------
+
+// Below mentioned function is customized, in future try to make them in upgrade safe manner...
+modules/Filters/clients/base/datas/model/model.js 
+buildSearchTermFilter: function
+
+-----------------------------------------3--------------------------------------
+**************************** Non Upgrade Safe Change # 3 ***********************
+--------------------------------------------------------------------------------

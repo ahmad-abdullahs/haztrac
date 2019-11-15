@@ -42,12 +42,16 @@
     },
 
     plugins: ['LinkedModel'],
+    showEditAll: false,
 
     /**
      * @inheritdoc
      */
     initialize: function (options) {
         this._super('initialize', [options]);
+        if (_.contains(["sales_and_services"], this.parentModule)) {
+            this.showEditAll = true;
+        }
     },
 
     bindDataChange: function () {

@@ -6,10 +6,11 @@
         // Add listener for custom button
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
         this.model.on('change:recurring_sale_c', this.takeUserToRecurringTab, this);
-        this.model.on('data:sync:complete', function (options) {
-            if (!_.isNull(this.model._relatedCollections))
-                this.model._relatedCollections.sales_and_services_revenuelineitems_1.on('data:sync:complete', _.bind(this.colourTheFields, this));
-        }, this);
+        /*This makes the field colored in detail view...*/
+//        this.model.on('data:sync:complete', function (options) {
+//            if (!_.isNull(this.model._relatedCollections))
+//                this.model._relatedCollections.sales_and_services_revenuelineitems_1.on('data:sync:complete', _.bind(this.colourTheFields, this));
+//        }, this);
     },
 
     colourTheFields: function () {
@@ -37,6 +38,17 @@
 
     _render: function () {
         this._super('_render');
+
+        /* When sales and service is opened up in the drawer from list view to complete the record
+         * fetch the related collections, because they are not automatically laded and subpanel keep on showing the loading sign.
+         * */
+        if (this.context.get('loadSpecifiedPanels')) {
+            var panelsListToLoad = this.context.get('loadSpecifiedPanels');
+            _.each(panelsListToLoad, function (linkName) {
+                this.model._relatedCollections[linkName].fetch();
+            }, this);
+        }
+
         // Get all the tabs with class like panel_
         // $('#recordTab > li.tab [class*=panel_]');
 
@@ -77,9 +89,10 @@
         this.$('li.tab[class*=panel_]:not(.panel_completion) > a').on('click', function () {
             $.when(self.context.trigger('cancel:full:subpanel:cstm')).then(function () {
                 //*** Make the Estimated Quantity and Unit of Measure fields coloured.
-                if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
-                    self.colourTheFields();
-                }
+                /*This makes the field colored in detail view...*/
+//                if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+//                    self.colourTheFields();
+//                }
             });
         });
     },

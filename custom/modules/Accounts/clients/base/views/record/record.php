@@ -425,16 +425,23 @@ $viewdefs['Accounts'] = array(
                             ),
                             5 =>
                             array(
+                                'name' => 'po_required',
+                                'studio' => 'visible',
+                                'label' => 'LBL_PO_REQUIRED',
+                            ),
+                            6 =>
+                            array(
                                 'name' => 'service_instruction_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_SERVICE_INSTRUCTION',
+                                'span' => 12,
                             ),
-                            6 =>
+                            7 =>
                             array(
                                 'name' => 'hint_account_industry_c',
                                 'label' => 'LBL_HINT_COMPANY_INDUSTRY',
                             ),
-                            7 =>
+                            8 =>
                             array(
                                 'name' => 'hint_account_industry_tags_c',
                                 'label' => 'LBL_HINT_COMPANY_INDUSTRY_TAGS',

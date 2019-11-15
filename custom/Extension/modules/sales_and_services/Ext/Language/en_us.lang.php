@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_STATUS'] = 'Status';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Address Panel';
@@ -30,7 +31,9 @@ $mod_strings['LBL_SVC_DAYS'] = 'Svc Days';
 $mod_strings['LBL_PO_NUMBER_HT_PO_ID'] = 'PO Number (related PO ID)';
 $mod_strings['LBL_SVC_TYPE'] = 'SVC Type';
 $mod_strings['LBL_HOMEPAGE_TITLE'] = 'My Sales &amp; Service';
-$mod_strings['LBL_RLI_TOTAL'] = 'RLI Total';
+$mod_strings['LBL_RLI_TOTAL'] = 'Sales Total';
+$mod_strings['LBL_ESTIMATED_RLI_TOTAL'] = 'Forecasted Total';
+$mod_strings['LBL_ESTIMATED_TOTAL_AMOUNT'] = 'Calculated Revenue Line Item Estimate';
 $mod_strings['LBL_LAT'] = 'LAT';
 $mod_strings['LBL_LON'] = 'LON';
 $mod_strings['LBL_PO_NUMBER'] = 'Purchase Order Number';
@@ -103,3 +106,4 @@ $mod_strings['LBL_YEARLY_BY_DAY_OF_THE_WEEK_LI'] = 'Day';
 $mod_strings['LBL_YEARLY_BY_DAY_OF_WEEK_MONTH'] = 'Month';
 $mod_strings['LBL_MONTHLY_SKIP_WEEKENDS'] = 'Skip weekends';
 $mod_strings['LBL_YEARLY_SKIP_WEEKENDS'] = 'Skip weekends';
+$mod_strings['LBL_PO_REQUIRED'] = 'PO Required';

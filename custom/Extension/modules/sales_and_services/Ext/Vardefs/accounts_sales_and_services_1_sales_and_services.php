@@ -43,6 +43,7 @@ $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1_name"
         'ac_usepa_id_c' => 'ac_usepa_id_c',
         'account_number_c' => 'account_number_c',
         'account_status_c' => 'account_status_c',
+//        'po_required' => 'po_required',
     ),
 );
 $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1accounts_ida"] = array(

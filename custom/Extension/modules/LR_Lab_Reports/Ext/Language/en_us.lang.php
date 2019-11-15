@@ -277,3 +277,5 @@ $mod_strings['LBL_LABORATORY_VENDOR'] = 'Laboratory / Vendor';
 $mod_strings['LBL_PROJECT_DESCRIPTION'] = 'Project Description';
 $mod_strings['LNK_NEW_RECORD_LR_LAB_REPORTS_TEMPLATES'] = 'Create Lab Report Template';
 $mod_strings['LNK_LIST_LR_LAB_REPORTS_TEMPLATES'] = 'View Lab Report Templates';
+$mod_strings['LBL_GENERATOR_ACCOUNT_ID'] = 'Generator (related Account ID)';
+$mod_strings['LBL_GENERATOR'] = 'Generator';

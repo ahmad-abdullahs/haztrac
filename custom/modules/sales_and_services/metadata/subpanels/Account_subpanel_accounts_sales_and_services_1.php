@@ -9,10 +9,10 @@ $subpanel_layout['list_fields'] = array(
         'width' => 10,
         'default' => true,
     ),
-    'sales_and_service_total_c' =>
+    'estimated_rli_total' =>
     array(
         'type' => 'decimal',
-        'vname' => 'LBL_SALES_AND_SERVICE_TOTAL',
+        'vname' => 'LBL_ESTIMATED_RLI_TOTAL',
         'width' => 10,
         'default' => true,
     ),

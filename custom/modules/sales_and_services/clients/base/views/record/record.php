@@ -158,6 +158,7 @@ $viewdefs['sales_and_services'] = array(
                                     0 => 'ac_usepa_id_c',
                                     1 => 'account_number_c',
                                     2 => 'account_status_c',
+                                    3 => 'po_required',
                                 ),
                             ),
                             2 =>
@@ -271,6 +272,14 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             13 =>
                             array(
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'estimated_rli_total',
+                                'label' => 'LBL_ESTIMATED_RLI_TOTAL',
+                            ),
+                            15 =>
+                            array(
                                 'name' => 'rli_total_c',
                                 'label' => 'LBL_RLI_TOTAL',
                             ),
@@ -358,6 +367,13 @@ $viewdefs['sales_and_services'] = array(
                                 'name' => 'recurring_sale_c',
                                 'label' => 'LBL_RECURRING_SALE',
                             ),
+//                            array(
+//                                'name' => 'recurring_info',
+//                                'dismiss_label' => true,
+//                                'highlight' => true,
+//                                'readonly' => true,
+//                                'type' => 'info-label',
+//                            ),
                             array(
                             ),
                             array(

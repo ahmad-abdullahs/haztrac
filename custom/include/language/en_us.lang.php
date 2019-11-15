@@ -6,6 +6,7 @@ $app_strings['LBL_COPY_RLI_BUTTON'] = 'Copy';
 //
 $app_strings['LBL_PRINT_BUTTON_LABEL'] = 'Print';
 $app_strings['LBL_PRINT_PAPERWORK'] = 'Print Paperwork';
+$app_strings['LBL_COMPLETE_SALE'] = 'Complete Sales';
 $app_strings['LBL_CANCEL_PRINT_PAPERWORK'] = 'Cancel';
 $app_strings['LBL_SAVE_PRINT_PAPERWORK'] = 'Save';
 $app_strings['LBL_TASK_FOLLOWUP'] = 'Print Paperwork';
@@ -28,3 +29,5 @@ $app_list_strings['history_filter_options_cstm'] = array(
     30 => 'Last 30 Days',
     90 => 'Last Quarter',
 );
+
+$app_strings['LBL_OPERATOR_CSTM_CONTAINS'] = 'contains';

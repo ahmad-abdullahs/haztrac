@@ -11,4 +11,4 @@
  */
 
 $app_list_strings['moduleList']['WPM_Waste_Profile_Module'] = 'Waste Profile';
-$app_list_strings['moduleListSingular']['WPM_Waste_Profile_Module'] = 'Profile';
+$app_list_strings['moduleListSingular']['WPM_Waste_Profile_Module'] = 'Waste Profile';
