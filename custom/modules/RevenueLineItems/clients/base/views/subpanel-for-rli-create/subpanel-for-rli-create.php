@@ -135,19 +135,26 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-rli-create'] = array
 //                    'default' => true,
 //                ),
                 array(
-                    'name' => 'total_amount',
-                    'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+                    'name' => 'estimated_total_amount',
+                    'label' => 'LBL_ESTIMATED_TOTAL_AMOUNT',
                     'enabled' => true,
-                    'related_fields' =>
-                    array(
-                        0 => 'currency_id',
-                        1 => 'base_rate',
-                        2 => 'is_bundle_product_c',
-                        3 => 'rli_as_template_c',
-                    ),
                     'currency_format' => true,
                     'default' => true,
                 ),
+//                array(
+//                    'name' => 'total_amount',
+//                    'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+//                    'enabled' => true,
+//                    'related_fields' =>
+//                    array(
+//                        0 => 'currency_id',
+//                        1 => 'base_rate',
+//                        2 => 'is_bundle_product_c',
+//                        3 => 'rli_as_template_c',
+//                    ),
+//                    'currency_format' => true,
+//                    'default' => true,
+//                ),
                 array(
                     'name' => 'assigned_user_name',
                     'enabled' => true,

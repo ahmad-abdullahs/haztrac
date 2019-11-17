@@ -28,6 +28,7 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
                     'quantity',
                     'product_uom_c',
                     'total_amount',
+                    'estimated_total_amount',
                     'rli_as_template_c',
                     'line_number',
                 ),

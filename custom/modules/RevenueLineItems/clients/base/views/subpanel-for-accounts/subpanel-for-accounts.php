@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +12,9 @@
  */
 
 $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
-	'type' => 'subpanel-list',
-	'favorite' => true,
-	'panels' => array(
+    'type' => 'subpanel-list',
+    'favorite' => true,
+    'panels' => array(
         array(
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
@@ -23,13 +24,22 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
                     'link' => true,
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
-                    'default' => true
+                    'default' => true,
+                    'related_fields' => array(
+                        'currency_id',
+                        'base_rate',
+                        'total_amount',
+                        'quantity',
+                        'discount_amount',
+                        'discount_price',
+                        'estimated_total_amount'
+                    ),
                 ),
                 array(
-                        'name' => 'opportunity_name',
-                        'sortable' => false,
-                        'enabled' => true,
-                        'default' => true
+                    'name' => 'opportunity_name',
+                    'sortable' => false,
+                    'enabled' => true,
+                    'default' => true
                 ),
                 array(
                     'name' => 'account_name',
@@ -84,7 +94,8 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
                         'total_amount',
                         'quantity',
                         'discount_amount',
-                        'discount_price'
+                        'discount_price',
+                        'estimated_total_amount'
                     ),
                     'showTransactionalAmount' => true,
                     'convertToBase' => true,

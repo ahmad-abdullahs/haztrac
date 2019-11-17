@@ -28,6 +28,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     'quantity',
                                     'discount_amount',
                                     'total_amount',
+                                    'estimated_total_amount',
                                     "line_number",
                                     "description",
                                     "type_id",

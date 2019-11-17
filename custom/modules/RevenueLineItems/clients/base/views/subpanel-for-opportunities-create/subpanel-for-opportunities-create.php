@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -68,7 +69,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                     'name' => 'charge_c',
                     'label' => 'LBL_CHARGE',
                     'enabled' => true,
-                    'related_fields' => 
+                    'related_fields' =>
                     array(
                         0 => 'currency_id',
                         1 => 'base_rate',
@@ -77,18 +78,31 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                     'default' => true,
                 ),
                 array(
-                    'name' => 'total_amount',
-                    'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+                    'name' => 'estimated_total_amount',
+                    'label' => 'LBL_ESTIMATED_TOTAL_AMOUNT',
                     'enabled' => true,
-                    'related_fields' => 
+                    'currency_format' => true,
+                    'default' => true,
+                    'related_fields' =>
                     array(
                         0 => 'discount_price',
                         1 => 'quantity',
                         2 => 'discount_amount',
                     ),
-                    'currency_format' => true,
-                    'default' => true,
                 ),
+//                array(
+//                    'name' => 'total_amount',
+//                    'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
+//                    'enabled' => true,
+//                    'related_fields' => 
+//                    array(
+//                        0 => 'discount_price',
+//                        1 => 'quantity',
+//                        2 => 'discount_amount',
+//                    ),
+//                    'currency_format' => true,
+//                    'default' => true,
+//                ),
             ),
         ),
     ),

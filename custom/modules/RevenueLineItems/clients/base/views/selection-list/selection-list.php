@@ -86,6 +86,13 @@ $viewdefs['RevenueLineItems'] = array(
                                 'default' => true,
                             ),
                             array(
+                                'name' => 'estimated_total_amount',
+                                'label' => 'LBL_ESTIMATED_TOTAL_AMOUNT',
+                                'enabled' => true,
+                                'currency_format' => true,
+                                'default' => true,
+                            ),
+                            array(
                                 'name' => 'total_amount',
                                 'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
                                 'enabled' => true,

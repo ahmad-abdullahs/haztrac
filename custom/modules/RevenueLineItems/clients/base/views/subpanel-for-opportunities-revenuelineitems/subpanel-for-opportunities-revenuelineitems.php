@@ -105,6 +105,14 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-revenu
                 ),
                 10 =>
                 array(
+                    'name' => 'estimated_total_amount',
+                    'label' => 'LBL_ESTIMATED_TOTAL_AMOUNT',
+                    'enabled' => true,
+                    'currency_format' => true,
+                    'default' => true,
+                ),
+                11 =>
+                array(
                     'name' => 'total_amount',
                     'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
                     'enabled' => true,
@@ -116,14 +124,14 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-revenu
                     'currency_format' => true,
                     'default' => true,
                 ),
-                11 =>
+                12 =>
                 array(
                     'name' => 'close_amount_c',
                     'label' => 'LBL_CLOSE_AMOUNT',
                     'enabled' => true,
                     'default' => true,
                 ),
-                12 =>
+                13 =>
                 array(
                     'name' => 'quote_name',
                     'label' => 'LBL_ASSOCIATED_QUOTE',
@@ -136,7 +144,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-revenu
                     'enabled' => true,
                     'default' => true,
                 ),
-                13 =>
+                14 =>
                 array(
                     'name' => 'category_name',
                     'enabled' => true,

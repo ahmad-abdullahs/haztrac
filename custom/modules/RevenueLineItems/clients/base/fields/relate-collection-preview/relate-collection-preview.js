@@ -13,6 +13,7 @@
                 _.each(value['records'], function (record) {
                     record.discount_price = '$' + app.utils.formatNumberLocale(record.discount_price || 0);
                     record.total_amount = '$' + app.utils.formatNumberLocale(record.total_amount || 0);
+                    record.estimated_total_amount = '$' + app.utils.formatNumberLocale(record.estimated_total_amount || 0);
 //                    var rli = app.data.createBean('RevenueLineItems');
                     var options = this.model.fields.product_uom_c.options;
                     var ddList = app.lang.getAppListStrings(options);

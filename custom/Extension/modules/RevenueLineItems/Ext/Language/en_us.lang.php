@@ -40,3 +40,5 @@ $mod_strings['LBL_COMMISSION_BROKER_ACCOUNT_ACCOUNT_ID'] = 'Broker / Account (re
 $mod_strings['LBL_COMMISSION_BROKER_ACCOUNT'] = 'Broker / Account';
 $mod_strings['LBL_COMMISSION_UMO'] = 'Commission UMO';
 $mod_strings['LBL_COMMISSION_FORMULA'] = 'Commission Formula';
+$mod_strings['LBL_ESTIMATED_TOTAL_AMOUNT'] = 'Forecast Amount';
+$mod_strings['LBL_CALCULATED_LINE_ITEM_AMOUNT'] = 'Sale Amount';

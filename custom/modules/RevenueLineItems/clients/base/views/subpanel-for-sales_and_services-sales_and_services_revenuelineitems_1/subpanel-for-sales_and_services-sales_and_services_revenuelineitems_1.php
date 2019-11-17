@@ -77,11 +77,18 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'default' => true,
                 ),
                 array(
+                    'name' => 'estimated_total_amount',
+                    'label' => 'LBL_ESTIMATED_TOTAL_AMOUNT',
+                    'enabled' => true,
+                    'currency_format' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'total_amount',
                     'type' => 'currency',
                     'default' => true,
                     'label' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
                     'enabled' => true,
-                    'name' => 'total_amount',
                 ),
                 array(
                     'type' => 'decimal',

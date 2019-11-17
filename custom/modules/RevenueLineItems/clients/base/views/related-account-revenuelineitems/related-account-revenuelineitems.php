@@ -54,6 +54,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         'shipping_hazardous_materia_c',
                         'state_regulated_c',
                         'mft_part_num',
+                        'estimated_total_amount',
                     ),
                 ),
                 array(
@@ -69,11 +70,11 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'enabled' => true,
                     'default' => true,
                 ),
-                array(
-                    'name' => 'quantity',
-                    'enabled' => true,
-                    'default' => true,
-                ),
+//                array(
+//                    'name' => 'quantity',
+//                    'enabled' => true,
+//                    'default' => true,
+//                ),
                 array(
                     'name' => 'product_uom_c',
                     'label' => 'LBL_UNIT_OF_MEASURE',
@@ -89,6 +90,13 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         0 => 'currency_id',
                         1 => 'base_rate',
                     ),
+                    'currency_format' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'estimated_total_amount',
+                    'label' => 'LBL_ESTIMATED_TOTAL_AMOUNT',
+                    'enabled' => true,
                     'currency_format' => true,
                     'default' => true,
                 ),
