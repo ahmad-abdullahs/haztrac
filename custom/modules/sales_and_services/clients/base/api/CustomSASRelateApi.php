@@ -34,13 +34,6 @@ class CustomSASRelateApi extends RelateApi {
 
         $returnData = $this->runQuery($api, $args, $q, $options, $linkSeed);
 
-        $preparedStmt = $q->compile();
-//$GLOBALS['log']->fatal('$preparedStmt : ' . print_r($preparedStmt, 1));
-$sql = $preparedStmt->getSQL();
-$GLOBALS['log']->fatal('$sql : ' . print_r($sql, 1));
-$parameters = $preparedStmt->getParameters();
-$GLOBALS['log']->fatal('$parameters : ' . print_r($parameters, 1));
-        
         $originalAllRLIIds = array();
         // get the bundle ids and all the ids od records shown in this subpanel
         $bundleIds = array();
