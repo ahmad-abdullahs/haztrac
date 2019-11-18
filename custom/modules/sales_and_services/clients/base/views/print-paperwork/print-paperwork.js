@@ -7,7 +7,6 @@
 
     _render: function () {
         this._super('_render');
-        khan = this;
     },
 
     bindDataChange: function () {
