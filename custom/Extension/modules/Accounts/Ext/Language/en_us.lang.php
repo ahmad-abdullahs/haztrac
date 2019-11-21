@@ -52,3 +52,5 @@ $mod_strings['LBL_RAIL_NOTES'] = 'Rail Description/Notes';
 $mod_strings['LBL_FILTER_BY_TRANSPORTER_TAG'] = 'Transporters';
 $mod_strings['LBL_LIST_TRANSFER_DATE'] = 'Transfer Date';
 $mod_strings['LBL_PO_REQUIRED'] = 'PO Required';
+$mod_strings['LBL_BILLING_ADDRESS_THIRD_PARTY_NAME'] = 'Billing Third Party';
+$mod_strings['LBL_SHIPPING_ADDRESS_THIRD_PARTY_NAME'] = 'Shipping Third Party';

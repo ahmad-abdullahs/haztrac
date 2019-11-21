@@ -222,36 +222,36 @@ $viewdefs['Accounts'] = array(
                             8 =>
                             array(
                                 'name' => 'billing_address',
-                                'type' => 'fieldset',
+                                'type' => 'fieldset-visibility',
                                 'css_class' => 'address',
                                 'label' => 'LBL_BILLING_ADDRESS',
                                 'fields' =>
                                 array(
-                                    0 =>
+                                    array(
+                                        'name' => 'billing_address_third_party_name',
+                                        'css_class' => 'address_state',
+                                        'placeholder' => 'LBL_BILLING_ADDRESS_THIRD_PARTY_NAME',
+                                    ),
                                     array(
                                         'name' => 'billing_address_street',
                                         'css_class' => 'address_street',
                                         'placeholder' => 'LBL_BILLING_ADDRESS_STREET',
                                     ),
-                                    1 =>
                                     array(
                                         'name' => 'billing_address_city',
                                         'css_class' => 'address_city',
                                         'placeholder' => 'LBL_BILLING_ADDRESS_CITY',
                                     ),
-                                    2 =>
                                     array(
                                         'name' => 'billing_address_state',
                                         'css_class' => 'address_state',
                                         'placeholder' => 'LBL_BILLING_ADDRESS_STATE',
                                     ),
-                                    3 =>
                                     array(
                                         'name' => 'billing_address_postalcode',
                                         'css_class' => 'address_zip',
                                         'placeholder' => 'LBL_BILLING_ADDRESS_POSTALCODE',
                                     ),
-                                    4 =>
                                     array(
                                         'name' => 'billing_address_country',
                                         'css_class' => 'address_country',
@@ -263,42 +263,41 @@ $viewdefs['Accounts'] = array(
                             9 =>
                             array(
                                 'name' => 'shipping_address',
-                                'type' => 'fieldset',
+                                'type' => 'fieldset-visibility',
                                 'css_class' => 'address',
                                 'label' => 'LBL_SHIPPING_ADDRESS',
                                 'fields' =>
                                 array(
-                                    0 =>
+                                    array(
+                                        'name' => 'shipping_address_third_party_name',
+                                        'css_class' => 'address_state',
+                                        'placeholder' => 'LBL_SHIPPING_ADDRESS_THIRD_PARTY_NAME',
+                                    ),
                                     array(
                                         'name' => 'shipping_address_street',
                                         'css_class' => 'address_street',
                                         'placeholder' => 'LBL_SHIPPING_ADDRESS_STREET',
                                     ),
-                                    1 =>
                                     array(
                                         'name' => 'shipping_address_city',
                                         'css_class' => 'address_city',
                                         'placeholder' => 'LBL_SHIPPING_ADDRESS_CITY',
                                     ),
-                                    2 =>
                                     array(
                                         'name' => 'shipping_address_state',
                                         'css_class' => 'address_state',
                                         'placeholder' => 'LBL_SHIPPING_ADDRESS_STATE',
                                     ),
-                                    3 =>
                                     array(
                                         'name' => 'shipping_address_postalcode',
                                         'css_class' => 'address_zip',
                                         'placeholder' => 'LBL_SHIPPING_ADDRESS_POSTALCODE',
                                     ),
-                                    4 =>
                                     array(
                                         'name' => 'shipping_address_country',
                                         'css_class' => 'address_country',
                                         'placeholder' => 'LBL_SHIPPING_ADDRESS_COUNTRY',
                                     ),
-                                    5 =>
                                     array(
                                         'name' => 'copy',
                                         'label' => 'NTC_COPY_BILLING_ADDRESS',

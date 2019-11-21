@@ -50,6 +50,26 @@
     /**
      * @inheritdoc
      */
+    render: function () {
+        this._super('render');
+
+        // At time of creating the record, We need to set the default values...
+        // We can directly set the values in the model but just to be conscious we have added the if checks 
+        if (_.isEmpty(this.model.get('end_date_option_c')) && _.isEmpty(this.model.get('recurring_end_date_c'))) {
+            this.model.set('end_date_option_c', 'End date');
+            this.model.set('recurring_end_date_c', this.model.get('recurring_start_date_c'));
+        }
+
+        if (_.isEmpty(this.model.get('occurs_c')) && _.isEmpty(this.model.get('daily_repeats_on_c'))) {
+            this.model.set('occurs_c', 'Daily');
+            this.model.set('daily_repeats_on_c', 'Every day');
+            this.model.set('daily_skip_weekends_c', true);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
     initiateSave: function (callback) {
         this.disableButtons();
         async.waterfall([
@@ -244,6 +264,8 @@
                     // loop through the models in the collection and push each model's JSON
                     // data to the 'create' array
                     _.each(child.get('collection').models, function (model) {
+                        // Set the Sales and Service Account to every RLI model which is going to create...
+                        model.set('account_id', this.model.get('accounts_sales_and_services_1'));
                         childCollection.create.push(model.toJSON());
                     }, this);
 

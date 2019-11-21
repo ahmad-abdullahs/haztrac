@@ -12,11 +12,7 @@ class sales_and_servicesViewmanifest extends ViewList {
     }
 
     function ProcessPDF() {
-        $GLOBALS['log']->fatal('Data : ' . print_r($_REQUEST, 1));
-
         $salesAndServiceBean = BeanFactory::getBean($_REQUEST['module'], $_REQUEST['record'], array('disable_row_level_security' => true));
-        $GLOBALS['log']->fatal('Data : ' . print_r($salesAndServiceBean->id, 1));
-        $GLOBALS['log']->fatal('Data : ' . print_r($salesAndServiceBean->name, 1));
 
         // create new PDF document
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -46,13 +42,13 @@ class sales_and_servicesViewmanifest extends ViewList {
 
         // ---------------------------------------------------------
         // set font
-        $pdf->SetFont('times', 'B', 10);
+        $pdf->SetFont('courier', 'B', 9);
 
         // add a page
         $pdf->AddPage();
 
-//        $pdf->SetXY(0, 0);
-//        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', '', '', 210, 270, '', '', '', false, 300, '', false, false, 1, false, false, false);
+        $pdf->SetXY(0, 0);
+        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', '', '', 210, 270, '', '', '', false, 300, '', false, false, 1, false, false, false);
 
         $startXIndex = empty($_REQUEST['x']) ? 50 : $_REQUEST['x']; // 50, 49
         $startYIndex = empty($_REQUEST['y']) ? 19 : $_REQUEST['y']; // 19, 31
@@ -70,12 +66,12 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Page Of
             $pdf->SetXY(0, 0);
-            $pageOf = array('x' => $startXIndex + 48, 'y' => $startYIndex, 'text' => '1 / 1'); // 98, 19
+            $pageOf = array('x' => $startXIndex + 47, 'y' => $startYIndex, 'text' => '1 / 1'); // 97, 19
             $pdf->MultiCell(40, 5, $pageOf['text'], 0, '', 0, 1, $pageOf['x'], $pageOf['y'], true);
 
             // Emergency Response Phone
             $pdf->SetXY(0, 0);
-            $emergencyResponsePhone = array('x' => $startXIndex + 62, 'y' => $startYIndex, 'text' => ''); // 112, 19
+            $emergencyResponsePhone = array('x' => $startXIndex + 60, 'y' => $startYIndex, 'text' => ''); // 110, 19
             // '(800) 424-9300'
             $pdf->MultiCell(40, 5, $emergencyResponsePhone['text'], 0, '', 0, 1, $emergencyResponsePhone['x'], $emergencyResponsePhone['y'], true);
 
@@ -83,16 +79,14 @@ class sales_and_servicesViewmanifest extends ViewList {
             $pdf->SetXY(0, 0);
             $generatorName = array('x' => $startXIndex - 28, 'y' => $startYIndex + 7
                 , 'text' => htmlspecialchars_decode($salesAndServiceAccountBean->name)); // 22, 26
-            $pdf->MultiCell(50, 5, $generatorName['text'], 0, '', 0, 1, $generatorName['x'], $generatorName['y'], true);
-
-//            $GLOBALS['log']->fatal('Data : ' . print_r($salesAndServiceAccountBean, 1));
+            $pdf->MultiCell(70, 5, $generatorName['text'], 0, '', 0, 1, $generatorName['x'], $generatorName['y'], true);
 
             $mailingAddress = '';
             $mailingAddress = $salesAndServiceAccountBean->billing_address_street;
             $mailingAddress .= ' ' . !empty(trim($salesAndServiceAccountBean->billing_address_city)) ? $salesAndServiceAccountBean->billing_address_city . ',' : '';
             $mailingAddress .= ' ' . $salesAndServiceAccountBean->billing_address_state;
             $mailingAddress .= ' ' . $salesAndServiceAccountBean->billing_address_postalcode;
-            $mailingAddress .= ' ' . $salesAndServiceAccountBean->billing_address_country;
+//            $mailingAddress .= ' ' . $salesAndServiceAccountBean->billing_address_country;
             $mailingAddress = trim(preg_replace('/\s+/', ' ', preg_replace('/\s+/', ' ', preg_replace('/\s+/', ' ', $mailingAddress))));
             $mailingAddress = htmlspecialchars_decode($mailingAddress);
 
@@ -104,8 +98,8 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Generator Phone
             $pdf->SetXY(0, 0);
-            $generatorPhone = array('x' => $startXIndex + 20, 'y' => $startYIndex + 16
-                , 'text' => $salesAndServiceAccountBean->phone_office); // 70, 35
+            $generatorPhone = array('x' => $startXIndex + 16, 'y' => $startYIndex + 16
+                , 'text' => $salesAndServiceAccountBean->phone_office); // 66, 35
             // '(800) 424-9300'
             $pdf->MultiCell(70, 5, $generatorPhone['text'], 0, '', 0, 1, $generatorPhone['x'], $generatorPhone['y'], true);
 
@@ -114,7 +108,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $shippingAddress .= ' ' . !empty(trim($salesAndServiceAccountBean->shipping_address_city)) ? $salesAndServiceAccountBean->shipping_address_city . ',' : '';
             $shippingAddress .= ' ' . $salesAndServiceAccountBean->shipping_address_state;
             $shippingAddress .= ' ' . $salesAndServiceAccountBean->shipping_address_postalcode;
-            $shippingAddress .= ' ' . $salesAndServiceAccountBean->shipping_address_country;
+//            $shippingAddress .= ' ' . $salesAndServiceAccountBean->shipping_address_country;
             $shippingAddress = trim(preg_replace('/\s+/', ' ', preg_replace('/\s+/', ' ', preg_replace('/\s+/', ' ', $shippingAddress))));
             $shippingAddress = htmlspecialchars_decode($shippingAddress);
 
@@ -170,7 +164,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $shippingAddress .= ' ' . !empty(trim($salesAndServiceDesignatedFacilityBean->shipping_address_city)) ? $salesAndServiceDesignatedFacilityBean->shipping_address_city . ',' : '';
             $shippingAddress .= ' ' . $salesAndServiceDesignatedFacilityBean->shipping_address_state;
             $shippingAddress .= ' ' . $salesAndServiceDesignatedFacilityBean->shipping_address_postalcode;
-            $shippingAddress .= ' ' . $salesAndServiceDesignatedFacilityBean->shipping_address_country;
+//            $shippingAddress .= ' ' . $salesAndServiceDesignatedFacilityBean->shipping_address_country;
             $shippingAddress = trim(preg_replace('/\s+/', ' ', preg_replace('/\s+/', ' ', preg_replace('/\s+/', ' ', $shippingAddress))));
             $shippingAddress = htmlspecialchars_decode($shippingAddress);
 
@@ -216,22 +210,26 @@ class sales_and_servicesViewmanifest extends ViewList {
             // Line Number 1
             // HM Hazardeous Material
             $pdf->SetXY(0, 0);
+            $pdf->SetFont('courier', 'B', 10);
             // set font for chars
-            $pdf->SetFont('zapfdingbats', '', 16);
-            $hm1 = array('x' => $startXIndex - 37, 'y' => $startYIndex + $rliYScailing + 66
-                , 'text' => ''); // ✅ ❌ 13, 85
-            $pdf->SetXY($hm1['x'], $hm1['y']);
+            /*
+              $pdf->SetFont('zapfdingbats', '', 16);
+              $hm1 = array('x' => $startXIndex - 37, 'y' => $startYIndex + $rliYScailing + 66
+              , 'text' => ''); // ✅ ❌ 13, 85
+              $pdf->SetXY($hm1['x'], $hm1['y']);
+              if ($rliBean->shipping_hazardous_materia_c) {
+              $pdf->Image('custom/modules/sales_and_services/tpls/checked_rli.png', '', '', 0, 0, '', '', '', false, 300, '', false, false, 1, false, false, false);
+              } else {
+              $pdf->Image('custom/modules/sales_and_services/tpls/crossed_rli.png', '', '', 0, 0, '', '', '', false, 300, '', false, false, 1, false, false, false);
+              } */
+            $hm1 = array('x' => $startXIndex - 36, 'y' => $startYIndex + $rliYScailing + 66
+                , 'text' => 'X'); // 14, 85
             if ($rliBean->shipping_hazardous_materia_c) {
-                $pdf->Image('custom/modules/sales_and_services/tpls/checked_rli.png', '', '', 0, 0, '', '', '', false, 300, '', false, false, 1, false, false, false);
-            } else {
-                $pdf->Image('custom/modules/sales_and_services/tpls/crossed_rli.png', '', '', 0, 0, '', '', '', false, 300, '', false, false, 1, false, false, false);
+                $pdf->MultiCell(5, 5, $hm1['text'], 0, '', 0, 1, $hm1['x'], $hm1['y'], true);
             }
 
             // set font
-            $pdf->SetFont('times', 'B', 10);
-
-            $GLOBALS['log']->fatal('RLI Name : ' . print_r($rliBean->name, 1));
-            $GLOBALS['log']->fatal('RLI proper_shipping_name_c : ' . print_r($rliBean->proper_shipping_name_c, 1));
+            $pdf->SetFont('courier', 'B', 9);
 
             $pdf->SetXY(0, 0);
             $rli1 = array('x' => $startXIndex - 28, 'y' => $startYIndex + $rliYScailing + 64
@@ -260,11 +258,11 @@ class sales_and_servicesViewmanifest extends ViewList {
             // waste_state_codes_c , epa_waste_codes_c
             $waste_state_codes_c = unencodeMultienum($rliBean->waste_state_codes_c);
             $wasteStateCodeXScailing = 0;
+            $pdf->SetFont('courier', 'B', 8);
             foreach ($waste_state_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
                 // set font
-                $pdf->SetFont('times', 'B', 8);
                 $pdf->SetXY(0, 0);
                 $wasteCode1 = array('x' => ($startXIndex + $wasteStateCodeXScailing + 121) - ($key == 0 ? 1 : 0), 'y' => $startYIndex + $rliYScailing + 63
                     , 'text' => $value); // 171, 82
@@ -277,11 +275,11 @@ class sales_and_servicesViewmanifest extends ViewList {
             // waste_state_codes_c , epa_waste_codes_c
             $epa_waste_codes_c = unencodeMultienum($rliBean->epa_waste_codes_c);
             $epaWasteCodeXScailing = 0;
+            $pdf->SetFont('courier', 'B', 8);
             foreach ($epa_waste_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
                 // set font
-                $pdf->SetFont('times', 'B', 8);
                 $pdf->SetXY(0, 0);
                 $wasteCode1 = array('x' => ($startXIndex + $epaWasteCodeXScailing + 121) - ($key == 0 ? 1 : 0), 'y' => $startYIndex + $rliYScailing + 69
                     , 'text' => $value); // 171, 82
@@ -296,7 +294,7 @@ class sales_and_servicesViewmanifest extends ViewList {
 //        $GLOBALS['log']->fatal('$additional_info_ack_list : ' . print_r($additional_info_ack_list, 1));
 //        $additionalInfoYScailing = 0;
 //        foreach ($additional_info_ack_list as $value) {
-//            $pdf->SetFont('times', 'B', 8);
+//            $pdf->SetFont('courier', 'B', 8);
 //            $pdf->SetXY(0, 0);
 //            $additional_info_ack = array('x' => $startXIndex - 28, 'y' => $startYIndex + $additionalInfoYScailing + 112
 //                , 'text' => $value); // 22, 139
@@ -305,10 +303,9 @@ class sales_and_servicesViewmanifest extends ViewList {
 //            $additionalInfoYScailing += 5;
 //        }
 
+        $pdf->SetFont('courier', 'B', 9);
         $manifestHazmatXScailing = 5;
-        $GLOBALS['log']->fatal('$manifest_hazmat_handle_code_list : ' . print_r($manifest_hazmat_handle_code_list, 1));
         foreach ($manifest_hazmat_handle_code_list as $value) {
-            $pdf->SetFont('times', 'B', 10);
             $pdf->SetXY(0, 0);
             $manifest_hazmat_handle_code = array('x' => ($startXIndex - 28) + $manifestHazmatXScailing, 'y' => $startYIndex + 219
                 , 'text' => $value); // 27, 238

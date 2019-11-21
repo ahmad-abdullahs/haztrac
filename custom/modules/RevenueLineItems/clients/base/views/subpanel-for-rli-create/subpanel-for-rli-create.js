@@ -124,6 +124,7 @@
         var currencyFields;
         var currencyFromRate;
         var parentModel = this.context.parent.get('model');
+        var parentModule = this.context.parent.get('module');
 
         if (bean.has('sales_stage')) {
             dom = app.lang.getAppListStrings('sales_probability_dom');
@@ -195,8 +196,10 @@
                         _model.set('primary_rli', false);
                     } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
                         // Set the sales and service name as primary selected RLI
-                        parentModel.set('name', _model.get('name'));
-                        parentModel.set('mft_part_num', _model.get('mft_part_num'));
+                        if (parentModule == 'sales_and_services') {
+                            parentModel.set('name', _model.get('name'));
+                            parentModel.set('mft_part_num', _model.get('mft_part_num'));
+                        }
                         if (this.context.parent.get('module') == 'sales_and_services') {
                             this.setTSDFFacility(_model, parentModel);
                         }
@@ -208,8 +211,10 @@
         // if RLI name is changed and it is the primary rli update the sales and service name as well...
         bean.on('change:name', function (model) {
             if (model.get('primary_rli')) {
-                parentModel.set('name', model.get('name'));
-                parentModel.set('mft_part_num', model.get('mft_part_num'));
+                if (parentModule == 'sales_and_services') {
+                    parentModel.set('name', model.get('name'));
+                    parentModel.set('mft_part_num', model.get('mft_part_num'));
+                }
                 if (this.context.parent.get('module') == 'sales_and_services') {
                     this.setTSDFFacility(model, parentModel);
                 }
