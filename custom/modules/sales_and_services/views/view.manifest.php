@@ -40,9 +40,11 @@ class sales_and_servicesViewmanifest extends ViewList {
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
+        $fontSize = 10;
+        $smallfontSize = 9;
         // ---------------------------------------------------------
         // set font
-        $pdf->SetFont('courier', 'B', 9);
+        $pdf->SetFont('courier', 'B', $fontSize);
 
         // add a page
         $pdf->AddPage();
@@ -230,7 +232,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // Line Number 1
             // HM Hazardeous Material
             $pdf->SetXY(0, 0);
-            $pdf->SetFont('courier', 'B', 10);
+            $pdf->SetFont('courier', 'B', $fontSize);
             // set font for chars
             /*
               $pdf->SetFont('zapfdingbats', '', 16);
@@ -249,7 +251,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             }
 
             // set font
-            $pdf->SetFont('courier', 'B', 9);
+            $pdf->SetFont('courier', 'B', $fontSize);
 
             $pdf->SetXY(0, 0);
             $rli1 = array('x' => $startXIndex - 28, 'y' => $startYIndex + $rliYScailing + 64
@@ -278,7 +280,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // waste_state_codes_c , epa_waste_codes_c
             $waste_state_codes_c = unencodeMultienum($rliBean->waste_state_codes_c);
             $wasteStateCodeXScailing = 0;
-            $pdf->SetFont('courier', 'B', 8);
+            $pdf->SetFont('courier', 'B', $smallfontSize);
             foreach ($waste_state_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
@@ -295,7 +297,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // waste_state_codes_c , epa_waste_codes_c
             $epa_waste_codes_c = unencodeMultienum($rliBean->epa_waste_codes_c);
             $epaWasteCodeXScailing = 0;
-            $pdf->SetFont('courier', 'B', 8);
+            $pdf->SetFont('courier', 'B', $smallfontSize);
             foreach ($epa_waste_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
@@ -323,7 +325,7 @@ class sales_and_servicesViewmanifest extends ViewList {
 //            $additionalInfoYScailing += 5;
 //        }
 
-        $pdf->SetFont('courier', 'B', 9);
+        $pdf->SetFont('courier', 'B', $fontSize);
         $manifestHazmatXScailing = 5;
         foreach ($manifest_hazmat_handle_code_list as $value) {
             $pdf->SetXY(0, 0);
