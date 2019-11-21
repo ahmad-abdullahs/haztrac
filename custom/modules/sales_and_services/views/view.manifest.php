@@ -52,7 +52,9 @@ class sales_and_servicesViewmanifest extends ViewList {
 
         $startXIndex = empty($_REQUEST['x']) ? 50 : $_REQUEST['x']; // 50, 49
         $startYIndex = empty($_REQUEST['y']) ? 19 : $_REQUEST['y']; // 19, 31
-
+        // Default CellHeightRatio is 1.25. We have reduced it to 1.10, 
+        // so that it takes less space and we can write more. 
+        $pdf->setCellHeightRatio(1.10);
 
         if (!empty($salesAndServiceBean->accounts_sales_and_services_1accounts_ida)) {
             // Sales and Service related account.
@@ -77,9 +79,15 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Generator Name
             $pdf->SetXY(0, 0);
+            // Check if the account is of third party type use the Third party billing name
+            // otherwise use the account name...
+            $generatorNameText = htmlspecialchars_decode($salesAndServiceAccountBean->name);
+            if (strpos($salesAndServiceAccountBean->account_type_cst_c, '3rd Party') !== false) {
+                $generatorNameText = htmlspecialchars_decode($salesAndServiceAccountBean->billing_address_third_party_name);
+            }
             $generatorName = array('x' => $startXIndex - 28, 'y' => $startYIndex + 7
-                , 'text' => htmlspecialchars_decode($salesAndServiceAccountBean->name)); // 22, 26
-            $pdf->MultiCell(70, 5, $generatorName['text'], 0, '', 0, 1, $generatorName['x'], $generatorName['y'], true);
+                , 'text' => $generatorNameText); // 22, 26
+            $pdf->MultiCell(88, 5, $generatorName['text'], 0, '', 0, 1, $generatorName['x'], $generatorName['y'], true);
 
             $mailingAddress = '';
             $mailingAddress = $salesAndServiceAccountBean->billing_address_street;
@@ -94,7 +102,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $pdf->SetXY(0, 0);
             $generatorMailingAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 10
                 , 'text' => $mailingAddress); // 22, 29
-            $pdf->MultiCell(70, 5, $generatorMailingAddress['text'], 0, '', 0, 1, $generatorMailingAddress['x'], $generatorMailingAddress['y'], true);
+            $pdf->MultiCell(88, 5, $generatorMailingAddress['text'], 0, '', 0, 1, $generatorMailingAddress['x'], $generatorMailingAddress['y'], true);
 
             // Generator Phone
             $pdf->SetXY(0, 0);
@@ -102,6 +110,18 @@ class sales_and_servicesViewmanifest extends ViewList {
                 , 'text' => $salesAndServiceAccountBean->phone_office); // 66, 35
             // '(800) 424-9300'
             $pdf->MultiCell(70, 5, $generatorPhone['text'], 0, '', 0, 1, $generatorPhone['x'], $generatorPhone['y'], true);
+
+            // Generator Name
+            $pdf->SetXY(0, 0);
+            // Check if the account is of third party type use the Third party shipping name
+            // otherwise use the account name...
+            $generatorNameText = htmlspecialchars_decode($salesAndServiceAccountBean->name);
+            if (strpos($salesAndServiceAccountBean->account_type_cst_c, '3rd Party') !== false) {
+                $generatorNameText = htmlspecialchars_decode($salesAndServiceAccountBean->shipping_address_third_party_name);
+            }
+            $generatorName = array('x' => $startXIndex + 62, 'y' => $startYIndex + 7
+                , 'text' => $generatorNameText); // 112, 26
+            $pdf->MultiCell(88, 5, $generatorName['text'], 0, '', 0, 1, $generatorName['x'], $generatorName['y'], true);
 
             $shippingAddress = '';
             $shippingAddress = $salesAndServiceAccountBean->shipping_address_street;
@@ -117,7 +137,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $generatorSiteAddress = array('x' => $startXIndex + 62, 'y' => $startYIndex + 10
                 , 'text' => $shippingAddress); // 112, 29
             // '19528 Ventura Blvd Tarzana, CA 91356 United States'
-            $pdf->MultiCell(70, 5, $generatorSiteAddress['text'], 0, '', 0, 1, $generatorSiteAddress['x'], $generatorSiteAddress['y'], true);
+            $pdf->MultiCell(88, 5, $generatorSiteAddress['text'], 0, '', 0, 1, $generatorSiteAddress['x'], $generatorSiteAddress['y'], true);
         }
 
 //        transporter_carrier_c
