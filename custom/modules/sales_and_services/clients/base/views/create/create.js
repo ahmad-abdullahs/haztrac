@@ -265,7 +265,7 @@
                     // data to the 'create' array
                     _.each(child.get('collection').models, function (model) {
                         // Set the Sales and Service Account to every RLI model which is going to create...
-                        model.set('account_id', this.model.get('accounts_sales_and_services_1'));
+                        model.set('account_id', this.model.get('accounts_sales_and_services_1accounts_ida'));
                         childCollection.create.push(model.toJSON());
                     }, this);
 

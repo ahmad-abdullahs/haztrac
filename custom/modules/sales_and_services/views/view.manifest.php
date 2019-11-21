@@ -48,7 +48,7 @@ class sales_and_servicesViewmanifest extends ViewList {
         $pdf->AddPage();
 
         $pdf->SetXY(0, 0);
-        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', '', '', 210, 270, '', '', '', false, 300, '', false, false, 1, false, false, false);
+//        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', '', '', 210, 270, '', '', '', false, 300, '', false, false, 1, false, false, false);
 
         $startXIndex = empty($_REQUEST['x']) ? 50 : $_REQUEST['x']; // 50, 49
         $startYIndex = empty($_REQUEST['y']) ? 19 : $_REQUEST['y']; // 19, 31
