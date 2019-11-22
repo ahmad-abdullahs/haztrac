@@ -222,7 +222,8 @@ $viewdefs['Accounts'] = array(
                             8 =>
                             array(
                                 'name' => 'billing_address',
-                                'type' => 'fieldset-visibility',
+                                'type' => 'fieldset',
+//                                'type' => 'fieldset-visibility',
                                 'css_class' => 'address',
                                 'label' => 'LBL_BILLING_ADDRESS',
                                 'fields' =>
@@ -263,7 +264,8 @@ $viewdefs['Accounts'] = array(
                             9 =>
                             array(
                                 'name' => 'shipping_address',
-                                'type' => 'fieldset-visibility',
+                                'type' => 'fieldset',
+//                                'type' => 'fieldset-visibility',
                                 'css_class' => 'address',
                                 'label' => 'LBL_SHIPPING_ADDRESS',
                                 'fields' =>
