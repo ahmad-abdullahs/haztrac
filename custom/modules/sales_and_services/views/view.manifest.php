@@ -40,8 +40,8 @@ class sales_and_servicesViewmanifest extends ViewList {
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-        $fontSize = 10;
-        $smallfontSize = 9;
+        $fontSize = 11;
+        $smallfontSize = 10;
         // ---------------------------------------------------------
         // set font
         $pdf->SetFont('courier', 'B', $fontSize);
@@ -280,7 +280,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // waste_state_codes_c , epa_waste_codes_c
             $waste_state_codes_c = unencodeMultienum($rliBean->waste_state_codes_c);
             $wasteStateCodeXScailing = 0;
-            $pdf->SetFont('courier', 'B', $smallfontSize);
+            $pdf->SetFont('courier', 'B', $fontSize);
             foreach ($waste_state_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
@@ -297,7 +297,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // waste_state_codes_c , epa_waste_codes_c
             $epa_waste_codes_c = unencodeMultienum($rliBean->epa_waste_codes_c);
             $epaWasteCodeXScailing = 0;
-            $pdf->SetFont('courier', 'B', $smallfontSize);
+            $pdf->SetFont('courier', 'B', $fontSize);
             foreach ($epa_waste_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
