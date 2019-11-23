@@ -1,5 +1,5 @@
 <?php
- // created: 2019-10-27 20:24:25
+ // created: 2019-11-20 13:57:58
 
 $app_list_strings['lab_analysis_list']=array (
   'Aniline Point F' => 'Aniline Point, °F',
@@ -37,4 +37,5 @@ $app_list_strings['lab_analysis_list']=array (
   'Visc 50' => 'Viscosity cSt @ 50C (D445)',
   'Water by Distillation' => 'Water by Distillation, Vol% (D95)',
   'Water by Karl Fisher' => 'Water by Karl Fisher, Vol% (E203)',
+  'TPS' => 'Total Potential Sediment, (ISO10307-2)',
 );
