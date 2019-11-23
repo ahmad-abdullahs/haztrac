@@ -10,13 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="control-group contact_multiselect_row clearfix contact_multiselect-{{fieldAction}}" data-uid={{uid}}>
-    <div class="row-fluid" data-uid={{uid}}>
-        {{#each modelFields}}
-                <div class="span{{span}} {{css_class}} record-cell">
-                        {{field ../view model=../model template=../fieldAction}}
-                </div>
+<div class="control-group {{name}} clearfix" style="margin-bottom: 5px;">
+    <div class="record-label">
+        {{#each def.fields}}
+            <div class="span{{span}} record-cell {{css_class}}">
+                <lable>{{str label ../module}}</lable>
+            </div>
         {{/each}}
     </div>
 </div>
+<div class="{{name}}-to-insert"></div>
 

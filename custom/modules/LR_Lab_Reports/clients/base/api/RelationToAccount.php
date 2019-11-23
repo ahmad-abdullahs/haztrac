@@ -53,7 +53,7 @@ class RelationToAccount extends SugarApi {
                         . "('" . create_guid() . "', '{$timedate->nowDb()}', '0', '{$labReportId}', '{$accountId}', '')";
                 $result = $db->query($insert, true);
             } else {
-                // tye is unlink, and it does not exist in the database to no need to worry.
+                // this is unlink, and it does not exist in the database, so no need to worry.
             }
         }
     }

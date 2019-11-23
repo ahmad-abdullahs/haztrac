@@ -223,7 +223,7 @@ $viewdefs['Contacts'] = array(
                                 'name' => 'accounts_and_roles_widget',
                                 'type' => 'accounts_and_roles_widget',
                                 'dismiss_label' => true,
-                                'span' => 9,
+                                'span' => 6,
                                 'related_fields' => array(
                                     'accounts_and_roles_widget',
                                 ),
@@ -237,7 +237,7 @@ $viewdefs['Contacts'] = array(
                                         'id_name' => 'accounts_and_roles_widget_name_id',
                                         'module' => 'Accounts',
                                         'link' => true,
-                                        'span' => 5,
+                                        'span' => 6,
                                         'sortable' => false,
                                     ),
                                     array(
@@ -246,7 +246,7 @@ $viewdefs['Contacts'] = array(
                                         'label' => 'LBL_ACCOUNTS_AND_ROLES_WIDGET_ROLE',
                                         'type' => 'enum',
                                         'options' => 'contact_role_list',
-                                        'span' => 3
+                                        'span' => 4
                                     ),
                                     array(
                                         'name' => 'accounts_and_roles_widget_primary_account',
