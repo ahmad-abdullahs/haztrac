@@ -285,6 +285,9 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             14 =>
                             array(
+                                'name' => 'waste_profile_relate_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_WASTE_PROFILE_RELATE',
                             ),
                         ),
                     ),
@@ -434,6 +437,14 @@ $viewdefs['RevenueLineItems'] = array(
                                 'name' => 'manifest_uom_c',
                                 'label' => 'LBL_MANIFEST_UOM',
                                 'type' => 'enum-same-key-and-value',
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'manifest_additional_info_c',
+                                'label' => 'LBL_MANIFEST_ADDITIONAL_INFO',
+                            ),
+                            8 =>
+                            array(
                             ),
                         ),
                     ),

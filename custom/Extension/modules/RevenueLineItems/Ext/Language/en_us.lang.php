@@ -42,3 +42,6 @@ $mod_strings['LBL_COMMISSION_UMO'] = 'Commission UMO';
 $mod_strings['LBL_COMMISSION_FORMULA'] = 'Commission Formula';
 $mod_strings['LBL_ESTIMATED_TOTAL_AMOUNT'] = 'Forecast Amount';
 $mod_strings['LBL_CALCULATED_LINE_ITEM_AMOUNT'] = 'Sale Amount';
+$mod_strings['LBL_WASTE_PROFILE_RELATE_WPM_WASTE_PROFILE_MODULE_ID'] = 'waste profile relate (related Waste Profile ID)';
+$mod_strings['LBL_WASTE_PROFILE_RELATE'] = 'Waste Profile';
+$mod_strings['LBL_MANIFEST_ADDITIONAL_INFO'] = 'Additional Info';
