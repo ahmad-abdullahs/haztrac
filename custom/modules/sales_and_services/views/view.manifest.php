@@ -129,7 +129,7 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Designated Facility Name + Designated Facility Site Address + Designated Facility Phone
             $pdf->SetXY(0, 0);
-            $shippingAddress = $this->getFormatedAddress($salesAndServiceAccountBean, 'shipping');
+            $shippingAddress = $this->getFormatedAddress($salesAndServiceDesignatedFacilityBean, 'shipping');
             $designatedFacilitySiteAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 40
                 , 'text' => $shippingAddress); // 22, 59
             $pdf->MultiCell(100, 5, $designatedFacilitySiteAddress['text'], 0, '', 0, 1, $designatedFacilitySiteAddress['x'], $designatedFacilitySiteAddress['y'], true);
