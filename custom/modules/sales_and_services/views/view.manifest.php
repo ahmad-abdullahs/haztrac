@@ -242,8 +242,6 @@ class sales_and_servicesViewmanifest extends ViewList {
             $rliYScailing += 12;
         }
 
-//        $GLOBALS['log']->fatal('$additional_info_ack_list : ' . print_r($additional_info_ack_list, 1));
-
         $lineNum = 1;
         $additionaInformation = '';
         foreach ($additional_info_ack_list as $key => $value) {
@@ -263,9 +261,9 @@ class sales_and_servicesViewmanifest extends ViewList {
         $pdf->SetXY(0, 0);
         $phone = $this->formatPhone($salesAndServiceAccountBean);
         if (!is_null($phone) && !empty($phone)) {
-            $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT' . utf8_decode(chr(10)) . 'IN CASE OF EMERGENCY CALL ' . trim($phone);
+            $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT IN CASE OF EMERGENCY CALL ' . trim($phone);
         } else {
-            $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT' . utf8_decode(chr(10)) . 'IN CASE OF EMERGENCY CALL ' . 'CHEMTREC: (800)424-9300';
+            $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT IN CASE OF EMERGENCY CALL ' . 'CHEMTREC: (800)424-9300';
 //            $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT IN CASE OF EMERGENCY CALL' . '  ' . 'OR' . 'CHEMTREC: (800)424-9300';
         }
         $regulatoryInfo = array('x' => $startXIndex + 85, 'y' => $startYIndex + 112
@@ -349,7 +347,7 @@ ORDER BY revenue_line_items.line_number ASC , revenue_line_items.id ASC";
 
     function formatPhone($bean) {
         $phone = null;
-        if (!is_null($bean) && !empty($bean->phone_office) && $isPhone) {
+        if (!is_null($bean) && !empty($bean->phone_office)) {
             $piece1 = $piece2 = $piece3 = '';
             $phone = $bean->phone_office;
 
