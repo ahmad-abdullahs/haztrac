@@ -241,6 +241,105 @@
         }
     },
 
+    checkButtons: function () {
+        this._super('checkButtons');
+        if (this.disposed) {
+            return;
+        }
+
+        var facilitiesInfo = {};
+        _.each(this.collection.models, function (model, key) {
+            this.warnIfDifferentFacilities(model, key, facilitiesInfo);
+        }, this);
+    },
+
+    warnIfDifferentFacilities: function (model, key, facilitiesInfo, checkValidation) {
+        // Put RLI id and facility id in an object
+        if (!_.isEmpty(model.attributes.v_vendors_id_c) && model.attributes.is_bundle_product_c != 'parent') {
+            facilitiesInfo[model.attributes.id] = model.attributes.v_vendors_id_c;
+        }
+
+        // If all the RLIs has been looped through and this is the last RLI
+        // get the facilities ids and make then unique to check do we 
+        // have multiple facilities or not
+        // If we have multiple group them and color them on the view.
+        // each facility has its own color, this way we will group multiple 
+        // rlis with same facility to a common color.
+        if (key + 1 == this.collection.models.length) {
+            if (_.unique(_.compact(_.values(facilitiesInfo))).length > 1) {
+                app.alert.dismiss('multifacility-warning');
+                app.alert.show('multifacility-warning', {
+                    level: 'warning',
+                    messages: 'You have selected multiple Items which have different Ship To / TSDF',
+                    closeable: true,
+                    autoClose: true,
+                    autoCloseDelay: 12000,
+                });
+
+                if (checkValidation) {
+                    return false;
+                }
+
+                var facilitiesInfoGroupBy = {};
+                _.each(facilitiesInfo, function (val, key) {
+                    if (_.isUndefined(facilitiesInfoGroupBy[val]) || _.isNull(facilitiesInfoGroupBy[val])) {
+                        facilitiesInfoGroupBy[val] = [];
+                    }
+                    facilitiesInfoGroupBy[val].push(key)
+                }, this);
+
+                var colorsList = ['#0679c8', '#6d17e5', '#54cb14', '#ffb600', '#e61718'];
+                _.each(facilitiesInfoGroupBy, function (_val) {
+                    var color = colorsList.pop();
+                    _.each(_val, function (val) {
+                        $('tr[name=RevenueLineItems_' + val + ']').attr('style', 'border:groove ' + color + ';border-width: thick;');
+                    }, this);
+                }, this);
+            }
+        }
+        return true;
+    },
+
+    checkTSDFValidity: function () {
+        var isValidTSDF = true;
+        var facilitiesInfo = {};
+        _.each(this.collection.models, function (model, key) {
+            if (!this.warnIfDifferentFacilities(model, key, facilitiesInfo, true)) {
+                isValidTSDF = false;
+            }
+        }, this);
+        return isValidTSDF;
+    },
+
+    validateModels: function (callback, fromCreateView) {
+        fromCreateView = fromCreateView || false;
+
+        var returnCt = 0;
+        this.hasValidModels = true;
+
+        _.each(this.collection.models, function (model) {
+            // loop through all models and call doValidate on each model
+            model.doValidate(this.getFields(this.module), _.bind(function (isValid) {
+                returnCt++;
+
+                if (this.hasValidModels && !isValid) {
+                    // hasValidModels was true, but a model returned false from validation
+                    this.hasValidModels = isValid;
+                }
+
+                // check if all model validations have occurred
+                if (returnCt === this.collection.length) {
+                    if (fromCreateView) {
+                        // the create waterfall wants the opposite of if this is validated
+                        callback(!this.hasValidModels || !this.checkTSDFValidity());
+                    } else {
+                        // this view wants if the models are valid or not
+                        callback(this.hasValidModels);
+                    }
+                }
+            }, this));
+        }, this);
+    },
     /**
      * We have to overwrite this method completely, since there is currently no way to completely disable
      * a field from being displayed
