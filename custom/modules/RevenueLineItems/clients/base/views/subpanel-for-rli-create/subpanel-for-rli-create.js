@@ -255,7 +255,7 @@
 
     warnIfDifferentFacilities: function (model, key, facilitiesInfo, checkValidation) {
         // Put RLI id and facility id in an object
-        if (!_.isEmpty(model.attributes.v_vendors_id_c) && model.attributes.is_bundle_product_c != 'parent') {
+        if (!_.isEmpty(model.attributes.v_vendors_id_c) && model.attributes.is_bundle_product_c != 'parent' && model.attributes.manifest_required_c) {
             facilitiesInfo[model.attributes.id] = model.attributes.v_vendors_id_c;
         }
 
