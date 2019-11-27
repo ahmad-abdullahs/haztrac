@@ -81,7 +81,7 @@
                 _.each(model.get('revenuelineitems_revenuelineitems_1').records, function (relatedRLI) {
                     if (relatedRLI.name && relatedRLI.id && !_.contains(pillsIds, relatedRLI.id)) {
                         if (!_.isEmpty(relatedRLI.v_vendors_id_c) && relatedRLI.is_bundle_product_c != 'parent' && relatedRLI.manifest_required_c) {
-                            facilitiesInfo[relatedRLI.id] = relatedRLI.v_vendors_id_c;
+                            this.facilitiesInfo[relatedRLI.id] = relatedRLI.v_vendors_id_c;
                         }
 
                         pillsAttrs.push({
