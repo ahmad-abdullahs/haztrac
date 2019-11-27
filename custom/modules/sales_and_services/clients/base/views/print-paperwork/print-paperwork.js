@@ -22,8 +22,8 @@
             'action': 'manifest',
             'module': this.model.get('_module'),
             'record': this.model.get('id'),
-            'x': this.model.get('xaxis'),
-            'y': this.model.get('yaxis'),
+//            'x': this.model.get('xaxis'),
+//            'y': this.model.get('yaxis'),
             'sugarpdf': 'pdfmanager',
         });
         return '?' + urlParams;

@@ -6,6 +6,8 @@
         // Add listener for custom button
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
         this.model.on('change:recurring_sale_c', this.takeUserToRecurringTab, this);
+        // Add listener for print_paperwork_button
+        this.context.on('button:print_paperwork_button:click', this.printPaperworkDrawer, this);
         /*This makes the field colored in detail view...*/
 //        this.model.on('data:sync:complete', function (options) {
 //            if (!_.isNull(this.model._relatedCollections))
@@ -205,5 +207,18 @@
 
     closeDrawer: function () {
         app.drawer.close();
+    },
+    
+    printPaperworkDrawer: function () {
+        app.drawer.open({
+            layout: 'print-paperwork',
+            context: {
+                create: true,
+                module: this.model.module || this.model.get('_module'),
+                model: this.model,
+            }
+        }, _.bind(function (context, taskmodel) {
+            // These are for code reference...
+        }, this));
     },
 })

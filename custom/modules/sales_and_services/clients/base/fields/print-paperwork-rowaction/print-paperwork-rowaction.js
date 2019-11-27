@@ -6,10 +6,10 @@
         this.type = 'rowaction';
     },
     rowActionSelect: function (evt) {
-        this.openTasksCreateView();
+        this.printPaperworkDrawer();
     },
 
-    openTasksCreateView: function () {
+    printPaperworkDrawer: function () {
         app.drawer.open({
             layout: 'print-paperwork',
             context: {
@@ -18,6 +18,7 @@
                 model: this.model,
             }
         }, _.bind(function (context, taskmodel) {
+            // These are for code reference...
         }, this));
     },
 })

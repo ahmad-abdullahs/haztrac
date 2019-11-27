@@ -68,13 +68,21 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             2 =>
                             array(
+                                'type' => 'rowaction',
+                                'name' => 'print_paperwork_button',
+                                'event' => 'button:print_paperwork_button:click',
+                                'label' => 'LBL_PRINT_PAPERWORK',
+                                'acl_action' => 'view',
+                            ),
+                            3 =>
+                            array(
                                 'type' => 'pdfaction',
                                 'name' => 'download-pdf',
                                 'label' => 'LBL_PDF_VIEW',
                                 'action' => 'download',
                                 'acl_action' => 'view',
                             ),
-                            3 =>
+                            4 =>
                             array(
                                 'type' => 'pdfaction',
                                 'name' => 'email-pdf',
@@ -82,11 +90,11 @@ $viewdefs['sales_and_services'] = array(
                                 'action' => 'email',
                                 'acl_action' => 'view',
                             ),
-                            4 =>
+                            5 =>
                             array(
                                 'type' => 'divider',
                             ),
-                            5 =>
+                            6 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:find_duplicates_button:click',
@@ -94,7 +102,7 @@ $viewdefs['sales_and_services'] = array(
                                 'label' => 'LBL_DUP_MERGE',
                                 'acl_action' => 'edit',
                             ),
-                            6 =>
+                            7 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:duplicate_button:click',
@@ -103,7 +111,7 @@ $viewdefs['sales_and_services'] = array(
                                 'acl_module' => 'sales_and_services',
                                 'acl_action' => 'create',
                             ),
-                            7 =>
+                            8 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:audit_button:click',
@@ -111,11 +119,11 @@ $viewdefs['sales_and_services'] = array(
                                 'label' => 'LNK_VIEW_CHANGE_LOG',
                                 'acl_action' => 'view',
                             ),
-                            8 =>
+                            9 =>
                             array(
                                 'type' => 'divider',
                             ),
-                            9 =>
+                            10 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:delete_button:click',

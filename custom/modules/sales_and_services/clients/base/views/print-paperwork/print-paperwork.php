@@ -108,22 +108,22 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
                         'click' => 'button:print_manifest:click',
                     ),
                 ),
-                array(
-                    'name' => 'xaxis',
-                    'label' => 'X-Axis',
-                    'type' => 'int',
-                    'len' => '2',
-                    'default' => '50',
-                    'span' => 6
-                ),
-                array(
-                    'name' => 'yaxis',
-                    'label' => 'Y-Axis',
-                    'type' => 'int',
-                    'len' => '2',
-                    'default' => '19',
-                    'span' => 6
-                ),
+//                array(
+//                    'name' => 'xaxis',
+//                    'label' => 'X-Axis',
+//                    'type' => 'int',
+//                    'len' => '2',
+//                    'default' => '50',
+//                    'span' => 6
+//                ),
+//                array(
+//                    'name' => 'yaxis',
+//                    'label' => 'Y-Axis',
+//                    'type' => 'int',
+//                    'len' => '2',
+//                    'default' => '19',
+//                    'span' => 6
+//                ),
             ),
         ),
     ),
