@@ -21,6 +21,7 @@
 ({
     extendsFrom: 'SelectionListContextView',
     className: 'selection-context',
+    facilitiesInfo: {},
     events: {
         'click [data-close-pill]': 'handleClosePillEvent',
         'click .reset_button': 'removeAllPills'
@@ -31,6 +32,7 @@
      */
     initialize: function (options) {
         this.pills = [];
+        this.facilitiesInfo = {};
         /**
          * The maximum number of pills that can be displayed.
          *
@@ -63,14 +65,25 @@
                     app.utils.formatNameLocale(model.attributes) ||
                     model.get('document_name');
 
+            if (!_.isEmpty(model.get('v_vendors_id_c')) && model.get('is_bundle_product_c') != 'parent' && model.get('manifest_required_c')) {
+                this.facilitiesInfo[model.get('id')] = model.get('v_vendors_id_c');
+            }
+
             if (modelName && !_.contains(pillsIds, model.id)) {
-                pillsAttrs.push({id: model.id, name: modelName});
+                pillsAttrs.push({
+                    id: model.id,
+                    name: modelName,
+                });
             }
 
             // ++
             if (!_.isEmpty(model.get('revenuelineitems_revenuelineitems_1').records)) {
                 _.each(model.get('revenuelineitems_revenuelineitems_1').records, function (relatedRLI) {
                     if (relatedRLI.name && relatedRLI.id && !_.contains(pillsIds, relatedRLI.id)) {
+                        if (!_.isEmpty(relatedRLI.v_vendors_id_c) && relatedRLI.is_bundle_product_c != 'parent' && relatedRLI.manifest_required_c) {
+                            facilitiesInfo[relatedRLI.id] = relatedRLI.v_vendors_id_c;
+                        }
+
                         pillsAttrs.push({
                             id: relatedRLI.id,
                             name: relatedRLI.name,
@@ -80,12 +93,19 @@
                     }
                 }, this);
             }
-        });
+        }, this);
 
         this.pills.push.apply(this.pills, pillsAttrs);
 
         this._debounceRender();
     },
+
+    _debounceRender: _.debounce(function () {
+        var self = this;
+        $.when(self.render()).then(function () {
+            self.ifValidFacilities();
+        });
+    }, 50),
 
     /**
      * Removes a pill from the template.
@@ -106,8 +126,11 @@
                     if (relatedRLI.name && relatedRLI.id) {
                         ids.push(relatedRLI.id);
                     }
+                    this.facilitiesInfo = _.omit(this.facilitiesInfo, relatedRLI.id);
                 }, this);
             }
+            // Remove the entry from the facilitiesInfo when row is unselected or pill is removed.
+            this.facilitiesInfo = _.omit(this.facilitiesInfo, models[0].get('id'));
         }
 
         this.pills = _.reject(this.pills, function (pill) {
@@ -115,5 +138,43 @@
         });
 
         this._debounceRender();
+    },
+
+    ifValidFacilities: function () {
+        var exceptVendors = [];
+        // Subpanel RLIs (Put RLI id and facility id in an object)
+        if (!_.isUndefined(this.context.parent) && !_.isNull(this.context.parent)) {
+            _.each(this.context.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model, key) {
+                if (!_.isEmpty(model.attributes.v_vendors_id_c) && model.attributes.is_bundle_product_c != 'parent' && model.attributes.manifest_required_c) {
+                    this.facilitiesInfo[model.attributes.id] = model.attributes.v_vendors_id_c;
+                    exceptVendors.push(model.attributes.v_vendors_id_c);
+                }
+            }, this);
+        }
+
+        // Get the facilities ids and make them unique to check do we 
+        // have multiple facilities or not
+        // If we have multiple, group them and color the pills.
+        // each facility has its own color, this way we will group multiple 
+        // rlis with same facility to a common color.
+        if (_.unique(_.compact(_.values(this.facilitiesInfo))).length > 1) {
+            var facilitiesInfoGroupBy = {};
+            _.each(this.facilitiesInfo, function (val, key) {
+                if (_.isUndefined(facilitiesInfoGroupBy[val]) || _.isNull(facilitiesInfoGroupBy[val])) {
+                    facilitiesInfoGroupBy[val] = [];
+                }
+                facilitiesInfoGroupBy[val].push(key)
+            }, this);
+
+            var colorsList = ['#0679c8', '#6d17e5', '#54cb14', '#ffb600', '#e61718'];
+            _.each(facilitiesInfoGroupBy, function (_val, _key) {
+                if (!_.contains(exceptVendors, _key)) {
+                    var color = colorsList.pop();
+                    _.each(_val, function (val) {
+                        $('li[data-id=' + val + ']').attr('style', 'background:radial-gradient(' + color + ', ' + color + ');');
+                    }, this);
+                }
+            }, this);
+        }
     },
 })

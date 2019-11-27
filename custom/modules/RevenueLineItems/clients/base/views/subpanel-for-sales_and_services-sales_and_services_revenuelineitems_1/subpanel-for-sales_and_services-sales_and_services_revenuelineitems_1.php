@@ -1,6 +1,6 @@
 <?php
 
-// created: 2019-11-24 21:06:40
+// created: 2019-11-27 04:47:04
 $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-sales_and_services_revenuelineitems_1'] = array(
     'panels' =>
     array(
@@ -23,6 +23,8 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                         0 => 'currency_id',
                         1 => 'base_rate',
                         2 => 'is_bundle_product_c',
+                        3 => 'v_vendors_id_c',
+                        4 => 'manifest_required_c',
                     ),
                 ),
                 1 =>

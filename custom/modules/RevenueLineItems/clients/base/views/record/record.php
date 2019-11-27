@@ -304,6 +304,14 @@ $viewdefs['RevenueLineItems'] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'hide_price_from_paperwork_c',
+                                'label' => 'LBL_HIDE_PRICE_FROM_PAPERWORK',
+                            ),
+                            1 =>
+                            array(
+                            ),
+                            2 =>
+                            array(
                                 'name' => 'discount_price',
                                 'type' => 'currency',
                                 'related_fields' =>
@@ -317,35 +325,35 @@ $viewdefs['RevenueLineItems'] = array(
                                 'currency_field' => 'currency_id',
                                 'base_rate_field' => 'base_rate',
                             ),
-                            1 =>
+                            3 =>
                             array(
                                 'name' => 'product_uom_c',
                                 'label' => 'LBL_UNIT_OF_MEASURE',
                             ),
-                            2 =>
+                            4 =>
                             array(
                                 'name' => 'pricing_formula',
                                 'comment' => 'Pricing formula (ex: Fixed, Markup over Cost)',
                                 'label' => 'LBL_PRICING_FORMULA',
                             ),
-                            3 =>
+                            5 =>
                             array(
                                 'name' => 'weight',
                             ),
-                            4 =>
+                            6 =>
                             array(
                                 'name' => 'related_rli_total_c',
                                 'label' => 'LBL_RELATED_RLI_TOTAL',
                             ),
-                            5 =>
+                            7 =>
                             array(
                                 'name' => 'date_cost_price',
                             ),
-                            6 =>
+                            8 =>
                             array(
                                 'name' => 'tax_class',
                             ),
-                            7 =>
+                            9 =>
                             array(
                                 'name' => 'base_rate',
                                 'label' => 'LBL_CURRENCY_RATE',

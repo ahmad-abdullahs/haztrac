@@ -1,5 +1,5 @@
 <?php
-// created: 2019-11-24 21:06:40
+// created: 2019-11-27 04:47:04
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -32,6 +32,26 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HT_Manifest',
     'target_record_key' => 'ht_manifest_revenuelineitems_1ht_manifest_ida',
+  ),
+  'product_vendor_c' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_PRODUCT_VENDOR',
+    'id' => 'V_VENDORS_ID_C',
+    'link' => true,
+    'width' => 10,
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Accounts',
+    'target_record_key' => 'v_vendors_id_c',
+  ),
+  'manifest_required_c' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'vname' => 'LBL_MANIFEST_REQUIRED',
+    'width' => 10,
   ),
   'estimated_quantity_c' => 
   array (

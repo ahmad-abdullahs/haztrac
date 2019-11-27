@@ -15,11 +15,6 @@ $viewdefs['RevenueLineItems'] = array(
                         'label' => 'LBL_PANEL_1',
                         'fields' =>
                         array(
-//                            array(
-//                                'name' => 'id',
-//                                'enabled' => true,
-//                                'default' => true,
-//                            ),
                             array(
                                 'name' => 'name',
                                 'link' => true,
@@ -30,11 +25,29 @@ $viewdefs['RevenueLineItems'] = array(
                                 array(
                                     0 => 'revenuelineitems_revenuelineitems_1',
                                     1 => 'rli_as_template_c',
+                                    2 => 'v_vendors_id_c',
+                                    3 => 'manifest_required_c',
+                                    4 => 'is_bundle_product_c',
                                 ),
                             ),
                             array(
                                 'name' => 'account_name',
                                 'readonly' => true,
+                                'enabled' => true,
+                                'default' => true,
+                            ),
+                            array(
+                                'name' => 'product_vendor_c',
+                                'label' => 'LBL_PRODUCT_VENDOR',
+                                'enabled' => true,
+                                'id' => 'V_VENDORS_ID_C',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => true,
+                            ),
+                            array(
+                                'name' => 'manifest_required_c',
+                                'label' => 'LBL_MANIFEST_REQUIRED',
                                 'enabled' => true,
                                 'default' => true,
                             ),

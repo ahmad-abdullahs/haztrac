@@ -14,6 +14,7 @@
  * @extends View.Views.Base.MassupdateView
  */
 ({
+    // background: radial-gradient(#e61718, #e61718);
     extendsFrom: 'MassLinkView',
     copyCount: 0,
     massUpdateViewName: 'masslink-progress',
@@ -67,9 +68,15 @@
     },
 
     getRliAndRelatedRLIs: function (massLink) {
-        var rliAndRelatedRLIs = [];
+        var rliAndRelatedRLIs = [], relatedIds = [],
+                facilitiesInfo = {};
         _.each(massLink.models, function (model) {
-            var relatedIds = [];
+            relatedIds = [];
+
+            if (!_.isEmpty(model.get('v_vendors_id_c')) && model.get('is_bundle_product_c') != 'parent' && model.get('manifest_required_c')) {
+                facilitiesInfo[model.get('id')] = model.get('v_vendors_id_c');
+            }
+
             if (!_.isEmpty(model.get('revenuelineitems_revenuelineitems_1').records)) {
                 _.each(model.get('revenuelineitems_revenuelineitems_1').records, function (relatedRLI) {
                     if (relatedRLI.id) {
@@ -77,6 +84,11 @@
                         relatedIds.push({
                             'id': relatedRLI.id,
                         });
+
+                        if (!_.isEmpty(relatedRLI.v_vendors_id_c) && relatedRLI.is_bundle_product_c != 'parent' && relatedRLI.manifest_required_c) {
+                            facilitiesInfo[relatedRLI.id] = relatedRLI.v_vendors_id_c;
+                        }
+
                     }
                 }, this);
             }
@@ -85,7 +97,11 @@
                 [model.get('id')]: relatedIds
             });
         }, this);
-        return rliAndRelatedRLIs;
+
+        return {
+            rliAndRelatedRLIs: rliAndRelatedRLIs,
+            facilitiesInfo: facilitiesInfo,
+        };
     },
 
     setParentModelRelations: function (createView, parentModel, bundleID) {
@@ -191,8 +207,17 @@
     },
 
     makeRLICopies: function (massLink, parentModel) {
-        var self = this;
-        var rliAndRelatedRLIsArr = this.getRliAndRelatedRLIs(massLink);
+        var self = this,
+                returnData = {}, facilitiesInfo = {},
+                rliAndRelatedRLIsArr = [];
+
+        returnData = this.getRliAndRelatedRLIs(massLink);
+        rliAndRelatedRLIsArr = returnData.rliAndRelatedRLIs;
+        facilitiesInfo = returnData.facilitiesInfo;
+
+        if (!this.ifValidFacilities(facilitiesInfo)) {
+            return;
+        }
 
         self.handleAlerts('show', 1);
         self.handleAlerts(null, 3);
@@ -406,5 +431,36 @@
         _.each(collections, function (name) {
             copyCollection(source.get(name));
         });
+    },
+
+    // warn If Different Facilities
+    ifValidFacilities: function (facilitiesInfo) {
+        // Subpanel RLIs (Put RLI id and facility id in an object)
+        if (!_.isUndefined(this.context.parent) && !_.isNull(this.context.parent)) {
+            _.each(this.context.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model, key) {
+                if (!_.isEmpty(model.attributes.v_vendors_id_c) && model.attributes.is_bundle_product_c != 'parent' && model.attributes.manifest_required_c) {
+                    facilitiesInfo[model.attributes.id] = model.attributes.v_vendors_id_c;
+                }
+            }, this);
+        }
+
+        // Get the facilities ids and make them unique to check do we 
+        // have multiple facilities or not
+        // If we have multiple, group them and color the pills.
+        // each facility has its own color, this way we will group multiple 
+        // rlis with same facility to a common color.
+        if (_.unique(_.compact(_.values(facilitiesInfo))).length > 1) {
+            app.alert.dismiss('multifacility-warning');
+            app.alert.show('multifacility-warning', {
+                level: 'warning',
+                messages: 'Your selected Item(s) have different Ship To / TSDF, ' +
+                        'Please create separate Sales and Service for highlighted items.',
+                closeable: true,
+                autoClose: true,
+                autoCloseDelay: 12000,
+            });
+            return false;
+        }
+        return true;
     },
 })

@@ -82,4 +82,45 @@
         }
         this.toggleFields(this.rowFields[modelId], isEdit);
     },
+
+    deleteModel: function () {
+        var self = this,
+                model = this._modelToDelete;
+
+        model.destroy({
+            //Show alerts for this request
+            showAlerts: {
+                'process': true,
+                'success': {
+                    messages: self.getDeleteMessages(self._modelToDelete).success
+                }
+            },
+            success: function () {
+                var redirect = self._targetUrl !== self._currentUrl;
+                self._modelToDelete = null;
+                self.collection.remove(model, {silent: redirect});
+                if (redirect) {
+                    self.unbindBeforeRouteDelete();
+                    //Replace the url hash back to the current staying page
+                    app.router.navigate(self._targetUrl, {trigger: true});
+                    return;
+                }
+                app.events.trigger("preview:close");
+                if (!self.disposed) {
+                    self.render();
+                }
+
+                self.layout.trigger("list:record:deleted", model);
+
+                // ++ This is added to reload the RLI subpanel, so that the child RLIs disappear from the panel  
+                if (!_.isUndefined(self.context) && !_.isNull(self.context)) {
+                    if (self.module == 'RevenueLineItems' &&
+                            self.context.parent.get('module') == 'sales_and_services' &&
+                            model.attributes.is_bundle_product_c == 'parent') {
+                        self.collection.fetch();
+                    }
+                }
+            }
+        });
+    },
 })

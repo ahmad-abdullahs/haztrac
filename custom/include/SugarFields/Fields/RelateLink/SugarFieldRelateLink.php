@@ -30,6 +30,9 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
                     'total_amount',
                     'estimated_total_amount',
                     'rli_as_template_c',
+                    'v_vendors_id_c',
+                    'is_bundle_product_c',
+                    'manifest_required_c',
                     'line_number',
                 ),
                     ), $displayParams, array(

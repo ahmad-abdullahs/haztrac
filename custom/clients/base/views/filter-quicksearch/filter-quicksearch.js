@@ -48,7 +48,7 @@
             "LR_Lab_Reports",
             "HT_Manifest",
             "HT_PO",
-            "RevenueLineItems",
+//            "RevenueLineItems",
             "WPM_Waste_Profile_Module",
             "HRM_Employee_Training",
             "PNL_Permits_Licenses",
