@@ -103,7 +103,9 @@
     _debounceRender: _.debounce(function () {
         var self = this;
         $.when(self.render()).then(function () {
-            self.ifValidFacilities();
+            if (self.context.parent.get('model').module == 'sales_and_services') {
+                self.ifValidFacilities();
+            }
         });
     }, 50),
 

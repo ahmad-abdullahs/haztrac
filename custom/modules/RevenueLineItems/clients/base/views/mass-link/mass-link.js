@@ -215,8 +215,10 @@
         rliAndRelatedRLIsArr = returnData.rliAndRelatedRLIs;
         facilitiesInfo = returnData.facilitiesInfo;
 
-        if (!this.ifValidFacilities(facilitiesInfo)) {
-            return;
+        if (this.context.parent.get('model').module == 'sales_and_services') {
+            if (!this.ifValidFacilities(facilitiesInfo)) {
+                return;
+            }
         }
 
         self.handleAlerts('show', 1);
