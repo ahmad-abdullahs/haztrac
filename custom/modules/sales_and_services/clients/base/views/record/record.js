@@ -15,6 +15,37 @@
 //        }, this);
     },
 
+    duplicateClicked: function () {
+        var self = this,
+                prefill = app.data.createBean(this.model.module);
+
+        prefill.copy(this.model);
+        this._copyNestedCollections(this.model, prefill);
+        self.model.trigger('duplicate:before', prefill);
+        prefill.unset('id');
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                model: prefill,
+                copiedFromModelId: this.model.get('id'),
+                copyFeature: true,
+            }
+        }, function (context, newModel) {
+            if (newModel && newModel.id) {
+                app.router.navigate(self.model.module + '/' + newModel.id, {trigger: true});
+            }
+        }, function (thisOfDrawer) {
+            // Change is triggered to load the Related Revenue Line Items dashlet...
+            if (!_.isUndefined(thisOfDrawer) && !_.isNull(thisOfDrawer)) {
+                thisOfDrawer.model.trigger('change:accounts_sales_and_services_1accounts_ida');
+                thisOfDrawer.context.trigger('load:revenuelineitems:subpanel-for-rli-create');
+            }
+        });
+
+        prefill.trigger('duplicate:field', self.model);
+    },
+
     colourTheFields: function () {
         if (this.model._relatedCollections.sales_and_services_revenuelineitems_1.length) {
 //            var activeTab = app.user.lastState.get(app.user.lastState.key('activeTab', this));
@@ -208,7 +239,7 @@
     closeDrawer: function () {
         app.drawer.close();
     },
-    
+
     printPaperworkDrawer: function () {
         app.drawer.open({
             layout: 'print-paperwork',

@@ -55,6 +55,8 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         'state_regulated_c',
                         'mft_part_num',
                         'estimated_total_amount',
+                        'product_list_name_c',
+                        'manifest_required_c',
                     ),
                 ),
                 array(

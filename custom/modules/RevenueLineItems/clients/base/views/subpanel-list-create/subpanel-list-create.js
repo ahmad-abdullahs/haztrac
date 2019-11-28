@@ -179,9 +179,15 @@
                 if (this.context.parent && this.context.parent.has('model')) {
                     var parentModel = this.context.parent.get('model');
                     if (this.context.parent.get('module') == 'sales_and_services') {
-                        parentModel.set('name', this.collection.at(0).get('name'));
+                        // This is check is added, not to set the sales and service name 
+                        // from first rli as primary at time of copy sales and service
+                        if (!this.context.parent.get('copyFeature'))
+                            parentModel.set('name', this.collection.at(0).get('name'));
                     }
-                    this.collection.at(0).set('primary_rli', 1);
+                    // This is check is added, not to set the first rli as primary 
+                    // at time of copy sales and service
+                    if (!this.context.parent.get('copyFeature'))
+                        this.collection.at(0).set('primary_rli', 1);
                 }
             }
 

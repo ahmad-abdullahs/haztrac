@@ -24,10 +24,15 @@
     extendsFrom: 'RevenueLineItemsCustomSubpanelListCreateView',
 
     initialize: function (options) {
+        this.plugins = _.union(this.plugins || [], ['PopulateRLIS']);
         this._super('initialize', [options]);
 
         // undo flex-list's hardcoding and re-hardcode to use the subpanel-list-create.hbs
         this.template = app.template.getView(this.name, 'RevenueLineItems');
+        // ++ Added to load the RLIs from the sales and servive RLI subpanel at time of copy.
+        if (!_.isUndefined(this.context.parent)) {
+            this.context.parent.on('load:revenuelineitems:subpanel-for-rli-create', this.copyRlisInSubpanelCreate, this);
+        }
     },
 
     _render: function () {
@@ -370,5 +375,16 @@
         });
 
         return catalog;
+    },
+
+    copyRlisInSubpanelCreate: function () {
+        if (!_.isUndefined(this.context.parent.parent) && !_.isNull(this.context.parent.parent)) {
+            if (this.context.parent.parent.get('model')) {
+                _.each(this.context.parent.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model, key) {
+                    if (model.get('is_bundle_product_c') != 'child')
+                        this.prepopulateData(this, model, model.attributes);
+                }, this);
+            }
+        }
     }
 })
