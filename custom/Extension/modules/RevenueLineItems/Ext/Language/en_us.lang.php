@@ -46,3 +46,4 @@ $mod_strings['LBL_WASTE_PROFILE_RELATE_WPM_WASTE_PROFILE_MODULE_ID'] = 'waste pr
 $mod_strings['LBL_WASTE_PROFILE_RELATE'] = 'Waste Profile';
 $mod_strings['LBL_MANIFEST_ADDITIONAL_INFO'] = 'Additional Info';
 $mod_strings['LBL_HIDE_PRICE_FROM_PAPERWORK'] = 'Hide Price From Paperwork';
+$mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Cost';
