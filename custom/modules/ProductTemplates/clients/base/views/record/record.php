@@ -194,42 +194,47 @@ $viewdefs['ProductTemplates'] = array(
                             7 => 'vendor_part_num',
                             8 =>
                             array(
-                                'name' => 'additional_info_ack_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_ADDITIONAL_INFO_ACK',
-                                'span' => 12,
-                            ),
-                            9 =>
-                            array(
                                 'name' => 'vendor_product_svc_descrp_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_VENDOR_PRODUCT_SVC_DESCRP',
                             ),
-                            10 =>
+                            9 =>
                             array(
                                 'name' => 'product_svc_description_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PRODUCT_SVC_DESCRIPTION',
                             ),
-                            11 =>
+                            10 =>
                             array(
                                 'name' => 'description',
                                 'span' => 6,
                             ),
-                            12 =>
+                            11 =>
                             array(
                                 'name' => 'mandatory_print_text_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_MANDATORY_PRINT_TEXT',
                                 'span' => 6,
                             ),
+                            12 =>
+                            array(
+                                'name' => 'additional_info_ack_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_ADDITIONAL_INFO_ACK',
+                                'span' => 12,
+                            ),
                             13 =>
                             array(
                                 'name' => 'waste_profile_rqrd_c',
                                 'label' => 'LBL_WASTE_PROFILE_RQRD',
-                                'span' => 12,
                             ),
                             14 =>
+                            array(
+                                'name' => 'waste_profile_relate_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_WASTE_PROFILE_RELATE',
+                            ),
+                            15 =>
                             array(
                                 'name' => 'tag',
                                 'span' => 12,
@@ -249,14 +254,22 @@ $viewdefs['ProductTemplates'] = array(
                         array(
                             0 =>
                             array(
-                                'name' => 'tax_class',
+                                'name' => 'hide_price_from_paperwork_c',
+                                'label' => 'LBL_HIDE_PRICE_FROM_PAPERWORK',
                             ),
                             1 =>
+                            array(
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'tax_class',
+                            ),
+                            3 =>
                             array(
                                 'name' => 'base_rate',
                                 'label' => 'LBL_CURRENCY_RATE',
                             ),
-                            2 =>
+                            4 =>
                             array(
                                 'name' => 'discount_price',
                                 'type' => 'currency',
@@ -271,7 +284,7 @@ $viewdefs['ProductTemplates'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            3 =>
+                            5 =>
                             array(
                                 'name' => 'list_price',
                                 'type' => 'currency',
@@ -286,24 +299,24 @@ $viewdefs['ProductTemplates'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            4 =>
+                            6 =>
                             array(
                                 'name' => 'product_uom_c',
                                 'label' => 'LBL_PRODUCT_UOM',
                             ),
-                            5 =>
+                            7 =>
                             array(
                                 'name' => 'weight',
                             ),
-                            6 =>
+                            8 =>
                             array(
                                 'name' => 'list_usdollar',
                             ),
-                            7 =>
+                            9 =>
                             array(
                                 'name' => 'discount_usdollar',
                             ),
-                            8 =>
+                            10 =>
                             array(
                                 'name' => 'cost_price',
                                 'type' => 'currency',
@@ -318,17 +331,17 @@ $viewdefs['ProductTemplates'] = array(
                                 'enabled' => true,
                                 'default' => true,
                             ),
-                            9 =>
+                            11 =>
                             array(
                                 'name' => 'date_cost_price',
                             ),
-                            10 => 'cost_usdollar',
-                            11 =>
+                            12 => 'cost_usdollar',
+                            13 =>
                             array(
                                 'name' => 'bundle_total_c',
                                 'label' => 'LBL_BUNDLE_TOTAL',
                             ),
-                            12 =>
+                            14 =>
                             array(
                                 'name' => 'pricing_factor',
                                 'comment' => 'Variable pricing factor depending on pricing_formula',
@@ -338,7 +351,7 @@ $viewdefs['ProductTemplates'] = array(
                                 ),
                                 'label' => 'LBL_PRICING_FACTOR',
                             ),
-                            13 =>
+                            15 =>
                             array(
                                 'name' => 'pricing_formula',
                                 'related_fields' =>
@@ -433,6 +446,14 @@ $viewdefs['ProductTemplates'] = array(
                                 'name' => 'manifest_uom_c',
                                 'label' => 'LBL_MANIFEST_UOM',
                                 'type' => 'enum-same-key-and-value',
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'manifest_additional_info_c',
+                                'label' => 'LBL_MANIFEST_ADDITIONAL_INFO',
+                            ),
+                            8 =>
+                            array(
                             ),
                         ),
                     ),

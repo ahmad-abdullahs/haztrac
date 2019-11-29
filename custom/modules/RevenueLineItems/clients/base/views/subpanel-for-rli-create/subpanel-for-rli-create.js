@@ -22,7 +22,10 @@
     // This file is used for sales_and_services, Opportunities and Accounts.
     // So you may found checks specific to module for few functionalities.
     extendsFrom: 'RevenueLineItemsCustomSubpanelListCreateView',
-
+    copyFieldsListToParent: {
+        name: 'name',
+        mft_part_num: 'mft_part_num',
+    },
     initialize: function (options) {
         this.plugins = _.union(this.plugins || [], ['PopulateRLIS']);
         this._super('initialize', [options]);
@@ -202,10 +205,9 @@
                     } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
                         // Set the sales and service name as primary selected RLI
                         if (parentModule == 'sales_and_services') {
-                            parentModel.set('name', _model.get('name'));
-                            parentModel.set('mft_part_num', _model.get('mft_part_num'));
-                        }
-                        if (this.context.parent.get('module') == 'sales_and_services') {
+                            _.each(this.copyFieldsListToParent, function (val, key) {
+                                parentModel.set(val, _model.get(key));
+                            }, this);
                             this.setTSDFFacility(_model, parentModel);
                         }
                     }
@@ -217,10 +219,9 @@
         bean.on('change:name', function (model) {
             if (model.get('primary_rli')) {
                 if (parentModule == 'sales_and_services') {
-                    parentModel.set('name', model.get('name'));
-                    parentModel.set('mft_part_num', model.get('mft_part_num'));
-                }
-                if (this.context.parent.get('module') == 'sales_and_services') {
+                    _.each(this.copyFieldsListToParent, function (val, key) {
+                        parentModel.set(val, model.get(key));
+                    }, this);
                     this.setTSDFFacility(model, parentModel);
                 }
             }
@@ -244,6 +245,25 @@
                 'destination_ship_to_c': ''
             });
         }
+    },
+
+    onDeleteRow: function (model) {
+        // On deleting the row reset the sales and service name, TSDF and mft_part_num, 
+        // if that is the primary_rli 
+        var parentModel = this.context.parent.get('model');
+        var parentModule = this.context.parent.get('module');
+        if (model.get('primary_rli')) {
+            if (parentModule == 'sales_and_services') {
+                _.each(this.copyFieldsListToParent, function (val, key) {
+                    parentModel.set(val, '');
+                }, this);
+                model.set('shipping_hazardous_materia_c', false);
+                model.set('state_regulated_c', false);
+                this.setTSDFFacility(model, parentModel);
+            }
+        }
+        this.context.get('collection').remove(model);
+        this.checkButtons();
     },
 
     checkButtons: function () {

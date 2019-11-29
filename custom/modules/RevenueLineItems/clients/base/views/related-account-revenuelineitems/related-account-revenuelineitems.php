@@ -1,5 +1,6 @@
 <?php
 
+//$view = 'recordview', $module = 'RevenueLineItems'
 $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'] = array(
     'panels' => array(
         array(
@@ -14,7 +15,8 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'default' => true,
                     'type' => 'relate-populate-rli',
                     'related_fields' =>
-                    array(
+                    array_merge(
+                            array(
                         'name',
                         'description',
                         'product_template_id',
@@ -57,7 +59,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                         'estimated_total_amount',
                         'product_list_name_c',
                         'manifest_required_c',
-                    ),
+                            ), getViewFields('recordview', 'RevenueLineItems')),
                 ),
                 array(
                     'name' => 'related_rli_total_c',

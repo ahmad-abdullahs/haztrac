@@ -19,7 +19,8 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'link' => true,
                     'type' => 'name',
                     'related_fields' =>
-                    array(
+                    array_merge(
+                            array(
                         'currency_id',
                         'base_rate',
                         'is_bundle_product_c',
@@ -66,7 +67,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                         'mft_part_num',
                         'estimated_total_amount',
                         'product_list_name_c',
-                    ),
+                            ), getViewFields('recordview', 'RevenueLineItems')),
                 ),
                 1 =>
                 array(

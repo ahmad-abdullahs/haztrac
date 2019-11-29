@@ -37,3 +37,7 @@ $mod_strings['LBL_MANIFEST_UOM'] = 'Manifest UOM';
 $mod_strings['LBL_MANIFEST_HAZMAT_HANDLE_CODE'] = 'Manifest Hazmat Handle Code';
 $mod_strings['LBL_MANIFEST_REQUIRED'] = 'Manifest Required';
 $mod_strings['LBL_WASTE_PROFILE'] = 'Waste Profile';
+$mod_strings['LBL_WASTE_PROFILE_RELATE_WPM_WASTE_PROFILE_MODULE_ID'] = 'Waste Profile (related Waste Profile ID)';
+$mod_strings['LBL_WASTE_PROFILE_RELATE'] = 'Waste Profile';
+$mod_strings['LBL_HIDE_PRICE_FROM_PAPERWORK'] = 'Hide Price From Paperwork';
+$mod_strings['LBL_MANIFEST_ADDITIONAL_INFO'] = 'Additional Info';
