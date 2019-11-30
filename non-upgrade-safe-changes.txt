@@ -37,3 +37,10 @@ buildSearchTermFilter: function
 -----------------------------------------3--------------------------------------
 **************************** Non Upgrade Safe Change # 3 ***********************
 --------------------------------------------------------------------------------
+
+// Title of Portal browser tab is changed
+portal2/index.html
+include/MVC/View/tpls/sidecar.tpl
+include/javascript/jquery/jquery.includes.js
+mobile/index.html
+Changed text from SugarCRM to HAZTRAC

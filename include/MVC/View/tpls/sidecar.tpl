@@ -16,7 +16,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <meta charset="UTF-8">
-        <title>SugarCRM</title>
+        <title>HAZTRAC</title>
         <link rel="shortcut icon" href="{sugar_getjspath file='themes/default/images/sugar_icon.ico'}">
         <!-- CSS -->
         <link rel="stylesheet" href="styleguide/assets/css/loading.css" type="text/css">
@@ -80,11 +80,11 @@
                 SUGAR.App.cache.set("{$appPrefix}AuthRefreshToken", "{$authorization.refresh_token}");
                 {/if}
                 if (window.SUGAR.App.config.siteUrl != '') {ldelim}
-                    history.replaceState(null, 'SugarCRM', window.SUGAR.App.config.siteUrl+"/"+window.location.hash);
+                    history.replaceState(null, 'HAZTRAC', window.SUGAR.App.config.siteUrl+"/"+window.location.hash);
                 {rdelim} else {ldelim}
                     history.replaceState(
                             null,
-                            'SugarCRM',
+                            'HAZTRAC',
                             window.location.origin + window.location.pathname + window.location.hash
                     );
                 {rdelim}

@@ -2,7 +2,7 @@ var header_template = '\
 <!DOCTYPE html>\
 <head>\
   <meta charset="utf-8">\
-  <title>SugarCRM</title>\
+  <title>HAZTRAC</title>\
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">\
   <meta name="apple-mobile-web-app-capable" content="yes">\
   <meta name="apple-mobile-web-app-status-bar-style" content="black">\
