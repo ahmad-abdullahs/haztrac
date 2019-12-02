@@ -18,9 +18,9 @@
             <tr>
                 {{#each ../leftColumns}}
                     <th{{#if name}} data-fieldname="{{name}}"{{/if}}>
-            <span>
-                {{field ../../this template="list-header"}}
-            </span>
+                        <span>
+                            {{field ../../this template="list-header"}}
+                        </span>
                     </th>
                 {{/each}}
                 {{#each ../_fields.visible}}
@@ -37,7 +37,10 @@
                                 supported.}}
                         <div{{#has "ReorderableColumns" ../../../plugins}} data-draggable="true"{{/has}}>
                         {{/has}}
-                        <span>
+                        <span {{#eq this.name "row_holder"}}style="text-align: center;"{{/eq}}>
+                            {{#eq this.name "row_holder"}}
+                                <i class="fa fa-sort-numeric-asc" style="font-weight: bold;font-size: medium;" title="Drag and Drop Rows To Order"></i>
+                            {{/eq}}
                             {{str this.label ../../module}}
                         </span>
                         {{#has "ReorderableColumns" ../../plugins}}

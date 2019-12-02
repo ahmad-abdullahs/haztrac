@@ -46,6 +46,16 @@
         prefill.trigger('duplicate:field', self.model);
     },
 
+    setupDuplicateFields: function (prefill) {
+        // On Copy unset these fields...
+        var duplicateBlackList = ['on_date_c', 'on_time_c', 'name', 'destination_ship_to_c', 'account_id1_c'];
+        _.each(duplicateBlackList, function (field) {
+            if (field && prefill.has(field)) {
+                prefill.unset(field);
+            }
+        });
+    },
+
     colourTheFields: function () {
         if (this.model._relatedCollections.sales_and_services_revenuelineitems_1.length) {
 //            var activeTab = app.user.lastState.get(app.user.lastState.key('activeTab', this));

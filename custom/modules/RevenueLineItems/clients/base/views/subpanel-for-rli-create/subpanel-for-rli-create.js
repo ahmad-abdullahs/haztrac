@@ -400,7 +400,9 @@
     copyRlisInSubpanelCreate: function () {
         if (!_.isUndefined(this.context.parent.parent) && !_.isNull(this.context.parent.parent)) {
             if (this.context.parent.parent.get('model')) {
-                _.each(this.context.parent.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models, function (model, key) {
+                var _tempModels = _.clone(this.context.parent.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models);
+                _tempModels = _tempModels.reverse();
+                _.each(_tempModels, function (model, key) {
                     if (model.get('is_bundle_product_c') != 'child')
                         this.prepopulateData(this, model, model.attributes);
                 }, this);

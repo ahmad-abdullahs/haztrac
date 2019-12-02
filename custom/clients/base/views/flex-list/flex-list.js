@@ -18,11 +18,17 @@
     className: 'flex-list-view',
     // Model being previewed (if any)
     _previewed: null,
+    showOrderingIcon: false,
 
     /**
      * @inheritdoc
      */
     initialize: function (options) {
         this._super('initialize', [options]);
+        if (this.context.parent) {
+            if (this.context.parent.get('module') == 'RevenueLineItems' && this.module == 'RevenueLineItems') {
+                this.showOrderingIcon = true;
+            }
+        }
     },
 })

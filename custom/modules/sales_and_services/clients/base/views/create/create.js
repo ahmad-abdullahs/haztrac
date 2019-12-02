@@ -263,10 +263,22 @@
 
                     // loop through the models in the collection and push each model's JSON
                     // data to the 'create' array
+                    var lineNumber = 1, setLineNumber = false;
                     _.each(child.get('collection').models, function (model) {
                         // Set the Sales and Service Account to every RLI model which is going to create...
                         model.set('account_id', this.model.get('accounts_sales_and_services_1accounts_ida'));
+                        // Check if line_number is not set to first model, 
+                        // It means it is not set for any of these, (set line_number for revenuelineitems)
+                        if (child.get('collection').models[0].get('line_number') == 0) {
+                            setLineNumber = true;
+                        }
+
+                        if (setLineNumber) {
+                            model.set('line_number', lineNumber, {'silent': true});
+                        }
+
                         childCollection.create.push(model.toJSON());
+                        lineNumber++;
                     }, this);
 
                     // set the child JSON collection data to the model

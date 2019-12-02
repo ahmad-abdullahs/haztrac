@@ -15,8 +15,13 @@
                 // need to trigger on app.controller.context because of contexts changing between
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
-                if (!_.isUndefined(viewDetails)) {
-                    app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                if (thisOfCall.context.parent.get('copyFeature')) {
+                    if (data.is_bundle_product_c != 'parent' && !_.isUndefined(viewDetails))
+                        app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                } else {
+                    if (!_.isUndefined(viewDetails)) {
+                        app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                    }
                 }
 
                 if (data.is_bundle_product_c == 'parent') {
@@ -25,7 +30,16 @@
                     var rliRelatedRLIColl = rliModel.getRelatedCollection('revenuelineitems_revenuelineitems_1');
                     rliRelatedRLIColl = rliRelatedRLIColl.fetch({
                         relate: true,
+                        limit: -1,
+                        // Fetched in descending order because when the items are added in the subpanel-for-rli-create
+                        // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
+                        params: {
+                            order_by: "line_number:asc",
+                        },
                         success: function (coll) {
+                            if (thisOfCall.context.parent.get('copyFeature')) {
+                                app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                            }
                             _.each(coll.models, function (model) {
                                 _self._massageDataBeforeSendingToRecord(model.attributes);
 

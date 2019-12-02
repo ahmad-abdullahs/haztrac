@@ -14,6 +14,9 @@
     {{#each view.leftColumns}}
         <th{{#if name}} data-fieldname="{{name}}"{{/if}}>
             <span>
+                {{#if ../view.showOrderingIcon}}
+                    <i class="fa fa-sort-numeric-asc" style="font-weight: bold;font-size: medium;" title="Drag and Drop Rows To Order"></i>
+                {{/if}}
                 {{field ../view template="list-header"}}
             </span>
         </th>

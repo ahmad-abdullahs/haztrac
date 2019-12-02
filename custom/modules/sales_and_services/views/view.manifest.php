@@ -7,8 +7,9 @@ require_once('include/MVC/View/views/view.list.php');
 
 class sales_and_servicesViewmanifest extends ViewList {
 
-    var $fontSize = 10;
-    var $smallfontSize = 9;
+    var $fontSize = 9.5;
+    var $smallfontSize = 8.5;
+    var $verysmallfontSize = 7;
 
     function display() {
         $this->ProcessPDF();
@@ -16,7 +17,7 @@ class sales_and_servicesViewmanifest extends ViewList {
 
     function getPDFObj($bean) {
         // create new PDF document
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LEGAL', true, 'UTF-8', false);
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
@@ -57,13 +58,14 @@ class sales_and_servicesViewmanifest extends ViewList {
         $pdf->AddPage();
 
         $pdf->SetXY(0, 0);
-        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', 0, 0, 216, 272, '', '', '', true, 300, '', false, true, 0, true);
+//        $pdf->Image('custom/modules/sales_and_services/tpls/background3.png', 8, 17, 199, 250, '', '', '', true, 300, '', false, true, 0, true);
+//        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', 0, 0, 216, 279, '', '', '', true, 300, '', false, true, 0, true);
 
-        $startXIndex = empty($_REQUEST['x']) ? 50 : $_REQUEST['x']; // 50, 49
-        $startYIndex = empty($_REQUEST['y']) ? 19 : $_REQUEST['y']; // 19, 31
+        $startXIndex = empty($_REQUEST['x']) ? 52 : $_REQUEST['x']; // 50, 49
+        $startYIndex = empty($_REQUEST['y']) ? 22 : $_REQUEST['y']; // 19, 31
         // Default CellHeightRatio is 1.25. We have reduced it to 1.10, 
         // so that it takes less space and we can write more. 
-        $pdf->setCellHeightRatio(1.0);
+        $pdf->setCellHeightRatio(0.9);
 
         $salesAndServiceAccountBean = null;
         if (!empty($salesAndServiceBean->accounts_sales_and_services_1accounts_ida)) {
@@ -87,7 +89,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             if (!is_null($phone) && !empty($phone)) {
                 $emergencyContact = trim($phone);
             }
-            $emergencyResponsePhone = array('x' => $startXIndex + 60, 'y' => $startYIndex, 'text' => $emergencyContact); // 110, 19
+            $emergencyResponsePhone = array('x' => $startXIndex + 63, 'y' => $startYIndex, 'text' => $emergencyContact); // 110, 19
             $pdf->MultiCell(40, 5, $emergencyResponsePhone['text'], 0, '', 0, 1, $emergencyResponsePhone['x'], $emergencyResponsePhone['y'], true);
 
             // Generator Name + Generator Mailing Address + Generator Phone
@@ -111,13 +113,13 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Transporter 1 Company Name
             $pdf->SetXY(0, 0);
-            $transporter1CompanyName = array('x' => $startXIndex - 28, 'y' => $startYIndex + 24
+            $transporter1CompanyName = array('x' => $startXIndex - 28, 'y' => $startYIndex + 25
                 , 'text' => htmlspecialchars_decode($salesAndServiceTransporterBean->shipping_address_third_party_name)); // 22, 43
             $pdf->MultiCell(70, 5, $transporter1CompanyName['text'], 0, '', 0, 1, $transporter1CompanyName['x'], $transporter1CompanyName['y'], true);
 
             // EPA ID Number
             $pdf->SetXY(0, 0);
-            $epaIdNumber1 = array('x' => $startXIndex + 110, 'y' => $startYIndex + 24
+            $epaIdNumber1 = array('x' => $startXIndex + 110, 'y' => $startYIndex + 25
                 , 'text' => $salesAndServiceTransporterBean->ac_usepa_id_c); // 160, 43
             $pdf->MultiCell(70, 5, $epaIdNumber1['text'], 0, '', 0, 1, $epaIdNumber1['x'], $epaIdNumber1['y'], true);
         }
@@ -130,7 +132,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // Designated Facility Name + Designated Facility Site Address + Designated Facility Phone
             $pdf->SetXY(0, 0);
             $shippingAddress = $this->getFormatedAddress($salesAndServiceDesignatedFacilityBean, 'shipping');
-            $designatedFacilitySiteAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 40
+            $designatedFacilitySiteAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 42
                 , 'text' => $shippingAddress); // 22, 59
             $pdf->MultiCell(100, 5, $designatedFacilitySiteAddress['text'], 0, '', 0, 1, $designatedFacilitySiteAddress['x'], $designatedFacilitySiteAddress['y'], true);
 
@@ -145,8 +147,8 @@ class sales_and_servicesViewmanifest extends ViewList {
         // ---------------Revenue Line Items Stuff------------------
         // ---------------------------------------------------------
         global $db;
-        $rliYScailing = $rowCount = 0;
-        $waste_state_codes_c_list = $epa_waste_codes_c_list = array();
+        $rliYScailing = 2;
+        $rowCount = 0;
         $result = $this->getRelatedRLIs($salesAndServiceBean);
 
         $manifest_hazmat_handle_code_list = $additional_info_ack_list = array();
@@ -177,7 +179,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             // HM Hazardeous Material
             $pdf->SetXY(0, 0);
             $pdf->SetFont('courier', 'B', $this->fontSize);
-            $hm1 = array('x' => $startXIndex - 36, 'y' => $startYIndex + $rliYScailing + 67
+            $hm1 = array('x' => $startXIndex - 38, 'y' => $startYIndex + $rliYScailing + 67
                 , 'text' => 'X'); // 14, 86
             if ($rliBean->shipping_hazardous_materia_c && $rliBean->manifest_required_c) {
                 $pdf->MultiCell(5, 5, $hm1['text'], 0, '', 0, 1, $hm1['x'], $hm1['y'], true);
@@ -195,13 +197,13 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // 10.b Container Type 
             $pdf->SetXY(0, 0);
-            $containerType1 = array('x' => $startXIndex + 85, 'y' => $startYIndex + $rliYScailing + 67
+            $containerType1 = array('x' => $startXIndex + 85.75, 'y' => $startYIndex + $rliYScailing + 67
                 , 'text' => $rliBean->manifest_container_type_c); // 135, 86
             $pdf->MultiCell(95, 5, $containerType1['text'], 0, '', 0, 1, $containerType1['x'], $containerType1['y'], true);
 
             // 12 Unit of Measure 
             $pdf->SetXY(0, 0);
-            $unitOfMeasure1 = array('x' => $startXIndex + 112, 'y' => $startYIndex + $rliYScailing + 67
+            $unitOfMeasure1 = array('x' => $startXIndex + 113.75, 'y' => $startYIndex + $rliYScailing + 67
                 , 'text' => $rliBean->manifest_uom_c); // 162, 86
             $pdf->MultiCell(95, 5, $unitOfMeasure1['text'], 0, '', 0, 1, $unitOfMeasure1['x'], $unitOfMeasure1['y'], true);
 
@@ -215,11 +217,11 @@ class sales_and_servicesViewmanifest extends ViewList {
                 if ($key > 2)
                     continue;
                 $pdf->SetXY(0, 0);
-                $wasteCode1 = array('x' => ($startXIndex + $wasteStateCodeXScailing + 121) - ($key == 0 ? 1 : 0), 'y' => $startYIndex + $rliYScailing + 63
+                $wasteCode1 = array('x' => ($startXIndex + $wasteStateCodeXScailing + 122) - ($key == 0 ? 1 : 0), 'y' => $startYIndex + $rliYScailing + 64
                     , 'text' => $value); // 171, 82
                 $pdf->MultiCell(12, 5, $wasteCode1['text'], 0, '', 0, 1, $wasteCode1['x'], $wasteCode1['y'], true);
 
-                $wasteStateCodeXScailing += 10;
+                $wasteStateCodeXScailing += 10.75;
             }
 
             // waste_state_codes_c , epa_waste_codes_c
@@ -232,14 +234,14 @@ class sales_and_servicesViewmanifest extends ViewList {
                 if ($key > 2)
                     continue;
                 $pdf->SetXY(0, 0);
-                $wasteCode1 = array('x' => ($startXIndex + $epaWasteCodeXScailing + 121) - ($key == 0 ? 1 : 0), 'y' => $startYIndex + $rliYScailing + 69
+                $wasteCode1 = array('x' => ($startXIndex + $epaWasteCodeXScailing + 122) - ($key == 0 ? 1 : 0), 'y' => $startYIndex + $rliYScailing + 70
                     , 'text' => $value); // 171, 82
                 $pdf->MultiCell(12, 5, $wasteCode1['text'], 0, '', 0, 1, $wasteCode1['x'], $wasteCode1['y'], true);
 
-                $epaWasteCodeXScailing += 10;
+                $epaWasteCodeXScailing += 11;
             }
 
-            $rliYScailing += 12;
+            $rliYScailing += 12.75;
         }
 
         $lineNum = 1;
@@ -251,11 +253,12 @@ class sales_and_servicesViewmanifest extends ViewList {
                 $additionaInformation .= $index . $value['text'] . utf8_decode(chr(10));
             }
         }
-        $pdf->SetFont('courier', 'B', 7.5);
+        $pdf->SetFont('courier', 'B', $this->verysmallfontSize);
         $pdf->SetXY(0, 0);
-        $additional_info_ack = array('x' => $startXIndex - 37, 'y' => $startYIndex + 115
+        $additional_info_ack = array('x' => $startXIndex - 37, 'y' => $startYIndex + 118
             , 'text' => $additionaInformation); // 13, 142
         $pdf->MultiCell(120, 5, $additional_info_ack['text'], 0, '', 0, 1, $additional_info_ack['x'], $additional_info_ack['y'], true);
+
 
         $pdf->SetFont('courier', 'B', $this->fontSize);
         $pdf->SetXY(0, 0);
@@ -266,7 +269,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT IN CASE OF EMERGENCY CALL ' . 'CHEMTREC: (800)424-9300';
 //            $regulatoryText = 'WEAR APPROPRIATE PROTECTIVE EQUIPMENT IN CASE OF EMERGENCY CALL' . '  ' . 'OR' . 'CHEMTREC: (800)424-9300';
         }
-        $regulatoryInfo = array('x' => $startXIndex + 85, 'y' => $startYIndex + 112
+        $regulatoryInfo = array('x' => $startXIndex + 85, 'y' => $startYIndex + 118
             , 'text' => $regulatoryText); // 135, 139
         $pdf->MultiCell(70, 5, $regulatoryInfo['text'], 0, '', 0, 1, $regulatoryInfo['x'], $regulatoryInfo['y'], true);
 
@@ -275,7 +278,7 @@ class sales_and_servicesViewmanifest extends ViewList {
         $manifestHazmatXScailing = 5;
         foreach ($manifest_hazmat_handle_code_list as $value) {
             $pdf->SetXY(0, 0);
-            $manifest_hazmat_handle_code = array('x' => ($startXIndex - 28) + $manifestHazmatXScailing, 'y' => $startYIndex + 219
+            $manifest_hazmat_handle_code = array('x' => ($startXIndex - 28) + $manifestHazmatXScailing, 'y' => $startYIndex + 226
                 , 'text' => $value); // 27, 238
             $pdf->MultiCell(30, 5, $manifest_hazmat_handle_code['text'], 0, '', 0, 1, $manifest_hazmat_handle_code['x'], $manifest_hazmat_handle_code['y'], true);
             $manifestHazmatXScailing += 45;
@@ -302,7 +305,7 @@ FROM
         AND (jt4_sales_and_services_revenuelineitems_1.deleted = 0)
         AND (jt4_sales_and_services_revenuelineitems_1.id = '{$_REQUEST["record"]}')
 WHERE
-    revenue_line_items.deleted = 0
+    revenue_line_items.deleted = 0 AND revenue_line_items_cstm.manifest_required_c = 1
 ORDER BY revenue_line_items.line_number ASC , revenue_line_items.id ASC";
         $result = $db->query($query, false);
         return $result;

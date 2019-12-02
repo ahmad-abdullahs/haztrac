@@ -286,114 +286,63 @@ $viewdefs['Accounts'] = array(
                             ),
                             2 =>
                             array(
-                                'name' => 'physical_address',
-                                'type' => 'fieldset',
-                                'css_class' => 'address',
-                                'label' => 'LBL_PHYSICAL_ADDRESS',
-                                'fields' =>
-                                array(
-                                    0 =>
-                                    array(
-                                        'name' => 'physical_address_account_name',
-                                        'css_class' => 'address_account',
-                                        'placeholder' => 'LBL_PHYSICAL_ADDRESS_ACCOUNT_NAME',
-                                    ),
-                                    1 =>
-                                    array(
-                                        'name' => 'physical_address_street',
-                                        'css_class' => 'address_street',
-                                        'placeholder' => 'LBL_PHYSICAL_ADDRESS_STREET',
-                                    ),
-                                    2 =>
-                                    array(
-                                        'name' => 'physical_address_city',
-                                        'css_class' => 'address_city',
-                                        'placeholder' => 'LBL_PHYSICAL_ADDRESS_CITY',
-                                    ),
-                                    3 =>
-                                    array(
-                                        'name' => 'physical_address_state',
-                                        'css_class' => 'address_state',
-                                        'placeholder' => 'LBL_PHYSICAL_ADDRESS_STATE',
-                                    ),
-                                    4 =>
-                                    array(
-                                        'name' => 'physical_address_postalcode',
-                                        'css_class' => 'address_zip',
-                                        'placeholder' => 'LBL_PHYSICAL_ADDRESS_POSTALCODE',
-                                    ),
-                                    5 =>
-                                    array(
-                                        'name' => 'physical_address_country',
-                                        'css_class' => 'address_country',
-                                        'placeholder' => 'LBL_PHYSICAL_ADDRESS_COUNTRY',
-                                    ),
-                                    6 =>
-                                    array(
-                                        'name' => 'copy',
-                                        'label' => 'NTC_COPY_BILLING_ADDRESS',
-                                        'type' => 'copy',
-                                        'mapping' =>
-                                        array(
-                                            'billing_address_street' => 'physical_address_street',
-                                            'billing_address_city' => 'physical_address_city',
-                                            'billing_address_state' => 'physical_address_state',
-                                            'billing_address_postalcode' => 'physical_address_postalcode',
-                                            'billing_address_country' => 'physical_address_country',
-                                        ),
-                                    ),
-                                ),
-                                'span' => 12,
+                                'name' => 'physical_address_account_name',
+                                'placeholder' => 'LBL_PHYSICAL_ADDRESS_ACCOUNT_NAME',
+                                'span' => 6,
                             ),
                             3 =>
                             array(
-                                'name' => 'account_type_cst_c',
-                                'label' => 'LBL_ACCOUNT_TYPE_CST',
                             ),
                             4 =>
+                            array(
+                                'name' => 'account_type_cst_c',
+                                'label' => 'LBL_ACCOUNT_TYPE_CST',
+                                'type' => 'account-type-multienum',
+                            ),
+                            5 =>
                             array(
                                 'name' => 'phone_office',
                                 'tabindex' => '3',
                             ),
-                            5 =>
+                            6 =>
                             array(
                                 'name' => 'tag',
                                 'tabindex' => '2',
                                 'span' => 6,
                             ),
-                            6 =>
+                            7 =>
                             array(
                                 'name' => 'phone_alternate',
                                 'label' => 'LBL_PHONE_ALT',
                                 'tabindex' => '4',
                                 'span' => 6,
                             ),
-                            7 =>
+                            8 =>
                             array(
                                 'name' => 'ac_usepa_id_c',
                                 'label' => 'LBL_AC_USEPA_ID',
                             ),
-                            8 =>
+                            9 =>
                             array(
                                 'name' => 'phone_fax',
                                 'tabindex' => '5',
                             ),
-                            9 =>
+                            10 =>
                             array(
                                 'name' => 'parent_name',
                                 'tabindex' => '8',
                             ),
-                            10 =>
+                            11 =>
                             array(
                                 'name' => 'website',
                                 'tabindex' => '6',
                             ),
-                            11 =>
+                            12 =>
                             array(
                                 'name' => 'assigned_user_name',
                                 'tabindex' => '13',
                             ),
-                            12 =>
+                            13 =>
                             array(
                                 'name' => 'team_name',
                                 'tabindex' => '14',
@@ -522,8 +471,6 @@ $viewdefs['Accounts'] = array(
                             ),
                             1 =>
                             array(
-                                'name' => 'account_type',
-                                'tabindex' => '10',
                             ),
                             2 =>
                             array(

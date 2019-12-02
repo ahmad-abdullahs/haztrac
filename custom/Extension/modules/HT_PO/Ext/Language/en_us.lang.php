@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LNK_NEW_RECORD'] = 'Create Purchase Order';
 $mod_strings['LNK_LIST'] = 'View Purchase Orders';
@@ -24,3 +25,6 @@ $mod_strings['LBL_CURRENCY_0'] = 'LBL_CURRENCY';
 $mod_strings['LBL_PO_AMOUNT'] = 'PO Value ($)';
 $mod_strings['LBL_SALES_AND_SVS_SALES_AND_SERVICES_ID'] = 'Sales &amp; Service Link (related Sales &amp; Service ID)';
 $mod_strings['LBL_SALES_AND_SVS'] = 'Sales &amp; Service Link';
+$mod_strings["LBL_FILE_MIME_TYPE"] = "File Mime Type";
+$mod_strings["LBL_FILE_URL"] = "File URL";
+$mod_strings["LBL_FILENAME"] = "File";
