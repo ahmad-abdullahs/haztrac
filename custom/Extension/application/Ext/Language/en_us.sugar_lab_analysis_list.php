@@ -1,11 +1,12 @@
 <?php
- // created: 2019-11-20 13:57:58
+ // created: 2019-11-29 22:08:13
 
 $app_list_strings['lab_analysis_list']=array (
   'Aniline Point F' => 'Aniline Point, °F',
   'API Gravity 60' => 'API Gravity @ 60°F (D4052)',
   'Ash' => 'Ash, Wt%',
   'Asphaltenes' => 'Asphaltenes, Wt%',
+  'BromineNo' => 'Bromine Number (D1159)',
   'Carbon Residue Micro Method' => 'Carbon Residue / Micro Method, Vol% (D4530)',
   'Color ASTM' => 'Color ASTM',
   'Compatibility With 6 Oil 5050' => 'Compatibility With 6 Oil, 50/50 (D4740)',
@@ -21,7 +22,7 @@ $app_list_strings['lab_analysis_list']=array (
   'Hydrogen Sulfide PPM' => 'Hydrogen Sulfide, PPM (IP570)',
   'Inorganic Chlorides' => 'Inorganic Chlorides, PPM',
   'Mercaptan Sulfur Wt' => 'Mercaptan Sulfur, Wt%',
-  'Organic Chlorides' => 'Organic Chlorides, PPM',
+  'Organic Chlorides' => 'Organic Chlorides, PPM (D4929)',
   'Physical Hydrogen' => 'pH',
   'Phenol' => 'Phenol, PPM',
   'Polychlorinated Biphenyls' => 'Polychlorinated Biphenyls, ug/g',
@@ -32,10 +33,10 @@ $app_list_strings['lab_analysis_list']=array (
   'Sulfur Wt' => 'Sulfur, Wt% (D4294)',
   'Total Acid Number' => 'Total Acid Number (TAN), Mg_KOH/gm',
   'Total Halogens PPM' => 'Total Halogens, PPM (SW9075)',
+  'TPS' => 'Total Potential Sediment, (ISO10307-2)',
   'Vapor Pressure  60 F PSIA' => 'Vapor Pressure @ 60°F, PSIA (D2879)',
   'Visc 40' => 'Viscosity cSt @ 40C (D445)',
   'Visc 50' => 'Viscosity cSt @ 50C (D445)',
   'Water by Distillation' => 'Water by Distillation, Vol% (D95)',
   'Water by Karl Fisher' => 'Water by Karl Fisher, Vol% (E203)',
-  'TPS' => 'Total Potential Sediment, (ISO10307-2)',
 );

@@ -1,5 +1,5 @@
 <?php
- // created: 2019-11-20 13:57:57
+ // created: 2019-11-29 22:08:13
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -38,4 +38,5 @@ $app_list_strings['lab_analysis_list']=array (
   'Carbon Residue Micro Method' => 'Carbon Residue / Micro Method, Vol% (D4530)',
   'Visc 40' => 'Viscosity cSt @ 40C (D445)',
   'TPS' => 'Total Potential Sediment, (ISO10307-2)',
+  'BromineNo' => 'Bromine Number (D1159)',
 );
