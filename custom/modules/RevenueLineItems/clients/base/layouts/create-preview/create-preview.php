@@ -18,5 +18,13 @@ $viewdefs['RevenueLineItems']['base']['layout']['create-preview'] = array(
                 'module' => 'RevenueLineItems',
             ),
         ),
+        array(
+            'view' => array(
+                'type' => 'related-account-revenuelineitems-for-revenuelineitems-create',
+            ),
+            'context' => array(
+                'module' => 'RevenueLineItems',
+            ),
+        ),
     ),
 );

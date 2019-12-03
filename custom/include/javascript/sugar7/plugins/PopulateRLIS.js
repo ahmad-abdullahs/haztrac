@@ -62,6 +62,20 @@
                 }
             },
 
+            _sendItemToRecord: function (thisOfCall, data) {
+                this._massageDataBeforeSendingToRecord(data);
+
+                var viewDetails = thisOfCall.closestComponent('record') ?
+                        thisOfCall.closestComponent('record') :
+                        thisOfCall.closestComponent('create');
+                // need to trigger on app.controller.context because of contexts changing between
+                // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+                // app.controller.context is the only consistent context to use
+                if (!_.isUndefined(viewDetails)) {
+                    app.controller.context.trigger('productCatalogDashlet:populate:RLI', data);
+                }
+            },
+
             _massageDataBeforeSendingToRecord: function (data) {
                 data.position = 0;
                 data._forcePosition = true;
