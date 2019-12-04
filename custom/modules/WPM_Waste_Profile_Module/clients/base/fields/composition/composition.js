@@ -10,7 +10,6 @@
     addClass: 'addRecord',
     initialize: function (options) {
         this._super('initialize', [options]);
-        ahmad = this;
     },
 
     bindDataChange: function () {

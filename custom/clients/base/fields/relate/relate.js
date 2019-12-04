@@ -58,4 +58,60 @@
 
         ele.preventDefault();
     },
+
+    format: function (value) {
+
+        var parentCtx = this.context && this.context.parent,
+                setFromCtx;
+
+        if (value || this.noAutoPopulate) {
+            /**
+             * Flag to indicate that the value has been set from the context
+             * once, so if later the value is unset, we don't set it again on
+             * {@link #format}.
+             *
+             * @type {boolean}
+             * @protected
+             */
+            this._valueSetOnce = true;
+        }
+
+        // This check sees if we should populate the field from the context.
+        // Note that this is a different condition from if we should populate
+        // the field from a parent model.
+        //
+        // Also note that readonly fields are not automatically populated from
+        // the context.
+        setFromCtx = value === null && !this.fieldDefs.readonly &&
+                !this._valueSetOnce && parentCtx && _.isEmpty(this.context.get('model').link) &&
+                this.view instanceof app.view.views.BaseCreateView &&
+                parentCtx.get('module') === this.def.module &&
+                this.module !== this.def.module;
+
+        if (setFromCtx) {
+            this._valueSetOnce = true;
+            var model = parentCtx.get('model');
+            // FIXME we need a method to prevent us from doing this
+            this.def.auto_populate = true;
+            // FIXME the setValue receives a model but not a backbone model...
+            this.setValue(model.toJSON());
+            // FIXME we need to iterate over the populated_ that is causing
+            // unsaved warnings when doing the auto populate.
+        }
+
+        if (!this.def.isMultiSelect && this.action !== 'edit' && !this.context.get('create')) {
+            this._buildRoute();
+        }
+
+        var idList = this.model.get(this.def.id_name);
+        if (_.isArray(value)) {
+            this.formattedRname = value.join(this._separator);
+            this.formattedIds = idList.join(this._separator);
+        } else {
+            this.formattedRname = value;
+            this.formattedIds = idList;
+        }
+
+        return value;
+    },
 })

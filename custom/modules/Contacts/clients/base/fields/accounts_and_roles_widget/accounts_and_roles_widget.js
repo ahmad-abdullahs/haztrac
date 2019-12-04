@@ -7,6 +7,7 @@
     fieldIds: [],
     modelFields: {},
     isFirst: true,
+    enablePlusButton: false,
     addClass: 'addRecord',
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -61,6 +62,13 @@
         if (!rowExist) {
             this.model.set(this.name, '[]', {silent: true});
             newRowObj[this.name + '_primary_account'] = "1";
+            var parentCtx = this.context && this.context.parent;
+            if (this.view instanceof app.view.views.BaseCreateView &&
+                    parentCtx.get('module') === 'Accounts' && this.module !== 'Accounts') {
+                newRowObj[this.name + '_name_id'] = parentCtx.get('model').get('id');
+                newRowObj[this.name + '_name'] = parentCtx.get('model').get('name');
+                this.enablePlusButton = true;
+            }
         }
 
         if ((this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName))) {
@@ -68,6 +76,15 @@
         }
 
         this.renderInnerFields();
+
+        // If data is already populated in the row at time of new record creation
+        // enable the [+] button for users to add another row.
+        if (this.enablePlusButton && this.fieldIds[0]) {
+            this.$('.' + this.addClass + '[data-uid=' + this.fieldIds[0] + ']').removeClass('disabled');
+//            this.model.set(this.name + '_name_id__' + this.fieldIds[0], parentCtx.get('model').get('id'));
+//            this.model.set(this.name + '_name__' + this.fieldIds[0], parentCtx.get('model').get('name'));
+            this.updateJSON();
+        }
     },
     isRowEmpty: function (rowObj) {
         var empty = true;
@@ -206,7 +223,7 @@
                     }
                 }
             }, this);
-            if (uid != nruid) {
+            if (uid != nruid || this.enablePlusButton) {
                 jsonField.push(obj);
             }
         }, this);
@@ -239,6 +256,12 @@
                 var fieldToRender = self.view.fields[sfId];
                 // Added for preview eye ball icon
                 fieldToRender.iconVisibility = true;
+                // This piece of code is added to avoid the autopopulation of Account field 
+                // when the contact is created on top of any Account record, it starts auto populating the 
+                // Account id in every account field on [+] button click
+                if (self.view instanceof app.view.views.BaseCreateView) {
+                    fieldToRender.noAutoPopulate = true;
+                }
                 self.view.editableFields.push(fieldToRender);
                 self.view._renderField(fieldToRender);
                 self.modelFields[sfId] = fieldToRender;
