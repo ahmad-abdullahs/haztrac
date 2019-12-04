@@ -1,8 +1,11 @@
 <?php
- // created: 2019-11-23 17:56:38
+ // created: 2019-12-04 10:43:41
 
 $app_list_strings['uom_list']=array (
   'candela' => 'Candela',
   'moles' => 'Moles',
   '' => '',
+  'TCLP' => 'TCLP (mg/kg)',
+  'Percent' => 'Percent (%)',
+  'Total' => 'Total (Vol%)',
 );
