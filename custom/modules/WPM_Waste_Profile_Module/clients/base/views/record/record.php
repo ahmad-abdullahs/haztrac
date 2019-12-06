@@ -467,6 +467,289 @@ $viewdefs[$module_name] = array(
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL8',
+                        'label' => 'LBL_RECORDVIEW_PANEL8',
+                        'columns' => 3,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'constituent_regulated',
+                                'type' => 'constituent_regulated',
+                                'span' => 6,
+                                // 'dismiss_label' => true,
+                                'label' => 'LBL_CONSTITUENT_REGULATED',
+                                'primary_field' => 'constituent_regulated_epa_waste_code',
+                                'related_fields' =>
+                                array(
+                                    0 => 'constituent_regulated',
+                                ),
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'constituent_regulated_epa_waste_code',
+                                        'css_class' => 'constituent_regulated_epa_waste_code',
+                                        'label' => 'LBL_CONSTITUENT_EPA_WASTE_CODE',
+                                        'type' => 'enum',
+                                        'options' => 'WP_EPA_CODES',
+                                        'span' => 3,
+                                        'required' => true,
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'constituent_regulated_regulatory_level',
+                                        'css_class' => 'constituent_regulated_regulatory_level',
+                                        'label' => 'LBL_CONSTITUENT_REGULATORY_LEVEL',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 2,
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'constituent_regulated_tclp',
+                                        'css_class' => 'constituent_regulated_tclp',
+                                        'label' => 'LBL_CONSTITUENT_TCLP',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 2,
+                                    ),
+                                    3 =>
+                                    array(
+                                        'name' => 'constituent_regulated_uom',
+                                        'css_class' => 'constituent_regulated_uom',
+                                        'label' => 'LBL_CONSTITUENT_UOM',
+                                        'type' => 'enum',
+                                        'options' => 'uom_list',
+                                        'span' => 3,
+                                    ),
+                                    4 =>
+                                    array(
+                                        'name' => 'constituent_regulated_not_applicable',
+                                        'css_class' => 'constituent_regulated_not_applicable',
+                                        'label' => 'LBL_CONSTITUENT_NOT_APPLICABLE',
+                                        'type' => 'bool',
+                                        'span' => 1,
+                                    ),
+                                ),
+                            ),
+                            1 =>
+                            array(
+                                'span' => 1,
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'constituent_volatile',
+                                'type' => 'constituent_volatile',
+                                // 'dismiss_label' => true,
+                                'span' => 5,
+                                'label' => 'LBL_CONSTITUENT_VOLATILE',
+                                'primary_field' => 'constituent_volatile_epa_waste_code',
+                                'related_fields' =>
+                                array(
+                                    0 => 'constituent_volatile',
+                                ),
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'constituent_volatile_epa_waste_code',
+                                        'css_class' => 'constituent_volatile_epa_waste_code',
+                                        'label' => 'LBL_CONSTITUENT_EPA_WASTE_CODE',
+                                        'type' => 'enum',
+                                        'options' => 'WP_EPA_CODES',
+                                        'span' => 4,
+                                        'required' => true,
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'constituent_volatile_regulatory_level',
+                                        'css_class' => 'constituent_volatile_regulatory_level',
+                                        'label' => 'LBL_CONSTITUENT_REGULATORY_LEVEL',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'constituent_volatile_tclp',
+                                        'css_class' => 'constituent_volatile_tclp',
+                                        'label' => 'LBL_CONSTITUENT_TCLP',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                ),
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'constituent_semivolatile',
+                                'type' => 'constituent_semivolatile',
+                                // 'dismiss_label' => true,
+                                'span' => 6,
+                                'label' => 'LBL_CONSTITUENT_SEMIVOLATILE',
+                                'primary_field' => 'constituent_semivolatile_epa_waste_code',
+                                'related_fields' =>
+                                array(
+                                    0 => 'constituent_semivolatile',
+                                ),
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'constituent_semivolatile_epa_waste_code',
+                                        'css_class' => 'constituent_semivolatile_epa_waste_code',
+                                        'label' => 'LBL_CONSTITUENT_EPA_WASTE_CODE',
+                                        'type' => 'enum',
+                                        'options' => 'WP_EPA_CODES',
+                                        'span' => 5,
+                                        'required' => true,
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'constituent_semivolatile_regulatory_level',
+                                        'css_class' => 'constituent_semivolatile_regulatory_level',
+                                        'label' => 'LBL_CONSTITUENT_REGULATORY_LEVEL',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'constituent_semivolatile_tclp',
+                                        'css_class' => 'constituent_semivolatile_tclp',
+                                        'label' => 'LBL_CONSTITUENT_TCLP',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                ),
+                            ),
+                            4 =>
+                            array(
+                                'span' => 1,
+                            ),
+                            5 =>
+                            array(
+                                'name' => 'constituent_pesticide_herbicide',
+                                'type' => 'constituent_pesticide_herbicide',
+                                // 'dismiss_label' => true,
+                                'span' => 5,
+                                'label' => 'LBL_CONSTITUENT_PESTICIDE_HERBICIDE',
+                                'primary_field' => 'constituent_pesticide_herbicide_epa_waste_code',
+                                'related_fields' =>
+                                array(
+                                    0 => 'constituent_pesticide_herbicide',
+                                ),
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'constituent_pesticide_herbicide_epa_waste_code',
+                                        'css_class' => 'constituent_pesticide_herbicide_epa_waste_code',
+                                        'label' => 'LBL_CONSTITUENT_EPA_WASTE_CODE',
+                                        'type' => 'enum',
+                                        'options' => 'WP_EPA_CODES',
+                                        'span' => 4,
+                                        'required' => true,
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'constituent_pesticide_herbicide_regulatory_level',
+                                        'css_class' => 'constituent_pesticide_herbicide_regulatory_level',
+                                        'label' => 'LBL_CONSTITUENT_REGULATORY_LEVEL',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'constituent_pesticide_herbicide_tclp',
+                                        'css_class' => 'constituent_pesticide_herbicide_tclp',
+                                        'label' => 'LBL_CONSTITUENT_TCLP',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                ),
+                            ),
+                            6 =>
+                            array(
+                                'name' => 'constituent_other',
+                                'type' => 'constituent_other',
+                                // 'dismiss_label' => true,
+                                'span' => 6,
+                                'label' => 'LBL_CONSTITUENT_OTHER',
+                                'primary_field' => 'constituent_other_other',
+                                'related_fields' =>
+                                array(
+                                    0 => 'constituent_other',
+                                ),
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'constituent_other_other',
+                                        'css_class' => 'constituent_other_other',
+                                        'label' => 'LBL_CONSTITUENT_OTHER_NAME',
+                                        'type' => 'text',
+                                        'span' => 4,
+                                        'required' => true,
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'constituent_other_max',
+                                        'css_class' => 'constituent_other_max',
+                                        'label' => 'LBL_CONSTITUENT_MAX',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 3,
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'constituent_other_uom',
+                                        'css_class' => 'constituent_other_uom',
+                                        'label' => 'LBL_CONSTITUENT_UOM',
+                                        'type' => 'enum',
+                                        'options' => 'uom_list',
+                                        'span' => 3,
+                                    ),
+                                    3 =>
+                                    array(
+                                        'name' => 'constituent_other_not_applicable',
+                                        'css_class' => 'constituent_other_not_applicable',
+                                        'label' => 'LBL_CONSTITUENT_NOT_APPLICABLE',
+                                        'type' => 'bool',
+                                        'span' => 1,
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                    7 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL6',
                         'label' => 'LBL_RECORDVIEW_PANEL6',
                         'columns' => 2,
@@ -482,7 +765,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    7 =>
+                    8 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -501,7 +784,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    8 =>
+                    9 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -520,7 +803,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    9 =>
+                    10 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
