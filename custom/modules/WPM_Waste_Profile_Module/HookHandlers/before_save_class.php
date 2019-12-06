@@ -7,6 +7,34 @@ class before_save_class {
 
     //{$db->quoted($account_role_obj->composition_role)}
     function before_save_method($bean, $event, $arguments) {
+        $this->handleCompositionField($bean, $event, $arguments);
+//        $this->jumpWasteProfileNumBy3($bean, $event, $arguments);
+    }
+
+    function jumpWasteProfileNumBy3($bean, $event, $arguments) {
+        // Check if its new record
+        if (isset($arguments['isUpdate']) && $arguments['isUpdate'] == false) {
+            $sql = <<<SQL
+                    SELECT 
+                        MAX(waste_profile_num_c) AS waste_profile_num_c
+                    FROM
+                        wpm_waste_profile_module_cstm;
+SQL;
+            global $db;
+
+            $res = $db->query($sql);
+            if ($res->num_rows > 0) {
+                $row = $db->fetchByAssoc($res);
+                // Get the number out of the string.
+                preg_match_all('!\d+!', $row['waste_profile_num_c'], $matches);
+                if (!empty($matches) && is_array($matches[0])) {
+                    $bean->waste_profile_num_c = 'P-' . ((int) $matches[0][0] + 3);
+                }
+            }
+        }
+    }
+
+    function handleCompositionField($bean, $event, $arguments) {
         if ($bean->composition != $bean->fetched_row['composition']) {
             // Fetch all the waste compositions linked to this waste profile and delete those.
             // We are going to add the new ones

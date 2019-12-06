@@ -188,12 +188,16 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'waste_profile_num_c',
                                 'label' => 'LBL_WASTE_PROFILE_NUM',
+                                'readonly' => true,
                             ),
                             4 =>
                             array(
                                 'name' => 'generator_c',
-                                'studio' => 'visible',
                                 'label' => 'LBL_GENERATOR',
+                                'related_fields' =>
+                                array(
+                                    0 => 'account_id_c',
+                                ),
                             ),
                             5 =>
                             array(
@@ -202,19 +206,11 @@ $viewdefs[$module_name] = array(
                             ),
                             6 =>
                             array(
-                                'name' => 'tag',
-                                'span' => 12,
+                                'name' => 'destination_ship_to_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_DESTINATION_SHIP_TO',
                             ),
                             7 =>
-                            array(
-                            ),
-                            8 =>
-                            array(
-                            ),
-                            9 =>
-                            array(
-                            ),
-                            10 =>
                             array(
                             ),
                         ),
@@ -275,6 +271,7 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'physical_state_c',
                                 'label' => 'LBL_PHYSICAL_STATE',
+                                'type' => 'radioenum-linear',
                             ),
                             1 =>
                             array(
@@ -295,6 +292,7 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'odor_c',
                                 'label' => 'LBL_ODOR',
+                                'type' => 'radioenum-linear',
                             ),
                             5 =>
                             array(
@@ -305,31 +303,37 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'flash_point_c',
                                 'label' => 'LBL_FLASH_POINT',
+                                'type' => 'radioenum-linear',
                             ),
                             7 =>
                             array(
                                 'name' => 'btu_c',
                                 'label' => 'LBL_BTU',
+                                'type' => 'radioenum-linear',
                             ),
                             8 =>
                             array(
                                 'name' => 'ash_content_c',
                                 'label' => 'LBL_ASH_CONTENT',
+                                'type' => 'radioenum-linear',
                             ),
                             9 =>
                             array(
                                 'name' => 'ph_c',
                                 'label' => 'LBL_PH',
+                                'type' => 'radioenum-linear',
                             ),
                             10 =>
                             array(
                                 'name' => 'viscosity_c',
                                 'label' => 'LBL_VISCOSITY',
+                                'type' => 'radioenum-linear',
                             ),
                             11 =>
                             array(
                                 'name' => 'specific_gravity_c',
                                 'label' => 'LBL_SPECIFIC_GRAVITY',
+                                'type' => 'radioenum-linear',
                             ),
                         ),
                     ),
@@ -348,6 +352,7 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'wp_test_radio_c',
                                 'label' => 'LBL_WP_TEST_RADIO',
+                                'type' => 'radioenum-linear',
                             ),
                             1 =>
                             array(
@@ -370,11 +375,13 @@ $viewdefs[$module_name] = array(
                                 'name' => 'composition',
                                 'type' => 'composition',
                                 'dismiss_label' => true,
-                                'span' => 6,
-                                'related_fields' => array(
-                                    'composition',
+                                'related_fields' =>
+                                array(
+                                    0 => 'composition',
                                 ),
-                                'fields' => array(
+                                'fields' =>
+                                array(
+                                    0 =>
                                     array(
                                         'name' => 'composition_name',
                                         'css_class' => 'composition_name',
@@ -383,6 +390,7 @@ $viewdefs[$module_name] = array(
                                         'span' => 4,
                                         'required' => true,
                                     ),
+                                    1 =>
                                     array(
                                         'name' => 'composition_min',
                                         'css_class' => 'composition_min',
@@ -391,8 +399,9 @@ $viewdefs[$module_name] = array(
                                         'len' => '8',
                                         'size' => '20',
                                         'precision' => 2,
-                                        'span' => 2
+                                        'span' => 2,
                                     ),
+                                    2 =>
                                     array(
                                         'name' => 'composition_max',
                                         'css_class' => 'composition_max',
@@ -403,15 +412,51 @@ $viewdefs[$module_name] = array(
                                         'precision' => 2,
                                         'span' => 2,
                                     ),
+                                    3 =>
                                     array(
                                         'name' => 'composition_uom',
                                         'css_class' => 'composition_uom',
                                         'label' => 'LBL_COMPOSITION_UOM',
                                         'type' => 'enum',
                                         'options' => 'uom_list',
-                                        'span' => 3
+                                        'span' => 3,
                                     ),
-                                )
+                                ),
+                                'footer_fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'empty_field1',
+                                        'css_class' => 'hidden',
+                                        'span' => 4,
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'empty_field2',
+                                        'css_class' => '',
+                                        'type' => 'non-html-field',
+                                        'label' => 'LBL_COMPOSITION_MAX_TOTAL',
+                                        'span' => 2,
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'composition_max_total',
+                                        'css_class' => 'composition_max_total',
+                                        'label' => 'LBL_COMPOSITION_MAX_TOTAL',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'readonly' => true,
+                                        'span' => 2,
+                                    ),
+                                    3 =>
+                                    array(
+                                        'name' => 'empty_field3',
+                                        'css_class' => 'hidden',
+                                        'span' => 3,
+                                    ),
+                                ),
                             ),
                             1 =>
                             array(

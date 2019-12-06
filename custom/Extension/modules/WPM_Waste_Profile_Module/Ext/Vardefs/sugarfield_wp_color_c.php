@@ -1,5 +1,5 @@
 <?php
- // created: 2019-07-28 19:22:04
+ // created: 2019-12-05 04:26:49
 $dictionary['WPM_Waste_Profile_Module']['fields']['wp_color_c']['labelValue']='Phyical Color';
 $dictionary['WPM_Waste_Profile_Module']['fields']['wp_color_c']['full_text_search']=array (
   'enabled' => '0',

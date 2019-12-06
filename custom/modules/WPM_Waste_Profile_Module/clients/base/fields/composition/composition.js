@@ -5,11 +5,34 @@
         'click .addRecord:not(.disabled)': 'addRow',
     },
     fieldIds: [],
+    footerFieldIds: [],
     modelFields: {},
+    modelFooterFields: {},
     isFirst: true,
     addClass: 'addRecord',
     initialize: function (options) {
         this._super('initialize', [options]);
+        app.error.errorName2Keys['composition_max_total_should_not_more_than_100_message'] = 'ERROR_MAX_TOTAL_VALIDATION_MESSAGE';
+        //add validation tasks
+        this.model.addValidationTask('composition_max_total_should_not_more_than_100_message', _.bind(this._doValidateCompositionMaxTotal, this));
+    },
+
+    _doValidateCompositionMaxTotal: function (fields, errors, callback) {
+        // Validate Max Total should not be more than 100.
+        if (this.model.get('composition_max_total__' + this.footerFieldIds[0]) > 100.00)
+        {
+            errors[this.name] = errors[this.name] || {};
+            errors[this.name].composition_max_total_should_not_more_than_100_message = true;
+            var fieldName = 'composition_max_total__' + this.footerFieldIds[0];
+            errors[fieldName] = errors[fieldName] || {};
+            errors[fieldName].composition_max_total_should_not_more_than_100_message = true;
+            app.alert.show('composition_max_total_error', {
+                level: 'error',
+                messages: app.lang.get('ERROR_MAX_TOTAL_VALIDATION_MESSAGE', this.module),
+            });
+        }
+
+        callback(null, fields, errors);
     },
 
     bindDataChange: function () {
@@ -17,16 +40,19 @@
             if (this.action !== 'edit') {
                 this.render();
             }
+            this.recalculateMaxTotal();
         }, this);
     },
 
     render: function () {
         // Remove the fields which we have on the view, because everytime it render, It create new fields.
         this.unsetOldFields();
-        // Empty the fieldIds, we will have new fields as we are going to render it.
+        // Empty the fieldIds, footerFieldIds, we will have new fields as we are going to render it.
         this.fieldIds = [];
+        this.footerFieldIds = [];
         this._super('render');
         this.renderFieldsMetaAndValues();
+        this.renderFooterFieldsMetaAndValues();
     },
 
     /*
@@ -37,6 +63,15 @@
     unsetOldFields: function () {
         _.each(this.fieldIds, function (id) {
             _.each(this.def.fields, function (field) {
+                var field_name = field.name + "__" + id;
+                if (this.model.has(field_name)) {
+                    this.model.unset(field_name, {silent: true});
+                    this.model.off('change:' + field_name);
+                }
+            }, this);
+        }, this);
+        _.each(this.footerFieldIds, function (id) {
+            _.each(this.def.footer_fields, function (field) {
                 var field_name = field.name + "__" + id;
                 if (this.model.has(field_name)) {
                     this.model.unset(field_name, {silent: true});
@@ -78,6 +113,46 @@
         this.renderInnerFields();
     },
 
+    renderFooterFieldsMetaAndValues: function () {
+        var field = this.model.get(this.name) || "[]",
+                newRowObj = {
+                    'empty_field1': '',
+                    'empty_field2': '',
+                    'composition_max_total': 0.00,
+                    'empty_field2': '',
+                };
+
+        // Parse the data and sum the field values.
+        var fieldObj = JSON.parse(field);
+        _.each(fieldObj, function (rowObj) {
+            if (!this.isRowEmpty(rowObj)) {
+                newRowObj['composition_max_total'] += parseFloat(rowObj['composition_max']) || 0.00;
+            }
+        }, this);
+
+        this.insertFooterRow(newRowObj);
+        this.renderFieldFooterInnerFields();
+    },
+
+    recalculateMaxTotal: function () {
+        var field = this.model.get(this.name),
+                compositionMaxTotal = 0.00;
+
+        // Parse the data and sum the field values.
+        var fieldObj = JSON.parse(field);
+        _.each(fieldObj, function (rowObj) {
+            if (!this.isRowEmpty(rowObj)) {
+                compositionMaxTotal += parseFloat(rowObj['composition_max']) || 0.00;
+            }
+        }, this);
+
+        if (!_.isEmpty(this.footerFieldIds)) {
+            this.model.set('composition_max_total__' + this.footerFieldIds[0], compositionMaxTotal);
+        }
+
+        this.renderFieldFooterInnerFields();
+    },
+
     /*
      * If a single field has a value in the row, row will not be empty
      * @param {type} rowObj
@@ -106,6 +181,11 @@
         }
         var fieldTemplate = this.getRowTemplate(rowObj, isNew, labelsOnTop);
         this.$('.' + this.name + '-to-insert').append(fieldTemplate);
+    },
+
+    insertFooterRow: function (rowObj) {
+        var fieldTemplate = this.getFooterRowTemplate(rowObj);
+        this.$('.' + this.name + '-total-row-to-insert').append(fieldTemplate);
     },
 
     getRowTemplate: function (rowObj, isNew, labelsOnTop) {
@@ -162,6 +242,37 @@
         });
 
         this.fieldIds.push(uid);
+        return fieldTemplate;
+    },
+
+    getFooterRowTemplate: function (rowObj) {
+        var uid = _.uniqueId(), template = this.name + '-footer-row',
+                modelFooterFields = [],
+                extendedObj = {}, styleProperties = {};
+
+        _.each(this.def.footer_fields, function (fieldDef) {
+            extendedObj = {};
+            var innerFieldName = fieldDef.name + "__" + uid;
+            extendedObj.name = innerFieldName;
+            fieldDef.fuid = uid;
+            this.model.set(innerFieldName, rowObj[fieldDef.name]);
+
+            modelFooterFields.push(_.extend({}, fieldDef, extendedObj));
+        }, this);
+
+        var fieldAction = (this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName)) ? "edit" : "detail";
+
+        var modelRowTemplate = app.template.getField(this.type, template, this.module);
+        var fieldTemplate = modelRowTemplate({
+            view: this.view,
+            model: this.model,
+            name: this.name,
+            fieldAction: fieldAction,
+            modelFooterFields: modelFooterFields,
+            uid: uid,
+        });
+
+        this.footerFieldIds.push(uid);
         return fieldTemplate;
     },
 
@@ -225,6 +336,8 @@
             }
         }, this);
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
+
+        this.recalculateMaxTotal();
     },
 
     parseFieldNames: function (fieldNames) {
@@ -256,6 +369,22 @@
                 self.view.editableFields.push(fieldToRender);
                 self.view._renderField(fieldToRender);
                 self.modelFields[sfId] = fieldToRender;
+            } catch (e) {
+            }
+        });
+    },
+
+    renderFieldFooterInnerFields: function () {
+        var self = this;
+        self.modelFooterFields = {};
+        this.$('span[sfuuid]').each(function () {
+            var sfId = $(this).attr('sfuuid');
+            try {
+                var fieldToRender = self.view.fields[sfId];
+//                self.view.editableFields.push(fieldToRender);
+                self.view.noEditFields.push(fieldToRender);
+                self.view._renderField(fieldToRender);
+                self.modelFooterFields[sfId] = fieldToRender;
             } catch (e) {
             }
         });
@@ -318,6 +447,10 @@
     },
 
     dispose: function () {
+        _.each(this.footerFieldIds, function (uid) {
+            this.unbindDataChangesFromFields(uid);
+        }, this);
+        this.footerFieldIds = [];
         _.each(this.fieldIds, function (uid) {
             this.unbindDataChangesFromFields(uid);
         }, this);

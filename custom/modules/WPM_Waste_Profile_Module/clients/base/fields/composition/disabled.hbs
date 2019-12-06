@@ -10,22 +10,3 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{log "disabled"}}
-<style>
-input[name=survey_score], input[name=qa_score]{
-	width: 25% !important;
-	margin-left: 0% !important;
-}
-</style>
-{{#each relatedFields}}
-	{{#eq ffield.type "int"}}
-		<span class="span3" style="display: inline;  margin-left: 0px;">{{str ../label ../../module}}</span>
-	{{/eq}}
-	{{#with ffield}}
-		{{field ../../view model=../../model template="disabled"}}
-	{{/with}}
-	{{#eq ffield.type "bool"}}
-		<span style="display: inline;">{{str ../label ../../module}}</span>
-	{{/eq}}
-	<br><br>
-{{/each}}

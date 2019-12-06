@@ -33,3 +33,7 @@ $mod_strings['LBL_COMPOSITION_NAME'] = 'Name';
 $mod_strings['LBL_COMPOSITION_MIN'] = 'Min';
 $mod_strings['LBL_COMPOSITION_MAX'] = 'Max';
 $mod_strings['LBL_COMPOSITION_UOM'] = 'UOM';
+$mod_strings['LBL_COMPOSITION_MAX_TOTAL'] = 'Max Total';
+$mod_strings['ERROR_MAX_TOTAL_VALIDATION_MESSAGE'] = 'Composition Max Total should not be more than 100.';
+$mod_strings['LBL_DESTINATION_SHIP_TO_ACCOUNT_ID'] = 'Ship To / TSDF (related Account ID)';
+$mod_strings['LBL_DESTINATION_SHIP_TO'] = 'Ship To / TSDF';
