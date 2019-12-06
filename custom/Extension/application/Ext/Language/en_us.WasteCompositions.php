@@ -12,6 +12,3 @@
 
 $app_list_strings['moduleList']['waste_composition'] = 'Waste Compositions';
 $app_list_strings['moduleListSingular']['waste_composition'] = 'Waste Composition';
-$app_list_strings['uom_list']['candela'] = 'Candela';
-$app_list_strings['uom_list']['moles'] = 'Moles';
-$app_list_strings['uom_list'][''] = '';

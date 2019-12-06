@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_GENERATOR_ACCOUNT_ID'] = 'Generator (related Account ID)';
 $mod_strings['LBL_FLEX_TEST'] = 'Flex Relate';
@@ -37,3 +38,18 @@ $mod_strings['LBL_COMPOSITION_MAX_TOTAL'] = 'Max Total';
 $mod_strings['ERROR_MAX_TOTAL_VALIDATION_MESSAGE'] = 'Composition Max Total should not be more than 100.';
 $mod_strings['LBL_DESTINATION_SHIP_TO_ACCOUNT_ID'] = 'Ship To / TSDF (related Account ID)';
 $mod_strings['LBL_DESTINATION_SHIP_TO'] = 'Ship To / TSDF';
+$mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Constituents';
+$mod_strings['LBL_CONSTITUENT_REGULATED'] = 'Constituent Regulated Metals';
+$mod_strings['LBL_CONSTITUENT_VOLATILE'] = 'Constituent Volatile Compounds';
+$mod_strings['LBL_CONSTITUENT_SEMIVOLATILE'] = 'Constituent Semi-Volatile Compounds';
+$mod_strings['LBL_CONSTITUENT_PESTICIDE_HERBICIDE'] = 'Constituent Pesticides and Herbicides';
+$mod_strings['LBL_CONSTITUENT_OTHER'] = 'Other Constituents';
+$mod_strings['LBL_CONSTITUENT_OTHER_NAME'] = 'Name';
+$mod_strings['LBL_CONSTITUENT_MAX'] = 'Max';
+$mod_strings['LBL_CONSTITUENT_EPA_WASTE_CODE'] = 'Waste Code';
+$mod_strings['LBL_CONSTITUENT_RCRA'] = 'RCRA';
+$mod_strings['LBL_CONSTITUENT_REGULATED_METALS'] = 'Regulated Metals';
+$mod_strings['LBL_CONSTITUENT_REGULATORY_LEVEL'] = 'Regulatory Level (mg/l)';
+$mod_strings['LBL_CONSTITUENT_TCLP'] = 'TCLP (mg/l)';
+$mod_strings['LBL_CONSTITUENT_UOM'] = 'UOM';
+$mod_strings['LBL_CONSTITUENT_NOT_APPLICABLE'] = 'Not Applicable';
