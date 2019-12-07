@@ -54,3 +54,4 @@ $mod_strings['LBL_LIST_TRANSFER_DATE'] = 'Transfer Date';
 $mod_strings['LBL_PO_REQUIRED'] = 'PO Required';
 $mod_strings['LBL_BILLING_ADDRESS_THIRD_PARTY_NAME'] = 'Billing Name';
 $mod_strings['LBL_SHIPPING_ADDRESS_THIRD_PARTY_NAME'] = 'Shipping Name';
+$mod_strings['LBL_THIRD_PARTY'] = '3rd Party / Broker';

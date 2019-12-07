@@ -53,20 +53,10 @@
 ({
     extendsFrom: 'FieldsetField',
 
-    /*
-     * 
-     * @param {type} options
-     * @returns {undefined}
-     */
     initialize: function (options) {
         this._super('initialize', [options]);
     },
 
-    /*
-     * 
-     * @param {type} fields
-     * @returns {undefined}
-     */
     _render: function () {
         this._super('_render');
     },
@@ -75,22 +65,38 @@
         this._super('_renderFields', [fields]);
 
         if (this.name == 'billing_address' || this.name == 'shipping_address') {
-            _.each(fields, function (field) {
-                if (field.name == 'billing_address_third_party_name' || field.name == 'shipping_address_third_party_name') {
-                    this.set3rdPartyVisibility(this.model.get('account_type_cst_c'), field);
-                }
-            }, this);
+            /*_.each(fields, function (field) {
+             if (field.name == 'billing_address_third_party_name' || field.name == 'shipping_address_third_party_name') {
+             this.set3rdPartyVisibility(this.model.get('account_type_cst_c'), field);
+             }
+             }, this);*/
+            this.colorAddressFields(this.model.get('account_type_cst_c'));
         }
     },
 
     bindDataChange: function () {
         if (this.model) {
             this.model.on('change:account_type_cst_c', function (model, value) {
-                this.set3rdPartyVisibility(value);
+//                this.set3rdPartyVisibility(value);
+                this.colorAddressFields(value);
             }, this);
         }
 
         this._super('bindDataChange');
+    },
+
+    colorAddressFields: function (value) {
+        if (_.contains(value, "3rd Party")) {
+            this.view.$el.find('[data-name=billing_address]').find('input,textarea').css('background-color', '#ddffa8');
+            this.view.$el.find('[data-name=shipping_address]').find('input,textarea').css('background-color', '#ddffa8');
+            this.view.$el.find('[data-fieldname=billing_address]').find('.address.fieldset').css('background-color', '#ddffa8');
+            this.view.$el.find('[data-fieldname=shipping_address]').find('.address.fieldset').css('background-color', '#ddffa8');
+        } else {
+            this.view.$el.find('[data-name=billing_address]').find('input,textarea').css('background-color', '');
+            this.view.$el.find('[data-name=shipping_address]').find('input,textarea').css('background-color', '');
+            this.view.$el.find('[data-fieldname=billing_address]').find('.address.fieldset').css('background-color', '');
+            this.view.$el.find('[data-fieldname=shipping_address]').find('.address.fieldset').css('background-color', '');
+        }
     },
 
     set3rdPartyVisibility: function (value, field) {

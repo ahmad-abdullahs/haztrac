@@ -163,6 +163,14 @@ $viewdefs['Accounts'] = array(
                                 'readonly' => true,
                                 'dismiss_label' => true,
                             ),
+                            4 =>
+                            array(
+                                'name' => 'third_party',
+                                'label' => 'LBL_THIRD_PARTY',
+                                'type' => 'third-party',
+                                'readonly' => true,
+                                'dismiss_label' => true,
+                            ),
                         ),
                     ),
                     1 =>
@@ -179,7 +187,7 @@ $viewdefs['Accounts'] = array(
                             0 =>
                             array(
                                 'name' => 'billing_address',
-                                'type' => 'fieldset',
+                                'type' => 'fieldset-visibility',
                                 'css_class' => 'address',
                                 'label' => 'LBL_BILLING_ADDRESS',
                                 'fields' =>
@@ -226,7 +234,7 @@ $viewdefs['Accounts'] = array(
                             1 =>
                             array(
                                 'name' => 'shipping_address',
-                                'type' => 'fieldset',
+                                'type' => 'fieldset-visibility',
                                 'css_class' => 'address',
                                 'label' => 'LBL_SHIPPING_ADDRESS',
                                 'fields' =>
