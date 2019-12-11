@@ -5,6 +5,7 @@
         'click .addRecord:not(.disabled)': 'addRow',
     },
     fieldIds: [],
+    usepaWasteCodes: [],
     modelFields: {},
     isFirst: true,
     addClass: 'addRecord',
@@ -201,7 +202,7 @@
     },
 
     updateJSON: function () {
-        var jsonField = [];
+        var jsonField = this.usepaWasteCodes = [];
         var nruid = this.getCurrentNewRowUid();
         _.each(this.fieldIds, function (uid) {
             var obj = {};
@@ -213,12 +214,19 @@
                     var val = this.model.get(fname) || "";
                     obj[fieldDef.id_name] = val;
                 }
+
+                /*USEPA HAZARDOUS WASTE CODES*/
+                if (fieldDef.name == this.def.primary_field) {
+                    this.usepaWasteCodes.push(this.model.get(fieldName));
+                }
+
             }, this);
             if (uid != nruid) {
                 jsonField.push(obj);
             }
         }, this);
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
+        this.model.trigger('change:quest_usepa_hazardous_waste_c');
     },
 
     parseFieldNames: function (fieldNames) {

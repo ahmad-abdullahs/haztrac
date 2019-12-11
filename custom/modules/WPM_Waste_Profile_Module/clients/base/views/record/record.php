@@ -469,7 +469,7 @@ $viewdefs[$module_name] = array(
                         'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL8',
                         'label' => 'LBL_RECORDVIEW_PANEL8',
-                        'columns' => 3,
+                        'columns' => 2,
                         'labelsOnTop' => 1,
                         'placeholders' => 1,
                         'fields' =>
@@ -478,8 +478,6 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'constituent_regulated',
                                 'type' => 'constituent_regulated',
-                                'span' => 6,
-                                // 'dismiss_label' => true,
                                 'label' => 'LBL_CONSTITUENT_REGULATED',
                                 'primary_field' => 'constituent_regulated_epa_waste_code',
                                 'related_fields' =>
@@ -541,14 +539,8 @@ $viewdefs[$module_name] = array(
                             ),
                             1 =>
                             array(
-                                'span' => 1,
-                            ),
-                            2 =>
-                            array(
                                 'name' => 'constituent_volatile',
                                 'type' => 'constituent_volatile',
-                                // 'dismiss_label' => true,
-                                'span' => 5,
                                 'label' => 'LBL_CONSTITUENT_VOLATILE',
                                 'primary_field' => 'constituent_volatile_epa_waste_code',
                                 'related_fields' =>
@@ -591,12 +583,10 @@ $viewdefs[$module_name] = array(
                                     ),
                                 ),
                             ),
-                            3 =>
+                            2 =>
                             array(
                                 'name' => 'constituent_semivolatile',
                                 'type' => 'constituent_semivolatile',
-                                // 'dismiss_label' => true,
-                                'span' => 6,
                                 'label' => 'LBL_CONSTITUENT_SEMIVOLATILE',
                                 'primary_field' => 'constituent_semivolatile_epa_waste_code',
                                 'related_fields' =>
@@ -639,16 +629,10 @@ $viewdefs[$module_name] = array(
                                     ),
                                 ),
                             ),
-                            4 =>
-                            array(
-                                'span' => 1,
-                            ),
-                            5 =>
+                            3 =>
                             array(
                                 'name' => 'constituent_pesticide_herbicide',
                                 'type' => 'constituent_pesticide_herbicide',
-                                // 'dismiss_label' => true,
-                                'span' => 5,
                                 'label' => 'LBL_CONSTITUENT_PESTICIDE_HERBICIDE',
                                 'primary_field' => 'constituent_pesticide_herbicide_epa_waste_code',
                                 'related_fields' =>
@@ -691,12 +675,10 @@ $viewdefs[$module_name] = array(
                                     ),
                                 ),
                             ),
-                            6 =>
+                            4 =>
                             array(
                                 'name' => 'constituent_other',
                                 'type' => 'constituent_other',
-                                // 'dismiss_label' => true,
-                                'span' => 6,
                                 'label' => 'LBL_CONSTITUENT_OTHER',
                                 'primary_field' => 'constituent_other_other',
                                 'related_fields' =>
@@ -744,6 +726,485 @@ $viewdefs[$module_name] = array(
                                     ),
                                 ),
                             ),
+                            5 =>
+                            array(
+                            ),
+                            6 =>
+                            array(
+                                'name' => 'hoc_c',
+                                'label' => 'LBL_HOC',
+                                'type' => 'radioenum-linear',
+                                'style' => 'width: 100%;',
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'pcb_c',
+                                'label' => 'LBL_PCB',
+                                'type' => 'radioenum-linear',
+                                'style' => 'width: 100%;',
+                            ),
+                            8 =>
+                            array(
+                                'name' => 'exact_hoc_c',
+                                'label' => 'LBL_EXACT_HOC',
+                            ),
+                            9 =>
+                            array(
+                                'name' => 'exact_pcb_c',
+                                'label' => 'LBL_EXACT_PCB',
+                            ),
+                            10 =>
+                            array(
+                            ),
+                            11 =>
+                            array(
+                                'name' => 'pcb_present_c',
+                                'label' => 'LBL_PCB_PRESENT',
+                                'type' => 'radioenum-linear',
+                            ),
+                            12 =>
+                            array(
+                                'name' => 'undisclosed_hazards_c',
+                                'label' => 'LBL_UNDISCLOSED_HAZARDS',
+                                'type' => 'radioenum-linear',
+                            ),
+                            13 =>
+                            array(
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'undisclosed_hazards_comments_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_UNDISCLOSED_HAZARDS_COMMENTS',
+                                'dismiss_label' => true,
+                            ),
+                            15 =>
+                            array(
+                            ),
+                            16 =>
+                            array(
+                                'name' => 'choose_hazards_that_apply_c',
+                                'label' => 'LBL_CHOOSE_HAZARDS_THAT_APPLY',
+                                'type' => 'multienum-checkbox',
+                                'perline' => 2,
+                            ),
+                            17 =>
+                            array(
+                            ),
+                            18 =>
+                            array(
+                                'name' => 'quest_usepa_hazardous_waste_c',
+                                'label' => 'LBL_QUEST_USEPA_HAZARDOUS_WASTE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            19 =>
+                            array(
+                                'name' => 'quest_usepa_hazardous_waste_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_USEPA_HAZARDOUS_WASTE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            20 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            21 =>
+                            array(
+                                'name' => 'notes_usepa_hazardous_waste_c',
+                                'type' => 'waste-code-multienum',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_USEPA_HAZARDOUS_WASTE',
+                                'dismiss_label' => true,
+                                'span' => 10,
+                            ),
+                            22 =>
+                            array(
+                                'name' => 'quest_any_state_code_apply_c',
+                                'label' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            23 =>
+                            array(
+                                'name' => 'quest_any_state_code_apply_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            24 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            25 =>
+                            array(
+                                'name' => 'notes_any_state_code_apply_c',
+                                'type' => 'enum-same-key-and-value',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_ANY_STATE_CODE_APPLY',
+                                'dismiss_label' => true,
+                                'span' => 10,
+                            ),
+                            26 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            27 =>
+                            array(
+                                'name' => 'notes_texas_waste_code_c',
+                                'type' => 'enum-same-key-and-value',
+                                'label' => 'LBL_NOTES_TEXAS_WASTE_CODE',
+                                'span' => 10,
+                            ),
+                            28 =>
+                            array(
+                                'name' => 'quest_foreign_waste_code_c',
+                                'label' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            29 =>
+                            array(
+                                'name' => 'quest_foreign_waste_code_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            30 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            31 =>
+                            array(
+                                'name' => 'notes_foreign_waste_code_c',
+                                'label' => 'LBL_NOTES_FOREIGN_WASTE_CODE',
+                                'dismiss_label' => true,
+                                'span' => 10,
+                            ),
+                            32 =>
+                            array(
+                                'name' => 'quest_40_cfr_part_c',
+                                'label' => 'LBL_QUEST_40_CFR_PART',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            33 =>
+                            array(
+                                'name' => 'quest_40_cfr_part_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_40_CFR_PART',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            34 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            35 =>
+                            array(
+                                'name' => 'notes_40_cfr_part_1_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_40_CFR_PART_1',
+                                'span' => 10,
+                            ),
+                            36 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            37 =>
+                            array(
+                                'name' => 'notes_40_cfr_part_2_c',
+                                'label' => 'LBL_NOTES_40_CFR_PART_2',
+                                'span' => 10,
+                            ),
+                            38 =>
+                            array(
+                                'name' => 'quest_universal_waste_c',
+                                'label' => 'LBL_QUEST_UNIVERSAL_WASTE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            39 =>
+                            array(
+                                'name' => 'quest_universal_waste_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_UNIVERSAL_WASTE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            40 =>
+                            array(
+                                'name' => 'quest_is_cesqg_c',
+                                'label' => 'LBL_QUEST_IS_CESQG',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            41 =>
+                            array(
+                                'name' => 'quest_is_cesqg_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_IS_CESQG',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            42 =>
+                            array(
+                                'name' => 'quest_is_rcra_exempt_commerc_c',
+                                'label' => 'LBL_QUEST_IS_RCRA_EXEMPT_COMMERC',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            43 =>
+                            array(
+                                'name' => 'quest_is_rcra_exempt_commerc_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_IS_RCRA_EXEMPT_COMMERC',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            44 =>
+                            array(
+                                'name' => 'quest_generate_f006_or_f019_c',
+                                'label' => 'LBL_QUEST_GENERATE_F006_OR_F019',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            45 =>
+                            array(
+                                'name' => 'quest_generate_f006_or_f019_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_GENERATE_F006_OR_F019',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            46 =>
+                            array(
+                                'name' => 'quest_found_at_40_cfr_c',
+                                'label' => 'LBL_QUEST_FOUND_AT_40_CFR',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            47 =>
+                            array(
+                                'name' => 'quest_found_at_40_cfr_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_FOUND_AT_40_CFR',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            48 =>
+                            array(
+                                'name' => 'quest_contains_vocs_c',
+                                'label' => 'LBL_QUEST_CONTAINS_VOCS',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            49 =>
+                            array(
+                                'name' => 'quest_contains_vocs_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_CONTAINS_VOCS',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            50 =>
+                            array(
+                                'name' => 'quest_greater_than_20organic_c',
+                                'label' => 'LBL_QUEST_GREATER_THAN_20ORGANIC',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            51 =>
+                            array(
+                                'name' => 'quest_greater_than_20organic_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_GREATER_THAN_20ORGANIC',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            52 =>
+                            array(
+                                'name' => 'quest_vapor_pressure_77_c',
+                                'label' => 'LBL_QUEST_VAPOR_PRESSURE_77',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            53 =>
+                            array(
+                                'name' => 'quest_vapor_pressure_77_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_VAPOR_PRESSURE_77',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            54 =>
+                            array(
+                                'name' => 'quest_cercla_regulated_c',
+                                'label' => 'LBL_QUEST_CERCLA_REGULATED',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            55 =>
+                            array(
+                                'name' => 'quest_cercla_regulated_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_CERCLA_REGULATED',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            56 =>
+                            array(
+                                'name' => 'quest_one_of_neshap_rule_c',
+                                'label' => 'LBL_QUEST_ONE_OF_NESHAP_RULE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            57 =>
+                            array(
+                                'name' => 'quest_one_of_neshap_rule_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_ONE_OF_NESHAP_RULE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            58 =>
+                            array(
+                                'name' => 'neshap_rules_c',
+                                'label' => 'LBL_NESHAP_RULES',
+                            ),
+                            59 =>
+                            array(
+                            ),
+                            60 =>
+                            array(
+                                'name' => 'quest_is_usepa_hazardous_c',
+                                'label' => 'LBL_QUEST_IS_USEPA_HAZARDOUS',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            61 =>
+                            array(
+                                'name' => 'quest_is_usepa_hazardous_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_IS_USEPA_HAZARDOUS',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            62 =>
+                            array(
+                                'name' => 'quest_waste_from_facility_c',
+                                'label' => 'LBL_QUEST_WASTE_FROM_FACILITY',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            63 =>
+                            array(
+                                'name' => 'quest_waste_from_facility_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_WASTE_FROM_FACILITY',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            64 =>
+                            array(
+                                'name' => 'quest_total_annual_benzene_c',
+                                'label' => 'LBL_QUEST_TOTAL_ANNUAL_BENZENE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            65 =>
+                            array(
+                                'name' => 'quest_total_annual_benzene_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_TOTAL_ANNUAL_BENZENE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            66 =>
+                            array(
+                                'name' => 'notes_tab_quantity_c',
+                                'label' => 'LBL_NOTES_TAB_QUANTITY',
+                            ),
+                            67 =>
+                            array(
+                                'name' => 'notes_tab_quantity_c_1',
+                                'type' => 'label',
+                                'label' => 'Unit',
+                                'default_value' => 'LBL_NOTES_TAB_QUANTITY_1',
+                                'noInline' => true,
+                            ),
+                            68 =>
+                            array(
+                                'name' => 'notes_describe_knowledge_c_header_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_NOTES_DESCRIBE_KNOWLEDGE_HEADER_1',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 8,
+                            ),
+                            69 =>
+                            array(
+                                'name' => 'notes_describe_knowledge_c_header_2',
+                                'type' => 'label',
+                                'default_value' => 'LBL_NOTES_DESCRIBE_KNOWLEDGE_HEADER_2',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 4,
+                            ),
+                            70 =>
+                            array(
+                                'name' => 'notes_describe_knowledge_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_NOTES_DESCRIBE_KNOWLEDGE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 3,
+                            ),
+                            71 =>
+                            array(
+                                'name' => 'notes_describe_knowledge_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_DESCRIBE_KNOWLEDGE',
+                                'dismiss_label' => true,
+                                'span' => 9,
+                            ),
                         ),
                     ),
                     7 =>
@@ -778,9 +1239,34 @@ $viewdefs[$module_name] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'proper_shipping_name',
+                                'studio' => 'visible',
+                                'label' => 'LBL_PROPER_SHIPPING_NAME',
                             ),
                             1 =>
                             array(
+                                'name' => 'erg_no',
+                                'label' => 'LBL_ERG_NO',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'manifest_additional_info',
+                                'label' => 'LBL_MANIFEST_ADDITIONAL_INFO',
+                            ),
+                            3 =>
+                            array(
+                            ),
+                            4 =>
+                            array(
+                                'name' => 'estimated_shipment_frequency_c',
+                                'label' => 'LBL_ESTIMATED_SHIPMENT_FREQUENCY',
+                                'type' => 'radioenum-linear',
+                                'style' => 'width: 100%;',
+                            ),
+                            5 =>
+                            array(
+                                'name' => 'other_shipment_frequency_c',
+                                'label' => 'LBL_OTHER_SHIPMENT_FREQUENCY',
                             ),
                         ),
                     ),

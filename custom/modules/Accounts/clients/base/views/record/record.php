@@ -171,6 +171,14 @@ $viewdefs['Accounts'] = array(
                                 'readonly' => true,
                                 'dismiss_label' => true,
                             ),
+                            5 =>
+                            array(
+                                'name' => 'account_status',
+                                'label' => 'LBL_ACCOUNT_BADGE_STATUS',
+                                'type' => 'account-status',
+                                'readonly' => true,
+                                'dismiss_label' => true,
+                            ),
                         ),
                     ),
                     1 =>
@@ -296,7 +304,6 @@ $viewdefs['Accounts'] = array(
                             array(
                                 'name' => 'physical_address_account_name',
                                 'placeholder' => 'LBL_PHYSICAL_ADDRESS_ACCOUNT_NAME',
-                                'span' => 6,
                             ),
                             3 =>
                             array(
@@ -370,47 +377,55 @@ $viewdefs['Accounts'] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'account_status_c',
+                                'label' => 'LBL_ACCOUNT_STATUS',
+                            ),
+                            1 =>
+                            array(
+                            ),
+                            2 =>
+                            array(
                                 'name' => 'account_number_c',
                                 'label' => 'LBL_ACCOUNT_NUMBER',
                             ),
-                            1 =>
+                            3 =>
                             array(
                                 'name' => 'email',
                                 'tabindex' => '7',
                             ),
-                            2 =>
+                            4 =>
                             array(
                                 'name' => 'service_level',
                             ),
-                            3 =>
+                            5 =>
                             array(
                                 'name' => 'account_terms_c',
                                 'label' => 'LBL_ACCOUNT_TERMS',
                             ),
-                            4 =>
+                            6 =>
                             array(
                                 'name' => 'hour_operations_c',
                                 'label' => 'LBL_HOUR_OPERATIONS',
                             ),
-                            5 =>
+                            7 =>
                             array(
                                 'name' => 'po_required',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PO_REQUIRED',
                             ),
-                            6 =>
+                            8 =>
                             array(
                                 'name' => 'service_instruction_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_SERVICE_INSTRUCTION',
                                 'span' => 12,
                             ),
-                            7 =>
+                            9 =>
                             array(
                                 'name' => 'hint_account_industry_c',
                                 'label' => 'LBL_HINT_COMPANY_INDUSTRY',
                             ),
-                            8 =>
+                            10 =>
                             array(
                                 'name' => 'hint_account_industry_tags_c',
                                 'label' => 'LBL_HINT_COMPANY_INDUSTRY_TAGS',
@@ -533,8 +548,6 @@ $viewdefs['Accounts'] = array(
                             ),
                             16 =>
                             array(
-                                'name' => 'account_status_c',
-                                'label' => 'LBL_ACCOUNT_STATUS',
                             ),
                             17 =>
                             array(

@@ -19,8 +19,7 @@
 
     _doValidateCompositionMaxTotal: function (fields, errors, callback) {
         // Validate Max Total should not be more than 100.
-        if (this.model.get('composition_max_total__' + this.footerFieldIds[0]) > 100.00)
-        {
+        if (this.model.get('composition_max_total__' + this.footerFieldIds[0]) > 100.00) {
             errors[this.name] = errors[this.name] || {};
             errors[this.name].composition_max_total_should_not_more_than_100_message = true;
             var fieldName = 'composition_max_total__' + this.footerFieldIds[0];
@@ -126,7 +125,9 @@
         var fieldObj = JSON.parse(field);
         _.each(fieldObj, function (rowObj) {
             if (!this.isRowEmpty(rowObj)) {
-                newRowObj['composition_max_total'] += parseFloat(rowObj['composition_max']) || 0.00;
+                if (rowObj['composition_uom'] != 'TCLP') {
+                    newRowObj['composition_max_total'] += parseFloat(rowObj['composition_max']) || 0.00;
+                }
             }
         }, this);
 
@@ -142,7 +143,9 @@
         var fieldObj = JSON.parse(field);
         _.each(fieldObj, function (rowObj) {
             if (!this.isRowEmpty(rowObj)) {
-                compositionMaxTotal += parseFloat(rowObj['composition_max']) || 0.00;
+                if (rowObj['composition_uom'] != 'TCLP') {
+                    compositionMaxTotal += parseFloat(rowObj['composition_max']) || 0.00;
+                }
             }
         }, this);
 
