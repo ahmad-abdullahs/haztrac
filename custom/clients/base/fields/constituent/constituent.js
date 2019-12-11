@@ -202,7 +202,8 @@
     },
 
     updateJSON: function () {
-        var jsonField = this.usepaWasteCodes = [];
+        var jsonField = [];
+        this.usepaWasteCodes = [];
         var nruid = this.getCurrentNewRowUid();
         _.each(this.fieldIds, function (uid) {
             var obj = {};

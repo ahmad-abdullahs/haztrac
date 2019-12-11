@@ -31,7 +31,7 @@
 
                     // Merge the existing options if user has made any in the USEPA Hazard waste code field...
                     var notes_usepa_hazardous_waste_list = this.model.get('notes_usepa_hazardous_waste_c') || [];
-                    usepaWasteCodesList = _.filter(_.uniq(_.union(usepaWasteCodesList, notes_usepa_hazardous_waste_list)));
+                    usepaWasteCodesList = _.filter(_.uniq(_.flatten(_.union(usepaWasteCodesList, notes_usepa_hazardous_waste_list))));
                     this.model.set('notes_usepa_hazardous_waste_c', usepaWasteCodesList);
                 }
             }, this);
