@@ -21,6 +21,7 @@
      */
     showNoData: false,
     extendsFrom: 'RowactionField',
+    showBadge: false,
 
     initialize: function (options) {
         this._super("initialize", [options]);
@@ -32,6 +33,7 @@
             this.model.on('change:account_type_cst_c', function (model, value) {
                 if (_.contains(value, "3rd Party")) {
                     this.render();
+                    this.showBadge = true;
                 } else {
                     this.hide();
                 }
@@ -43,6 +45,7 @@
         value = '';
         if (_.contains(this.model.get('account_type_cst_c'), "3rd Party")) {
             value = this.label = app.lang.get(this.def.label, this.module);
+            this.showBadge = true;
         }
 
         return value;

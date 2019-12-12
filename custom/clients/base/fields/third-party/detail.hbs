@@ -11,5 +11,7 @@
  */
 --}}
 {{#if model.id}}
-    <a href="javascript:void(0);" role="button" tabindex="0" name="{{name}}" class="label{{#if value}} label-success{{/if}}" style="background-color: green;">{{label}}</a>
+    {{#if showBadge}}
+        <a href="javascript:void(0);" role="button" tabindex="0" name="{{name}}" class="label{{#if value}} label-success{{/if}}" style="background-color: green;">{{label}}</a>
+    {{/if}}
 {{/if}}

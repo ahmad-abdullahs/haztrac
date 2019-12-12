@@ -21,6 +21,7 @@
      */
     showNoData: false,
     extendsFrom: 'RowactionField',
+    showBadge: false,
 
     initialize: function (options) {
         this._super("initialize", [options]);
@@ -31,6 +32,7 @@
         if (this.model) {
             this.model.on('change:account_status_c', function (model, value) {
                 if (value == "Account On Hold") {
+                    this.showBadge = true;
                     this.render();
                 } else {
                     this.hide();
@@ -43,6 +45,7 @@
         value = '';
         if (this.model.get('account_status_c' == "Account On Hold")) {
             value = this.label = app.lang.get(this.def.label, this.module);
+            this.showBadge = true;
         }
 
         return value;
