@@ -4,6 +4,7 @@ $dependencies['WPM_Waste_Profile_Module']['generator_type_c_setvalue_dep'] = arr
     'hooks' => array("edit", "view"),
     'trigger' => 'true',
     'triggerFields' => array('generator_type_c'),
+    'onload' => false,
     'actions' => array(
         array(
             'name' => 'SetValue',
@@ -451,7 +452,7 @@ $dependencies['WPM_Waste_Profile_Module']['quest_waste_from_facility_c_1_hide_st
 );
 /////////////////////////////////////////
 $dependencies['WPM_Waste_Profile_Module']['benzene_container_dep'] = array(
-    'hooks' => array("edit", "view"),
+    'hooks' => array("edit"),
     'trigger' => 'true',
     'triggerFields' => array('quest_is_usepa_hazardous_c'),
     'onload' => true,
@@ -461,7 +462,7 @@ $dependencies['WPM_Waste_Profile_Module']['benzene_container_dep'] = array(
             'params' => array(
                 'target' => 'quest_waste_from_facility_c',
                 'label' => 'quest_waste_from_facility_c_label',
-                'value' => 'ifElse(equal($quest_is_usepa_hazardous_c,"Yes"),$quest_waste_from_facility_c,"Yes")',
+                'value' => 'ifElse(equal($quest_is_usepa_hazardous_c,"Yes"),$quest_waste_from_facility_c,"No")',
             ),
         ),
         array(
@@ -469,7 +470,7 @@ $dependencies['WPM_Waste_Profile_Module']['benzene_container_dep'] = array(
             'params' => array(
                 'target' => 'quest_total_annual_benzene_c',
                 'label' => 'quest_total_annual_benzene_c_label',
-                'value' => 'ifElse(equal($quest_is_usepa_hazardous_c,"Yes"),$quest_total_annual_benzene_c,"Yes")',
+                'value' => 'ifElse(equal($quest_is_usepa_hazardous_c,"Yes"),$quest_total_annual_benzene_c,"No")',
             ),
         ),
     ),
