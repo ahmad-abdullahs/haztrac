@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_GENERATOR_ACCOUNT_ID'] = 'Generator (related Account ID)';
 $mod_strings['LBL_FLEX_TEST'] = 'Flex Relate';
@@ -28,7 +27,7 @@ $mod_strings['LBL_DESCRIBE_APPEARANCE'] = 'Describe Appearance';
 $mod_strings['LBL_SERVICE_FREQUENCY'] = 'Service Frequency';
 $mod_strings['LBL_SUBMISSION_TYPE'] = 'Submission Type';
 $mod_strings['LBL_GENERATOR_TYPE'] = 'Generator Type';
-$mod_strings['LBL_CONTAINER_TYPE'] = 'Container Type';
+$mod_strings['LBL_CONTAINER_TYPE'] = 'CONTAINER TYPE';
 $mod_strings['LBL_COMPOSITION'] = 'Composition';
 $mod_strings['LBL_COMPOSITION_NAME'] = 'Name';
 $mod_strings['LBL_COMPOSITION_MIN'] = 'Min';
@@ -95,3 +94,11 @@ $mod_strings['LBL_ERG_NO'] = 'ERG No';
 $mod_strings['LBL_MANIFEST_ADDITIONAL_INFO'] = 'Additional Info';
 $mod_strings['LBL_ESTIMATED_SHIPMENT_FREQUENCY'] = 'ESTIMATED SHIPMENT FREQUENCY';
 $mod_strings['LBL_OTHER_SHIPMENT_FREQUENCY'] = 'Other Shipment Frequency';
+$mod_strings['LBL_TRANSPORTATION_TYPE'] = 'Transportation Type';
+$mod_strings['LBL_SHIPMENT_QUANTITY'] = 'QUANTITY (CONTAINERS/SHIPMENT)';
+$mod_strings['LBL_STORAGE_CAPACITY'] = 'STORAGE CAPACITY';
+$mod_strings['LBL_SHIPMENT_CONTAINER_TYPE'] = 'CONTAINER TYPE';
+$mod_strings['LBL_SHIPMENT_CONTAINER_TYPE_OTHE'] = 'OTHER CONTAINER TYPE';
+$mod_strings['LBL_SHIPMENT_CONTAINER_TYPE_DRUM'] = 'DRUM SIZE';
+$mod_strings['LBL_SHIPMENT_QUANTITY_BULKLIQUID'] = 'QUANTITY (GALLONS/SHIPMENT)';
+$mod_strings['LBL_SHIPMENT_QUANTITY_BULKSOLID'] = 'QUANTITY (TONS/YARDS/SHIPMENT)';

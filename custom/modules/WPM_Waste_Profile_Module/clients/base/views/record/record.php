@@ -1232,7 +1232,7 @@ $viewdefs[$module_name] = array(
                         'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL4',
                         'label' => 'LBL_RECORDVIEW_PANEL4',
-                        'columns' => 2,
+                        'columns' => 3,
                         'labelsOnTop' => 1,
                         'placeholders' => 1,
                         'fields' =>
@@ -1255,18 +1255,100 @@ $viewdefs[$module_name] = array(
                             ),
                             3 =>
                             array(
-                            ),
-                            4 =>
-                            array(
                                 'name' => 'estimated_shipment_frequency_c',
                                 'label' => 'LBL_ESTIMATED_SHIPMENT_FREQUENCY',
                                 'type' => 'radioenum-linear',
                                 'style' => 'width: 100%;',
+                                'span' => 8,
+                            ),
+                            4 =>
+                            array(
+                                'span' => 2,
                             ),
                             5 =>
                             array(
+                                'span' => 2,
+                            ),
+                            6 =>
+                            array(
                                 'name' => 'other_shipment_frequency_c',
                                 'label' => 'LBL_OTHER_SHIPMENT_FREQUENCY',
+                            ),
+                            7 =>
+                            array(
+                            ),
+                            8 =>
+                            array(
+                            ),
+                            9 =>
+                            array(
+                                'name' => 'transportation_type_c',
+                                'label' => 'LBL_TRANSPORTATION_TYPE',
+                                'type' => 'radioenum-linear',
+                                'style' => 'width: 100%;',
+                                'span' => 12,
+                            ),
+                            12 =>
+                            array(
+                                'name' => 'shipment_quantity_c',
+                                'label' => 'LBL_SHIPMENT_QUANTITY',
+                            ),
+                            13 =>
+                            array(
+                                'name' => 'shipment_quantity_bulkliquid_c',
+                                'label' => 'LBL_SHIPMENT_QUANTITY_BULKLIQUID',
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'shipment_quantity_bulksolid_c',
+                                'label' => 'LBL_SHIPMENT_QUANTITY_BULKSOLID',
+                            ),
+                            15 =>
+                            array(
+                                'name' => 'storage_capacity_c',
+                                'label' => 'LBL_STORAGE_CAPACITY',
+                            ),
+                            16 =>
+                            array(
+                            ),
+                            17 =>
+                            array(
+                            ),
+                            18 =>
+                            array(
+                                'name' => 'container_type_c',
+                                'label' => 'LBL_CONTAINER_TYPE',
+                            ),
+                            19 =>
+                            array(
+                            ),
+                            20 =>
+                            array(
+                            ),
+                            21 =>
+                            array(
+                                'name' => 'shipment_container_type_drum_c',
+                                'label' => 'LBL_SHIPMENT_CONTAINER_TYPE_DRUM',
+                            ),
+                            22 =>
+                            array(
+                            ),
+                            23 =>
+                            array(
+                            ),
+                            24 =>
+                            array(
+                                'name' => 'shipment_container_type_othe_c',
+                                'label' => 'LBL_SHIPMENT_CONTAINER_TYPE_OTHE',
+                            ),
+                            25 =>
+                            array(
+                            ),
+                            26 =>
+                            array(
+                            ),
+                            27 =>
+                            array(
                             ),
                         ),
                     ),

@@ -7,6 +7,6 @@ $dictionary['WPM_Waste_Profile_Module']['fields']['notes_describe_knowledge_c'][
   'searchable' => false,
 );
 $dictionary['WPM_Waste_Profile_Module']['fields']['notes_describe_knowledge_c']['enforced']='';
-$dictionary['WPM_Waste_Profile_Module']['fields']['notes_describe_knowledge_c']['dependency']='equal($quest_is_usepa_hazardous_c,"Yes")';
+//$dictionary['WPM_Waste_Profile_Module']['fields']['notes_describe_knowledge_c']['dependency']='equal($quest_is_usepa_hazardous_c,"Yes")';
 
  ?>

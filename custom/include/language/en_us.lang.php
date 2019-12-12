@@ -16,6 +16,7 @@ $app_strings['LBL_PRINT_PAPERWORD_AFTER_PAYMENT'] = 'Print Paperwork After Payme
 $app_strings['LBL_PRINT_PAPERWORD_START_DATE'] = 'Print Paperwork Start Date';
 $app_strings['LBL_PRINT_PAPERWORD_END_DATE'] = 'Print Paperwork End Date';
 $app_strings['LBL_PRINT_MANIFEST'] = 'Print Manifest';
+$app_strings['LBL_PRINT_MANIFEST_WITH_NUM'] = 'Put Number To Print Manifest';
 //
 $app_strings['LBL_CONVERT_BUTTON_TITLE'] = 'Add to Product Catalog';
 $app_strings['LBL_RECORD_DETAILS'] = 'Record Details';
