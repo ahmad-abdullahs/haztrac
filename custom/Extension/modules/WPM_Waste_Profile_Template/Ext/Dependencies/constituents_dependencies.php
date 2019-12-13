@@ -229,11 +229,19 @@ $dependencies['WPM_Waste_Profile_Template']['neshap_rules_c_readonly_dep'] = arr
                 'value' => 'not(equal($quest_one_of_neshap_rule_c,"Yes"))',
             ),
         ),
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'neshap_rules_c',
+                'label' => 'neshap_rules_c_label',
+                'value' => 'equal($quest_one_of_neshap_rule_c,"Yes")',
+            ),
+        ),
     ),
 );
 
 $dependencies['WPM_Waste_Profile_Template']['neshap_rules_c_setvalue_dep_save'] = array(
-    'hooks' => array("save"),
+    'hooks' => array("all"),
     'trigger' => 'true',
     'triggerFields' => array('quest_one_of_neshap_rule_c'),
     'actions' => array(
