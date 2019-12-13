@@ -104,3 +104,5 @@ $mod_strings['LBL_SHIPMENT_QUANTITY_BULKLIQUID'] = 'QUANTITY (GALLONS/SHIPMENT)'
 $mod_strings['LBL_SHIPMENT_QUANTITY_BULKSOLID'] = 'QUANTITY (TONS/YARDS/SHIPMENT)';
 $mod_strings['LBL_WASTE_PROFILE_TEMPLATE_WPM_WASTE_PROFILE_TEMPLATE_ID'] = 'Waste Profile Template (related Waste Profile Template ID)';
 $mod_strings['LBL_WASTE_PROFILE_TEMPLATE'] = 'Waste Profile Template';
+$mod_strings['LNK_NEW_RECORD_WPM_WASTE_PROFILE_TEMPLATE'] = 'Create Waste Profile Template';
+$mod_strings['LNK_LIST_WPM_WASTE_PROFILE_TEMPLATE'] = 'View Waste Profile Template';
