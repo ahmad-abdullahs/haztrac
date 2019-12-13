@@ -15,6 +15,7 @@
         app.error.errorName2Keys['composition_max_total_should_not_more_than_100_message'] = 'ERROR_MAX_TOTAL_VALIDATION_MESSAGE';
         //add validation tasks
         this.model.addValidationTask('composition_max_total_should_not_more_than_100_message', _.bind(this._doValidateCompositionMaxTotal, this));
+        this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
     },
 
     _doValidateCompositionMaxTotal: function (fields, errors, callback) {

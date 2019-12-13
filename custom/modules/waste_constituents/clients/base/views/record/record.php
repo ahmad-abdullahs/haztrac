@@ -178,6 +178,10 @@ array (
               array (
                 'name' => 'waste_constituents_wpm_waste_profile_module_name',
               ),
+              4 => 
+              array (
+                'name' => 'wpm_waste_profile_template_waste_constituents_name',
+              ),
             ),
           ),
           2 => 

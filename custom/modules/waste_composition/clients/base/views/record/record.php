@@ -214,6 +214,10 @@ array (
                 ),
                 'label' => 'LBL_COMMENTLOG',
               ),
+              8 => 
+              array (
+                'name' => 'wpm_waste_profile_template_waste_composition_name',
+              ),
             ),
           ),
           2 => 

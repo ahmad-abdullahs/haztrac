@@ -11,6 +11,7 @@
     addClass: 'addRecord',
     initialize: function (options) {
         this._super('initialize', [options]);
+        this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
     },
 
     bindDataChange: function () {

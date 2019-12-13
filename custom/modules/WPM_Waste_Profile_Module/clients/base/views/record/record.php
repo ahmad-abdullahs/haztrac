@@ -170,27 +170,37 @@ $viewdefs[$module_name] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'waste_profile_template_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_WASTE_PROFILE_TEMPLATE',
+                                'type' => 'waste-profile-template-relate',
+                            ),
+                            1 =>
+                            array(
+                            ),
+                            2 =>
+                            array(
                                 'name' => 'submission_type_c',
                                 'label' => 'LBL_SUBMISSION_TYPE',
                             ),
-                            1 =>
+                            3 =>
                             array(
                                 'name' => 'generator_type_c',
                                 'label' => 'LBL_GENERATOR_TYPE',
                             ),
-                            2 =>
+                            4 =>
                             array(
                                 'name' => 'wp_billing_account_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_WP_BILLING_ACCOUNT',
                             ),
-                            3 =>
+                            5 =>
                             array(
                                 'name' => 'waste_profile_num_c',
                                 'label' => 'LBL_WASTE_PROFILE_NUM',
                                 'readonly' => true,
                             ),
-                            4 =>
+                            6 =>
                             array(
                                 'name' => 'generator_c',
                                 'label' => 'LBL_GENERATOR',
@@ -199,18 +209,18 @@ $viewdefs[$module_name] = array(
                                     0 => 'account_id_c',
                                 ),
                             ),
-                            5 =>
+                            7 =>
                             array(
                                 'name' => 'wp_usepa_id_c',
                                 'label' => 'LBL_WP_USEPA_ID',
                             ),
-                            6 =>
+                            8 =>
                             array(
                                 'name' => 'destination_ship_to_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_DESTINATION_SHIP_TO',
                             ),
-                            7 =>
+                            9 =>
                             array(
                             ),
                         ),
