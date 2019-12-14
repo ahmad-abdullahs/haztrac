@@ -4,5 +4,5 @@
 $app_list_strings['three_options_list']=array (
   'Yes' => 'Yes',
   'No' => 'No',
-  'NA' => 'NA',
+//  'NA' => 'NA',
 );

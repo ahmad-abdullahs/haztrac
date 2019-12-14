@@ -340,6 +340,7 @@ $viewdefs[$module_name] = array(
                                 'name' => 'composition',
                                 'type' => 'composition',
                                 'dismiss_label' => true,
+                                'span' => 12,
                                 'related_fields' =>
                                 array(
                                     0 => 'composition',
@@ -425,6 +426,175 @@ $viewdefs[$module_name] = array(
                             ),
                             1 =>
                             array(
+                                'name' => 'quest_contain_heavy_metals_c',
+                                'label' => 'LBL_QUEST_CONTAIN_HEAVY_METALS',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'quest_contain_heavy_metals_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_CONTAIN_HEAVY_METALS',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'describe_with_dimensions_c',
+                                'label' => 'LBL_DESCRIBE_WITH_DIMENSIONS',
+                            ),
+                            4 =>
+                            array(
+                            ),
+                            5 =>
+                            array(
+                                'name' => 'quest_metal_in_powdered_form_c',
+                                'label' => 'LBL_QUEST_METAL_IN_POWDERED_FORM',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            6 =>
+                            array(
+                                'name' => 'quest_metal_in_powdered_form_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_METAL_IN_POWDERED_FORM',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'quest_animal_waste_c',
+                                'label' => 'LBL_QUEST_ANIMAL_WASTE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            8 =>
+                            array(
+                                'name' => 'quest_animal_waste_c_1',
+                                'default_value' => 'LBL_QUEST_ANIMAL_WASTE',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            9 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            10 =>
+                            array(
+                                'name' => 'acknowledge_0',
+                                'default_value' => 'LBL_ACKNOWLEDGE_0',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            11 =>
+                            array(
+                                'name' => 'acknowledge_1_c',
+                                'label' => 'LBL_ACKNOWLEDGE_1',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            12 =>
+                            array(
+                                'name' => 'acknowledge_1_c_1',
+                                'default_value' => 'LBL_ACKNOWLEDGE_1',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            13 =>
+                            array(
+                                'name' => 'acknowledge_2_c',
+                                'label' => 'LBL_ACKNOWLEDGE_2',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'acknowledge_2_c_1',
+                                'default_value' => 'LBL_ACKNOWLEDGE_2',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            15 =>
+                            array(
+                                'name' => 'quest_packaging_requirements_c',
+                                'label' => 'LBL_QUEST_PACKAGING_REQUIREMENTS',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            16 =>
+                            array(
+                                'name' => 'quest_packaging_requirements_c_1',
+                                'default_value' => 'LBL_QUEST_PACKAGING_REQUIREMENTS',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            17 =>
+                            array(
+                                'name' => 'quest_double_bagged_c',
+                                'label' => 'LBL_QUEST_DOUBLE_BAGGED',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            18 =>
+                            array(
+                                'name' => 'quest_double_bagged_c_1',
+                                'default_value' => 'LBL_QUEST_DOUBLE_BAGGED',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            19 =>
+                            array(
+                                'name' => 'associated_source_code_c',
+                                'label' => 'LBL_ASSOCIATED_SOURCE_CODE',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            20 =>
+                            array(
+                                'name' => 'associated_source_code_c_1',
+                                'default_value' => 'LBL_ASSOCIATED_SOURCE_CODE',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            21 =>
+                            array(
+                                'name' => 'associated_form_code_c',
+                                'label' => 'LBL_ASSOCIATED_FORM_CODE',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            22 =>
+                            array(
+                                'name' => 'associated_form_code_c_1',
+                                'default_value' => 'LBL_ASSOCIATED_FORM_CODE',
+                                'type' => 'label',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
                             ),
                         ),
                     ),
@@ -1185,9 +1355,20 @@ $viewdefs[$module_name] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'arizona_special_waste_c',
+                                'label' => 'LBL_ARIZONA_SPECIAL_WASTE',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
                             ),
                             1 =>
                             array(
+                                'name' => 'arizona_special_waste_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_ARIZONA_SPECIAL_WASTE',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
                             ),
                         ),
                     ),
