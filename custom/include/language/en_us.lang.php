@@ -138,3 +138,6 @@ $app_list_strings['waste_form_code_list'] = array(
     'W609' => 'W609 - ORGANIC SLUDGES - OTHER ORGANIC SLUDGE (SPECIFY IN COMMENTS)',
     'W801' => 'W801 - MIXED MEDIA/DEBRIS/DEVICES - COMPRESSED GASES',
 );
+
+$app_strings['LBL_SCROLL_TOP'] = 'Scroll to Top';
+$app_strings['LBL_SCROLL_BOTTOM'] = 'Scroll to Bottom';

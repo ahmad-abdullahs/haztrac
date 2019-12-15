@@ -22,5 +22,21 @@
      */
     getActiveTab: function (options) {
         return false;
-    }
+    },
+
+    _buildGridsFromPanelsMetadata: function (panels) {
+        this._super('_buildGridsFromPanelsMetadata', [panels]);
+        _.each(this.options.meta.buttons, function (_buttons, index) {
+            if (_buttons.name == 'sidebar_toggle') {
+                this.options.meta.buttons.splice(index, 0, {
+                    'name': 'scroll_top',
+                    'type': 'scrolltop'
+                });
+                this.options.meta.buttons.splice(index + 1, 0, {
+                    'name': 'scroll_bottom',
+                    'type': 'scrollbottom'
+                });
+            }
+        }, this);
+    },
 })
