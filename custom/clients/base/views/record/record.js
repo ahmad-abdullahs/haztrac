@@ -25,9 +25,14 @@
     },
 
     _buildGridsFromPanelsMetadata: function (panels) {
+        var alreadyExist = false;
         this._super('_buildGridsFromPanelsMetadata', [panels]);
         _.each(this.options.meta.buttons, function (_buttons, index) {
-            if (_buttons.name == 'sidebar_toggle') {
+            if (_.contains(['scroll_top', 'scroll_bottom'], _buttons.name)) {
+                alreadyExist = true;
+            }
+
+            if (_buttons.name == 'sidebar_toggle' && !alreadyExist) {
                 this.options.meta.buttons.splice(index, 0, {
                     'name': 'scroll_top',
                     'type': 'scrolltop'

@@ -15,7 +15,7 @@
     scrollToBottom: function (event) {
         if ($('.search-filter').length) {
             this.view.$el.parent().stop().animate({
-                scrollTop: ($('.record.tab-layout').height() + 25)
+                scrollTop: ($('div.record').height() + 250)
             }, 500);
         }
     }
