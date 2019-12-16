@@ -8,4 +8,5 @@ $app_list_strings['WP_Flashpoint'] = array(
     '101 to 140' => '101F - 140F (38 - 60C)',
     '141 to 200' => '141F - 200F (60 - 93C)',
     'greater 200' => '> 200F (> 93C)',
+    'Unknown' => 'Unknown',
 );

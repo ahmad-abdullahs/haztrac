@@ -141,3 +141,25 @@ $app_list_strings['waste_form_code_list'] = array(
 
 $app_strings['LBL_SCROLL_TOP'] = 'Scroll to Top';
 $app_strings['LBL_SCROLL_BOTTOM'] = 'Scroll to Bottom';
+
+$app_list_strings['wp_melting_point_list'] = array(
+    '< 140 (< 60)' => '< 140 (< 60)',
+    '140 - 200 (60 - 93)' => '140 - 200 (60 - 93)',
+    '> 200 (> 93)' => '> 200 (> 93)',
+    'Unknown' => 'Unknown',
+);
+
+$app_list_strings['wp_boiling_point_list'] = array(
+    '<= 95 (<= 35)' => '<= 95 (<= 35)',
+    '95 - 100 (35 - 38)' => '95 - 100 (35 - 38)',
+    '101 - 129 (38 - 54)' => '101 - 129 (38 - 54)',
+    '>= 130 (> 54)' => '>= 130 (> 54)',
+    'Unknown' => 'Unknown',
+);
+
+$app_list_strings['wp_total_organic_carbon_list'] = array(
+    '<= 1%' => '<= 1%',
+    '1 - 9%' => '1 - 9%',
+    '>= 10%' => '>= 10%',
+    'Unknown' => 'Unknown',
+);
