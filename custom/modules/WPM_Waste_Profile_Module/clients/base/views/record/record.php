@@ -190,9 +190,7 @@ $viewdefs[$module_name] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'wp_billing_account_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_WP_BILLING_ACCOUNT',
+                                'name' => 'accounts_wpm_waste_profile_module_1_name',
                             ),
                             5 =>
                             array(
@@ -202,12 +200,7 @@ $viewdefs[$module_name] = array(
                             ),
                             6 =>
                             array(
-                                'name' => 'generator_c',
-                                'label' => 'LBL_GENERATOR',
-                                'related_fields' =>
-                                array(
-                                    0 => 'account_id_c',
-                                ),
+                                'name' => 'accounts_wpm_waste_profile_module_2_name',
                             ),
                             7 =>
                             array(
@@ -216,9 +209,7 @@ $viewdefs[$module_name] = array(
                             ),
                             8 =>
                             array(
-                                'name' => 'destination_ship_to_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_DESTINATION_SHIP_TO',
+                                'name' => 'accounts_wpm_waste_profile_module_3_name',
                             ),
                             9 =>
                             array(

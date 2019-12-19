@@ -6,7 +6,7 @@ $dictionary['WPM_Waste_Profile_Module']['fields']['wp_usepa_id_c']['full_text_se
   'boost' => '1',
   'searchable' => false,
 );
-$dictionary['WPM_Waste_Profile_Module']['fields']['wp_usepa_id_c']['formula']='related($wpm_waste_profile_module_accounts,"ac_usepa_id_c")';
+//$dictionary['WPM_Waste_Profile_Module']['fields']['wp_usepa_id_c']['formula']='related($wpm_waste_profile_module_accounts,"ac_usepa_id_c")';
 $dictionary['WPM_Waste_Profile_Module']['fields']['wp_usepa_id_c']['enforced']='false';
 $dictionary['WPM_Waste_Profile_Module']['fields']['wp_usepa_id_c']['dependency']='';
 

@@ -1,6 +1,5 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
-$mod_strings['LBL_GENERATOR_ACCOUNT_ID'] = 'Generator (related Account ID)';
 $mod_strings['LBL_FLEX_TEST'] = 'Flex Relate';
 $mod_strings['LBL_WP_USEPA_ID'] = 'USEPA ID No.';
 $mod_strings['LBL_WP_BILLING_ACCOUNT'] = 'WP Billing Account';
@@ -35,7 +34,6 @@ $mod_strings['LBL_COMPOSITION_MAX'] = 'Max';
 $mod_strings['LBL_COMPOSITION_UOM'] = 'UOM';
 $mod_strings['LBL_COMPOSITION_MAX_TOTAL'] = 'Max Total';
 $mod_strings['ERROR_MAX_TOTAL_VALIDATION_MESSAGE'] = 'Composition Max Total should not be more than 100.';
-$mod_strings['LBL_DESTINATION_SHIP_TO_ACCOUNT_ID'] = 'Ship To / TSDF (related Account ID)';
 $mod_strings['LBL_DESTINATION_SHIP_TO'] = 'Ship To / TSDF';
 $mod_strings['LBL_RECORDVIEW_PANEL8'] = 'VI. Constituents';
 $mod_strings['LBL_CONSTITUENT_REGULATED'] = 'Regulated Metals';
@@ -129,3 +127,9 @@ $mod_strings['LBL_QUEST_ON_TEST_OR_KNOWLEDGE'] = 'Are these values based on test
 $mod_strings['LBL_NOTES_ON_TEST_OR_KNOWLEDGE'] = 'If based on knowledge, please describe in detail, the rationale applied to identify and characterize the waste material. Please include reference to MAterial Safety Data Sheets (MSDS) when applicable. Include the chemical or trade-name represented by the MSDS, and or detailed process or operating procedures which generate the waste.';
 $mod_strings['LBL_CONSTITUENT_HEADER'] = 'Please indicate which constituents below apply. Concentrations must be entered when applicable to assist in accurate review and expedited approval of your waste profile. Please note that the total regulated metals and other constituents sections require answers.';
 $mod_strings['LBL_COMMENTS_OR_REQUESTS'] = 'Comments Or Requests';
+$mod_strings['LBL_COMPOSITION_HEADER'] = '(List the complete composition of the waste, include any inert components and/or debris. Ranges for individual components are acceptable. If a trade name is used, please supply an MSDS. Please do not use abbreviations.)';
+$mod_strings['LBL_CERTIFICATION_STATEMENT'] = 'I certify that I am authorized to execute this document as an authorized agent. I hereby certify that all information submitted in this and attached documents is correct to the best of my knowledge. I also certify that any samples submitted are representative of the actual waste. If HAZTRAC discovers a discrepancy during tha approval process, Generator grants HAZTRAC the authority to amend the profile, as HAZTRAC deems necessary, to reflect the discrepancy.';
+$mod_strings['LBL_AUTHORIZED_SIGNATURE'] = 'AUTHORIZED SIGNATURE';
+$mod_strings['LBL_AUTHORIZED_SIGNATURER_NAME'] = 'NAME (PRINT)';
+$mod_strings['LBL_AUTHORIZED_SIGNATURER_TITLE'] = 'TITLE';
+$mod_strings['LBL_AUTHORIZED_SIGNATURER_DATE'] = 'DATE';

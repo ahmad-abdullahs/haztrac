@@ -178,45 +178,6 @@ $viewdefs[$module_name] = array(
                                 'name' => 'generator_type_c',
                                 'label' => 'LBL_GENERATOR_TYPE',
                             ),
-                            2 =>
-                            array(
-                                'name' => 'wp_billing_account_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_WP_BILLING_ACCOUNT',
-                            ),
-                            3 =>
-                            array(
-                                'name' => 'waste_profile_num_c',
-                                'label' => 'LBL_WASTE_PROFILE_NUM',
-                            ),
-                            4 =>
-                            array(
-                                'name' => 'generator_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_GENERATOR',
-                            ),
-                            5 =>
-                            array(
-                                'name' => 'wp_usepa_id_c',
-                                'label' => 'LBL_WP_USEPA_ID',
-                            ),
-                            6 =>
-                            array(
-                                'name' => 'tag',
-                                'span' => 12,
-                            ),
-                            7 =>
-                            array(
-                            ),
-                            8 =>
-                            array(
-                            ),
-                            9 =>
-                            array(
-                            ),
-                            10 =>
-                            array(
-                            ),
                         ),
                     ),
                     2 =>

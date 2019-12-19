@@ -4,7 +4,7 @@ $dependencies['WPM_Waste_Profile_Module']['auto_fill_name_field'] = array(
     'hooks' => array("edit"),
     'trigger' => 'true',
     'onload' => true,
-    'triggerFields' => array('waste_profile_num_c', 'wp_waste_name_c', 'generator_c'),
+    'triggerFields' => array('waste_profile_num_c', 'wp_waste_name_c', 'accounts_wpm_waste_profile_module_2_name'),
     'actions' => array(
         array(
             'name' => 'SetValue',
@@ -17,10 +17,10 @@ $dependencies['WPM_Waste_Profile_Module']['auto_fill_name_field'] = array(
                                     equal(
                                         ifElse(
                                             and(
-                                                not(equal($wp_waste_name_c,"")), not(equal($generator_c,""))
+                                                not(equal($wp_waste_name_c,"")), not(equal($accounts_wpm_waste_profile_module_2_name,""))
                                             ),
-                                            concat($wp_waste_name_c, " | ", $generator_c), 
-                                            concat($wp_waste_name_c, $generator_c)
+                                            concat($wp_waste_name_c, " | ", $accounts_wpm_waste_profile_module_2_name), 
+                                            concat($wp_waste_name_c, $accounts_wpm_waste_profile_module_2_name)
                                         ),""
                                     )
                                 )
@@ -30,20 +30,20 @@ $dependencies['WPM_Waste_Profile_Module']['auto_fill_name_field'] = array(
                                 " | ", 
                                 ifElse(
                                     and(
-                                        not(equal($wp_waste_name_c,"")), not(equal($generator_c,""))
+                                        not(equal($wp_waste_name_c,"")), not(equal($accounts_wpm_waste_profile_module_2_name,""))
                                     ),
-                                    concat($wp_waste_name_c, " | ", $generator_c), 
-                                    concat($wp_waste_name_c, $generator_c)
+                                    concat($wp_waste_name_c, " | ", $accounts_wpm_waste_profile_module_2_name), 
+                                    concat($wp_waste_name_c, $accounts_wpm_waste_profile_module_2_name)
                                 )
                             ), 
                             concat(
                                 $waste_profile_num_c, 
                                 ifElse(
                                     and(
-                                        not(equal($wp_waste_name_c,"")),not(equal($generator_c,""))
+                                        not(equal($wp_waste_name_c,"")),not(equal($accounts_wpm_waste_profile_module_2_name,""))
                                     ),
-                                    concat($wp_waste_name_c, " | ", $generator_c), 
-                                    concat($wp_waste_name_c, $generator_c)
+                                    concat($wp_waste_name_c, " | ", $accounts_wpm_waste_profile_module_2_name), 
+                                    concat($wp_waste_name_c, $accounts_wpm_waste_profile_module_2_name)
                                 )
                             ) 
                         )',
