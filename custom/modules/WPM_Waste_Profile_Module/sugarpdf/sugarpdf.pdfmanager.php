@@ -116,6 +116,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                     $bundleFields['constituent_regulateds'][$count1] = $tempBean;
                     $bundleFields['constituent_regulateds'][$count1]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
                     $bundleFields['constituent_regulateds'][$count1]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
+                    $bundleFields['constituent_regulateds'][$count1]['not_applicable'] = $constituentBean->not_applicable ? 'Yes' : '';
                     $count1++;
                 } else if ($constituentBean->type == 'Volatile') {
                     $bundleFields['constituent_volatiles'][$count2] = $tempBean;

@@ -696,33 +696,15 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'associated_source_code_c',
                                 'label' => 'LBL_ASSOCIATED_SOURCE_CODE',
-                                'dismiss_label' => true,
-                                'span' => 2,
+                                'type' => 'enum-same-key-and-value',
+                                'span' => 6,
                             ),
                             20 =>
                             array(
-                                'name' => 'associated_source_code_c_1',
-                                'default_value' => 'LBL_ASSOCIATED_SOURCE_CODE',
-                                'type' => 'label',
-                                'dismiss_label' => true,
-                                'noInline' => true,
-                                'span' => 10,
-                            ),
-                            21 =>
-                            array(
                                 'name' => 'associated_form_code_c',
                                 'label' => 'LBL_ASSOCIATED_FORM_CODE',
-                                'dismiss_label' => true,
-                                'span' => 2,
-                            ),
-                            22 =>
-                            array(
-                                'name' => 'associated_form_code_c_1',
-                                'default_value' => 'LBL_ASSOCIATED_FORM_CODE',
-                                'type' => 'label',
-                                'dismiss_label' => true,
-                                'noInline' => true,
-                                'span' => 10,
+                                'type' => 'enum-same-key-and-value',
+                                'span' => 6,
                             ),
                         ),
                     ),
@@ -1103,10 +1085,8 @@ $viewdefs[$module_name] = array(
                                 'name' => 'choose_hazards_that_apply_c',
                                 'label' => 'LBL_CHOOSE_HAZARDS_THAT_APPLY',
                                 'type' => 'multienum-checkbox',
-                                'perline' => 2,
-                            ),
-                            23 =>
-                            array(
+//                                'perline' => 2,
+                                'span' => 12,
                             ),
                             24 =>
                             array(
@@ -1166,17 +1146,6 @@ $viewdefs[$module_name] = array(
                                 'studio' => 'visible',
                                 'label' => 'LBL_NOTES_ANY_STATE_CODE_APPLY',
                                 'dismiss_label' => true,
-                                'span' => 10,
-                            ),
-                            32 =>
-                            array(
-                                'span' => 2,
-                            ),
-                            33 =>
-                            array(
-                                'name' => 'notes_texas_waste_code_c',
-                                'type' => 'enum-same-key-and-value',
-                                'label' => 'LBL_NOTES_TEXAS_WASTE_CODE',
                                 'span' => 10,
                             ),
                             34 =>
