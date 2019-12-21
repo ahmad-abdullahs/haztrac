@@ -7,8 +7,8 @@ require_once('include/MVC/View/views/view.list.php');
 
 class sales_and_servicesViewmanifest extends ViewList {
 
-    var $fontSize = 9.5;
-    var $smallfontSize = 8.5;
+    var $fontSize = 10.5;
+    var $smallfontSize = 9.5;
     var $verysmallfontSize = 7;
 
     function display() {

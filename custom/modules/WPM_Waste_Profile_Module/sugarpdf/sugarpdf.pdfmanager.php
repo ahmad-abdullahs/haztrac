@@ -386,6 +386,29 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 $fields_module[$name] = implode(', ', $multienums_value);
                 $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
             }
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value]) &&
+                    ($name == 'associated_source_code_c' || $name == 'associated_form_code_c')
+            ) {
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $value);
+            }
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'multienum' &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
+                    ($name == 'notes_usepa_hazardous_waste_c' || $name == 'notes_any_state_code_apply_c')
+            ) {
+                $multienums = unencodeMultienum($value);
+                $multienums_value = array();
+                foreach ($multienums as $multienum) {
+                    $multienums_value[] = $multienum;
+                }
+                $fields_module[$name] = implode(', ', $multienums_value);
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            }
         }
 
         return $fields_module;
