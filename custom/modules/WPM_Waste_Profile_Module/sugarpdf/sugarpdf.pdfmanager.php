@@ -399,7 +399,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                     $module_instance->field_defs[$name]['type'] == 'multienum' &&
                     isset($module_instance->field_defs[$name]['options']) &&
                     isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
-                    ($name == 'notes_usepa_hazardous_waste_c' || $name == 'notes_any_state_code_apply_c')
+                    ($name == 'notes_any_state_code_apply_c')
             ) {
                 $multienums = unencodeMultienum($value);
                 $multienums_value = array();
