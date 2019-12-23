@@ -17,7 +17,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                     'enabled' => true,
                     'name' => 'name',
                     'link' => true,
-                    'type' => 'name',
+                    'type' => 'open-in-drawer',
                     'related_fields' =>
                     array_merge(
                             array(

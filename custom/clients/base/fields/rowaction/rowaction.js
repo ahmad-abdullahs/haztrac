@@ -43,11 +43,19 @@
      */
     _render: function () {
         this._super('_render');
-
+        // ++ This code is added to prevent the edit button from getting disabled 
+        // when Revenue Line item is opened in the drawer...
         if (this.model.get('is_bundle_product_c') == 'parent') {
-            this.disableListControl(this, {
-                'name': 'edit_button',
-            }, this.model);
+            if (!_.isUndefined(this.context.get('openInDrawer')) && !_.isNull(this.context.get('openInDrawer'))) {
+                var openInDrawer = this.context.get('openInDrawer') || false;
+                if (openInDrawer) {
+                    return;
+                }
+            } else {
+                this.disableListControl(this, {
+                    'name': 'edit_button',
+                }, this.model);
+            }
         }
     },
 })

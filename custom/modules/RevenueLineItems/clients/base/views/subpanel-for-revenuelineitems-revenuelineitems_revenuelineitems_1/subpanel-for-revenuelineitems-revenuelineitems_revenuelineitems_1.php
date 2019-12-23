@@ -18,6 +18,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-revenuelineitems-rev
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
+                    'type' => 'open-in-drawer',
                 ),
                 array(
                     'name' => 'account_name',
