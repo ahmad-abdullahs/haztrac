@@ -90,3 +90,33 @@ i.fa.fa-briefcase {
 .ellipsis_inline.long-sentense {
     white-space: unset;
 }
+
+html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_city_c"] .detail div,html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_state_c"] .detail div,html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_postalcode_c"] .detail div {
+    padding-right: 0;
+    padding-left: 4px
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_city_c"],.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_state_c"],.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_postalcode_c"] {
+    flex: 0 0 auto
+}
+
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_city_c"] .detail,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_state_c"] .detail,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_postalcode_c"] .detail {
+    max-width: inherit;
+    overflow: hidden
+}
+
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_city_c"] .detail div,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_state_c"] .detail div,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_postalcode_c"] .detail div {
+    padding-right: 4px
+}
+
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_city_c"] .address_city .ellipsis_inline {
+    width: calc(100% + 1px)
+}
+
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_street_c"] {
+    word-break: break-all;
+    word-break: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -ms-word-break: normal
+}

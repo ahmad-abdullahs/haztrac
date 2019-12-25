@@ -415,17 +415,70 @@ $viewdefs['Accounts'] = array(
                             ),
                             8 =>
                             array(
+                            ),
+                            9 =>
+                            array(
+                                'name' => 'different_service_site_c',
+                                'label' => 'LBL_DIFFERENT_SERVICE_SITE',
+                            ),
+                            10 =>
+                            array(
                                 'name' => 'service_instruction_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_SERVICE_INSTRUCTION',
-                                'span' => 12,
                             ),
-                            9 =>
+                            11 =>
+                            array(
+                                'name' => 'service_site_address_c',
+                                'type' => 'fieldset',
+                                'css_class' => 'address',
+                                'label' => 'LBL_SERVICE_SITE_ADDRESS',
+                                'fields' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'service_site_address_name',
+                                        'css_class' => 'address_state',
+                                        'placeholder' => 'LBL_SERVICE_SITE_NAME',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'service_site_address_street_c',
+                                        'css_class' => 'address_street',
+                                        'placeholder' => 'LBL_SERVICE_SITE_ADDRESS_STREET',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'service_site_address_city_c',
+                                        'css_class' => 'address_city',
+                                        'placeholder' => 'LBL_SERVICE_SITE_ADDRESS_CITY',
+                                    ),
+                                    3 =>
+                                    array(
+                                        'name' => 'service_site_address_state_c',
+                                        'css_class' => 'address_state',
+                                        'placeholder' => 'LBL_SERVICE_SITE_ADDRESS_STATE',
+                                    ),
+                                    4 =>
+                                    array(
+                                        'name' => 'service_site_address_postalcode_c',
+                                        'css_class' => 'address_zip',
+                                        'placeholder' => 'LBL_SERVICE_SITE_ADDRESS_POSTALCODE',
+                                    ),
+                                    5 =>
+                                    array(
+                                        'name' => 'service_site_address_country_c',
+                                        'css_class' => 'address_country',
+                                        'placeholder' => 'LBL_SERVICE_SITE_ADDRESS_COUNTRY',
+                                    ),
+                                ),
+                            ),
+                            12 =>
                             array(
                                 'name' => 'hint_account_industry_c',
                                 'label' => 'LBL_HINT_COMPANY_INDUSTRY',
                             ),
-                            10 =>
+                            13 =>
                             array(
                                 'name' => 'hint_account_industry_tags_c',
                                 'label' => 'LBL_HINT_COMPANY_INDUSTRY_TAGS',

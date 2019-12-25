@@ -27,3 +27,14 @@ $dictionary['Account']['fields']['shipping_address_third_party_name'] = array(
     'merge_filter' => 'enabled',
     'duplicate_on_record_copy' => 'always',
 );
+
+$dictionary['Account']['fields']['service_site_address_name'] = array(
+    'name' => 'service_site_address_name',
+    'vname' => 'LBL_SERVICE_SITE_NAME',
+    'type' => 'varchar',
+    'len' => '100',
+    'group' => 'service_site_address_c',
+    'comment' => 'The name used for service site address',
+    'merge_filter' => 'enabled',
+    'duplicate_on_record_copy' => 'always',
+);

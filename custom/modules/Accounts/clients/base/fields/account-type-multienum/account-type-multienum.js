@@ -20,18 +20,36 @@
         this._super('bindDataChange');
         if (this.model) {
             this.model.on('change:' + this.name, function (model, value) {
-                var fieldName = 'physical_address_account_name',
-                        physical_address_account_name = this.view.getField(fieldName);
+                var fieldName1 = 'physical_address_account_name',
+                        physical_address_account_name = this.view.getField(fieldName1),
+                        fieldName2 = 'service_site_address_c',
+                        service_site_address_c = this.view.getField(fieldName2);
 
                 if (physical_address_account_name) {
                     if (_.contains(value, "3rd Party")) {
                         physical_address_account_name.show();
-                        $('div.record-cell[data-name=' + fieldName + ']').show();
+                        $('div.record-cell[data-name=' + fieldName1 + ']').show();
                     } else {
                         physical_address_account_name.hide();
-                        $('div.record-cell[data-name=' + fieldName + ']').hide();
+                        $('div.record-cell[data-name=' + fieldName1 + ']').hide();
                         this.model.set('physical_address_account_id', '');
                         this.model.set('physical_address_account_name', '');
+                    }
+                }
+
+                if (service_site_address_c) {
+                    if (_.contains(value, "Separate Svc Site")) {
+                        service_site_address_c.show();
+                        $('div.record-cell[data-name=' + fieldName2 + ']').show();
+                    } else {
+                        service_site_address_c.hide();
+                        $('div.record-cell[data-name=' + fieldName2 + ']').hide();
+                        this.model.set('service_site_address_name', '');
+                        this.model.set('service_site_address_street_c', '');
+                        this.model.set('service_site_address_city_c', '');
+                        this.model.set('service_site_address_state_c', '');
+                        this.model.set('service_site_address_postalcode_c', '');
+                        this.model.set('service_site_address_country_c', '');
                     }
                 }
             }, this);

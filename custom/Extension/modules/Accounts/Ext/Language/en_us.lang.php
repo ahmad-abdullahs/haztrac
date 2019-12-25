@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_PHYSICAL_ADDRESS'] = '3rd Party/Broker';
 $mod_strings['LBL_PHYSICAL_ADDRESS_ACCOUNT_ID'] = '3rd Party/Broker ID';
@@ -56,3 +55,11 @@ $mod_strings['LBL_BILLING_ADDRESS_THIRD_PARTY_NAME'] = 'Billing Name';
 $mod_strings['LBL_SHIPPING_ADDRESS_THIRD_PARTY_NAME'] = 'Shipping Name';
 $mod_strings['LBL_THIRD_PARTY'] = '3rd Party / Broker';
 $mod_strings['LBL_ACCOUNT_BADGE_STATUS'] = 'Account On Hold';
+$mod_strings['LBL_SERVICE_SITE_ADDRESS'] = 'Service Site';
+$mod_strings['LBL_SERVICE_SITE_ADDRESS_STREET'] = 'Service Site Street';
+$mod_strings['LBL_SERVICE_SITE_ADDRESS_CITY'] = 'Service Site City';
+$mod_strings['LBL_SERVICE_SITE_ADDRESS_STATE'] = 'Service Site State';
+$mod_strings['LBL_SERVICE_SITE_ADDRESS_POSTALCODE'] = 'Service Site PostalCode';
+$mod_strings['LBL_SERVICE_SITE_ADDRESS_COUNTRY'] = 'Service Site Country';
+$mod_strings['LBL_SERVICE_SITE_NAME'] = 'Service Site Name';
+$mod_strings['LBL_DIFFERENT_SERVICE_SITE'] = 'Different Service Site';
