@@ -9,7 +9,8 @@ class sales_and_servicesViewmanifest extends ViewList {
 
     var $fontSize = 10.5;
     var $smallfontSize = 9.5;
-    var $verysmallfontSize = 7;
+    var $verysmallfontSize = 9;
+    var $veryVerysmallfontSize = 7;
 
     function display() {
         $this->ProcessPDF();
@@ -94,7 +95,14 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Generator Name + Generator Mailing Address + Generator Phone
             $pdf->SetXY(0, 0);
-            $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean);
+            $accountTypesList = unencodeMultienum($salesAndServiceAccountBean->account_type_cst_c);
+            
+            if (in_array('Separate Svc Site', $accountTypesList) && $salesAndServiceAccountBean->different_service_site_c == 1) {
+                $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean, 'service_site', true, '_address_name', '_c');
+            } else {
+                $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean);
+            }
+            
             $generatorMailingAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 7
                 , 'text' => $mailingAddress); // 22, 26
             $pdf->MultiCell(88, 5, $generatorMailingAddress['text'], 0, '', 0, 1, $generatorMailingAddress['x'], $generatorMailingAddress['y'], true);
@@ -212,7 +220,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $wasteStateCodeXScailing = 0;
 
             // set font
-            $pdf->SetFont('courier', 'B', $this->smallfontSize);
+            $pdf->SetFont('courier', 'B', $this->verysmallfontSize);
             foreach ($waste_state_codes_c as $key => $value) {
                 if ($key > 2)
                     continue;
@@ -253,7 +261,7 @@ class sales_and_servicesViewmanifest extends ViewList {
                 $additionaInformation .= $index . $value['text'] . utf8_decode(chr(10));
             }
         }
-        $pdf->SetFont('courier', 'B', $this->verysmallfontSize);
+        $pdf->SetFont('courier', 'B', $this->veryVerysmallfontSize);
         $pdf->SetXY(0, 0);
         $additional_info_ack = array('x' => $startXIndex - 37, 'y' => $startYIndex + 118
             , 'text' => $additionaInformation); // 13, 142
@@ -311,13 +319,13 @@ ORDER BY revenue_line_items.line_number ASC , revenue_line_items.id ASC";
         return $result;
     }
 
-    function getFormatedAddress($bean, $type = 'billing', $isPhone = true) {
+    function getFormatedAddress($bean, $type = 'billing', $isPhone = true, $addressNameField = '_address_third_party_name', $suffix = '') {
         $addressFieldsList = array(
-            $type . '_address_third_party_name' => 'EOL',
-            $type . '_address_street' => 'EOL',
-            $type . '_address_city' => 'commaCheck',
-            $type . '_address_state' => '',
-            $type . '_address_postalcode' => '',
+            $type . $addressNameField => 'EOL',
+            $type . '_address_street' . $suffix => 'EOL',
+            $type . '_address_city' . $suffix => 'commaCheck',
+            $type . '_address_state' . $suffix => '',
+            $type . '_address_postalcode' . $suffix => '',
         );
         $address = array();
 
