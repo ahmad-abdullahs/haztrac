@@ -26,8 +26,8 @@ function getViewFields($view, $module) {
     $relatedFieldsList = array();
     $bannedFieldsList = array(
         'picture', 'favorite', 'follow', 'team_name', 'campaign_name',
-        'date_entered_by', 'date_modified_by', 'date_entered', 'date_modified', 'created_by_name',
-        'modified_by_name'
+//        'date_entered_by', 'date_modified_by', 'date_entered', 'date_modified', 'created_by_name',
+//        'modified_by_name'
     );
 
     try {
