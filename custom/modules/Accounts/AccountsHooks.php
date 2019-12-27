@@ -7,23 +7,57 @@ class AccountsHooks {
 
         // if lat long are not calculated or address changed
         if ((empty($bean->lat_c) ||
+                $bean->fetched_row['service_site_address_name'] != $bean->service_site_address_name ||
                 $bean->fetched_row['service_site_address_street_c'] != $bean->service_site_address_street_c ||
                 $bean->fetched_row['service_site_address_city_c'] != $bean->service_site_address_city_c ||
                 $bean->fetched_row['service_site_address_state_c'] != $bean->service_site_address_state_c ||
                 $bean->fetched_row['service_site_address_postalcode_c'] != $bean->service_site_address_postalcode_c ||
                 $bean->fetched_row['service_site_address_country_c'] != $bean->service_site_address_country_c) &&
                 (in_array('Separate Svc Site', $accountTypesList) && $bean->different_service_site_c == 1)) {
-            $GLOBALS['log']->fatal('I am in 111 ...');
             $this->getLatLon($bean, $this->getAddress($bean, 'service_site', '_c'));
-        } else if (empty($bean->lat_c) ||
+            $this->updateSalesAndServiceAddresses($bean, 'service_site', '_c', '_address_name');
+        }
+        if (empty($bean->lat_c) ||
+                $bean->fetched_row['shipping_address_third_party_name'] != $bean->shipping_address_third_party_name ||
                 $bean->fetched_row['shipping_address_street'] != $bean->shipping_address_street ||
                 $bean->fetched_row['shipping_address_city'] != $bean->shipping_address_city ||
                 $bean->fetched_row['shipping_address_state'] != $bean->shipping_address_state ||
                 $bean->fetched_row['shipping_address_postalcode'] != $bean->shipping_address_postalcode ||
                 $bean->fetched_row['shipping_address_country'] != $bean->shipping_address_country) {
-            $GLOBALS['log']->fatal('I am in 222 ...');
             $this->getLatLon($bean, $this->getAddress($bean));
+            $this->updateSalesAndServiceAddresses($bean);
         }
+    }
+
+    private function updateSalesAndServiceAddresses($bean, $type = 'shipping', $suffix = '', $addressNameField = '_address_third_party_name') {
+        // Load related Sales and services...
+        $bean->load_relationship('accounts_sales_and_services_1');
+        $relatedSAS = $bean->accounts_sales_and_services_1->getBeans();
+        foreach ($relatedSAS as $salesAndService) {
+            $salesAndService = $this->updateSalesAndServiceAddress($bean, $salesAndService, $type, $suffix, $addressNameField);
+            $salesAndService->save();
+        }
+    }
+
+    private function updateSalesAndServiceAddress($bean, $salesAndService, $type, $suffix, $addressNameField) {
+        $addressFieldsList = array(
+            $type . '_address_street' . $suffix,
+            $type . '_address_city' . $suffix,
+            $type . '_address_state' . $suffix,
+            $type . '_address_postalcode' . $suffix,
+            $type . '_address_country' . $suffix,
+        );
+
+        foreach ($addressFieldsList as $key) {
+            $_key = $key;
+            if ($type == 'shipping') {
+                $_key = $key . '_c';
+            }
+            $salesAndService->$_key = $bean->$key;
+        }
+
+        $salesAndService->{$type . $addressNameField} = $bean->{$type . $addressNameField};
+        return $salesAndService;
     }
 
     private function getAddress($bean, $prefix = 'shipping', $suffix = '') {
@@ -36,7 +70,6 @@ class AccountsHooks {
     }
 
     private function getLatLon($bean, $address) {
-        $GLOBALS['log']->fatal('$address : ' . print_r($address, 1));
         if (!empty($address)) {
             $url = "https://api.opencagedata.com/geocode/v1/json?q={$address}&key=bb98ad0c915e4f479e3b11678e355461";
             $curl = curl_init($url);
@@ -55,12 +88,8 @@ class AccountsHooks {
             if ($response !== false) {
                 $res = json_decode($response, true);
 
-                $GLOBALS['log']->fatal('$res : ' . print_r($res, 1));
-
                 if (!empty($res['results'][0]['geometry'])) {
                     $latlon = $res['results'][0]['geometry'];
-
-                    $GLOBALS['log']->fatal('$latlon : ' . print_r($latlon, 1));
 
                     if (!empty($latlon['lat']) && !empty($latlon['lng'])) {
                         $bean->lat_c = $latlon['lat'];

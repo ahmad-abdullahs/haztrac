@@ -33,6 +33,18 @@ $viewdefs['Accounts'] = array(
                     ),
                     2 =>
                     array(
+                        'type' => 'button',
+                        'name' => 'close_drawer_button',
+                        'label' => 'LBL_CLOSE_DRAWER_BUTTON_LABEL',
+                        'css_class' => 'btn-invisible btn-link',
+                        'showOn' => 'view',
+                        'events' =>
+                        array(
+                            'click' => 'button:close_drawer_button:click',
+                        ),
+                    ),
+                    3 =>
+                    array(
                         'type' => 'actiondropdown',
                         'name' => 'main_dropdown',
                         'primary' => true,
@@ -121,7 +133,7 @@ $viewdefs['Accounts'] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'name' => 'sidebar_toggle',
                         'type' => 'sidebartoggle',

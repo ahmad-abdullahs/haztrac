@@ -22,7 +22,7 @@ $viewdefs['sales_and_services'] = array(
                                 'enabled' => true,
                                 'link' => true,
                                 'related_fields' =>
-                                array(
+                                array_merge(array(
                                     0 => 'shipping_address_street_c',
                                     1 => 'shipping_address_city_c',
                                     2 => 'shipping_address_state_c',
@@ -30,7 +30,13 @@ $viewdefs['sales_and_services'] = array(
                                     4 => 'shipping_address_country_c',
                                     5 => 'lat_c',
                                     6 => 'lon_c',
-                                ),
+                                    7 => 'service_site_address_name',
+                                    8 => 'service_site_address_street_c',
+                                    9 => 'service_site_address_city_c',
+                                    10 => 'service_site_address_state_c',
+                                    11 => 'service_site_address_postalcode_c',
+                                    12 => 'service_site_address_country_c',
+                                        ), getViewFields('recordview', 'sales_and_services')),
                                 'width' => 'medium',
                             ),
                             1 =>

@@ -139,8 +139,7 @@
                 address = address.toString();
 
                 var name = !_.isEmpty(model.get('name')) ? model.get('name') + "\n" : '';
-                var accountName = !_.isEmpty(model.get('accounts_sales_and_services_1_name')) ? model.get('accounts_sales_and_services_1_name') + "\n" : '';
-                var title = name + accountName + address;
+                var title = name + address;
 
                 var position = new google.maps.LatLng(model.get('lat_c'), model.get('lon_c'));
                 var _marker = new google.maps.Marker({
@@ -164,9 +163,6 @@
                             model: this.recordModel,
                             modelId: this.recordID,
                             initiatedByMapView: true,
-                            loadSpecifiedPanels: [
-                                'sales_and_services_revenuelineitems_1',
-                            ],
                         }
                     });
                 });

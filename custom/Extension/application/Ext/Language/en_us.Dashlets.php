@@ -10,18 +10,21 @@ $app_strings['LBL_ACTIVE_MANIFEST_DASHLET_INACTIVE'] = 'Inactive';
 // sales and service dashlet
 $app_strings['LBL_SALES_SERVICE_DASHLET_VIEW'] = 'Sales and Services';
 $app_strings['LBL_SALES_SERVICE_DASHLET_VIEW_DESCRIPTION'] = 'This dashlet displays the list of Sales and Services records';
-$app_list_strings['sales_service_date_range_dom'] = array (
+$app_list_strings['sales_service_date_range_dom'] = array(
     'today' => 'Today',
     'yesterday' => 'Yesterday',
     'tomorrow' => 'Tomorrow',
     'last_7_days' => 'Last 7 Days',
-    'next_7_days'=> 'Next 7 Days',
+    'next_7_days' => 'Next 7 Days',
 );
 
 // sales and service maps dashlet
-$app_strings['LBL_SALES_SERVICE_MAPS_DASHLET_VIEW'] = 'Sales and Services Maps';
+$app_strings['LBL_ACCOUNTS_MAPS_DASHLET_VIEW'] = 'Accounts Map';
+$app_strings['LBL_ACCOUNTS_MAPS_DASHLET_VIEW_DESCRIPTION'] = 'This dashlet displays the Account records on Map';
+$app_strings['LBL_SALES_SERVICE_MAPS_DASHLET_VIEW'] = 'Sales and Services Map';
 $app_strings['LBL_SALES_SERVICE_MAPS_DASHLET_VIEW_DESCRIPTION'] = 'This dashlet displays the Sales and Services records on Map';
-$app_list_strings['sales_service_map_limit_dom'] = array (
+$app_list_strings['sales_service_map_limit_dom'] = array(
+    20 => 20,
     50 => 50,
     100 => 100,
     250 => 250,

@@ -19,15 +19,21 @@ class sales_and_services extends sales_and_services_sugar {
 
     public function save($check_notify = false) {
         // if lat long are not calculated or address changed
-        if (
-                empty($this->lat_c) ||
+        if (empty($this->lat_c) ||
+                $this->fetched_row['service_site_address_street_c'] != $this->service_site_address_street_c ||
+                $this->fetched_row['service_site_address_city_c'] != $this->service_site_address_city_c ||
+                $this->fetched_row['service_site_address_state_c'] != $this->service_site_address_state_c ||
+                $this->fetched_row['service_site_address_postalcode_c'] != $this->service_site_address_postalcode_c ||
+                $this->fetched_row['service_site_address_country_c'] != $this->service_site_address_country_c) {
+            $this->getLatLon($this->getAddress('service_site'));
+        }
+        if (empty($this->lat_c) ||
                 $this->fetched_row['shipping_address_street_c'] != $this->shipping_address_street_c ||
                 $this->fetched_row['shipping_address_city_c'] != $this->shipping_address_city_c ||
                 $this->fetched_row['shipping_address_state_c'] != $this->shipping_address_state_c ||
                 $this->fetched_row['shipping_address_postalcode_c'] != $this->shipping_address_postalcode_c ||
-                $this->fetched_row['shipping_address_country_c'] != $this->shipping_address_country_c
-        ) {
-            $this->getLatLon();
+                $this->fetched_row['shipping_address_country_c'] != $this->shipping_address_country_c) {
+            $this->getLatLon($this->getAddress());
         }
 
         if (empty($this->ss_number)) {
@@ -59,13 +65,16 @@ class sales_and_services extends sales_and_services_sugar {
         return true;
     }
 
-    private function getLatLon() {
-        $address = urlencode($this->shipping_address_street_c . ', ' .
-                $this->shipping_address_city_c . ', ' .
-                $this->shipping_address_state_c . ', ' .
-                $this->shipping_address_postalcode_c . ', ' .
-                $this->shipping_address_country_c);
+    private function getAddress($prefix = 'shipping', $suffix = '_c') {
+        return urlencode(
+                $this->{$prefix . '_address_street' . $suffix} . ', ' .
+                $this->{$prefix . '_address_city' . $suffix } . ', ' .
+                $this->{$prefix . '_address_state' . $suffix } . ', ' .
+                $this->{$prefix . '_address_postalcode' . $suffix} . ', ' .
+                $this->{$prefix . '_address_country' . $suffix});
+    }
 
+    private function getLatLon($address) {
         if (!empty($address)) {
             $url = "https://api.opencagedata.com/geocode/v1/json?q={$address}&key=bb98ad0c915e4f479e3b11678e355461";
             $curl = curl_init($url);
