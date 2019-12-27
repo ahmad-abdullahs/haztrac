@@ -23,6 +23,7 @@ function getViewColumns($module, $view = 'listview') {
 function getViewFields($view, $module) {
     $finalFieldsList = array();
     $viewFieldsList = array();
+    $fieldSetFields = array();
     $relatedFieldsList = array();
     $bannedFieldsList = array(
         'picture', 'favorite', 'follow', 'team_name', 'campaign_name',
@@ -42,11 +43,20 @@ function getViewFields($view, $module) {
                 if (is_array($value) && isset($value['related_fields'])) {
                     $relatedFieldsList = array_merge($relatedFieldsList, $value['related_fields']);
                 }
+                if (is_array($value) && isset($value['fields'])) {
+                    foreach ($value['fields'] as $_key => $_value) {
+                        if (is_array($_value)) {
+                            $fieldSetFields = array_merge($fieldSetFields, (array) $_value['name']);
+                        } else {
+                            $fieldSetFields = array_merge($fieldSetFields, (array) $_value);
+                        }
+                    }
+                }
                 array_push($viewFieldsList, $key);
             }
 
-            // Merge view fields and related fields
-            $finalFieldsList = array_merge($viewFieldsList, $relatedFieldsList);
+            // Merge view fields, fieldset fields and related fields
+            $finalFieldsList = array_merge($viewFieldsList, $relatedFieldsList, $fieldSetFields);
             // Remove the banned fields
             $finalFieldsList = array_diff($finalFieldsList, $bannedFieldsList);
             // Remove the duplicate entries
