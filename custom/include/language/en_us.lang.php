@@ -1,5 +1,6 @@
 <?php
 
+$app_strings['LBL_USER_MANAGEMENT'] = 'User Management';
 $app_strings['LBL_COPY_RELATED_RECORD'] = 'Copy Existing Record';
 $app_strings['LBL_ADD_MULTIPLE_RLI_RECORD'] = 'Add Multiple Items';
 $app_strings['LBL_COPY_RLI_BUTTON'] = 'Copy';

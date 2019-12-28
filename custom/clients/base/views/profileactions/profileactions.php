@@ -34,6 +34,14 @@ $viewdefs['base']['view']['profileactions'] = array(
         'icon' => 'fa-users',
     ),
     array(
+        'route' => '#bwc/index.php?module=Users&action=index',
+        'label' => 'LBL_USER_MANAGEMENT',
+        'css_class' => 'administration',
+        'module' => 'Users',
+        'acl_action' => 'admin',
+        'icon' => 'fa-user-md',
+    ),
+    array(
         'route' => '#bwc/index.php?module=Administration&action=index',
         'label' => 'LBL_ADMIN',
         'css_class' => 'administration',
