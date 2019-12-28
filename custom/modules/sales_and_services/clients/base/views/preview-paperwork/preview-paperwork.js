@@ -14,6 +14,7 @@
     css: ['hint-help'],
     fileURL: '',
     isNotReady: true,
+    isRenderedBefore: false,
     initialize: function (options) {
         this._super('initialize', [options]);
         var href = window.location.href;
@@ -21,6 +22,7 @@
         this.fileURL = href[0] + 'pdfs/';
         this.fileURL = this.fileURL + this.model.get('id') + '.pdf';
         this.isNotReady = true;
+        this.isRenderedBefore = false;
         this.isPdfReady();
     },
     isPdfReady: function () {
@@ -36,7 +38,10 @@
                     }
                 } else if (request.status === 200) {
                     self.isNotReady = false;
-                    self.render();
+                    if (!this.isRenderedBefore) {
+                        self.render();
+                        this.isRenderedBefore = true;
+                    }
                 }
             };
             try {
