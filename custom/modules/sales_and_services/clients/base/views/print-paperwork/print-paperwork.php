@@ -62,7 +62,7 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
         ),
         array(
             'name' => 'panel_body',
-            'columns' => 1,
+            'columns' => 2,
             'label' => true,
             'title' => '',
             'labelsOnTop' => true,
@@ -76,10 +76,14 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
                     'type' => 'bool',
                 ),
                 array(
+                ),
+                array(
 //                    'name' => 'print_paperword_tomorrow',
                     'name' => 'taxable_c',
                     'type' => 'bool',
                     'label' => 'LBL_PRINT_PAPERWORD_TOMORROW',
+                ),
+                array(
                 ),
                 array(
 //                    'name' => 'print_paperword_tomorrow',
@@ -88,10 +92,14 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
                     'label' => 'LBL_PRINT_PAPERWORD_AFTER_PAYMENT',
                 ),
                 array(
+                ),
+                array(
                     'name' => 'date_start',
                     'label' => 'LBL_PRINT_PAPERWORD_START_DATE',
                     'type' => 'datetimecombo',
                     'required' => true,
+                ),
+                array(
                 ),
                 array(
                     'name' => 'date_end',
@@ -100,12 +108,23 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
                     'required' => true,
                 ),
                 array(
+                ),
+                array(
                     'name' => 'print_manifest',
                     'label' => 'LBL_PRINT_MANIFEST',
                     'type' => 'button',
                     'primary' => true,
                     'events' => array(
                         'click' => 'button:print_manifest:click',
+                    ),
+                ),
+                array(
+                    'name' => 'print_manifest_with_num',
+                    'label' => 'LBL_PRINT_MANIFEST_WITH_NUM',
+                    'type' => 'button',
+                    'primary' => true,
+                    'events' => array(
+                        'click' => 'button:print_manifest_with_num:click',
                     ),
                 ),
 //                array(

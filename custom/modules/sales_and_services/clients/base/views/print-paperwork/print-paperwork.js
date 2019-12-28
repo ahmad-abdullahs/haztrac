@@ -3,6 +3,7 @@
 
     events: {
         'click .btn[name=print_manifest]': 'printManifest',
+        'click .btn[name=print_manifest_with_num]': 'printManifestWithNum',
     },
 
     _render: function () {
@@ -14,6 +15,10 @@
     },
 
     printManifest: function (evt) {
+        this._downloadClicked();
+    },
+
+    printManifestWithNum: function (evt) {
         this._downloadClicked();
     },
 

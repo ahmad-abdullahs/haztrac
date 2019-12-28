@@ -59,7 +59,9 @@ class sales_and_servicesViewmanifest extends ViewList {
         $pdf->AddPage();
 
         $pdf->SetXY(0, 0);
-//        $pdf->Image('custom/modules/sales_and_services/tpls/background3.png', 8, 17, 199, 250, '', '', '', true, 300, '', false, true, 0, true);
+        if ($_REQUEST['putToDir']) {
+            $pdf->Image('custom/modules/sales_and_services/tpls/background3.png', 8, 17.5, 199, 250, '', '', '', true, 300, '', false, true, 0, true);
+        }
 //        $pdf->Image('custom/modules/sales_and_services/tpls/background.jpg', 0, 0, 216, 279, '', '', '', true, 300, '', false, true, 0, true);
 
         $startXIndex = empty($_REQUEST['x']) ? 52 : $_REQUEST['x']; // 50, 49
@@ -96,13 +98,13 @@ class sales_and_servicesViewmanifest extends ViewList {
             // Generator Name + Generator Mailing Address + Generator Phone
             $pdf->SetXY(0, 0);
             $accountTypesList = unencodeMultienum($salesAndServiceAccountBean->account_type_cst_c);
-            
+
             if (in_array('Separate Svc Site', $accountTypesList) && $salesAndServiceAccountBean->different_service_site_c == 1) {
                 $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean, 'service_site', true, '_address_name', '_c');
             } else {
                 $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean);
             }
-            
+
             $generatorMailingAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 7
                 , 'text' => $mailingAddress); // 22, 26
             $pdf->MultiCell(88, 5, $generatorMailingAddress['text'], 0, '', 0, 1, $generatorMailingAddress['x'], $generatorMailingAddress['y'], true);
@@ -142,7 +144,7 @@ class sales_and_servicesViewmanifest extends ViewList {
             $shippingAddress = $this->getFormatedAddress($salesAndServiceDesignatedFacilityBean, 'shipping');
             $designatedFacilitySiteAddress = array('x' => $startXIndex - 28, 'y' => $startYIndex + 42
                 , 'text' => $shippingAddress); // 22, 59
-            $pdf->MultiCell(100, 5, $designatedFacilitySiteAddress['text'], 0, '', 0, 1, $designatedFacilitySiteAddress['x'], $designatedFacilitySiteAddress['y'], true);
+            $pdf->MultiCell(110, 5, $designatedFacilitySiteAddress['text'], 0, '', 0, 1, $designatedFacilitySiteAddress['x'], $designatedFacilitySiteAddress['y'], true);
 
             // EPA ID Number
             $pdf->SetXY(0, 0);
@@ -159,7 +161,8 @@ class sales_and_servicesViewmanifest extends ViewList {
         $rowCount = 0;
         $result = $this->getRelatedRLIs($salesAndServiceBean);
 
-        $manifest_hazmat_handle_code_list = $additional_info_ack_list = array();
+        $manifest_hazmat_handle_code_list = array();
+        $additional_info_ack_list = array();
         while ($row = $db->fetchByAssoc($result)) {
             if ($rowCount > 3)
                 continue;
@@ -294,7 +297,13 @@ class sales_and_servicesViewmanifest extends ViewList {
 
         // Download PDF
         ob_clean();
-        $pdf->Output(htmlspecialchars_decode(trim($salesAndServiceBean->name . ' Manifest.pdf')), 'D');
+        $name = htmlspecialchars_decode(trim($salesAndServiceBean->name . ' Manifest.pdf'));
+        $flag = 'D';
+        if ($_REQUEST['putToDir']) {
+            $name = 'pdfs/' . $salesAndServiceBean->id . '.pdf';
+            $flag = 'F';
+        }
+        $pdf->Output($name, $flag);
     }
 
     function getRelatedRLIs($salesAndServiceBean) {

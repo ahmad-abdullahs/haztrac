@@ -36,6 +36,18 @@ $viewdefs['sales_and_services']['base']['layout']['print-paperwork'] = array(
                     array(
                         'layout' => array(
                             'type' => 'base',
+                            'name' => 'dashboard-pane',
+                            'css_class' => 'dashboard-pane',
+                            'components' => array(
+                                array(
+                                    'view' => 'preview-paperwork',
+                                ),
+                            ),
+                        ),
+                    ),
+                    array(
+                        'layout' => array(
+                            'type' => 'base',
                             'name' => 'preview-pane',
                             'css_class' => 'preview-pane',
                             'components' => array(
