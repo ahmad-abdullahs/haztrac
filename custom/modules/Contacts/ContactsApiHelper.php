@@ -9,12 +9,9 @@ class CustomContactsApiHelper extends ContactsApiHelper {
     public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array()) {
         $data = parent::formatForApi($bean, $fieldList, $options);
 
-        // Make sure they requested the top_opp field, or no field restriction at all
-        if (empty($fieldList) || in_array('accounts_and_roles_widget', $fieldList)) {
-            // Pushing Account, its role and primary status data to Contacts Model
-            $data['accounts_and_roles_widget'] = array();
-
-            $sql = <<<SQL
+        // Pushing Account, its role and primary status data to Contacts Model
+        $data['accounts_and_roles_widget'] = array();
+        $sql = <<<SQL
                     SELECT 
                     accounts_contacts.account_id AS 'accounts_and_roles_widget_name_id',
                     accounts.name AS 'accounts_and_roles_widget_name',
@@ -30,12 +27,11 @@ class CustomContactsApiHelper extends ContactsApiHelper {
                     accounts_contacts.contact_id = '{$bean->id}' 
                 ORDER BY accounts.name
 SQL;
-            global $db;
+        global $db;
 
-            $res = $db->query($sql);
-            while ($row = $db->fetchByAssoc($res)) {
-                $data['accounts_and_roles_widget'][] = $row;
-            }
+        $res = $db->query($sql);
+        while ($row = $db->fetchByAssoc($res)) {
+            $data['accounts_and_roles_widget'][] = $row;
         }
 
 //        $data['accounts_and_roles_widget'] = json_encode(array(

@@ -38,7 +38,7 @@ class sales_and_services extends sales_and_services_sugar {
 
         if (empty($this->ss_number)) {
             $this->ss_number = 'S-' . $this->getUniqueNumber();
-            $this->name = $this->name . ' ' . $this->ss_number;
+            $this->name = $this->name . ' | ' . $this->ss_number;
         }
 
         return parent::save($check_notify);
