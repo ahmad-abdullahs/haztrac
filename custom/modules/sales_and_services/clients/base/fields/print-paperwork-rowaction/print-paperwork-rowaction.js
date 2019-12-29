@@ -1,5 +1,6 @@
 ({
     extendsFrom: 'RowactionField',
+    unixTimeSuffix: '',
 
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -11,6 +12,7 @@
     },
 
     printPaperworkDrawer: function () {
+        this.unixTimeSuffix = app.date().unix();
         // app.drawer.open({
         //     layout: 'print-paperwork',
         //     context: {
@@ -40,6 +42,7 @@
                         create: true,
                         module: self.model.module || self.model.get('_module'),
                         model: self.model,
+                        unixTimeSuffix: self.unixTimeSuffix,
                     }
                 }, _.bind(function (context, taskmodel) {
                     // These are for code reference...
@@ -60,6 +63,7 @@
             'record': this.model.get('id'),
             'sugarpdf': 'pdfmanager',
             'putToDir': true,
+            'unixTimeSuffix': this.unixTimeSuffix,
         });
         return '?' + urlParams;
     },

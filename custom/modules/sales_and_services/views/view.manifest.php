@@ -53,6 +53,13 @@ class sales_and_servicesViewmanifest extends ViewList {
     function ProcessPDF() {
         $salesAndServiceBean = BeanFactory::getBean($_REQUEST['module'], $_REQUEST['record'], array('disable_row_level_security' => true));
 
+        $fileName = htmlspecialchars_decode(trim($salesAndServiceBean->name . ' Manifest.pdf'));
+        $flag = 'D';
+        if ($_REQUEST['putToDir']) {
+            $fileName = 'pdfs/' . $salesAndServiceBean->id . '-' . $_REQUEST['unixTimeSuffix'] . '.pdf';
+            $flag = 'F';
+        }
+
         $pdf = $this->getPDFObj($salesAndServiceBean);
 
         // ---------------------------------------------------------
@@ -301,13 +308,7 @@ class sales_and_servicesViewmanifest extends ViewList {
 
         // Download PDF
         ob_clean();
-        $name = htmlspecialchars_decode(trim($salesAndServiceBean->name . ' Manifest.pdf'));
-        $flag = 'D';
-        if ($_REQUEST['putToDir']) {
-            $name = 'pdfs/' . $salesAndServiceBean->id . '.pdf';
-            $flag = 'F';
-        }
-        $pdf->Output($name, $flag);
+        $pdf->Output($fileName, $flag);
     }
 
     function getRelatedRLIs($salesAndServiceBean) {

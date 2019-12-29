@@ -20,7 +20,7 @@
         var href = window.location.href;
         href = href.split("#");
         this.fileURL = href[0] + 'pdfs/';
-        this.fileURL = this.fileURL + this.model.get('id') + '.pdf';
+        this.fileURL = this.fileURL + this.model.get('id') + '-' + options.context.get('unixTimeSuffix') + '.pdf';
         this.isNotReady = true;
         this.isRenderedBefore = false;
         this.isPdfReady();
