@@ -9,4 +9,6 @@ $app_list_strings['contact_role_list'] = array(
     'Broker' => 'Broker',
     '3rd Party' => '3rd Party Primary Contact',
     'EHS' => 'EHS Contact',
+    'Accounting Pay Prime' => 'Accounts Payable Prime',
+    'Accounting Pay Add' => 'Accounts Payable Additional',
 );

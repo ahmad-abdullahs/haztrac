@@ -1,4 +1,5 @@
 <?php
+
 // created: 2019-07-08 12:50:21
 $app_list_strings['moduleListSingular']['Home'] = 'Home';
 $app_list_strings['moduleListSingular']['Contacts'] = 'Contact';
@@ -40,3 +41,4 @@ $app_list_strings['moduleListSingular']['HT_PO'] = 'PO';
 $app_list_strings['moduleListSingular']['V_Vendors'] = 'Vendor';
 $app_list_strings['moduleListSingular']['RevenueLineItems'] = 'Revenue Line Item';
 $app_list_strings['moduleListSingular']['LR_Lab_Reports'] = 'Lab Report';
+$app_list_strings['moduleListSingular']['Project'] = 'Project';
