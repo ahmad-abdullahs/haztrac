@@ -18,7 +18,11 @@ class sales_and_servicesViewmanifest extends ViewList {
 
     function getPDFObj($bean) {
         // create new PDF document
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'LEGAL', true, 'UTF-8', false);
+        $documentType = 'LEGAL';
+        if ($_REQUEST['putToDir']) {
+            $documentType = 'A4';
+        }
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, $documentType, true, 'UTF-8', false);
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
