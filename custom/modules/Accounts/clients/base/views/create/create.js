@@ -170,7 +170,7 @@
         this.originalSuccess = options.success;
 
         if (app.metadata.getModule(this.module).isTBAEnabled === true) {
-            // make sure new RLIs inherit opportunity's teamset and selected teams
+            // make sure new RLIs inherit Account's teamset and selected teams
             var addedRLIs = this.createdModel.get('revenuelineitems') || false;
             if (addedRLIs && addedRLIs.create && addedRLIs.create.length) {
                 _.each(addedRLIs.create, function (data) {

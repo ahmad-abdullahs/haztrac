@@ -177,33 +177,19 @@
             /*
              * Below two check are added to make the bundle first line item as primary 
              * or if there is no bundle then make the first row added as the primary.
+             * This logic is only for Sales and Services...
              */
             // set checkbox checked and mark the first item name as the sales and service name 
-            if (this.context.parent && this.context.parent.has('model')) {
+            if (this.context.parent && this.context.parent.has('model') &&
+                    this.context.parent.get('module') == 'sales_and_services') {
                 if (this.collection.length == 1 && this.collection.at(0).get('is_bundle_product_c') != 'parent') {
                     var parentModel = this.context.parent.get('model');
-                    if (this.context.parent.get('module') == 'sales_and_services') {
-                        // This is check is added, not to set the sales and service name 
-                        // from first rli as primary at time of copy sales and service
-//                        if (!this.context.parent.get('copyFeature'))
-                        parentModel.set('name', this.collection.at(0).get('name'));
-                    }
-                    // This is check is added, not to set the first rli as primary 
-                    // at time of copy sales and service
-//                    if (!this.context.parent.get('copyFeature'))
+                    parentModel.set('name', this.collection.at(0).get('name'));
                     this.collection.at(0).set('primary_rli', 1);
                 } else if (this.collection.length == 2 && this.collection.at(0).get('is_bundle_product_c') != 'parent' &&
                         this.collection.at(1).get('is_bundle_product_c') == 'parent') {
                     var parentModel = this.context.parent.get('model');
-                    if (this.context.parent.get('module') == 'sales_and_services') {
-                        // This is check is added, not to set the sales and service name 
-                        // from first rli as primary at time of copy sales and service
-//                        if (!this.context.parent.get('copyFeature'))
-                        parentModel.set('name', this.collection.at(0).get('name'));
-                    }
-                    // This is check is added, not to set the first rli as primary 
-                    // at time of copy sales and service
-//                    if (!this.context.parent.get('copyFeature'))
+                    parentModel.set('name', this.collection.at(0).get('name'));
                     this.collection.at(0).set('primary_rli', 1);
                 }
             }

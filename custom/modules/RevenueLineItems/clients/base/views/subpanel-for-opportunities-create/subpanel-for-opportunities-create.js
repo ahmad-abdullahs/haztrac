@@ -16,25 +16,18 @@
  * @extends View.Views.Base.SubpanelListCreateView
  */
 ({
-    // This list is used on the Sales and Service create view for RLI bundle creation...
-    // @see screenshots 2.png
+    // This list is used on the Accounts and Opportunities create view for RLI bundle creation...
+    // @see screenshots 2.1.png
 
-    // This file is used for sales_and_services only
+    // This file is used for Opportunities and Accounts.
+    // So you may found checks specific to module for few functionalities.
     extendsFrom: 'RevenueLineItemsCustomSubpanelListCreateView',
-    copyFieldsListToParent: {
-        name: 'name',
-        mft_part_num: 'mft_part_num',
-    },
+
     initialize: function (options) {
-        this.plugins = _.union(this.plugins || [], ['PopulateRLIS']);
         this._super('initialize', [options]);
 
         // undo flex-list's hardcoding and re-hardcode to use the subpanel-list-create.hbs
         this.template = app.template.getView(this.name, 'RevenueLineItems');
-        // ++ Added to load the RLIs from the sales and servive RLI subpanel at time of copy.
-        if (!_.isUndefined(this.context.parent)) {
-            this.context.parent.on('load:revenuelineitems:subpanel-for-rli-create', this.copyRlisInSubpanelCreate, this);
-        }
     },
 
     _render: function () {
@@ -195,175 +188,9 @@
             }, {'silent': true});
         }, this);
 
-        // Only keep one checkbox checked at a time... and unset all the others
-        bean.on('change:primary_rli', function (model) {
-            if (model.get('primary_rli')) {
-                _.each(this.collection.models, function (_model) {
-                    if (_model.get('primary_rli') && _model.get('id') != model.get('id')) {
-                        _model.set('primary_rli', false);
-                    } else if (_model.get('primary_rli') && _model.get('id') == model.get('id')) {
-                        // Set the sales and service name as primary selected RLI
-                        if (parentModule == 'sales_and_services') {
-                            _.each(this.copyFieldsListToParent, function (val, key) {
-                                parentModel.set(val, _model.get(key));
-                            }, this);
-                            this.setTSDFFacility(_model, parentModel);
-                        }
-                    }
-                }, this);
-            }
-        }, this);
-
-        // if RLI name is changed and it is the primary rli update the sales and service name as well...
-        bean.on('change:name', function (model) {
-            if (model.get('primary_rli')) {
-                if (parentModule == 'sales_and_services') {
-                    _.each(this.copyFieldsListToParent, function (val, key) {
-                        parentModel.set(val, model.get(key));
-                    }, this);
-                    this.setTSDFFacility(model, parentModel);
-                }
-            }
-        }, this);
         return bean;
     },
 
-    /*
-     * If the selected RLI is Hazardous Material (Y) or State Regulated (Y)
-     then populate the vendor from this line into the sales and service `Ship To / TSDF` field.
-     */
-    setTSDFFacility: function (model, parentModel) {
-        if (model.get('shipping_hazardous_materia_c') || model.get('state_regulated_c')) {
-            parentModel.set({
-                'account_id1_c': model.get('v_vendors_id_c'),
-                'destination_ship_to_c': model.get('product_vendor_c')
-            });
-        } else {
-            parentModel.set({
-                'account_id1_c': '',
-                'destination_ship_to_c': ''
-            });
-        }
-    },
-
-    onDeleteRow: function (model) {
-        // On deleting the row reset the sales and service name, TSDF and mft_part_num, 
-        // if that is the primary_rli 
-        var parentModel = this.context.parent.get('model');
-        var parentModule = this.context.parent.get('module');
-        if (model.get('primary_rli')) {
-            if (parentModule == 'sales_and_services') {
-                _.each(this.copyFieldsListToParent, function (val, key) {
-                    parentModel.set(val, '');
-                }, this);
-                model.set('shipping_hazardous_materia_c', false);
-                model.set('state_regulated_c', false);
-                this.setTSDFFacility(model, parentModel);
-            }
-        }
-        this.context.get('collection').remove(model);
-        this.checkButtons();
-    },
-
-    checkButtons: function () {
-        this._super('checkButtons');
-        if (this.disposed) {
-            return;
-        }
-
-        var facilitiesInfo = {};
-        _.each(this.collection.models, function (model, key) {
-            this.warnIfDifferentFacilities(model, key, facilitiesInfo);
-        }, this);
-    },
-
-    warnIfDifferentFacilities: function (model, key, facilitiesInfo, checkValidation) {
-        // Put RLI id and facility id in an object
-        if (!_.isEmpty(model.attributes.v_vendors_id_c) && model.attributes.is_bundle_product_c != 'parent' && model.attributes.manifest_required_c) {
-            facilitiesInfo[model.attributes.id] = model.attributes.v_vendors_id_c;
-        }
-
-        // If all the RLIs has been looped through and this is the last RLI
-        // get the facilities ids and make then unique to check do we 
-        // have multiple facilities or not
-        // If we have multiple group them and color them on the view.
-        // each facility has its own color, this way we will group multiple 
-        // rlis with same facility to a common color.
-        if (key + 1 == this.collection.models.length) {
-            if (_.unique(_.compact(_.values(facilitiesInfo))).length > 1) {
-                app.alert.dismiss('multifacility-warning');
-                app.alert.show('multifacility-warning', {
-                    level: 'warning',
-                    messages: 'You have selected multiple Items which have different Ship To / TSDF',
-                    closeable: true,
-                    autoClose: true,
-                    autoCloseDelay: 12000,
-                });
-
-                if (checkValidation) {
-                    return false;
-                }
-
-                var facilitiesInfoGroupBy = {};
-                _.each(facilitiesInfo, function (val, key) {
-                    if (_.isUndefined(facilitiesInfoGroupBy[val]) || _.isNull(facilitiesInfoGroupBy[val])) {
-                        facilitiesInfoGroupBy[val] = [];
-                    }
-                    facilitiesInfoGroupBy[val].push(key)
-                }, this);
-
-                var colorsList = ['#0679c8', '#6d17e5', '#54cb14', '#ffb600', '#e61718'];
-                _.each(facilitiesInfoGroupBy, function (_val) {
-                    var color = colorsList.pop();
-                    _.each(_val, function (val) {
-                        $('tr[name=RevenueLineItems_' + val + ']').attr('style', 'border:groove ' + color + ';border-width: thick;');
-                    }, this);
-                }, this);
-            }
-        }
-        return true;
-    },
-
-    checkTSDFValidity: function () {
-        var isValidTSDF = true;
-        var facilitiesInfo = {};
-        _.each(this.collection.models, function (model, key) {
-            if (!this.warnIfDifferentFacilities(model, key, facilitiesInfo, true)) {
-                isValidTSDF = false;
-            }
-        }, this);
-        return isValidTSDF;
-    },
-
-    validateModels: function (callback, fromCreateView) {
-        fromCreateView = fromCreateView || false;
-
-        var returnCt = 0;
-        this.hasValidModels = true;
-
-        _.each(this.collection.models, function (model) {
-            // loop through all models and call doValidate on each model
-            model.doValidate(this.getFields(this.module), _.bind(function (isValid) {
-                returnCt++;
-
-                if (this.hasValidModels && !isValid) {
-                    // hasValidModels was true, but a model returned false from validation
-                    this.hasValidModels = isValid;
-                }
-
-                // check if all model validations have occurred
-                if (returnCt === this.collection.length) {
-                    if (fromCreateView) {
-                        // the create waterfall wants the opposite of if this is validated
-                        callback(!this.hasValidModels || !this.checkTSDFValidity());
-                    } else {
-                        // this view wants if the models are valid or not
-                        callback(this.hasValidModels);
-                    }
-                }
-            }, this));
-        }, this);
-    },
     /**
      * We have to overwrite this method completely, since there is currently no way to completely disable
      * a field from being displayed
@@ -394,18 +221,5 @@
         });
 
         return catalog;
-    },
-
-    copyRlisInSubpanelCreate: function () {
-        if (!_.isUndefined(this.context.parent.parent) && !_.isNull(this.context.parent.parent)) {
-            if (this.context.parent.parent.get('model')) {
-                var _tempModels = _.clone(this.context.parent.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models);
-                _tempModels = _tempModels.reverse();
-                _.each(_tempModels, function (model, key) {
-                    if (model.get('is_bundle_product_c') != 'child')
-                        this.prepopulateData(this, model, model.attributes);
-                }, this);
-            }
-        }
     }
 })

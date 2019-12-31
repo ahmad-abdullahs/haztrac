@@ -33,6 +33,15 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
             'label' => 'LBL_PANEL_1',
             'fields' => array(
                 array(
+                    'name' => 'primary_rli',
+                    'label' => '',
+                    'enabled' => true,
+                    'sortable' => false,
+                    'default' => true,
+                    'type' => 'non-html-field',
+                    'width' => '24',
+                ),
+                array(
                     'name' => 'name',
                     'link' => true,
                     'label' => 'LBL_LIST_NAME',
