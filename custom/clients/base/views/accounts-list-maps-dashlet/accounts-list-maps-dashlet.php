@@ -3,7 +3,7 @@ $viewdefs['base']['view']['accounts-list-maps-dashlet'] = array(
     'dashlets' => array(
         array(
             'label' => 'LBL_ACCOUNTS_MAPS_DASHLET_VIEW',
-            'description' => 'LBL_ACCOUNTS_MAPS_DASHLET_VIEW_DESCRIPTION',
+            'description' => 'LBL_ACCOUNTS_MAPS_DASHLET_LIST_VIEW_DESCRIPTION',
             'config' => array(
                 'module' => 'Accounts',
             ),

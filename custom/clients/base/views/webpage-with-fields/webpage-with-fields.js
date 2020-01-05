@@ -35,7 +35,7 @@
         // (Accounts) If the model has account type Service Site and Different Service Site is checked then show the
         // Service Site Address on the Map
         if (module == 'Accounts') {
-            if (_.contains(model.get('account_type_cst_c'), "Separate Svc Site") && model.get('different_service_site_c') == true) {
+            if (model.get('different_service_site_c') == true) {
                 tempModelAttributes.billing_address_street = tempModelAttributes.shipping_address_street = model.get('service_site_address_street_c');
                 tempModelAttributes.billing_address_city = tempModelAttributes.shipping_address_city = model.get('service_site_address_city_c');
                 tempModelAttributes.billing_address_postalcode = tempModelAttributes.shipping_address_postalcode = model.get('service_site_address_postalcode_c');

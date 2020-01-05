@@ -34,7 +34,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
             'fields' => array(
                 array(
                     'name' => 'primary_rli',
-                    'label' => '',
+                    'label' => ' ',
                     'enabled' => true,
                     'sortable' => false,
                     'default' => true,

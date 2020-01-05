@@ -4,7 +4,7 @@
  * @extends View.Views.Base.CreateView
  */
 ({
-    extendsFrom: 'RecordView',
+    extendsFrom: 'RecordInDrawerView',
 
     /**
      * Used by the alert openRLICreate method
@@ -113,24 +113,6 @@
             this.initiateSave(_.bind(function () {
                 this.handleSave();
             }, this));
-        }
-    },
-
-    handleSave: function () {
-        if (this.disposed) {
-            return;
-        }
-
-        this._saveModel();
-        this.$('.record-save-prompt').hide();
-
-        if (!this.disposed) {
-            this.setButtonStates(this.STATE.VIEW);
-            this.action = 'detail';
-            this.setRoute();
-            this.unsetContextAction();
-            this.toggleEdit(false);
-            this.inlineEditMode = false;
         }
     },
 

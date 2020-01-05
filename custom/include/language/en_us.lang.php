@@ -1,5 +1,11 @@
 <?php
 
+$app_strings['LBL_DASHLET_CONFIGURE_MAP'] = 'Map';
+$app_strings['LBL_DASHLET_CONFIGURE_RELATE_FIELDS'] = 'Relate Field';
+$app_strings['LBL_DASHLET_CONFIGURE_ADDRESS_FIELDS'] = 'Address Field';
+$app_strings['LBL_DASHLET_ADDRESS_TO_MAP'] = 'Address To Map';
+$app_strings['LBL_DASHLET_ADDRESS_TO_MAP_DESCRIPTION'] = 'Address To Map is a dashlet representation of an address field on Map. 
+    Users can build dashlets of this type for any module with their choice of address field to be shown on Map.';
 $app_strings['LBL_USER_MANAGEMENT'] = 'User Management';
 $app_strings['LBL_COPY_RELATED_RECORD'] = 'Copy Existing Record';
 $app_strings['LBL_ADD_MULTIPLE_RLI_RECORD'] = 'Add Multiple Items';

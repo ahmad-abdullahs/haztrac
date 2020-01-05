@@ -38,6 +38,7 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                     'link' => true,
                     'enabled' => true,
                     'default' => true,
+                    'type' => 'open-in-drawer',
                     'related_fields' =>
                     array(
                         "line_number",

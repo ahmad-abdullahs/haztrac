@@ -26,9 +26,9 @@ $viewdefs['base']['view']['webpage-with-fields'] = array(
                 'name' => 'url',
                 'label' => 'LBL_DASHLET_WEBPAGE_URL',
                 'help' => 'LBL_DASHLET_WEBPAGE_URL_HELP',
-				'height' => '500',
+                'height' => '500',
             ),
-			array(
+            array(
                 'name' => 'limit',
                 'label' => 'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS',
                 'type' => 'enum',
@@ -42,8 +42,7 @@ $viewdefs['base']['view']['webpage-with-fields'] = array(
             'name' => 'url',
             'label' => 'LBL_DASHLET_WEBPAGE_URL',
             'width' => '100%',
-			'height' => '500',
-
+            'height' => '500',
         ),
     ),
 );

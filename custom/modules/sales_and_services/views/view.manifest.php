@@ -108,9 +108,8 @@ class sales_and_servicesViewmanifest extends ViewList {
 
             // Generator Name + Generator Mailing Address + Generator Phone
             $pdf->SetXY(0, 0);
-            $accountTypesList = unencodeMultienum($salesAndServiceAccountBean->account_type_cst_c);
 
-            if (in_array('Separate Svc Site', $accountTypesList) && $salesAndServiceAccountBean->different_service_site_c == 1) {
+            if ($salesAndServiceAccountBean->different_service_site_c == 1) {
                 $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean, 'service_site', true, '_address_name', '_c');
             } else {
                 $mailingAddress = $this->getFormatedAddress($salesAndServiceAccountBean);

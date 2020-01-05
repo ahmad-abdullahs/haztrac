@@ -37,7 +37,10 @@
                                 supported.}}
                         <div{{#has "ReorderableColumns" ../../../plugins}} data-draggable="true"{{/has}}>
                         {{/has}}
-                        <span>
+                        <span {{#eq this.name "primary_rli"}}style="text-align: center;"{{/eq}}>
+                            {{#eq this.name "primary_rli"}}
+                                <i class="fa fa-sort-numeric-asc" style="font-weight: bold;font-size: medium;" title="Drag and Drop Rows To Order"></i>
+                            {{/eq}}
                             {{str this.label ../../module}}
                         </span>
                         {{#has "ReorderableColumns" ../../plugins}}

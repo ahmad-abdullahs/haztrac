@@ -21,6 +21,7 @@ $app_list_strings['sales_service_date_range_dom'] = array(
 // sales and service maps dashlet
 $app_strings['LBL_ACCOUNTS_MAPS_DASHLET_VIEW'] = 'Accounts Map';
 $app_strings['LBL_ACCOUNTS_MAPS_DASHLET_VIEW_DESCRIPTION'] = 'This dashlet displays the Account records on Map';
+$app_strings['LBL_ACCOUNTS_MAPS_DASHLET_LIST_VIEW_DESCRIPTION'] = 'This dashlet displays the list of Account records on Map';
 $app_strings['LBL_SALES_SERVICE_MAPS_DASHLET_VIEW'] = 'Sales and Services Map';
 $app_strings['LBL_SALES_SERVICE_MAPS_DASHLET_VIEW_DESCRIPTION'] = 'This dashlet displays the Sales and Services records on Map';
 $app_list_strings['sales_service_map_limit_dom'] = array(

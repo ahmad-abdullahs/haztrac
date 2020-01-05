@@ -95,11 +95,8 @@ class sales_and_services extends sales_and_services_sugar {
 
                 if (!empty($res['results'][0]['geometry'])) {
                     $latlon = $res['results'][0]['geometry'];
-
-                    if (!empty($latlon['lat']) && !empty($latlon['lng'])) {
-                        $this->lat_c = $latlon['lat'];
-                        $this->lon_c = $latlon['lng'];
-                    }
+                    $this->lat_c = $latlon['lat'];
+                    $this->lon_c = $latlon['lng'];
                 }
             }
         }

@@ -20,6 +20,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
+                    'type' => 'open-in-drawer',
                     'related_fields' =>
                     array(
                         0 => 'currency_id',

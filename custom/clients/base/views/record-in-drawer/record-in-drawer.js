@@ -1,5 +1,20 @@
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+/**
+ * @class View.Views.Base.RecordView
+ * @alias SUGAR.App.view.views.BaseRecordView
+ * @extends View.View
+ */
 ({
-    extendsFrom: 'AccountsRecordView',
+    extendsFrom: 'RecordView',
 
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -7,15 +22,11 @@
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
     },
 
-    getActiveTab: function (options) {
-        return false;
-    },
-
     _buildGridsFromPanelsMetadata: function (panels) {
         this._super('_buildGridsFromPanelsMetadata', [panels]);
 
         // Only Add the Close button if this is initiated from the RevenueLineItems (open in drawer) or Maps View.
-        var openInDrawer = this.context.get('initiatedByMapView') || false;
+        var openInDrawer = this.context.get('openInDrawer') || false;
         if (!openInDrawer) {
             this.options.meta.buttons = _.reject(this.options.meta.buttons, function (btn) {
                 return _.contains(["close_drawer_button"], btn.name);
@@ -29,7 +40,7 @@
         this.toggleEdit(true);
         // Only set the route if its the real record view, not the record view opened in the
         // drawer, like we are opening the record view in drawer for RevenueLineItems or Maps.
-        var openInDrawer = this.context.get('initiatedByMapView') || false;
+        var openInDrawer = this.context.get('openInDrawer') || false;
         if (!openInDrawer) {
             this.setRoute('edit');
         }
@@ -42,7 +53,7 @@
         this.clearValidationErrors(this.editableFields);
         // Only set the route if its the real record view, not the record view opened in the
         // drawer, like we are opening the record view in drawer for RevenueLineItems or Maps.
-        var openInDrawer = this.context.get('initiatedByMapView') || false;
+        var openInDrawer = this.context.get('openInDrawer') || false;
         if (!openInDrawer) {
             this.setRoute();
         }
@@ -61,7 +72,7 @@
             this.action = 'detail';
             // Only set the route if its the real record view, not the record view opened in the
             // drawer, like we are opening the record view in drawer for RevenueLineItems or Maps.
-            var openInDrawer = this.context.get('initiatedByMapView') || false;
+            var openInDrawer = this.context.get('openInDrawer') || false;
             if (!openInDrawer) {
                 this.setRoute();
             }
@@ -73,48 +84,5 @@
 
     closeDrawer: function () {
         app.drawer.close();
-    },
-
-    bindDataChange: function () {
-        this.model.on('change:account_status_c', this.colorTheTabs, this);
-//        this.model.on('change:different_service_site_c', this.addValidationOnServiceSiteAddress, this);
-//        this.model.on('change:account_type_cst_c', this.addValidationOnServiceSiteAddress, this);
-        this._super('bindDataChange');
-    },
-
-//    addValidationOnServiceSiteAddress: function (model, value) {
-//        var fieldsList = [
-//            'service_site_address_name',
-//            'service_site_address_street_c',
-//            'service_site_address_city_c',
-//            'service_site_address_state_c',
-//            'service_site_address_postalcode_c',
-//            'service_site_address_country_c',
-//        ], isRequired = false;
-//
-//        if (_.contains(this.model.get('account_type_cst_c'), "Separate Svc Site") && this.model.get('different_service_site_c') == true) {
-//            isRequired = true;
-//        }
-//        _.each(fieldsList, function (fieldName) {
-//            this.setRequired(fieldName, isRequired);
-//        }, this);
-//    },
-
-    setRequired: function (target, required) {
-        //Force required to be boolean true or false
-        required = SUGAR.expressions.Expression.isTruthy(required);
-        var field = this.getField(target, this.model);
-        if (field) {
-            field.def.required = required;
-            field.render();
-        }
-    },
-
-    colorTheTabs: function (model, value) {
-        if (value == 'Account On Hold') {
-            this.$el.find('#recordTab').css('background-color', 'red');
-        } else {
-            this.$el.find('#recordTab').css('background-color', '#f6f6f6');
-        }
     },
 })

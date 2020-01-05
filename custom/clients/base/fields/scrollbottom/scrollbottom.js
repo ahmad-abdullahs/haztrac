@@ -13,10 +13,9 @@
         'click': 'scrollToBottom'
     },
     scrollToBottom: function (event) {
-        if ($('.search-filter').length) {
-            this.view.$el.parent().stop().animate({
-                scrollTop: ($('div.record').height() + 250)
-            }, 500);
-        }
+        var self = this;
+        this.view.$el.parent().stop().animate({
+            scrollTop: (self.view.$el.find('div.record').height())
+        }, 500);
     }
 })

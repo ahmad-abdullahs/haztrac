@@ -37,21 +37,21 @@
                     }
                 }
 
-                if (service_site_address_c) {
-                    if (_.contains(value, "Separate Svc Site")) {
-                        service_site_address_c.show();
-                        $('div.record-cell[data-name=' + fieldName2 + ']').show();
-                    } else {
-                        service_site_address_c.hide();
-                        $('div.record-cell[data-name=' + fieldName2 + ']').hide();
-                        this.model.set('service_site_address_name', '');
-                        this.model.set('service_site_address_street_c', '');
-                        this.model.set('service_site_address_city_c', '');
-                        this.model.set('service_site_address_state_c', '');
-                        this.model.set('service_site_address_postalcode_c', '');
-                        this.model.set('service_site_address_country_c', '');
-                    }
-                }
+//                if (service_site_address_c) {
+//                    if (_.contains(value, "Separate Svc Site")) {
+//                        service_site_address_c.show();
+//                        $('div.record-cell[data-name=' + fieldName2 + ']').show();
+//                    } else {
+//                        service_site_address_c.hide();
+//                        $('div.record-cell[data-name=' + fieldName2 + ']').hide();
+//                        this.model.set('service_site_address_name', '');
+//                        this.model.set('service_site_address_street_c', '');
+//                        this.model.set('service_site_address_city_c', '');
+//                        this.model.set('service_site_address_state_c', '');
+//                        this.model.set('service_site_address_postalcode_c', '');
+//                        this.model.set('service_site_address_country_c', '');
+//                    }
+//                }
             }, this);
         }
     },

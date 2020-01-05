@@ -54,9 +54,11 @@
                 }
                 defaultId = defaultId || this.filters.collection.defaultFilterFromMeta;
                 this.selectFilter(defaultId);
-                // ++
-                this.layout._components[4].filterCollection = this.layout._components[4].filters;
-                this.layout._components[4].render();
+                // ++ Adding filter tabs system wide...
+                if (!_.isUndefined(this.layout._components[4])) {
+                    this.layout._components[4].filterCollection = this.layout._components[4].filters;
+                    this.layout._components[4].render();
+                }
             }, this)
         });
     },

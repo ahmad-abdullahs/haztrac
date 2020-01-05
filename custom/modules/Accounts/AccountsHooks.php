@@ -3,20 +3,23 @@
 class AccountsHooks {
 
     function beforeSave($bean, $event, $arguments) {
-        $accountTypesList = unencodeMultienum($bean->account_type_cst_c);
-
         // if lat long are not calculated or address changed
-        if ((empty($bean->lat_c) ||
-                $bean->fetched_row['service_site_address_name'] != $bean->service_site_address_name ||
-                $bean->fetched_row['service_site_address_street_c'] != $bean->service_site_address_street_c ||
-                $bean->fetched_row['service_site_address_city_c'] != $bean->service_site_address_city_c ||
-                $bean->fetched_row['service_site_address_state_c'] != $bean->service_site_address_state_c ||
-                $bean->fetched_row['service_site_address_postalcode_c'] != $bean->service_site_address_postalcode_c ||
-                $bean->fetched_row['service_site_address_country_c'] != $bean->service_site_address_country_c) &&
-                (in_array('Separate Svc Site', $accountTypesList) && $bean->different_service_site_c == 1)) {
-            $this->getLatLon($bean, $this->getAddress($bean, 'service_site', '_c'));
-            $this->updateSalesAndServiceAddresses($bean, 'service_site', '_c', '_address_name');
+        if ($bean->different_service_site_c == 1) {
+            if ((empty($bean->lat_c) ||
+                    $bean->fetched_row['service_site_address_name'] != $bean->service_site_address_name ||
+                    $bean->fetched_row['service_site_address_street_c'] != $bean->service_site_address_street_c ||
+                    $bean->fetched_row['service_site_address_city_c'] != $bean->service_site_address_city_c ||
+                    $bean->fetched_row['service_site_address_state_c'] != $bean->service_site_address_state_c ||
+                    $bean->fetched_row['service_site_address_postalcode_c'] != $bean->service_site_address_postalcode_c ||
+                    $bean->fetched_row['service_site_address_country_c'] != $bean->service_site_address_country_c)
+            ) {
+                $this->getLatLon($bean, $this->getAddress($bean, 'service_site', '_c'));
+                $this->updateSalesAndServiceAddresses($bean, 'service_site', '_c', '_address_name');
+            }
+        } else if ($bean->fetched_row['different_service_site_c'] != $bean->different_service_site_c) {
+            $bean->lat_c = '';
         }
+
         if (empty($bean->lat_c) ||
                 $bean->fetched_row['shipping_address_third_party_name'] != $bean->shipping_address_third_party_name ||
                 $bean->fetched_row['shipping_address_street'] != $bean->shipping_address_street ||
@@ -90,11 +93,8 @@ class AccountsHooks {
 
                 if (!empty($res['results'][0]['geometry'])) {
                     $latlon = $res['results'][0]['geometry'];
-
-                    if (!empty($latlon['lat']) && !empty($latlon['lng'])) {
-                        $bean->lat_c = $latlon['lat'];
-                        $bean->lon_c = $latlon['lng'];
-                    }
+                    $bean->lat_c = $latlon['lat'];
+                    $bean->lon_c = $latlon['lng'];
                 }
             }
         }
