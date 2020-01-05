@@ -112,7 +112,7 @@
 
     colorTheTabs: function (model, value) {
         if (value == 'Account On Hold') {
-            this.$el.find('#recordTab').css('background-color', 'red');
+            this.$el.find('#recordTab').css('background-color', '#e61718');
         } else {
             this.$el.find('#recordTab').css('background-color', '#f6f6f6');
         }
