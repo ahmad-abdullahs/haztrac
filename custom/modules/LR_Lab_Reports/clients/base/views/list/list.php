@@ -122,6 +122,43 @@ array (
               ),
               12 => 
               array (
+                'name' => 'generator_c',
+                'label' => 'LBL_GENERATOR',
+                'enabled' => true,
+                'id' => 'ACCOUNT_ID_C',
+                'link' => true,
+                'sortable' => false,
+                'default' => false,
+              ),
+              13 => 
+              array (
+                'name' => 'v_vendors_lr_lab_reports_1_name',
+                'label' => 'LBL_V_VENDORS_LR_LAB_REPORTS_1_FROM_V_VENDORS_TITLE',
+                'enabled' => true,
+                'id' => 'V_VENDORS_LR_LAB_REPORTS_1V_VENDORS_IDA',
+                'link' => true,
+                'sortable' => false,
+                'default' => false,
+              ),
+              14 => 
+              array (
+                'name' => 'lab_svc_request_c',
+                'label' => 'LBL_LAB_SVC_REQUEST',
+                'enabled' => true,
+                'default' => false,
+              ),
+              15 => 
+              array (
+                'name' => 'accounts_lr_lab_reports_2_name',
+                'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_2_FROM_ACCOUNTS_TITLE_CST',
+                'enabled' => true,
+                'id' => 'ACCOUNTS_LR_LAB_REPORTS_2ACCOUNTS_IDA',
+                'link' => true,
+                'sortable' => false,
+                'default' => false,
+              ),
+              16 => 
+              array (
                 'name' => 'created_by_name',
                 'label' => 'LBL_LIST_LAST_REV_CREATOR',
                 'default' => false,
@@ -129,7 +166,7 @@ array (
                 'enabled' => true,
                 'width' => '2',
               ),
-              13 => 
+              17 => 
               array (
                 'name' => 'active_date',
                 'default' => false,
@@ -137,7 +174,7 @@ array (
                 'width' => '10',
                 'label' => 'LBL_LIST_ACTIVE_DATE',
               ),
-              14 => 
+              18 => 
               array (
                 'name' => 'exp_date',
                 'default' => false,
@@ -145,7 +182,7 @@ array (
                 'width' => '10',
                 'label' => 'LBL_LIST_EXP_DATE',
               ),
-              15 => 
+              19 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_LIST_TEAM',
