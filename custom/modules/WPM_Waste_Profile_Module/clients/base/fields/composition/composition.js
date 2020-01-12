@@ -128,6 +128,7 @@
             if (!this.isRowEmpty(rowObj)) {
                 if (rowObj['composition_uom'] != 'TCLP') {
                     newRowObj['composition_max_total'] += parseFloat(rowObj['composition_max']) || 0.00;
+                    this.model.set('composition_max_total', newRowObj['composition_max_total']);
                 }
             }
         }, this);
@@ -152,6 +153,7 @@
 
         if (!_.isEmpty(this.footerFieldIds)) {
             this.model.set('composition_max_total__' + this.footerFieldIds[0], compositionMaxTotal);
+            this.model.set('composition_max_total', compositionMaxTotal);
         }
 
         this.renderFieldFooterInnerFields();

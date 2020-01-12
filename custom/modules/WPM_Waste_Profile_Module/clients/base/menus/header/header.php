@@ -28,6 +28,13 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'icon' => 'fa-plus',
     ),
     array(
+        'route' => "#wp_terms_and_conditions/create",
+        'label' => 'LNK_NEW_RECORD_WPM_WASTE_PROFILE_TERMS_AND_CONDITIONS',
+        'acl_action' => 'create',
+        'acl_module' => 'wp_terms_and_conditions',
+        'icon' => 'fa-plus',
+    ),
+    array(
         'route' => "#$moduleName",
         'label' => 'LNK_LIST',
         'acl_action' => 'list',
@@ -39,6 +46,13 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_LIST_WPM_WASTE_PROFILE_TEMPLATE',
         'acl_action' => 'list',
         'acl_module' => 'WPM_Waste_Profile_Template',
+        'icon' => 'fa-bars',
+    ),
+    array(
+        'route' => "#wp_terms_and_conditions",
+        'label' => 'LNK_LIST_WPM_WASTE_PROFILE_TERMS_AND_CONDITIONS',
+        'acl_action' => 'list',
+        'acl_module' => 'wp_terms_and_conditions',
         'icon' => 'fa-bars',
     ),
 );

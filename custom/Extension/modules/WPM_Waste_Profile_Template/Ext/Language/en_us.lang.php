@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_GENERATOR_ACCOUNT_ID'] = 'Generator (related Account ID)';
 $mod_strings['LBL_FLEX_TEST'] = 'Flex Relate';
@@ -105,7 +106,7 @@ $mod_strings['LBL_SHIPMENT_QUANTITY_BULKSOLID'] = 'QUANTITY (TONS/YARDS/SHIPMENT
 $mod_strings['LBL_ARIZONA_SPECIAL_WASTE'] = 'Is this a Arizona Special Waste?';
 $mod_strings['LBL_QUEST_CONTAIN_HEAVY_METALS'] = 'DOES THIS WASTE CONTAIN ANY HEAVY GAUGE METAL DEBRIS OR OTHER LARGE OBJECTS (EX., METAL PLATE OR PIPING &gt;1/4” THICK OR &gt;12” LONG, METAL REINFORCED HOSE &gt;12” LONG, METAL WIRE &gt;12” LONG, METAL VALVES, PIPE FITTING, CONCRETE REINFORCING BAR OR PIECES OF CONCRETE &gt;3”)?';
 $mod_strings['LBL_QUEST_METAL_IN_POWDERED_FORM'] = 'DOES THIS WASTE CONTAIN ANY METALS IN POWDERED OR OTHER FINELY DIVIDED FORM?';
-$mod_strings['LBL_QUEST_ANIMAL_WASTE'] = 'DOES THIS WASTE CONTAIN OR HAS IT CONTACTED ANY OF THE FOLLOWING: ANIMAL WASTES, HUMAN BLOOD, BLOOD PRODUCTS, BODY FLUIDS, MICROBIOLOGICAL WASTE, PATHOLOGICAL WASTE, HUMAN OR ANIMAL DERIVED SERUMS OR PROTEINS OR ANY OTHER POTENTIALLY INFECTIOUS MATERIAL?';
+$mod_strings['LBL_QUEST_ANIMAL_WASTE'] = 'DOES THIS WASTE CONTAIN OR HAS IT CONTAINED ANY OF THE FOLLOWING: ANIMAL WASTES, HUMAN BLOOD, BLOOD PRODUCTS, BODY FLUIDS, MICROBIOLOGICAL WASTE, PATHOLOGICAL WASTE, HUMAN OR ANIMAL DERIVED SERUMS OR PROTEINS OR ANY OTHER POTENTIALLY INFECTIOUS MATERIAL?';
 $mod_strings['LBL_ACKNOWLEDGE_1'] = 'The waste was never exposed to potentially infectious material.';
 $mod_strings['LBL_ACKNOWLEDGE_2'] = 'Chemical disinfection or some other form of sterilization has been applied to the waste.';
 $mod_strings['LBL_QUEST_PACKAGING_REQUIREMENTS'] = 'I ACKNOWLEDGE THAT THIS PROFILE MEETS THE HAZTRAC BATTERY PACKAGING REQUIREMENTS.';
@@ -125,3 +126,6 @@ $mod_strings['LBL_QUEST_ON_TEST_OR_KNOWLEDGE'] = 'Are these values based on test
 $mod_strings['LBL_NOTES_ON_TEST_OR_KNOWLEDGE'] = 'If based on knowledge, please describe in detail, the rationale applied to identify and characterize the waste material. Please include reference to MAterial Safety Data Sheets (MSDS) when applicable. Include the chemical or trade-name represented by the MSDS, and or detailed process or operating procedures which generate the waste.';
 $mod_strings['LBL_CONSTITUENT_HEADER'] = 'Please indicate which constituents below apply. Concentrations must be entered when applicable to assist in accurate review and expedited approval of your waste profile. Please note that the total regulated metals and other constituents sections require answers.';
 $mod_strings['LBL_COMMENTS_OR_REQUESTS'] = 'Comments Or Requests';
+$mod_strings['LBL_DESCRIBE_THE_DETAILS'] = 'Describe The Details';
+$mod_strings['LBL_SPECIAL_INSTRUCTIONS'] = 'Special Instructions';
+$mod_strings['LBL_CERTIFICATES'] = 'Terms and Conditions (Certificates)';

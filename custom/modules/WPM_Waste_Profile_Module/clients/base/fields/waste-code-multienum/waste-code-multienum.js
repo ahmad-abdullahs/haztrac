@@ -23,15 +23,17 @@
                     var constituent_volatile = this.view.getField('constituent_volatile');
                     var constituent_semivolatile = this.view.getField('constituent_semivolatile');
                     var constituent_pesticide_herbicide = this.view.getField('constituent_pesticide_herbicide');
+                    var constituent_other = this.view.getField('constituent_other');
 
                     usepaWasteCodesList.push(constituent_regulated.usepaWasteCodes);
                     usepaWasteCodesList.push(constituent_volatile.usepaWasteCodes);
                     usepaWasteCodesList.push(constituent_semivolatile.usepaWasteCodes);
                     usepaWasteCodesList.push(constituent_pesticide_herbicide.usepaWasteCodes);
+                    usepaWasteCodesList.push(constituent_other.usepaWasteCodes);
 
                     // Merge the existing options if user has made any in the USEPA Hazard waste code field...
                     var notes_usepa_hazardous_waste_list = this.model.get('notes_usepa_hazardous_waste_c') || [];
-                    usepaWasteCodesList = _.filter(_.uniq(_.flatten(_.union(usepaWasteCodesList, notes_usepa_hazardous_waste_list))));
+                    usepaWasteCodesList = _.sortBy(_.filter(_.uniq(_.flatten(_.union(usepaWasteCodesList, notes_usepa_hazardous_waste_list)))));
                     this.model.set('notes_usepa_hazardous_waste_c', usepaWasteCodesList);
                 }
             }, this);

@@ -36,6 +36,8 @@ class WPM_Waste_Profile_ModuleApiHelper extends SugarBeanApiHelper {
                 'epa_waste_code',
                 'regulatory_level',
                 'tclp',
+                'uom',
+                'not_applicable',
             ),
         ));
         $data = $this->formatForConstituent($bean, $fieldList, $data, array(
@@ -46,6 +48,8 @@ class WPM_Waste_Profile_ModuleApiHelper extends SugarBeanApiHelper {
                 'epa_waste_code',
                 'regulatory_level',
                 'tclp',
+                'uom',
+                'not_applicable',
             ),
         ));
         $data = $this->formatForConstituent($bean, $fieldList, $data, array(
@@ -56,6 +60,8 @@ class WPM_Waste_Profile_ModuleApiHelper extends SugarBeanApiHelper {
                 'epa_waste_code',
                 'regulatory_level',
                 'tclp',
+                'uom',
+                'not_applicable',
             ),
         ));
         $data = $this->formatForConstituent($bean, $fieldList, $data, array(
@@ -63,8 +69,9 @@ class WPM_Waste_Profile_ModuleApiHelper extends SugarBeanApiHelper {
             'type' => 'Other Constituents',
             'orderBy' => 'name',
             'selectionList' => array(
-                'other',
-                'max',
+                'epa_waste_code',
+                'regulatory_level',
+                'tclp',
                 'uom',
                 'not_applicable',
             ),

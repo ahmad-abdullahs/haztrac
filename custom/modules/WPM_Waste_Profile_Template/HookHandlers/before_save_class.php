@@ -27,6 +27,8 @@ class before_save_class {
                 'epa_waste_code',
                 'regulatory_level',
                 'tclp',
+                'uom',
+                'not_applicable',
             ),
         ));
         $this->handleConstituentField($bean, $event, $arguments, array(
@@ -37,6 +39,8 @@ class before_save_class {
                 'epa_waste_code',
                 'regulatory_level',
                 'tclp',
+                'uom',
+                'not_applicable',
             ),
         ));
         $this->handleConstituentField($bean, $event, $arguments, array(
@@ -47,15 +51,18 @@ class before_save_class {
                 'epa_waste_code',
                 'regulatory_level',
                 'tclp',
+                'uom',
+                'not_applicable',
             ),
         ));
         $this->handleConstituentField($bean, $event, $arguments, array(
             'name' => 'constituent_other',
             'type' => 'Other Constituents',
-            'primary_field' => 'other',
+            'primary_field' => 'epa_waste_code',
             'updateList' => array(
-                'other',
-                'max',
+                'epa_waste_code',
+                'regulatory_level',
+                'tclp',
                 'uom',
                 'not_applicable',
             ),

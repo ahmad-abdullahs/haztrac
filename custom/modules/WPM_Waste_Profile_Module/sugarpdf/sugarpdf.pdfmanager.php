@@ -5,12 +5,14 @@ require_once('include/Sugarpdf/sugarpdf/sugarpdf.pdfmanager.php');
 class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
 
     public $hrLikeDiv = false;
+    public $logoSize = 20;
 
     public function preDisplay() {
         SugarpdfSmarty::preDisplay();
 
         //set margins
-        $this->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
+        //PDF_MARGIN_TOP
+        $this->SetMargins(PDF_MARGIN_LEFT, 38, PDF_MARGIN_RIGHT);
         // $this->setCellHeightRatio(1.25);
         /* function Footer for page number */
 
@@ -22,8 +24,8 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
         }
 
         // header/footer settings
-        $this->setPrintHeader(false);
-        $this->setPrintFooter(true); // always print page number at least
+//        $this->setPrintHeader(true);
+        $this->setPrintFooter(false); // always print page number at least
 
         if (!empty($_REQUEST['pdf_template_id'])) {
 
@@ -54,7 +56,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 if (!empty($pdfTemplate->header_logo) ||
                         !empty($pdfTemplate->header_title) || !empty($pdfTemplate->header_text)) {
                     $this->setHeaderData(
-                            $headerLogo, PDF_HEADER_LOGO_WIDTH, $pdfTemplate->header_title, $pdfTemplate->header_text
+                            $headerLogo, $this->logoSize, $pdfTemplate->header_title, $pdfTemplate->header_text
                     );
                     $this->setPrintHeader(true);
                 }
@@ -100,6 +102,8 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
             $bundleFields['constituent_others'] = array();
             $bundleFields['constituent_semivolatiles'] = array();
             $bundleFields['constituent_pesticide_herbicides'] = array();
+            $fields['showTotal'] = 0;
+            $fields['composition_max_total'] = format_number($fields['composition_max_total'], $locale->getPrecision(), $locale->getPrecision());
 
             // Composition
             $this->bean->load_relationship('waste_composition_wpm_waste_profile_module');
@@ -108,6 +112,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 $bundleFields['compositions'][$count] = PdfManagerHelper::parseBeanFields($compositionBean, true);
                 $bundleFields['compositions'][$count]['min'] = format_number($compositionBean->min, $locale->getPrecision(), $locale->getPrecision());
                 $bundleFields['compositions'][$count]['max'] = format_number($compositionBean->max, $locale->getPrecision(), $locale->getPrecision());
+                $fields['showTotal'] = 1;
                 $count++;
             }
 
@@ -120,7 +125,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                     $bundleFields['constituent_regulateds'][$count1] = $tempBean;
                     $bundleFields['constituent_regulateds'][$count1]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
                     $bundleFields['constituent_regulateds'][$count1]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
-                    $bundleFields['constituent_regulateds'][$count1]['not_applicable'] = $constituentBean->not_applicable ? 'Yes' : '';
+                    // $bundleFields['constituent_regulateds'][$count1]['not_applicable'] = $constituentBean->not_applicable ? 'Yes' : '';
                     $count1++;
                 } else if ($constituentBean->type == 'Volatile') {
                     $bundleFields['constituent_volatiles'][$count2] = $tempBean;
@@ -129,7 +134,8 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                     $count2++;
                 } else if ($constituentBean->type == 'Other Constituents') {
                     $bundleFields['constituent_others'][$count3] = $tempBean;
-                    $bundleFields['constituent_others'][$count3]['max'] = format_number($constituentBean->max, $locale->getPrecision(), $locale->getPrecision());
+                    $bundleFields['constituent_others'][$count3]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
+                    $bundleFields['constituent_others'][$count3]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
                     $count3++;
                 } else if ($constituentBean->type == 'Semi-Volatile') {
                     $bundleFields['constituent_semivolatiles'][$count4] = $tempBean;
@@ -144,9 +150,85 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 }
             }
 
+            global $app_list_strings;
+            $multienums = unencodeMultienum($this->bean->choose_hazards_that_apply_c);
+            $index = -1;
+            $count = 0;
+            $bundleFields['catas'][$count] = array();
+            foreach ($app_list_strings['choose_hazards_that_apply_c_list'] as $key => $value) {
+                $index++;
+                if ($index == 4) {
+                    $index = 0;
+                    $count++;
+                    $bundleFields['catas'][$count] = array();
+                }
+
+                if (in_array($key, $multienums)) {
+                    $bundleFields['catas'][$count]['status' . $index] = "Yes";
+                } else {
+                    $bundleFields['catas'][$count]['status' . $index] = "No";
+                }
+                $bundleFields['catas'][$count]['name' . $index] = $app_list_strings['choose_hazards_that_apply_c_list'][$key];
+            }
+
+
+            $certificates = array_unique(unencodeMultienum($this->bean->certificates));
+            if (!empty($certificates)) {
+                $count = 0;
+                $bundleFields['certificates'][$count] = array();
+                foreach ($certificates as $key => $certificateId) {
+                    $certificateBean = BeanFactory::getBean('wp_terms_and_conditions', $certificateId, array('disable_row_level_security' => true));
+                    $bundleFields['certificates'][$count]['description'] = $certificateBean->description;
+                    $count++;
+                }
+            }
+
+            $link2 = 'accounts_wpm_waste_profile_module_2';
+            $this->bean->load_relationship($link2);
+            $accountBean = $this->bean->$link2->getBeans();
+            if (!empty($accountBean)) {
+                $accountBean = array_shift($accountBean);
+                $accountBean->load_relationship('contacts');
+                $contactsList = $accountBean->contacts->getBeans();
+                foreach ($contactsList as $contactBean) {
+                    $tempBean = PdfManagerHelper::parseBeanFields($contactBean, true);
+                    if ($contactBean->role_contact == 'EHS') {
+                        $fields[$link2]['contacts'] = $tempBean;
+                        break;
+                    } else if ($contactBean->role_contact == 'Primary') {
+                        $fields[$link2]['contacts'] = $tempBean;
+                    } else if (empty($fields[$link2]['contacts'])) {
+                        $fields[$link2]['contacts'] = $tempBean;
+                    }
+                }
+            }
+
+            $link1 = 'accounts_wpm_waste_profile_module_1';
+            $this->bean->load_relationship($link1);
+            $this->bean->$link1->getBeans();
+            $accountBean = $this->bean->$link1->getBeans();
+            if (!empty($accountBean)) {
+                $accountBean = array_shift($accountBean);
+                $accountBean->load_relationship('contacts');
+                $contactsList = $accountBean->contacts->getBeans();
+                foreach ($contactsList as $contactBean) {
+                    $tempBean = PdfManagerHelper::parseBeanFields($contactBean, true);
+                    if ($contactBean->role_contact == 'EHS') {
+                        $fields[$link1]['contacts'] = $tempBean;
+                        break;
+                    } else if ($contactBean->role_contact == 'Primary') {
+                        $fields[$link1]['contacts'] = $tempBean;
+                    } else if (empty($fields[$link1]['contacts'])) {
+                        $fields[$link1]['contacts'] = $tempBean;
+                    }
+                }
+            }
+
             $compositions[] = $bundleFields;
             $this->ss->assign('waste_composition_wpm_waste_profile_module', $compositions);
             $this->ss->assign('waste_constituents_wpm_waste_profile_module', $compositions);
+            $this->ss->assign('choose_hazards_that_apply_list', $compositions);
+            $this->ss->assign('certificates', $compositions);
         }
 
         $this->ss->assign('fields', $fields);
@@ -193,6 +275,12 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 $pdfTemplate->body_html = str_replace(
                         '<!--START_PRODUCT5_LOOP-->', '{foreach from=$constituentList.constituent_others item="constituent_other"}', $pdfTemplate->body_html
                 );
+                $pdfTemplate->body_html = str_replace(
+                        '<!--START_CATA_LOOP-->', '{foreach from=$cataList.catas item="cata"}', $pdfTemplate->body_html
+                );
+                $pdfTemplate->body_html = str_replace(
+                        '<!--START_CERTIFICATE_LOOP-->', '{foreach from=$certificateList.certificates item="certificate"}', $pdfTemplate->body_html
+                );
 
                 $pdfTemplate->body_html = str_replace(
                         array(
@@ -202,6 +290,8 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                     "<!--END_PRODUCT3_LOOP-->",
                     "<!--END_PRODUCT4_LOOP-->",
                     "<!--END_PRODUCT5_LOOP-->",
+                    "<!--END_CATA_LOOP-->", // CHOOSE ALL THAT APPLY
+                    "<!--END_CERTIFICATE_LOOP-->", // Certificates
                         ), '{/foreach}', $pdfTemplate->body_html
                 );
             }
@@ -1238,6 +1328,49 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
             $this->SetX($x + $w);
         }
         return $nl;
+    }
+
+    /**
+     * PDF manager specific Header function
+     */
+    public function Header() {
+        $fields = self::parseBeanFields($this->bean, true);
+        $ormargins = $this->getOriginalMargins();
+        $headerfont = $this->getHeaderFont();
+        $headerdata = $this->getHeaderData();
+        $marginTop = 4;
+
+        if ($headerdata['logo'] && $headerdata['logo'] != K_BLANK_IMAGE) {
+            $this->Image($headerdata['logo'], $this->GetX() + $marginTop, $this->getHeaderMargin() + 5, $headerdata['logo_width'], $headerdata['logo_width']);
+            $imgy = $this->getImageRBY();
+        } else {
+            $imgy = $this->GetY();
+        }
+        $cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
+        // set starting margin for text data cell
+        if ($this->getRTL()) {
+            $header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
+        } else {
+            $header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
+        }
+        $this->SetTextColor(0, 0, 0);
+        // header title
+        $this->SetFont($headerfont[0], 'B', $headerfont[2] + 6);
+        $headerLine = $this->GetY() + $marginTop;
+        $this->MultiCell(0, $cell_height, "WASTE PROFILE SHEET", 0, '', 0, 1, 67, $headerLine, true, 0, false);
+        // header string
+        $this->SetFont($headerfont[0], $headerfont[1], $headerfont[2] + 1);
+        $this->SetX($header_x);
+        $infoCorner = "
+   Profile No:   {$fields['waste_profile_num_c']}
+     Revision:   1
+Submission:   {$fields['submission_type_c']}";
+        $infoCornerXPosition = 149;
+        $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $infoCornerXPosition, $headerLine, true, 0, false);
+        $infoCorner = "       Page(s)   {{pnb}} of ";
+        $pageNumberYAxis = $this->GetY();
+        $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $infoCornerXPosition, $pageNumberYAxis, true, 0, false);
+        $this->MultiCell(0, 0, "{{nb}}", 0, '', 0, 1, $infoCornerXPosition + 29, $pageNumberYAxis, true, 0, false);
     }
 
 }

@@ -20,17 +20,8 @@
      * @inheritdoc
      */
     initialize: function (options) {
-        var self = this;
         this._super('initialize', [options]);
         this.model.on('change:quest_is_usepa_hazardous_c', this.hideDependentFields, this);
-        app.api.call('read', App.api.buildURL('getWasteProfileNum'), {}, {
-            success: function (data) {
-                self.model.set('waste_profile_num_c', data);
-            },
-            error: function (e) {
-                throw e;
-            }
-        });
     },
 
     hideDependentFields: function (model, fieldValue) {

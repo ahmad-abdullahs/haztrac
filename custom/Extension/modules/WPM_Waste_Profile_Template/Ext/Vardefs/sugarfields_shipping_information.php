@@ -31,6 +31,37 @@ $dictionary['WPM_Waste_Profile_Template']['fields']['proper_shipping_name'] = ar
     'cols' => '20',
 );
 
+$dictionary['WPM_Waste_Profile_Template']['fields']['special_instructions'] = array(
+    'labelValue' => 'Special Instructions',
+    'full_text_search' =>
+    array(
+        'enabled' => '0',
+        'boost' => '1',
+        'searchable' => false,
+    ),
+    'required' => false,
+    'name' => 'special_instructions',
+    'vname' => 'LBL_SPECIAL_INSTRUCTIONS',
+    'type' => 'text',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'enabled',
+    'duplicate_merge_dom_value' => 1,
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'pii' => false,
+    'calculated' => false,
+    'size' => '20',
+    'studio' => 'visible',
+    'rows' => '4',
+    'cols' => '20',
+);
+
 $dictionary['WPM_Waste_Profile_Template']['fields']['erg_no'] = array(
     'labelValue' => 'ERG No',
     'required' => false,

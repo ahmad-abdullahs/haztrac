@@ -47,66 +47,66 @@ $dependencies['WPM_Waste_Profile_Template']['liquid_solid_mixture_group_setvalue
     ),
 );
 
-$dependencies["WPM_Waste_Profile_Template"]["free_liquid_c_synofieldmask"] = array(
-    'hooks' =>
-    array(
-        0 => 'edit',
-        1 => 'save',
-    ),
-    'trigger' => 'true',
-    'triggerFields' =>
-    array(
-        0 => 'free_liquid_c',
-        0 => 'settled_solid_c',
-        0 => 'total_suspended_solid_c',
-    ),
-    'onload' => true,
-    'actions' =>
-    array(
-        0 =>
-        array(
-            'name' => 'SetSynoFieldMask',
-            'params' =>
-            array(
-                'target' => 'free_liquid_c',
-                'label' => 'free_liquid_c_label',
-                'value' =>
-                array(
-                    'mask' => '9[9][9][.][9][9]',
-                    'greedy' => false,
-                ),
-            ),
-        ),
-        1 =>
-        array(
-            'name' => 'SetSynoFieldMask',
-            'params' =>
-            array(
-                'target' => 'settled_solid_c',
-                'label' => 'settled_solid_c_label',
-                'value' =>
-                array(
-                    'mask' => '9[9][9][.][9][9]',
-                    'greedy' => false,
-                ),
-            ),
-        ),
-        2 =>
-        array(
-            'name' => 'SetSynoFieldMask',
-            'params' =>
-            array(
-                'target' => 'total_suspended_solid_c',
-                'label' => 'total_suspended_solid_c_label',
-                'value' =>
-                array(
-                    'mask' => '9[9][9].[9][9]',
-                    'greedy' => false,
-                ),
-            ),
-        ),
-    ),
-);
+//$dependencies["WPM_Waste_Profile_Template"]["free_liquid_c_synofieldmask"] = array(
+//    'hooks' =>
+//    array(
+//        0 => 'edit',
+//        1 => 'save',
+//    ),
+//    'trigger' => 'true',
+//    'triggerFields' =>
+//    array(
+//        0 => 'free_liquid_c',
+//        0 => 'settled_solid_c',
+//        0 => 'total_suspended_solid_c',
+//    ),
+//    'onload' => true,
+//    'actions' =>
+//    array(
+//        0 =>
+//        array(
+//            'name' => 'SetSynoFieldMask',
+//            'params' =>
+//            array(
+//                'target' => 'free_liquid_c',
+//                'label' => 'free_liquid_c_label',
+//                'value' =>
+//                array(
+//                    'mask' => '9[9][9][.][9][9]',
+//                    'greedy' => false,
+//                ),
+//            ),
+//        ),
+//        1 =>
+//        array(
+//            'name' => 'SetSynoFieldMask',
+//            'params' =>
+//            array(
+//                'target' => 'settled_solid_c',
+//                'label' => 'settled_solid_c_label',
+//                'value' =>
+//                array(
+//                    'mask' => '9[9][9][.][9][9]',
+//                    'greedy' => false,
+//                ),
+//            ),
+//        ),
+//        2 =>
+//        array(
+//            'name' => 'SetSynoFieldMask',
+//            'params' =>
+//            array(
+//                'target' => 'total_suspended_solid_c',
+//                'label' => 'total_suspended_solid_c_label',
+//                'value' =>
+//                array(
+//                    'mask' => '9[9][9].[9][9]',
+//                    'greedy' => false,
+//                ),
+//            ),
+//        ),
+//    ),
+//);
 
 $dependencies['WPM_Waste_Profile_Template']['notes_on_test_or_knowledge_c_required_dep'] = array(
     'hooks' => array("all"),

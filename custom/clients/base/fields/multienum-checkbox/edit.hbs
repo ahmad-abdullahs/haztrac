@@ -14,14 +14,18 @@
 {{#if this.def.perline}}<span>{{/if}}
 {{#each items}}
     {{#if ../this.def.perline}}{{#compare @index '%' ../../this.def.perline}}</span><span style="width: 100%;">{{/compare}}{{/if}}
-    <input type="checkbox" class="{{../name}}" {{#has this ../value}}checked{{/has}} data-value="{{this}}">
-    <label class="checkbox-label" data-identifier="{{this}}">{{@key}}</label></input><br />
+    {{#if ../this.def.inrow}}<span style="display: flex;">{{/if}}
+        <input type="checkbox" class="{{../name}}" {{#has this ../value}}checked{{/has}} data-value="{{this}}">
+        <label class="checkbox-label" data-identifier="{{this}}">{{@key}}</label></input><br />
+    {{#if ../this.def.inrow}}</span>{{/if}}
     {{setParentKey @key ../this}}
     {{#each ../duplicateItemsList}}
         {{#eq ../../parentKey this}}
             {{#notEq ../../this @key}}
-                <input type="checkbox" class="{{../../../../name}}" {{#has @key ../../../../value}}checked{{/has}} data-value="{{@key}}">
-                <label class="checkbox-label" data-identifier="{{@key}}">{{this}}</label></input><br />                    
+                {{#if ../../../../this.def.inrow}}<span style="display: flex;">{{/if}}
+                    <input type="checkbox" class="{{../../../../name}}" {{#has @key ../../../../value}}checked{{/has}} data-value="{{@key}}">
+                    <label class="checkbox-label" data-identifier="{{@key}}">{{this}}</label></input><br />                    
+                {{#if ../../../../this.def.inrow}}</span>{{/if}}
             {{/notEq}}
         {{/eq}}
     {{/each}}

@@ -62,6 +62,7 @@ $mod_strings = array(
     'LBL_SHOW_MORE' => 'III. Physical CatacteristicsShow more',
     'LBL_RECORDVIEW_PANEL4' => 'VIII. Shipping Information',
     'LBL_RECORDVIEW_PANEL5' => 'IX. Special Handling',
+    'LBL_RECORDVIEW_PANEL10' => 'X. Terms and Conditions (Certificates)',
     'LBL_RECORDVIEW_PANEL6' => 'VII. State Related Information',
     'LBL_RECORDVIEW_PANEL8' => 'VI. Constituents',
     'LBL_GENERATOR' => 'Generator',
