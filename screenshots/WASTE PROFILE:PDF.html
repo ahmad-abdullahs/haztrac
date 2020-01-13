@@ -1095,7 +1095,7 @@
                                     <td width="15%">E2.</td>
                                     <td width="150%">DOES THIS WASTE CONTAIN GREATER THAN 1000 PPM (&gt;1000 PPM) HALOGENATED ORGANIC COMPOUNDS (HOC)?</td>
                                     <td width="5%">&nbsp;</td>
-                                    <td width="30%">{if $fields.hoc_c == ">=1000"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;Yes {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;Yes {/if} {if $fields.hoc_c != ">=1000"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;No {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;No {/if}</td>
+                                    <td width="30%">{if $fields.quest_hoc_c == "Yes"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;Yes {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;Yes {/if} {if $fields.quest_hoc_c == "No"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;No {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;No {/if}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1103,7 +1103,7 @@
                 </tr>
             </tbody>
         </table>
-        {if $fields.hoc_c == ">=1000"}
+        {if $fields.quest_hoc_c == "Yes"}
         <table border="0" cellspacing="20">
             <tbody>
                 <tr>
@@ -1118,7 +1118,7 @@
                                         <table border="1" cellpadding="15">
                                             <tbody>
                                                 <tr>
-                                                    <td width="100%">&nbsp;</td>
+                                                    <td width="100%">{$fields.notes_hoc_c}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -1141,7 +1141,7 @@
                                     <td width="15%">E3.</td>
                                     <td width="150%">DOES THIS WASTE CONTAIN GREATER THAN 2 PPM (>2 PPM) POLYCHLORINATED BIPHENYLS (PCB)?</td>
                                     <td width="5%">&nbsp;</td>
-                                    <td width="30%">{if $fields.pcb_c == ">2"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;Yes {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;Yes {/if} {if $fields.pcb_c != ">2"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;No {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;No {/if}</td>
+                                    <td width="30%">{if $fields.quest_pcb_c == "Yes"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;Yes {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;Yes {/if} {if $fields.quest_pcb_c == "No"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;No {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;No {/if}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1149,7 +1149,7 @@
                 </tr>
             </tbody>
         </table>
-        {if $fields.pcb_c == ">2"}
+        {if $fields.quest_pcb_c == "Yes"}
         <table border="0" cellspacing="20">
             <tbody>
                 <tr>
@@ -1164,7 +1164,7 @@
                                         <table border="1" cellpadding="15">
                                             <tbody>
                                                 <tr>
-                                                    <td width="100%">&nbsp;</td>
+                                                    <td width="100%">{$fields.notes_pcb_c}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

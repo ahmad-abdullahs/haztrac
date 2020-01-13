@@ -18,67 +18,184 @@ $dependencies['WPM_Waste_Profile_Module']['generator_type_c_setvalue_dep'] = arr
 );
 
 /////////////////////////
-$dependencies['WPM_Waste_Profile_Module']['exact_pcb_c_required_dep'] = array(
+//$dependencies['WPM_Waste_Profile_Module']['exact_pcb_c_required_dep'] = array(
+//    'hooks' => array("all"),
+//    'trigger' => 'true',
+//    'triggerFields' => array('pcb_c'),
+//    'onload' => true,
+//    'actions' => array(
+//        array(
+//            'name' => 'SetRequired',
+//            'params' => array(
+//                'target' => 'exact_pcb_c',
+//                'label' => 'exact_pcb_c_label',
+//                'value' => 'equal($pcb_c,"Exact")',
+//            ),
+//        ),
+//    ),
+//);
+//
+//$dependencies['WPM_Waste_Profile_Module']['exact_pcb_c_dep_save'] = array(
+//    'hooks' => array("save"),
+//    'trigger' => 'true',
+//    'triggerFields' => array('pcb_c'),
+//    'actions' => array(
+//        array(
+//            'name' => 'SetValue',
+//            'params' => array(
+//                'target' => 'exact_pcb_c',
+//                'label' => 'exact_pcb_c_label',
+//                'value' => 'ifElse(equal($pcb_c,"Exact"),$exact_pcb_c,"")',
+//            ),
+//        ),
+//    ),
+//);
+//$dependencies['WPM_Waste_Profile_Module']['exact_hoc_c_required_dep'] = array(
+//    'hooks' => array("all"),
+//    'trigger' => 'true',
+//    'triggerFields' => array('hoc_c'),
+//    'onload' => true,
+//    'actions' => array(
+//        array(
+//            'name' => 'SetRequired',
+//            'params' => array(
+//                'target' => 'exact_hoc_c',
+//                'label' => 'exact_hoc_c_label',
+//                'value' => 'equal($hoc_c,"Exact")',
+//            ),
+//        ),
+//    ),
+//);
+//
+//$dependencies['WPM_Waste_Profile_Module']['exact_hoc_c_dep_save'] = array(
+//    'hooks' => array("save"),
+//    'trigger' => 'true',
+//    'triggerFields' => array('hoc_c'),
+//    'actions' => array(
+//        array(
+//            'name' => 'SetValue',
+//            'params' => array(
+//                'target' => 'exact_hoc_c',
+//                'label' => 'exact_hoc_c_label',
+//                'value' => 'ifElse(equal($hoc_c,"Exact"),$exact_hoc_c,"")',
+//            ),
+//        ),
+//    ),
+//);
+
+$dependencies['WPM_Waste_Profile_Module']['notes_pcb_c_required_dep'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('pcb_c'),
+    'triggerFields' => array('quest_pcb_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'SetRequired',
             'params' => array(
-                'target' => 'exact_pcb_c',
-                'label' => 'exact_pcb_c_label',
-                'value' => 'equal($pcb_c,"Exact")',
+                'target' => 'notes_pcb_c',
+                'label' => 'notes_pcb_c_label',
+                'value' => 'equal($quest_pcb_c,"Yes")',
             ),
         ),
     ),
 );
 
-$dependencies['WPM_Waste_Profile_Module']['exact_pcb_c_dep_save'] = array(
+$dependencies['WPM_Waste_Profile_Module']['notes_pcb_c_dep_save'] = array(
     'hooks' => array("save"),
     'trigger' => 'true',
-    'triggerFields' => array('pcb_c'),
+    'triggerFields' => array('quest_pcb_c'),
     'actions' => array(
         array(
             'name' => 'SetValue',
             'params' => array(
-                'target' => 'exact_pcb_c',
-                'label' => 'exact_pcb_c_label',
-                'value' => 'ifElse(equal($pcb_c,"Exact"),$exact_pcb_c,"")',
+                'target' => 'notes_pcb_c',
+                'label' => 'notes_pcb_c_label',
+                'value' => 'ifElse(equal($quest_pcb_c,"Yes"),$notes_pcb_c,"")',
+            ),
+        ),
+        array(
+            'name' => 'SetValue',
+            'params' => array(
+                'target' => 'pcb_present_c',
+                'label' => 'pcb_present_c_label',
+                'value' => 'ifElse(equal($quest_pcb_c,"Yes"),$pcb_present_c,"No")',
             ),
         ),
     ),
 );
 
-$dependencies['WPM_Waste_Profile_Module']['exact_hoc_c_required_dep'] = array(
+$dependencies['WPM_Waste_Profile_Module']['quest_pcb_present_c_1_hide'] = array(
+    'hooks' => array("all"),
+    'triggerFields' => array('quest_pcb_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'pcb_present_c',
+                'value' => 'equal($quest_pcb_c,"Yes")',
+            ),
+        ),
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'pcb_present_c_1',
+                'value' => 'equal($quest_pcb_c,"Yes")',
+            ),
+        ),
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'notes_pcb_c',
+                'value' => 'equal($quest_pcb_c,"Yes")',
+            ),
+        ),
+    ),
+);
+
+$dependencies['WPM_Waste_Profile_Module']['notes_hoc_c_required_dep'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('hoc_c'),
+    'triggerFields' => array('quest_hoc_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'SetRequired',
             'params' => array(
-                'target' => 'exact_hoc_c',
-                'label' => 'exact_hoc_c_label',
-                'value' => 'equal($hoc_c,"Exact")',
+                'target' => 'notes_hoc_c',
+                'label' => 'notes_hoc_c_label',
+                'value' => 'equal($quest_hoc_c,"Yes")',
             ),
         ),
     ),
 );
 
-$dependencies['WPM_Waste_Profile_Module']['exact_hoc_c_dep_save'] = array(
+$dependencies['WPM_Waste_Profile_Module']['notes_hoc_c_dep_save'] = array(
     'hooks' => array("save"),
     'trigger' => 'true',
-    'triggerFields' => array('hoc_c'),
+    'triggerFields' => array('quest_hoc_c'),
     'actions' => array(
         array(
             'name' => 'SetValue',
             'params' => array(
-                'target' => 'exact_hoc_c',
-                'label' => 'exact_hoc_c_label',
-                'value' => 'ifElse(equal($hoc_c,"Exact"),$exact_hoc_c,"")',
+                'target' => 'notes_hoc_c',
+                'label' => 'notes_hoc_c_label',
+                'value' => 'ifElse(equal($quest_hoc_c,"Yes"),$notes_hoc_c,"")',
+            ),
+        ),
+    ),
+);
+
+$dependencies['WPM_Waste_Profile_Module']['quest_hoc_c_1_hide'] = array(
+    'hooks' => array("all"),
+    'triggerFields' => array('quest_hoc_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'notes_hoc_c',
+                'value' => 'equal($quest_hoc_c,"Yes")',
             ),
         ),
     ),

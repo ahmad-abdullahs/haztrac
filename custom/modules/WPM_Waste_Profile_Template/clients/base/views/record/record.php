@@ -1039,38 +1039,76 @@ $viewdefs[$module_name] = array(
                             ),
                             8 =>
                             array(
-                                'name' => 'hoc_c',
-                                'label' => 'LBL_HOC',
+                                'name' => 'quest_hoc_c',
+                                'label' => 'LBL_QUEST_HOC_C',
                                 'type' => 'radioenum-linear',
-                                'style' => 'width: 100%;',
+                                'dismiss_label' => true,
+                                'span' => 2,
                             ),
                             9 =>
                             array(
-                                'name' => 'pcb_c',
-                                'label' => 'LBL_PCB',
-                                'type' => 'radioenum-linear',
-                                'style' => 'width: 100%;',
+                                'name' => 'quest_hoc_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_HOC_C',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
                             ),
                             10 =>
                             array(
-                                'name' => 'exact_hoc_c',
-                                'label' => 'LBL_EXACT_HOC',
+                                'name' => 'notes_hoc_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_HOC_C',
+                                'dismiss_label' => true,
                             ),
                             11 =>
                             array(
-                                'name' => 'exact_pcb_c',
-                                'label' => 'LBL_EXACT_PCB',
                             ),
                             12 =>
                             array(
+                                'name' => 'quest_pcb_c',
+                                'label' => 'LBL_QUEST_PCB_C',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
                             ),
                             13 =>
+                            array(
+                                'name' => 'quest_pcb_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_PCB_C',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'notes_pcb_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_PCB_C',
+                                'dismiss_label' => true,
+                            ),
+                            15 =>
+                            array(
+                            ),
+                            16 =>
                             array(
                                 'name' => 'pcb_present_c',
                                 'label' => 'LBL_PCB_PRESENT',
                                 'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
                             ),
-                            14 =>
+                            17 =>
+                            array(
+                                'name' => 'pcb_present_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_PCB_PRESENT',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            18 =>
                             array(
                                 'name' => 'undisclosed_hazards_c',
                                 'label' => 'LBL_UNDISCLOSED_HAZARDS',
@@ -1078,7 +1116,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            15 =>
+                            19 =>
                             array(
                                 'name' => 'undisclosed_hazards_c_1',
                                 'type' => 'label',
@@ -1087,17 +1125,17 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            16 =>
+                            20 =>
                             array(
                                 'name' => 'undisclosed_hazards_comments_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_UNDISCLOSED_HAZARDS_COMMENTS',
                                 'dismiss_label' => true,
                             ),
-                            17 =>
+                            21 =>
                             array(
                             ),
-                            18 =>
+                            22 =>
                             array(
                                 'name' => 'choose_hazards_that_apply_c',
                                 'label' => 'LBL_CHOOSE_HAZARDS_THAT_APPLY',
@@ -1106,7 +1144,7 @@ $viewdefs[$module_name] = array(
                                 'inrow' => true,
                                 'span' => 12,
                             ),
-                            19 =>
+                            23 =>
                             array(
                                 'name' => 'quest_usepa_hazardous_waste_c',
                                 'label' => 'LBL_QUEST_USEPA_HAZARDOUS_WASTE',
@@ -1114,41 +1152,11 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            20 =>
+                            24 =>
                             array(
                                 'name' => 'quest_usepa_hazardous_waste_c_1',
                                 'type' => 'label',
                                 'default_value' => 'LBL_QUEST_USEPA_HAZARDOUS_WASTE',
-                                'dismiss_label' => true,
-                                'noInline' => true,
-                                'span' => 10,
-                            ),
-                            21 =>
-                            array(
-                                'span' => 2,
-                            ),
-                            22 =>
-                            array(
-                                'name' => 'notes_usepa_hazardous_waste_c',
-                                'type' => 'waste-code-multienum',
-                                'studio' => 'visible',
-                                'label' => 'LBL_NOTES_USEPA_HAZARDOUS_WASTE',
-                                'dismiss_label' => true,
-                                'span' => 10,
-                            ),
-                            23 =>
-                            array(
-                                'name' => 'quest_any_state_code_apply_c',
-                                'label' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
-                                'type' => 'radioenum-linear',
-                                'dismiss_label' => true,
-                                'span' => 2,
-                            ),
-                            24 =>
-                            array(
-                                'name' => 'quest_any_state_code_apply_c_1',
-                                'type' => 'label',
-                                'default_value' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
@@ -1159,26 +1167,26 @@ $viewdefs[$module_name] = array(
                             ),
                             26 =>
                             array(
-                                'name' => 'notes_any_state_code_apply_c',
-                                'type' => 'enum-same-key-and-value',
+                                'name' => 'notes_usepa_hazardous_waste_c',
+                                'type' => 'waste-code-multienum',
                                 'studio' => 'visible',
-                                'label' => 'LBL_NOTES_ANY_STATE_CODE_APPLY',
+                                'label' => 'LBL_NOTES_USEPA_HAZARDOUS_WASTE',
                                 'dismiss_label' => true,
                                 'span' => 10,
                             ),
                             27 =>
                             array(
-                                'name' => 'quest_foreign_waste_code_c',
-                                'label' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
+                                'name' => 'quest_any_state_code_apply_c',
+                                'label' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
                                 'type' => 'radioenum-linear',
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
                             28 =>
                             array(
-                                'name' => 'quest_foreign_waste_code_c_1',
+                                'name' => 'quest_any_state_code_apply_c_1',
                                 'type' => 'label',
-                                'default_value' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
+                                'default_value' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
@@ -1189,24 +1197,26 @@ $viewdefs[$module_name] = array(
                             ),
                             30 =>
                             array(
-                                'name' => 'notes_foreign_waste_code_c',
-                                'label' => 'LBL_NOTES_FOREIGN_WASTE_CODE',
+                                'name' => 'notes_any_state_code_apply_c',
+                                'type' => 'enum-same-key-and-value',
+                                'studio' => 'visible',
+                                'label' => 'LBL_NOTES_ANY_STATE_CODE_APPLY',
                                 'dismiss_label' => true,
                                 'span' => 10,
                             ),
                             31 =>
                             array(
-                                'name' => 'quest_40_cfr_part_c',
-                                'label' => 'LBL_QUEST_40_CFR_PART',
+                                'name' => 'quest_foreign_waste_code_c',
+                                'label' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
                                 'type' => 'radioenum-linear',
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
                             32 =>
                             array(
-                                'name' => 'quest_40_cfr_part_c_1',
+                                'name' => 'quest_foreign_waste_code_c_1',
                                 'type' => 'label',
-                                'default_value' => 'LBL_QUEST_40_CFR_PART',
+                                'default_value' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
@@ -1217,22 +1227,50 @@ $viewdefs[$module_name] = array(
                             ),
                             34 =>
                             array(
+                                'name' => 'notes_foreign_waste_code_c',
+                                'label' => 'LBL_NOTES_FOREIGN_WASTE_CODE',
+                                'dismiss_label' => true,
+                                'span' => 10,
+                            ),
+                            35 =>
+                            array(
+                                'name' => 'quest_40_cfr_part_c',
+                                'label' => 'LBL_QUEST_40_CFR_PART',
+                                'type' => 'radioenum-linear',
+                                'dismiss_label' => true,
+                                'span' => 2,
+                            ),
+                            36 =>
+                            array(
+                                'name' => 'quest_40_cfr_part_c_1',
+                                'type' => 'label',
+                                'default_value' => 'LBL_QUEST_40_CFR_PART',
+                                'dismiss_label' => true,
+                                'noInline' => true,
+                                'span' => 10,
+                            ),
+                            37 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            38 =>
+                            array(
                                 'name' => 'notes_40_cfr_part_1_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_NOTES_40_CFR_PART_1',
                                 'span' => 10,
                             ),
-                            35 =>
+                            39 =>
                             array(
                                 'span' => 2,
                             ),
-                            36 =>
+                            40 =>
                             array(
                                 'name' => 'notes_40_cfr_part_2_c',
                                 'label' => 'LBL_NOTES_40_CFR_PART_2',
                                 'span' => 10,
                             ),
-                            37 =>
+                            41 =>
                             array(
                                 'name' => 'quest_universal_waste_c',
                                 'label' => 'LBL_QUEST_UNIVERSAL_WASTE',
@@ -1240,7 +1278,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            38 =>
+                            42 =>
                             array(
                                 'name' => 'quest_universal_waste_c_1',
                                 'type' => 'label',
@@ -1249,7 +1287,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            39 =>
+                            43 =>
                             array(
                                 'name' => 'quest_is_cesqg_c',
                                 'label' => 'LBL_QUEST_IS_CESQG',
@@ -1257,7 +1295,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            40 =>
+                            44 =>
                             array(
                                 'name' => 'quest_is_cesqg_c_1',
                                 'type' => 'label',
@@ -1266,7 +1304,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            41 =>
+                            45 =>
                             array(
                                 'name' => 'quest_is_rcra_exempt_commerc_c',
                                 'label' => 'LBL_QUEST_IS_RCRA_EXEMPT_COMMERC',
@@ -1274,7 +1312,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            42 =>
+                            46 =>
                             array(
                                 'name' => 'quest_is_rcra_exempt_commerc_c_1',
                                 'type' => 'label',
@@ -1283,7 +1321,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            43 =>
+                            47 =>
                             array(
                                 'name' => 'quest_generate_f006_or_f019_c',
                                 'label' => 'LBL_QUEST_GENERATE_F006_OR_F019',
@@ -1291,7 +1329,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            44 =>
+                            48 =>
                             array(
                                 'name' => 'quest_generate_f006_or_f019_c_1',
                                 'type' => 'label',
@@ -1300,7 +1338,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            45 =>
+                            49 =>
                             array(
                                 'name' => 'quest_found_at_40_cfr_c',
                                 'label' => 'LBL_QUEST_FOUND_AT_40_CFR',
@@ -1308,7 +1346,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            46 =>
+                            50 =>
                             array(
                                 'name' => 'quest_found_at_40_cfr_c_1',
                                 'type' => 'label',
@@ -1317,7 +1355,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            47 =>
+                            51 =>
                             array(
                                 'name' => 'quest_contains_vocs_c',
                                 'label' => 'LBL_QUEST_CONTAINS_VOCS',
@@ -1325,7 +1363,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            48 =>
+                            52 =>
                             array(
                                 'name' => 'quest_contains_vocs_c_1',
                                 'type' => 'label',
@@ -1334,7 +1372,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            49 =>
+                            53 =>
                             array(
                                 'name' => 'quest_greater_than_20organic_c',
                                 'label' => 'LBL_QUEST_GREATER_THAN_20ORGANIC',
@@ -1342,7 +1380,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            50 =>
+                            54 =>
                             array(
                                 'name' => 'quest_greater_than_20organic_c_1',
                                 'type' => 'label',
@@ -1351,7 +1389,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            51 =>
+                            55 =>
                             array(
                                 'name' => 'quest_vapor_pressure_77_c',
                                 'label' => 'LBL_QUEST_VAPOR_PRESSURE_77',
@@ -1359,7 +1397,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            52 =>
+                            56 =>
                             array(
                                 'name' => 'quest_vapor_pressure_77_c_1',
                                 'type' => 'label',
@@ -1368,7 +1406,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            53 =>
+                            57 =>
                             array(
                                 'name' => 'quest_cercla_regulated_c',
                                 'label' => 'LBL_QUEST_CERCLA_REGULATED',
@@ -1376,7 +1414,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            54 =>
+                            58 =>
                             array(
                                 'name' => 'quest_cercla_regulated_c_1',
                                 'type' => 'label',
@@ -1385,7 +1423,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            55 =>
+                            59 =>
                             array(
                                 'name' => 'quest_one_of_neshap_rule_c',
                                 'label' => 'LBL_QUEST_ONE_OF_NESHAP_RULE',
@@ -1393,7 +1431,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            56 =>
+                            60 =>
                             array(
                                 'name' => 'quest_one_of_neshap_rule_c_1',
                                 'type' => 'label',
@@ -1402,15 +1440,15 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            57 =>
+                            61 =>
                             array(
                                 'name' => 'neshap_rules_c',
                                 'label' => 'LBL_NESHAP_RULES',
                             ),
-                            58 =>
+                            62 =>
                             array(
                             ),
-                            59 =>
+                            63 =>
                             array(
                                 'name' => 'quest_is_usepa_hazardous_c',
                                 'label' => 'LBL_QUEST_IS_USEPA_HAZARDOUS',
@@ -1418,7 +1456,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            60 =>
+                            64 =>
                             array(
                                 'name' => 'quest_is_usepa_hazardous_c_1',
                                 'type' => 'label',
@@ -1427,7 +1465,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            61 =>
+                            65 =>
                             array(
                                 'name' => 'quest_waste_from_facility_c',
                                 'label' => 'LBL_QUEST_WASTE_FROM_FACILITY',
@@ -1435,7 +1473,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            62 =>
+                            66 =>
                             array(
                                 'name' => 'quest_waste_from_facility_c_1',
                                 'type' => 'label',
@@ -1444,7 +1482,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            63 =>
+                            67 =>
                             array(
                                 'name' => 'quest_total_annual_benzene_c',
                                 'label' => 'LBL_QUEST_TOTAL_ANNUAL_BENZENE',
@@ -1452,7 +1490,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            64 =>
+                            68 =>
                             array(
                                 'name' => 'quest_total_annual_benzene_c_1',
                                 'type' => 'label',
@@ -1461,12 +1499,12 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            65 =>
+                            69 =>
                             array(
                                 'name' => 'notes_tab_quantity_c',
                                 'label' => 'LBL_NOTES_TAB_QUANTITY',
                             ),
-                            66 =>
+                            70 =>
                             array(
                                 'name' => 'notes_tab_quantity_c_1',
                                 'type' => 'label',
@@ -1474,7 +1512,7 @@ $viewdefs[$module_name] = array(
                                 'default_value' => 'LBL_NOTES_TAB_QUANTITY_1',
                                 'noInline' => true,
                             ),
-                            67 =>
+                            71 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c_header_1',
                                 'type' => 'label',
@@ -1483,7 +1521,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 8,
                             ),
-                            68 =>
+                            72 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c_header_2',
                                 'type' => 'label',
@@ -1492,7 +1530,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 4,
                             ),
-                            69 =>
+                            73 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c_1',
                                 'type' => 'label',
@@ -1501,7 +1539,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 3,
                             ),
-                            70 =>
+                            74 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c',
                                 'studio' => 'visible',
