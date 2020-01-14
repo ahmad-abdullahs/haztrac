@@ -26,7 +26,9 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         if (this.context.parent) {
-            if (this.context.parent.get('module') == 'RevenueLineItems' && this.module == 'RevenueLineItems') {
+            if (this.context.parent.get('module') == 'RevenueLineItems' &&
+                    this.module == 'RevenueLineItems' &&
+                    this.type == "subpanel-list") {
                 this.showOrderingIcon = true;
             }
         }

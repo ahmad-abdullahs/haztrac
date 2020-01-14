@@ -1,0 +1,16 @@
+
+Step: 0
+Trigger the event for subpanel-list-create to add the product template as an RLI in subpanel-list-create
+_onTreeNodeNameClicked function trigger this event like this
+app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
+ 
+Step: 1
+clients/base/views/subpanel-list-create/subpanel-list-create.js
+bindDataChange register the function to listen the (viewDetails.cid + ':productCatalogDashlet:add') event triggred from Setp 0.
+
+Step: 2
+After listening the trigger from Step: 0, Step: 1 will call the function onAddFromProductCatalog and _addBeanToList 
+which can be overridden in classes (views) extending the subpanel-list-create 
+** User can set the bean attributes in _addBeanToList or _addCustomFieldsToBean function, can make changes in that.
+
+Step: 3

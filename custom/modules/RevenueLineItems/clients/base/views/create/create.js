@@ -99,5 +99,114 @@
 
             rliModel.set(bean.attributes);
         }
+
+        // Piece of code is added to reset the related revenueline item subpanel create list every time
+        // when a product template is selected from the dashlet.
+        if (this.context) {
+            var rli_context = this.context.getChildContext({link: 'revenuelineitems_revenuelineitems_1'});
+            rli_context.prepare();
+            if (rli_context.get('collection').length > 0) {
+                rli_context.get('collection').reset();
+            }
+        }
+    },
+
+    validateSubpanelModelsWaterfall: function (callback) {
+        this.hasSubpanelModels = false;
+        _.each(this.context.children, function (child) {
+            if (child.get('isCreateSubpanel')) {
+                this.hasSubpanelModels = true;
+                this.context.trigger('subpanel:validateCollection:' + child.get('link'), callback, true);
+            }
+        }, this);
+
+        // If there are no subpanel models, callback false so the waterfall can continue
+        if (!this.hasSubpanelModels) {
+            return callback(false);
+        } else {
+            // ++ 
+            // Saving is hacked to save the single Revenuelineitem (because when revenue line item is created in a drawer
+            // bundle is saved from the above return callback(false) condition, so for a single revenue line item, we have
+            // to write this code.)
+            var rli_context = this.context.getChildContext({link: 'revenuelineitems_revenuelineitems_1'});
+            rli_context.prepare();
+            if (rli_context.get('collection').length == 0) {
+                return callback(false);
+            }
+        }
+    },
+
+    saveModel: function (success, error) {
+        var self = this,
+                options;
+        options = {
+            success: success,
+            error: error,
+            viewed: true,
+            relate: (self.model.link) ? true : null,
+            //Show alerts for this request
+            showAlerts: {
+                'process': true,
+                'success': false,
+                'error': false //error callback implements its own error handler
+            },
+            lastSaveAction: this.context.lastSaveAction
+        };
+        this.applyAfterCreateOptions(options);
+
+        // Check if this has subpanel create models
+        if (this.hasSubpanelModels) {
+            _.each(this.context.children, function (child) {
+                if (child.get('isCreateSubpanel')) {
+                    // create the child collection JSON structure to save
+                    var childCollection = {
+                        create: []
+                    },
+                            linkName = child.get('link');
+                    if (this.model.has(linkName)) {
+                        // the model already has the link name, there must be rollup formulas
+                        // on the create form between the model and the subpanel
+                        childCollection = this.model.get(linkName);
+                        // make sure there is a create key on the childCollection
+                        if (!_.has(childCollection, 'create')) {
+                            childCollection['create'] = [];
+                        }
+                    }
+
+                    // loop through the models in the collection and push each model's JSON
+                    // data to the 'create' array
+//                    var lineNumber = 1, setLineNumber = false;
+                    _.each(child.get('collection').models, function (model) {
+                        // Set the Sales and Service Account, Opportunity account, account ID, to every RLI model in
+                        // bundle which is going to create...
+                        if (self.context.parent.get('module') == 'Accounts') {
+                            model.set('account_id', self.context.parent.get('model').get('id'));
+                        } else if (self.context.parent.get('module') == 'sales_and_services') {
+                            model.set('account_id', self.context.parent.get('model').get('accounts_sales_and_services_1accounts_ida'));
+                        } else if (self.context.parent.get('module') == 'Opportunities') {
+                            model.set('account_id', self.context.parent.get('model').get('account_id'));
+                        }
+                        // Check if line_number is not set to first model, 
+                        // It means it is not set for any of these, (set line_number for revenuelineitems)
+//                        if (child.get('collection').models[0].get('line_number') == 0) {
+//                            setLineNumber = true;
+//                        }
+//
+//                        if (setLineNumber) {
+//                            model.set('line_number', lineNumber, {'silent': true});
+//                        }
+
+                        childCollection.create.push(model.toJSON());
+//                        lineNumber++;
+                    }, this);
+
+                    // set the child JSON collection data to the model
+                    this.model.set(linkName, childCollection);
+                }
+            }, this);
+        }
+
+        options = _.extend({}, options, self.getCustomSaveOptions(options));
+        self.model.save(null, options);
     },
 })

@@ -26,6 +26,9 @@ $viewdefs['RevenueLineItems']['base']['layout']['create'] = array(
                                 array(
                                     'view' => 'create',
                                 ),
+                                array(
+                                    'layout' => 'subpanels-create',
+                                ),
                             ),
                         ),
                     ),

@@ -52,33 +52,37 @@
         this.registerShortcuts();
         /**/
 
-        this.raRLIs = App.data.createBeanCollection('RevenueLineItems');
+        // Only show this dashlet view when RevenuelineItem create dawer 
+        // is open on top of the Sales and services module.
+        if (this.context.parent.parent.get('module') == 'sales_and_services') {
+            this.raRLIs = App.data.createBeanCollection('RevenueLineItems');
 
-        this.raRLIs.setOption('endpoint', _.bind(function (method, model, options, callbacks) {
-            options.params.filter = [{
-                    account_id: {
-                        '$equals': this.parentModel.get('accounts_sales_and_services_1accounts_ida'),
-                    },
-                    is_bundle_product_c: {
-                        '$not_in': ['child', 'parent'],
-                    },
-                    rli_as_template_c: {
-                        '$equals': 1,
-                    },
-                }];
-            options.params.view = this.thisViewName;
+            this.raRLIs.setOption('endpoint', _.bind(function (method, model, options, callbacks) {
+                options.params.filter = [{
+                        account_id: {
+                            '$equals': this.parentModel.get('accounts_sales_and_services_1accounts_ida'),
+                        },
+                        is_bundle_product_c: {
+                            '$not_in': ['child', 'parent'],
+                        },
+                        rli_as_template_c: {
+                            '$equals': 1,
+                        },
+                    }];
+                options.params.view = this.thisViewName;
 
-            return SUGAR.App.api.records(
-                    method,
-                    model.module,
-                    model.attributes,
-                    options.params,
-                    callbacks,
-                    options.apiOptions
-                    );
-        }, this));
+                return SUGAR.App.api.records(
+                        method,
+                        model.module,
+                        model.attributes,
+                        options.params,
+                        callbacks,
+                        options.apiOptions
+                        );
+            }, this));
 
-        this.listenTo(options.context.parent.get('model'), 'change:is_bundle_product_c', _.bind(this.reloadList, this), this);
+            this.listenTo(options.context.parent.get('model'), 'change:is_bundle_product_c', _.bind(this.reloadList, this), this);
+        }
     },
 
     _render: function () {
