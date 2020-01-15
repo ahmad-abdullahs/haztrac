@@ -693,14 +693,14 @@ $viewdefs[$module_name] = array(
                                 'name' => 'associated_source_code_c',
                                 'label' => 'LBL_ASSOCIATED_SOURCE_CODE',
                                 'type' => 'enum-same-key-and-value',
-                                'span' => 6,
+                                'span' => 12,
                             ),
                             26 =>
                             array(
                                 'name' => 'associated_form_code_c',
                                 'label' => 'LBL_ASSOCIATED_FORM_CODE',
                                 'type' => 'enum-same-key-and-value',
-                                'span' => 6,
+                                'span' => 12,
                             ),
                         ),
                     ),
