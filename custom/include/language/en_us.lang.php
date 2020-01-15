@@ -14,6 +14,7 @@ $app_strings['LBL_COPY_RLI_BUTTON'] = 'Copy';
 $app_strings['LBL_PRINT_BUTTON_LABEL'] = 'Print';
 $app_strings['LBL_PRINT_PAPERWORK'] = 'Print Paperwork';
 $app_strings['LBL_COMPLETE_SALE'] = 'Complete Sales';
+$app_strings['LBL_CONVERT_TO_LAB_TEMPLATE'] = 'Convert To Template';
 $app_strings['LBL_CANCEL_PRINT_PAPERWORK'] = 'Cancel';
 $app_strings['LBL_SAVE_PRINT_PAPERWORK'] = 'Save';
 $app_strings['LBL_TASK_FOLLOWUP'] = 'Print Paperwork';

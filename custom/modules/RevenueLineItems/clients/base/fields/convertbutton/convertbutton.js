@@ -82,7 +82,7 @@
                     }
                 }, _.bind(self.loadParentView, self));
             },
-            error: function () {
+            error: function (err) {
                 app.logger.error('Failed to fetch RevenueLineItems Bean: ' + JSON.stringify(err));
             }
         });

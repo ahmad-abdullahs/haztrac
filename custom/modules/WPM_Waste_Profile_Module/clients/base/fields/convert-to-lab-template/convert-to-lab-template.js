@@ -1,31 +1,21 @@
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
 ({
-    extendsFrom: 'RecordView',
+    extendsFrom: 'RowactionField',
 
-    /**
-     * @inheritdoc
-     */
     initialize: function (options) {
-        this.plugins = _.union(this.plugins || [], ['WasteProfilePlugin']);
         this._super('initialize', [options]);
-        this.fieldsDataChangeBinding();
-        // Add listener for print_paperwork_button
-        this.context.on('button:convert_to_lab_template_button:click', this.openWasteProfileTemplateRecordView, this);
+        this.type = 'rowaction';
+    },
+
+    rowActionSelect: function (evt) {
+        this.openWasteProfileTemplateRecordView();
     },
 
     openWasteProfileTemplateRecordView: function () {
+        var recordId = this.getRecordId();
+        var model = this.collection.get(recordId);
         var wasteProfileBean;
         var wasteProfileBean = app.data.createBean('WPM_Waste_Profile_Module', {
-            id: this.model.get('id'),
+            id: model.get('id'),
         });
         wasteProfileBean.fetch({
             success: function (wasteProfileBean) {
@@ -48,5 +38,18 @@
                 app.logger.error('Failed to fetch WPM_Waste_Profile_Module Bean: ' + JSON.stringify(err));
             }
         });
+    },
+
+    getRecordId: function () {
+        var findName = this.$el.parents('tr:first').attr('name').split('_');
+        return findName[findName.length - 1];
+    },
+
+    /*
+     * Disable the button if service is already completed
+     * @returns {undefined}
+     */
+    _render: function () {
+        this._super('_render');
     },
 })

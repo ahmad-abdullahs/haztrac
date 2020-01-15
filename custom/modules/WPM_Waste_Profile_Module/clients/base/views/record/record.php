@@ -57,13 +57,21 @@ $viewdefs[$module_name] = array(
                             ),
                             2 =>
                             array(
+                                'type' => 'rowaction',
+                                'name' => 'convert_to_lab_template',
+                                'event' => 'button:convert_to_lab_template_button:click',
+                                'label' => 'LBL_CONVERT_TO_LAB_TEMPLATE',
+                                'acl_action' => 'view',
+                            ),
+                            3 =>
+                            array(
                                 'type' => 'pdfaction',
                                 'name' => 'download-pdf',
                                 'label' => 'LBL_PDF_VIEW',
                                 'action' => 'download',
                                 'acl_action' => 'view',
                             ),
-                            3 =>
+                            4 =>
                             array(
                                 'type' => 'pdfaction',
                                 'name' => 'email-pdf',
@@ -71,11 +79,11 @@ $viewdefs[$module_name] = array(
                                 'action' => 'email',
                                 'acl_action' => 'view',
                             ),
-                            4 =>
+                            5 =>
                             array(
                                 'type' => 'divider',
                             ),
-                            5 =>
+                            6 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:find_duplicates_button:click',
@@ -83,7 +91,7 @@ $viewdefs[$module_name] = array(
                                 'label' => 'LBL_DUP_MERGE',
                                 'acl_action' => 'edit',
                             ),
-                            6 =>
+                            7 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:duplicate_button:click',
@@ -92,7 +100,7 @@ $viewdefs[$module_name] = array(
                                 'acl_module' => 'WPM_Waste_Profile_Module',
                                 'acl_action' => 'create',
                             ),
-                            7 =>
+                            8 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:audit_button:click',
@@ -100,11 +108,11 @@ $viewdefs[$module_name] = array(
                                 'label' => 'LNK_VIEW_CHANGE_LOG',
                                 'acl_action' => 'view',
                             ),
-                            8 =>
+                            9 =>
                             array(
                                 'type' => 'divider',
                             ),
-                            9 =>
+                            10 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:delete_button:click',
@@ -290,13 +298,9 @@ $viewdefs[$module_name] = array(
                                 'name' => 'physical_state_c',
                                 'label' => 'LBL_PHYSICAL_STATE',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
                             1 =>
-                            array(
-                                'name' => 'wp_color_c',
-                                'label' => 'LBL_WP_COLOR',
-                            ),
-                            2 =>
                             array(
                                 'name' => 'liquid_solid_mixture_group',
                                 'type' => 'custom-fieldset',
@@ -349,85 +353,98 @@ $viewdefs[$module_name] = array(
                                         'name' => 'grid_end',
                                     ),
                                 ),
-                                'span' => 12,
                             ),
                             3 =>
+                            array(
+                                'name' => 'wp_color_c',
+                                'label' => 'LBL_WP_COLOR',
+                            ),
+                            4 =>
+                            array(
+                            ),
+                            5 =>
                             array(
                                 'name' => 'describe_appearance_c',
                                 'label' => 'LBL_DESCRIBE_APPEARANCE',
                             ),
-                            4 =>
+                            6 =>
                             array(
                                 'name' => 'number_of_phases_c',
                                 'label' => 'LBL_NUMBER_OF_PHASES',
                             ),
-                            5 =>
+                            7 =>
                             array(
                                 'name' => 'odor_c',
                                 'label' => 'LBL_ODOR',
                                 'type' => 'radioenum-linear',
                             ),
-                            6 =>
+                            8 =>
                             array(
                                 'name' => 'odor_description_c',
                                 'label' => 'LBL_ODOR_DESCRIPTION',
                             ),
-                            7 =>
+                            9 =>
                             array(
                                 'name' => 'flash_point_c',
                                 'label' => 'LBL_FLASH_POINT',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            8 =>
+                            10 =>
                             array(
                                 'name' => 'btu_c',
                                 'label' => 'LBL_BTU',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            9 =>
+                            11 =>
                             array(
                                 'name' => 'ash_content_c',
                                 'label' => 'LBL_ASH_CONTENT',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            10 =>
+                            12 =>
                             array(
                                 'name' => 'ph_c',
                                 'label' => 'LBL_PH',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            11 =>
+                            13 =>
                             array(
                                 'name' => 'viscosity_c',
                                 'label' => 'LBL_VISCOSITY',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            12 =>
+                            14 =>
                             array(
                                 'name' => 'specific_gravity_c',
                                 'label' => 'LBL_SPECIFIC_GRAVITY',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            13 =>
+                            15 =>
                             array(
                                 'name' => 'boiling_point_c',
                                 'label' => 'LBL_BOILING_POINT',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            14 =>
+                            16 =>
                             array(
                                 'name' => 'melting_point_c',
                                 'label' => 'LBL_MELTING_POINT',
                                 'type' => 'radioenum-linear',
+                                'span' => 12,
                             ),
-                            15 =>
+                            17 =>
                             array(
                                 'name' => 'total_organic_carbon_c',
                                 'label' => 'LBL_TOTAL_ORGANIC_CARBON',
                                 'type' => 'radioenum-linear',
-                            ),
-                            16 =>
-                            array(
+                                'span' => 12,
                             ),
                         ),
                     ),
@@ -720,14 +737,14 @@ $viewdefs[$module_name] = array(
                                 'name' => 'associated_source_code_c',
                                 'label' => 'LBL_ASSOCIATED_SOURCE_CODE',
                                 'type' => 'enum-same-key-and-value',
-                                'span' => 6,
+                                'span' => 12,
                             ),
                             26 =>
                             array(
                                 'name' => 'associated_form_code_c',
                                 'label' => 'LBL_ASSOCIATED_FORM_CODE',
                                 'type' => 'enum-same-key-and-value',
-                                'span' => 6,
+                                'span' => 12,
                             ),
                         ),
                     ),

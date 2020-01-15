@@ -14,9 +14,9 @@ $app_list_strings['choose_hazards_that_apply_c_list'] = array(
     'Fuming' => 'Fuming',
     'Water/Air Recitative' => 'Water/Air Recitative',
     'Recitative Sulfides' => 'Recitative Sulfides',
+    'None of the Above' => 'None of the Above',
     'Medical / Infectious' => 'Medical / Infectious',
     'OHSA Carcinogen' => 'OHSA Carcinogen',
     'DEA Regulated Subs.' => 'DEA Regulated Subs.',
-    'AZ Special Waste' => 'AZ Special Waste',
-    'None of the Above' => 'None of the Above',
+//    'AZ Special Waste' => 'AZ Special Waste',
 );
