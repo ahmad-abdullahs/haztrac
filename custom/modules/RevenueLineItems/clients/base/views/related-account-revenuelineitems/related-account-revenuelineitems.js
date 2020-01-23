@@ -83,6 +83,10 @@
         }, this));
 
         this.parentModel.on('change:accounts_sales_and_services_1accounts_ida', _.bind(this.reloadList, this), this);
+        // At the time of initialization it is called to load the related revenue line items dashlet.
+        // When the sales and service create drawer is open from subpanel create button under Account record
+        // view, It was not loading the dashlet, that's why this code is added.
+        this.reloadList();
     },
 
     reloadList: function () {

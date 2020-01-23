@@ -16,7 +16,7 @@ class before_save_class {
         if (isset($_REQUEST['__sugar_url'])) {
             $requestURL = explode('/', $_REQUEST['__sugar_url']);
 
-            if ($requestURL[1] == 'Accounts') { // 1. Means RLI is created in Accounts along with Account creation and then linked to Account
+            if ($requestURL[1] == 'Accounts' && empty($requestURL[4])) { // 1. Means RLI is created in Accounts along with Account creation and then linked to Account
                 $bean->rli_as_template_c = 1;
             } else if ($requestURL[1] == 'Accounts' && $requestURL[4] == 'revenuelineitems') { // 2. Means RLI is created in Accounts through the subpanel create button
                 $bean->rli_as_template_c = 1;
@@ -26,7 +26,7 @@ class before_save_class {
                 }
             }
             // 4. Means RLI is created in Opportunity along with Opportunity creation and linked to Account
-            if ($requestURL[1] == 'Opportunities') {
+            if ($requestURL[1] == 'Opportunities' && empty($requestURL[4])) {
                 $bean->rli_as_template_c = 1;
             } else if ($requestURL[1] == 'Opportunities' && $requestURL[4] == 'revenuelineitems') { // 2. Means RLI is created in Opportunities through the subpanel create button
                 $bean->rli_as_template_c = 1;

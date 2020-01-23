@@ -339,6 +339,10 @@
                 var productTemplatesRelatedColl = productTemplates.getRelatedCollection('product_templates_product_templates_1');
                 productTemplatesRelatedColl = productTemplatesRelatedColl.fetch({
                     relate: true,
+                    limit: -1,
+                    params: {
+                        order_by: "line_number:asc",
+                    },
                     success: function (coll) {
                         _.each(coll.models, function (model) {
                             _self._massageDataBeforeSendingToRecord(model.attributes);

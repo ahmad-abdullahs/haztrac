@@ -35,7 +35,30 @@ class CustomProductTemplatesRelateApi extends RelateApi {
                 }
             }
         }
-        return parent::filterRelated($api, $args);
+
+        $data = parent::filterRelated($api, $args);
+
+        foreach ($data['records'] as $key => $value) {
+            if (!empty($value['v_vendors_id_c'])) {
+                global $db;
+                $sql = "SELECT 
+                    accounts.id,
+                    accounts.name
+                FROM
+                    accounts
+                WHERE
+                    accounts.id ='" . $value['v_vendors_id_c'] . "'
+                        AND accounts.deleted = '0'";
+
+                $result = $db->query($sql);
+
+                while ($row = $db->fetchByAssoc($result)) {
+                    $data['records'][$key]['product_vendor_c'] = ($row['name']);
+                }
+            }
+        }
+
+        return $data;
     }
 
 }

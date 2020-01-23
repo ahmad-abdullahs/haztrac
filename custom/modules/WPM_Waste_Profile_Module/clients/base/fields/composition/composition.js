@@ -10,6 +10,7 @@
     modelFooterFields: {},
     isFirst: true,
     addClass: 'addRecord',
+    setFocusEle: '',
     initialize: function (options) {
         this._super('initialize', [options]);
         app.error.errorName2Keys['composition_max_total_should_not_more_than_100_message'] = 'ERROR_MAX_TOTAL_VALIDATION_MESSAGE';
@@ -36,12 +37,14 @@
     },
 
     bindDataChange: function () {
-        this.model.on('change:' + this.name, function () {
-            if (this.action !== 'edit') {
-                this.render();
-            }
-            this.recalculateMaxTotal();
-        }, this);
+        this.model.on('change:' + this.name, _.bind(this.listenCompositionChange, this, this.name), this);
+    },
+
+    listenCompositionChange: function (innerFieldName, model, value) {
+        if (this.action !== 'edit') {
+            this.render();
+        }
+        this.recalculateMaxTotal(innerFieldName);
     },
 
     render: function () {
@@ -137,7 +140,7 @@
         this.renderFieldFooterInnerFields();
     },
 
-    recalculateMaxTotal: function () {
+    recalculateMaxTotal: function (innerFieldName) {
         var field = this.model.get(this.name),
                 compositionMaxTotal = 0.00;
 
@@ -156,7 +159,11 @@
             this.model.set('composition_max_total', compositionMaxTotal);
         }
 
-        this.renderFieldFooterInnerFields();
+        $.when(this.renderFieldFooterInnerFields()).then(function () {
+            if (!_.isEmpty(innerFieldName)) {
+                $('[name=' + innerFieldName + ']').parents('div:first').next().find('input').focus();
+            }
+        });
     },
 
     /*
@@ -221,12 +228,12 @@
 //            }
 
             if (fieldDef.name == (this.name + "_name") && isNew) {
-                this.model.on('change:' + innerFieldName, this.checkPlusButton, this);
+                this.model.on('change:' + innerFieldName, _.bind(this.checkPlusButton, this, innerFieldName), this);
             } else {
                 if (fieldDef.name == this.name + '_name') {
                     this.model.on('change:' + innerFieldName, _.bind(this.updateName, this, innerFieldName), this);
                 } else {
-                    this.model.on('change:' + innerFieldName, _.bind(this.updateJSON, this, _.clone(fieldDef)), this);
+                    this.model.on('change:' + innerFieldName, _.bind(this.updateJSON, this, innerFieldName), this);
                 }
             }
 
@@ -306,7 +313,9 @@
         }
     },
 
-    checkPlusButton: function (model, value) {
+    checkPlusButton: function (innerFieldName, model, value) {
+        var self = this;
+        this.setFocusEle = innerFieldName;
         var changedFields = _.keys(model.changed);
         var obj = this.parseFieldNames(changedFields);
         var nruid = this.getCurrentNewRowUid();
@@ -320,10 +329,16 @@
         if (obj.id == nruid && value) {
             this.addRowFromUid(obj.id);
         }
-        this.updateJSON();
+
+        $.when(this.updateJSON()).then(function () {
+            if (!_.isEmpty(self.setFocusEle)) {
+                $('[name=' + self.setFocusEle + ']').parents('div:first').next().find('input').focus();
+                self.setFocusEle = '';
+            }
+        });
     },
 
-    updateJSON: function () {
+    updateJSON: function (innerFieldName) {
         var jsonField = [];
         var nruid = this.getCurrentNewRowUid();
         _.each(this.fieldIds, function (uid) {
@@ -343,7 +358,7 @@
         }, this);
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
 
-        this.recalculateMaxTotal();
+        this.recalculateMaxTotal(innerFieldName);
     },
 
     parseFieldNames: function (fieldNames) {

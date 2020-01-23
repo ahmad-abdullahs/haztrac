@@ -74,6 +74,7 @@
         data.worst_case = data.discount_price;
         data.assigned_user_id = app.user.get('id');
         data.assigned_user_name = app.user.get('name');
+        data.executeBundleLogic = 1;
 
         var bean;
 
@@ -183,6 +184,7 @@
                             model.set('account_id', self.context.parent.get('model').get('id'));
                         } else if (self.context.parent.get('module') == 'sales_and_services') {
                             model.set('account_id', self.context.parent.get('model').get('accounts_sales_and_services_1accounts_ida'));
+                            model.set('sales_and_services_revenuelineitems_1sales_and_services_ida', self.context.parent.get('model').get('id'));
                         } else if (self.context.parent.get('module') == 'Opportunities') {
                             model.set('account_id', self.context.parent.get('model').get('account_id'));
                         }

@@ -37,7 +37,15 @@ $dictionary["RevenueLineItem"]["fields"]['is_bundle_product_c'] = array(
         'searchable' => false,
     ),
     'calculated' => '1',
-    'formula' => 'ifElse(greaterThan(count($revenuelineitems_revenuelineitems_1),0),"parent",ifElse(equal(count($revenuelineitems_revenuelineitems_1_right),1),"child",""))',
+//    'formula' => 'ifElse(greaterThan(count($revenuelineitems_revenuelineitems_1),0),"parent",ifElse(equal(count($revenuelineitems_revenuelineitems_1_right),1),"child",""))',
+    'formula' => 'ifElse(greaterThan(count($revenuelineitems_revenuelineitems_1),0),"parent",'
+    . 'ifElse(or('
+    . 'equal(count($revenuelineitems_revenuelineitems_1_right),1)'
+    . ','
+    . 'not(equal($revenuelineitems_revenuelineitems_1revenuelineitems_ida,""))'
+//    . ','
+//    . 'not(equal($revenuelineitems_revenuelineitems_1_right,""))'
+    . '),"child",""))',
     'enforced' => '1',
     'dependency' => '',
     'visibility_grid' => '',
@@ -61,4 +69,11 @@ $dictionary["RevenueLineItem"]["fields"]['is_bundle_product_c'] = array(
     'size' => '20',
 //      'id' => 'RevenueLineItemsis_bundle_product_c',
     'custom_module' => 'RevenueLineItems',
+);
+
+$dictionary['RevenueLineItem']['fields']['executeBundleLogic'] = array(
+    'name' => 'executeBundleLogic',
+    'vname' => 'LBL_EXECUTE_BUNDLE_LOGIC',
+    'type' => 'varchar',
+    'source' => 'non-db',
 );

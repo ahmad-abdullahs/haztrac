@@ -87,6 +87,9 @@
             view: 'subpanel-for-producttemplates-create',
             relate: true,
             limit: -1,
+            params: {
+                order_by: "line_number:asc",
+            },
             success: function (data) {
                 self.productBundleIds = [];
                 self.productBundle = _.clone(data.models);
@@ -376,7 +379,19 @@
                     }
                     // loop through the models in the collection and push each model's JSON
                     // data to the 'create' array
+                    var lineNumber = 1, setLineNumber = false;
                     _.each(child.get('collection').models, function (model) {
+                        // Check if line_number is not set to first model, 
+                        // It means it is not set for any of these, (set line_number for product bundle items)
+                        if (model.get('line_number') == 0) {
+                            setLineNumber = true;
+                        }
+
+                        if (setLineNumber) {
+                            model.set('line_number', lineNumber, {'silent': true});
+                        }
+                        lineNumber++;
+
                         if (child.get('link') == 'product_templates_product_templates_1') {
                             if (_.contains(this.productBundleIds, model.get('id'))) {
                                 childCollection.update.push(model.toJSON());

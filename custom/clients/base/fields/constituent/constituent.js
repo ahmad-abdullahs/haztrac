@@ -9,6 +9,7 @@
     modelFields: {},
     isFirst: true,
     addClass: 'addRecord',
+    setFocusEle: '',
     initialize: function (options) {
         this._super('initialize', [options]);
         this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
@@ -131,7 +132,7 @@
             this.model.set(innerFieldName, rowObj[fieldDef.name]);
 
             if (fieldDef.name == this.def.primary_field && isNew) {
-                this.model.on('change:' + innerFieldName, this.checkPlusButton, this);
+                this.model.on('change:' + innerFieldName, _.bind(this.checkPlusButton, this, innerFieldName), this);
             } else {
                 if (fieldDef.name == this.def.primary_field) {
                     this.model.on('change:' + innerFieldName, _.bind(this.updateName, this, innerFieldName), this);
@@ -185,7 +186,9 @@
         }
     },
 
-    checkPlusButton: function (model, value) {
+    checkPlusButton: function (innerFieldName, model, value) {
+        var self = this;
+        this.setFocusEle = innerFieldName;
         var changedFields = _.keys(model.changed);
         var obj = this.parseFieldNames(changedFields);
         var nruid = this.getCurrentNewRowUid();
@@ -199,7 +202,13 @@
         if (obj.id == nruid && value) {
             this.addRowFromUid(obj.id);
         }
-        this.updateJSON();
+
+        $.when(this.updateJSON()).then(function () {
+            if (!_.isEmpty(self.setFocusEle)) {
+                $('[name=' + self.setFocusEle + ']').parents('div:first').next().find('input').focus();
+                self.setFocusEle = '';
+            }
+        });
     },
 
     updateJSON: function () {
