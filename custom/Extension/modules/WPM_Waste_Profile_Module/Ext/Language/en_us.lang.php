@@ -141,3 +141,6 @@ $mod_strings['LBL_SPECIAL_INSTRUCTIONS'] = 'Special Instructions';
 $mod_strings['LBL_CERTIFICATES'] = 'Terms and Conditions (Certificates)';
 $mod_strings['LBL_QUEST_HOC_C'] = 'DOES THIS WASTE CONTAIN GREATER THAN 1000 PPM (>1000 PPM) HALOGENATED ORGANIC COMPOUNDS (HOC)?';
 $mod_strings['LBL_QUEST_PCB_C'] = 'DOES THIS WASTE CONTAIN GREATER THAN 2 PPM (>2 PPM) POLYCHLORINATED BIPHENYLS (PCB)?';
+$mod_strings["LBL_FILE_MIME_TYPE"] = "File Mime Type";
+$mod_strings["LBL_FILE_URL"] = "File URL";
+$mod_strings["LBL_FILENAME"] = "File";

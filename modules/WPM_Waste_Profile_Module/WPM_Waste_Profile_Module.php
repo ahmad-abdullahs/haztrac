@@ -14,9 +14,38 @@
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
 require_once('modules/WPM_Waste_Profile_Module/WPM_Waste_Profile_Module_sugar.php');
+require_once('include/upload_file.php');
 
 class WPM_Waste_Profile_Module extends WPM_Waste_Profile_Module_sugar {
-    
+
+    function deleteAttachment($isduplicate = 'false') {
+        if ($this->ACLAccess('edit')) {
+            if ($isduplicate == 'true') {
+                return true;
+            }
+            $removeFile = 'upload://{$this->id}';
+        }
+
+        if (SugarAutoloader::fileExists($removeFile)) {
+            if (!UploadFile::unlink($removeFile)) {
+                $GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
+            } else {
+                $this->filename = '';
+                $this->file_mime_type = '';
+                $this->file = '';
+                $this->save();
+                return true;
+            }
+        } else {
+            $this->filename = '';
+            $this->file_mime_type = '';
+            $this->file = '';
+            $this->save();
+            return true;
+        }
+        return false;
+    }
+
 }
 
 function getCertificatesForWP() {

@@ -8,6 +8,12 @@
     },
     format: function (value) {
         this._super('format', [value]);
+        if (this.view.name == 'preview') {
+            if (!_.isUndefined(value) && !_.isNull(value)) {
+                // Sort the list on basis of line number
+                value['records'] = _.sortBy(value['records'], 'line_number');
+            }
+        }
         return value;
     },
     _loadTemplate: function () {

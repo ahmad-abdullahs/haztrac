@@ -9,16 +9,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /**
- * @class View.Views.Base.Calls.CreateView
- * @alias SUGAR.App.view.views.CallsCreateView
+ * @class View.Views.Base.CreateNodupecheckView
+ * @alias SUGAR.App.view.views.BaseCreateNodupecheckView
  * @extends View.Views.Base.CreateView
  */
 ({
-    extendsFrom: 'CreateView',
+    extendsFrom: 'CreateNodupecheckView',
 
-    /**
-     * @inheritdoc
-     */
     initialize: function (options) {
         var self = this;
         this.plugins = _.union(this.plugins || [], ['WasteProfilePlugin']);
@@ -32,5 +29,5 @@
                 throw e;
             }
         });
-    },
+    }
 })

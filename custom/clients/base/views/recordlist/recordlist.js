@@ -113,7 +113,7 @@
                 self.layout.trigger("list:record:deleted", model);
 
                 // ++ This is added to reload the RLI subpanel, so that the child RLIs disappear from the panel  
-                if (!_.isUndefined(self.context) && !_.isNull(self.context)) {
+                if (!_.isUndefined(self.context) && !_.isNull(self.context) && self.context.parent) {
                     if (self.module == 'RevenueLineItems' &&
                             self.context.parent.get('module') == 'sales_and_services' &&
                             model.attributes.is_bundle_product_c == 'parent') {

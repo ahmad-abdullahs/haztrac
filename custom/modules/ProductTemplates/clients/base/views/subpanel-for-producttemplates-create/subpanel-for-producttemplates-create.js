@@ -59,6 +59,33 @@
                 },
             });
         }
+
+        // Once the view is initialized, fetch the related product template items 
+        // to populate in the subpanel-for-producttemplates-create
+        if (options.context.parent.get('bundleTemplateModelId')) {
+            var rliModel = app.data.createBean('ProductTemplates', {id: options.context.parent.get('bundleTemplateModelId')});
+            var rliRelatedRLIColl = app.data.createRelatedCollection(rliModel, 'product_templates_product_templates_1');
+            rliRelatedRLIColl = rliRelatedRLIColl.fetch({
+                relate: true,
+                limit: -1,
+                // Fetched in descending order because when the items are added in the subpanel-for-producttemplates-create
+                // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
+                params: {
+                    order_by: "line_number:desc",
+                    view: 'list',
+                },
+                success: function (coll) {
+                    _.each(coll.models, function (model) {
+                        _self._massageDataBeforeSendingToRecord(model.attributes);
+
+                        var viewDetails = _self.closestComponent('convert-create');
+                        if (!_.isUndefined(viewDetails)) {
+                            app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
+                        }
+                    })
+                },
+            });
+        }
     },
 
     _massageDataBeforeSendingToRecord: function (data) {
@@ -76,7 +103,7 @@
     bindDataChange: function () {
         this._super('bindDataChange');
 
-        if (this.context.parent.get('parentModelId')) {
+        if (this.context.parent.get('parentModelId') || this.context.parent.get('bundleTemplateModelId')) {
             var viewDetails = this.closestComponent('convert-create');
             if (!_.isUndefined(viewDetails)) {
                 app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add', this.onAddFromProductCatalog, this);
@@ -190,7 +217,7 @@
     bindDataChange: function () {
         this._super('bindDataChange');
 
-        if (this.context.parent.get('parentModelId')) {
+        if (this.context.parent.get('parentModelId') || this.context.parent.get('bundleTemplateModelId')) {
             var viewDetails = this.closestComponent('convert-create');
             if (!_.isUndefined(viewDetails)) {
                 app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add', this.onAddFromProductCatalog, this);

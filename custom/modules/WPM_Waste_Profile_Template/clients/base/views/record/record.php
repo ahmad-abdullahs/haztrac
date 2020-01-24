@@ -254,9 +254,13 @@ $viewdefs[$module_name] = array(
                                 'name' => 'physical_state_c',
                                 'label' => 'LBL_PHYSICAL_STATE',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
                             1 =>
+                            array(
+                                'name' => 'wp_color_c',
+                                'label' => 'LBL_WP_COLOR',
+                            ),
+                            2 =>
                             array(
                                 'name' => 'liquid_solid_mixture_group',
                                 'type' => 'custom-fieldset',
@@ -309,98 +313,85 @@ $viewdefs[$module_name] = array(
                                         'name' => 'grid_end',
                                     ),
                                 ),
+                                'span' => 12,
                             ),
                             3 =>
-                            array(
-                                'name' => 'wp_color_c',
-                                'label' => 'LBL_WP_COLOR',
-                            ),
-                            4 =>
-                            array(
-                            ),
-                            5 =>
                             array(
                                 'name' => 'describe_appearance_c',
                                 'label' => 'LBL_DESCRIBE_APPEARANCE',
                             ),
-                            6 =>
+                            4 =>
                             array(
                                 'name' => 'number_of_phases_c',
                                 'label' => 'LBL_NUMBER_OF_PHASES',
                             ),
-                            7 =>
+                            5 =>
                             array(
                                 'name' => 'odor_c',
                                 'label' => 'LBL_ODOR',
                                 'type' => 'radioenum-linear',
                             ),
-                            8 =>
+                            6 =>
                             array(
                                 'name' => 'odor_description_c',
                                 'label' => 'LBL_ODOR_DESCRIPTION',
                             ),
-                            9 =>
+                            7 =>
                             array(
                                 'name' => 'flash_point_c',
                                 'label' => 'LBL_FLASH_POINT',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            10 =>
+                            8 =>
                             array(
                                 'name' => 'btu_c',
                                 'label' => 'LBL_BTU',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            11 =>
+                            9 =>
                             array(
                                 'name' => 'ash_content_c',
                                 'label' => 'LBL_ASH_CONTENT',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            12 =>
+                            10 =>
                             array(
                                 'name' => 'ph_c',
                                 'label' => 'LBL_PH',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            13 =>
+                            11 =>
                             array(
                                 'name' => 'viscosity_c',
                                 'label' => 'LBL_VISCOSITY',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            14 =>
+                            12 =>
                             array(
                                 'name' => 'specific_gravity_c',
                                 'label' => 'LBL_SPECIFIC_GRAVITY',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            15 =>
+                            13 =>
                             array(
                                 'name' => 'boiling_point_c',
                                 'label' => 'LBL_BOILING_POINT',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            16 =>
+                            14 =>
                             array(
                                 'name' => 'melting_point_c',
                                 'label' => 'LBL_MELTING_POINT',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
                             ),
-                            17 =>
+                            15 =>
                             array(
                                 'name' => 'total_organic_carbon_c',
                                 'label' => 'LBL_TOTAL_ORGANIC_CARBON',
                                 'type' => 'radioenum-linear',
-                                'span' => 12,
+                            ),
+                            16 =>
+                            array(
                             ),
                         ),
                     ),

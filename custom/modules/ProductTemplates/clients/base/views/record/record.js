@@ -428,6 +428,56 @@
         });
     },
 
+    duplicateClicked: function (event) {
+        if (_.isEmpty(this.model.get('is_bundle_product_c')) || _.isNull(this.model.get('is_bundle_product_c'))) {
+            this.openDrawerToConvertRecord(false);
+        } else if (this.model.get('is_bundle_product_c') == 'parent') {
+            // we need to open up the create view with bundled line items in it.
+            this.openDrawerToConvertRecord(true);
+        }
+    },
+
+    openDrawerToConvertRecord: function (isBundle) {
+        var self = this,
+                prefill = app.data.createBean(this.model.module);
+
+        prefill.copy(this.model);
+        this._copyNestedCollections(this.model, prefill);
+        self.model.trigger('duplicate:before', prefill);
+        prefill.unset('id');
+
+        var layout = 'create',
+                _context = {
+                    create: true,
+                    model: prefill,
+                    copiedFromModelId: this.model.get('id'),
+                };
+
+        if (isBundle) {
+            layout = 'convert-create';
+            _context = _.extend(_context, {
+                bundleTemplateModelId: this.model.get('id'),
+            });
+        }
+
+        app.drawer.open({
+            layout: layout,
+            context: _context
+        }, function (context, newModel) {
+            // self.cancelClicked is added to avoid the unsaved changes warning.
+            // This the the hack used to avoid unsaved changes warning.
+            if (newModel && newModel.id) {
+                $.when(self.cancelClicked()).then(function () {
+                    app.router.navigate(self.model.module + '/' + newModel.id, {trigger: true});
+                });
+            } else {
+                self.cancelClicked();
+            }
+        });
+
+        prefill.trigger('duplicate:field', self.model);
+    },
+
     /**
      * @inheritdoc
      */
