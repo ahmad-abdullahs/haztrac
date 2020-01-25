@@ -9,6 +9,6 @@
     },
     addRLIBundleToList: function () {
         var model = this.view.raRLIs.get(this.model.id);
-        this._sendItemToRecord(this, model.attributes);
+        this._sendItemToRecord(this, model, model.attributes);
     },
 })

@@ -63,7 +63,7 @@
                             '$equals': this.parentModel.get('accounts_sales_and_services_1accounts_ida'),
                         },
                         is_bundle_product_c: {
-                            '$not_in': ['child', 'parent'],
+                            '$not_in': ['child'],
                         },
                         rli_as_template_c: {
                             '$equals': 1,
