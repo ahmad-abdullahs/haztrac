@@ -1,5 +1,5 @@
 <?php
- // created: 2019-11-29 22:08:13
+ // created: 2020-01-21 15:28:15
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -39,4 +39,11 @@ $app_list_strings['lab_analysis_list']=array (
   'Visc 40' => 'Viscosity cSt @ 40C (D445)',
   'TPS' => 'Total Potential Sediment, (ISO10307-2)',
   'BromineNo' => 'Bromine Number (D1159)',
+  'C5 Asphaltenes n pentane' => 'Asphaltenes, C5 N-pentane Insoluble, Wt%',
+  'C7 heptane Insolubles' => 'Asphaltenes, C7 N-heptane Insoluble, Wt% (ASTM D3279)',
+  'Conradson carbon residue' => 'Conradson Carbon Residue, Wt%',
+  'Sim Distillation' => 'Distillation Simulated (D2887)',
+  'N2 Nitrogen' => 'Nitrogen (N2), PPM',
+  'Visc 100' => 'Viscosity cSt @ 100C/212F (D445)',
+  'VOC 8260' => 'EPA Volatile Organic Compounds, VOC, PPM (SW8260)',
 );
