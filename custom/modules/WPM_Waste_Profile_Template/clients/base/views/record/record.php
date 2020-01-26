@@ -234,6 +234,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                         ),
                     ),
@@ -531,14 +532,17 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             3 =>
                             array(
-                                'name' => 'describe_with_dimensions_c',
-                                'label' => 'LBL_DESCRIBE_WITH_DIMENSIONS',
+                                'span' => 2,
                             ),
                             4 =>
                             array(
+                                'name' => 'describe_with_dimensions_c',
+                                'label' => 'LBL_DESCRIBE_WITH_DIMENSIONS',
+                                'span' => 10,
                             ),
                             5 =>
                             array(
@@ -559,11 +563,13 @@ $viewdefs[$module_name] = array(
                             ),
                             7 =>
                             array(
-                                'name' => 'describe_metal_in_powdered_form_c',
-                                'label' => 'LBL_DESCRIBE_THE_DETAILS',
+                                'span' => 2,
                             ),
                             8 =>
                             array(
+                                'name' => 'describe_metal_in_powdered_form_c',
+                                'label' => 'LBL_DESCRIBE_THE_DETAILS',
+                                'span' => 10,
                             ),
                             9 =>
                             array(
@@ -581,14 +587,17 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             11 =>
                             array(
-                                'name' => 'describe_animal_waste_c',
-                                'label' => 'LBL_DESCRIBE_THE_DETAILS',
+                                'span' => 2,
                             ),
                             12 =>
                             array(
+                                'name' => 'describe_animal_waste_c',
+                                'label' => 'LBL_DESCRIBE_THE_DETAILS',
+                                'span' => 10,
                             ),
                             13 =>
                             array(
@@ -656,11 +665,13 @@ $viewdefs[$module_name] = array(
                             ),
                             21 =>
                             array(
-                                'name' => 'describe_packaging_requirements_c',
-                                'label' => 'LBL_DESCRIBE_THE_DETAILS',
+                                'span' => 2,
                             ),
                             22 =>
                             array(
+                                'name' => 'describe_packaging_requirements_c',
+                                'label' => 'LBL_DESCRIBE_THE_DETAILS',
+                                'span' => 10,
                             ),
                             23 =>
                             array(
@@ -678,6 +689,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             25 =>
                             array(
@@ -714,6 +726,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 12,
+                                'background_color' => '#ebedef',
                             ),
                             1 =>
                             array(
@@ -1053,16 +1066,19 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             10 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            11 =>
                             array(
                                 'name' => 'notes_hoc_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_NOTES_HOC_C',
                                 'dismiss_label' => true,
-                            ),
-                            11 =>
-                            array(
+                                'span' => 10,
                             ),
                             12 =>
                             array(
@@ -1083,13 +1099,15 @@ $viewdefs[$module_name] = array(
                             ),
                             14 =>
                             array(
+                                'span' => 2,
+                            ),
+                            15 =>
+                            array(
                                 'name' => 'notes_pcb_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_NOTES_PCB_C',
                                 'dismiss_label' => true,
-                            ),
-                            15 =>
-                            array(
+                                'span' => 10,
                             ),
                             16 =>
                             array(
@@ -1124,16 +1142,19 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             20 =>
+                            array(
+                                'span' => 2,
+                            ),
+                            21 =>
                             array(
                                 'name' => 'undisclosed_hazards_comments_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_UNDISCLOSED_HAZARDS_COMMENTS',
                                 'dismiss_label' => true,
-                            ),
-                            21 =>
-                            array(
+                                'span' => 10,
                             ),
                             22 =>
                             array(
@@ -1160,6 +1181,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             25 =>
                             array(
@@ -1220,6 +1242,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             33 =>
                             array(
@@ -1286,6 +1309,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             43 =>
                             array(
@@ -1320,6 +1344,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             47 =>
                             array(
@@ -1354,6 +1379,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             51 =>
                             array(
@@ -1388,6 +1414,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             55 =>
                             array(
@@ -1422,6 +1449,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             59 =>
                             array(
@@ -1442,11 +1470,13 @@ $viewdefs[$module_name] = array(
                             ),
                             61 =>
                             array(
-                                'name' => 'neshap_rules_c',
-                                'label' => 'LBL_NESHAP_RULES',
+                                'span' => 2,
                             ),
                             62 =>
                             array(
+                                'name' => 'neshap_rules_c',
+                                'label' => 'LBL_NESHAP_RULES',
+                                'span' => 10,
                             ),
                             63 =>
                             array(
@@ -1464,6 +1494,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                             65 =>
                             array(
@@ -1576,6 +1607,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
+                                'background_color' => '#ebedef',
                             ),
                         ),
                     ),

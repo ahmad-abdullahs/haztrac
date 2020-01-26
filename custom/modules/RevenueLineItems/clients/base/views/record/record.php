@@ -290,17 +290,6 @@ $viewdefs['RevenueLineItems'] = array(
                                 'label' => 'LBL_ADDITIONAL_INFO_ACK',
                                 'span' => 12,
                             ),
-                            13 =>
-                            array(
-                                'name' => 'waste_profile_rqrd_c',
-                                'label' => 'LBL_WASTE_PROFILE_RQRD',
-                            ),
-                            14 =>
-                            array(
-                                'name' => 'waste_profile_relate_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_WASTE_PROFILE_RELATE',
-                            ),
                         ),
                     ),
                     2 =>
@@ -385,7 +374,6 @@ $viewdefs['RevenueLineItems'] = array(
                             0 =>
                             array(
                                 'name' => 'cost_price',
-                                'readonly' => true,
                                 'type' => 'currency',
                                 'related_fields' =>
                                 array(
@@ -404,23 +392,21 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             2 =>
                             array(
+                                'name' => 'list_price',
+                                'type' => 'currency',
+                                'related_fields' =>
+                                array(
+                                    0 => 'list_price',
+                                    1 => 'currency_id',
+                                    2 => 'base_rate',
+                                ),
+                                'convertToBase' => true,
+                                'showTransactionalAmount' => true,
+                                'currency_field' => 'currency_id',
+                                'base_rate_field' => 'base_rate',
                             ),
                             3 =>
                             array(
-                                'name' => 'cost_usdollar',
-                                'comment' => 'Cost expressed in USD',
-                                'studio' =>
-                                array(
-                                    'editview' => false,
-                                    'mobile' => false,
-                                ),
-                                'readonly' => true,
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                ),
-                                'label' => 'LBL_COST_USDOLLAR',
                             ),
                         ),
                     ),
@@ -454,6 +440,26 @@ $viewdefs['RevenueLineItems'] = array(
                             array(
                                 'name' => 'waste_profile_c',
                                 'label' => 'LBL_WASTE_PROFILE',
+                                'initial_filter' => 'filterByGenerator',
+                                'initial_filter_label' => 'LBL_FILTER_BY_GENERATOR',
+                                'filter_relate' =>
+                                array(
+                                    'account_id' => 'accounts_wpm_waste_profile_module_2accounts_ida',
+                                ),
+                            ),
+                            4 =>
+                            array(
+                            ),
+                            5 =>
+                            array(
+                            ),
+                            6 =>
+                            array(
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'waste_profile_relate_c',
+                                'label' => 'LBL_WASTE_PROFILE_RELATE',
                             ),
                         ),
                     ),

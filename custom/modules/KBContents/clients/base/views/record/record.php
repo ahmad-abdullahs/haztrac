@@ -203,6 +203,30 @@ array (
             array (
               0 => 
               array (
+                'name' => 'is_external',
+                'type' => 'bool',
+              ),
+              1 => 
+              array (
+                'name' => 'link_only_c',
+                'label' => 'LBL_LINK_ONLY',
+              ),
+              2 => 
+              array (
+                'name' => 'link_only_website_c',
+                'label' => 'LBL_LINK_ONLY_WEBSITE',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
+                'name' => 'website_c',
+                'label' => 'LBL_WEBSITE',
+                'span' => 12,
+              ),
+              5 => 
+              array (
                 'name' => 'kbdocument_body_set',
                 'type' => 'fieldset',
                 'label' => 'LBL_TEXT_BODY',
@@ -226,13 +250,7 @@ array (
                 ),
                 'span' => 12,
               ),
-              1 => 
-              array (
-                'name' => 'website_c',
-                'label' => 'LBL_WEBSITE',
-                'span' => 12,
-              ),
-              2 => 
+              6 => 
               array (
                 'name' => 'attachment_list',
                 'label' => 'LBL_ATTACHMENTS',
@@ -243,7 +261,7 @@ array (
                 'bLabel' => 'LBL_ADD_ATTACHMENT',
                 'span' => 12,
               ),
-              3 => 
+              7 => 
               array (
                 'name' => 'tag',
                 'span' => 12,
@@ -304,8 +322,6 @@ array (
               ),
               7 => 
               array (
-                'name' => 'is_external',
-                'type' => 'bool',
               ),
               8 => 
               array (

@@ -25,6 +25,8 @@ class CustomSugarFieldRelateLink extends SugarFieldRelateLink {
                     'date_modified',
                     'name',
                     'discount_price',
+                    'list_price',
+                    'cost_price',
                     'quantity',
                     'product_uom_c',
                     'total_amount',

@@ -7,6 +7,12 @@ $dictionary['RevenueLineItem']['unified_search'] = true;
 unset($dictionary['RevenueLineItem']['fields']['discount_price']['formula']);
 unset($dictionary['RevenueLineItem']['fields']['discount_price']['calculated']);
 unset($dictionary['RevenueLineItem']['fields']['discount_price']['enforced']);
+unset($dictionary['RevenueLineItem']['fields']['cost_price']['formula']);
+unset($dictionary['RevenueLineItem']['fields']['cost_price']['calculated']);
+unset($dictionary['RevenueLineItem']['fields']['cost_price']['enforced']);
+unset($dictionary['RevenueLineItem']['fields']['list_price']['formula']);
+unset($dictionary['RevenueLineItem']['fields']['list_price']['calculated']);
+unset($dictionary['RevenueLineItem']['fields']['list_price']['enforced']);
 unset($dictionary['RevenueLineItem']['fields']['discount_rate_percent']['formula']);
 unset($dictionary['RevenueLineItem']['fields']['discount_rate_percent']['calculated']);
 unset($dictionary['RevenueLineItem']['fields']['discount_rate_percent']['enforced']);
@@ -25,6 +31,14 @@ unset($dictionary['RevenueLineItem']['fields']['discount_usdollar']['formula']);
 unset($dictionary['RevenueLineItem']['fields']['discount_usdollar']['calculated']);
 unset($dictionary['RevenueLineItem']['fields']['discount_usdollar']['enforced']);
 unset($dictionary['RevenueLineItem']['fields']['discount_usdollar']['readonly']);
+unset($dictionary['RevenueLineItem']['fields']['cost_usdollar']['formula']);
+unset($dictionary['RevenueLineItem']['fields']['cost_usdollar']['calculated']);
+unset($dictionary['RevenueLineItem']['fields']['cost_usdollar']['enforced']);
+unset($dictionary['RevenueLineItem']['fields']['cost_usdollar']['readonly']);
+unset($dictionary['RevenueLineItem']['fields']['list_usdollar']['formula']);
+unset($dictionary['RevenueLineItem']['fields']['list_usdollar']['calculated']);
+unset($dictionary['RevenueLineItem']['fields']['list_usdollar']['enforced']);
+unset($dictionary['RevenueLineItem']['fields']['list_usdollar']['readonly']);
 
 
 $dictionary["RevenueLineItem"]["fields"]['is_bundle_product_c'] = array(

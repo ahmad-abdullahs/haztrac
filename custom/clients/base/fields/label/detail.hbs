@@ -11,7 +11,7 @@
  */
 --}}
 {{#if value}}
-    <div {{#if this.def.noInline}}class="ellipsis_inline long-sentense"{{else}}class="ellipsis_inline"{{/if}} data-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{value}}">
+    <div {{#if this.def.background_color}}style="background-color: {{this.def.background_color}};"{{/if}} {{#if this.def.noInline}}class="ellipsis_inline long-sentense"{{else}}class="ellipsis_inline"{{/if}} data-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{value}}">
         {{value}}
     </div>
 {{/if}}

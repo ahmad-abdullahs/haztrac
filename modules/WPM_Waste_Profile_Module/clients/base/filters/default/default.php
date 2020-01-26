@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,6 +16,7 @@ $viewdefs[$module_name]['base']['filter']['default'] = array(
     'default_filter' => 'all_records',
     'fields' => array(
         'name' => array(),
+        'accounts_wpm_waste_profile_module_2_name' => array(),
         'tag' => array(),
         'assigned_user_name' => array(),
         '$owner' => array(

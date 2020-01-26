@@ -3,6 +3,8 @@
 if (isset($dependencies['RevenueLineItems'])) {
     $fields = array(
         'discount_price',
+        'cost_price',
+        'list_price',
         'weight',
         'probability',
         'category_name',

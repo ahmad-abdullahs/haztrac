@@ -144,3 +144,4 @@ $mod_strings['LBL_QUEST_PCB_C'] = 'DOES THIS WASTE CONTAIN GREATER THAN 2 PPM (>
 $mod_strings["LBL_FILE_MIME_TYPE"] = "File Mime Type";
 $mod_strings["LBL_FILE_URL"] = "File URL";
 $mod_strings["LBL_FILENAME"] = "File";
+$mod_strings['LBL_FILTER_BY_GENERATOR'] = 'Filter By Generator';
