@@ -1,6 +1,6 @@
 <?php
- // created: 2020-01-25 17:15:04
-$dictionary['KBContent']['fields']['website_c']['labelValue']='Website';
-$dictionary['KBContent']['fields']['website_c']['dependency']='';
 
- ?>
+// created: 2020-01-27 17:50:02
+$dictionary['KBContent']['fields']['website_c']['labelValue'] = 'Embedded Wireframe';
+$dictionary['KBContent']['fields']['website_c']['dependency'] = 'equal($enable_wireframe_c,true)';
+?>

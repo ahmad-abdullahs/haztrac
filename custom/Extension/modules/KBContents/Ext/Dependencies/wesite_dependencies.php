@@ -31,3 +31,19 @@ $dependencies['KBContents']['link_only_c_setvalue_dep_save'] = array(
         ),
     ),
 );
+
+$dependencies['KBContents']['website_c_setvalue_dep_save'] = array(
+    'hooks' => array("save"),
+    'triggerFields' => array('enable_wireframe_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetValue',
+            'params' => array(
+                'target' => 'website_c',
+                'label' => 'website_c_label',
+                'value' => 'ifElse(equal($enable_wireframe_c,true),$website_c,"")',
+            ),
+        ),
+    ),
+);
