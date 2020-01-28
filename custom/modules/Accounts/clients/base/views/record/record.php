@@ -343,8 +343,8 @@ array (
               ),
               8 => 
               array (
-                'name' => 'phone_fax',
-                'tabindex' => '5',
+                'name' => 'website',
+                'tabindex' => '6',
               ),
               9 => 
               array (
@@ -353,8 +353,8 @@ array (
               ),
               10 => 
               array (
-                'name' => 'website',
-                'tabindex' => '6',
+                'name' => 'assigned_user_name',
+                'tabindex' => '13',
               ),
               11 => 
               array (
@@ -364,13 +364,13 @@ array (
               ),
               12 => 
               array (
-                'name' => 'assigned_user_name',
-                'tabindex' => '13',
+                'name' => 'team_name',
+                'tabindex' => '14',
               ),
               13 => 
               array (
-                'name' => 'team_name',
-                'tabindex' => '14',
+                'name' => 'phone_fax',
+                'tabindex' => '5',
               ),
             ),
           ),
