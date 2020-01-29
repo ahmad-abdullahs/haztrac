@@ -3,7 +3,7 @@
 // created: 2019-08-26 14:00:35
 $dictionary['ProductTemplate']['fields']['discount_price']['default'] = 0.0;
 $dictionary['ProductTemplate']['fields']['discount_price']['len'] = 26;
-$dictionary['ProductTemplate']['fields']['discount_price']['audited'] = false;
+$dictionary['ProductTemplate']['fields']['discount_price']['audited'] = true;
 $dictionary['ProductTemplate']['fields']['discount_price']['massupdate'] = false;
 $dictionary['ProductTemplate']['fields']['discount_price']['comments'] = 'Discounted price ("Unit Price" in Quote)';
 $dictionary['ProductTemplate']['fields']['discount_price']['duplicate_merge'] = 'enabled';

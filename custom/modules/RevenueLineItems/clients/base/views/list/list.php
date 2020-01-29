@@ -23,7 +23,7 @@ $viewdefs['RevenueLineItems'] = array(
                                 'enabled' => true,
                                 'default' => true,
                                 'related_fields' =>
-                                array(
+                                array_merge(array(
                                     'rli_as_template_c',
                                     'quantity',
                                     'discount_amount',
@@ -103,7 +103,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     "status",
                                     "pricing_formula",
                                     "mft_part_num",
-                                ),
+                                        ), getViewFields('recordview', 'RevenueLineItems')),
                             ),
                             1 =>
                             array(

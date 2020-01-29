@@ -183,8 +183,8 @@
                 'cost_usdollar': model.get('cost_usdollar'),
                 'list_price': model.get('list_price'),
                 'list_usdollar': model.get('list_usdollar'),
-                'product_template_id': '',
-                'product_template_name': '',
+//                'product_template_id': '',
+//                'product_template_name': '',
             }, {'silent': true});
         }, this);
 

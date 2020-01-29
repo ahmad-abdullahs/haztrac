@@ -17,7 +17,7 @@ $dictionary["WPM_Waste_Profile_Module"]["fields"]["accounts_wpm_waste_profile_mo
     'name' => 'accounts_wpm_waste_profile_module_1_name',
     'type' => 'relate',
     'source' => 'non-db',
-    'vname' => 'LBL_ACCOUNTS_WPM_WASTE_PROFILE_MODULE_1_FROM_ACCOUNTS_TITLE',
+    'vname' => 'LBL_WP_BILLING_ACCOUNT',
     'save' => true,
     'id_name' => 'accounts_wpm_waste_profile_module_1accounts_ida',
     'link' => 'accounts_wpm_waste_profile_module_1',

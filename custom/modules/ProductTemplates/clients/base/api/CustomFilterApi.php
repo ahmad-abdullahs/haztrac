@@ -128,6 +128,11 @@ class CustomFilterApi extends FilterApi {
                     'child',
                 ),
             ),
+            'vendor_only_c' => array(
+                '$not_in' => array(
+                    '1',
+                ),
+            ),
         ));
         return $args;
     }

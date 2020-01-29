@@ -1,0 +1,28 @@
+<?php
+
+$dictionary['RevenueLineItem']['fields']['product_vendor_c'] = array(
+    'labelValue' => 'Product Vendor / TSDF',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'non-db',
+    'name' => 'product_vendor_c',
+    'vname' => 'LBL_PRODUCT_VENDOR',
+    'type' => 'relate',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'enabled',
+    'duplicate_merge_dom_value' => 1,
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'v_vendors_id_c',
+    'module' => 'Accounts',
+    'rname' => 'name',
+    'studio' => 'visible',
+);

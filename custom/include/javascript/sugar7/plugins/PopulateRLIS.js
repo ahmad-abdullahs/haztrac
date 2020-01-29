@@ -52,8 +52,8 @@
                                 if (!_.isUndefined(viewDetails)) {
                                     // To add the relationship between the revenuelineitems
                                     model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
-                                    model.attributes.product_template_id = '';
-                                    model.attributes.product_template_name = '';
+//                                    model.attributes.product_template_id = '';
+//                                    model.attributes.product_template_name = '';
                                     app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                 }
                             })
@@ -117,9 +117,9 @@
                 data.position = 0;
                 data._forcePosition = true;
 
-                // copy Template's id and name to where the QLI expects them
-                data.product_template_id = data.id;
-                data.product_template_name = data.name;
+                // copy Template's id and name from RLI bundle or single RLI.
+                data.product_template_id = data.product_template_id;
+                data.product_template_name = data.product_template_name;
 
                 // remove ID/etc since we dont want Template ID to be the record id
                 delete data.id;

@@ -110,6 +110,14 @@ $viewdefs['ProductTemplates'] = array(
                             8 =>
                             array(
                                 'type' => 'rowaction',
+                                'event' => 'button:audit_button:click',
+                                'name' => 'audit_button',
+                                'label' => 'LNK_VIEW_CHANGE_LOG',
+                                'acl_action' => 'view',
+                            ),
+                            9 =>
+                            array(
+                                'type' => 'rowaction',
                                 'event' => 'button:delete_button:click',
                                 'name' => 'delete_button',
                                 'label' => 'LBL_DELETE_BUTTON_LABEL',
@@ -177,7 +185,12 @@ $viewdefs['ProductTemplates'] = array(
                                     1 => 'mft_part_num',
                                 ),
                             ),
-                            1 => 'category_name',
+                            1 =>
+                            array(
+                                'name' => 'category_name',
+                                'type' => 'relate',
+                                'label' => 'LBL_CATEGORY',
+                            ),
                             2 =>
                             array(
                                 'name' => 'mft_part_num',
@@ -196,59 +209,32 @@ $viewdefs['ProductTemplates'] = array(
                             array(
                                 'name' => 'is_bundle_product_c',
                                 'label' => 'LBL_IS_BUNDLE_PRODUCT',
+                                'readonly' => true,
                             ),
                             6 =>
-                            array(
-                                'name' => 'product_vendor_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_PRODUCT_VENDOR',
-                            ),
-                            7 => 'vendor_part_num',
-                            8 =>
-                            array(
-                                'name' => 'vendor_product_svc_descrp_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_VENDOR_PRODUCT_SVC_DESCRP',
-                            ),
-                            9 =>
                             array(
                                 'name' => 'product_svc_description_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PRODUCT_SVC_DESCRIPTION',
+                                'span' => 12,
                             ),
-                            10 =>
+                            7 =>
                             array(
                                 'name' => 'description',
                                 'span' => 6,
                             ),
-                            11 =>
+                            8 =>
                             array(
                                 'name' => 'mandatory_print_text_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_MANDATORY_PRINT_TEXT',
                                 'span' => 6,
                             ),
-                            12 =>
+                            9 =>
                             array(
                                 'name' => 'additional_info_ack_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_ADDITIONAL_INFO_ACK',
-                                'span' => 12,
-                            ),
-                            13 =>
-                            array(
-                                'name' => 'waste_profile_rqrd_c',
-                                'label' => 'LBL_WASTE_PROFILE_RQRD',
-                            ),
-                            14 =>
-                            array(
-                                'name' => 'waste_profile_relate_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_WASTE_PROFILE_RELATE',
-                            ),
-                            15 =>
-                            array(
-                                'name' => 'tag',
                                 'span' => 12,
                             ),
                         ),
@@ -274,15 +260,6 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                             2 =>
                             array(
-                                'name' => 'tax_class',
-                            ),
-                            3 =>
-                            array(
-                                'name' => 'base_rate',
-                                'label' => 'LBL_CURRENCY_RATE',
-                            ),
-                            4 =>
-                            array(
                                 'name' => 'discount_price',
                                 'type' => 'currency',
                                 'related_fields' =>
@@ -291,44 +268,76 @@ $viewdefs['ProductTemplates'] = array(
                                     1 => 'currency_id',
                                     2 => 'base_rate',
                                 ),
+                                'convertToBase' => true,
+                                'showTransactionalAmount' => true,
                                 'currency_field' => 'currency_id',
                                 'base_rate_field' => 'base_rate',
-                                'enabled' => true,
-                                'default' => true,
                             ),
-                            5 =>
-                            array(
-                                'name' => 'list_price',
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'list_usdollar',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            6 =>
+                            3 =>
                             array(
                                 'name' => 'product_uom_c',
                                 'label' => 'LBL_PRODUCT_UOM',
                             ),
-                            7 =>
+                            4 =>
+                            array(
+                                'name' => 'pricing_formula',
+                                'comment' => 'Pricing formula (ex: Fixed, Markup over Cost)',
+                                'label' => 'LBL_PRICING_FORMULA',
+                            ),
+                            5 =>
                             array(
                                 'name' => 'weight',
                             ),
+                            6 =>
+                            array(
+                                'name' => 'bundle_total_c',
+                                'label' => 'LBL_BUNDLE_TOTAL',
+                            ),
+                            7 =>
+                            array(
+                            ),
                             8 =>
                             array(
-                                'name' => 'list_usdollar',
+                                'name' => 'tax_class',
                             ),
                             9 =>
                             array(
-                                'name' => 'discount_usdollar',
+                                'name' => 'base_rate',
+                                'label' => 'LBL_CURRENCY_RATE',
                             ),
-                            10 =>
+                        ),
+                    ),
+                    3 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL7',
+                        'label' => 'LBL_RECORDVIEW_PANEL7',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'vendor_only_c',
+                                'label' => 'LBL_VENDOR_ONLY',
+                            ),
+                            1 =>
+                            array(
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'product_vendor_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_PRODUCT_VENDOR',
+                                'related_fields' =>
+                                array(
+                                    0 => 'v_vendors_id_c',
+                                ),
+                            ),
+                            3 => 'vendor_part_num',
+                            4 =>
                             array(
                                 'name' => 'cost_price',
                                 'type' => 'currency',
@@ -338,42 +347,39 @@ $viewdefs['ProductTemplates'] = array(
                                     1 => 'currency_id',
                                     2 => 'base_rate',
                                 ),
+                                'convertToBase' => true,
+                                'showTransactionalAmount' => true,
                                 'currency_field' => 'currency_id',
                                 'base_rate_field' => 'base_rate',
-                                'enabled' => true,
-                                'default' => true,
                             ),
-                            11 =>
+                            5 =>
                             array(
                                 'name' => 'date_cost_price',
                             ),
-                            12 => 'cost_usdollar',
-                            13 =>
+                            6 =>
                             array(
-                                'name' => 'bundle_total_c',
-                                'label' => 'LBL_BUNDLE_TOTAL',
-                            ),
-                            14 =>
-                            array(
-                                'name' => 'pricing_factor',
-                                'comment' => 'Variable pricing factor depending on pricing_formula',
+                                'name' => 'list_price',
+                                'type' => 'currency',
                                 'related_fields' =>
                                 array(
-                                    0 => 'pricing_formula',
+                                    0 => 'list_usdollar',
+                                    1 => 'currency_id',
+                                    2 => 'base_rate',
                                 ),
-                                'label' => 'LBL_PRICING_FACTOR',
+                                'convertToBase' => true,
+                                'showTransactionalAmount' => true,
+                                'currency_field' => 'currency_id',
+                                'base_rate_field' => 'base_rate',
                             ),
-                            15 =>
+                            7 =>
                             array(
-                                'name' => 'pricing_formula',
-                                'related_fields' =>
-                                array(
-                                    0 => 'pricing_factor',
-                                ),
+                                'name' => 'vendor_product_svc_descrp_c',
+                                'studio' => 'visible',
+                                'label' => 'LBL_VENDOR_PRODUCT_SVC_DESCRP',
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -403,10 +409,25 @@ $viewdefs['ProductTemplates'] = array(
                             array(
                                 'name' => 'waste_profile_c',
                                 'label' => 'LBL_WASTE_PROFILE',
+                                'type' => 'dep-checkbox',
+                            ),
+                            4 =>
+                            array(
+                            ),
+                            5 =>
+                            array(
+                            ),
+                            6 =>
+                            array(
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'waste_profile_relate_c',
+                                'label' => 'LBL_WASTE_PROFILE_RELATE',
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -469,7 +490,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'collapsed',
@@ -500,7 +521,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                         ),
                     ),
-                    6 =>
+                    7 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',

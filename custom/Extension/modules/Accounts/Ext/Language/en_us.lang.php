@@ -14,6 +14,7 @@ $mod_strings['LBL_ACCOUNT_TERMS'] = 'Account Terms';
 $mod_strings['LBL_ACCOUNTS_SALES_AND_SERVICES_1_FROM_SALES_AND_SERVICES_TITLE'] = 'Sales &amp; Service';
 $mod_strings['LBL_HT_PO_ACCOUNTS_FROM_HT_PO_TITLE'] = 'Purchase Orders';
 $mod_strings['LBL_V_VENDORS_ACCOUNTS_FROM_V_VENDORS_TITLE'] = 'Vendors';
+$mod_strings['LBL_PRODUCT_TEMPLATE_ACCOUNT_SUBPANEL'] = 'Vendors';
 $mod_strings['LBL_EPA_ID'] = 'EPA ID No';
 $mod_strings['LBL_ROLE_ASSIGNED'] = 'Role Assigned';
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Service Related';

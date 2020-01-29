@@ -1,0 +1,30 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{#if hideCurrencyDropdown}}
+    <input type="text" name="{{name}}" value="{{value}}" class="inherit-width"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}>
+{{else}}
+    <div class="{{#if updateButton}}span8{{/if}} select2-addon">
+        <span sfuuid="{{currencySfId}}" class="currency edit"></span>
+        <input type="text" name="{{name}}" value="{{value}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}>
+    </div>
+{{/if}}
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
+{{#if updateButton}}
+    <div class="span4 record-cell" data-type="update-rlis-button" data-name="update_rlis">
+        <span class="normal index" data-fieldname="update_rlis" data-index="">
+             <span class="pull-right edit">
+                <a class="btn btn-primary" href="javascript:void(0);" track="click:update_rlis" name="update_rlis">Update Customer RLIs</a>
+            </span>
+        </span>
+    </div>
+{{/if}}

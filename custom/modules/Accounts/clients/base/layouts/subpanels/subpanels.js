@@ -28,7 +28,7 @@
      */
     registerModelEvents: function () {
         this.model.on('change:account_type_cst_c', function (model) {
-            var link = 'v_vendors_accounts';
+            var link = 'product_templates_accounts';
             if (_.contains(model.get('account_type_cst_c'), "Vendor")) {
                 this.unhideSubpanel(link);
             } else {
@@ -83,6 +83,10 @@
         var component = this.getSubpanelByLink(link);
         if (!_.isUndefined(component)) {
             component.show();
+            // This piece of code load the subpanels and expand it.
+            // component.context.trigger('change:collapsed');
+            // This piece of code refresh the whole subpanel list.
+            $('[data-action=refreshList]').click();
         }
-    }
+    },
 })

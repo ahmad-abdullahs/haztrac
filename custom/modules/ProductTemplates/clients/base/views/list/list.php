@@ -21,7 +21,7 @@ $viewdefs['ProductTemplates'] = array(
                                 'enabled' => true,
                                 'default' => true,
                                 'related_fields' =>
-                                array(
+                                array_merge(array(
                                     0 => 'description',
                                     1 => 'type_id',
                                     2 => 'manufacturer_id',
@@ -94,7 +94,7 @@ $viewdefs['ProductTemplates'] = array(
                                     69 => 'worst_case',
                                     70 => 'line_number',
                                     71 => 'mft_part_num',
-                                ),
+                                        ), getViewFields('recordview', 'ProductTemplates')),
                             ),
                             1 =>
                             array(
@@ -129,7 +129,6 @@ $viewdefs['ProductTemplates'] = array(
                                 'base_rate_field' => 'base_rate',
                                 'enabled' => true,
                                 'default' => true,
-                                'width' => 'xxsmall',
                             ),
                             5 =>
                             array(
@@ -153,7 +152,6 @@ $viewdefs['ProductTemplates'] = array(
                                 'base_rate_field' => 'base_rate',
                                 'enabled' => true,
                                 'default' => true,
-                                'width' => 'xxsmall',
                             ),
                             7 =>
                             array(
@@ -169,7 +167,6 @@ $viewdefs['ProductTemplates'] = array(
                                 'base_rate_field' => 'base_rate',
                                 'enabled' => true,
                                 'default' => true,
-                                'width' => 'xxsmall',
                             ),
                             8 =>
                             array(

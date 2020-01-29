@@ -145,3 +145,4 @@ $mod_strings["LBL_FILE_MIME_TYPE"] = "File Mime Type";
 $mod_strings["LBL_FILE_URL"] = "File URL";
 $mod_strings["LBL_FILENAME"] = "File";
 $mod_strings['LBL_FILTER_BY_GENERATOR'] = 'Filter By Generator';
+$mod_strings['LBL_GENERATOR'] = 'Generator';
