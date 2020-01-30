@@ -43,3 +43,4 @@ $mod_strings['LBL_HIDE_PRICE_FROM_PAPERWORK'] = 'Hide Price From Paperwork';
 $mod_strings['LBL_MANIFEST_ADDITIONAL_INFO'] = 'Additional Info';
 $mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Cost';
 $mod_strings['LBL_VENDOR_ONLY'] = 'Vendor Only';
+$mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Audit';

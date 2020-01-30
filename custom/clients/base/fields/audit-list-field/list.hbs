@@ -1,0 +1,76 @@
+<style>
+    .record .subpanel-cell .select2-container {
+        margin: 0px !important;
+    }
+    
+    .record .subpanel-cell input[type="text"],
+    .record .subpanel-cell input[type="password"],
+    .record .subpanel-cell textarea,
+    .record .subpanel-cell .uneditable-input {
+        margin: 0px !important;
+    }
+    
+    .record .subpanel-cell .input-append input[type="text"] + .add-on,
+    .record .subpanel-cell .input-append input[type="password"] + .add-on,
+    .record .subpanel-cell .input-append textarea + .add-on {
+        margin: 0px !important;
+    }
+    
+    .dropdown_upside {
+        top: auto !important;
+        bottom: 100% !important;
+        margin-bottom: 1px !important;
+    }
+</style>
+<div data-subpanel-link="{{subpanelModule}}" class="filtered tabbable tabs-left subpanel-cell" style="border: 1px solid lightslategray; height: 225px; overflow-y:auto;">
+    <ul class="nav results">
+        <li class="subpanel clearfix">
+            <div class="flex-list-view left-actions right-actions" style="">
+                <div class="flex-list-view-content">
+                    <table class="table table-striped dataTable">
+                        <thead>
+                            <tr module="{{subpanelModule}}">
+                                <th></th>
+                                {{#each columns}}
+                                <th class="{{sorting_class}} orderBy{{name}} sortable" data-fieldname="{{name}}" data-orderby="{{name}}" tabindex="-1" {{#if width}}style="width:{{width}};" {{/if}}>
+                                    <span>
+                                        {{str label ../subpanelModule}}
+                                    </span>
+                                </th>
+                                {{/each}}
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th data-target="alert-container" class="alert alert-warning hide" colspan="8">
+                                    <div data-target="alert">
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each filteredCollection.models}}
+                            <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
+                                {{#eq template "list"}}
+                                    <td></td>
+                                {{/eq}} 
+                                {{#each ../columnsMeta}} 
+                                    {{#if readonly}}
+                                        <td class="rowcell subpanel-field" style="line-height: 30px !important;">
+                                            {{field ../../../view model=../../this template="list"}}
+                                        </td>
+                                    {{else}}
+                                    <td class="rowcell subpanel-field" style="line-height: 30px !important;">
+                                        {{field ../../../view model=../../this template="list"}}
+                                    </td>
+                                    {{/if}} 
+                                {{/each}}
+                                <td></td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

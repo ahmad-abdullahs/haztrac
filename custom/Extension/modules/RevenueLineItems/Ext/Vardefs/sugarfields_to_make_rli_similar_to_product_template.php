@@ -25,6 +25,7 @@ $dictionary['RevenueLineItem']['fields']['product_list_name_c']['full_text_searc
     'searchable' => false,
 );
 $dictionary['RevenueLineItem']['fields']['product_list_name_c']['enforced'] = '';
+$dictionary['RevenueLineItem']['fields']['product_list_name_c']['audited'] = true;
 
 $dictionary['RevenueLineItem']['fields']['product_vendor_c']['labelValue'] = 'Product Vendor / TSDF';
 $dictionary['RevenueLineItem']['fields']['product_vendor_c']['dependency'] = '';

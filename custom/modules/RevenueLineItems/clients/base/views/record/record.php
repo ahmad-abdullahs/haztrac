@@ -765,6 +765,77 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
+                    9 =>
+                    array(
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL8',
+                        'label' => 'LBL_RECORDVIEW_PANEL8',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'span' => 12,
+                                'name' => 'audit',
+                                'label' => 'Audit',
+                                'type' => 'audit-list-field',
+                                'relatedModule' => 'RevenueLineItems',
+                                'readonly' => true,
+                                'columns' => array(
+                                    array(
+                                        'type' => 'field-name',
+                                        'name' => 'field_name',
+                                        'label' => 'Field',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'before',
+                                        'label' => 'Old Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'after',
+                                        'label' => 'New Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'created_by_username',
+                                        'label' => 'Changed By',
+                                        'sortable' => true,
+                                        'width' => '10%',
+                                    ),
+                                    array(
+                                        'type' => 'source',
+                                        'name' => 'source',
+                                        'label' => 'Source',
+                                        'sortable' => false,
+                                        'width' => '10%',
+                                        'module' => 'Users',
+                                        'link' => true,
+                                    ),
+                                    array(
+                                        'type' => 'datetimecombo',
+                                        'name' => 'date_created',
+                                        'label' => 'Change Date',
+                                        'options' => 'date_range_search_dom',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                ),
+                                'relatedFields' => array(),
+                                'allowedFieldList' => array('discount_price', 'list_price', 'cost_price', 'product_list_name_c'),
+                            ),
+                        ),
+                    ),
                 ),
                 'templateMeta' =>
                 array(
