@@ -149,3 +149,5 @@ $mod_strings['LBL_GENERATOR_SIGN_DATE'] = 'Generator Sign Date';
 $mod_strings['LBL_PROFILE_ACCEPTANCE'] = 'Profile Acceptance';
 $mod_strings['LBL_PROFILE_EXPIRATION_DATE'] = 'Profile Expiration Date';
 $mod_strings['LBL_RECORDVIEW_PANEL11'] = 'Review &amp; Acceptance';
+$mod_strings['LBL_PROFILE_PREVIEW'] = 'Profile Preview';
+$mod_strings['LBL_RECORDVIEW_PANEL12'] = 'Profile Preview';

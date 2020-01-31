@@ -16,7 +16,7 @@
             {{#if header}}
                 {{#each grid}}
                     {{#each this}}
-                        <span class="record-cell" {{#eq type "third-party"}}data-type="follow"{{else}}{{#eq type "account-status"}}data-type="follow"{{else}}data-type="{{type}}"{{/eq}}{{/eq}} data-name="{{name}}">
+                        <span class="record-cell" {{#eq type "third-party"}}data-type="follow"{{else}}{{#eq type "account-status"}}data-type="follow"{{else}}{{#eq type "profile-acceptance"}}data-type="follow"{{else}}data-type="{{type}}"{{/eq}}{{/eq}}{{/eq}} data-name="{{name}}">
                             <span class="table-cell-wrapper">
                                 {{#if ../../labels}}
                                     {{#unless dismiss_label}}

@@ -159,6 +159,25 @@ $viewdefs[$module_name] = array(
                     ),
                     1 =>
                     array(
+                        'newTab' => false,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'LBL_RECORDVIEW_PANEL12',
+                        'label' => 'LBL_RECORDVIEW_PANEL12',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'profile_preview',
+                                'label' => 'LBL_PROFILE_PREVIEW',
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
+                    2 =>
+                    array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
                         'columns' => 2,
@@ -215,7 +234,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    2 =>
+                    3 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -255,7 +274,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_SHOW_MORE',
@@ -329,7 +348,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -350,7 +369,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -369,7 +388,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    6 =>
+                    7 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -388,7 +407,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    7 =>
+                    8 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -407,7 +426,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    8 =>
+                    9 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -426,7 +445,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    9 =>
+                    10 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',

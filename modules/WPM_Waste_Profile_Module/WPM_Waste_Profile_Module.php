@@ -46,6 +46,20 @@ class WPM_Waste_Profile_Module extends WPM_Waste_Profile_Module_sugar {
         return false;
     }
 
+    public function save($check_notify = false) {
+        $ret = parent::save($check_notify);
+
+        $this->setPreviewURL();
+
+        return $ret;
+    }
+
+    private function setPreviewURL() {
+        $this->profile_preview = 'https://docs.google.com/viewer?url=https%3A%2F%2Fsugar.haztrac.com%2F%3FentryPoint%3DWPM_Waste_Profile_Preview%26report_id%3D' . $this->id . '&embedded=true&chrome=false&dov=1';
+
+        $this->db->query("UPDATE {$this->table_name}_cstm SET profile_preview='$this->profile_preview' WHERE id_c='{$this->id}'");
+    }
+
 }
 
 function getCertificatesForWP() {

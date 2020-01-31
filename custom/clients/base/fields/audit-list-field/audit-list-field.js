@@ -149,7 +149,7 @@
         this.removeValidationErrors();
         this._super('_render');
         this.renderSubpanelFields();
-        // this.handleSpecificSubpanelLogic();
+        this.showToAdminOnly();
         $('.tooltip').remove();
     },
 
@@ -194,8 +194,9 @@
     /**
      * Specific Subpanel Logics start from here
      */
-    handleSpecificSubpanelLogic: function () {
-        if (!this.filteredCollection.models.length > 0) {
+    showToAdminOnly: function () {
+        // if (!this.filteredCollection.models.length > 0)
+        if (app.user.get('type') != 'admin') {
             $('div [data-type="audit-list-field"]').hide();
         } else {
             $('div [data-type="audit-list-field"]').show();
