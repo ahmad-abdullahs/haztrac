@@ -1,5 +1,7 @@
 <?php
 
+// http://localhost/haztrac/#bwc/index.php?entryPoint=TestCodeEntryPointRegistry
+
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 

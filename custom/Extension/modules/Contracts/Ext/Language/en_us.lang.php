@@ -20,3 +20,4 @@ $mod_strings['LBL_CREDIT_SUPPORT'] = 'Credit Support';
 $mod_strings['LBL_INSPECTION'] = 'Inspection';
 $mod_strings['LBL_MISCELLANEOUS_PROVISIONS'] = 'Miscellaneous Provisions';
 $mod_strings['LBL_REMARKS'] = 'Remarks';
+$mod_strings['LBL_CONTRACT_NUMBER'] = 'Contract Number';

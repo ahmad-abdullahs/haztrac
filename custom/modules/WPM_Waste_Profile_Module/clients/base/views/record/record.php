@@ -305,7 +305,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                         ),
                     ),
@@ -603,7 +603,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                             3 =>
                             array(
@@ -658,7 +658,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                             11 =>
                             array(
@@ -768,7 +768,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                             27 =>
                             array(
@@ -805,7 +805,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 12,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                             1 =>
                             array(
@@ -1151,7 +1151,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                             10 =>
                             array(
@@ -1231,7 +1231,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                             21 =>
                             array(
@@ -1247,22 +1247,13 @@ $viewdefs[$module_name] = array(
                             ),
                             23 =>
                             array(
-                                'name' => 'choose_hazards_that_apply_c',
-                                'label' => 'LBL_CHOOSE_HAZARDS_THAT_APPLY',
-                                'type' => 'multienum-checkbox',
-                                'perline' => 4,
-                                'inrow' => true,
-                                'span' => 12,
-                            ),
-                            24 =>
-                            array(
                                 'name' => 'quest_usepa_hazardous_waste_c',
                                 'label' => 'LBL_QUEST_USEPA_HAZARDOUS_WASTE',
                                 'type' => 'radioenum-linear',
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            25 =>
+                            24 =>
                             array(
                                 'name' => 'quest_usepa_hazardous_waste_c_1',
                                 'type' => 'label',
@@ -1270,13 +1261,13 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            26 =>
+                            25 =>
                             array(
                                 'span' => 2,
                             ),
-                            27 =>
+                            26 =>
                             array(
                                 'name' => 'notes_usepa_hazardous_waste_c',
                                 'type' => 'waste-code-multienum',
@@ -1285,7 +1276,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 10,
                             ),
-                            28 =>
+                            27 =>
                             array(
                                 'name' => 'quest_any_state_code_apply_c',
                                 'label' => 'LBL_QUEST_ANY_STATE_CODE_APPLY',
@@ -1293,7 +1284,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            29 =>
+                            28 =>
                             array(
                                 'name' => 'quest_any_state_code_apply_c_1',
                                 'type' => 'label',
@@ -1302,11 +1293,11 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            30 =>
+                            29 =>
                             array(
                                 'span' => 2,
                             ),
-                            31 =>
+                            30 =>
                             array(
                                 'name' => 'notes_any_state_code_apply_c',
                                 'type' => 'enum-same-key-and-value',
@@ -1315,7 +1306,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 10,
                             ),
-                            32 =>
+                            31 =>
                             array(
                                 'name' => 'quest_foreign_waste_code_c',
                                 'label' => 'LBL_QUEST_FOREIGN_WASTE_CODE',
@@ -1323,7 +1314,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            33 =>
+                            32 =>
                             array(
                                 'name' => 'quest_foreign_waste_code_c_1',
                                 'type' => 'label',
@@ -1331,20 +1322,20 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            34 =>
+                            33 =>
                             array(
                                 'span' => 2,
                             ),
-                            35 =>
+                            34 =>
                             array(
                                 'name' => 'notes_foreign_waste_code_c',
                                 'label' => 'LBL_NOTES_FOREIGN_WASTE_CODE',
                                 'dismiss_label' => true,
                                 'span' => 10,
                             ),
-                            36 =>
+                            35 =>
                             array(
                                 'name' => 'quest_40_cfr_part_c',
                                 'label' => 'LBL_QUEST_40_CFR_PART',
@@ -1352,7 +1343,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            37 =>
+                            36 =>
                             array(
                                 'name' => 'quest_40_cfr_part_c_1',
                                 'type' => 'label',
@@ -1361,28 +1352,28 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            38 =>
+                            37 =>
                             array(
                                 'span' => 2,
                             ),
-                            39 =>
+                            38 =>
                             array(
                                 'name' => 'notes_40_cfr_part_1_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_NOTES_40_CFR_PART_1',
                                 'span' => 10,
                             ),
-                            40 =>
+                            39 =>
                             array(
                                 'span' => 2,
                             ),
-                            41 =>
+                            40 =>
                             array(
                                 'name' => 'notes_40_cfr_part_2_c',
                                 'label' => 'LBL_NOTES_40_CFR_PART_2',
                                 'span' => 10,
                             ),
-                            42 =>
+                            41 =>
                             array(
                                 'name' => 'quest_universal_waste_c',
                                 'label' => 'LBL_QUEST_UNIVERSAL_WASTE',
@@ -1390,7 +1381,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            43 =>
+                            42 =>
                             array(
                                 'name' => 'quest_universal_waste_c_1',
                                 'type' => 'label',
@@ -1398,9 +1389,9 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            44 =>
+                            43 =>
                             array(
                                 'name' => 'quest_is_cesqg_c',
                                 'label' => 'LBL_QUEST_IS_CESQG',
@@ -1408,7 +1399,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            45 =>
+                            44 =>
                             array(
                                 'name' => 'quest_is_cesqg_c_1',
                                 'type' => 'label',
@@ -1417,7 +1408,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            46 =>
+                            45 =>
                             array(
                                 'name' => 'quest_is_rcra_exempt_commerc_c',
                                 'label' => 'LBL_QUEST_IS_RCRA_EXEMPT_COMMERC',
@@ -1425,7 +1416,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            47 =>
+                            46 =>
                             array(
                                 'name' => 'quest_is_rcra_exempt_commerc_c_1',
                                 'type' => 'label',
@@ -1433,9 +1424,9 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            48 =>
+                            47 =>
                             array(
                                 'name' => 'quest_generate_f006_or_f019_c',
                                 'label' => 'LBL_QUEST_GENERATE_F006_OR_F019',
@@ -1443,7 +1434,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            49 =>
+                            48 =>
                             array(
                                 'name' => 'quest_generate_f006_or_f019_c_1',
                                 'type' => 'label',
@@ -1452,7 +1443,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            50 =>
+                            49 =>
                             array(
                                 'name' => 'quest_found_at_40_cfr_c',
                                 'label' => 'LBL_QUEST_FOUND_AT_40_CFR',
@@ -1460,7 +1451,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            51 =>
+                            50 =>
                             array(
                                 'name' => 'quest_found_at_40_cfr_c_1',
                                 'type' => 'label',
@@ -1468,9 +1459,9 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            52 =>
+                            51 =>
                             array(
                                 'name' => 'quest_contains_vocs_c',
                                 'label' => 'LBL_QUEST_CONTAINS_VOCS',
@@ -1478,7 +1469,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            53 =>
+                            52 =>
                             array(
                                 'name' => 'quest_contains_vocs_c_1',
                                 'type' => 'label',
@@ -1487,7 +1478,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            54 =>
+                            53 =>
                             array(
                                 'name' => 'quest_greater_than_20organic_c',
                                 'label' => 'LBL_QUEST_GREATER_THAN_20ORGANIC',
@@ -1495,7 +1486,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            55 =>
+                            54 =>
                             array(
                                 'name' => 'quest_greater_than_20organic_c_1',
                                 'type' => 'label',
@@ -1503,9 +1494,9 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            56 =>
+                            55 =>
                             array(
                                 'name' => 'quest_vapor_pressure_77_c',
                                 'label' => 'LBL_QUEST_VAPOR_PRESSURE_77',
@@ -1513,7 +1504,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            57 =>
+                            56 =>
                             array(
                                 'name' => 'quest_vapor_pressure_77_c_1',
                                 'type' => 'label',
@@ -1522,7 +1513,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            58 =>
+                            57 =>
                             array(
                                 'name' => 'quest_cercla_regulated_c',
                                 'label' => 'LBL_QUEST_CERCLA_REGULATED',
@@ -1530,7 +1521,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            59 =>
+                            58 =>
                             array(
                                 'name' => 'quest_cercla_regulated_c_1',
                                 'type' => 'label',
@@ -1538,9 +1529,9 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            60 =>
+                            59 =>
                             array(
                                 'name' => 'quest_one_of_neshap_rule_c',
                                 'label' => 'LBL_QUEST_ONE_OF_NESHAP_RULE',
@@ -1548,7 +1539,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            61 =>
+                            60 =>
                             array(
                                 'name' => 'quest_one_of_neshap_rule_c_1',
                                 'type' => 'label',
@@ -1557,17 +1548,17 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 10,
                             ),
-                            62 =>
+                            61 =>
                             array(
                                 'span' => 2,
                             ),
-                            63 =>
+                            62 =>
                             array(
                                 'name' => 'neshap_rules_c',
                                 'label' => 'LBL_NESHAP_RULES',
                                 'span' => 10,
                             ),
-                            64 =>
+                            63 =>
                             array(
                                 'name' => 'quest_is_usepa_hazardous_c',
                                 'label' => 'LBL_QUEST_IS_USEPA_HAZARDOUS',
@@ -1575,7 +1566,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            65 =>
+                            64 =>
                             array(
                                 'name' => 'quest_is_usepa_hazardous_c_1',
                                 'type' => 'label',
@@ -1583,13 +1574,13 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
-                            66 =>
+                            65 =>
                             array(
                                 'span' => 2,
                             ),
-                            67 =>
+                            66 =>
                             array(
                                 'name' => 'quest_waste_from_facility_c',
                                 'label' => 'LBL_QUEST_WASTE_FROM_FACILITY',
@@ -1597,7 +1588,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            68 =>
+                            67 =>
                             array(
                                 'name' => 'quest_waste_from_facility_c_1',
                                 'type' => 'label',
@@ -1606,11 +1597,11 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 8,
                             ),
-                            69 =>
+                            68 =>
                             array(
                                 'span' => 2,
                             ),
-                            70 =>
+                            69 =>
                             array(
                                 'name' => 'quest_total_annual_benzene_c',
                                 'label' => 'LBL_QUEST_TOTAL_ANNUAL_BENZENE',
@@ -1618,7 +1609,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'span' => 2,
                             ),
-                            71 =>
+                            70 =>
                             array(
                                 'name' => 'quest_total_annual_benzene_c_1',
                                 'type' => 'label',
@@ -1627,17 +1618,17 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 8,
                             ),
-                            72 =>
+                            71 =>
                             array(
                                 'span' => 3,
                             ),
-                            73 =>
+                            72 =>
                             array(
                                 'name' => 'notes_tab_quantity_c',
                                 'label' => 'LBL_NOTES_TAB_QUANTITY',
                                 'span' => 5,
                             ),
-                            74 =>
+                            73 =>
                             array(
                                 'name' => 'notes_tab_quantity_c_1',
                                 'type' => 'label',
@@ -1646,11 +1637,11 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 4,
                             ),
-                            75 =>
+                            74 =>
                             array(
                                 'span' => 3,
                             ),
-                            76 =>
+                            75 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c_header_1',
                                 'type' => 'label',
@@ -1659,7 +1650,7 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 6,
                             ),
-                            77 =>
+                            76 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c_header_2',
                                 'type' => 'label',
@@ -1668,11 +1659,11 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 3,
                             ),
-                            78 =>
+                            77 =>
                             array(
                                 'span' => 3,
                             ),
-                            79 =>
+                            78 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c_1',
                                 'type' => 'label',
@@ -1681,13 +1672,22 @@ $viewdefs[$module_name] = array(
                                 'noInline' => true,
                                 'span' => 3,
                             ),
-                            80 =>
+                            79 =>
                             array(
                                 'name' => 'notes_describe_knowledge_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_NOTES_DESCRIBE_KNOWLEDGE',
                                 'dismiss_label' => true,
                                 'span' => 6,
+                            ),
+                            80 =>
+                            array(
+                                'name' => 'choose_hazards_that_apply_c',
+                                'label' => 'LBL_CHOOSE_HAZARDS_THAT_APPLY',
+                                'type' => 'multienum-checkbox',
+                                'perline' => 4,
+                                'inrow' => true,
+                                'span' => 12,
                             ),
                         ),
                     ),
@@ -1718,7 +1718,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                'background_color' => '#ebedef',
+                                // 'background_color' => '#ebedef',
                             ),
                         ),
                     ),

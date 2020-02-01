@@ -158,13 +158,17 @@ array (
             'fields' => 
             array (
               0 => 'reference_code',
-              1 => 'status',
+              1 => 
+              array (
+                'name' => 'contract_number_c',
+                'label' => 'LBL_CONTRACT_NUMBER',
+              ),
               2 => 'account_name',
-              3 => 'start_date',
+              3 => 'status',
               4 => 'opportunity_name',
-              5 => 'end_date',
+              5 => 'start_date',
               6 => 'type_name',
-              7 => 'contract_term',
+              7 => 'end_date',
               8 => 
               array (
                 'name' => 'total_contract_value',
@@ -178,19 +182,21 @@ array (
                   1 => 'base_rate',
                 ),
               ),
-              9 => 'company_signed_date',
+              9 => 'contract_term',
               10 => 'expiration_notice',
-              11 => 'customer_signed_date',
+              11 => 'company_signed_date',
               12 => 'description',
-              13 => 
-              array (
-                'name' => 'contract_type_c',
-                'label' => 'LBL_CONTRACT_TYPE',
-              ),
+              13 => 'customer_signed_date',
               14 => 
               array (
                 'name' => 'tag',
-                'span' => 12,
+                'span' => 6,
+              ),
+              15 => 
+              array (
+                'name' => 'contract_type_c',
+                'label' => 'LBL_CONTRACT_TYPE',
+                'span' => 6,
               ),
             ),
           ),

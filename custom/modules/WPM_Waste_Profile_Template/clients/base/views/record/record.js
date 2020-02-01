@@ -46,11 +46,12 @@
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="10"]').attr('style', 'background-color:#ebedef');
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="11"]').attr('style', 'background-color:#f4f4f4');
         //
-        this.$('.LBL_RECORDVIEW_PANEL8[row-num="13"]').attr('style', 'background-color:#ebedef');
-        this.$('.LBL_RECORDVIEW_PANEL8[row-num="14"]').attr('style', 'background-color:#f4f4f4');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="14"]').attr('style', 'background-color:#ebedef');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="15"]').attr('style', 'background-color:#f4f4f4');
         //
-        this.$('.LBL_RECORDVIEW_PANEL8[row-num="17"]').attr('style', 'background-color:#ebedef');
-        this.$('.LBL_RECORDVIEW_PANEL8[row-num="18"]').attr('style', 'background-color:#f4f4f4');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="18"]').attr('style', 'background-color:#ebedef');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="19"]').attr('style', 'background-color:#f4f4f4');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="20"]').attr('style', 'background-color:#f4f4f4');
         //
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="22"]').attr('style', 'background-color:#ebedef');
         //
@@ -62,12 +63,12 @@
         //
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="30"]').attr('style', 'background-color:#ebedef');
         //
-        this.$('.LBL_RECORDVIEW_PANEL8[row-num="33"]').attr('style', 'background-color:#ebedef');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="32"]').attr('style', 'background-color:#ebedef');
+        this.$('.LBL_RECORDVIEW_PANEL8[row-num="33"]').attr('style', 'background-color:#f4f4f4');
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="34"]').attr('style', 'background-color:#f4f4f4');
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="35"]').attr('style', 'background-color:#f4f4f4');
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="36"]').attr('style', 'background-color:#f4f4f4');
         this.$('.LBL_RECORDVIEW_PANEL8[row-num="37"]').attr('style', 'background-color:#f4f4f4');
-        this.$('.LBL_RECORDVIEW_PANEL8[row-num="38"]').attr('style', 'background-color:#f4f4f4');
         //
         this.$('.LBL_RECORDVIEW_PANEL6[row-num="0"]').attr('style', 'background-color:#ebedef');
     },
