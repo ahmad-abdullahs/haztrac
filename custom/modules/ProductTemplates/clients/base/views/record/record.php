@@ -325,6 +325,8 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                             1 =>
                             array(
+                                'name' => 'standalone_item_c',
+                                'label' => 'LBL_STANDALONE_ITEM',
                             ),
                             2 =>
                             array(
@@ -618,13 +620,14 @@ $viewdefs['ProductTemplates'] = array(
                         array(
                             0 =>
                             array(
-                                'span' => 12,
                                 'name' => 'audit',
                                 'label' => 'Audit',
                                 'type' => 'audit-list-field',
                                 'relatedModule' => 'ProductTemplates',
                                 'readonly' => true,
-                                'columns' => array(
+                                'columns' =>
+                                array(
+                                    0 =>
                                     array(
                                         'type' => 'field-name',
                                         'name' => 'field_name',
@@ -632,6 +635,7 @@ $viewdefs['ProductTemplates'] = array(
                                         'sortable' => true,
                                         'width' => '20%',
                                     ),
+                                    1 =>
                                     array(
                                         'type' => 'base',
                                         'name' => 'before',
@@ -639,6 +643,7 @@ $viewdefs['ProductTemplates'] = array(
                                         'sortable' => false,
                                         'width' => '20%',
                                     ),
+                                    2 =>
                                     array(
                                         'type' => 'base',
                                         'name' => 'after',
@@ -646,6 +651,7 @@ $viewdefs['ProductTemplates'] = array(
                                         'sortable' => false,
                                         'width' => '20%',
                                     ),
+                                    3 =>
                                     array(
                                         'type' => 'base',
                                         'name' => 'created_by_username',
@@ -653,6 +659,7 @@ $viewdefs['ProductTemplates'] = array(
                                         'sortable' => true,
                                         'width' => '10%',
                                     ),
+                                    4 =>
                                     array(
                                         'type' => 'source',
                                         'name' => 'source',
@@ -662,6 +669,7 @@ $viewdefs['ProductTemplates'] = array(
                                         'module' => 'Users',
                                         'link' => true,
                                     ),
+                                    5 =>
                                     array(
                                         'type' => 'datetimecombo',
                                         'name' => 'date_created',
@@ -671,8 +679,17 @@ $viewdefs['ProductTemplates'] = array(
                                         'width' => '20%',
                                     ),
                                 ),
-                                'relatedFields' => array(),
-                                'allowedFieldList' => array('discount_price', 'list_price', 'cost_price', 'product_list_name_c'),
+                                'relatedFields' =>
+                                array(
+                                ),
+                                'allowedFieldList' =>
+                                array(
+                                    0 => 'discount_price',
+                                    1 => 'list_price',
+                                    2 => 'cost_price',
+                                    3 => 'product_list_name_c',
+                                ),
+                                'span' => 12,
                             ),
                         ),
                     ),

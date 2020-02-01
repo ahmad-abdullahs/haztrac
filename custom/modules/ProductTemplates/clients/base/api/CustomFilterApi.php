@@ -133,6 +133,11 @@ class CustomFilterApi extends FilterApi {
                     '1',
                 ),
             ),
+            'standalone_item_c' => array(
+                '$not_in' => array(
+                    '1',
+                ),
+            ),
         ));
         return $args;
     }

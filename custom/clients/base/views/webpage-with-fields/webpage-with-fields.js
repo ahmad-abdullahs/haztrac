@@ -8,7 +8,7 @@
     },
 
     bindDataChange: function () {
-        if (!this.meta.config) {
+        if (!this.meta.config && !this.meta.url.includes('entryPoint')) {
             this.model.on("change", this.render, this);
         }
     },

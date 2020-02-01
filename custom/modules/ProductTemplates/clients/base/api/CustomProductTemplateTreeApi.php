@@ -96,7 +96,9 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $filter = "%$filter%";
         $unionFilter2 = "and name like ? AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = ''
-        OR is_bundle_product_c = ?) ";
+        OR is_bundle_product_c = ?) AND (standalone_item_c IS NULL
+        OR standalone_item_c = ''
+        OR standalone_item_c = 0) ";
 
         return $this->_getTreeData($unionFilter1, $unionFilter2, [$filter, $filter, 'parent']);
     }
@@ -109,13 +111,17 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
             $union1Root = "and parent_id is null ";
             $union2Root = "and category_id is null AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = ''
-        OR is_bundle_product_c = ?) ";
+        OR is_bundle_product_c = ?) AND (standalone_item_c IS NULL
+        OR standalone_item_c = ''
+        OR standalone_item_c = 0) ";
             $params = ['parent'];
         } else {
             $union1Root = "and parent_id = ? ";
             $union2Root = "and category_id = ? AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = ''
-        OR is_bundle_product_c = ?) ";
+        OR is_bundle_product_c = ?) AND (standalone_item_c IS NULL
+        OR standalone_item_c = ''
+        OR standalone_item_c = 0) ";
             $params = [$root, $root, 'parent'];
         }
 
@@ -174,7 +180,9 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
 
         $filter = "%$filter%";
         $unionFilter2 = "and name like ? AND (is_bundle_product_c IS NULL
-        OR is_bundle_product_c = '') ";
+        OR is_bundle_product_c = '') AND (standalone_item_c IS NULL
+        OR standalone_item_c = ''
+        OR standalone_item_c = 0) ";
 
         return $this->getTreeData($unionFilter1, $unionFilter2, [$filter, $filter]);
     }
@@ -186,12 +194,16 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         if ($root == null) {
             $union1Root = "and parent_id is null ";
             $union2Root = "and category_id is null AND (is_bundle_product_c IS NULL
-        OR is_bundle_product_c = '') ";
+        OR is_bundle_product_c = '') AND (standalone_item_c IS NULL
+        OR standalone_item_c = ''
+        OR standalone_item_c = 0) ";
             $params = [];
         } else {
             $union1Root = "and parent_id = ? ";
             $union2Root = "and category_id = ? AND (is_bundle_product_c IS NULL
-        OR is_bundle_product_c = '') ";
+        OR is_bundle_product_c = '') AND (standalone_item_c IS NULL
+        OR standalone_item_c = ''
+        OR standalone_item_c = 0) ";
             $params = [$root, $root];
         }
 
