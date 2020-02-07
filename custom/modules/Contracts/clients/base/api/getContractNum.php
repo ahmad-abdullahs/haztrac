@@ -50,7 +50,6 @@ SQL;
             if (!empty($row['contract_number_c']) && !is_null($row['contract_number_c'])) {
                 // Get the number out of the string.
                 preg_match_all('!\d+!', $row['contract_number_c'], $matches);
-                $GLOBALS['log']->fatal('$matches : ' . print_r($matches, 1));
                 if (!empty($matches) && is_array($matches[0])) {
                     if ((int) $matches[0][0] == substr(date("Y"), -2)) {
                         // Get last 2 digit of the year.
