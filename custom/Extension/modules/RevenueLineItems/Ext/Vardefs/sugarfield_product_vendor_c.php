@@ -26,3 +26,31 @@ $dictionary['RevenueLineItem']['fields']['product_vendor_c'] = array(
     'rname' => 'name',
     'studio' => 'visible',
 );
+
+// This field product_vendor_c_ac_usepa_id_c is added to keep the EPA ID number of TSDF for PDF Templates.
+$dictionary['RevenueLineItem']['fields']['product_vendor_c_ac_usepa_id_c'] = array(
+    'labelValue' => 'EPA ID (Product Vendor / TSDF)',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'non-db',
+    'name' => 'product_vendor_c_ac_usepa_id_c',
+    'vname' => 'LBL_PRODUCT_VENDOR_C_AC_USEPA_ID_C',
+    'type' => 'relate',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'enabled',
+    'duplicate_merge_dom_value' => 1,
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'v_vendors_id_c',
+    'module' => 'Accounts',
+    'rname' => 'ac_usepa_id_c',
+    'studio' => 'visible',
+);

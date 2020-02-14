@@ -1,6 +1,126 @@
 <?php
- // created: 2019-09-08 16:39:53
-$dictionary['sales_and_services']['fields']['transporter_carrier_c']['labelValue']='Transporter / Carrier';
-$dictionary['sales_and_services']['fields']['transporter_carrier_c']['dependency']='';
 
- ?>
+// created: 2019-09-08 16:39:53
+$dictionary['sales_and_services']['fields']['transporter_carrier_c']['labelValue'] = 'Transporter / Carrier';
+$dictionary['sales_and_services']['fields']['transporter_carrier_c']['dependency'] = '';
+
+// Below field(s) transporter_ac_usepa_id_c is added to keep the EPA ID number of Transporter for PDF Templates.
+$dictionary["sales_and_services"]["fields"]["transporter_ac_usepa_id_c"] = array(
+    'labelValue' => 'EPA ID (Transporter)',
+    'source' => 'non-db',
+    'name' => 'transporter_ac_usepa_id_c',
+    'vname' => 'LBL_TRANSPORTER_AC_USEPA_ID_C',
+    'type' => 'relate',
+    'required' => false,
+    'massupdate' => false,
+    'no_default' => false,
+    'importable' => false,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'studio' => false,
+    'pii' => false,
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'account_id_c',
+    'ext2' => 'Accounts',
+    'module' => 'Accounts',
+    'rname' => 'ac_usepa_id_c',
+);
+
+$dictionary["sales_and_services"]["fields"]["transporter_shipping_address_street"] = array(
+    'labelValue' => 'Transporter Shipping Street',
+    'source' => 'non-db',
+    'name' => 'transporter_shipping_address_street',
+    'vname' => 'LBL_TRANSPORTER_SHIPPING_ADDRESS_STREET',
+    'type' => 'relate',
+    'required' => false,
+    'massupdate' => false,
+    'no_default' => false,
+    'importable' => false,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'studio' => false,
+    'pii' => false,
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'account_id_c',
+    'ext2' => 'Accounts',
+    'module' => 'Accounts',
+    'rname' => 'shipping_address_street',
+);
+
+$dictionary["sales_and_services"]["fields"]["transporter_shipping_address_city"] = array(
+    'labelValue' => 'Transporter Shipping City',
+    'source' => 'non-db',
+    'name' => 'transporter_shipping_address_city',
+    'vname' => 'LBL_TRANSPORTER_SHIPPING_ADDRESS_CITY',
+    'type' => 'relate',
+    'required' => false,
+    'massupdate' => false,
+    'no_default' => false,
+    'importable' => false,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'studio' => false,
+    'pii' => false,
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'account_id_c',
+    'ext2' => 'Accounts',
+    'module' => 'Accounts',
+    'rname' => 'shipping_address_city',
+);
+
+$dictionary["sales_and_services"]["fields"]["transporter_shipping_address_state"] = array(
+    'labelValue' => 'Transporter Shipping State',
+    'source' => 'non-db',
+    'name' => 'transporter_shipping_address_state',
+    'vname' => 'LBL_TRANSPORTER_SHIPPING_ADDRESS_STATE',
+    'type' => 'relate',
+    'required' => false,
+    'massupdate' => false,
+    'no_default' => false,
+    'importable' => false,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'studio' => false,
+    'pii' => false,
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'account_id_c',
+    'ext2' => 'Accounts',
+    'module' => 'Accounts',
+    'rname' => 'shipping_address_state',
+);
+
+$dictionary["sales_and_services"]["fields"]["transporter_shipping_address_postalcode"] = array(
+    'labelValue' => 'Transporter Shipping Postalcode',
+    'source' => 'non-db',
+    'name' => 'transporter_shipping_address_postalcode',
+    'vname' => 'LBL_TRANSPORTER_SHIPPING_ADDRESS_POSTALCODE',
+    'type' => 'relate',
+    'required' => false,
+    'massupdate' => false,
+    'no_default' => false,
+    'importable' => false,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'studio' => false,
+    'pii' => false,
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'account_id_c',
+    'ext2' => 'Accounts',
+    'module' => 'Accounts',
+    'rname' => 'shipping_address_postalcode',
+);

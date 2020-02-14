@@ -412,6 +412,34 @@ $viewdefs['RevenueLineItems'] = array(
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL9',
+                        'label' => 'LBL_RECORDVIEW_PANEL9',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'customer_certificates',
+                                'label' => 'LBL_CUSTOMER_CERTIFICATES',
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'transporter_certificates',
+                                'label' => 'LBL_TRANSPORTER_CERTIFICATES',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'consignee_certificates',
+                                'label' => 'LBL_CONSIGNEE_CERTIFICATES',
+                            ),
+                        ),
+                    ),
+                    5 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL5',
                         'label' => 'LBL_RECORDVIEW_PANEL5',
                         'columns' => 4,
@@ -462,7 +490,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -525,7 +553,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
-                    6 =>
+                    7 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
@@ -570,7 +598,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
-                    7 =>
+                    8 =>
                     array(
                         'name' => 'LBL_RECORDVIEW_PANEL2',
                         'label' => 'LBL_RECORDVIEW_PANEL2',
@@ -684,7 +712,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
-                    8 =>
+                    9 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_RECORD_SHOWMORE',
@@ -765,7 +793,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                         ),
                     ),
-                    9 =>
+                    10 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
@@ -778,13 +806,14 @@ $viewdefs['RevenueLineItems'] = array(
                         array(
                             0 =>
                             array(
-                                'span' => 12,
                                 'name' => 'audit',
                                 'label' => 'Audit',
                                 'type' => 'audit-list-field',
                                 'relatedModule' => 'RevenueLineItems',
                                 'readonly' => true,
-                                'columns' => array(
+                                'columns' =>
+                                array(
+                                    0 =>
                                     array(
                                         'type' => 'field-name',
                                         'name' => 'field_name',
@@ -792,6 +821,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'sortable' => true,
                                         'width' => '20%',
                                     ),
+                                    1 =>
                                     array(
                                         'type' => 'base',
                                         'name' => 'before',
@@ -799,6 +829,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'sortable' => false,
                                         'width' => '20%',
                                     ),
+                                    2 =>
                                     array(
                                         'type' => 'base',
                                         'name' => 'after',
@@ -806,6 +837,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'sortable' => false,
                                         'width' => '20%',
                                     ),
+                                    3 =>
                                     array(
                                         'type' => 'base',
                                         'name' => 'created_by_username',
@@ -813,6 +845,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'sortable' => true,
                                         'width' => '10%',
                                     ),
+                                    4 =>
                                     array(
                                         'type' => 'source',
                                         'name' => 'source',
@@ -822,6 +855,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'module' => 'Users',
                                         'link' => true,
                                     ),
+                                    5 =>
                                     array(
                                         'type' => 'datetimecombo',
                                         'name' => 'date_created',
@@ -831,8 +865,17 @@ $viewdefs['RevenueLineItems'] = array(
                                         'width' => '20%',
                                     ),
                                 ),
-                                'relatedFields' => array(),
-                                'allowedFieldList' => array('discount_price', 'list_price', 'cost_price', 'product_list_name_c'),
+                                'relatedFields' =>
+                                array(
+                                ),
+                                'allowedFieldList' =>
+                                array(
+                                    0 => 'discount_price',
+                                    1 => 'list_price',
+                                    2 => 'cost_price',
+                                    3 => 'product_list_name_c',
+                                ),
+                                'span' => 12,
                             ),
                         ),
                     ),

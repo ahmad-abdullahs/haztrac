@@ -48,3 +48,7 @@ $mod_strings['LBL_MANIFEST_ADDITIONAL_INFO'] = 'Additional Info';
 $mod_strings['LBL_HIDE_PRICE_FROM_PAPERWORK'] = 'Hide Price From Paperwork';
 $mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Cost';
 $mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Audit';
+$mod_strings['LBL_RECORDVIEW_PANEL9'] = 'Terms &amp; Conditions &amp; Certificates';
+$mod_strings['LBL_CUSTOMER_CERTIFICATES'] = 'Customer Certificates';
+$mod_strings['LBL_TRANSPORTER_CERTIFICATES'] = 'Transporter Certificates';
+$mod_strings['LBL_CONSIGNEE_CERTIFICATES'] = 'Consignee Certificates';

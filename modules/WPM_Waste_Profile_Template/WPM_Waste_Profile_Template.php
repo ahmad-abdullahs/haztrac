@@ -25,6 +25,7 @@ function getCertificatesForWPT() {
         'team_security' => false
     ));
     $query->select(array('id', 'name'));
+    $query->where()->equals('module_type_c', 'Waste Profile Certificate');
     $query->orderBy('name', 'ASC');
     $result = $query->execute();
     $allTermAndConditions = array('' => '');

@@ -1,21 +1,30 @@
 <?php
 
-require_once('include/Sugarpdf/sugarpdf/sugarpdf.pdfmanager.php');
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 
-class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
+use Sugarcrm\Sugarcrm\Util\Uuid;
+
+class SugarpdfPdfmanager extends SugarpdfSmarty {
 
     public $hrLikeDiv = false;
-    public $logoSize = 20;
+    protected $pdfFilename;
+    protected $footerText = null;
 
     public function preDisplay() {
-        SugarpdfSmarty::preDisplay();
+        parent::preDisplay();
 
-        //set margins
-        //PDF_MARGIN_TOP
-        $this->SetMargins(PDF_MARGIN_LEFT, 38, PDF_MARGIN_RIGHT);
-        // $this->setCellHeightRatio(1.25);
-        /* function Footer for page number */
-
+//        //set margins
+//        // $this->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+//        $this->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
         // settings for disable smarty php tags
         $this->ss->security_settings['PHP_TAGS'] = false;
         $this->ss->security = true;
@@ -24,7 +33,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
         }
 
         // header/footer settings
-//        $this->setPrintHeader(true);
+        $this->setPrintHeader(false);
         $this->setPrintFooter(false); // always print page number at least
 
         if (!empty($_REQUEST['pdf_template_id'])) {
@@ -56,7 +65,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 if (!empty($pdfTemplate->header_logo) ||
                         !empty($pdfTemplate->header_title) || !empty($pdfTemplate->header_text)) {
                     $this->setHeaderData(
-                            $headerLogo, $this->logoSize, $pdfTemplate->header_title, $pdfTemplate->header_text
+                            $headerLogo, PDF_HEADER_LOGO_WIDTH, $pdfTemplate->header_title, $pdfTemplate->header_text
                     );
                     $this->setPrintHeader(true);
                 }
@@ -79,161 +88,275 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
             }
         }
 
-
         if ($previewMode === FALSE) {
             require_once 'modules/PdfManager/PdfManagerHelper.php';
-            $fields = self::parseBeanFields($this->bean, true);
+            $fields = PdfManagerHelper::parseBeanFields($this->bean, true);
         } else {
             $fields = array();
         }
 
-        if ($this->module == 'WPM_Waste_Profile_Module' && $previewMode === FALSE) {
+        if ($this->module == 'Quotes' && $previewMode === FALSE) {
             global $locale;
-            $compositions = array();
+            require_once 'modules/Quotes/config.php';
+            require_once 'modules/Currencies/Currency.php';
+            $currency = BeanFactory::newBean('Currencies');
+            $format_number_array = array(
+                'currency_symbol' => true,
+                'type' => 'sugarpdf',
+                'currency_id' => $this->bean->currency_id,
+                'charset_convert' => true, /* UTF-8 uses different bytes for Euro and Pounds */
+            );
+            $currency->retrieve($this->bean->currency_id);
+            $fields['currency_iso'] = $currency->iso4217;
+
+            // Adding Tax Rate Field
+            $fields['taxrate_value'] = format_number_sugarpdf($this->bean->taxrate_value, $locale->getPrecision(), $locale->getPrecision(), array('percentage' => true));
+
+            $this->bean->load_relationship('product_bundles');
+            $product_bundle_list = $this->bean->product_bundles->getBeans();
+            usort($product_bundle_list, array('ProductBundle', 'compareProductBundlesByIndex'));
+
+            $bundles = array();
             $count = 0;
-            $count1 = 0;
-            $count2 = 0;
-            $count3 = 0;
-            $count4 = 0;
-            $count5 = 0;
-            $bundleFields['compositions'] = array();
-            $bundleFields['constituent_regulateds'] = array();
-            $bundleFields['constituent_volatiles'] = array();
-            $bundleFields['constituent_others'] = array();
-            $bundleFields['constituent_semivolatiles'] = array();
-            $bundleFields['constituent_pesticide_herbicides'] = array();
-            $fields['showTotal'] = 0;
-            $fields['composition_max_total'] = format_number($fields['composition_max_total'], $locale->getPrecision(), $locale->getPrecision());
+            foreach ($product_bundle_list as $ordered_bundle) {
 
-            // Composition
-            $this->bean->load_relationship('waste_composition_wpm_waste_profile_module');
-            $compositionList = $this->bean->waste_composition_wpm_waste_profile_module->getBeans();
-            foreach ($compositionList as $compositionBean) {
-                $bundleFields['compositions'][$count] = PdfManagerHelper::parseBeanFields($compositionBean, true);
-                $bundleFields['compositions'][$count]['min'] = format_number($compositionBean->min, $locale->getPrecision(), $locale->getPrecision());
-                $bundleFields['compositions'][$count]['max'] = format_number($compositionBean->max, $locale->getPrecision(), $locale->getPrecision());
-                $fields['showTotal'] = 1;
-                $count++;
-            }
+                $bundleFields = PdfManagerHelper::parseBeanFields($ordered_bundle, true);
+                $bundleFields['products'] = array();
+                $product_bundle_line_items = $ordered_bundle->get_product_bundle_line_items();
+                foreach ($product_bundle_line_items as $product_bundle_line_item) {
 
-            // Constituents : Regulated Metals 
-            $this->bean->load_relationship('waste_constituents_wpm_waste_profile_module');
-            $constituentList = $this->bean->waste_constituents_wpm_waste_profile_module->getBeans();
-            foreach ($constituentList as $constituentBean) {
-                $tempBean = PdfManagerHelper::parseBeanFields($constituentBean, true);
-                if ($constituentBean->type == 'Regulated') {
-                    $bundleFields['constituent_regulateds'][$count1] = $tempBean;
-                    $bundleFields['constituent_regulateds'][$count1]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
-                    $bundleFields['constituent_regulateds'][$count1]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
-                    // $bundleFields['constituent_regulateds'][$count1]['not_applicable'] = $constituentBean->not_applicable ? 'Yes' : '';
-                    $count1++;
-                } else if ($constituentBean->type == 'Volatile') {
-                    $bundleFields['constituent_volatiles'][$count2] = $tempBean;
-                    $bundleFields['constituent_volatiles'][$count2]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
-                    $bundleFields['constituent_volatiles'][$count2]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
-                    $count2++;
-                } else if ($constituentBean->type == 'Other Constituents') {
-                    $bundleFields['constituent_others'][$count3] = $tempBean;
-                    $bundleFields['constituent_others'][$count3]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
-                    $bundleFields['constituent_others'][$count3]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
-                    $count3++;
-                } else if ($constituentBean->type == 'Semi-Volatile') {
-                    $bundleFields['constituent_semivolatiles'][$count4] = $tempBean;
-                    $bundleFields['constituent_semivolatiles'][$count4]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
-                    $bundleFields['constituent_semivolatiles'][$count4]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
-                    $count4++;
-                } else if ($constituentBean->type == 'Pesticides And Herbicides') {
-                    $bundleFields['constituent_pesticide_herbicides'][$count5] = $tempBean;
-                    $bundleFields['constituent_pesticide_herbicides'][$count5]['regulatory_level'] = format_number($constituentBean->regulatory_level, $locale->getPrecision(), $locale->getPrecision());
-                    $bundleFields['constituent_pesticide_herbicides'][$count5]['tclp'] = format_number($constituentBean->tclp, $locale->getPrecision(), $locale->getPrecision());
-                    $count5++;
-                }
-            }
+                    $bundleFields['products'][$count] = PdfManagerHelper::parseBeanFields($product_bundle_line_item, true);
 
-            global $app_list_strings;
-            $multienums = unencodeMultienum($this->bean->choose_hazards_that_apply_c);
-            $index = -1;
-            $count = 0;
-            $bundleFields['catas'][$count] = array();
-            foreach ($app_list_strings['choose_hazards_that_apply_c_list'] as $key => $value) {
-                $index++;
-                if ($index == 4) {
-                    $index = 0;
-                    $count++;
-                    $bundleFields['catas'][$count] = array();
-                }
+                    if ($product_bundle_line_item->object_name == "ProductBundleNote") {
+                        $bundleFields['products'][$count]['name'] = $bundleFields['products'][$count]['description'];
+                    } else {
+                        // Special case about discount amount
+                        if ($product_bundle_line_item->discount_select) {
+                            $bundleFields['products'][$count]['discount_amount'] = format_number($product_bundle_line_item->discount_amount, $locale->getPrecision(), $locale->getPrecision()) . '%';
+                        }
+                        // ensure the discount_select field exists in the pdf data
+                        $bundleFields['products'][$count]['discount_select'] = $product_bundle_line_item->discount_select;
 
-                if (in_array($key, $multienums)) {
-                    $bundleFields['catas'][$count]['status' . $index] = "Yes";
-                } else {
-                    $bundleFields['catas'][$count]['status' . $index] = "No";
-                }
-                $bundleFields['catas'][$count]['name' . $index] = $app_list_strings['choose_hazards_that_apply_c_list'][$key];
-            }
+                        // Special case about ext price
+                        $bundleFields['products'][$count]['ext_price'] = format_number_sugarpdf($product_bundle_line_item->discount_price * $product_bundle_line_item->quantity, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
+                    }
 
 
-            $certificates = array_unique(unencodeMultienum($this->bean->certificates));
-            if (!empty($certificates)) {
-                $count = 0;
-                $bundleFields['certificates'][$count] = array();
-                foreach ($certificates as $key => $certificateId) {
-                    $certificateBean = BeanFactory::getBean('wp_terms_and_conditions', $certificateId, array('disable_row_level_security' => true));
-                    $bundleFields['certificates'][$count]['description'] = $certificateBean->description;
                     $count++;
                 }
+                $bundles[] = $bundleFields;
             }
 
-            $link2 = 'accounts_wpm_waste_profile_module_2';
-            $this->bean->load_relationship($link2);
-            $accountBean = $this->bean->$link2->getBeans();
-            if (!empty($accountBean)) {
-                $accountBean = array_shift($accountBean);
-                $accountBean->load_relationship('contacts');
-                $contactsList = $accountBean->contacts->getBeans();
-                foreach ($contactsList as $contactBean) {
-                    $tempBean = PdfManagerHelper::parseBeanFields($contactBean, true);
-                    if ($contactBean->role_contact == 'EHS') {
-                        $fields[$link2]['contacts'] = $tempBean;
-                        break;
-                    } else if ($contactBean->role_contact == 'Primary') {
-                        $fields[$link2]['contacts'] = $tempBean;
-                    } else if (empty($fields[$link2]['contacts'])) {
-                        $fields[$link2]['contacts'] = $tempBean;
+            $this->ss->assign('product_bundles', $bundles);
+        }
+
+        // For phone number formatting...
+        $phoneFields = array(
+            'phone_office' => 'phone_office',
+            'phone_fax' => 'phone_fax',
+            'phone_alternate' => 'phone_alternate',
+        );
+
+        foreach ($fields as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $_key => $_value) {
+                    if (array_key_exists($_key, $phoneFields)) {
+                        $fields[$key][$_key] = $this->formatPhone($fields[$key][$_key]);
                     }
                 }
+            } else if (array_key_exists($key, $phoneFields)) {
+                $fields[$key] = $this->formatPhone($fields[$key]);
             }
-
-            $link1 = 'accounts_wpm_waste_profile_module_1';
-            $this->bean->load_relationship($link1);
-            $this->bean->$link1->getBeans();
-            $accountBean = $this->bean->$link1->getBeans();
-            if (!empty($accountBean)) {
-                $accountBean = array_shift($accountBean);
-                $accountBean->load_relationship('contacts');
-                $contactsList = $accountBean->contacts->getBeans();
-                foreach ($contactsList as $contactBean) {
-                    $tempBean = PdfManagerHelper::parseBeanFields($contactBean, true);
-                    if ($contactBean->role_contact == 'EHS') {
-                        $fields[$link1]['contacts'] = $tempBean;
-                        break;
-                    } else if ($contactBean->role_contact == 'Primary') {
-                        $fields[$link1]['contacts'] = $tempBean;
-                    } else if (empty($fields[$link1]['contacts'])) {
-                        $fields[$link1]['contacts'] = $tempBean;
-                    }
-                }
-            }
-
-            $compositions[] = $bundleFields;
-            $this->ss->assign('waste_composition_wpm_waste_profile_module', $compositions);
-            $this->ss->assign('waste_constituents_wpm_waste_profile_module', $compositions);
-            $this->ss->assign('choose_hazards_that_apply_list', $compositions);
-            $this->ss->assign('certificates', $compositions);
         }
 
         $this->ss->assign('fields', $fields);
+    }
 
-        $this->ss->assign('PDF_MARGIN_TOP', 0);
+    public function display() {
+        parent::display();
+
+        $headerdata = $this->getHeaderData();
+        // Remove the temporary logo copy (starts with "upload/") if exists
+        if (!empty($headerdata['logo']) && file_exists($headerdata['logo']) && strpos($headerdata['logo'], "upload/") === 0) {
+            unlink($headerdata['logo']);
+        }
+    }
+
+    /**
+     * Build the Email with the attachement
+     *
+     * @param $file_name
+     * @param $focus
+     * @return $email_id
+     */
+    protected function buildEmail($file_name, $focus) {
+
+        global $mod_strings;
+        global $current_user;
+
+        //First Create e-mail draft
+        $email_object = BeanFactory::newBean("Emails");
+        // set the id for relationships
+        $email_object->id = create_guid();
+        $email_object->new_with_id = true;
+
+        //subject
+        $email_object->name = $focus->name;
+        //body
+        $email_object->description_html = sprintf(translate('LBL_EMAIL_PDF_DEFAULT_DESCRIPTION', "PdfManager"), $file_name);
+        $email_object->description = html_entity_decode($email_object->description_html, ENT_COMPAT, 'UTF-8');
+
+        //parent type, id
+        $email_object->parent_type = $focus->module_name;
+        $email_object->parent_id = $focus->id;
+        //type is draft
+        $email_object->type = "draft";
+        $email_object->status = "draft";
+        $email_object->state = Email::STATE_DRAFT;
+
+        $email_object->to_addrs_ids = $focus->id;
+        $email_object->to_addrs_names = $focus->name . ";";
+
+        if (isset($focus->emailAddress)) {
+            $to_addrs = $focus->emailAddress->getPrimaryAddress($focus);
+            $email_object->to_addrs_emails = $to_addrs . ";";
+            $email_object->to_addrs = $focus->name . " <" . $to_addrs . ">";
+        } elseif ($focus->module_name == "Quotes") {
+            // link the sent pdf to the relevant account
+            if (isset($focus->billing_account_id) && !empty($focus->billing_account_id)) {
+                $email_object->load_relationship('accounts');
+                $email_object->accounts->add($focus->billing_account_id);
+            }
+
+            //check to see if there is a billing contact associated with this quote
+            if (!empty($focus->billing_contact_id) && $focus->billing_contact_id != "") {
+                $contact = BeanFactory::newBean("Contacts");
+                $contact->retrieve($focus->billing_contact_id);
+
+                if (!empty($contact->email1) || !empty($contact->email2)) {
+                    if ($email_object->load_relationship('to')) {
+                        $ep = BeanFactory::newBean('EmailParticipants');
+                        $ep->new_with_id = true;
+                        $ep->id = Uuid::uuid1();
+                        BeanFactory::registerBean($ep);
+                        $ep->parent_type = $contact->getModuleName();
+                        $ep->parent_id = $contact->id;
+                        $ep->email_address = $contact->emailAddress->getPrimaryAddress($contact);
+
+                        if (!empty($ep->email_address)) {
+                            $ep->email_address_id = $contact->emailAddress->getEmailGUID($ep->email_address);
+                        }
+
+                        $email_object->to->add($ep);
+                    };
+
+                    //contact email is set
+                    $email_object->to_addrs_ids = $focus->billing_contact_id;
+                    $email_object->to_addrs_names = $focus->billing_contact_name . ";";
+
+                    if (!empty($contact->email1)) {
+                        $email_object->to_addrs_emails = $contact->email1 . ";";
+                        $email_object->to_addrs = $focus->billing_contact_name . " <" . $contact->email1 . ">";
+                    } elseif (!empty($contact->email2)) {
+                        $email_object->to_addrs_emails = $contact->email2 . ";";
+                        $email_object->to_addrs = $focus->billing_contact_name . " <" . $contact->email2 . ">";
+                    }
+
+                    // create relationship b/t the email(w/pdf) and the contact
+                    $contact->load_relationship('emails');
+                    $contact->emails->add($email_object->id);
+                }//end if contact name is set
+            } elseif (isset($focus->billing_account_id) && !empty($focus->billing_account_id)) {
+                $acct = BeanFactory::newBean("Accounts");
+                $acct->retrieve($focus->billing_account_id);
+
+                if (!empty($acct->email1) || !empty($acct->email2)) {
+                    if ($email_object->load_relationship('to')) {
+                        $ep = BeanFactory::newBean('EmailParticipants');
+                        $ep->new_with_id = true;
+                        $ep->id = Uuid::uuid1();
+                        BeanFactory::registerBean($ep);
+                        $ep->parent_type = $acct->getModuleName();
+                        $ep->parent_id = $acct->id;
+                        $ep->email_address = $acct->emailAddress->getPrimaryAddress($acct);
+
+                        if (!empty($ep->email_address)) {
+                            $ep->email_address_id = $acct->emailAddress->getEmailGUID($ep->email_address);
+                        }
+
+                        $email_object->to->add($ep);
+                    };
+
+                    //acct email is set
+                    $email_object->to_addrs_ids = $focus->billing_account_id;
+                    $email_object->to_addrs_names = $focus->billing_account_name . ";";
+
+                    if (!empty($acct->email1)) {
+                        $email_object->to_addrs_emails = $acct->email1 . ";";
+                        $email_object->to_addrs = $focus->billing_account_name . " <" . $acct->email1 . ">";
+                    } elseif (!empty($acct->email2)) {
+                        $email_object->to_addrs_emails = $acct->email2 . ";";
+                        $email_object->to_addrs = $focus->billing_account_name . " <" . $acct->email2 . ">";
+                    }
+
+                    // create relationship b/t the email(w/pdf) and the acct
+                    $acct->load_relationship('emails');
+                    $acct->emails->add($email_object->id);
+                }//end if acct name is set
+            }
+        }
+
+        if (isset($email_object->team_id)) {
+            $email_object->team_id = $current_user->getPrivateTeamID();
+        }
+        if (isset($email_object->team_set_id)) {
+            $teamSet = BeanFactory::newBean('TeamSets');
+            $teamIdsArray = array($current_user->getPrivateTeamID());
+            $email_object->team_set_id = $teamSet->addTeams($teamIdsArray);
+        }
+
+        $email_object->assigned_user_id = $current_user->id;
+
+        //Save the email object
+        global $timedate;
+        $email_object->date_start = $timedate->now();
+
+        $email_object->save(FALSE);
+        $email_id = $email_object->id;
+
+        //Handle PDF Attachment
+        $note = BeanFactory::newBean("Notes");
+        $note->id = Uuid::uuid1();
+        $note->new_with_id = true;
+        $note->filename = $file_name;
+        $note->file_mime_type = get_file_mime_type("upload://{$file_name}", 'application/octet-stream');
+        $note->name = translate('LBL_EMAIL_ATTACHMENT', "Quotes") . $file_name;
+
+        $note->email_id = $email_object->id;
+        $note->email_type = $email_object->module_name;
+
+        //teams
+        $note->team_id = $current_user->getPrivateTeamID();
+        $noteTeamSet = BeanFactory::newBean('TeamSets');
+        $noteteamIdsArray = array($current_user->getPrivateTeamID());
+        $note->team_set_id = $noteTeamSet->addTeams($noteteamIdsArray);
+
+        // Copy the file before saving so that the file size is captured during save.
+        $source = 'upload://' . $file_name;
+        $destination = "upload://{$note->id}";
+
+        if (!copy($source, $destination)) {
+            $msg = str_replace('$destination', $destination, translate('LBL_RENAME_ERROR', "Quotes"));
+            die($msg);
+        }
+
+        @unlink($source);
+
+        $note->save();
+        $email_object->attachments->add($note);
+
+        //return the email id
+        return $email_id;
     }
 
     /**
@@ -256,43 +379,26 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 $pdfTemplate->body_html = str_replace(array('{', '}'), array('&#123;', '&#125;'), $pdfTemplate->body_html);
             }
 
-            if ($pdfTemplate->base_module == 'WPM_Waste_Profile_Module') {
+            if ($pdfTemplate->base_module == 'Quotes') {
+
                 $pdfTemplate->body_html = str_replace(
-                        '<!--START_PRODUCT_LOOP-->', '{foreach from=$compositionList.compositions item="composition"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_PRODUCT1_LOOP-->', '{foreach from=$constituentList.constituent_regulateds item="constituent_regulated"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_PRODUCT2_LOOP-->', '{foreach from=$constituentList.constituent_volatiles item="constituent_volatile"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_PRODUCT3_LOOP-->', '{foreach from=$constituentList.constituent_semivolatiles item="constituent_semivolatile"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_PRODUCT4_LOOP-->', '{foreach from=$constituentList.constituent_pesticide_herbicides item="constituent_pesticide_herbicide"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_PRODUCT5_LOOP-->', '{foreach from=$constituentList.constituent_others item="constituent_other"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_CATA_LOOP-->', '{foreach from=$cataList.catas item="cata"}', $pdfTemplate->body_html
-                );
-                $pdfTemplate->body_html = str_replace(
-                        '<!--START_CERTIFICATE_LOOP-->', '{foreach from=$certificateList.certificates item="certificate"}', $pdfTemplate->body_html
+                        '$fields.product_bundles', '$bundle', $pdfTemplate->body_html
                 );
 
                 $pdfTemplate->body_html = str_replace(
-                        array(
-                    "<!--END_PRODUCT_LOOP-->",
-                    "<!--END_PRODUCT1_LOOP-->",
-                    "<!--END_PRODUCT2_LOOP-->",
-                    "<!--END_PRODUCT3_LOOP-->",
-                    "<!--END_PRODUCT4_LOOP-->",
-                    "<!--END_PRODUCT5_LOOP-->",
-                    "<!--END_CATA_LOOP-->", // CHOOSE ALL THAT APPLY
-                    "<!--END_CERTIFICATE_LOOP-->", // Certificates
-                        ), '{/foreach}', $pdfTemplate->body_html
+                        '$fields.products', '$product', $pdfTemplate->body_html
+                );
+
+                $pdfTemplate->body_html = str_replace(
+                        '<!--START_BUNDLE_LOOP-->', '{foreach from=$product_bundles item="bundle"}', $pdfTemplate->body_html
+                );
+
+                $pdfTemplate->body_html = str_replace(
+                        '<!--START_PRODUCT_LOOP-->', '{foreach from=$bundle.products item="product"}', $pdfTemplate->body_html
+                );
+
+                $pdfTemplate->body_html = str_replace(
+                        array("<!--END_PRODUCT_LOOP-->", "<!--END_BUNDLE_LOOP-->"), '{/foreach}', $pdfTemplate->body_html
                 );
             }
 
@@ -304,178 +410,207 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
         return '';
     }
 
-    protected static function hasOneRelationship(SugarBean $bean, $fieldName) {
-        if (!isset($bean->$fieldName)) {
-            return false;
+    /**
+     * Set the file name and manage the email attachement output
+     *
+     * @see TCPDF::Output()
+     */
+    public function Output($name = "doc.pdf", $dest = 'I') {
+        if (!empty($this->pdfFilename)) {
+            $name = $this->pdfFilename;
         }
 
-        if ($bean->$fieldName instanceof Link2) {
-            return true;
+        // This case is for "email as PDF"
+        if (isset($_REQUEST['to_email']) && $_REQUEST['to_email'] == "1") {
+            // After the output the object is destroy
+
+            $bean = $this->bean;
+
+            $tmp = parent::Output('', 'S');
+            $badoutput = ob_get_contents();
+            if (strlen($badoutput) > 0) {
+                ob_end_clean();
+            }
+            file_put_contents('upload://' . $name, ltrim($tmp));
+
+            $email_id = $this->buildEmail($name, $bean);
+
+            //redirect
+            if ($email_id == "") {
+                //Redirect to quote, since something went wrong
+                echo "There was an error with your request";
+                exit; //end if email id is blank
+            } else {
+                SugarApplication::redirect("index.php?module=Emails&action=Compose&record=" . $email_id . "&replyForward=true&reply=");
+            }
         }
 
-        // not Link2 or Link. Bail
-        if (!isset($bean->$fieldName->_relationship->relationship_type)) {
-            return false;
-        }
+        parent::Output($name, 'D');
+    }
 
-        // deal with Link
-        switch ($bean->$fieldName->_relationship->relationship_type) {
-            case 'one-to-one':
-                return true;
-            case 'one-to-many':
-                return !$bean->$fieldName->_get_bean_position();
-            case 'many-to-one':
-                return $bean->$fieldName->_get_bean_position();
-            case 'many-to-many':
-                if (isset($bean->field_defs[$fieldName]['side'])) {
-                    return false;
-                }
-                switch ($bean->$fieldName->_get_link_table_definition(
-                        $bean->$fieldName->_relationship_name, 'true_relationship_type'
-                )) {
-                    case 'one-to-many':
-                        return !$bean->$fieldName->_get_bean_position();
-                    case 'many-to-one':
-                        return $bean->$fieldName->_get_bean_position();
-                    default:
-                        return false;
-                }
-            default:
-                return false;
+    /**
+     * PDF manager specific Header function
+     */
+    public function Header() {
+        $ormargins = $this->getOriginalMargins();
+        $headerfont = $this->getHeaderFont();
+        $headerdata = $this->getHeaderData();
+        if ($headerdata['logo'] && $headerdata['logo'] != K_BLANK_IMAGE) {
+            $this->Image($headerdata['logo'], $this->GetX(), $this->getHeaderMargin(), $headerdata['logo_width'], 12);
+            $imgy = $this->getImageRBY();
+        } else {
+            $imgy = $this->GetY();
+        }
+        $cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
+        // set starting margin for text data cell
+        if ($this->getRTL()) {
+            $header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
+        } else {
+            $header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
+        }
+        $this->SetTextColor(0, 0, 0);
+        // header title
+        $this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
+        $this->SetX($header_x);
+        $this->Cell(0, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
+        // header string
+        $this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
+        $this->SetX($header_x);
+        $this->MultiCell(0, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false);
+        // print an ending header line
+        $this->SetLineStyle(array('width' => 0.85 / $this->getScaleFactor(), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+        $this->SetY((2.835 / $this->getScaleFactor()) + max($imgy, $this->GetY()));
+        if ($this->getRTL()) {
+            $this->SetX($ormargins['right']);
+        } else {
+            $this->SetX($ormargins['left']);
+        }
+        $this->Cell(0, 0, '', 'T', 0, 'C');
+    }
+
+    /**
+     * PDF manager specific Footer function
+     */
+    public function Footer() {
+        $cur_y = $this->GetY();
+        $ormargins = $this->getOriginalMargins();
+        $this->SetTextColor(0, 0, 0);
+        //set style for cell border
+        $line_width = 0.85 / $this->getScaleFactor();
+        $this->SetLineStyle(array('width' => $line_width, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+        //print document barcode
+        $barcode = $this->getBarcode();
+        if (!empty($barcode)) {
+            $this->Ln($line_width);
+            $barcode_width = round(($this->getPageWidth() - $ormargins['left'] - $ormargins['right']) / 3);
+            $this->write1DBarcode($barcode, 'C128B', $this->GetX(), $cur_y + $line_width, $barcode_width, (($this->getFooterMargin() / 3) - $line_width), 0.3, '', '');
+        }
+        if (empty($this->pagegroups)) {
+            $pagenumtxt = $this->l['w_page'] . ' ' . $this->getAliasNumPage() . ' / ' . $this->getAliasNbPages();
+        } else {
+            $pagenumtxt = $this->l['w_page'] . ' ' . $this->getPageNumGroupAlias() . ' / ' . $this->getPageGroupAlias();
+        }
+        $this->SetY($cur_y);
+
+        if ($this->getRTL()) {
+            $this->SetX($ormargins['right']);
+            if ($this->footerText) {
+                // footer text and page number
+                $this->Cell(0, 0, $this->footerText, 'T', 0, 'R');
+                $this->Cell(0, 0, $pagenumtxt, 0, 0, 'L');
+            } else {
+                // page number only
+                $this->Cell(0, 0, $pagenumtxt, 'T', 0, 'L');
+            }
+        } else {
+            $this->SetX($ormargins['left']);
+            if ($this->footerText) {
+                // footer text and page number
+                $this->Cell(0, 0, $this->footerText, 'T', 0, 'L');
+                $this->Cell(0, 0, $pagenumtxt, 0, 0, 'R');
+            } else {
+                // page number only
+                $this->Cell(0, 0, $pagenumtxt, 'T', 0, 'R');
+            }
         }
     }
 
-    public static function parseBeanFields($module_instance, $recursive = FALSE) {
-        global $app_list_strings;
-        $module_instance->ACLFilterFields();
+    /**
+     * Gets the PDF Filename
+     * @return string
+     */
+    public function getPDFFilename() {
+        return $this->pdfFilename;
+    }
 
-        $fields_module = array();
-        foreach ($module_instance->toArray() as $name => $value) {
-            if (isset($module_instance->field_defs[$name]['type']) &&
-                    ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
-                    isset($module_instance->field_defs[$name]['options']) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value])
-            ) {
-                $fields_module[$name] = $app_list_strings[$module_instance->field_defs[$name]['options']][$value];
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
-            } elseif (isset($module_instance->field_defs[$name]['type']) &&
-                    $module_instance->field_defs[$name]['type'] == 'multienum' &&
-                    isset($module_instance->field_defs[$name]['options']) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']])
-            ) {
-                $multienums = unencodeMultienum($value);
-                $multienums_value = array();
-                foreach ($multienums as $multienum) {
-                    if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
-                        $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
-                    } else {
-                        $multienums_value[] = $multienum;
-                    }
-                }
-                $fields_module[$name] = implode(', ', $multienums_value);
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
-            } elseif ($recursive &&
-                    isset($module_instance->field_defs[$name]['type']) &&
-                    $module_instance->field_defs[$name]['type'] == 'link' &&
-                    $module_instance->load_relationship($name) &&
-                    self::hasOneRelationship($module_instance, $name) &&
-                    count($module_instance->$name->get()) == 1
-            ) {
-                $related_module = $module_instance->$name->getRelatedModuleName();
-                $related_instance = BeanFactory::newBean($related_module);
-                $related_instance_id = $module_instance->$name->get();
-                if ($related_instance->retrieve($related_instance_id[0]) === null) {
-                    $GLOBALS['log']->fatal(__FILE__ . ' Failed loading module ' . $related_module . ' with id ' . $related_instance_id[0]);
-                }
+    /**
+     * Forces a download of the PDF in a way our API understands.
+     * @param string $filename The name of the file to force
+     * @return string
+     */
+    public function forceDownload($filename) {
+        $this->sendForceDownloadHeaders($filename);
+        return parent::Output($filename, 'S');
+    }
 
-                $fields_module[$name] = self::parseBeanFields($related_instance, FALSE);
-            } elseif (
-                    isset($module_instance->field_defs[$name]['type']) &&
-                    $module_instance->field_defs[$name]['type'] == 'currency' &&
-                    isset($module_instance->currency_id)
-            ) {
-                global $locale;
-                $format_number_array = array(
-                    'currency_symbol' => true,
-                    'currency_id' => (!empty($module_instance->field_defs[$name]['currency_id']) ? $module_instance->field_defs[$name]['currency_id'] : $module_instance->currency_id),
-                    'type' => 'sugarpdf',
-                    'charset_convert' => true,
-                );
+    /**
+     * Sends the necessary headers to force a download of a PDF file
+     *
+     * This is borrowed entirely from {@see TCPDF::Output}, in the 'D' case for
+     * forcing a download. It is done this way to allow the return of data rather
+     * than echoing data.
+     * @param string $filename The name of the file to force
+     * @return null
+     */
+    protected function sendForceDownloadHeaders($filename) {
+        // Download PDF as file
+        if (ob_get_contents()) {
+            $this->Error('Some data has already been output, can\'t send PDF file');
+        }
+        header('Content-Description: File Transfer');
+        if (headers_sent()) {
+            $this->Error('Some data has already been output to browser, can\'t send PDF file');
+        }
+        header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
+        header('Pragma: public');
+        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        // force download dialog
+        header('Content-Type: application/force-download');
+        header('Content-Type: application/octet-stream', false);
+        header('Content-Type: application/download', false);
+        header('Content-Type: application/pdf', false);
+        // use the Content-Disposition header to supply a recommended filename
+        header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: ' . $this->bufferlen);
+    }
 
-                $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
-            } elseif (
-                    isset($module_instance->field_defs[$name]['type']) &&
-                    ($module_instance->field_defs[$name]['type'] == 'decimal')
-            ) {
-                global $locale;
-                $format_number_array = array(
-                    'convert' => false,
-                );
-                if (!isset($module_instance->$name)) {
-                    $module_instance->$name = 0;
-                }
+    public function formatPhone($value) {
+        $phone = null;
+        if (!is_null($value) && !empty($value)) {
+            $piece1 = $piece2 = $piece3 = '';
+            $phone = $value;
 
-                $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
-            } elseif (
-                    isset($module_instance->field_defs[$name]['type']) &&
-                    ($module_instance->field_defs[$name]['type'] == 'image')
-            ) {
-                $fields_module[$name] = $GLOBALS['sugar_config']['upload_dir'] . "/" . $value;
-            } elseif (is_string($value)) {
-                $value = nl2br(stripslashes($value));
-
-                if (isset($module_instance->field_defs[$name]['type']) &&
-                        $module_instance->field_defs[$name]['type'] === 'html'
-                ) {
-                    $value = htmlspecialchars_decode($value, ENT_QUOTES);
-                }
-                $fields_module[$name] = $value;
+            $_phone = explode('(', $phone);
+            if (!empty($_phone[1])) {
+                $_phone = explode(')', $_phone[1]);
+                $piece1 = $_phone[0];
             }
-            // ++ code added for multi checkboxes.
-            if (isset($module_instance->field_defs[$name]['type']) &&
-                    $module_instance->field_defs[$name]['type'] == 'radioenum' &&
-                    isset($module_instance->field_defs[$name]['options']) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']])
-            ) {
-                $multienums = unencodeMultienum($value);
-                $multienums_value = array();
-                foreach ($multienums as $multienum) {
-                    if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
-                        $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
-                    } else {
-                        $multienums_value[] = $multienum;
-                    }
-                }
-                $fields_module[$name] = implode(', ', $multienums_value);
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
-            }
-            if (isset($module_instance->field_defs[$name]['type']) &&
-                    ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
-                    isset($module_instance->field_defs[$name]['options']) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value]) &&
-                    ($name == 'associated_source_code_c' || $name == 'associated_form_code_c')
-            ) {
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $value);
-            }
-            if (isset($module_instance->field_defs[$name]['type']) &&
-                    $module_instance->field_defs[$name]['type'] == 'multienum' &&
-                    isset($module_instance->field_defs[$name]['options']) &&
-                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
-                    ($name == 'notes_any_state_code_apply_c')
-            ) {
-                $multienums = unencodeMultienum($value);
-                $multienums_value = array();
-                foreach ($multienums as $multienum) {
-                    $multienums_value[] = $multienum;
-                }
-                $fields_module[$name] = implode(', ', $multienums_value);
-                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
-            }
+
+            $_phone = explode('-', $phone);
+            $_phone = explode(' ', $_phone[0]);
+            $piece2 = $_phone[count($_phone) - 1];
+
+            $_phone = explode('-', $phone);
+            $_phone = explode(' ', $_phone[1]);
+            $piece3 = $_phone[0];
+
+            $phone = '(' . trim($piece1) . ') ' . trim($piece2) . '-' . trim($piece3);
+            $phone = preg_replace('!\s+!', ' ', $phone);
         }
 
-        return $fields_module;
+        return $phone;
     }
 
     /**
@@ -755,7 +890,7 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 }
             case 'div': {
                     // ++
-                    if (isset($tag['attribute']['id']) && $tag['attribute']['id'] == 'dotted-line') {
+                    if (isset($tag['attribute']['id']) && ($tag['attribute']['id'] == 'dotted-line' || $tag['attribute']['id'] == 'full-line')) {
                         $this->addHTMLVertSpace(0, $cell, '', $firstorlast, $tag['value'], false);
                         $this->htmlvspace = 0;
                         $wtmp = $this->w - $this->lMargin - $this->rMargin;
@@ -767,7 +902,11 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                         $x = $this->GetX();
                         $y = $this->GetY() - 1;
                         $prevlinewidth = $this->GetLineWidth();
-                        $this->Line($x, $y, $x + $hrWidth, $y, array('dash' => '3,1', 'color' => '#999'));
+                        if ($tag['attribute']['id'] == 'dotted-line') {
+                            $this->Line($x, $y, $x + $hrWidth, $y, array('dash' => '3,1', 'color' => '#999'));
+                        } else {
+                            $this->Line($x, $y, $x + $hrWidth, $y, array('dash' => '0', 'color' => '#999'));
+                        }
                         $this->SetLineWidth($prevlinewidth);
                         $this->addHTMLVertSpace(0, $cell, '', !isset($dom[($key + 1)]), $tag['value'], false);
                         $this->hrLikeDiv = true;
@@ -1006,7 +1145,22 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
                                 $cw = abs($cellpos['endx'] - $cellpos['startx']);
                                 $ch = $endy - $parent['starty'];
                                 // design a cell around the text
+                                $moreDetails = false;
+                                if ($border) {
+                                    if (isset($table_el['attribute']['rules'])) {
+                                        $border = $table_el['attribute']['rules'];
+                                    }
+                                    if (isset($table_el['attribute']['summary'])) {
+                                        $this->SetLineStyle(array('dash' => $table_el['attribute']['summary'], 'color' => '#999'));
+                                    }
+                                    $moreDetails = true;
+                                }
+
                                 $ccode = $this->FillColor . "\n" . $this->getCellCode($cw, $ch, '', $border, 1, '', $fill, '', 0, true);
+
+                                if ($moreDetails) {
+                                    $border = 1;
+                                }
                                 if ($border OR $fill) {
                                     if (end($this->transfmrk[$this->page]) !== false) {
                                         $pagemarkkey = key($this->transfmrk[$this->page]);
@@ -1236,8 +1390,8 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
             $nl = $this->Write($this->lasth, $txt, '', 0, $align, true, $stretch, false, false, $maxh);
         }
         // ++
-        if (strpos($txt, 'dotted-line') !== false) {
-            $this->y -= 3;
+        if (strpos($txt, 'dotted-line') !== false || strpos($txt, 'full-line') !== false) {
+            $this->y -= 5;
         }
         if ($autopadding) {
             // add bottom padding
@@ -1331,47 +1485,174 @@ class WPM_Waste_Profile_ModuleSugarpdfPdfmanager extends SugarpdfPdfmanager {
         return $nl;
     }
 
-    /**
-     * PDF manager specific Header function
-     */
-    public function Header() {
-        $fields = self::parseBeanFields($this->bean, true);
-        $ormargins = $this->getOriginalMargins();
-        $headerfont = $this->getHeaderFont();
-        $headerdata = $this->getHeaderData();
-        $marginTop = 4;
+    protected function _putpages() {
+        $nb = $this->numpages;
+        if (!empty($this->AliasNbPages)) {
+            $nbs = $this->formatPageNumber($nb);
+            $nbu = $this->UTF8ToUTF16BE($nbs, false); // replacement for unicode font
+            $alias_a = $this->_escape($this->AliasNbPages);
+            $alias_au = $this->_escape('{' . $this->AliasNbPages . '}');
+            // ++
+            $alias_a_ = $this->_escape('[nb]');
+            $alias_au_ = $this->_escape('[[nb]]');
+            if ($this->isunicode) {
+                $alias_b = $this->_escape($this->UTF8ToLatin1($this->AliasNbPages));
+                $alias_bu = $this->_escape($this->UTF8ToLatin1('{' . $this->AliasNbPages . '}'));
+                $alias_c = $this->_escape($this->utf8StrRev($this->AliasNbPages, false, $this->tmprtl));
+                $alias_cu = $this->_escape($this->utf8StrRev('{' . $this->AliasNbPages . '}', false, $this->tmprtl));
+                // ++
+                $alias_b_ = $this->_escape($this->UTF8ToLatin1('[nb]'));
+                $alias_bu_ = $this->_escape($this->UTF8ToLatin1('[[nb]]'));
+                $alias_c_ = $this->_escape($this->utf8StrRev('[nb]', false, $this->tmprtl));
+                $alias_cu_ = $this->_escape($this->utf8StrRev('[[nb]]', false, $this->tmprtl));
+            }
+        }
 
-        if ($headerdata['logo'] && $headerdata['logo'] != K_BLANK_IMAGE) {
-            $this->Image($headerdata['logo'], $this->GetX() + $marginTop, $this->getHeaderMargin() + 5, $headerdata['logo_width'], $headerdata['logo_width']);
-            $imgy = $this->getImageRBY();
-        } else {
-            $imgy = $this->GetY();
+
+        if (!empty($this->AliasNumPage)) {
+            $alias_pa = $this->_escape($this->AliasNumPage);
+            $alias_pau = $this->_escape('{' . $this->AliasNumPage . '}');
+            // ++
+            $alias_pa_ = $this->_escape('[pnb]');
+            $alias_pau_ = $this->_escape('[[pnb]]');
+            if ($this->isunicode) {
+                $alias_pb = $this->_escape($this->UTF8ToLatin1($this->AliasNumPage));
+                $alias_pbu = $this->_escape($this->UTF8ToLatin1('{' . $this->AliasNumPage . '}'));
+                $alias_pc = $this->_escape($this->utf8StrRev($this->AliasNumPage, false, $this->tmprtl));
+                $alias_pcu = $this->_escape($this->utf8StrRev('{' . $this->AliasNumPage . '}', false, $this->tmprtl));
+                // ++
+                $alias_pb_ = $this->_escape($this->UTF8ToLatin1('[pnb]'));
+                $alias_pbu_ = $this->_escape($this->UTF8ToLatin1('[[pnb]]'));
+                $alias_pc_ = $this->_escape($this->utf8StrRev('[pnb]', false, $this->tmprtl));
+                $alias_pcu_ = $this->_escape($this->utf8StrRev('[[pnb]]', false, $this->tmprtl));
+            }
         }
-        $cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
-        // set starting margin for text data cell
-        if ($this->getRTL()) {
-            $header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
-        } else {
-            $header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
+        $pagegroupnum = 0;
+        $filter = ($this->compress) ? '/Filter /FlateDecode ' : '';
+        for ($n = 1; $n <= $nb; ++$n) {
+            $temppage = $this->getPageBuffer($n);
+            if (!empty($this->pagegroups)) {
+                if (isset($this->newpagegroup[$n])) {
+                    $pagegroupnum = 0;
+                }
+                ++$pagegroupnum;
+                foreach ($this->pagegroups as $k => $v) {
+                    // replace total pages group numbers
+                    $vs = $this->formatPageNumber($v);
+                    $vu = $this->UTF8ToUTF16BE($vs, false);
+                    $alias_ga = $this->_escape($k);
+                    $alias_gau = $this->_escape('{' . $k . '}');
+                    if ($this->isunicode) {
+                        $alias_gb = $this->_escape($this->UTF8ToLatin1($k));
+                        $alias_gbu = $this->_escape($this->UTF8ToLatin1('{' . $k . '}'));
+                        $alias_gc = $this->_escape($this->utf8StrRev($k, false, $this->tmprtl));
+                        $alias_gcu = $this->_escape($this->utf8StrRev('{' . $k . '}', false, $this->tmprtl));
+                    }
+                    $temppage = str_replace($alias_gau, $vu, $temppage);
+                    if ($this->isunicode) {
+                        $temppage = str_replace($alias_gbu, $vu, $temppage);
+                        $temppage = str_replace($alias_gcu, $vu, $temppage);
+                        $temppage = str_replace($alias_gb, $vs, $temppage);
+                        $temppage = str_replace($alias_gc, $vs, $temppage);
+                    }
+                    $temppage = str_replace($alias_ga, $vs, $temppage);
+                    // replace page group numbers
+                    $pvs = $this->formatPageNumber($pagegroupnum);
+                    $pvu = $this->UTF8ToUTF16BE($pvs, false);
+                    $pk = str_replace('{nb', '{pnb', $k);
+                    $alias_pga = $this->_escape($pk);
+                    $alias_pgau = $this->_escape('{' . $pk . '}');
+                    if ($this->isunicode) {
+                        $alias_pgb = $this->_escape($this->UTF8ToLatin1($pk));
+                        $alias_pgbu = $this->_escape($this->UTF8ToLatin1('{' . $pk . '}'));
+                        $alias_pgc = $this->_escape($this->utf8StrRev($pk, false, $this->tmprtl));
+                        $alias_pgcu = $this->_escape($this->utf8StrRev('{' . $pk . '}', false, $this->tmprtl));
+                    }
+                    $temppage = str_replace($alias_pgau, $pvu, $temppage);
+                    if ($this->isunicode) {
+                        $temppage = str_replace($alias_pgbu, $pvu, $temppage);
+                        $temppage = str_replace($alias_pgcu, $pvu, $temppage);
+                        $temppage = str_replace($alias_pgb, $pvs, $temppage);
+                        $temppage = str_replace($alias_pgc, $pvs, $temppage);
+                    }
+                    $temppage = str_replace($alias_pga, $pvs, $temppage);
+                }
+            }
+            if (!empty($this->AliasNbPages)) {
+                // replace total pages number
+                $temppage = str_replace($alias_au, $nbu, $temppage);
+                // ++
+                $temppage = str_replace($alias_au_, $nbu, $temppage);
+                if ($this->isunicode) {
+                    $temppage = str_replace($alias_bu, $nbu, $temppage);
+                    $temppage = str_replace($alias_cu, $nbu, $temppage);
+                    $temppage = str_replace($alias_b, $nbs, $temppage);
+                    $temppage = str_replace($alias_c, $nbs, $temppage);
+                    // ++
+                    $temppage = str_replace($alias_bu_, $nbu, $temppage);
+                    $temppage = str_replace($alias_cu_, $nbu, $temppage);
+                    $temppage = str_replace($alias_b_, $nbs, $temppage);
+                    $temppage = str_replace($alias_c_, $nbs, $temppage);
+                }
+                $temppage = str_replace($alias_a, $nbs, $temppage);
+                // ++
+                $temppage = str_replace($alias_a_, $nbs, $temppage);
+            }
+            if (!empty($this->AliasNumPage)) {
+                // replace page number
+                $pnbs = $this->formatPageNumber($n);
+                $pnbu = $this->UTF8ToUTF16BE($pnbs, false); // replacement for unicode font
+                $temppage = str_replace($alias_pau, $pnbu, $temppage);
+                if ($this->isunicode) {
+                    $temppage = str_replace($alias_pbu, $pnbu, $temppage);
+                    $temppage = str_replace($alias_pcu, $pnbu, $temppage);
+                    $temppage = str_replace($alias_pb, $pnbs, $temppage);
+                    $temppage = str_replace($alias_pc, $pnbs, $temppage);
+                    // ++
+                    $temppage = str_replace($alias_pbu_, $pnbu, $temppage);
+                    $temppage = str_replace($alias_pcu_, $pnbu, $temppage);
+                    $temppage = str_replace($alias_pb_, $pnbs, $temppage);
+                    $temppage = str_replace($alias_pc_, $pnbs, $temppage);
+                }
+                $temppage = str_replace($alias_pa, $pnbs, $temppage);
+                // ++
+                $temppage = str_replace($alias_pa_, $pnbs, $temppage);
+            }
+            $temppage = str_replace($this->epsmarker, '', $temppage);
+            //$this->setPageBuffer($n, $temppage);
+            //Page
+            $this->_newobj();
+            $this->_out('<</Type /Page');
+            $this->_out('/Parent 1 0 R');
+            $this->_out(sprintf('/MediaBox [0 0 %.2F %.2F]', $this->pagedim[$n]['w'], $this->pagedim[$n]['h']));
+            $this->_out('/Resources 2 0 R');
+            $this->_putannots($n);
+            $this->_out('/Contents ' . ($this->n + 1) . ' 0 R>>');
+            $this->_out('endobj');
+            //Page content
+            $p = ($this->compress) ? gzcompress($temppage) : $temppage;
+            $this->_newobj();
+            $this->_out('<<' . $filter . '/Length ' . strlen($p) . '>>');
+            $this->_putstream($p);
+            $this->_out('endobj');
+            if ($this->diskcache) {
+                // remove temporary files
+                unlink($this->pages[$n]);
+            }
         }
-        $this->SetTextColor(0, 0, 0);
-        // header title
-        $this->SetFont($headerfont[0], 'B', $headerfont[2] + 6);
-        $headerLine = $this->GetY() + $marginTop;
-        $this->MultiCell(0, $cell_height, "WASTE PROFILE SHEET", 0, '', 0, 1, 67, $headerLine, true, 0, false);
-        // header string
-        $this->SetFont($headerfont[0], $headerfont[1], $headerfont[2] + 1);
-        $this->SetX($header_x);
-        $infoCorner = "
-   Profile No:   {$fields['waste_profile_num_c']}
-     Revision:   1
-Submission:   {$fields['submission_type_c']}";
-        $infoCornerXPosition = 149;
-        $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $infoCornerXPosition, $headerLine, true, 0, false);
-        $infoCorner = "       Page(s)   {{pnb}} of ";
-        $pageNumberYAxis = $this->GetY();
-        $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $infoCornerXPosition, $pageNumberYAxis, true, 0, false);
-        $this->MultiCell(0, 0, "{{nb}}", 0, '', 0, 1, $infoCornerXPosition + 29, $pageNumberYAxis, true, 0, false);
+        //Pages root
+        $this->offsets[1] = $this->bufferlen;
+        $this->_out('1 0 obj');
+        $this->_out('<</Type /Pages');
+        $kids = '/Kids [';
+        for ($i = 0; $i < $nb; ++$i) {
+            $kids .= (3 + (2 * $i)) . ' 0 R ';
+        }
+        $this->_out($kids . ']');
+        $this->_out('/Count ' . $nb);
+        //$this->_out(sprintf('/MediaBox [0 0 %.2F %.2F]',$this->pagedim[0]['w'],$this->pagedim[0]['h']));
+        $this->_out('>>');
+        $this->_out('endobj');
     }
 
 }
