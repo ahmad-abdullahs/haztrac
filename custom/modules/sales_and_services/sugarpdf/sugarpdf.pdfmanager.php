@@ -21,7 +21,7 @@ class sales_and_servicesSugarpdfPdfmanager extends SugarpdfPdfmanager {
         }
 
         // header/footer settings
-        $this->setPrintHeader(false);
+        $this->setPrintHeader(true);
         $this->setPrintFooter(false); // always print page number at least
 
         if (!empty($_REQUEST['pdf_template_id'])) {
@@ -312,6 +312,225 @@ class sales_and_servicesSugarpdfPdfmanager extends SugarpdfPdfmanager {
         }
 
         return $phone;
+    }
+
+    public function Header() {
+        $fields = self::parseBeanFields($this->bean, true);
+        $pdfTemplate = BeanFactory::newBean('PdfManager');
+        if ($pdfTemplate->retrieve($_REQUEST['pdf_template_id'], false) !== null) {
+            $infoCorner = $pdfTemplate->header_html;
+        }
+
+        $compile_path = 'custom/modules/PdfManager/tpls/temp.tpl';
+        $this->ss->assign('fields', $fields);
+        if (file_exists($compile_path)) {
+            sugar_file_put_contents($compile_path, $infoCorner);
+            $infoCorner = $this->ss->fetch($compile_path);
+        }
+
+        $marginTop = 4;
+        $headerLine = $this->GetY() + $marginTop;
+
+        $ormargins = $this->getOriginalMargins();
+        if ($this->getRTL()) {
+            $header_x = $ormargins['right'];
+        } else {
+            $header_x = $ormargins['left'];
+        }
+        $this->SetX($header_x);
+
+        $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $header_x, $headerLine, true, 0, true, true, 0);
+    }
+
+    protected function setHeader() {
+        if ($this->print_header) {
+            $lasth = $this->lasth;
+            $this->_out('q');
+            $this->rMargin = $this->original_rMargin;
+            $this->lMargin = $this->original_lMargin;
+            $this->cMargin = 0;
+            //set current position
+            if ($this->rtl) {
+                $this->SetXY($this->original_rMargin, $this->header_margin);
+            } else {
+                $this->SetXY($this->original_lMargin, $this->header_margin);
+            }
+            $this->SetFont($this->header_font[0], $this->header_font[1], $this->header_font[2]);
+            $this->Header();
+            //restore position
+            $this->tMargin = $this->GetY();
+            if ($this->rtl) {
+                $this->SetXY($this->original_rMargin, $this->tMargin);
+            } else {
+                $this->SetXY($this->original_lMargin, $this->tMargin);
+            }
+            $this->_out('Q');
+            $this->lasth = $lasth;
+        }
+    }
+
+    protected static function hasOneRelationship(SugarBean $bean, $fieldName) {
+        if (!isset($bean->$fieldName)) {
+            return false;
+        }
+
+        if ($bean->$fieldName instanceof Link2) {
+            return true;
+        }
+
+        // not Link2 or Link. Bail
+        if (!isset($bean->$fieldName->_relationship->relationship_type)) {
+            return false;
+        }
+
+        // deal with Link
+        switch ($bean->$fieldName->_relationship->relationship_type) {
+            case 'one-to-one':
+                return true;
+            case 'one-to-many':
+                return !$bean->$fieldName->_get_bean_position();
+            case 'many-to-one':
+                return $bean->$fieldName->_get_bean_position();
+            case 'many-to-many':
+                if (isset($bean->field_defs[$fieldName]['side'])) {
+                    return false;
+                }
+                switch ($bean->$fieldName->_get_link_table_definition(
+                        $bean->$fieldName->_relationship_name, 'true_relationship_type'
+                )) {
+                    case 'one-to-many':
+                        return !$bean->$fieldName->_get_bean_position();
+                    case 'many-to-one':
+                        return $bean->$fieldName->_get_bean_position();
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    public static function parseBeanFields($module_instance, $recursive = FALSE) {
+        global $app_list_strings;
+
+        $module_instance->ACLFilterFields();
+
+        $fields_module = array();
+        foreach ($module_instance->toArray() as $name => $value) {
+
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value])
+            ) {
+                $fields_module[$name] = $app_list_strings[$module_instance->field_defs[$name]['options']][$value];
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            } elseif (isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'multienum' &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']])
+            ) {
+                $multienums = unencodeMultienum($value);
+                $multienums_value = array();
+                foreach ($multienums as $multienum) {
+                    if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
+                        $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
+                    } else {
+                        $multienums_value[] = $multienum;
+                    }
+                }
+                $fields_module[$name] = '<li>' . implode('</li><li>', $multienums_value) . '</li>';
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            } elseif ($recursive &&
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'link' &&
+                    $module_instance->load_relationship($name) &&
+                    self::hasOneRelationship($module_instance, $name) &&
+                    count($module_instance->$name->get()) == 1
+            ) {
+                $related_module = $module_instance->$name->getRelatedModuleName();
+                $related_instance = BeanFactory::newBean($related_module);
+                $related_instance_id = $module_instance->$name->get();
+                if ($related_instance->retrieve($related_instance_id[0]) === null) {
+                    $GLOBALS['log']->fatal(__FILE__ . ' Failed loading module ' . $related_module . ' with id ' . $related_instance_id[0]);
+                }
+
+                $fields_module[$name] = self::parseBeanFields($related_instance, FALSE);
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'currency' &&
+                    isset($module_instance->currency_id)
+            ) {
+                global $locale;
+                $format_number_array = array(
+                    'currency_symbol' => true,
+                    'currency_id' => (!empty($module_instance->field_defs[$name]['currency_id']) ? $module_instance->field_defs[$name]['currency_id'] : $module_instance->currency_id),
+                    'type' => 'sugarpdf',
+                    'charset_convert' => true,
+                );
+
+                $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'decimal')
+            ) {
+                global $locale;
+                $format_number_array = array(
+                    'convert' => false,
+                );
+                if (!isset($module_instance->$name)) {
+                    $module_instance->$name = 0;
+                }
+
+                $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'image')
+            ) {
+                $fields_module[$name] = $GLOBALS['sugar_config']['upload_dir'] . "/" . $value;
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'datetimecombo')
+            ) {
+                // ++ Customcode added to handle the datetimecombo field to convert the time according to the user preferences.
+                global $current_user;
+                // Instantiate the TimeDate Class
+                $timeDate = new TimeDate();
+                // Sample date saved in database
+                $dbDate = $value;
+                // Call the function
+                $localDate = $timeDate->to_display_date_time($dbDate, true, true, $current_user);
+                $fields_module[$name] = $localDate;
+            } elseif (is_string($value)) {
+                $value = nl2br(stripslashes($value));
+
+                if (isset($module_instance->field_defs[$name]['type']) &&
+                        $module_instance->field_defs[$name]['type'] === 'html'
+                ) {
+                    $value = htmlspecialchars_decode($value, ENT_QUOTES);
+                }
+                $fields_module[$name] = $value;
+            }
+        }
+
+        return $fields_module;
+    }
+
+    protected function buildEmail($file_name, $focus) {
+        global $sugar_config;
+
+        $email_id = parent::buildEmail($file_name, $focus);
+
+        if (!empty($_REQUEST['pdf_template_id']) && $_REQUEST['pdf_template_id'] == $sugar_config['coc_pdf_template']) {
+            $email_object = BeanFactory::retrieveBean("Emails", $email_id);
+
+            $email_object->name = "[Lab Report: {$focus->sample_id_number_c}] {$focus->commodity_c}-{$focus->sample_id_number_c}";
+
+            $email_object->save();
+        }
+
+        return $email_id;
     }
 
 }
