@@ -385,6 +385,34 @@ $viewdefs['ProductTemplates'] = array(
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL9',
+                        'label' => 'LBL_RECORDVIEW_PANEL9',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'customer_certificates',
+                                'label' => 'LBL_CUSTOMER_CERTIFICATES',
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'transporter_certificates',
+                                'label' => 'LBL_TRANSPORTER_CERTIFICATES',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'consignee_certificates',
+                                'label' => 'LBL_CONSIGNEE_CERTIFICATES',
+                            ),
+                        ),
+                    ),
+                    5 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL5',
                         'label' => 'LBL_RECORDVIEW_PANEL5',
                         'columns' => 4,
@@ -429,7 +457,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -492,7 +520,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                         ),
                     ),
-                    6 =>
+                    7 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'collapsed',
@@ -523,7 +551,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                         ),
                     ),
-                    7 =>
+                    8 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
@@ -607,7 +635,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                         ),
                     ),
-                    8 =>
+                    9 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
