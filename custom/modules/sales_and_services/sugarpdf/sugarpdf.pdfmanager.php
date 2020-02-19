@@ -25,6 +25,8 @@ class sales_and_servicesSugarpdfPdfmanager extends SugarpdfPdfmanager {
             $__count = 0;
             $bundleFields['revenuelineitems'] = array();
             $bundleFields['additional_info_ack_c'] = array();
+            $feds = 0;
+            $tax = 0;
 
             // RevenueLineItems
             $this->bean->load_relationship('sales_and_services_revenuelineitems_1');
@@ -39,6 +41,14 @@ class sales_and_servicesSugarpdfPdfmanager extends SugarpdfPdfmanager {
                 $bundleFields['revenuelineitems'][$count]['estimated_quantity_c'] = format_number($revenuelineitemsBean->estimated_quantity_c, $locale->getPrecision(), $locale->getPrecision());
                 $bundleFields['revenuelineitems'][$count]['discount_price'] = format_number($revenuelineitemsBean->discount_price, $locale->getPrecision(), $locale->getPrecision());
                 $bundleFields['revenuelineitems'][$count]['index'] = $count + 1;
+
+                if ($revenuelineitemsBean->tax_class == "Taxable" && $tax == 0) {
+                    $tax = 1;
+                }
+
+                if ((!empty($revenuelineitemsBean->fed_percentage) && $revenuelineitemsBean->fed_percentage != '0.00') && $feds == 0) {
+                    $feds = 1;
+                }
 
                 if (!empty($bundleFields['revenuelineitems'][$count]['additional_info_ack_c'])) {
                     $bundleFields['additional_info_ack_c'][$__count]['additional_info_ack_c'] = $bundleFields['revenuelineitems'][$count]['additional_info_ack_c'];
@@ -84,12 +94,11 @@ class sales_and_servicesSugarpdfPdfmanager extends SugarpdfPdfmanager {
             }
         }
 
+        $fields['all'] = $feds && $tax ? 1 : 0;
+        $fields['feds'] = $feds;
+        $fields['tax'] = $tax;
+
         $this->ss->assign('fields', $fields);
-        
-        $GLOBALS['log']->fatal('getFontSize : ' . print_r($this->getFontSize(), 1));
-        $GLOBALS['log']->fatal('getFontSizePt : ' . print_r($this->getFontSizePt(), 1));
-        $GLOBALS['log']->fatal('getFontFamily : ' . print_r($this->getFontFamily(), 1));
-        $GLOBALS['log']->fatal('getFontStyle : ' . print_r($this->getFontStyle(), 1));
     }
 
     /**
