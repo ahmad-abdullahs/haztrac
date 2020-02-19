@@ -95,10 +95,20 @@ $viewdefs['PdfManager'] = array(
                 ),
                 5 =>
                 array(
+                    0 =>
+                    array(
+                        'name' => 'footer_html',
+                        'studio' => 'visible',
+                        'label' => 'LBL_FOOTER_HTML',
+                        'customCode' => '{$fields.footer_html.value|from_html}',
+                    ),
+                ),
+                6 =>
+                array(
                     0 => 'header_title',
                     1 => 'header_text',
                 ),
-                6 =>
+                7 =>
                 array(
                     0 => 'header_logo',
                     1 => 'footer_text',

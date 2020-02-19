@@ -29,6 +29,30 @@ $dictionary["sales_and_services"]["fields"]["transporter_ac_usepa_id_c"] = array
     'rname' => 'ac_usepa_id_c',
 );
 
+$dictionary["sales_and_services"]["fields"]["transporter_shipping_address_third_party_name"] = array(
+    'labelValue' => 'Transporter Shipping Name',
+    'source' => 'non-db',
+    'name' => 'transporter_shipping_address_third_party_name',
+    'vname' => 'LBL_TRANSPORTER_SHIPPING_ADDRESS_THIRD_PARTY_NAME',
+    'type' => 'relate',
+    'required' => false,
+    'massupdate' => false,
+    'no_default' => false,
+    'importable' => false,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'studio' => false,
+    'pii' => false,
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'id_name' => 'account_id_c',
+    'ext2' => 'Accounts',
+    'module' => 'Accounts',
+    'rname' => 'shipping_address_third_party_name',
+);
+
 $dictionary["sales_and_services"]["fields"]["transporter_shipping_address_street"] = array(
     'labelValue' => 'Transporter Shipping Street',
     'source' => 'non-db',

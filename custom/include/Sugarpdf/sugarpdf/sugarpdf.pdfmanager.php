@@ -22,9 +22,25 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
     public function preDisplay() {
         parent::preDisplay();
 
-//        //set margins
-//        // $this->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-//        $this->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
+        // Footer margin settings, if there is no custom fotter it will working
+        // as per the default settings.
+        $yPosition = $this->calculateTheFooterHeight();
+        if ($yPosition != 0) {
+            $this->setFooterMargin($yPosition / 1.5);
+            $this->SetAutoPageBreak(TRUE, $yPosition / 1.5);
+        }
+
+        // Header settings, If there is no custom header set the default header to 
+        // default PDF_MARGIN_TOP
+//        if (!empty($_REQUEST['pdf_template_id'])) {
+//            $pdfTemplate = BeanFactory::newBean('PdfManager');
+//            if ($pdfTemplate->retrieve($_REQUEST['pdf_template_id'], false) !== null) {
+//                $infoCorner = $pdfTemplate->header_html;
+//                if (empty($infoCorner)) {
+//                    $this->SetMargins(PDF_MARGIN_LEFT, 20, PDF_MARGIN_RIGHT);
+//                }
+//            }
+//        }
         // settings for disable smarty php tags
         $this->ss->security_settings['PHP_TAGS'] = false;
         $this->ss->security = true;
@@ -33,8 +49,8 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
         }
 
         // header/footer settings
-        $this->setPrintHeader(false);
-        $this->setPrintFooter(false); // always print page number at least
+        $this->setPrintHeader(true);
+        $this->setPrintFooter(true); // always print page number at least
 
         if (!empty($_REQUEST['pdf_template_id'])) {
 
@@ -90,7 +106,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
 
         if ($previewMode === FALSE) {
             require_once 'modules/PdfManager/PdfManagerHelper.php';
-            $fields = PdfManagerHelper::parseBeanFields($this->bean, true);
+            $fields = self::parseBeanFields($this->bean, true);
         } else {
             $fields = array();
         }
@@ -120,12 +136,12 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
             $count = 0;
             foreach ($product_bundle_list as $ordered_bundle) {
 
-                $bundleFields = PdfManagerHelper::parseBeanFields($ordered_bundle, true);
+                $bundleFields = self::parseBeanFields($ordered_bundle, true);
                 $bundleFields['products'] = array();
                 $product_bundle_line_items = $ordered_bundle->get_product_bundle_line_items();
                 foreach ($product_bundle_line_items as $product_bundle_line_item) {
 
-                    $bundleFields['products'][$count] = PdfManagerHelper::parseBeanFields($product_bundle_line_item, true);
+                    $bundleFields['products'][$count] = self::parseBeanFields($product_bundle_line_item, true);
 
                     if ($product_bundle_line_item->object_name == "ProductBundleNote") {
                         $bundleFields['products'][$count]['name'] = $bundleFields['products'][$count]['description'];
@@ -155,6 +171,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
             'phone_office' => 'phone_office',
             'phone_fax' => 'phone_fax',
             'phone_alternate' => 'phone_alternate',
+            'phone_home' => 'phone_home',
+            'phone_mobile' => 'phone_mobile',
+            'phone_work' => 'phone_work',
         );
 
         foreach ($fields as $key => $value) {
@@ -170,6 +189,39 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
         }
 
         $this->ss->assign('fields', $fields);
+
+        return array(
+            'bundles' => $bundles,
+            'fields' => $fields,
+        );
+    }
+
+    public function calculateTheFooterHeight() {
+        // create new PDF document
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetMargins(PDF_MARGIN_LEFT, 0, PDF_MARGIN_RIGHT);
+        $pdf->AddPage();
+        $pdf->SetFont(PDF_FONT_NAME_MAIN, '', 8);
+
+        $fields = self::parseBeanFields($this->bean, true);
+        $pdfTemplate = BeanFactory::newBean('PdfManager');
+        if ($pdfTemplate->retrieve($_REQUEST['pdf_template_id'], false) !== null) {
+            $infoCorner = $pdfTemplate->footer_html;
+            if (!empty($infoCorner)) {
+                $headerSS = new Sugar_Smarty();
+                $headerSS->assign('fields', $fields);
+                $tpl = 'custom/modules/PdfManager/tpls/footer_temp.tpl';
+                if (file_exists($tpl)) {
+                    sugar_file_put_contents($tpl, $infoCorner);
+                    $infoCorner = $headerSS->fetch($tpl);
+                    $pdf->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, PDF_MARGIN_LEFT, 0, true, 0, true, true, 0);
+                }
+                // $pdf->Output('example_001.pdf', 'D');
+                return $pdf->GetY();
+            }
+        }
+        return 0;
     }
 
     public function display() {
@@ -366,7 +418,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
      * @param $previewMode
      * @return $tpl_filename
      */
-    private function buildTemplateFile($pdfTemplate, $previewMode = FALSE) {
+    public function buildTemplateFile($pdfTemplate, $previewMode = FALSE) {
         if (!empty($pdfTemplate)) {
 
             if (!file_exists(sugar_cached('modules/PdfManager/tpls'))) {
@@ -452,85 +504,98 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
      * PDF manager specific Header function
      */
     public function Header() {
-        $ormargins = $this->getOriginalMargins();
-        $headerfont = $this->getHeaderFont();
-        $headerdata = $this->getHeaderData();
-        if ($headerdata['logo'] && $headerdata['logo'] != K_BLANK_IMAGE) {
-            $this->Image($headerdata['logo'], $this->GetX(), $this->getHeaderMargin(), $headerdata['logo_width'], 12);
-            $imgy = $this->getImageRBY();
-        } else {
-            $imgy = $this->GetY();
+        $fields = self::parseBeanFields($this->bean, true);
+        $pdfTemplate = BeanFactory::newBean('PdfManager');
+        if ($pdfTemplate->retrieve($_REQUEST['pdf_template_id'], false) !== null) {
+            $infoCorner = $pdfTemplate->header_html;
+
+            if (!empty($infoCorner)) {
+                $headerSS = new Sugar_Smarty();
+                $headerSS->assign('fields', $fields);
+                $tpl = 'custom/modules/PdfManager/tpls/header_temp.tpl';
+                if (file_exists($tpl)) {
+                    sugar_file_put_contents($tpl, $infoCorner);
+                    $infoCorner = $headerSS->fetch($tpl);
+                }
+
+                $marginTop = 4;
+                $headerLine = $this->GetY() + $marginTop;
+
+                $ormargins = $this->getOriginalMargins();
+                if ($this->getRTL()) {
+                    $header_x = $ormargins['right'];
+                } else {
+                    $header_x = $ormargins['left'];
+                }
+                $this->SetX($header_x);
+
+                $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $header_x, $headerLine, true, 0, true, true, 0);
+            } /* else {
+              $this->Ln1();
+              $this->Ln1();
+              $this->Ln1();
+              $this->Ln1();
+              } */
         }
-        $cell_height = round(($this->getCellHeightRatio() * $headerfont[2]) / $this->getScaleFactor(), 2);
-        // set starting margin for text data cell
-        if ($this->getRTL()) {
-            $header_x = $ormargins['right'] + ($headerdata['logo_width'] * 1.1);
-        } else {
-            $header_x = $ormargins['left'] + ($headerdata['logo_width'] * 1.1);
-        }
-        $this->SetTextColor(0, 0, 0);
-        // header title
-        $this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
-        $this->SetX($header_x);
-        $this->Cell(0, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
-        // header string
-        $this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
-        $this->SetX($header_x);
-        $this->MultiCell(0, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false);
-        // print an ending header line
-        $this->SetLineStyle(array('width' => 0.85 / $this->getScaleFactor(), 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-        $this->SetY((2.835 / $this->getScaleFactor()) + max($imgy, $this->GetY()));
-        if ($this->getRTL()) {
-            $this->SetX($ormargins['right']);
-        } else {
-            $this->SetX($ormargins['left']);
-        }
-        $this->Cell(0, 0, '', 'T', 0, 'C');
     }
 
     /**
-     * PDF manager specific Footer function
+     * This method is used to render the page header.
+     * @access protected
+     * @since 4.0.012 (2008-07-24)
      */
-    public function Footer() {
-        $cur_y = $this->GetY();
-        $ormargins = $this->getOriginalMargins();
-        $this->SetTextColor(0, 0, 0);
-        //set style for cell border
-        $line_width = 0.85 / $this->getScaleFactor();
-        $this->SetLineStyle(array('width' => $line_width, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-        //print document barcode
-        $barcode = $this->getBarcode();
-        if (!empty($barcode)) {
-            $this->Ln($line_width);
-            $barcode_width = round(($this->getPageWidth() - $ormargins['left'] - $ormargins['right']) / 3);
-            $this->write1DBarcode($barcode, 'C128B', $this->GetX(), $cur_y + $line_width, $barcode_width, (($this->getFooterMargin() / 3) - $line_width), 0.3, '', '');
-        }
-        if (empty($this->pagegroups)) {
-            $pagenumtxt = $this->l['w_page'] . ' ' . $this->getAliasNumPage() . ' / ' . $this->getAliasNbPages();
-        } else {
-            $pagenumtxt = $this->l['w_page'] . ' ' . $this->getPageNumGroupAlias() . ' / ' . $this->getPageGroupAlias();
-        }
-        $this->SetY($cur_y);
-
-        if ($this->getRTL()) {
-            $this->SetX($ormargins['right']);
-            if ($this->footerText) {
-                // footer text and page number
-                $this->Cell(0, 0, $this->footerText, 'T', 0, 'R');
-                $this->Cell(0, 0, $pagenumtxt, 0, 0, 'L');
+    protected function setHeader() {
+        if ($this->print_header) {
+            $lasth = $this->lasth;
+            $this->_out('q');
+            $this->rMargin = $this->original_rMargin;
+            $this->lMargin = $this->original_lMargin;
+            $this->cMargin = 0;
+            //set current position
+            if ($this->rtl) {
+                $this->SetXY($this->original_rMargin, $this->header_margin);
             } else {
-                // page number only
-                $this->Cell(0, 0, $pagenumtxt, 'T', 0, 'L');
+                $this->SetXY($this->original_lMargin, $this->header_margin);
             }
-        } else {
-            $this->SetX($ormargins['left']);
-            if ($this->footerText) {
-                // footer text and page number
-                $this->Cell(0, 0, $this->footerText, 'T', 0, 'L');
-                $this->Cell(0, 0, $pagenumtxt, 0, 0, 'R');
+            $this->SetFont($this->header_font[0], $this->header_font[1], $this->header_font[2]);
+            $this->Header();
+            //restore position
+            // ++ 1 line
+            $this->tMargin = $this->GetY();
+            if ($this->rtl) {
+                $this->SetXY($this->original_rMargin, $this->tMargin);
             } else {
-                // page number only
-                $this->Cell(0, 0, $pagenumtxt, 'T', 0, 'R');
+                $this->SetXY($this->original_lMargin, $this->tMargin);
+            }
+            $this->_out('Q');
+            $this->lasth = $lasth;
+        }
+    }
+
+    public function Footer() {
+        $fields = self::parseBeanFields($this->bean, true);
+        $pdfTemplate = BeanFactory::newBean('PdfManager');
+        if ($pdfTemplate->retrieve($_REQUEST['pdf_template_id'], false) !== null) {
+            $infoCorner = $pdfTemplate->footer_html;
+            if (!empty($infoCorner)) {
+                $footerSS = new Sugar_Smarty();
+                $footerSS->assign('fields', $fields);
+                $tpl = 'custom/modules/PdfManager/tpls/footer_temp.tpl';
+                if (file_exists($tpl)) {
+                    sugar_file_put_contents($tpl, $infoCorner);
+                    $infoCorner = $footerSS->fetch($tpl);
+                }
+
+                $ormargins = $this->getOriginalMargins();
+                if ($this->getRTL()) {
+                    $footer_x = $ormargins['right'];
+                } else {
+                    $footer_x = $ormargins['left'];
+                }
+
+                $this->SetX($footer_x);
+                $footer_y = $this->GetY() + 5; // Giving a coushion of 5 point to start after the body ends.
+                $this->MultiCell(0, 0, $infoCorner, 0, '', 0, 1, $footer_x, $footer_y, true, 0, true, true, 0);
             }
         }
     }
@@ -611,6 +676,193 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
         }
 
         return $phone;
+    }
+
+    public static function parseBeanFields($module_instance, $recursive = FALSE) {
+        global $app_list_strings;
+        $module_instance->ACLFilterFields();
+
+        $fields_module = array();
+        foreach ($module_instance->toArray() as $name => $value) {
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value])
+            ) {
+                $fields_module[$name] = $app_list_strings[$module_instance->field_defs[$name]['options']][$value];
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            } elseif (isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'multienum' &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']])
+            ) {
+                $multienums = unencodeMultienum($value);
+                $multienums_value = array();
+                foreach ($multienums as $multienum) {
+                    if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
+                        $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
+                    } else {
+                        $multienums_value[] = $multienum;
+                    }
+                }
+                $fields_module[$name] = '<li>' . implode('</li><li>', $multienums_value) . '</li>';
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            } elseif ($recursive &&
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'link' &&
+                    $module_instance->load_relationship($name) &&
+                    self::hasOneRelationship($module_instance, $name) &&
+                    count($module_instance->$name->get()) == 1
+            ) {
+                $related_module = $module_instance->$name->getRelatedModuleName();
+                $related_instance = BeanFactory::newBean($related_module);
+                $related_instance_id = $module_instance->$name->get();
+                if ($related_instance->retrieve($related_instance_id[0]) === null) {
+                    $GLOBALS['log']->fatal(__FILE__ . ' Failed loading module ' . $related_module . ' with id ' . $related_instance_id[0]);
+                }
+
+                $fields_module[$name] = self::parseBeanFields($related_instance, FALSE);
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'currency' &&
+                    isset($module_instance->currency_id)
+            ) {
+                global $locale;
+                $format_number_array = array(
+                    'currency_symbol' => true,
+                    'currency_id' => (!empty($module_instance->field_defs[$name]['currency_id']) ? $module_instance->field_defs[$name]['currency_id'] : $module_instance->currency_id),
+                    'type' => 'sugarpdf',
+                    'charset_convert' => true,
+                );
+
+                $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'decimal')
+            ) {
+                global $locale;
+                $format_number_array = array(
+                    'convert' => false,
+                );
+                if (!isset($module_instance->$name)) {
+                    $module_instance->$name = 0;
+                }
+
+                $fields_module[$name] = format_number_sugarpdf($module_instance->$name, $locale->getPrecision(), $locale->getPrecision(), $format_number_array);
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'image')
+            ) {
+                $fields_module[$name] = $GLOBALS['sugar_config']['upload_dir'] . "/" . $value;
+            } elseif (
+                    isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'datetimecombo')
+            ) {
+                // ++ Customcode added to handle the datetimecombo field to convert the time according to the user preferences.
+                global $current_user;
+                // Instantiate the TimeDate Class
+                $timeDate = new TimeDate();
+                // Sample date saved in database
+                $dbDate = $value;
+                // Call the function
+                $localDate = $timeDate->to_display_date_time($dbDate, true, true, $current_user);
+                $fields_module[$name] = $localDate;
+            } elseif (is_string($value)) {
+                $value = nl2br(stripslashes($value));
+
+                if (isset($module_instance->field_defs[$name]['type']) &&
+                        $module_instance->field_defs[$name]['type'] === 'html'
+                ) {
+                    $value = htmlspecialchars_decode($value, ENT_QUOTES);
+                }
+                $fields_module[$name] = $value;
+            }
+            // ++ code added for multi checkboxes.
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'radioenum' &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']])
+            ) {
+                $multienums = unencodeMultienum($value);
+                $multienums_value = array();
+                foreach ($multienums as $multienum) {
+                    if (isset($app_list_strings[$module_instance->field_defs[$name]['options']][$multienum])) {
+                        $multienums_value[] = $app_list_strings[$module_instance->field_defs[$name]['options']][$multienum];
+                    } else {
+                        $multienums_value[] = $multienum;
+                    }
+                }
+                $fields_module[$name] = implode(', ', $multienums_value);
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            }
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    ($module_instance->field_defs[$name]['type'] == 'enum' || $module_instance->field_defs[$name]['type'] == 'radio' || $module_instance->field_defs[$name]['type'] == 'radioenum') &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']][$value]) &&
+                    ($name == 'associated_source_code_c' || $name == 'associated_form_code_c')
+            ) {
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $value);
+            }
+            if (isset($module_instance->field_defs[$name]['type']) &&
+                    $module_instance->field_defs[$name]['type'] == 'multienum' &&
+                    isset($module_instance->field_defs[$name]['options']) &&
+                    isset($app_list_strings[$module_instance->field_defs[$name]['options']]) &&
+                    ($name == 'notes_any_state_code_apply_c')
+            ) {
+                $multienums = unencodeMultienum($value);
+                $multienums_value = array();
+                foreach ($multienums as $multienum) {
+                    $multienums_value[] = $multienum;
+                }
+                $fields_module[$name] = implode(', ', $multienums_value);
+                $fields_module[$name] = str_replace(array('&#39;', '&#039;'), "'", $fields_module[$name]);
+            }
+        }
+
+        return $fields_module;
+    }
+
+    protected static function hasOneRelationship(SugarBean $bean, $fieldName) {
+        if (!isset($bean->$fieldName)) {
+            return false;
+        }
+
+        if ($bean->$fieldName instanceof Link2) {
+            return true;
+        }
+
+        // not Link2 or Link. Bail
+        if (!isset($bean->$fieldName->_relationship->relationship_type)) {
+            return false;
+        }
+
+        // deal with Link
+        switch ($bean->$fieldName->_relationship->relationship_type) {
+            case 'one-to-one':
+                return true;
+            case 'one-to-many':
+                return !$bean->$fieldName->_get_bean_position();
+            case 'many-to-one':
+                return $bean->$fieldName->_get_bean_position();
+            case 'many-to-many':
+                if (isset($bean->field_defs[$fieldName]['side'])) {
+                    return false;
+                }
+                switch ($bean->$fieldName->_get_link_table_definition(
+                        $bean->$fieldName->_relationship_name, 'true_relationship_type'
+                )) {
+                    case 'one-to-many':
+                        return !$bean->$fieldName->_get_bean_position();
+                    case 'many-to-one':
+                        return $bean->$fieldName->_get_bean_position();
+                    default:
+                        return false;
+                }
+            default:
+                return false;
+        }
     }
 
     /**
@@ -890,7 +1142,11 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
                 }
             case 'div': {
                     // ++
-                    if (isset($tag['attribute']['id']) && ($tag['attribute']['id'] == 'dotted-line' || $tag['attribute']['id'] == 'full-line')) {
+                    if (isset($tag['attribute']['id']) &&
+                            ($tag['attribute']['id'] == 'dotted-line' ||
+                            $tag['attribute']['id'] == 'full-line') ||
+                            $tag['attribute']['id'] == 'dotted-mid-line' ||
+                            $tag['attribute']['id'] == 'full-mid-line') {
                         $this->addHTMLVertSpace(0, $cell, '', $firstorlast, $tag['value'], false);
                         $this->htmlvspace = 0;
                         $wtmp = $this->w - $this->lMargin - $this->rMargin;
@@ -902,7 +1158,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
                         $x = $this->GetX();
                         $y = $this->GetY() - 1;
                         $prevlinewidth = $this->GetLineWidth();
-                        if ($tag['attribute']['id'] == 'dotted-line') {
+                        if ($tag['attribute']['id'] == 'dotted-line' || $tag['attribute']['id'] == 'dotted-mid-line') {
                             $this->Line($x, $y, $x + $hrWidth, $y, array('dash' => '3,1', 'color' => '#999'));
                         } else {
                             $this->Line($x, $y, $x + $hrWidth, $y, array('dash' => '0', 'color' => '#999'));
@@ -1393,6 +1649,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
         if (strpos($txt, 'dotted-line') !== false || strpos($txt, 'full-line') !== false) {
             $this->y -= 5;
         }
+//        if (strpos($txt, 'dotted-mid-line') !== false || strpos($txt, 'full-mid-line') !== false) {
+//            $this->y += 5;
+//        }
         if ($autopadding) {
             // add bottom padding
             $this->y += $this->cMargin;

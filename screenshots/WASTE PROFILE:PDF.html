@@ -1,3 +1,66 @@
+<!--HEADER-->
+<table cellspacing="2" cellpadding="0">
+    <tbody>
+        <tr>
+            <td style="" rowspan="4" colspan="4">
+                <p><img src="./custom/themes/default/images/haztrac_pdf_icon.png" alt="" width="164" height="169" /></p>
+            </td>
+            <td style="" rowspan="4" colspan="8">
+                <div style="text-align: center; font-size: 14pt;"><strong>WASTE PROFILE SHEET</strong></div>
+            </td>
+            <td style="" colspan="6">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right;" colspan="3">Profile No:</td>
+                            <td style="text-align: left;" colspan="3">&nbsp;{$fields.waste_profile_num_c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="" colspan="6">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right;" colspan="3">Revision:</td>
+                            <td style="text-align: left;" colspan="3">&nbsp;1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="" colspan="6">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right;" colspan="3">Submission:</td>
+                            <td style="text-align: left;" colspan="3">&nbsp;{$fields.submission_type_c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="" colspan="6">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right;" colspan="3">Page(s)</td>
+                            <td style="text-align: left;" colspan="3">&nbsp;[[pnb]] of [[nb]]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="16"></td>
+        </tr>
+    </tbody>
+</table>
+<!--BODY-->
 <div style="width: 100%;">
     <table border="1" cellspacing="20" cellpadding="20">
         <tbody>
@@ -140,8 +203,7 @@
                                 </td>
                                 <td width="0%">&nbsp;</td>
                             </tr>
-                            <!--End of Section A-->
-                        </tbody>
+                            <!--End of Section A--></tbody>
                     </table>
                 </td>
             </tr>
@@ -226,8 +288,7 @@
                                     </table>
                                 </td>
                             </tr>
-                            <!--End of Section B-->
-                        </tbody>
+                            <!--End of Section B--></tbody>
                     </table>
                 </td>
             </tr>
@@ -437,8 +498,7 @@
                                     </table>
                                 </td>
                             </tr>
-                            <!--End of Section C-->
-                        </tbody>
+                            <!--End of Section C--></tbody>
                     </table>
                 </td>
             </tr>
@@ -449,9 +509,7 @@
     <table border="0" cellspacing="0">
         <tbody>
             <tr>
-                <td width="200%">
-                    {foreach from=$waste_composition_wpm_waste_profile_module item="compositionList"}
-                    {if $fields.showTotal}
+                <td width="200%">{foreach from=$waste_composition_wpm_waste_profile_module item="compositionList"} {if $fields.showTotal}
                     <table border="0" cellpadding="8">
                         <tbody>
                             <tr bgcolor="#999">
@@ -481,8 +539,7 @@
                                     <div id="dotted-line">&nbsp;</div>
                                 </td>
                             </tr>
-                            <!--END_PRODUCT_LOOP-->
-                        </tbody>
+                            <!--END_PRODUCT_LOOP--></tbody>
                     </table>
                     {else}
                     <table border="0" cellpadding="8">
@@ -495,19 +552,16 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 9pt;" width="110%">Not Applicable</td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                    {/foreach}
-                </td>
+                    {/if} {/foreach}</td>
             </tr>
             <tr>
-                <td width="200%">
-                    {if $fields.showTotal}
+                <td width="200%">{if $fields.showTotal}
                     <table border="0" cellpadding="4">
                         <tbody>
                             <tr>
@@ -532,8 +586,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                </td>
+                    {/if}</td>
             </tr>
         </tbody>
     </table>
@@ -722,16 +775,13 @@
                 </tr>
             </tbody>
         </table>
-        {/if}
-        <!--End of Section D-->
-    </div>
+        {/if} <!--End of Section D--></div>
     <div style="font-size: 10pt;"><strong>&nbsp;&nbsp;&nbsp;E. CONSTITUENTS</strong></div>
     <div>&nbsp;</div>
     <table border="0" cellspacing="0">
         <tbody>
             <tr>
-                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"}
-                    {if $constituentList.constituent_regulateds|@count}
+                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"} {if $constituentList.constituent_regulateds|@count}
                     <table border="0" cellpadding="8">
                         <tbody>
                             <tr bgcolor="#999">
@@ -761,8 +811,7 @@
                                     <div id="dotted-line">&nbsp;</div>
                                 </td>
                             </tr>
-                            <!--END_PRODUCT1_LOOP-->
-                        </tbody>
+                            <!--END_PRODUCT1_LOOP--></tbody>
                     </table>
                     {else}
                     <table border="0" cellpadding="8">
@@ -775,15 +824,13 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 9pt;" width="80%">Not Applicable</td>
-                                <td width="60%"></td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
+                                <td width="60%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                    {/foreach}
-                </td>
+                    {/if} {/foreach}</td>
             </tr>
         </tbody>
     </table>
@@ -792,8 +839,7 @@
     <table border="0" cellspacing="0">
         <tbody>
             <tr>
-                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"}
-                    {if $constituentList.constituent_volatiles|@count}
+                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"} {if $constituentList.constituent_volatiles|@count}
                     <table border="0" cellpadding="8">
                         <tbody>
                             <tr bgcolor="#999">
@@ -823,8 +869,7 @@
                                     <div id="dotted-line">&nbsp;</div>
                                 </td>
                             </tr>
-                            <!--END_PRODUCT2_LOOP-->
-                        </tbody>
+                            <!--END_PRODUCT2_LOOP--></tbody>
                     </table>
                     {else}
                     <table border="0" cellpadding="8">
@@ -837,15 +882,13 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 9pt;" width="80%">Not Applicable</td>
-                                <td width="60%"></td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
+                                <td width="60%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                    {/foreach}
-                </td>
+                    {/if} {/foreach}</td>
             </tr>
         </tbody>
     </table>
@@ -854,8 +897,7 @@
     <table border="0" cellspacing="0">
         <tbody>
             <tr>
-                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"}
-                    {if $constituentList.constituent_semivolatiles|@count}
+                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"} {if $constituentList.constituent_semivolatiles|@count}
                     <table border="0" cellpadding="8">
                         <tbody>
                             <tr bgcolor="#999">
@@ -885,8 +927,7 @@
                                     <div id="dotted-line">&nbsp;</div>
                                 </td>
                             </tr>
-                            <!--END_PRODUCT3_LOOP-->
-                        </tbody>
+                            <!--END_PRODUCT3_LOOP--></tbody>
                     </table>
                     {else}
                     <table border="0" cellpadding="8">
@@ -899,15 +940,13 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 9pt;" width="80%">Not Applicable</td>
-                                <td width="60%"></td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
+                                <td width="60%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                    {/foreach}
-                </td>
+                    {/if} {/foreach}</td>
             </tr>
         </tbody>
     </table>
@@ -916,8 +955,7 @@
     <table border="0" cellspacing="0">
         <tbody>
             <tr>
-                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"}
-                    {if $constituentList.constituent_pesticide_herbicides|@count}
+                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"} {if $constituentList.constituent_pesticide_herbicides|@count}
                     <table border="0" cellpadding="8">
                         <tbody>
                             <tr bgcolor="#999">
@@ -947,8 +985,7 @@
                                     <div id="dotted-line">&nbsp;</div>
                                 </td>
                             </tr>
-                            <!--END_PRODUCT4_LOOP-->
-                        </tbody>
+                            <!--END_PRODUCT4_LOOP--></tbody>
                     </table>
                     {else}
                     <table border="0" cellpadding="8">
@@ -961,15 +998,13 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 9pt;" width="80%">Not Applicable</td>
-                                <td width="60%"></td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
+                                <td width="60%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                    {/foreach}
-                </td>
+                    {/if} {/foreach}</td>
             </tr>
         </tbody>
     </table>
@@ -978,8 +1013,7 @@
     <table border="0" cellspacing="0">
         <tbody>
             <tr>
-                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"}
-                    {if $constituentList.constituent_others|@count}
+                <td width="200%">{foreach from=$waste_constituents_wpm_waste_profile_module item="constituentList"} {if $constituentList.constituent_others|@count}
                     <table border="0" cellpadding="8">
                         <tbody>
                             <tr bgcolor="#999">
@@ -1009,8 +1043,7 @@
                                     <div id="dotted-line">&nbsp;</div>
                                 </td>
                             </tr>
-                            <!--END_PRODUCT5_LOOP-->
-                        </tbody>
+                            <!--END_PRODUCT5_LOOP--></tbody>
                     </table>
                     {else}
                     <table border="0" cellpadding="8">
@@ -1023,15 +1056,13 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 9pt;" width="80%">Not Applicable</td>
-                                <td width="60%"></td>
-                                <td width="30%"></td>
-                                <td width="30%"></td>
+                                <td width="60%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
+                                <td width="30%">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                    {/if}
-                    {/foreach}
-                </td>
+                    {/if} {/foreach}</td>
             </tr>
         </tbody>
     </table>
@@ -1139,7 +1170,7 @@
                             <tbody>
                                 <tr>
                                     <td width="15%">E3.</td>
-                                    <td width="150%">DOES THIS WASTE CONTAIN GREATER THAN 2 PPM (>2 PPM) POLYCHLORINATED BIPHENYLS (PCB)?</td>
+                                    <td width="150%">DOES THIS WASTE CONTAIN GREATER THAN 2 PPM (&gt;2 PPM) POLYCHLORINATED BIPHENYLS (PCB)?</td>
                                     <td width="5%">&nbsp;</td>
                                     <td width="30%">{if $fields.quest_pcb_c == "Yes"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;Yes {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;Yes {/if} {if $fields.quest_pcb_c == "No"}<span style="font-size: 10pt;"><strong>▣</strong></span>&nbsp;No {else} <span style="font-size: 10pt;"><strong>□</strong></span>&nbsp;No {/if}</td>
                                 </tr>
@@ -1194,20 +1225,16 @@
                 </tr>
             </tbody>
         </table>
-        {/if}
-        <!--End of Section E-->
-    </div>
+        {/if} <!--End of Section E--></div>
     <div style="font-size: 10pt;"><strong>&nbsp;&nbsp;&nbsp;Select all that apply:</strong></div>
     <div>&nbsp;</div>
     <div style="width: 100%;">
         <table border="0" cellspacing="20" cellpadding="20">
             <tbody>
                 <tr>
-                    <td width="200%">
-                        {foreach from=$choose_hazards_that_apply_list item="cataList"}
+                    <td width="200%">{foreach from=$choose_hazards_that_apply_list item="cataList"}
                         <table border="0">
-                            <tbody>
-                                <!--START_CATA_LOOP-->
+                            <tbody><!--START_CATA_LOOP-->
                                 <tr>
                                     <td width="50%">
                                         <table>
@@ -1250,11 +1277,9 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <!--END_CATA_LOOP-->
-                            </tbody>
+                                <!--END_CATA_LOOP--></tbody>
                         </table>
-                        {/foreach}
-                    </td>
+                        {/foreach}</td>
                 </tr>
             </tbody>
         </table>
@@ -1354,10 +1379,8 @@
                 </tr>
             </tbody>
         </table>
-        {/if}
-        <!--End of Section F-->
-    </div>
-    <div style="font-size: 10pt;"><strong>&nbsp;&nbsp;&nbsp;B. WASTE DESCRIPTION</strong></div>
+        {/if} <!--End of Section F--></div>
+    <div style="font-size: 10pt;"><strong>&nbsp; &nbsp;G. WASTE DESCRIPTION</strong></div>
     <div>&nbsp;</div>
     <table border="0" cellspacing="20" cellpadding="20">
         <tbody>
@@ -1471,18 +1494,15 @@
                 </tr>
             </tbody>
         </table>
-        <!--End of Section H-->
-    </div>
+        <!--End of Section H--></div>
     <div style="font-size: 10pt;"><strong>&nbsp;&nbsp;&nbsp;I. GENERATION CERTIFICATION</strong></div>
     {foreach from=$certificates item="certificateList"}
     <table style="width: 100%;" border="0" cellspacing="20" cellpadding="20">
-        <tbody>
-            <!--START_CERTIFICATE_LOOP-->
+        <tbody><!--START_CERTIFICATE_LOOP-->
             <tr>
                 <td width="100%">{if isset($certificate.description)}{$certificate.description}{/if}</td>
             </tr>
-            <!--END_CERTIFICATE_LOOP-->
-        </tbody>
+            <!--END_CERTIFICATE_LOOP--></tbody>
     </table>
     {/foreach}
     <table style="width: 100%;" border="0" cellspacing="20">
@@ -1491,9 +1511,7 @@
                 <td width="100%">&nbsp;</td>
             </tr>
             <tr>
-                <td width="100%">
-                    <hr />
-                </td>
+                <td width="100%"><hr /></td>
             </tr>
             <tr>
                 <td width="100%">

@@ -18,7 +18,7 @@ $viewdefs['PdfManager'] = array(
         'templateMeta' =>
         array(
             'form' => array(
-                'footerTpl' => 'modules/PdfManager/tpls/EditViewFooter.tpl',
+                'footerTpl' => 'custom/modules/PdfManager/tpls/EditViewFooter.tpl',
                 'enctype' => 'multipart/form-data',
                 'hidden' => array(
                     '<input type="hidden" name="base_module_history" id="base_module_history" value="{$fields.base_module.value}">',
@@ -40,7 +40,7 @@ $viewdefs['PdfManager'] = array(
             ),
             'includes' => array(
                 array(
-                    'file' => 'modules/PdfManager/javascript/PdfManager.js',
+                    'file' => 'custom/modules/PdfManager/javascript/PdfManager.js',
                 ),
             ),
             'useTabs' => false,
@@ -106,7 +106,6 @@ $viewdefs['PdfManager'] = array(
                         'name' => 'header_html',
                         'label' => 'LBL_HEADER_HTML',
                         'popupHelp' => 'LBL_HEADER_HTML_POPUP_HELP',
-                        'span' => '12',
                     ),
                 ),
                 5 =>
@@ -120,6 +119,15 @@ $viewdefs['PdfManager'] = array(
                 ),
                 6 =>
                 array(
+                    0 =>
+                    array(
+                        'name' => 'footer_html',
+                        'label' => 'LBL_FOOTER_HTML',
+                        'popupHelp' => 'LBL_FOOTER_HTML_POPUP_HELP',
+                    ),
+                ),
+                7 =>
+                array(
                     0 => array(
                         'name' => 'header_title',
                     ),
@@ -127,7 +135,7 @@ $viewdefs['PdfManager'] = array(
                         'name' => 'header_text',
                     ),
                 ),
-                7 =>
+                8 =>
                 array(
                     0 => array(
                         'name' => 'header_logo',
