@@ -1,5 +1,5 @@
 <!--Header-->
-<table border="0" cellspacing="0" cellpadding="0">
+<table border="0" cellspacing="0" cellpadding="0" style="font-family: 'courier new', courier; font-size: 9pt;">
     <tbody>
         <tr>
             <td colspan="8"></td>
@@ -42,7 +42,7 @@
                     <tbody>
                         <tr>
                             <td style="text-align: right;" colspan="4">Page(s):&nbsp;</td>
-                            <td style="text-align: left;" colspan="4">[[pnb]] of [[nb]]</td>
+                            <td style="text-align: left;" colspan="4">[[pnb]] of[[nb]]</td>
                         </tr>
                     </tbody>
                 </table>
@@ -59,12 +59,12 @@
     </tbody>
 </table><br />
 <!--Body-->
-<div style="width: 100%;">
+<div style="font-family: 'courier new', courier; font-size: 9pt; width: 100%;">
     <table border="0" cellspacing="0" cellpadding="1">
         <tbody>
             <tr>
                 <td colspan="7"><hr size="10" /></td>
-                <td colspan="1"></td>
+                <td colspan="1">&nbsp;</td>
                 <td colspan="8"><hr size="10" /></td>
             </tr>
             <tr>
@@ -72,23 +72,8 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td style="text-align: left;" colspan="8">
-                                    <p>
-                                        <strong>Physical Site / Generator</strong>
-                                        <br />{if $fields.accounts_sales_and_services_1.different_service_site_c == "1"}
-                                        {$fields.accounts_sales_and_services_1.service_site_address_name}<br />
-                                        {$fields.accounts_sales_and_services_1.service_site_address_street_c}<br />
-                                        {if $fields.accounts_sales_and_services_1.service_site_address_city_c!=""}{$fields.accounts_sales_and_services_1.service_site_address_city_c},{/if}&nbsp;
-                                        {if $fields.accounts_sales_and_services_1.service_site_address_state_c!=""}{$fields.accounts_sales_and_services_1.service_site_address_state_c},{/if}&nbsp;
-                                        {$fields.accounts_sales_and_services_1.service_site_address_postalcode_c}&nbsp;
-                                        {else} 
-                                        {if $fields.accounts_sales_and_services_1.shipping_address_third_party_name != ""}
-                                        {$fields.accounts_sales_and_services_1.shipping_address_third_party_name}{else}{$fields.accounts_sales_and_services_1.name}{/if}<br />
-                                        {$fields.accounts_sales_and_services_1.shipping_address_street}<br />
-                                        {if $fields.accounts_sales_and_services_1.shipping_address_city!=""}{$fields.accounts_sales_and_services_1.shipping_address_city},{/if}&nbsp;
-                                        {if $fields.accounts_sales_and_services_1.shipping_address_state!=""}{$fields.accounts_sales_and_services_1.shipping_address_state},{/if}&nbsp;
-                                        {$fields.accounts_sales_and_services_1.shipping_address_postalcode}{/if}
-                                    </p>
+                                <td style="text-align: left; font-family: 'courier new', courier; font-size: 10pt;" colspan="8">
+                                    <p><strong>Physical Site / Generator</strong> <br />{if $fields.accounts_sales_and_services_1.different_service_site_c == "1"} {$fields.accounts_sales_and_services_1.service_site_address_name}<br /> {$fields.accounts_sales_and_services_1.service_site_address_street_c}<br /> {if $fields.accounts_sales_and_services_1.service_site_address_city_c!=""}{$fields.accounts_sales_and_services_1.service_site_address_city_c},{/if}&nbsp; {if $fields.accounts_sales_and_services_1.service_site_address_state_c!=""}{$fields.accounts_sales_and_services_1.service_site_address_state_c},{/if}&nbsp; {$fields.accounts_sales_and_services_1.service_site_address_postalcode_c}&nbsp; {else} {if $fields.accounts_sales_and_services_1.shipping_address_third_party_name != ""} {$fields.accounts_sales_and_services_1.shipping_address_third_party_name}{else}{$fields.accounts_sales_and_services_1.name}{/if}<br /> {$fields.accounts_sales_and_services_1.shipping_address_street}<br /> {if $fields.accounts_sales_and_services_1.shipping_address_city!=""}{$fields.accounts_sales_and_services_1.shipping_address_city},{/if}&nbsp; {if $fields.accounts_sales_and_services_1.shipping_address_state!=""}{$fields.accounts_sales_and_services_1.shipping_address_state},{/if}&nbsp; {$fields.accounts_sales_and_services_1.shipping_address_postalcode}{/if}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -98,9 +83,7 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td style="text-align: left;" colspan="3">
-                                    <strong>Account Terms:</strong>
-                                </td>
+                                <td style="text-align: left;" colspan="3"><strong>Account Terms:</strong></td>
                                 <td style="text-align: left;" colspan="5">{$fields.accounts_sales_and_services_1.account_terms_c}</td>
                             </tr>
                         </tbody>
@@ -112,9 +95,7 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td style="text-align: left;" colspan="3">
-                                    <strong>Pricing Doc:</strong>
-                                </td>
+                                <td style="text-align: left;" colspan="3"><strong>Pricing Doc:</strong></td>
                                 <td style="text-align: left;" colspan="5">&nbsp;</td>
                             </tr>
                         </tbody>
@@ -126,9 +107,7 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td style="text-align: left;" colspan="3">
-                                    <strong>EPA ID No:</strong>
-                                </td>
+                                <td style="text-align: left;" colspan="3"><strong>EPA ID No:</strong></td>
                                 <td style="text-align: left;" colspan="5">{$fields.accounts_sales_and_services_1.ac_usepa_id_c}</td>
                             </tr>
                         </tbody>
@@ -140,9 +119,7 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td style="text-align: left;" colspan="3">
-                                    <strong>Service Hrs:</strong>
-                                </td>
+                                <td style="text-align: left;" colspan="3"><strong>Service Hrs:</strong></td>
                                 <td style="text-align: left;" colspan="5">{$fields.accounts_sales_and_services_1.hour_operations_c}</td>
                             </tr>
                         </tbody>
@@ -150,15 +127,15 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="7"><br /><div id="dotted-line"></div></td>
-                <td colspan="1"></td>
+                <td colspan="7"><br />
+                    <div id="dotted-line">&nbsp;</div>
+                </td>
+                <td colspan="1">&nbsp;</td>
                 <td colspan="8">
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td style="text-align: left;" colspan="3">
-                                    <strong>Site Tel:</strong>
-                                </td>
+                                <td style="text-align: left;" colspan="3"><strong>Site Tel:</strong></td>
                                 <td style="text-align: left;" colspan="5">{$fields.accounts_sales_and_services_1.phone_office}</td>
                             </tr>
                         </tbody>
@@ -172,23 +149,7 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: left;" colspan="8">
-                                    <p>
-                                        <strong>Bill to Party</strong>
-                                        <br />{if $fields.accounts_sales_and_services_1.isThirdParty == "1"}
-                                        {if $fields.accounts_sales_and_services_1.third_party_billing_address_third_party_name != ""}
-                                        {$fields.accounts_sales_and_services_1.third_party_billing_address_third_party_name}{else}{$fields.accounts_sales_and_services_1.physical_address_account_name}{/if}
-                                        <br />{$fields.accounts_sales_and_services_1.third_party_billing_address_street}
-                                        <br />{if $fields.accounts_sales_and_services_1.third_party_billing_address_city!=""}{$fields.accounts_sales_and_services_1.third_party_billing_address_city},{/if}&nbsp;
-                                        {if $fields.accounts_sales_and_services_1.third_party_billing_address_state!=""}{$fields.accounts_sales_and_services_1.third_party_billing_address_state},{/if}&nbsp;
-                                        {$fields.accounts_sales_and_services_1.third_party_billing_address_postalcode}
-                                        {else}
-                                        {if $fields.accounts_sales_and_services_1.billing_address_third_party_name != ""}
-                                        {$fields.accounts_sales_and_services_1.billing_address_third_party_name}{else}{$fields.accounts_sales_and_services_1.name}{/if}
-                                        <br />{$fields.accounts_sales_and_services_1.billing_address_street}
-                                        <br />{if $fields.accounts_sales_and_services_1.billing_address_city!=""}{$fields.accounts_sales_and_services_1.billing_address_city},{/if}&nbsp;
-                                        {if $fields.accounts_sales_and_services_1.billing_address_state!=""}{$fields.accounts_sales_and_services_1.billing_address_state},{/if}&nbsp;
-                                        {$fields.accounts_sales_and_services_1.billing_address_postalcode}{/if}
-                                    </p>
+                                    <p><strong>Bill to Party</strong> <br />{if $fields.accounts_sales_and_services_1.isThirdParty == "1"} {if $fields.accounts_sales_and_services_1.third_party_billing_address_third_party_name != ""} {$fields.accounts_sales_and_services_1.third_party_billing_address_third_party_name}{else}{$fields.accounts_sales_and_services_1.physical_address_account_name}{/if} <br />{$fields.accounts_sales_and_services_1.third_party_billing_address_street} <br />{if $fields.accounts_sales_and_services_1.third_party_billing_address_city!=""}{$fields.accounts_sales_and_services_1.third_party_billing_address_city},{/if}&nbsp; {if $fields.accounts_sales_and_services_1.third_party_billing_address_state!=""}{$fields.accounts_sales_and_services_1.third_party_billing_address_state},{/if}&nbsp; {$fields.accounts_sales_and_services_1.third_party_billing_address_postalcode} {else} {if $fields.accounts_sales_and_services_1.billing_address_third_party_name != ""} {$fields.accounts_sales_and_services_1.billing_address_third_party_name}{else}{$fields.accounts_sales_and_services_1.name}{/if} <br />{$fields.accounts_sales_and_services_1.billing_address_street} <br />{if $fields.accounts_sales_and_services_1.billing_address_city!=""}{$fields.accounts_sales_and_services_1.billing_address_city},{/if}&nbsp; {if $fields.accounts_sales_and_services_1.billing_address_state!=""}{$fields.accounts_sales_and_services_1.billing_address_state},{/if}&nbsp; {$fields.accounts_sales_and_services_1.billing_address_postalcode}{/if}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -202,10 +163,7 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: left;" colspan="8">
-                                    <p>
-                                        <strong>--- Site Instructions ---</strong>
-                                        <br />{$fields.accounts_sales_and_services_1.service_instruction_c}
-                                    </p>
+                                    <p><strong>--- Site Instructions ---</strong> <br />{$fields.accounts_sales_and_services_1.service_instruction_c}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -213,7 +171,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="16"></td>
+                <td colspan="16">&nbsp;</td>
             </tr>
         </tbody>
     </table>
@@ -245,25 +203,15 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="1" align="center">#</td>
-                <td colspan="1" align="center">HM</td>
-                <td colspan="6" align="left">Product/Service Description</td>
-                <td colspan="1" align="center">Est 
-                    <br /> Qty
-                </td>
-                <td colspan="1" align="center">ACT 
-                    <br /> Qty
-                </td>
-                <td colspan="1" align="center">UOM</td>
-                <td colspan="2" align="center">Unit 
-                    <br /> Price
-                </td>
-                <td colspan="1" align="center">FED 
-                    <br /> %
-                </td>
-                <td colspan="2" align="center">Ext 
-                    <br /> Charges
-                </td>
+                <td colspan="1" align="center" width="30%">#</td>
+                <td colspan="1" align="center" width="50%">HM</td>
+                <td colspan="5" align="left" width="140%">Product/Service Description</td>
+                <td colspan="1" align="center" width="160%">Est <br /> Qty</td>
+                <td colspan="1" align="center" width="120%">ACT <br /> Qty</td>
+                <td colspan="2" align="center" width="65%">UOM</td>
+                <td colspan="2" align="center" width="90%">Unit <br /> Price</td>
+                <td colspan="1" align="center" width="100%">FED <br /> %</td>
+                <td colspan="2" align="center" width="80%">Ext <br /> Charges</td>
             </tr>
             <tr>
                 <td colspan="16">
@@ -272,32 +220,15 @@
             </tr>
             <!--START_sales_and_services_revenuelineitems_1_LOOP-->
             <tr>
-                <td colspan="1" align="center">{if isset($revenuelineitem.index)}{$revenuelineitem.index}{/if}</td>
-                <td colspan="1" align="center">
-                    {if isset($revenuelineitem.shipping_hazardous_materia_c)}{if $revenuelineitem.shipping_hazardous_materia_c == "1"}X{/if}{/if}
-                </td>
-                <td colspan="6" align="left">
-                    {if isset($revenuelineitem.product_list_name_c)}{if $revenuelineitem.product_list_name_c != ""}{$revenuelineitem.product_list_name_c}{/if}{/if}
-                    {if isset($revenuelineitem.proper_shipping_name_c)}{if $revenuelineitem.proper_shipping_name_c != ""}<br />{$revenuelineitem.proper_shipping_name_c}{/if}{/if}
-                    {if isset($revenuelineitem.mandatory_print_text_c)}{if $revenuelineitem.mandatory_print_text_c != ""}<br />{$revenuelineitem.mandatory_print_text_c}{/if}{/if}
-                    {if isset($revenuelineitem.ht_manifest_revenuelineitems_1.manifest_no_actual_c)}{if $revenuelineitem.ht_manifest_revenuelineitems_1.manifest_no_actual_c != ""}<br />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{$revenuelineitem.ht_manifest_revenuelineitems_1.manifest_no_actual_c}{/if}{/if}
-                    {if isset($revenuelineitem.waste_profile_relate_c_waste_profile_num_c)}{if $revenuelineitem.waste_profile_relate_c_waste_profile_num_c != ""}<br />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{$revenuelineitem.waste_profile_relate_c_waste_profile_num_c}{/if}{/if}
-                    {if isset($revenuelineitem.product_vendor_c_ac_usepa_id_c)}{if $revenuelineitem.product_vendor_c_ac_usepa_id_c != ""}<br />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{$revenuelineitem.product_vendor_c_ac_usepa_id_c}{/if}{/if}
-                </td>
-                <td colspan="1" align="center">
-                    {if isset($revenuelineitem.estimated_quantity_c)}{$revenuelineitem.estimated_quantity_c}{/if}
-                </td>
-                <td colspan="1" align="center">&nbsp;</td>
-                <td colspan="1" align="center">
-                    {if isset($revenuelineitem.product_uom_c)}{$revenuelineitem.product_uom_c}{/if}
-                </td>
-                <td colspan="2" align="center">
-                    {if isset($revenuelineitem.discount_price)}{$revenuelineitem.discount_price}{/if}
-                </td>
-                <td colspan="1" align="center">
-                </td>
-                <td colspan="2" align="center">
-                </td>
+                <td colspan="1" align="center" width="30%">{if isset($revenuelineitem.index)}{$revenuelineitem.index}{/if}</td>
+                <td colspan="1" align="center" width="50%">{if isset($revenuelineitem.shipping_hazardous_materia_c)}{if $revenuelineitem.shipping_hazardous_materia_c == "1"}X{/if}{/if}</td>
+                <td colspan="5" align="left" width="140%">{if isset($revenuelineitem.product_list_name_c)}{if $revenuelineitem.product_list_name_c != ""}{$revenuelineitem.product_list_name_c}{/if}{/if} {if isset($revenuelineitem.proper_shipping_name_c)}{if $revenuelineitem.proper_shipping_name_c != ""}<br />{$revenuelineitem.proper_shipping_name_c}{/if}{/if} {if isset($revenuelineitem.mandatory_print_text_c)}{if $revenuelineitem.mandatory_print_text_c != ""}<br />{$revenuelineitem.mandatory_print_text_c}{/if}{/if} {if isset($revenuelineitem.ht_manifest_revenuelineitems_1.manifest_no_actual_c)}{if $revenuelineitem.ht_manifest_revenuelineitems_1.manifest_no_actual_c != ""}<br />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{$revenuelineitem.ht_manifest_revenuelineitems_1.manifest_no_actual_c}{/if}{/if} {if isset($revenuelineitem.waste_profile_relate_c_waste_profile_num_c)}{if $revenuelineitem.waste_profile_relate_c_waste_profile_num_c != ""}<br />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{$revenuelineitem.waste_profile_relate_c_waste_profile_num_c}{/if}{/if}</td>
+                <td colspan="1" align="center" width="160%">{if isset($revenuelineitem.estimated_quantity_c)}{$revenuelineitem.estimated_quantity_c}{/if}</td>
+                <td colspan="1" align="center" width="120%">&nbsp;</td>
+                <td colspan="2" align="center" width="65%">{if isset($revenuelineitem.product_uom_c)}{$revenuelineitem.product_uom_c}{/if}</td>
+                <td colspan="2" align="center" width="90%">{if isset($revenuelineitem.discount_price)}{$revenuelineitem.discount_price}{/if}</td>
+                <td colspan="1" align="center" width="100%">{if $revenuelineitem.fed_percentage!="0.00" &amp;&amp; $revenuelineitem.fed_percentage!=""}{$revenuelineitem.fed_percentage}%{/if}</td>
+                <td colspan="2" align="center" width="80%">&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="16">
@@ -306,26 +237,24 @@
             </tr>
             <!--END_sales_and_services_revenuelineitems_1_LOOP-->
             <tr>
-                <td colspan="11">
-                    <!--                    <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td colspan="11">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td rowspan="7" colspan="11">FED% = Fuel, Energy, Disposal and Security 
-                                                        <br /> {$fields.destination_ship_to_c} / {$fields.tsdf_ac_usepa_id_c}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>-->
-                </td>
-                <td colspan="5">
+                <td colspan="11"><!--                    <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="11">&nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td rowspan="7" colspan="11">FED% = Fuel, Energy, Disposal and Security 
+                                                                        <br /> {$fields.destination_ship_to_c} / {$fields.tsdf_ac_usepa_id_c}
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>--></td>
+                <td colspan="5">{if $fields.all == "1"}
                     <table cellspacing="0" cellpadding="5">
                         <tbody>
                             <tr>
                                 <td colspan="3" align="right">Subtotal -----&gt;</td>
-                                <td colspan="2" align="center"></td>
+                                <td colspan="2" align="center">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="3">
@@ -337,7 +266,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3" align="right">FED -----&gt;</td>
-                                <td colspan="2" align="center"></td>
+                                <td colspan="2" align="center">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="3">
@@ -349,7 +278,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3" align="right">Tax -----&gt;</td>
-                                <td colspan="2" align="center"></td>
+                                <td colspan="2" align="center">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="3">
@@ -361,7 +290,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3" align="right">TOTAL DUE -----&gt;</td>
-                                <td colspan="2" align="center"></td>
+                                <td colspan="2" align="center">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td colspan="3">
@@ -372,31 +301,113 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="5"></td>
+                                <td colspan="5">&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
-                </td>
+                    {else} {if $fields.feds == "1"}
+                    <table cellspacing="0" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td colspan="3" align="right">Subtotal -----&gt;</td>
+                                <td colspan="2" align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="full-line">&nbsp;</div>
+                                </td>
+                                <td colspan="2">
+                                    <div id="dotted-line">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">FED -----&gt;</td>
+                                <td colspan="2" align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="full-line">&nbsp;</div>
+                                </td>
+                                <td colspan="2">
+                                    <div id="dotted-line">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">TOTAL DUE -----&gt;</td>
+                                <td colspan="2" align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="full-line">&nbsp;</div>
+                                </td>
+                                <td colspan="2">
+                                    <div id="dotted-line">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {else}
+                    <table cellspacing="0" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td colspan="3" align="right">Subtotal -----&gt;</td>
+                                <td colspan="2" align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="full-line">&nbsp;</div>
+                                </td>
+                                <td colspan="2">
+                                    <div id="dotted-line">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">Tax -----&gt;</td>
+                                <td colspan="2" align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="full-line">&nbsp;</div>
+                                </td>
+                                <td colspan="2">
+                                    <div id="dotted-line">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right">TOTAL DUE -----&gt;</td>
+                                <td colspan="2" align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="full-line">&nbsp;</div>
+                                </td>
+                                <td colspan="2">
+                                    <div id="dotted-line">&nbsp;</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {/if} {/if}</td>
             </tr>
         </tbody>
     </table>
-    {/foreach}
-    {foreach from=$sales_and_services_revenuelineitems_1 item="revenuelineitemsList"}
+    {/foreach} {foreach from=$sales_and_services_revenuelineitems_1 item="revenuelineitemsList"} {if isset($revenuelineitem.additional_info_ack_c)}{if $revenuelineitem.additional_info_ack_c != ""}{/if}{/if}
     <table border="0" cellspacing="2" cellpadding="1">
         <tbody>
             <tr>
                 <td colspan="16">&nbsp;</td>
             </tr>
             <!--START_sales_and_services_revenuelineitems_2_LOOP-->
-            {if isset($revenuelineitem.additional_info_ack_c)}{if $revenuelineitem.additional_info_ack_c != ""}
             <tr>
-                <td colspan="16" align="left">
-                    {$revenuelineitem.additional_info_ack_c}
-                </td>
+                <td colspan="16" align="left">{$revenuelineitem.additional_info_ack_c}</td>
             </tr>
-            {/if}{/if}
-            <!--END_sales_and_services_revenuelineitems_2_LOOP-->
-        </tbody>
+            <!--END_sales_and_services_revenuelineitems_2_LOOP--></tbody>
     </table>
     {/foreach}
     <table border="0" cellspacing="0" cellpadding="5">
@@ -405,19 +416,17 @@
                 <td colspan="16">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="1">
-                    <br />
+                <td colspan="1"><br />
                     <div id="dotted-line">&nbsp;</div>
                 </td>
                 <td colspan="2" align="center">Transporter</td>
-                <td colspan="13">
-                    <br />
+                <td colspan="13"><br />
                     <div id="dotted-line">&nbsp;</div>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Driver Sign:</td>
-                <td colspan="6">&nbsp;</td>
+                <td colspan="3">Driver Sign:</td>
+                <td colspan="5">&nbsp;</td>
                 <td colspan="1">Date:</td>
                 <td colspan="2">&nbsp;</td>
                 <td colspan="5">&nbsp;</td>
@@ -441,13 +450,7 @@
             </tr>
             <tr>
                 <td colspan="16">
-                    <p>{if $fields.transporter_shipping_address_third_party_name!=""}
-                        {$fields.transporter_shipping_address_third_party_name},{else}{$fields.transporter_carrier_c},{/if}
-                        &nbsp;{$fields.transporter_shipping_address_street}&nbsp;
-                        {if $fields.transporter_shipping_address_city!=""}{$fields.transporter_shipping_address_city},{/if}
-                        &nbsp;{if $fields.transporter_shipping_address_state!=""}{$fields.transporter_shipping_address_state},{/if}
-                        &nbsp;{$fields.transporter_shipping_address_postalcode}&nbsp;
-                        {if $fields.transporter_ac_usepa_id_c!=""}/&nbsp;{$fields.transporter_ac_usepa_id_c}{/if}</p>
+                    <p>{if $fields.transporter_shipping_address_third_party_name!=""} {$fields.transporter_shipping_address_third_party_name},{else}{$fields.transporter_carrier_c},{/if} &nbsp;{$fields.transporter_shipping_address_street}&nbsp; {if $fields.transporter_shipping_address_city!=""}{$fields.transporter_shipping_address_city},{/if} &nbsp;{if $fields.transporter_shipping_address_state!=""}{$fields.transporter_shipping_address_state},{/if} &nbsp;{$fields.transporter_shipping_address_postalcode}&nbsp; {if $fields.transporter_ac_usepa_id_c!=""}/&nbsp;{$fields.transporter_ac_usepa_id_c}{/if}</p>
                 </td>
             </tr>
             <tr>
@@ -455,11 +458,6 @@
                     <p>{if $fields.transporterCertificates!=""}{$fields.transporterCertificates}{/if}</p>
                 </td>
             </tr>
-            <!--            <tr>
-                            <td colspan="16">
-                                <br />
-                            </td>
-                        </tr>-->
         </tbody>
     </table>
     <table border="0" cellspacing="0" cellpadding="5">
@@ -468,26 +466,19 @@
                 <td colspan="16">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="1">
-                    <br />
+                <td colspan="1"><br />
                     <div id="dotted-line">&nbsp;</div>
                 </td>
                 <td colspan="1" align="center">TSDF</td>
-                <td colspan="14">
-                    <br />
+                <td colspan="14"><br />
                     <div id="dotted-line">&nbsp;</div>
                 </td>
             </tr>
             <tr>
                 <td colspan="16">
-                    <p>{$fields.destination_ship_to_c} / {$fields.tsdf_ac_usepa_id_c}</p>
+                    <p>{$fields.destination_ship_to_c}&nbsp;{if $fields.tsdf_ac_usepa_id_c != ""}/ {$fields.tsdf_ac_usepa_id_c}{/if}</p>
                 </td>
             </tr>
-            <!--            <tr>
-                            <td colspan="16">
-                                <br />
-                            </td>
-                        </tr>-->
         </tbody>
     </table>
     <table border="0" cellspacing="0" cellpadding="5">
@@ -496,19 +487,17 @@
                 <td colspan="16">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="1">
-                    <br />
+                <td colspan="1"><br />
                     <div id="dotted-line">&nbsp;</div>
                 </td>
-                <td colspan="3" align="center">Generator / Customer</td>
-                <td colspan="12">
-                    <br />
+                <td colspan="4" align="center">Generator / Customer</td>
+                <td colspan="11"><br />
                     <div id="dotted-line">&nbsp;</div>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Driver Sign:</td>
-                <td colspan="6">&nbsp;</td>
+                <td colspan="3">Driver Sign:</td>
+                <td colspan="5">&nbsp;</td>
                 <td colspan="2">Print Name:</td>
                 <td colspan="3">&nbsp;</td>
                 <td colspan="1">Date:</td>
@@ -539,11 +528,6 @@
                     <p>I am authorized to review and accept the terms and condition of this and the reverse side of this form;&nbsp;{if $fields.customerCertificates!=""}{$fields.customerCertificates}{/if}</p>
                 </td>
             </tr>
-            <!--            <tr>
-                            <td colspan="16">
-                                <br />
-                            </td>
-                        </tr>-->
         </tbody>
     </table>
 </div>

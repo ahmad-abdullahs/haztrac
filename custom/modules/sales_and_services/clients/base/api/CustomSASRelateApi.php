@@ -91,7 +91,8 @@ class CustomSASRelateApi extends RelateApi {
             $record = $this->getRecordOnId($returnData['records'], $key);
             $calssName = 'rli-td-bcc-' . $classColorCount;
             if (!is_null($record)) {
-                $record['_backgroundColorClass'] = $calssName;
+                // $record['_backgroundColorClass'] = $calssName;
+                $record['_backgroundColorClass'] = 'rli-td-bcc';
                 array_push($formatedRecords, $record);
             }
             foreach ($value as $_key => $_value) {

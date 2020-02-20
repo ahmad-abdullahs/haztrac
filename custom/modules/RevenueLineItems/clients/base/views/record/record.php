@@ -244,28 +244,28 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             5 =>
                             array(
-                                'name' => 'is_bundle_product_c',
-                                'label' => 'LBL_IS_BUNDLE_PRODUCT',
-                                'readonly' => true,
+//                                'name' => 'is_bundle_product_c',
+//                                'label' => 'LBL_IS_BUNDLE_PRODUCT',
+//                                'readonly' => true,
                             ),
                             6 =>
                             array(
                                 'name' => 'product_svc_description_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PRODUCT_SVC_DESCRIPTION',
-                                'span' => 12,
-                            ),
-                            7 =>
-                            array(
-                                'name' => 'description',
                                 'span' => 6,
                             ),
-                            8 =>
+                            7 =>
                             array(
                                 'name' => 'mandatory_print_text_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_MANDATORY_PRINT_TEXT',
                                 'span' => 6,
+                            ),
+                            8 =>
+                            array(
+                                'name' => 'description',
+                                'span' => 12,
                             ),
                             9 =>
                             array(
