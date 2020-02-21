@@ -46,6 +46,8 @@ $dictionary["sales_and_services"]["fields"]["accounts_sales_and_services_1_name"
         'account_number_c' => 'account_number_c',
         'account_status_c' => 'account_status_c',
 //        'po_required' => 'po_required',
+        'lon_c' => 'lon_c',
+        'lat_c' => 'lat_c',
         'service_site_address_name' => 'service_site_address_name',
         'service_site_address_street_c' => 'service_site_address_street_c',
         'service_site_address_city_c' => 'service_site_address_city_c',
