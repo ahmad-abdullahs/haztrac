@@ -59,6 +59,9 @@ class AccountsHooks {
             $salesAndService->$_key = $bean->$key;
         }
 
+        $salesAndService->lat_c = $bean->lat_c;
+        $salesAndService->lon_c = $bean->lon_c;
+
         $salesAndService->{$type . $addressNameField} = $bean->{$type . $addressNameField};
         return $salesAndService;
     }

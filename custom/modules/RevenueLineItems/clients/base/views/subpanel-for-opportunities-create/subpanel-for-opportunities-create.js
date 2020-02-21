@@ -221,5 +221,14 @@
         });
 
         return catalog;
-    }
+    },
+
+    checkButtons: function () {
+        this._super('checkButtons');
+        if (this.context.parent.get("module") == "Accounts") {
+            // This code is added to color the RLI subpanel create Estimated field yellow at
+            // time of Accounts record creation.
+            $('tr[name*=RevenueLineItems_] input[name=estimated_quantity_c]').css('background-color', '#f4e429');
+        }
+    },
 })

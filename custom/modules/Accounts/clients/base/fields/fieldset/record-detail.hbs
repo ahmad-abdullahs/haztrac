@@ -20,9 +20,9 @@
             {{#containsSubStr name "_address_postalcode"}}style=""{{/containsSubStr}}
         {{/eq}}
         {{#eq tplName "detail"}}
-            {{#containsSubStr name "_address_city"}}style="width: -webkit-fill-available;"{{/containsSubStr}}
-            {{#containsSubStr name "_address_state"}}style="width: -webkit-fill-available;"{{/containsSubStr}}
-            {{#containsSubStr name "_address_postalcode"}}style="width: -webkit-fill-available;"{{/containsSubStr}}
+            {{#containsSubStr name "_address_city"}}style=""{{/containsSubStr}}
+            {{#containsSubStr name "_address_state"}}style=""{{/containsSubStr}}
+            {{#containsSubStr name "_address_postalcode"}}style=""{{/containsSubStr}}
         {{/eq}}>
         {{#if ../def.show_child_labels}}
             <div class="record-label" data-name="{{name}}">{{str label ../module}}</div>

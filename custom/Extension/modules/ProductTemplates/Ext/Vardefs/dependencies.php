@@ -35,3 +35,9 @@ $dictionary['ProductTemplate']['fields']['manifest_container_type_c']['dependenc
 $dictionary['ProductTemplate']['fields']['manifest_uom_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['ProductTemplate']['fields']['manifest_required_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['ProductTemplate']['fields']['waste_profile_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['ProductTemplate']['fields']['hide_price_from_paperwork_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['ProductTemplate']['fields']['customer_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['ProductTemplate']['fields']['transporter_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['ProductTemplate']['fields']['consignee_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['ProductTemplate']['fields']['waste_profile_relate_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['ProductTemplate']['fields']['manifest_additional_info_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';

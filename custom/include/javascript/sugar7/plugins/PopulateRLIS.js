@@ -16,8 +16,15 @@
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
                 if (thisOfCall.context.parent.get('copyFeature')) {
-                    if (data.is_bundle_product_c != 'parent' && !_.isUndefined(viewDetails))
+                    if (data.is_bundle_product_c != 'parent' && !_.isUndefined(viewDetails)) {
+                        // Unset the Manifest from revenuelineitem at time of copy.
+                        data.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
+                        data.ht_manifest_revenuelineitems_1_name = '';
                         app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                    }
+                    // On copy of S&S set the status to Draft.
+                    var pModel = thisOfCall.context.parent.get('model');
+                    pModel.set('status_c', 'Draft');
                 } else {
                     if (!_.isUndefined(viewDetails)) {
                         app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
@@ -38,6 +45,9 @@
                         },
                         success: function (coll) {
                             if (thisOfCall.context.parent.get('copyFeature')) {
+                                // Unset the Manifest from revenuelineitem at time of copy.
+                                data.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
+                                data.ht_manifest_revenuelineitems_1_name = '';
                                 app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
                             }
                             _.each(coll.models, function (model) {
@@ -54,6 +64,11 @@
                                     model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
 //                                    model.attributes.product_template_id = '';
 //                                    model.attributes.product_template_name = '';
+                                    if (thisOfCall.context.parent.get('copyFeature')) {
+                                        // Unset the Manifest from revenuelineitem at time of copy.
+                                        model.attributes.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
+                                        model.attributes.ht_manifest_revenuelineitems_1_name = '';
+                                    }
                                     app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                 }
                             })

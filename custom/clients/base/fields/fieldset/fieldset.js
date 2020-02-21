@@ -61,12 +61,10 @@
             }
 
             str = str.toString();
-            var pos = 0;
             var exist = false;
 
-            while ((pos = str.indexOf(substring, pos)) > -1) {
+            if (str.indexOf(substring) > -1) {
                 exist = true;
-                break;
             }
 
             if (exist) {

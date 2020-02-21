@@ -43,3 +43,9 @@ $dictionary['RevenueLineItem']['fields']['consignee_certificates']['dependency']
 $dictionary['RevenueLineItem']['fields']['ht_manifest_revenuelineitems_1_name']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['waste_profile_relate_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['manifest_additional_info_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['worst_case']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['likely_case']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['best_case']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['probability']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['sales_stage']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['date_closed']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
