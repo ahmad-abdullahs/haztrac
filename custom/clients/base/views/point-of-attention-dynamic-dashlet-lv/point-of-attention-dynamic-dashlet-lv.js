@@ -13,6 +13,18 @@
         }, this);
     },
 
+//    loadData: function (options) {
+//        if (!this.filterIsAccessible) {
+//            if (options && _.isFunction(options.complete)) {
+//                options.complete();
+//            }
+//            return;
+//        }
+//        this.$el.parent('div').parent('div').attr('style', 'min-height:100px');
+//        this.$el.parents('div.rows').attr('style', 'padding:0px');
+//        this._super('loadData', [options]);
+//    },
+
     /**
      * @inheritdoc
      */

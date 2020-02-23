@@ -21,6 +21,7 @@ $viewdefs['sales_and_services'] = array(
                                 'default' => true,
                                 'enabled' => true,
                                 'link' => true,
+                                'type' => 'open-in-drawer',
                                 'related_fields' =>
                                 array_merge(array(
                                     0 => 'shipping_address_street_c',

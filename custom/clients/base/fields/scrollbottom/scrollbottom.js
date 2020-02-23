@@ -15,7 +15,7 @@
     scrollToBottom: function (event) {
         var self = this;
         this.view.$el.parent().stop().animate({
-            scrollTop: (self.view.$el.find('div.record').height())
+            scrollTop: (self.view.$el.find('div.record').height() + 500)
         }, 500);
     }
 })

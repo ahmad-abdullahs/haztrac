@@ -193,7 +193,17 @@
     },
 
     cancelClicked: function () {
-        this._super('cancelClicked');
+        this.setButtonStates(this.STATE.VIEW);
+        this.action = 'detail';
+        this.handleCancel();
+        this.clearValidationErrors(this.editableFields);
+        // Only set the route if its the real record view, not the record view opened in the
+        // drawer or list view.
+        var initiatedByMapView = this.context.get('initiatedByMapView') || this.isOnTopOfListView() || false;
+        if (!initiatedByMapView) {
+            this.setRoute();
+        }
+        this.unsetContextAction();
         this.context.trigger('cancel:full:subpanel:cstm');
     },
 
@@ -203,7 +213,7 @@
         this.toggleEdit(true);
         // Only set the route if its the real record view, not the record view opened in the
         // drawer, like we are opening in the record view in drawer for Maps.
-        var initiatedByMapView = this.context.get('initiatedByMapView') || false;
+        var initiatedByMapView = this.context.get('initiatedByMapView') || this.isOnTopOfListView() || false;
         if (!initiatedByMapView) {
             this.setRoute('edit');
         }
@@ -225,7 +235,7 @@
             this.action = 'detail';
             // Only set the route if its the real record view, not the record view opened in the
             // drawer, like we are opening in the record view in drawer for Maps.
-            var initiatedByMapView = this.context.get('initiatedByMapView') || false;
+            var initiatedByMapView = this.context.get('initiatedByMapView') || this.isOnTopOfListView() || false;
             if (!initiatedByMapView) {
                 this.setRoute();
             }
@@ -235,11 +245,23 @@
         }
     },
 
+    isOnTopOfListView: function () {
+        var isOnTopOfListView = false;
+        if (this.options.context) {
+            if (this.options.context.parent) {
+                if (this.options.context.parent.get('layout') == "records") {
+                    isOnTopOfListView = true;
+                }
+            }
+        }
+        return isOnTopOfListView;
+    },
+
     _buildGridsFromPanelsMetadata: function (panels) {
         this._super('_buildGridsFromPanelsMetadata', [panels]);
 
         // Only Add the Close button if this is initiated from the Maps View.
-        var initiatedByMapView = this.context.get('initiatedByMapView') || false;
+        var initiatedByMapView = this.context.get('initiatedByMapView') || this.isOnTopOfListView() || false;
         if (!initiatedByMapView) {
             this.options.meta.buttons = _.reject(this.options.meta.buttons, function (btn) {
                 return _.contains(["close_drawer_button"], btn.name);

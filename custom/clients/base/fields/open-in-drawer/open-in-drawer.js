@@ -27,6 +27,17 @@
         }),
                 self = this;
 
+        var loadSpecifiedPanels = [];
+        if (this.options.module == "sales_and_services" && this.options.viewName == "list") {
+            loadSpecifiedPanels = [
+                'sales_and_services_revenuelineitems_1',
+                'sales_and_services_tasks_1',
+                'lr_lab_reports_sales_and_services_1',
+                'sales_and_services_contacts_1',
+                'notes',
+            ];
+        }
+
         beanForDrawer.fetch({
             success: function (model) {
                 app.drawer.open({
@@ -36,6 +47,7 @@
                         model: model,
                         modelId: self.model.id,
                         openInDrawer: true,
+                        loadSpecifiedPanels: loadSpecifiedPanels,
                         // action: model.get('is_bundle_product_c') == 'child' ? 'edit' : 'detail',
                     }
                 }, _.bind(function () {

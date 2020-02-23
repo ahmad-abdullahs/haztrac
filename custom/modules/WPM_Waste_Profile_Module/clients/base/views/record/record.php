@@ -146,7 +146,14 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'readonly' => true,
                             ),
-                            1 => 'name',
+                            1 =>
+                            array(
+                                'name' => 'name',
+                                'related_fields' =>
+                                array(
+                                    0 => 'commentlog',
+                                ),
+                            ),
                             2 =>
                             array(
                                 'name' => 'favorite',
@@ -305,7 +312,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                         ),
                     ),
@@ -603,7 +610,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             3 =>
                             array(
@@ -658,7 +665,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             11 =>
                             array(
@@ -768,7 +775,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             27 =>
                             array(
@@ -805,7 +812,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 12,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             1 =>
                             array(
@@ -1151,7 +1158,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             10 =>
                             array(
@@ -1231,7 +1238,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             21 =>
                             array(
@@ -1261,7 +1268,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             25 =>
                             array(
@@ -1322,7 +1329,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             33 =>
                             array(
@@ -1389,7 +1396,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             43 =>
                             array(
@@ -1424,7 +1431,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             47 =>
                             array(
@@ -1459,7 +1466,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             51 =>
                             array(
@@ -1494,7 +1501,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             55 =>
                             array(
@@ -1529,7 +1536,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             59 =>
                             array(
@@ -1574,7 +1581,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                             65 =>
                             array(
@@ -1718,7 +1725,7 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'noInline' => true,
                                 'span' => 10,
-                                // 'background_color' => '#ebedef',
+                            // 'background_color' => '#ebedef',
                             ),
                         ),
                     ),

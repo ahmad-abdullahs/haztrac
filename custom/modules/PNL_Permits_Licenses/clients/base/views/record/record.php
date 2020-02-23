@@ -148,7 +148,14 @@ $viewdefs[$module_name] = array(
                                 'dismiss_label' => true,
                                 'readonly' => true,
                             ),
-                            1 => 'document_name',
+                            1 =>
+                            array(
+                                'name' => 'document_name',
+                                'related_fields' =>
+                                array(
+                                    0 => 'commentlog',
+                                ),
+                            ),
                             2 =>
                             array(
                                 'name' => 'favorite',

@@ -1,0 +1,41 @@
+{{!
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+}}
+<div class="omnibar-dashlet">
+    <div class="omnibar">
+        <div class="inputwrapper">
+            <div contenteditable="true" name="commentContent" class="sayit taggable"></div>
+            <div class="inputactions">
+                <button class="pull-right btn btn-primary addComment" name="addComment" tabindex="0" aria-disabled="false" track="click:addComment">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="unstyled listed kbcontents" data-action="pagination-body">
+    {{#if msgs.length}}
+        {{#each msgs}}
+            <li style="padding: 6px;">
+                <div class="msg-content" style="font-size: 13px;">{{entry}}</div>
+                <span class="ellipsis_inline" title data-placement="bottom" data-fieldname="author_name" style="font-size: 10px;">
+                    {{#if href}}
+                        <a title="{{created_by_name}}" href="{{href}}">{{created_by_name}}</a>
+                    {{else}}
+                        {{created_by_name}}
+                    {{/if}}
+                    {{entered_date}}
+                </span>
+            </li>
+        {{/each}}
+    {{else}}
+        <div class="block-footer">{{str "LBL_DASHLET_COMMENT_LOG_NO_DATA"}}</div>
+    {{/if}}
+</ul>

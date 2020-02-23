@@ -17,6 +17,7 @@
                     <tr class="single">
                         {{#each ../fields}}
                             <td{{#if align}} class="{{align}}"{{/if}}>{{field ../../../this model=../this template=../../../viewName}}</td>
+                            {{!--<td{{#if align}} class="{{align}} lowHeight" {{else}} class="lowHeight"{{/if}}>{{field ../../../this model=../this template=../../../viewName}}</td>--}}
                         {{/each}}
                     </tr>
                 {{/each}}
