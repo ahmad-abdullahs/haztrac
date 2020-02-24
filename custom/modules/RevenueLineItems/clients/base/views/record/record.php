@@ -181,6 +181,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     2 => 'base_rate',
                                     3 => 'rli_as_template_c',
                                     4 => 'mft_part_num',
+                                    5 => 'commentlog',
                                 ),
                             ),
                             2 =>

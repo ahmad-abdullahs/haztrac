@@ -39,15 +39,23 @@
         }
 
         beanForDrawer.fetch({
+            // This view: 'record' is essential to add otherwise it will not fetch the comment collection 
+            // and when this model is used for record view it will not show the data in comments dashlet.
+            view: 'record',
             success: function (model) {
                 app.drawer.open({
                     layout: 'record',
                     context: {
+                        // This layout abbribute is essential to add, otherwise record in the drawer will not
+                        // load the record view dashlets.
+                        layout: 'record',
                         module: self.model.module,
                         model: model,
                         modelId: self.model.id,
                         openInDrawer: true,
-                        loadSpecifiedPanels: loadSpecifiedPanels,
+                        // This is commented because if we keep it open it fetch the subpanel collection again
+                        // and records not shown in the subpanels.
+                        // loadSpecifiedPanels: loadSpecifiedPanels,
                         // action: model.get('is_bundle_product_c') == 'child' ? 'edit' : 'detail',
                     }
                 }, _.bind(function () {

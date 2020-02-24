@@ -15,13 +15,16 @@
         app.drawer.open({
             layout: 'record',
             context: {
+                // This layout abbribute is essential to add, otherwise record in the drawer will not
+                // load the record view dashlets.
+                layout: 'record',
                 module: module,
                 model: model,
                 modelId: recordId,
                 initiatedByMapView: true,
-                loadSpecifiedPanels: [
-                    'sales_and_services_revenuelineitems_1',
-                ],
+//                loadSpecifiedPanels: [
+//                    'sales_and_services_revenuelineitems_1',
+//                ],
             }
         }, _.bind(function () {
             // On Close
