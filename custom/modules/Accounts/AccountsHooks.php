@@ -16,19 +16,20 @@ class AccountsHooks {
                 $this->getLatLon($bean, $this->getAddress($bean, 'service_site', '_c'));
                 $this->updateSalesAndServiceAddresses($bean, 'service_site', '_c', '_address_name');
             }
-        } else if ($bean->fetched_row['different_service_site_c'] != $bean->different_service_site_c) {
-            $bean->lat_c = '';
-        }
-
-        if (empty($bean->lat_c) ||
-                $bean->fetched_row['shipping_address_third_party_name'] != $bean->shipping_address_third_party_name ||
-                $bean->fetched_row['shipping_address_street'] != $bean->shipping_address_street ||
-                $bean->fetched_row['shipping_address_city'] != $bean->shipping_address_city ||
-                $bean->fetched_row['shipping_address_state'] != $bean->shipping_address_state ||
-                $bean->fetched_row['shipping_address_postalcode'] != $bean->shipping_address_postalcode ||
-                $bean->fetched_row['shipping_address_country'] != $bean->shipping_address_country) {
-            $this->getLatLon($bean, $this->getAddress($bean));
-            $this->updateSalesAndServiceAddresses($bean);
+        } else {
+            if ($bean->fetched_row['different_service_site_c'] != $bean->different_service_site_c) {
+                $bean->lat_c = '';
+            }
+            if (empty($bean->lat_c) ||
+                    $bean->fetched_row['shipping_address_third_party_name'] != $bean->shipping_address_third_party_name ||
+                    $bean->fetched_row['shipping_address_street'] != $bean->shipping_address_street ||
+                    $bean->fetched_row['shipping_address_city'] != $bean->shipping_address_city ||
+                    $bean->fetched_row['shipping_address_state'] != $bean->shipping_address_state ||
+                    $bean->fetched_row['shipping_address_postalcode'] != $bean->shipping_address_postalcode ||
+                    $bean->fetched_row['shipping_address_country'] != $bean->shipping_address_country) {
+                $this->getLatLon($bean, $this->getAddress($bean));
+                $this->updateSalesAndServiceAddresses($bean);
+            }
         }
     }
 

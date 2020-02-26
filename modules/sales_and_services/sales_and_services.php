@@ -19,22 +19,22 @@ class sales_and_services extends sales_and_services_sugar {
 
     public function save($check_notify = false) {
         // if lat long are not calculated or address changed
-        if (empty($this->lat_c) ||
-                $this->fetched_row['service_site_address_street_c'] != $this->service_site_address_street_c ||
-                $this->fetched_row['service_site_address_city_c'] != $this->service_site_address_city_c ||
-                $this->fetched_row['service_site_address_state_c'] != $this->service_site_address_state_c ||
-                $this->fetched_row['service_site_address_postalcode_c'] != $this->service_site_address_postalcode_c ||
-                $this->fetched_row['service_site_address_country_c'] != $this->service_site_address_country_c) {
-            $this->getLatLon($this->getAddress('service_site'));
-        }
-        if (empty($this->lat_c) ||
-                $this->fetched_row['shipping_address_street_c'] != $this->shipping_address_street_c ||
-                $this->fetched_row['shipping_address_city_c'] != $this->shipping_address_city_c ||
-                $this->fetched_row['shipping_address_state_c'] != $this->shipping_address_state_c ||
-                $this->fetched_row['shipping_address_postalcode_c'] != $this->shipping_address_postalcode_c ||
-                $this->fetched_row['shipping_address_country_c'] != $this->shipping_address_country_c) {
-            $this->getLatLon($this->getAddress());
-        }
+//        if (empty($this->lat_c) ||
+//                $this->fetched_row['service_site_address_street_c'] != $this->service_site_address_street_c ||
+//                $this->fetched_row['service_site_address_city_c'] != $this->service_site_address_city_c ||
+//                $this->fetched_row['service_site_address_state_c'] != $this->service_site_address_state_c ||
+//                $this->fetched_row['service_site_address_postalcode_c'] != $this->service_site_address_postalcode_c ||
+//                $this->fetched_row['service_site_address_country_c'] != $this->service_site_address_country_c) {
+//            $this->getLatLon($this->getAddress('service_site'));
+//        }
+//        if (empty($this->lat_c) ||
+//                $this->fetched_row['shipping_address_street_c'] != $this->shipping_address_street_c ||
+//                $this->fetched_row['shipping_address_city_c'] != $this->shipping_address_city_c ||
+//                $this->fetched_row['shipping_address_state_c'] != $this->shipping_address_state_c ||
+//                $this->fetched_row['shipping_address_postalcode_c'] != $this->shipping_address_postalcode_c ||
+//                $this->fetched_row['shipping_address_country_c'] != $this->shipping_address_country_c) {
+//            $this->getLatLon($this->getAddress());
+//        }
 
         if (empty($this->ss_number)) {
             $this->ss_number = 'S-' . $this->getUniqueNumber();
