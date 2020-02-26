@@ -24,7 +24,7 @@ $dictionary["LR_Lab_Reports"]["fields"]["accounts_lr_lab_reports_3_name"] = arra
     'table' => 'accounts',
     'module' => 'Accounts',
     'rname' => 'name',
-    'default' => 'Botavia Energy, LLC',
+    'default' => 'Precision Petroleum Labs, Inc.',
     'dependency' => '',
     'massupdate' => true,
 );
@@ -43,5 +43,5 @@ $dictionary["LR_Lab_Reports"]["fields"]["accounts_lr_lab_reports_3accounts_ida"]
     'massupdate' => false,
     'duplicate_merge' => 'disabled',
     'hideacl' => true,
-    'default' => '2161dbfa-9cfb-11e9-a1da-000c29e77cbc',
+    'default' => '2e619afc-d987-11e9-894f-000c29e77cbc',
 );
