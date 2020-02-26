@@ -12,6 +12,7 @@ class before_save_class {
         if (!isset($bean->fetched_row['id'])) {
             $bean->contract_number_c = $this->jumpContarctNumBy15();
         }
+        $this->handleContractSpecificationField($bean, $event, $arguments);
     }
 
     function jumpContarctNumBy15() {
@@ -45,6 +46,37 @@ SQL;
         }
 
         return $contract_number;
+    }
+
+    function handleContractSpecificationField($bean, $event, $arguments) {
+        if ($bean->contract_specification != $bean->fetched_row['contract_specification']) {
+            // Fetch all the contract specification linked to this contract and delete those.
+            // We are going to add the new ones
+            // Delete the relationship link between contract specification and contract
+            if ($bean->load_relationship('contracts_contract_specification_1')) {
+                // Hard delete the records.
+                $contractSpecificationBeans = $bean->contracts_contract_specification_1->getBeans();
+                foreach ($contractSpecificationBeans as $contractSpecificationBean) {
+                    $contractSpecificationBean->mark_deleted($contractSpecificationBean->id);
+                    $contractSpecificationBean->save();
+                }
+            }
+
+            // Add the relationship
+            $contract_specification_decoded = json_decode($bean->contract_specification);
+            foreach ($contract_specification_decoded as $key => $contract_specification_obj) {
+                if (!empty($contract_specification_obj->contract_specification_name)) {
+                    $contractSpecificationBean = BeanFactory::newBean('contract_specification');
+                    $contractSpecificationBean->new_with_id = true;
+                    $contractSpecificationBean->name = $contract_specification_obj->contract_specification_name;
+//                    $contractSpecificationBean->text_name = $contract_specification_obj->contract_specification_text_name;
+                    $contractSpecificationBean->text_details = $contract_specification_obj->contract_specification_text_details;
+                    $contractSpecificationBean->contracts_contract_specification_1contracts_ida = $bean->id;
+                    $contractSpecificationBean->assigned_user_id = $GLOBALS['current_user']->id;
+                    $contractSpecificationBean->save();
+                }
+            }
+        }
     }
 
 }

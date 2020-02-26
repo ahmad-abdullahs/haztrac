@@ -4,14 +4,14 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
+    initialize: function (options) {
         this._super('initialize', [options]);
     },
 
     /**
      * @inheritdoc
      */
-    heldActivity: function(model) {
+    heldActivity: function (model) {
         var self = this;
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
         var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
@@ -26,7 +26,7 @@
         app.alert.show('close_activity_confirmation:' + model.get('id'), {
             level: 'confirmation',
             messages: app.utils.formatString(app.lang.get('LBL_PLANNED_ACTIVITIES_DASHLET_CONFIRM_CLOSE'), [context]),
-            onConfirm: function() {
+            onConfirm: function () {
                 model.save(statusToSet, {
                     showAlerts: true,
                     success: self._getRemoveModelCompleteCallback()
@@ -38,15 +38,24 @@
     /**
      * @inheritdoc
      */
-    refreshTabsForModule: function(module) {
+    refreshTabsForModule: function (module) {
         this.loadDataForTabs(this.tabs, {});
     },
 
     /**
      * @inheritdoc
      */
-    _renderHtml: function() {
+    _renderHtml: function () {
         this._super('_renderHtml');
+
+        this.$el.children().find('div.tab-content').css({
+            height: '140px'
+        });
+
+        if (this.meta.config) {
+            this._super('_renderHtml');
+            return;
+        }
 
         var tab = this.tabs[this.settings.get('activeTab')];
         if (_.isEmpty(tab.invitation_actions)) {

@@ -122,6 +122,7 @@ SQL;
                     $compositionBean->max = $composition_obj->composition_max;
                     $compositionBean->uom = $composition_obj->composition_uom;
                     $compositionBean->waste_comp1299_module_ida = $bean->id;
+                    $compositionBean->assigned_user_id = $GLOBALS['current_user']->id;
                     $compositionBean->save();
                 }
             }
@@ -158,6 +159,7 @@ SQL;
                     $constituentBean->name = $constituent_obj->{$additionalParam['name'] . '_' . $additionalParam['primary_field']} . " (" . $additionalParam['type'] . ") " . $bean->waste_profile_num_c;
                     $constituentBean->type = $additionalParam['type'];
                     $constituentBean->waste_cons93c5_module_ida = $bean->id;
+                    $constituentBean->assigned_user_id = $GLOBALS['current_user']->id;
                     $constituentBean->save();
                 }
             }

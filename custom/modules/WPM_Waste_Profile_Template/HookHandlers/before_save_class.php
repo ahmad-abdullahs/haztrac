@@ -98,6 +98,7 @@ class before_save_class {
                     $compositionBean->max = $composition_obj->composition_max;
                     $compositionBean->uom = $composition_obj->composition_uom;
                     $compositionBean->wpm_waste_90faemplate_ida = $bean->id;
+                    $compositionBean->assigned_user_id = $GLOBALS['current_user']->id;
                     $compositionBean->save();
                 }
             }
@@ -134,6 +135,7 @@ class before_save_class {
                     $constituentBean->name = $constituent_obj->{$additionalParam['name'] . '_' . $additionalParam['primary_field']} . " (" . $additionalParam['type'] . ") " . $bean->waste_profile_num_c;
                     $constituentBean->type = $additionalParam['type'];
                     $constituentBean->wpm_waste_73d2emplate_ida = $bean->id;
+                    $constituentBean->assigned_user_id = $GLOBALS['current_user']->id;
                     $constituentBean->save();
                 }
             }

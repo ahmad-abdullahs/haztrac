@@ -32,4 +32,12 @@
 
         return filters;
     },
+
+    _renderHtml: function () {
+        this._super('_renderHtml');
+
+        this.$el.children().find('div.tab-content').css({
+            height: '140px'
+        });
+    },
 })
