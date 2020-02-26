@@ -25,25 +25,32 @@ array (
               ),
               1 => 
               array (
+                'name' => 'module_type_c',
+                'label' => 'LBL_MODULE_TYPE',
+                'enabled' => true,
+                'default' => true,
+              ),
+              2 => 
+              array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO_NAME',
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'date_entered',
                 'enabled' => true,
                 'default' => true,
               ),
-              3 => 
+              4 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => true,
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'description',
                 'label' => 'LBL_DESCRIPTION',
@@ -51,12 +58,19 @@ array (
                 'sortable' => false,
                 'default' => false,
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
                 'default' => false,
                 'enabled' => true,
+              ),
+              7 => 
+              array (
+                'name' => 'tag',
+                'label' => 'LBL_TAGS',
+                'enabled' => true,
+                'default' => false,
               ),
             ),
           ),
