@@ -81,7 +81,8 @@
         var cssClasses;
 
         if (this.type == 'subpanel-list') {
-            if (this.context.parent.get('module') == 'RevenueLineItems' && this.module == 'RevenueLineItems') {
+            if ((this.context.parent.get('module') == 'RevenueLineItems' || this.context.parent.get('module') == 'Accounts')
+                    && this.module == 'RevenueLineItems') {
                 sortableItems = this.$('tbody');
                 if (sortableItems.length) {
                     _.each(sortableItems, function (sortableItem) {
@@ -146,7 +147,11 @@
         _.each(this.$('tbody > tr'), function (tr) {
             var name = $(tr).attr('name').split('_');
             var id = name[1];
-            this.collection.get(id).set('line_number', lineNumber).save();
+            if (this.context.parent.get('module') == 'Accounts') {
+                this.collection.get(id).set('account_line_number', lineNumber).save();
+            } else if (this.context.parent.get('module') == 'RevenueLineItems') {
+                this.collection.get(id).set('line_number', lineNumber).save();
+            }
             lineNumber++;
         }, this);
     },

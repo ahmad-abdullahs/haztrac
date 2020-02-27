@@ -71,6 +71,7 @@
                     },
                 }];
             options.params.view = 'related-account-revenuelineitems';
+            options.params.order_by = 'account_line_number:asc';
 
             return SUGAR.App.api.records(
                     method,

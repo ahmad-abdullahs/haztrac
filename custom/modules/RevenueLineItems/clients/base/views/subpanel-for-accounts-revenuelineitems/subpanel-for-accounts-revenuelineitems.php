@@ -107,6 +107,10 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
     'selection' =>
     array(
     ),
+    'orderBy' => array(
+        'field' => 'account_line_number',
+        'direction' => 'asc',
+    ),
 //    'rowactions' =>
 //    array(
 //        'css_class' => 'pull-right',

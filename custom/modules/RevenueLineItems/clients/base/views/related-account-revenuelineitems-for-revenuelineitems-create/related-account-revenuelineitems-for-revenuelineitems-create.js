@@ -14,7 +14,8 @@
         this.viewName = this.thisViewName;
 
         options = _.extend({}, {module: 'RevenueLineItems'}, options || {});
-        this.parentModel = options.context.parent.parent.get('model');
+        this.parentModel = !_.isEmpty(options.context.parent.parent.get('model').get('id'))
+                ? options.context.parent.parent.get('model') : options.context.get('parentModel').link.bean;
 
         // If we enable the super call it will take the view to list view.
         // this._super('initialize', [options]);
@@ -70,6 +71,7 @@
                         },
                     }];
                 options.params.view = this.thisViewName;
+                options.params.order_by = 'account_line_number:asc';
 
                 return SUGAR.App.api.records(
                         method,
