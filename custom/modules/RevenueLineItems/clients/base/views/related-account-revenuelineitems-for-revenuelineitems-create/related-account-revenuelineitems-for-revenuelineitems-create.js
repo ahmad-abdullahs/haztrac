@@ -14,8 +14,12 @@
         this.viewName = this.thisViewName;
 
         options = _.extend({}, {module: 'RevenueLineItems'}, options || {});
-        this.parentModel = !_.isEmpty(options.context.parent.parent.get('model').get('id'))
-                ? options.context.parent.parent.get('model') : options.context.get('parentModel').link.bean;
+        if (options.context.get('parentModel').link) {
+            this.parentModel = !_.isEmpty(options.context.parent.parent.get('model').get('id'))
+                    ? options.context.parent.parent.get('model') : options.context.get('parentModel').link.bean;
+        } else {
+            this.parentModel = options.context.parent.parent.get('model');
+        }
 
         // If we enable the super call it will take the view to list view.
         // this._super('initialize', [options]);
