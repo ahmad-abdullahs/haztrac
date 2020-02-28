@@ -148,7 +148,8 @@ $viewdefs['Tasks'] = array(
                                 'dismiss_label' => true,
                                 'readonly' => true,
                             ),
-                            1 => array(
+                            1 =>
+                            array(
                                 'name' => 'name',
                                 'related_fields' =>
                                 array(
@@ -179,6 +180,8 @@ $viewdefs['Tasks'] = array(
                         'columns' => 2,
                         'labelsOnTop' => true,
                         'placeholders' => true,
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
                         'fields' =>
                         array(
                             0 => 'date_start',
@@ -207,6 +210,8 @@ $viewdefs['Tasks'] = array(
                         'columns' => 2,
                         'labelsOnTop' => true,
                         'placeholders' => 1,
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
                         'fields' =>
                         array(
                             0 =>
@@ -273,6 +278,96 @@ $viewdefs['Tasks'] = array(
                             ),
                         ),
                     ),
+                    3 =>
+                    array(
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL1',
+                        'label' => 'LBL_RECORDVIEW_PANEL1',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'audit',
+                                'label' => 'Audit',
+                                'type' => 'audit-list-field',
+                                'relatedModule' => 'Tasks',
+                                'readonly' => true,
+                                'columns' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'type' => 'field-name',
+                                        'name' => 'field_name',
+                                        'label' => 'Field',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'before',
+                                        'label' => 'Old Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'after',
+                                        'label' => 'New Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    3 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'created_by_username',
+                                        'label' => 'Changed By',
+                                        'sortable' => true,
+                                        'width' => '10%',
+                                    ),
+                                    4 =>
+                                    array(
+                                        'type' => 'source',
+                                        'name' => 'source',
+                                        'label' => 'Source',
+                                        'sortable' => false,
+                                        'width' => '10%',
+                                        'module' => 'Users',
+                                        'link' => true,
+                                    ),
+                                    5 =>
+                                    array(
+                                        'type' => 'datetimecombo',
+                                        'name' => 'date_created',
+                                        'label' => 'Change Date',
+                                        'options' => 'date_range_search_dom',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                ),
+                                'relatedFields' =>
+                                array(
+                                ),
+                                'allowedFieldList' =>
+                                array(
+//                                    0 => 'discount_price',
+//                                    1 => 'list_price',
+//                                    2 => 'cost_price',
+//                                    3 => 'product_list_name_c',
+                                ),
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
+                ),
+                'templateMeta' =>
+                array(
+                    'useTabs' => true,
                 ),
             ),
         ),

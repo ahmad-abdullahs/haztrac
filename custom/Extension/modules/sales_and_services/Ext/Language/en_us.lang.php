@@ -116,3 +116,4 @@ $mod_strings['LBL_SERVICE_SITE_ADDRESS_POSTALCODE'] = 'Service Site PostalCode';
 $mod_strings['LBL_SERVICE_SITE_ADDRESS_COUNTRY'] = 'Service Site Country';
 $mod_strings['LBL_SERVICE_SITE_NAME'] = 'Service Site Name';
 $mod_strings['LBL_TSDF_AC_USEPA_ID_C'] = 'EPA ID (Ship To / TSDF)';
+$mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Audit';

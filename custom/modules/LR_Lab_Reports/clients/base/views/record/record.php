@@ -145,7 +145,8 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'height' => 42,
                                 'dismiss_label' => true,
                             ),
-                            1 => array(
+                            1 =>
+                            array(
                                 'name' => 'document_name',
                                 'related_fields' =>
                                 array(
@@ -172,6 +173,19 @@ $viewdefs['LR_Lab_Reports'] = array(
                     ),
                     1 =>
                     array(
+                        'newTab' => true,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'LBL_RECORDVIEW_PANEL0',
+                        'label' => 'LBL_RECORDVIEW_PANEL0',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                        ),
+                    ),
+                    2 =>
+                    array(
                         'newTab' => false,
                         'panelDefault' => 'collapsed',
                         'name' => 'LBL_RECORDVIEW_PANEL1',
@@ -189,7 +203,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    2 =>
+                    3 =>
                     array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
@@ -302,7 +316,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -343,7 +357,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -392,7 +406,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -477,10 +491,96 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
+                    7 =>
+                    array(
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL6',
+                        'label' => 'LBL_RECORDVIEW_PANEL6',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'audit',
+                                'label' => 'Audit',
+                                'type' => 'audit-list-field',
+                                'relatedModule' => 'LR_Lab_Reports',
+                                'readonly' => true,
+                                'columns' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'type' => 'field-name',
+                                        'name' => 'field_name',
+                                        'label' => 'Field',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'before',
+                                        'label' => 'Old Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'after',
+                                        'label' => 'New Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    3 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'created_by_username',
+                                        'label' => 'Changed By',
+                                        'sortable' => true,
+                                        'width' => '10%',
+                                    ),
+                                    4 =>
+                                    array(
+                                        'type' => 'source',
+                                        'name' => 'source',
+                                        'label' => 'Source',
+                                        'sortable' => false,
+                                        'width' => '10%',
+                                        'module' => 'Users',
+                                        'link' => true,
+                                    ),
+                                    5 =>
+                                    array(
+                                        'type' => 'datetimecombo',
+                                        'name' => 'date_created',
+                                        'label' => 'Change Date',
+                                        'options' => 'date_range_search_dom',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                ),
+                                'relatedFields' =>
+                                array(
+                                ),
+                                'allowedFieldList' =>
+                                array(
+//                                    0 => 'discount_price',
+//                                    1 => 'list_price',
+//                                    2 => 'cost_price',
+//                                    3 => 'product_list_name_c',
+                                ),
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
                 ),
                 'templateMeta' =>
                 array(
-                    'useTabs' => false,
+                    'useTabs' => true,
                 ),
             ),
         ),

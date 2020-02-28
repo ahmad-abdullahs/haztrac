@@ -151,3 +151,4 @@ $mod_strings['LBL_PROFILE_EXPIRATION_DATE'] = 'Profile Expiration Date';
 $mod_strings['LBL_RECORDVIEW_PANEL11'] = 'Review &amp; Acceptance';
 $mod_strings['LBL_PROFILE_PREVIEW'] = 'Profile Preview';
 $mod_strings['LBL_RECORDVIEW_PANEL12'] = 'Profile Preview';
+$mod_strings['LBL_RECORDVIEW_PANEL0'] = 'Profile';

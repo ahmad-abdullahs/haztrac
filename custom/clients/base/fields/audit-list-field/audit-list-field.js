@@ -27,8 +27,8 @@
     initialize: function (options) {
         this._super('initialize', [options]);
 
-        this.baseModule = app.controller.context.get('module');
-        this.baseRecord = app.controller.context.get('modelId');
+        this.baseModule = app.controller.context.get('module') || this.options.model.get('_module');
+        this.baseRecord = app.controller.context.get('modelId') || this.options.model.get('id');
         this._initCollection();
 
         this.columns = this.def.columns;
@@ -74,16 +74,20 @@
                     self._applyModelDataOnRecords(app.controller.context.get('model'), data.records);
 
                     for (var i in data.records) {
-                        if (_.contains(self.allowedFieldList, data.records[i].field_name)) {
-                            var model = app.data.createBean(this.subpanelModule, data.records[i]);
-                            model.template = "list";
+                        var model = app.data.createBean(this.subpanelModule, data.records[i]);
+                        model.template = "list";
 
-                            if (_.contains(['discount_price', 'list_price', 'cost_price'], model.get('field_name')) && model.get('data_type') == 'currency') {
-                                model.set('before', app.currency.formatAmountLocale(model.get('before') || 0, '-99'));
-                                model.set('after', app.currency.formatAmountLocale(model.get('after') || 0, '-99'));
+                        if (_.contains(['discount_price', 'list_price', 'cost_price'], model.get('field_name')) && model.get('data_type') == 'currency') {
+                            model.set('before', app.currency.formatAmountLocale(model.get('before') || 0, '-99'));
+                            model.set('after', app.currency.formatAmountLocale(model.get('after') || 0, '-99'));
+                        }
+
+                        if (!_.isEmpty(self.allowedFieldList) && !_.isUndefined(self.allowedFieldList) && !_.isNull(self.allowedFieldList)) {
+                            if (_.contains(self.allowedFieldList, data.records[i].field_name)) {
+                                self.filteredCollection.add(model);
                             }
-
-                            self.filteredCollection.add(model);                
+                        } else {
+                            self.filteredCollection.add(model);
                         }
                     }
 

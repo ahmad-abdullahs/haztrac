@@ -182,6 +182,19 @@ $viewdefs[$module_name] = array(
                     ),
                     1 =>
                     array(
+                        'newTab' => true,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'LBL_RECORDVIEW_PANEL0',
+                        'label' => 'LBL_RECORDVIEW_PANEL0',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                        ),
+                    ),
+                    2 =>
+                    array(
                         'newTab' => false,
                         'panelDefault' => 'collapsed',
                         'name' => 'LBL_RECORDVIEW_PANEL12',
@@ -199,7 +212,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    2 =>
+                    3 =>
                     array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
@@ -258,7 +271,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -316,7 +329,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_SHOW_MORE',
@@ -474,7 +487,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -493,7 +506,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    6 =>
+                    7 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -793,7 +806,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    7 =>
+                    8 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -1698,7 +1711,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    8 =>
+                    9 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -1729,7 +1742,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    9 =>
+                    10 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -1839,7 +1852,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    10 =>
+                    11 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -1860,7 +1873,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    11 =>
+                    12 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -1878,7 +1891,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    12 =>
+                    13 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -1935,9 +1948,9 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    13 =>
+                    14 =>
                     array(
-                        'newTab' => false,
+                        'newTab' => true,
                         'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL7',
                         'label' => 'LBL_RECORDVIEW_PANEL7',
@@ -1948,19 +1961,86 @@ $viewdefs[$module_name] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'audit',
+                                'label' => 'Audit',
+                                'type' => 'audit-list-field',
+                                'relatedModule' => 'WPM_Waste_Profile_Module',
+                                'readonly' => true,
+                                'columns' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'type' => 'field-name',
+                                        'name' => 'field_name',
+                                        'label' => 'Field',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'before',
+                                        'label' => 'Old Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'after',
+                                        'label' => 'New Value',
+                                        'sortable' => false,
+                                        'width' => '20%',
+                                    ),
+                                    3 =>
+                                    array(
+                                        'type' => 'base',
+                                        'name' => 'created_by_username',
+                                        'label' => 'Changed By',
+                                        'sortable' => true,
+                                        'width' => '10%',
+                                    ),
+                                    4 =>
+                                    array(
+                                        'type' => 'source',
+                                        'name' => 'source',
+                                        'label' => 'Source',
+                                        'sortable' => false,
+                                        'width' => '10%',
+                                        'module' => 'Users',
+                                        'link' => true,
+                                    ),
+                                    5 =>
+                                    array(
+                                        'type' => 'datetimecombo',
+                                        'name' => 'date_created',
+                                        'label' => 'Change Date',
+                                        'options' => 'date_range_search_dom',
+                                        'sortable' => true,
+                                        'width' => '20%',
+                                    ),
+                                ),
+                                'relatedFields' =>
+                                array(
+                                ),
+                                'allowedFieldList' =>
+                                array(
+//                                    0 => 'discount_price',
+//                                    1 => 'list_price',
+//                                    2 => 'cost_price',
+//                                    3 => 'product_list_name_c',
+                                ),
+                                'span' => 12,
                             ),
-                            1 =>
-                            array(
-                            ),
-                            2 => 'assigned_user_name',
-                            3 => 'team_name',
-                            4 =>
+                            1 => 'assigned_user_name',
+                            2 => 'team_name',
+                            3 =>
                             array(
                                 'name' => 'created_by_name',
                                 'readonly' => true,
                                 'label' => 'LBL_CREATED',
                             ),
-                            5 =>
+                            4 =>
                             array(
                                 'name' => 'date_entered',
                                 'comment' => 'Date record created',
@@ -1971,7 +2051,7 @@ $viewdefs[$module_name] = array(
                                 'readonly' => true,
                                 'label' => 'LBL_DATE_ENTERED',
                             ),
-                            6 =>
+                            5 =>
                             array(
                                 'name' => 'date_modified',
                                 'comment' => 'Date record last modified',
@@ -1981,13 +2061,6 @@ $viewdefs[$module_name] = array(
                                 ),
                                 'readonly' => true,
                                 'label' => 'LBL_DATE_MODIFIED',
-                            ),
-                            7 =>
-                            array(
-                            ),
-                            8 =>
-                            array(
-                                'span' => 12,
                             ),
                         ),
                     ),
