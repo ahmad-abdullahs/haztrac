@@ -397,9 +397,9 @@
     },
 
     copyRlisInSubpanelCreate: function () {
-        if (!_.isUndefined(this.context.parent.parent) && !_.isNull(this.context.parent.parent)) {
-            if (this.context.parent.parent.get('model')) {
-                var _tempModels = _.clone(this.context.parent.parent.get('model')._relatedCollections.sales_and_services_revenuelineitems_1.models);
+        if (!_.isUndefined(this.options.context.parent) && !_.isNull(this.options.context.parent)) {
+            if (this.options.context.parent.get('_relatedCollections')) {
+                var _tempModels = _.clone(this.options.context.parent.get('_relatedCollections').sales_and_services_revenuelineitems_1.models);
                 _tempModels = _tempModels.reverse();
                 _.each(_tempModels, function (model, key) {
                     if (model.get('is_bundle_product_c') != 'child')

@@ -157,7 +157,13 @@ $viewdefs['Cases'] = array(
                                 'dismiss_label' => true,
                                 'readonly' => true,
                             ),
-                            1 => 'name',
+                            1 => array(
+                                'name' => 'name',
+                                'related_fields' =>
+                                array(
+                                    0 => 'commentlog',
+                                ),
+                            ),
                             2 =>
                             array(
                                 'name' => 'favorite',
@@ -234,12 +240,6 @@ $viewdefs['Cases'] = array(
                         'fields' =>
                         array(
                             0 =>
-                            array(
-                                'name' => 'commentlog',
-                                'label' => 'LBL_COMMENTLOG',
-                                'span' => 12,
-                            ),
-                            1 =>
                             array(
                                 'name' => 'resolution',
                                 'nl2br' => true,

@@ -31,6 +31,7 @@
                 model: prefill,
                 copiedFromModelId: this.model.get('id'),
                 copyFeature: true,
+                _relatedCollections: _.clone(this.model._relatedCollections),
             }
         }, function (context, newModel) {
             if (newModel && newModel.id) {

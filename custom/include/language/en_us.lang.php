@@ -1,6 +1,6 @@
 <?php
 
-$app_strings['LBL_DASHLET_COMMENT_LOG_NAME'] = 'Record Comments Dashlet';
+$app_strings['LBL_DASHLET_COMMENT_LOG_NAME'] = 'Comments / Event Tracking';
 $app_strings['LBL_DASHLET_COMMENT_LOG_DESC'] = 'This dashlet show the related record comments in ascending order. (Latest comment will be at the top)';
 $app_strings['LBL_DASHLET_COMMENT_LOG_NO_DATA'] = 'This record has no comment at this time. Please add comments by clicking on the submit comment button.';
 $app_strings['LBL_DASHLET_COMMENT_LOG_ENABLE_FOR_MODULE'] = 'Enable comments for this module.';
