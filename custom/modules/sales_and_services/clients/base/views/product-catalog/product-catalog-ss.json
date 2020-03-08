@@ -4,16 +4,16 @@
             "frame": {  
                 "x": 1,
                 "y": 34,
-                "w": 22,
-                "h": 18
+                "w": 13,
+                "h": 16
             },
             "rotated": false,
             "trimmed": true,
             "spriteSourceSize": {  
                 "x": 4,
                 "y": 6,
-                "w": 22,
-                "h": 18
+                "w": 13,
+                "h": 16
             },
             "sourceSize": {  
                 "w": 32,
@@ -22,7 +22,7 @@
         },
         "file-archive": {  
             "frame": {  
-                "x": 35,
+                "x": 36,
                 "y": 30,
                 "w": 32,
                 "h": 27
@@ -38,6 +38,26 @@
             "sourceSize": {  
                 "w": 32,
                 "h": 32
+            }
+        },
+        "file-paperclip": {  
+            "frame": {  
+                "x": 14,
+                "y": 34,
+                "w": 22,
+                "h": 27
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {  
+                "x": 0,
+                "y": 0,
+                "w": 22,
+                "h": 27
+            },
+            "sourceSize": {  
+                "w": 22,
+                "h": 27
             }
         },
         "folder-open-o": {

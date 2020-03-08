@@ -26,8 +26,8 @@ It will be called for the number of records in the list view or in subpanel
                 </td>
             {{/each}}
             {{#each ../_fields.visible}}
-                <td{{#if align}} class="{{align}} {{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}">
-                    {{#eq @index 0}}{{#eq ../../attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{!--{{#if ../../attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>{{/if}}--}}{{/eq}}
+                <td {{#if align}} class="{{align}} {{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}">
+                    {{#eq @index 0}}{{#if ../../attributes.is_group_item_c}}<i class="color-black fa fa-paperclip"></i>{{else}}{{#eq ../../../attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{/if}}{{!--{{#if ../../attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>{{/if}}--}}{{/eq}}
                     {{field ../../this model=../this template=../../viewName}}
                 </td>
             {{/each}}
@@ -46,8 +46,8 @@ It will be called for the number of records in the list view or in subpanel
             </td>
         {{/each}}
         {{#each view._fields.visible}}
-            <td{{#if align}} class="{{align}} {{../../model.attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../model.attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../model.attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../model.attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}">
-                {{#eq @index 0}}{{#eq ../../model.attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{!--{{#if ../../model.attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>{{/if}}--}}{{/eq}}
+            <td {{#if align}} class="{{align}} {{../../model.attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../model.attributes._branchUptoTab}}{{/eq}}" {{else}} class="{{../../model.attributes._backgroundColorClass}} {{#eq @index 0}}{{../../../model.attributes._branchUptoTab}}{{/eq}}"{{/if}} data-type="{{type}}">
+                {{#eq @index 0}}{{#if ../../model.attributes.is_group_item_c}}<i class="color-black fa fa-paperclip"></i>{{else}}{{#eq ../../../model.attributes.is_bundle_product_c "parent"}}<i class="fa fa-briefcase"></i>{{/eq}}{{/if}}{{!--{{#if ../../model.attributes.rli_as_template_c}}<i class=""> </i><i class="fa fa-recycle"></i>{{/if}}--}}{{/eq}}
                 {{field ../view model=../model template=../view.viewName}}
             </td>
         {{/each}}

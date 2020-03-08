@@ -94,6 +94,7 @@ $viewdefs['ProductTemplates'] = array(
                                     69 => 'worst_case',
                                     70 => 'line_number',
                                     71 => 'mft_part_num',
+                                    72 => 'is_group_item_c',
                                         ), getViewFields('recordview', 'ProductTemplates')),
                             ),
                             1 =>

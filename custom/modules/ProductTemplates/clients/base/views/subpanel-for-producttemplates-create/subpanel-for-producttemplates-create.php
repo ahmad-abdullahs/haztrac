@@ -99,6 +99,7 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                         "product_templates_product_templates_1_right",
                         "product_templates_product_templates_1product_templates_ida",
                         "is_bundle_product_c",
+                        "is_group_item_c",
                         "epa_code_1_c",
                         "epa_code_2_c",
                         "epa_code_3_c",

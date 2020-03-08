@@ -13,9 +13,6 @@
  * @alias SUGAR.App.view.views.QuotesProductCatalogView
  * @extends View.View
  */
-// This view is used for showing up the dashlet on right side of the drawer for bundled tree.
-// While creating the sales and services you see this bundled dashlet.
-// @see screenshots 3.png
 ({
     plugins: ['CanvasDataRenderer'],
 
@@ -97,6 +94,8 @@
      * @inheritdoc
      */
     initialize: function (options) {
+        khan = this;
+        console.log('I am here....');
         this._super('initialize', [options]);
 
         this.activeFetchCt = 0;
@@ -245,7 +244,7 @@
     },
 
     /**
-     * Handles the ProductTemplates/tree endpoint response
+     * Handles the ProductTemplates/bundledtree endpoint response
      * and parses data to be used by the tree
      *
      * @param response
@@ -338,8 +337,8 @@
     _getSpriteSheets: function () {
         return [{
                 id: 'prodCatTS',
-                imagePath: 'custom/modules/sales_and_services/clients/base/views/product-catalog/product-catalog-ss.png',
-                dataPath: 'custom/modules/sales_and_services/clients/base/views/product-catalog/product-catalog-ss.json'
+                imagePath: 'custom/modules/ProductTemplates/clients/base/views/product-catalog/product-catalog-ss.png',
+                dataPath: 'custom/modules/ProductTemplates/clients/base/views/product-catalog/product-catalog-ss.json'
             }];
     },
 
@@ -553,6 +552,7 @@
     getUserDateTimeFormat: function () {
         return app.user.getPreference('datepref') + ' ' + app.user.getPreference('timepref');
     },
+
     /**
      * @param {Function} _render
      * @Description : This function is override to set default date to next month (same day and time) for start date
@@ -570,143 +570,118 @@
      * @protected
      */
     _onTreeNodeNameClicked: function (target) {
-        this._fetchRecord(target._itemId, {
-            success: _.bind(function (data) {
-                var _id = _.clone(data.id);
-                this._massageDataBeforeSendingToRecord(data);
-                var _self = this;
+        // If this is the Group product template then do this... otherwise else part
+        if (this.model.get('is_group_item_c')) {
+            this._fetchRecord(target._itemId, {
+                success: _.bind(function (data) {
+                    if (data.is_bundle_product_c == 'parent' && data.is_group_item_c == true) {
+                        var message = 'Group item cannot be added in Group, It is only used in Accounts/Customer module.';
+                        app.alert.show('add-item-warning', {
+                            level: 'warning',
+                            messages: message,
+                            closeable: true,
+                            autoClose: true,
+                            autoCloseDelay: 5000,
+                        });
+                        return;
+                    }
 
-                if (data.is_group_item_c == true && (_.contains(['sales_and_services', 'Opportunities'], _self.options.context.parent.get('module')))) {
-                    var message = 'Group item can only be used in Accounts/Customer module.';
-                    app.alert.show('add-item-warning', {
-                        level: 'warning',
-                        messages: message,
-                        closeable: true,
-                        autoClose: true,
-                        autoCloseDelay: 5000,
-                    });
-                    return;
-                }
+                    var _id = _.clone(data.id);
+                    this._massageDataBeforeSendingToRecord(data);
+                    var _self = this;
 
-                if (data.is_bundle_product_c == 'parent') {
-                    // Set expected close date of next month...
-                    data.date_closed = (this.getExpectedCloseDate()).substring(0, 10);
-                }
+                    if (data.is_bundle_product_c == 'parent') {
+                        // Set expected close date of next month...
+                        data.date_closed = (this.getExpectedCloseDate()).substring(0, 10);
+                    }
 
-                // Here is the field mapping to map the product template field to revenue line item
-                // Now we are using the same fields product_uom_c on both side so code is commented.
+                    // Here is the field mapping to map the product template field to revenue line item
+                    // Now we are using the same fields product_uom_c on both side so code is commented.
 //                data.unit_of_measure_c = data.product_uom_c;
 
-                var viewDetails = this.closestComponent('record') ?
-                        this.closestComponent('record') :
-                        this.closestComponent('create');
-                var relationshipRequired = true, order = 'asc';
-                // need to trigger on app.controller.context because of contexts changing between
-                // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
-                // app.controller.context is the only consistent context to use
-                if (!_.isUndefined(viewDetails)) {
-                    if (data.is_group_item_c != true) {
+                    var viewDetails = this.closestComponent('record') ?
+                            this.closestComponent('record') :
+                            this.closestComponent('create');
+                    // need to trigger on app.controller.context because of contexts changing between
+                    // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+                    // app.controller.context is the only consistent context to use
+                    if (!_.isUndefined(viewDetails)) {
                         app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
-                    } else {
-                        // When the parent group item is clicked, in that case we will not add that parent item
-                        // in the subpanel create list, but the child items will be added.
-                        // So we are only adding child items not the parent item so relationship between parent
-                        // child is not required.
-                        relationshipRequired = false;
-                        order = 'desc';
                     }
-                }
 
-                if (data.is_bundle_product_c == 'parent') {
-                    var productTemplates = App.data.createBean('ProductTemplates', {id: _id});
-                    productTemplates.fetch();
-                    var productTemplatesRelatedColl = productTemplates.getRelatedCollection('product_templates_product_templates_1');
-                    productTemplatesRelatedColl = productTemplatesRelatedColl.fetch({
-                        view: 'list',
-                        relate: true,
-                        limit: -1,
-                        // Fetched in descending order because when the items are added in the subpanel-for-rli-create
-                        // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
-                        params: {
-                            order_by: "line_number:" + order,
-                        },
-                        success: function (coll) {
-                            var bundleChildToParentObj = {};
-                            if (data.is_group_item_c == true) {
-                                bundleChildToParentObj = _self.getGroupBundlesChildToParentObj(coll, _id);
-                            }
+                    if (data.is_bundle_product_c == 'parent') {
+                        var productTemplates = App.data.createBean('ProductTemplates', {id: _id});
+                        productTemplates.fetch();
+                        var productTemplatesRelatedColl = productTemplates.getRelatedCollection('product_templates_product_templates_1');
+                        productTemplatesRelatedColl = productTemplatesRelatedColl.fetch({
+                            relate: true,
+                            limit: -1,
+                            // Fetched in descending order because when the items are added in the subpanel-for-rli-create
+                            // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
+                            params: {
+                                order_by: "line_number:asc",
+                            },
+                            success: function (coll) {
+                                _.each(coll.models, function (model) {
+                                    _self._massageDataBeforeSendingToRecord(model.attributes);
 
-                            _.each(coll.models, function (model, key) {
-                                var __id = _.clone(model.attributes.id);
-                                _self._massageDataBeforeSendingToRecord(model.attributes);
-                                if (data.is_group_item_c == true && !_.isEmpty(bundleChildToParentObj)) {
-                                    model.attributes.id = __id;
-                                }
-
-                                var viewDetails = _self.closestComponent('record') ?
-                                        _self.closestComponent('record') :
-                                        _self.closestComponent('create');
-                                // need to trigger on app.controller.context because of contexts changing between
-                                // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
-                                // app.controller.context is the only consistent context to use
-                                if (!_.isUndefined(viewDetails)) {
-                                    if (relationshipRequired) {
+                                    var viewDetails = _self.closestComponent('record') ?
+                                            _self.closestComponent('record') :
+                                            _self.closestComponent('create');
+                                    // need to trigger on app.controller.context because of contexts changing between
+                                    // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+                                    // app.controller.context is the only consistent context to use
+                                    if (!_.isUndefined(viewDetails)) {
                                         // To add the relationship between the revenuelineitems
-                                        model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
-                                    } else if (bundleChildToParentObj[__id]) {
-                                        model.attributes.idPersonallyAssigned = true;
-                                        model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = bundleChildToParentObj[__id];
-                                    } else {
-                                        // Since no relationship is required, we are going to empty out the is_bundle_product_c attribute
-                                        // which was set to child.
-                                        if (model.attributes.is_bundle_product_c == 'child')
-                                            model.attributes.is_bundle_product_c = '';
-                                        else if (model.attributes.is_bundle_product_c == 'parent')
-                                            model.attributes.idPersonallyAssigned = true;
+                                        model.attributes.product_templates_product_templates_1 = data.id;
+                                        app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                     }
-                                    app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
-                                }
-                            })
-                        }
-                    })
-                }
+                                })
+                            }
+                        })
+                    }
 
-            }, this)
-        });
-    },
-
-    getGroupBundlesChildToParentObj: function (coll, groupId) {
-        var bundleChildToParentObj = {};
-        var idsOldToNewMappingObj = {};
-        // This loop will extract the bundle and its childs from the group, standalone items will be ignored.
-        // bundle and child both will be alotted the new ids...
-        _.each(coll.models, function (model, key) {
-            var itemOldValue = model.get('id');
-            model.set('id', app.utils.generateUUID(), {silent: true});
-            var childId = model.get('id');
-            var itemNewValue = childId;
-            var parentId = '';
-
-            // Mapping of old and new value...
-            idsOldToNewMappingObj[itemOldValue] = itemNewValue;
-
-            _.each(model.get('product_templates_product_templates_1_right').records, function (parent, _key) {
-                if (parent.id != groupId) {
-                    parentId = parent.id;
-                }
+                }, this)
             });
+        } else {
+            this._fetchRecord(target._itemId, {
+                success: _.bind(function (data) {
+                    // Since it is not a group, then user is not able to add a bundle in the subpanel create list
+                    // Check if the clicked item in the drawer is a bundle or a group show message to the user.
+                    var message = '', showWarning = false;
+                    if (data.is_bundle_product_c == 'parent') {
+                        message = 'Bundle will not be added in Non Group item.';
+                        showWarning = true;
+                    }
+                    if (data.is_bundle_product_c == 'parent' && data.is_group_item_c == true) {
+                        message = 'Group item cannot be added in Group, It is only used in Accounts/Customer module.';
+                        showWarning = true;
+                    }
 
-            if (!_.isEmpty(parentId)) {
-                bundleChildToParentObj[childId] = parentId;
-            }
-        });
+                    if (showWarning) {
+                        app.alert.show('add-item-warning', {
+                            level: 'warning',
+                            messages: message,
+                            closeable: true,
+                            autoClose: true,
+                            autoCloseDelay: 5000,
+                        });
+                        return;
+                    }
+                    this._massageDataBeforeSendingToRecord(data);
 
-        _.each(bundleChildToParentObj, function (parentId, childId) {
-            // (bundleChildToParentObj[childId] id assigned) = <<idsOldToNewMappingObj[<<bundleChildToParentObj[childId](gives parent old id)>>](gives parent new id)>>;
-            bundleChildToParentObj[childId] = idsOldToNewMappingObj[bundleChildToParentObj[childId]];
-        });
-
-        return bundleChildToParentObj;
+                    var viewDetails = this.closestComponent('record') ?
+                            this.closestComponent('record') :
+                            this.closestComponent('create');
+                    // need to trigger on app.controller.context because of contexts changing between
+                    // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+                    // app.controller.context is the only consistent context to use
+                    if (!_.isUndefined(viewDetails)) {
+                        app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                    }
+                }, this)
+            });
+        }
     },
 
     /**

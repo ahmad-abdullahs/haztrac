@@ -40,6 +40,7 @@ $viewdefs['ProductTemplates']['base']['view']['preview'] = array(
                     'name' => 'name',
                     array(
                         0 => 'is_bundle_product_c',
+                        1 => 'is_group_item_c',
                     ),
                 ),
                 3 =>

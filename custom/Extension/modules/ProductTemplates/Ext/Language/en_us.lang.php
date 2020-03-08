@@ -50,3 +50,4 @@ $mod_strings['LBL_CUSTOMER_CERTIFICATES'] = 'Customer Certificates';
 $mod_strings['LBL_TRANSPORTER_CERTIFICATES'] = 'Transporter Certificates';
 $mod_strings['LBL_CONSIGNEE_CERTIFICATES'] = 'Consignee Certificates';
 $mod_strings['LBL_FED_PERCENTAGE'] = 'FED %';
+$mod_strings['LBL_IS_GROUP_ITEM'] = 'Is Group Item';

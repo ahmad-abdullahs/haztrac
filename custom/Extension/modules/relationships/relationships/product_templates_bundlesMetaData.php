@@ -2,7 +2,7 @@
 
 // created: 2019-08-11 19:09:20
 $dictionary["product_templates_product_templates_1"] = array(
-    'true_relationship_type' => 'one-to-many',
+    'true_relationship_type' => 'many-to-many',
     'from_studio' => true,
     'relationships' =>
     array(

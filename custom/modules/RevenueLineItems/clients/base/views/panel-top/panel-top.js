@@ -14,7 +14,7 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
+    initialize: function (options) {
         var userACLs;
 
         this._super('initialize', [options]);
@@ -39,27 +39,26 @@
      * Refreshes the RevenueLineItems subpanel when a new Opportunity is added
      * @private
      */
-     _reloadOpportunities: function() {
-         var $oppsSubpanel = $('div[data-subpanel-link="opportunities"]');
-         // only reload Opportunities if it is closed & no data exists
-         if ($('li.subpanel', $oppsSubpanel).hasClass('closed')) {
-             if ($('table.dataTable', $oppsSubpanel).length) {
-                 this.context.parent.trigger('subpanel:reload', {links: ['opportunities']});
-             } else {
-                 this.context.parent.trigger('subpanel:reload');
-             }
-         }
-         else {
-             this.context.parent.trigger('subpanel:reload', {links: ['opportunities']});
-         }
-     },
+    _reloadOpportunities: function () {
+        var $oppsSubpanel = $('div[data-subpanel-link="opportunities"]');
+        // only reload Opportunities if it is closed & no data exists
+        if ($('li.subpanel', $oppsSubpanel).hasClass('closed')) {
+            if ($('table.dataTable', $oppsSubpanel).length) {
+                this.context.parent.trigger('subpanel:reload', {links: ['opportunities']});
+            } else {
+                this.context.parent.trigger('subpanel:reload');
+            }
+        } else {
+            this.context.parent.trigger('subpanel:reload', {links: ['opportunities']});
+        }
+    },
 
     /**
      * @inheritdoc
      */
-    bindDataChange: function() {
+    bindDataChange: function () {
         this._super('bindDataChange');
-        this.context.parent.on('subpanel:reload', function(args) {
+        this.context.parent.on('subpanel:reload', function (args) {
             if (!_.isUndefined(args) && _.isArray(args.links) && _.contains(args.links, this.context.get('link'))) {
                 // have to set skipFetch to false so panel.js will toggle this panel open
                 this.context.set('skipFetch', false);
@@ -71,17 +70,48 @@
     /**
      * @inheritdoc
      */
-    createRelatedClicked: function(event) {
+    createRelatedClicked: function (event) {
         // close RLI warning alert
         app.alert.dismiss('opp-rli-create');
 
         this._super('createRelatedClicked', [event]);
     },
 
+    openCreateDrawer: function (module, link) {
+        var groupItemUsageAllowed = false;
+
+        if (this.parentModule == 'Accounts') {
+            groupItemUsageAllowed = true;
+        }
+
+        link = link || this.context.get('link');
+        //FIXME: `this.context` should always be used - SC-2550
+        var context = (this.context.get('name') === 'tabbed-dashlet') ?
+                this.context : (this.context.parent || this.context);
+        var parentModel = context.get('model') || context.parent.get('model'),
+                model = this.createLinkModel(parentModel, link),
+                self = this;
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                module: model.module,
+                model: model,
+                groupItemUsageAllowed: groupItemUsageAllowed,
+            }
+        }, function (context, model) {
+            if (!model) {
+                return;
+            }
+
+            self.trigger('linked-model:create', model);
+        });
+    },
+
     /**
      * Open a new Drawer with the RLI Create Form
      */
-    openRLICreate: function(data) {
+    openRLICreate: function (data) {
         var routerFrags = app.router.getFragment().split('/');
         var parentModel;
         var model;
@@ -118,7 +148,7 @@
      *
      * @param {Data.Bean} model
      */
-    rliCreateClose: function(model) {
+    rliCreateClose: function (model) {
         var rliCtx;
         var ctx;
 
@@ -134,7 +164,7 @@
         // find the child collection for the RLI subpanel
         // if we find one and it has the loadData method, call that method to
         // force the subpanel to load the data.
-        rliCtx = _.find(ctx.children, function(child) {
+        rliCtx = _.find(ctx.children, function (child) {
             return child.get('module') === 'RevenueLineItems';
         }, this);
         if (!_.isUndefined(rliCtx) && _.isFunction(rliCtx.loadData)) {
@@ -145,7 +175,7 @@
     /**
      * @inheritdoc
      */
-    _dispose: function() {
+    _dispose: function () {
         if (app.controller && app.controller.context) {
             app.controller.context.off('productCatalogDashlet:add', null, this);
         }

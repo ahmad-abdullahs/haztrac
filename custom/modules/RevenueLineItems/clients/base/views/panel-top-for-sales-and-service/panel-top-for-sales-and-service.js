@@ -126,6 +126,12 @@
                 model = this.createLinkModel(parentModel, link),
                 self = this;
 
+        var groupItemUsageAllowed = false;
+
+        if (this.parentModule == 'Accounts') {
+            groupItemUsageAllowed = true;
+        }
+
         var parentModule = parentModel.module || parentModel.get("module") || parentModel.get("_module");
         if (parentModule == "sales_and_services") {
             model.set('account_name', parentModel.get('accounts_sales_and_services_1_name'));
@@ -145,7 +151,8 @@
             context: {
                 create: true,
                 module: model.module,
-                model: model
+                model: model,
+                groupItemUsageAllowed: groupItemUsageAllowed,
             }
         }, function (context, model) {
             if (!model) {

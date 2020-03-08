@@ -83,13 +83,26 @@
 
     fetchProductBundle: function () {
         var self = this;
+        var params = {
+            order_by: "line_number:asc",
+            filter: [{
+                    is_bundle_product_c: {
+                        '$not_in': ['parent'],
+                    }
+                }],
+        };
+
+        if (this.model.get('is_group_item_c') == true) {
+            params = {
+                order_by: "line_number:asc",
+            };
+        }
+
         this.model._relatedCollections.product_templates_product_templates_1.fetch({
             view: 'subpanel-for-producttemplates-create',
             relate: true,
             limit: -1,
-            params: {
-                order_by: "line_number:asc",
-            },
+            params: params,
             success: function (data) {
                 self.productBundleIds = [];
                 self.productBundle = _.clone(data.models);
@@ -97,7 +110,10 @@
                     self.productBundleIds.push(model.get('id'));
                 }, this);
 
-                _.each(self.model._relatedCollections.product_templates_product_templates_1.models, function (model) {
+                _.each(self.model._relatedCollections.product_templates_product_templates_1.models, function (model, key) {
+                    // This is added to give the rowIndex when models are loaded on the view, so that when 
+                    // any new item will be added it should go at the appropriate location.
+                    model._rowIndex = key;
                     model.on('change', function (model) {
                         app.events.trigger('setButtonStates');
                     });

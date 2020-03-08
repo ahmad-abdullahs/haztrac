@@ -382,7 +382,9 @@
             iconName = 'empty';
         }
 
-        if (node.is_bundle_product_c == 'parent') {
+        if (node.is_bundle_product_c == 'parent' && node.is_group_item_c == true) {
+            iconName = 'file-paperclip';
+        } else if (node.is_bundle_product_c == 'parent') {
             iconName = 'file-archive';
         }
 
@@ -573,6 +575,18 @@
                 var _id = _.clone(data.id);
                 this._massageDataBeforeSendingToRecord(data);
                 var _self = this;
+
+                if (this.context.parent.get('groupItemUsageAllowed') != true && data.is_group_item_c == true) {
+                    var message = 'Group item can only be used in Accounts/Customer module.';
+                    app.alert.show('add-item-warning', {
+                        level: 'warning',
+                        messages: message,
+                        closeable: true,
+                        autoClose: true,
+                        autoCloseDelay: 5000,
+                    });
+                    return;
+                }
 
                 if (data.is_bundle_product_c == 'parent') {
                     // Set expected close date of next month...

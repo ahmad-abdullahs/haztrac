@@ -91,7 +91,7 @@
     _massageDataBeforeSendingToRecord: function (data) {
         data.position = 0;
         data._forcePosition = true;
-        
+
         // copy Template's id and name to where the QLI expects them
         data.product_template_id = data.id;
         data.product_template_name = data.name;
@@ -102,17 +102,6 @@
         delete data.date_entered;
         delete data.date_modified;
         delete data.pricing_formula;
-    },
-
-    bindDataChange: function () {
-        this._super('bindDataChange');
-
-        if (this.context.parent.get('parentModelId') || this.context.parent.get('bundleTemplateModelId')) {
-            var viewDetails = this.closestComponent('convert-create');
-            if (!_.isUndefined(viewDetails)) {
-                app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add', this.onAddFromProductCatalog, this);
-            }
-        }
     },
 
     /**
@@ -181,14 +170,13 @@
                     attrs[field.name] = app.currency.convertWithRate(
                             bean.get(field.name),
                             currencyFromRate,
-                            userCurrency.currency_rate
-                            );
+                            userCurrency.currency_rate);
                 }
             }, this);
         } else if (!skipCurrency) {
-//            userCurrencyId = userCurrency.currency_id || app.currency.getBaseCurrencyId();
-//            attrs.currency_id = userCurrencyId;
-//            attrs.base_rate = app.metadata.getCurrency(userCurrencyId).conversion_rate;
+            userCurrencyId = userCurrency.currency_id || app.currency.getBaseCurrencyId();
+            attrs.currency_id = userCurrencyId;
+            attrs.base_rate = app.metadata.getCurrency(userCurrencyId).conversion_rate;
         }
 
         if (!_.isEmpty(attrs)) {
@@ -198,7 +186,18 @@
             bean.set(attrs);
         }
 
-        bean.set('is_bundle_product_c', 'child');
+        if (_.isEmpty(bean.get('is_bundle_product_c'))) {
+            bean.set('is_bundle_product_c', 'child');
+        } else if (bean.get('is_bundle_product_c') == 'child') {
+            // It is set to (sub-child:parent bundle id) to make it distinguish in Module API 
+            // for adding the custom relationship between the bundle and its items, while the group relationship 
+            // with each of its item is already maintained by Sugar itself.
+            // Good part is that the ids which we are setting up in the Js is the record id when it saves.
+            bean.set('is_bundle_product_c', 'sub-child:' + bean.get('product_templates_product_templates_1'));
+            // We set it to empty in the Module API (after maintaing an array for later relationship maintaining), 
+            // otherwise Module API throws an error...
+            bean.unset('product_templates_product_templates_1', {silent: true});
+        }
 
         return bean;
     },
@@ -385,5 +384,124 @@
         });
 
         return catalog;
-    }
+    },
+
+    _addBeanToList: function (hasValidModels, prepopulateData) {
+        var beanId;
+        var bean;
+        var addAtZeroIndex;
+        prepopulateData = prepopulateData || {};
+
+        if (hasValidModels) {
+            beanId = app.utils.generateUUID();
+            addAtZeroIndex = !_.isEmpty(prepopulateData);
+
+            prepopulateData.id = beanId;
+            bean = app.data.createBean(this.module);
+            bean.set(prepopulateData);
+            bean._module = this.module;
+            bean._rowIndex = 0;
+
+            /**/
+            var _rowIndex = 1.000, _backgroundColorClass = '';
+            if (prepopulateData.is_bundle_product_c == 'parent') {
+                // Get the max rowIndex number from collection and convert to integer, increment it by 1
+                if (this.collection.length) {
+                    var maxModel = _.max(this.collection.models, function (model) {
+                        return model._rowIndex
+                    });
+                    _rowIndex = parseInt(maxModel._rowIndex) + 1;
+//                    _backgroundColorClass = 'rli-td-bcc-' + _rowIndex;
+                    _backgroundColorClass = 'rli-td-bcc';
+                } else {
+                    _rowIndex = 2.000;
+//                    _backgroundColorClass = 'rli-td-bcc-' + parseInt(_rowIndex);
+                    _backgroundColorClass = 'rli-td-bcc';
+                }
+            } else if (prepopulateData.is_bundle_product_c == 'child') {
+                // Get the max rowIndex number from collection and remain in float, increment it by 0.001
+                var maxModel = _.max(this.collection.models, function (model) {
+                    return model._rowIndex
+                });
+                _rowIndex = maxModel._rowIndex + 0.001;
+//                _backgroundColorClass = 'rli-td-bcc-' + parseInt(_rowIndex);
+                _backgroundColorClass = 'rli-td-bcc';
+            } else {
+                // It's the stand-alone product so rowType will be undefined
+                // Get the min rowIndex number and decrement it by 0.001
+                if (this.collection.length) {
+                    var maxModel = _.min(this.collection.models, function (model) {
+                        return model._rowIndex
+                    });
+                    _rowIndex = maxModel._rowIndex - 0.001;
+                } else {
+                    _rowIndex = 1;
+                }
+                _backgroundColorClass = '';
+            }
+            bean._rowIndex = _rowIndex;
+            bean._backgroundColorClass = _backgroundColorClass;
+            /**/
+
+            // check the parent record to see if an assigned user ID/name has been set
+            if (this.context.parent && this.context.parent.has('model')) {
+                var parentModel = this.context.parent.get('model'),
+                        userId = parentModel.get('assigned_user_id'),
+                        userName = parentModel.get('assigned_user_name');
+
+                if (userId) {
+                    bean.setDefault('assigned_user_id', userId);
+                }
+
+                if (userName) {
+                    bean.setDefault('assigned_user_name', userName);
+                }
+            }
+
+            var isChild = false;
+            if (bean.get('is_bundle_product_c') == 'child') {
+                isChild = true;
+            }
+
+            bean = this._addCustomFieldsToBean(bean, addAtZeroIndex);
+
+            // ++ Code is added to keep the Line number of the revenue line item while creation 
+            // from the Sales and service, Accounts or Opportunities
+            // This line number will be firther used for the printing in work orders or manifest
+            var collectionRowIds = [];
+            var htmlRowIds = [];
+
+            // get the collection row ids
+            _.each(this.collection.models, function (model) {
+                collectionRowIds.push(model.get('id'));
+            }, this);
+
+            // get the html row ids
+            _.each(this.$('tbody > tr'), function (tr) {
+                var name = $(tr).attr('name').split('_');
+                var id = name[1];
+                htmlRowIds.push(id);
+            }, this);
+
+            // must add to this.collection so the bean shows up in the subpanel list
+            if (addAtZeroIndex) {
+                if (isChild) {
+                    // Push, put the item at the end of collection.
+                    this.collection.push(bean);
+                } else {
+                    // Add, put the item at the start of collection.
+                    this.collection.unshift(bean);
+                }
+            } else {
+                this.collection.add(bean);
+            }
+
+            this.collection.comparator = function (model) {
+                return model._rowIndex;
+            };
+            this.collection.sort();
+        }
+
+        this.checkButtons();
+    },
 })

@@ -7,6 +7,8 @@ require_once("modules/ProductTemplates/clients/base/api/ProductTemplateTreeApi.p
 
 class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
 
+    public $groupBundleIdsString = "";
+
     public function registerApiRest() {
         return array_merge(parent::registerApiRest(), array(
             'bundledtree' => array(
@@ -43,6 +45,9 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $total = 0;
         $max_limit = $this->getSugarConfig()->get('max_list_limit');
 
+        // Get the ids of bundles which are part of groups...
+        // We need to exclude those bundles from the tree...
+        $this->groupBundleIdsString = $this->getGroupBundleIds();
         //set parameters
         if (array_key_exists('filter', $args)) {
             $data = $this->_getFilteredTreeData($args['filter']);
@@ -90,6 +95,10 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
     }
 
     public function _getFilteredTreeData($filter) {
+        if (empty($this->groupBundleIdsString)) {
+            $this->groupBundleIdsString = "''";
+        }
+
         $filter = "%$filter%";
         $unionFilter1 = "and name like ? ";
 
@@ -98,7 +107,7 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         OR is_bundle_product_c = ''
         OR is_bundle_product_c = ?) AND (standalone_item_c IS NULL
         OR standalone_item_c = ''
-        OR standalone_item_c = 0) ";
+        OR standalone_item_c = 0) AND id NOT IN ($this->groupBundleIdsString) ";
 
         return $this->_getTreeData($unionFilter1, $unionFilter2, [$filter, $filter, 'parent']);
     }
@@ -107,13 +116,17 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $union1Root = '';
         $union2Root = '';
 
+        if (empty($this->groupBundleIdsString)) {
+            $this->groupBundleIdsString = "''";
+        }
+
         if ($root == null) {
             $union1Root = "and parent_id is null ";
             $union2Root = "and category_id is null AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = ''
         OR is_bundle_product_c = ?) AND (standalone_item_c IS NULL
         OR standalone_item_c = ''
-        OR standalone_item_c = 0) ";
+        OR standalone_item_c = 0) AND id NOT IN ($this->groupBundleIdsString) ";
             $params = ['parent'];
         } else {
             $union1Root = "and parent_id = ? ";
@@ -121,7 +134,7 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         OR is_bundle_product_c = ''
         OR is_bundle_product_c = ?) AND (standalone_item_c IS NULL
         OR standalone_item_c = ''
-        OR standalone_item_c = 0) ";
+        OR standalone_item_c = 0) AND id NOT IN ($this->groupBundleIdsString) ";
             $params = [$root, $root, 'parent'];
         }
 
@@ -138,12 +151,12 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
      * @return mixed[][]
      */
     public function _getTreeData($union1Filter, $union2Filter, array $params) {
-        $q = "select id, name, 'category' as type, '' AS is_bundle_product_c from product_categories " .
+        $q = "select id, name, 'category' as type, '' AS is_bundle_product_c, '' AS is_group_item_c from product_categories " .
                 "where deleted = 0 " .
                 $union1Filter .
                 "union all " .
                 "SELECT 
-                    id, name, 'product' AS type, is_bundle_product_c
+                    id, name, 'product' AS type, is_bundle_product_c, is_group_item_c
                 FROM
                     product_templates
                         LEFT JOIN
@@ -165,6 +178,7 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $returnObj->id = $node['id'];
         $returnObj->type = $node['type'];
         $returnObj->is_bundle_product_c = $node['is_bundle_product_c'];
+        $returnObj->is_group_item_c = $node['is_group_item_c'] == 1 ? true : false;
         $returnObj->data = $node['name'];
         $returnObj->state = ($node['type'] == 'product') ? '' : 'closed';
         $returnObj->index = $index;
@@ -175,6 +189,10 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
     /* Default functions overriden... */
 
     protected function getFilteredTreeData($filter) {
+        if (empty($this->groupBundleIdsString)) {
+            $this->groupBundleIdsString = "''";
+        }
+
         $filter = "%$filter%";
         $unionFilter1 = "and name like ? ";
 
@@ -182,7 +200,7 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $unionFilter2 = "and name like ? AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = '') AND (standalone_item_c IS NULL
         OR standalone_item_c = ''
-        OR standalone_item_c = 0) ";
+        OR standalone_item_c = 0) AND id NOT IN ($this->groupBundleIdsString) ";
 
         return $this->getTreeData($unionFilter1, $unionFilter2, [$filter, $filter]);
     }
@@ -191,19 +209,23 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $union1Root = '';
         $union2Root = '';
 
+        if (empty($this->groupBundleIdsString)) {
+            $this->groupBundleIdsString = "''";
+        }
+
         if ($root == null) {
             $union1Root = "and parent_id is null ";
             $union2Root = "and category_id is null AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = '') AND (standalone_item_c IS NULL
         OR standalone_item_c = ''
-        OR standalone_item_c = 0) ";
+        OR standalone_item_c = 0) AND id NOT IN ($this->groupBundleIdsString) ";
             $params = [];
         } else {
             $union1Root = "and parent_id = ? ";
             $union2Root = "and category_id = ? AND (is_bundle_product_c IS NULL
         OR is_bundle_product_c = '') AND (standalone_item_c IS NULL
         OR standalone_item_c = ''
-        OR standalone_item_c = 0) ";
+        OR standalone_item_c = 0) AND id NOT IN ($this->groupBundleIdsString) ";
             $params = [$root, $root];
         }
 
@@ -220,12 +242,12 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
      * @return mixed[][]
      */
     protected function getTreeData($union1Filter, $union2Filter, array $params) {
-        $q = "select id, name, 'category' as type, '' AS is_bundle_product_c from product_categories " .
+        $q = "select id, name, 'category' as type, '' AS is_bundle_product_c, '' AS is_group_item_c from product_categories " .
                 "where deleted = 0 " .
                 $union1Filter .
                 "union all " .
                 "SELECT 
-                    id, name, 'product' AS type, is_bundle_product_c
+                    id, name, 'product' AS type, is_bundle_product_c, is_group_item_c
                 FROM
                     product_templates
                         LEFT JOIN
@@ -240,6 +262,29 @@ class CustomProductTemplateTreeApi extends ProductTemplateTreeApi {
         $stmt->execute($params);
 
         return $stmt->fetchAll();
+    }
+
+    protected function getGroupBundleIds() {
+        global $db;
+        $ids = array();
+        $sql = "SELECT DISTINCT
+                product_templates_product_templates_1product_templates_idb AS id,
+                is_bundle_product_c,
+                is_group_item_c
+            FROM
+                product_templates_product_templates_1_c middle_table
+                    JOIN
+                product_templates_cstm ON middle_table.product_templates_product_templates_1product_templates_idb = product_templates_cstm.id_c
+            WHERE
+                deleted = 0
+                    AND is_bundle_product_c = 'parent'
+                    AND is_group_item_c = 0;";
+
+        $result = $db->query($sql);
+        while ($row = $db->fetchByAssoc($result)) {
+            array_push($ids, $row['id']);
+        }
+        return "'" . implode("' , '", $ids) . "'";
     }
 
 }

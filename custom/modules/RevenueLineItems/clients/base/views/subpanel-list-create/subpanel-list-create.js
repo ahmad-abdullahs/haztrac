@@ -16,6 +16,9 @@
  * @extends View.Views.Base.SubpanelListView
  */
 ({
+    // This view _addBeanToList function is used in Sales and Service, Accounts and Opp create drawer.
+    // and this ---> custom/modules/RevenueLineItems/clients/base/views/subpanel-for-revenuelineitem-create/subpanel-for-revenuelineitem-create.js
+    // _addBeanToList function is used for Revenuelineitem create drawer.
     extendsFrom: 'SubpanelListCreateView',
 
     /**
@@ -71,6 +74,9 @@
 
         if (hasValidModels) {
             beanId = app.utils.generateUUID();
+            if (prepopulateData.idPersonallyAssigned == true) {
+                beanId = prepopulateData.id;
+            }
             addAtZeroIndex = !_.isEmpty(prepopulateData);
 
             prepopulateData.id = beanId;

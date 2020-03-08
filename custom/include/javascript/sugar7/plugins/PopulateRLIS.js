@@ -12,6 +12,7 @@
                 var viewDetails = thisOfCall.closestComponent('record') ?
                         thisOfCall.closestComponent('record') :
                         thisOfCall.closestComponent('create');
+                var relationshipRequired = true, order = 'asc';
                 // need to trigger on app.controller.context because of contexts changing between
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
@@ -27,7 +28,16 @@
                     pModel.set('status_c', 'Draft');
                 } else {
                     if (!_.isUndefined(viewDetails)) {
-                        app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                        if (data.is_group_item_c != true) {
+                            app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                        } else {
+                            // When the parent group item is clicked, in that case we will not add that parent item
+                            // in the subpanel create list, but the child items will be added.
+                            // So we are only adding child items not the parent item so relationship between parent
+                            // child is not required.
+                            relationshipRequired = false;
+                            order = 'desc';
+                        }
                     }
                 }
 
@@ -41,7 +51,7 @@
                         // Fetched in descending order because when the items are added in the subpanel-for-rli-create
                         // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
                         params: {
-                            order_by: "line_number:asc",
+                            order_by: "line_number:" + order,
                         },
                         success: function (coll) {
                             if (thisOfCall.context.parent.get('copyFeature')) {
@@ -50,7 +60,7 @@
                                 data.ht_manifest_revenuelineitems_1_name = '';
                                 app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
                             }
-                            _.each(coll.models, function (model) {
+                            _.each(coll.models, function (model, key) {
                                 _self._massageDataBeforeSendingToRecord(model.attributes);
 
                                 var viewDetails = _self.closestComponent('record') ?
@@ -60,14 +70,20 @@
                                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                                 // app.controller.context is the only consistent context to use
                                 if (!_.isUndefined(viewDetails)) {
-                                    // To add the relationship between the revenuelineitems
-                                    model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
 //                                    model.attributes.product_template_id = '';
 //                                    model.attributes.product_template_name = '';
                                     if (thisOfCall.context.parent.get('copyFeature')) {
                                         // Unset the Manifest from revenuelineitem at time of copy.
                                         model.attributes.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
                                         model.attributes.ht_manifest_revenuelineitems_1_name = '';
+                                    }
+                                    if (relationshipRequired) {
+                                        // To add the relationship between the revenuelineitems
+                                        model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
+                                    } else {
+                                        // Since no relationship is required, we are going to empty out the is_bundle_product_c attribute
+                                        // which was set to child.
+                                        model.attributes.is_bundle_product_c = '';
                                     }
                                     app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                 }
