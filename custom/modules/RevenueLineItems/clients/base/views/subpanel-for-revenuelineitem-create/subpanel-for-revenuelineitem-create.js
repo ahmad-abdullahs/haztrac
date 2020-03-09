@@ -238,6 +238,9 @@
 
         if (hasValidModels) {
             beanId = app.utils.generateUUID();
+            if (prepopulateData.idPersonallyAssigned == true) {
+                beanId = prepopulateData.id;
+            }
             addAtZeroIndex = !_.isEmpty(prepopulateData);
 
             prepopulateData.id = beanId;

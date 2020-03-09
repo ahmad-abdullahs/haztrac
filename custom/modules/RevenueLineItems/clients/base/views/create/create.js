@@ -5,10 +5,38 @@
  */
 ({
     extendsFrom: 'CreateView',
+    executeGroupLogic: 0,
+    exeuteBundleLogic: 0,
 
     initialize: function (options) {
         this._super('initialize', [options]);
         app.controller.context.on('productCatalogDashlet:populate:RLI', this.onPopulateFromProductCatalog, this);
+    },
+
+    buildSuccessMessage: function (model) {
+        var modelAttributes,
+                successLabel = 'LBL_RECORD_SAVED_SUCCESS',
+                successMessageContext;
+
+        //if we have model attributes, use them to build the message, otherwise use a generic message
+        if (model && model.attributes) {
+            modelAttributes = model.attributes;
+        } else {
+            modelAttributes = {};
+            successLabel = 'LBL_RECORD_SAVED';
+        }
+
+        if (this.executeGroupLogic == 1) {
+            successLabel = 'LBL_RECORD_SAVED';
+        }
+
+        //use the model attributes combined with data from the view to build the success message context
+        successMessageContext = _.extend({
+            module: this.module,
+            moduleSingularLower: app.lang.getModuleName(this.module).toLowerCase()
+        }, modelAttributes);
+
+        return app.lang.get(successLabel, this.module, successMessageContext);
     },
 
     validateModelWaterfall: function (callback) {
@@ -74,7 +102,14 @@
         data.worst_case = data.discount_price;
         data.assigned_user_id = app.user.get('id');
         data.assigned_user_name = app.user.get('name');
-        data.executeBundleLogic = 1;
+
+        if (data.is_group_item_c == true) {
+            data.executeGroupLogic = 1;
+            this.executeGroupLogic = 1;
+        } else {
+            data.exeuteBundleLogic = 1;
+            this.exeuteBundleLogic = 1;
+        }
 
         var bean;
 

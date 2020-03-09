@@ -99,9 +99,103 @@ class CustomRelateRecordApi extends RelateRecordApi {
 
             $updateIsBundleProduct = "UPDATE revenue_line_items_cstm SET  is_bundle_product_c = 'child' WHERE id_c in ('" . implode("' , '", $ids) . "')";
             $db->query($updateIsBundleProduct);
+        } else if (isset($args['executeGroupLogic']) && $args['executeGroupLogic'] == 1 &&
+                $relatedBean->module_dir == "RevenueLineItems") {
+            global $db, $timedate;
+            $bundleToItemsMapping = array();
+            $childIds = array();
+            $parentIds = array();
+            $allItemIds = array();
+
+            // Maintain the bundle id and the childs so that we can manage the relationships later.
+            list($allItemIds, $bundleToItemsMapping) = $this->getBundleToItemsMapping($args);
+
+            // Set the relationships
+            foreach ($bundleToItemsMapping as $key => $value) {
+                if (!empty($value)) {
+                    $queryValues = array();
+                    $insert = '';
+                    $insert .= "INSERT INTO revenuelineitems_revenuelineitems_1_c "
+                            . "(`id`, `date_modified`, `deleted`, `revenuelineitems_revenuelineitems_1revenuelineitems_ida`, `revenuelineitems_revenuelineitems_1revenuelineitems_idb`) "
+                            . "VALUES ";
+                    foreach ($value as $_key => $_value) {
+                        array_push($queryValues, "('" . create_guid() . "', '{$timedate->nowDb()}', '0', '{$key}', '{$_value}')");
+                    }
+
+                    if (!empty($queryValues)) {
+                        $insert .= implode(" , ", $queryValues) . ';';
+                        $db->query($insert, true);
+                    }
+                    array_push($childIds, $value);
+                    array_push($parentIds, $key);
+                    // Just retrieving and saving the bean so that the Sugar dependencies should be triggered 
+                    // which has to be triggered after inserting the relationship through insert query.
+                    $rliBean = BeanFactory::retrieveBean('RevenueLineItems', $key);
+                    $rliBean->save();
+                }
+            }
+
+            $childIds = $this->flattenArr($childIds);
+
+            // Setting the RLIs is_bundle_product_c.
+            // First make all of the is_bundle_product_c empty, then set the parent and child.
+            $update = '';
+            if (!empty($allItemIds)) {
+                $update = "UPDATE revenue_line_items_cstm SET is_bundle_product_c='' WHERE id_c IN ('" . implode("' , '", $allItemIds) . "');";
+                $db->query($update, true);
+            }
+            if (!empty($parentIds)) {
+                $update = "UPDATE revenue_line_items_cstm SET is_bundle_product_c='parent' WHERE id_c IN ('" . implode("' , '", $parentIds) . "');";
+                $db->query($update, true);
+            }
+            if (!empty($childIds)) {
+                $update = "UPDATE revenue_line_items_cstm SET is_bundle_product_c='child' WHERE id_c IN ('" . implode("' , '", $childIds) . "');";
+                $db->query($update, true);
+            }
+
+            // Removing the Group relationships.
+            $update = "UPDATE revenuelineitems_revenuelineitems_1_c SET deleted='1' WHERE revenuelineitems_revenuelineitems_1revenuelineitems_ida = '{$relatedBean->id}';";
+            $db->query($update, true);
+
+            // Deleting the Group record.
+            $update = "UPDATE revenue_line_items SET deleted='1' WHERE id = '{$relatedBean->id}';";
+            $db->query($update, true);
         }
 
         return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
+    }
+
+    public function flattenArr($childIds) {
+        $retArr = array();
+        $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($childIds));
+        foreach ($it as $v) {
+            array_push($retArr, $v);
+        }
+        return $retArr;
+    }
+
+    public function getBundleToItemsMapping(array $args) {
+        $bundleToItemsMapping = array();
+        $allItemIds = array();
+
+        foreach ($args['revenuelineitems_revenuelineitems_1']['create'] as $key => $value) {
+            array_push($allItemIds, $value['id']);
+            if ($value['is_bundle_product_c'] == 'parent' && !array_key_exists($value['id'], $bundleToItemsMapping)) {
+                $bundleToItemsMapping[$value['id']] = array();
+            } elseif ($value['is_bundle_product_c'] == 'child' && isset($value['revenuelineitems_revenuelineitems_1revenuelineitems_ida'])) {
+                $bundleId = $value['revenuelineitems_revenuelineitems_1revenuelineitems_ida'];
+                if (!empty($bundleId)) {
+                    if (array_key_exists($bundleId, $bundleToItemsMapping)) {
+                        $bundleToItemsMapping[$bundleId][] = $value['id'];
+                    } else {
+                        $bundleToItemsMapping[$bundleId] = array();
+                        $bundleToItemsMapping[$bundleId][] = $value['id'];
+                    }
+                }
+            }
+        }
+
+        return array($allItemIds, $bundleToItemsMapping);
     }
 
 }

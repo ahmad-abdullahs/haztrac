@@ -600,7 +600,7 @@
                 var viewDetails = this.closestComponent('record') ?
                         this.closestComponent('record') :
                         this.closestComponent('create');
-                var relationshipRequired = true, order = 'asc';
+                var notAGroup = true, order = 'asc';
                 // need to trigger on app.controller.context because of contexts changing between
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
@@ -612,7 +612,7 @@
                         // in the subpanel create list, but the child items will be added.
                         // So we are only adding child items not the parent item so relationship between parent
                         // child is not required.
-                        relationshipRequired = false;
+                        notAGroup = false;
                         order = 'desc';
                     }
                 }
@@ -650,7 +650,7 @@
                                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                                 // app.controller.context is the only consistent context to use
                                 if (!_.isUndefined(viewDetails)) {
-                                    if (relationshipRequired) {
+                                    if (notAGroup) {
                                         // To add the relationship between the revenuelineitems
                                         model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
                                     } else if (bundleChildToParentObj[__id]) {

@@ -596,6 +596,7 @@
                 var viewDetails = this.closestComponent('record') ?
                         this.closestComponent('record') :
                         this.closestComponent('create');
+                var notAGroup = true, order = 'asc';
                 // need to trigger on app.controller.context because of contexts changing between
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
@@ -603,21 +604,40 @@
                     app.controller.context.trigger('productCatalogDashlet:populate:RLI', data);
                 }
 
+                if (data.is_group_item_c == true) {
+                    // When the parent group item is clicked, in that case we will not add that parent item
+                    // in the subpanel create list, but the child items will be added.
+                    // So we are only adding child items not the parent item so relationship between parent
+                    // child is not required.
+                    notAGroup = false;
+                    order = 'desc';
+                }
+
                 if (data.is_bundle_product_c == 'parent') {
                     var productTemplates = App.data.createBean('ProductTemplates', {id: _id});
                     productTemplates.fetch();
                     var productTemplatesRelatedColl = productTemplates.getRelatedCollection('product_templates_product_templates_1');
                     productTemplatesRelatedColl = productTemplatesRelatedColl.fetch({
+                        view: 'list',
                         relate: true,
                         limit: -1,
                         // Fetched in descending order because when the items are added in the subpanel-for-rli-create
                         // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
                         params: {
-                            order_by: "line_number:desc",
+                            order_by: "line_number:" + order,
                         },
                         success: function (coll) {
-                            _.each(coll.models, function (model) {
+                            var bundleChildToParentObj = {};
+                            if (data.is_group_item_c == true) {
+                                bundleChildToParentObj = _self.getGroupBundlesChildToParentObj(coll, _id);
+                            }
+
+                            _.each(coll.models, function (model, key) {
+                                var __id = _.clone(model.attributes.id);
                                 _self._massageDataBeforeSendingToRecord(model.attributes);
+                                if (data.is_group_item_c == true && !_.isEmpty(bundleChildToParentObj)) {
+                                    model.attributes.id = __id;
+                                }
 
                                 var viewDetails = _self.closestComponent('record') ?
                                         _self.closestComponent('record') :
@@ -626,8 +646,20 @@
                                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                                 // app.controller.context is the only consistent context to use
                                 if (!_.isUndefined(viewDetails)) {
-                                    // To add the relationship between the revenuelineitems
-                                    model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
+                                    if (notAGroup) {
+                                        // To add the relationship between the revenuelineitems
+                                        model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
+                                    } else if (bundleChildToParentObj[__id]) {
+                                        model.attributes.idPersonallyAssigned = true;
+                                        model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = bundleChildToParentObj[__id];
+                                    } else {
+                                        // Since no relationship is required, we are going to empty out the is_bundle_product_c attribute
+                                        // which was set to child.
+                                        if (model.attributes.is_bundle_product_c == 'child')
+                                            model.attributes.is_bundle_product_c = '';
+                                        else if (model.attributes.is_bundle_product_c == 'parent')
+                                            model.attributes.idPersonallyAssigned = true;
+                                    }
                                     app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                 }
                             })
@@ -637,6 +669,40 @@
 
             }, this)
         });
+    },
+
+    getGroupBundlesChildToParentObj: function (coll, groupId) {
+        var bundleChildToParentObj = {};
+        var idsOldToNewMappingObj = {};
+        // This loop will extract the bundle and its childs from the group, standalone items will be ignored.
+        // bundle and child both will be alotted the new ids...
+        _.each(coll.models, function (model, key) {
+            var itemOldValue = model.get('id');
+            model.set('id', app.utils.generateUUID(), {silent: true});
+            var childId = model.get('id');
+            var itemNewValue = childId;
+            var parentId = '';
+
+            // Mapping of old and new value...
+            idsOldToNewMappingObj[itemOldValue] = itemNewValue;
+
+            _.each(model.get('product_templates_product_templates_1_right').records, function (parent, _key) {
+                if (parent.id != groupId) {
+                    parentId = parent.id;
+                }
+            });
+
+            if (!_.isEmpty(parentId)) {
+                bundleChildToParentObj[childId] = parentId;
+            }
+        });
+
+        _.each(bundleChildToParentObj, function (parentId, childId) {
+            // (bundleChildToParentObj[childId] id assigned) = <<idsOldToNewMappingObj[<<bundleChildToParentObj[childId](gives parent old id)>>](gives parent new id)>>;
+            bundleChildToParentObj[childId] = idsOldToNewMappingObj[bundleChildToParentObj[childId]];
+        });
+
+        return bundleChildToParentObj;
     },
 
     /**

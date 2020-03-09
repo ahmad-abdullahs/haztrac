@@ -90,4 +90,13 @@ $dictionary['RevenueLineItem']['fields']['executeBundleLogic'] = array(
     'vname' => 'LBL_EXECUTE_BUNDLE_LOGIC',
     'type' => 'varchar',
     'source' => 'non-db',
+    'studio' => false,
+);
+
+$dictionary['RevenueLineItem']['fields']['executeGroupLogic'] = array(
+    'name' => 'executeGroupLogic',
+    'vname' => 'LBL_EXECUTE_GROUP_LOGIC',
+    'type' => 'varchar',
+    'source' => 'non-db',
+    'studio' => false,
 );
