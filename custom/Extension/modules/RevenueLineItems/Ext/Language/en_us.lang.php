@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICES_QUOTES'] = 'Sales/Services Quotes';
 $mod_strings['LBL_NAME'] = 'Product Svc Name';
@@ -55,3 +56,11 @@ $mod_strings['LBL_CONSIGNEE_CERTIFICATES'] = 'Consignee Certificates';
 $mod_strings['LBL_FED_PERCENTAGE'] = 'FED %';
 $mod_strings['LBL_ACCOUNT_LINE_NUMBER'] = 'Account Line Number';
 $mod_strings['LBL_IS_GROUP_ITEM'] = 'Is Group Item';
+$mod_strings['LBL_RECORDVIEW_PANEL10'] = 'Specs';
+$mod_strings['LBL_SALES_REP'] = 'Sales Rep';
+$mod_strings['LBL_SALES_REP_TYPE'] = 'Sales Rep Type';
+$mod_strings['LBL_COMMISSION_TYPE'] = 'Commission Type';
+$mod_strings['LBL_COMMISSION_VALUE'] = 'Commission';
+$mod_strings['LBL_COMMISSION_SUBTYPE'] = 'Type';
+$mod_strings['LBL_COMMISSION_SUBTYPE_UOM'] = 'UOM';
+$mod_strings['LBL_COMMISSION_TEXT'] = 'Other';

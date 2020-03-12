@@ -176,3 +176,31 @@ $app_list_strings['wp_total_organic_carbon_list'] = array(
     '>= 10%' => '>= 10%',
     'Unknown' => 'Unknown',
 );
+
+$app_list_strings['sales_rep_type_list'] = array(
+    '' => '',
+    'Sale Rep (Contact)' => 'Sale Rep (Contact)',
+    'Broker Indivdual (Contact)' => 'Broker Indivdual (Contact)',
+    'Broker Company (Account)' => 'Broker Company (Account)',
+);
+
+$app_list_strings['comission_type_list'] = array(
+    '' => '',
+    'Percentage' => 'Percentage',
+    'Flat' => 'Flat',
+    'Formula' => 'Formula',
+    'Other' => 'Other',
+);
+
+$app_list_strings['comission_subtype_percentage_list'] = array(
+    '' => '',
+    'On Gross' => 'On Gross',
+    'On Net' => 'On Net',
+    'On List' => 'On List',
+);
+
+$app_list_strings['comission_subtype_flat_list'] = array(
+    '' => '',
+    'Per Sale' => 'Per Sale',
+    'Per UOM' => 'Per UOM',
+);

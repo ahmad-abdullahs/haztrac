@@ -245,23 +245,18 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             5 =>
                             array(
-//                                'name' => 'is_bundle_product_c',
-//                                'label' => 'LBL_IS_BUNDLE_PRODUCT',
-//                                'readonly' => true,
                             ),
                             6 =>
                             array(
                                 'name' => 'product_svc_description_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PRODUCT_SVC_DESCRIPTION',
-                                'span' => 6,
                             ),
                             7 =>
                             array(
                                 'name' => 'mandatory_print_text_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_MANDATORY_PRINT_TEXT',
-                                'span' => 6,
                             ),
                             8 =>
                             array(
@@ -437,6 +432,9 @@ $viewdefs['RevenueLineItems'] = array(
                                 'name' => 'consignee_certificates',
                                 'label' => 'LBL_CONSIGNEE_CERTIFICATES',
                             ),
+                            3 =>
+                            array(
+                            ),
                         ),
                     ),
                     5 =>
@@ -569,36 +567,120 @@ $viewdefs['RevenueLineItems'] = array(
                         array(
                             0 =>
                             array(
-                                'name' => 'sales_rep_name_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_SALES_REP_NAME',
+                                'name' => 'sales_rep',
+                                'type' => 'sales_rep',
+                                'dismiss_label' => true,
+                                'span' => 12,
+                                'related_fields' => array(
+                                    'sales_rep',
+                                ),
+                                'fields' => array(
+                                    array(
+                                        'name' => 'sales_rep_type',
+                                        'short_name' => 'sales_rep_type',
+                                        'css_class' => 'sales_rep_type',
+                                        'label' => 'LBL_SALES_REP_TYPE',
+                                        'type' => 'enum',
+                                        'options' => 'sales_rep_type_list',
+                                        'span' => 2
+                                    ),
+                                    array(
+                                        'name' => 'sales_rep_name',
+                                        'short_name' => 'sales_rep_name',
+                                        'css_class' => 'sales_rep_name',
+                                        'label' => 'LBL_SALES_REP',
+                                        'rname' => 'name',
+                                        'type' => 'relate',
+                                        'id_name' => 'sales_rep_name_id',
+//                                        'module' => 'Accounts',
+                                        'link' => true,
+                                        'span' => 2,
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'sales_rep_comission_type',
+                                        'short_name' => 'sales_rep_comission_type',
+                                        'css_class' => 'sales_rep_comission_type',
+                                        'label' => 'LBL_COMMISSION_TYPE',
+                                        'type' => 'enum',
+                                        'options' => 'comission_type_list',
+                                        'span' => 2
+                                    ),
+                                    array(
+                                        'name' => 'sales_rep_comission_value',
+                                        'short_name' => 'sales_rep_comission_value',
+                                        'css_class' => 'sales_rep_comission_value',
+                                        'label' => 'LBL_COMMISSION_VALUE',
+                                        'type' => 'float',
+                                        'len' => '8',
+                                        'size' => '20',
+                                        'precision' => 2,
+                                        'span' => 1
+                                    ),
+                                    array(
+                                        'name' => 'sales_rep_comission_subtype',
+                                        'short_name' => 'sales_rep_comission_subtype',
+                                        'css_class' => 'sales_rep_comission_subtype',
+                                        'label' => 'LBL_COMMISSION_SUBTYPE',
+                                        'type' => 'enum',
+                                        'options' => 'comission_subtype_percentage_list',
+                                        // 'options' => 'comission_subtype_flat_list',
+                                        'span' => 1
+                                    ),
+                                    array(
+                                        'name' => 'sales_rep_comission_subtype_uom',
+                                        'short_name' => 'sales_rep_comission_subtype_uom',
+                                        'css_class' => 'sales_rep_comission_subtype_uom',
+                                        'label' => 'LBL_COMMISSION_SUBTYPE_UOM',
+                                        'type' => 'enum',
+                                        'options' => 'unit_of_measure_c_list',
+                                        'span' => 2
+                                    ),
+                                    array(
+                                        'name' => 'sales_rep_comission_text',
+                                        'short_name' => 'sales_rep_comission_text',
+                                        'css_class' => 'sales_rep_comission_text',
+                                        'label' => 'LBL_COMMISSION_TEXT',
+                                        'type' => 'text',
+                                        'span' => 1
+                                    ),
+                                )
                             ),
                             1 =>
                             array(
-                                'name' => 'commission_broker_account_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_COMMISSION_BROKER_ACCOUNT',
                             ),
-                            2 =>
-                            array(
-                                'name' => 'commission_unit_price_c',
-                                'label' => 'LBL_COMMISSION_UNIT_PRICE',
-                            ),
-                            3 =>
-                            array(
-                                'name' => 'commission_umo_c',
-                                'label' => 'LBL_COMMISSION_UMO',
-                            ),
-                            4 =>
-                            array(
-                                'name' => 'commission_percentage_c',
-                                'label' => 'LBL_COMMISSION_PERCENTAGE',
-                            ),
-                            5 =>
-                            array(
-                                'name' => 'commission_formula_c',
-                                'label' => 'LBL_COMMISSION_FORMULA',
-                            ),
+//                            0 =>
+//                            array(
+//                                'name' => 'sales_rep_name_c',
+//                                'studio' => 'visible',
+//                                'label' => 'LBL_SALES_REP_NAME',
+//                            ),
+//                            1 =>
+//                            array(
+//                                'name' => 'commission_broker_account_c',
+//                                'studio' => 'visible',
+//                                'label' => 'LBL_COMMISSION_BROKER_ACCOUNT',
+//                            ),
+//                            2 =>
+//                            array(
+//                                'name' => 'commission_unit_price_c',
+//                                'label' => 'LBL_COMMISSION_UNIT_PRICE',
+//                            ),
+//                            3 =>
+//                            array(
+//                                'name' => 'commission_umo_c',
+//                                'label' => 'LBL_COMMISSION_UMO',
+//                            ),
+//                            4 =>
+//                            array(
+//                                'name' => 'commission_percentage_c',
+//                                'label' => 'LBL_COMMISSION_PERCENTAGE',
+//                            ),
+//                            5 =>
+//                            array(
+//                                'name' => 'commission_formula_c',
+//                                'label' => 'LBL_COMMISSION_FORMULA',
+//                            ),
                         ),
                     ),
                     8 =>
@@ -740,6 +822,7 @@ $viewdefs['RevenueLineItems'] = array(
                             6 =>
                             array(
                                 'name' => 'description',
+                                'span' => 6,
                             ),
                             7 =>
                             array(
@@ -879,6 +962,25 @@ $viewdefs['RevenueLineItems'] = array(
                                     3 => 'product_list_name_c',
                                 ),
                                 'span' => 12,
+                            ),
+                        ),
+                    ),
+                    11 =>
+                    array(
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL10',
+                        'label' => 'LBL_RECORDVIEW_PANEL10',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                            ),
+                            1 =>
+                            array(
                             ),
                         ),
                     ),
