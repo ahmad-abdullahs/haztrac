@@ -905,7 +905,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'name' => 'field_name',
                                         'label' => 'Field',
                                         'sortable' => true,
-                                        'width' => '20%',
+                                        'width' => '15%',
                                     ),
                                     1 =>
                                     array(
@@ -913,7 +913,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'name' => 'before',
                                         'label' => 'Old Value',
                                         'sortable' => false,
-                                        'width' => '20%',
+                                        'width' => '29%',
                                     ),
                                     2 =>
                                     array(
@@ -921,7 +921,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'name' => 'after',
                                         'label' => 'New Value',
                                         'sortable' => false,
-                                        'width' => '20%',
+                                        'width' => '29%',
                                     ),
                                     3 =>
                                     array(
@@ -929,7 +929,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'name' => 'created_by_username',
                                         'label' => 'Changed By',
                                         'sortable' => true,
-                                        'width' => '10%',
+                                        'width' => '5%',
                                     ),
                                     4 =>
                                     array(
@@ -937,7 +937,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'name' => 'source',
                                         'label' => 'Source',
                                         'sortable' => false,
-                                        'width' => '10%',
+                                        'width' => '7%',
                                         'module' => 'Users',
                                         'link' => true,
                                     ),
@@ -948,7 +948,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'label' => 'Change Date',
                                         'options' => 'date_range_search_dom',
                                         'sortable' => true,
-                                        'width' => '20%',
+                                        'width' => '15%',
                                     ),
                                 ),
                                 'relatedFields' =>
@@ -960,6 +960,7 @@ $viewdefs['RevenueLineItems'] = array(
                                     1 => 'list_price',
                                     2 => 'cost_price',
                                     3 => 'product_list_name_c',
+                                    4 => 'sales_rep',
                                 ),
                                 'span' => 12,
                             ),

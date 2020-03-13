@@ -94,8 +94,6 @@
      * @inheritdoc
      */
     initialize: function (options) {
-        khan = this;
-        console.log('I am here....');
         this._super('initialize', [options]);
 
         this.activeFetchCt = 0;

@@ -10,7 +10,6 @@
     addClass: 'addRecord',
     setFocusEle: '',
     initialize: function (options) {
-        fawad = this;
         this._super('initialize', [options]);
     },
 
@@ -324,23 +323,13 @@
                 if (field.def.fuid == fieldName[1] && field.def.short_name == 'sales_rep_name') {
                     if (_.contains(['Sale Rep (Contact)', 'Broker Indivdual (Contact)'], this.model.get(innerFieldName))) {
                         this.view.fields[key].def.module = 'Contacts';
+                        // This code is added to initialize the searchCollection with the right module..
+                        // Otherwise it will not search the quicksearch data and throw the error. 
+                        this.view.fields[key].searchCollection = app.data.createBeanCollection('Contacts');
                     } else {
                         this.view.fields[key].def.module = 'Accounts';
+                        this.view.fields[key].searchCollection = app.data.createBeanCollection('Accounts');
                     }
-
-                    /*if (_.contains(['Sale Rep (Contact)', 'Broker Indivdual (Contact)'], this.model.get(innerFieldName))) {
-                     this.view.fields[key].def.module = 'Contacts';
-                     this.view.fields[key].options.def.module = 'Contacts';
-                     this.view.fields[key].options.viewDefs.module = 'Contacts';
-                     this.view.fields[key].viewDefs.module = 'Contacts';
-                     this.view.fields[key].filters.moduleName = 'Contacts';
-                     } else {
-                     this.view.fields[key].def.module = 'Accounts';
-                     this.view.fields[key].options.def.module = 'Accounts';
-                     this.view.fields[key].options.viewDefs.module = 'Accounts';
-                     this.view.fields[key].viewDefs.module = 'Accounts';
-                     this.view.fields[key].filters.moduleName = 'Accounts';
-                     }*/
 
                     // empty the value and re-render it...
                     this.model.set(field.def.id_name, '');

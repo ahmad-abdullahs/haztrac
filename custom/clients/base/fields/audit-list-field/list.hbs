@@ -30,7 +30,7 @@
                     <table class="table table-striped dataTable">
                         <thead>
                             <tr module="{{subpanelModule}}">
-                                <th></th>
+                                <th style="min-width: 0px;" class="audit-table-field"></th>
                                 {{#each columns}}
                                 <th class="{{sorting_class}} orderBy{{name}} sortable" data-fieldname="{{name}}" data-orderby="{{name}}" tabindex="-1" {{#if width}}style="width:{{width}};" {{/if}}>
                                     <span>
@@ -38,7 +38,7 @@
                                     </span>
                                 </th>
                                 {{/each}}
-                                <th></th>
+                                <th style="min-width: 0px;" class="audit-table-field"></th>
                             </tr>
                             <tr>
                                 <th data-target="alert-container" class="alert alert-warning hide" colspan="8">
@@ -51,7 +51,7 @@
                             {{#each filteredCollection.models}}
                             <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
                                 {{#eq template "list"}}
-                                    <td></td>
+                                    <td class="audit-table-field"></td>
                                 {{/eq}} 
                                 {{#each ../columnsMeta}} 
                                     {{#if readonly}}
@@ -64,7 +64,7 @@
                                     </td>
                                     {{/if}} 
                                 {{/each}}
-                                <td></td>
+                                <td class="audit-table-field"></td>
                             </tr>
                             {{/each}}
                         </tbody>

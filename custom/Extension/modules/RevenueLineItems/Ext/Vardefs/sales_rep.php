@@ -5,4 +5,5 @@ $dictionary['RevenueLineItem']['fields']['sales_rep'] = array(
     'vname' => 'LBL_SALES_REP',
     'type' => 'text',
     'dbType' => 'text',
+    'audited' => true,
 );

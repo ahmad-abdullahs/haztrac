@@ -30,5 +30,25 @@
                 throw e;
             }
         });
+
+        this.model.on('change:is_group_item_c', _.bind(this.setCategory, this));
+    },
+
+    setCategory: function (model, value) {
+        if (value) {
+            var self = this;
+            var productTemplatesBean = app.data.createBean('ProductCategories', {
+                id: 'e800d96a-6194-11ea-9e13-000c29e77cbc'
+            });
+            productTemplatesBean.fetch({
+                success: function (bean) {
+                    self.model.set('category_id', bean.get('id'));
+                    self.model.set('category_name', bean.get('name'));
+                },
+            });
+        } else {
+            this.model.set('category_id', '');
+            this.model.set('category_name', '');
+        }
     },
 })

@@ -60,5 +60,6 @@
         if (options && options.complete) {
             options.complete();
         }
+        this._render();
     }
 })

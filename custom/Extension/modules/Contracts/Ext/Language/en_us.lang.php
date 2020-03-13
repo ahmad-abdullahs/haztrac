@@ -23,5 +23,5 @@ $mod_strings['LBL_REMARKS'] = 'Remarks';
 $mod_strings['LBL_CONTRACT_NUMBER'] = 'Contract Number';
 $mod_strings['LBL_RECORDVIEW_PANEL2'] = 'Contract Specification';
 $mod_strings['LBL_CONTRACT_SPECIFICATION'] = 'Contract Specification';
-$mod_strings['LBL_CONTRACT_SPECIFICATION_NAME'] = 'Contract Name';
-$mod_strings['LBL_CONTRACT_SPECIFICATION_TEXT_DETAILS'] = 'Contract Details';
+$mod_strings['LBL_CONTRACT_SPECIFICATION_NAME'] = 'Characteristic Name';
+$mod_strings['LBL_CONTRACT_SPECIFICATION_TEXT_DETAILS'] = 'Characteristic Value';
