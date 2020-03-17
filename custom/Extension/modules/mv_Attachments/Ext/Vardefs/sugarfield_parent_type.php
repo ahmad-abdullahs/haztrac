@@ -1,0 +1,25 @@
+<?php
+
+$dictionary['mv_Attachments']['fields']['parent_type'] = array(
+    'required' => false,
+    'name' => 'parent_type',
+    'vname' => 'LBL_PARENT_TYPE',
+    'type' => 'parent_type',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'enabled',
+    'duplicate_merge_dom_value' => 1,
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'calculated' => false,
+    'len' => 255,
+    'size' => '20',
+    'dbType' => 'varchar',
+    'studio' => 'hidden',
+    'group' => 'parent_name',
+);

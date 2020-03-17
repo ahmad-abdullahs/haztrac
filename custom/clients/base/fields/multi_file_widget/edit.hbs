@@ -1,0 +1,49 @@
+{{#notEq this.view.action 'list'}}
+<table class="table table-striped dataTable">
+    <tbody>
+{{/notEq}}
+    <tr>
+        <td>File Name</td>
+        <td>File Type</td>
+        <td>Lab Ref Number</td>
+        <td>Analysis Date</td>
+        <td></td>
+    </tr>
+    {{#each attachmentCollection.models}}
+        <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
+            {{#each ../columnsMeta}} 
+                {{#if readonly}}
+                    <td class="rowcell subpanel-field cbi-rowcell" data-name="{{name}}" style="">
+                        {{field ../../../view model=../../this template="detail"}}
+                    </td>
+                {{else}}
+                    {{#eq name "uploadfile"}}
+                        <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="">
+                            {{field ../../../../view model=../../../this template=../../../template}}
+                        </td>
+                    {{else}}
+                        <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="">
+                            {{field ../../../../view model=../../../this template="edit"}}
+                        </td>
+                    {{/eq}}
+                {{/if}} 
+            {{/each}}
+            {{#notEq ../view.action 'list'}}
+                <td>
+                     <div class="btn-toolbar prevent-mousedown">
+                        <div class="btn-group">
+                           <a href="javascript:void(0)" class="btn deleteFile" rel="tooltip" title="{{str "Delete File"}}"><i class="icon-plus fa fa-minus"></i></a>
+                        </div>
+                        <div class="btn-group">
+                           <a href="javascript:void(0)" class="btn addFile" rel="tooltip" title="{{str "Add File"}}"><i class="icon-plus fa fa-plus"></i></a>
+                        </div>
+                     </div>
+                </td>
+            {{/notEq}}
+        </tr>
+    {{/each}}
+{{#notEq this.view.action 'list'}}
+    </tbody>
+</table>
+{{/notEq}}
+<div id="{{createWrapper}}"></div>

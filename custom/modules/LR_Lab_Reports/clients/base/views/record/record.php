@@ -173,19 +173,6 @@ $viewdefs['LR_Lab_Reports'] = array(
                     ),
                     1 =>
                     array(
-                        'newTab' => true,
-                        'panelDefault' => 'collapsed',
-                        'name' => 'LBL_RECORDVIEW_PANEL0',
-                        'label' => 'LBL_RECORDVIEW_PANEL0',
-                        'columns' => 2,
-                        'labelsOnTop' => 1,
-                        'placeholders' => 1,
-                        'fields' =>
-                        array(
-                        ),
-                    ),
-                    2 =>
-                    array(
                         'newTab' => false,
                         'panelDefault' => 'collapsed',
                         'name' => 'LBL_RECORDVIEW_PANEL1',
@@ -203,7 +190,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    2 =>
                     array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
@@ -262,9 +249,9 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                             7 =>
                             array(
-                                'name' => 'lab_ref_number_c',
-                                'label' => 'LBL_LAB_REF_NUMBER',
-                                'tabindex' => '50',
+                                'name' => 'other_ref_number_c',
+                                'label' => 'LBL_OTHER_REF_NUMBER',
+                                'tabindex' => '11',
                             ),
                             8 =>
                             array(
@@ -290,29 +277,60 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                             12 =>
                             array(
-                                'name' => 'uploadfile',
-                                'populate_list' =>
-                                array(
-                                    0 => 'document_name',
-                                ),
-                                'span' => 6,
-                            ),
-                            13 =>
-                            array(
-                                'name' => 'other_ref_number_c',
-                                'label' => 'LBL_OTHER_REF_NUMBER',
-                                'tabindex' => '11',
-                                'span' => 6,
-                            ),
-                            14 =>
-                            array(
                                 'name' => 'assigned_user_name',
                                 'tabindex' => '13',
                             ),
-                            15 =>
+                            13 =>
                             array(
                                 'name' => 'team_name',
                                 'tabindex' => '14',
+                            ),
+                        ),
+                    ),
+                    3 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL7',
+                        'label' => 'LBL_RECORDVIEW_PANEL7',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'multi_files',
+                                'label' => 'Attachments',
+                                'dismiss_label' => true,
+                                'type' => 'multi_file_widget',
+                                'linkField' => 'lr_lab_reports_mv_attachments',
+                                'relatedModule' => 'mv_Attachments',
+                                'columns' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'uploadfile',
+                                        'label' => 'LBL_FILE_UPLOAD',
+                                        'type' => 'file',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'category_id',
+                                        'type' => 'enum',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'lab_ref_number',
+                                        'type' => 'text',
+                                    ),
+                                    3 =>
+                                    array(
+                                        'name' => 'analysis_date',
+                                        'type' => 'date',
+                                    ),
+                                ),
+                                'span' => 12,
                             ),
                         ),
                     ),
@@ -374,9 +392,6 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                             1 =>
                             array(
-                                'name' => 'analysis_date_c',
-                                'label' => 'LBL_ANALYSIS_DATE',
-                                'tabindex' => '17',
                             ),
                             2 =>
                             array(
@@ -568,10 +583,6 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 ),
                                 'allowedFieldList' =>
                                 array(
-//                                    0 => 'discount_price',
-//                                    1 => 'list_price',
-//                                    2 => 'cost_price',
-//                                    3 => 'product_list_name_c',
                                 ),
                                 'span' => 12,
                             ),

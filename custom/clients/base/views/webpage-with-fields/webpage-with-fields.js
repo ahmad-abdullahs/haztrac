@@ -54,6 +54,14 @@
         this.viewName = view;
         var settings = _.extend({}, this._defaultOptions, this.settings.attributes);
         this.settings.set(settings);
+        app.events.on('loadTheLabReportInDashlet', this.loadTheLabReportInDashlet, this);
+    },
+
+    loadTheLabReportInDashlet: function (param) {
+        var context = this.context.parent || this.context;
+        var model = context.get('model');
+        model.set('preview_doc_id', param.id + '.' + param.file_ext, {silent: true});
+        this._render();
     },
 
     loadData: function (options) {

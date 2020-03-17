@@ -1,11 +1,76 @@
 ({
     extendsFrom: 'RecordView',
+    fieldTag: 'input[type=file]',
+
     labReportCustomerInfo: {},
 
     initialize: function (options) {
         this.labReportCustomerInfo = {};
         this._super('initialize', [options]);
     },
+
+    handleSave: function (e) {
+        var parent_id = this.model.get('id');
+        var field = this.getField("multi_files", this.model);
+
+        if (field.attachmentCollection.models.length) {
+            _.each(field.attachmentCollection.models, function (model, index) {
+                // To avoid the empty models to save
+                if (model.get('document_name')) {
+                    this.saveAttachments(model, parent_id);
+                }
+            }, this);
+        }
+
+        this._super('handleSave');
+    },
+
+    saveAttachments: function (model, parent_id) {
+        var self = this;
+        var url = 'LR_Lab_Reports/' + parent_id + '/link/lr_lab_reports_mv_attachments';
+
+        var action = 'create';
+        var obj = {
+            deleted: false,
+            assigned_user_id: app.user.id,
+            uploadfile_guid: model.get('uploadfile_guid'),
+            temp_file_ext: model.get('temp_file_ext'),
+        };
+
+        if (!model.isnew) {
+            url = 'LR_Lab_Reports/' + parent_id + '/link/lr_lab_reports_mv_attachments/' + model.get('id');
+            action = 'update';
+            obj = {
+                deleted: false,
+                id: model.get('id'),
+                category_id: model.get('category_id'),
+                lab_ref_number: model.get('lab_ref_number'),
+                assigned_user_id: app.user.id,
+            };
+        }
+
+        app.api.call(action, app.api.buildURL(url), obj, {
+            success: _.bind(function (result) {
+                model.set('id', result.related_record.id);
+                model.isnew = false;
+                model.save(null, {
+                    success: function () {
+                    },
+                });
+            }),
+            error: _.bind(function (err) {
+                console.log(err);
+            }, this),
+            complete: _.bind(function () {
+            }, this)
+        });
+    },
+
+    /*cancelClicked: function () {
+     this._super('cancelClicked');
+     var field = this.getField("multi_files", this.model);
+     field.render();
+     },*/
 
     loadData: function (options) {
         this._super('loadData', [options]);
@@ -31,10 +96,7 @@
         this.labReportCustomerInfo[accountId] = {};
         var self = this;
 
-        var url = app.api.buildURL('Accounts', 'lr_lab_reports_accounts', {
-            id: accountId,
-            link: true,
-        }, {
+        var url = app.api.buildURL('Accounts', 'lr_lab_reports_accounts', {id: accountId, link: true}, {
             limit: '-1',
         });
         app.api.call('read', url, null, {

@@ -44,6 +44,12 @@ $app_list_strings['history_filter_options_cstm'] = array(
     90 => 'Last Quarter',
 );
 
+$app_list_strings['cst_document_type_list'] = array(
+    '' => '',
+    'Primary' => 'Primary',
+    'Secondary' => 'Secondary',
+);
+
 $app_strings['LBL_OPERATOR_CSTM_CONTAINS'] = 'contains';
 
 $app_list_strings['waste_source_code_list'] = array(

@@ -1,0 +1,38 @@
+<table class="table table-striped dataTable">
+    <tbody>
+        <tr>
+            <td>File Name</td>
+            <td style="text-align: center;">File Type</td>
+            <td style="text-align: center;">Lab Ref Number</td>
+            <td style="text-align: center;">Analysis Date</td>
+            <td></td>
+        </tr>
+        {{#each attachmentCollection.models}}
+            <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
+                {{#each ../columnsMeta}} 
+                    {{#if readonly}}
+                        <td class="rowcell subpanel-field cbi-rowcell" data-name="{{name}}" style="">
+                            {{field ../../../view model=../../this template="detail"}}
+                        </td>
+                    {{else}}
+                        {{#eq name "uploadfile"}}
+                            <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="">
+                                <a name="advance-relate-preview" id="{{../../../this.attributes.id}}" file_ext="{{../../../this.attributes.file_ext}}" class="rowaction loadInDashlet" style="padding-right: 1px;" tabindex="-1">
+                                    <i rel="tooltip" title="" class="fa fa-eye" data-original-title="Preview Record">
+                                    </i>
+                                </a>
+                                {{field ../../../../view model=../../../this template=../../../template}}
+                            </td>
+                        {{else}}
+                            <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="text-align: center;">
+                                {{field ../../../../view model=../../../this template=../../../template}}
+                            </td>
+                        {{/eq}}
+                    {{/if}} 
+                {{/each}}
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<div id="{{createWrapper}}"></div>
