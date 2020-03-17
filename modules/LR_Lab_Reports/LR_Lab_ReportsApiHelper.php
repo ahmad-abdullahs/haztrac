@@ -20,7 +20,7 @@ class LR_Lab_ReportsApiHelper extends SugarBeanApiHelper {
                 WHERE
                     r.deleted = '0' AND r.ht_manifest_lr_lab_reports_1lr_lab_reports_idb = '{$bean->id}'
 SQL;
-        global $db;
+        global $db, $sugar_config;
         $res = $db->query($sql);
         while ($row = $db->fetchByAssoc($res)) {
             $ret['manifests'][] = $row;
@@ -46,11 +46,11 @@ SQL;
 
         $res = $db->query($sql);
         $ret['preview_doc_id'] = 'report-preview.jpg';
-        $ret['lab_report_preview_c'] = "http://localhost/haztrac/pdfs/report-preview.jpg#zoom=60";
+        $ret['lab_report_preview_c'] = "{$sugar_config['site_url']}/pdfs/report-preview.jpg#zoom=60";
         while ($row = $db->fetchByAssoc($res)) {
             if (!empty($row['id']) && !empty($row['file_ext'])) {
                 $ret['preview_doc_id'] = $row['id'] . '.' . $row['file_ext'];
-                $ret['lab_report_preview_c'] = "http://localhost/haztrac/pdfs/{$ret['preview_doc_id']}#zoom=60";
+                $ret['lab_report_preview_c'] = "{$sugar_config['site_url']}/pdfs/{$ret['preview_doc_id']}#zoom=60";
             }
         }
 
