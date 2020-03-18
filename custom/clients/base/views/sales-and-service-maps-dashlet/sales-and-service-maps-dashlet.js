@@ -14,10 +14,21 @@
     initDashlet: function (view) {
         this._super('initDashlet', [view]);
         this.settings.on('change:filter', _.bind(this.reApplyFilter, this), this);
-        if (this.context.parent)
-            if (!_.isUndefined(this.context.parent.get('collection')) && !_.isNull(this.context.parent.get('collection')))
+        if (this.context.parent) {
+            if (!_.isUndefined(this.context.parent.get('collection')) && !_.isNull(this.context.parent.get('collection'))) {
                 this.context.parent.get('collection').on('reset', _.bind(this.reApplyFilter, this), this);
+            }
+        }
 
+        app.events.on('loadMapForSelectedRows', this.loadMapForSelectedRows, this);
+    },
+
+    loadMapForSelectedRows: function (ids) {
+        this._displayDashlet([{
+                'id': {
+                    '$in': ids,
+                }
+            }], true);
     },
 
     /**
@@ -34,7 +45,7 @@
     /**
      * @Override
      */
-    _displayDashlet: function (filterDef) {
+    _displayDashlet: function (filterDef, flag) {
         filterDef = filterDef || [];
         var listViewFilterDef = [];
 
@@ -42,11 +53,19 @@
             if (!_.isUndefined(this.context.parent.get('collection')) && !_.isNull(this.context.parent.get('collection')))
                 listViewFilterDef = this.context.parent.get('collection').filterDef;
 
-        filterDef = _.union(listViewFilterDef, [{
-                'on_date_c': {
-                    '$dateRange': this.settings.get('filter')
-                }
-            }]);
+        if (flag == true) {
+            filterDef = _.union(filterDef, listViewFilterDef, [{
+                    'on_date_c': {
+                        '$dateRange': this.settings.get('filter')
+                    }
+                }]);
+        } else {
+            filterDef = _.union(listViewFilterDef, [{
+                    'on_date_c': {
+                        '$dateRange': this.settings.get('filter')
+                    }
+                }]);
+        }
 
         this._super('_displayDashlet', [filterDef]);
     },

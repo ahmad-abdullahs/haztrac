@@ -11,11 +11,20 @@ $app_strings['LBL_ACTIVE_MANIFEST_DASHLET_INACTIVE'] = 'Inactive';
 $app_strings['LBL_SALES_SERVICE_DASHLET_VIEW'] = 'Sales and Services';
 $app_strings['LBL_SALES_SERVICE_DASHLET_VIEW_DESCRIPTION'] = 'This dashlet displays the list of Sales and Services records';
 $app_list_strings['sales_service_date_range_dom'] = array(
+    'all' => 'All',
     'today' => 'Today',
     'yesterday' => 'Yesterday',
     'tomorrow' => 'Tomorrow',
     'last_7_days' => 'Last 7 Days',
     'next_7_days' => 'Next 7 Days',
+    'last_30_days' => 'Last 30 Days',
+    'next_30_days' => 'Next 30 Days',
+    'last_month' => 'Last Month',
+    'this_month' => 'This Month',
+    'next_month' => 'Next Month',
+    'last_year' => 'Last Year',
+    'this_year' => 'This Year',
+    'next_year' => 'Next Year',
 );
 
 // sales and service maps dashlet
