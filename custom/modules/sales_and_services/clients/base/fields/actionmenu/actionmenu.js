@@ -41,6 +41,11 @@
         this.addMapFilter();
     },
 
+    /*
+     * When the row is selected on the sales and service list view.
+     * It will get the selected row ids and call the app level trigger to
+     * notify the dashlet to load the appropriate records on the Map. 
+     */
     addMapFilter: function () {
         var ids = [];
         _.each(this.$el.parents('tbody').children('tr'), function (ele, key) {
