@@ -379,7 +379,7 @@
             iconName = 'empty';
         }
 
-        if (node.is_bundle_product_c == 'parent' && node.is_group_item_c == true) {
+        if (/*node.is_bundle_product_c == 'parent' && */node.is_group_item_c == true) {
             iconName = 'file-paperclip';
         } else if (node.is_bundle_product_c == 'parent') {
             iconName = 'file-archive';
@@ -561,6 +561,18 @@
         return this.setDateTimeFormate(app.date(value).format(app.date.convertFormat(this.getUserDateTimeFormat())));
     },
 
+    showProcessing: function (show) {
+        if (show) {
+            app.alert.show('show_processing', {
+                level: 'process',
+                title: 'Processing',
+                autoClose: false,
+            });
+        } else {
+            app.alert.dismiss('show_processing');
+        }
+    },
+
     /**
      * When a tree item's name gets clicked
      *
@@ -568,11 +580,13 @@
      * @protected
      */
     _onTreeNodeNameClicked: function (target) {
+        this.showProcessing(true);
         // If this is the Group product template then do this... otherwise else part
         if (this.model.get('is_group_item_c')) {
             this._fetchRecord(target._itemId, {
                 success: _.bind(function (data) {
-                    if (data.is_bundle_product_c == 'parent' && data.is_group_item_c == true) {
+                    if (/*data.is_bundle_product_c == 'parent' && */data.is_group_item_c == true) {
+                        this.showProcessing(false);
                         var message = 'Group item cannot be added in Group, It is only used in Accounts/Customer module.';
                         app.alert.show('add-item-warning', {
                             level: 'warning',
@@ -634,11 +648,13 @@
                                         model.attributes.product_templates_product_templates_1 = data.id;
                                         app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                     }
-                                })
+                                });
+                                _self.showProcessing(false);
                             }
                         })
+                    } else {
+                        this.showProcessing(false);
                     }
-
                 }, this)
             });
         } else {
@@ -651,12 +667,13 @@
                         message = 'Bundle will not be added in Non Group item.';
                         showWarning = true;
                     }
-                    if (data.is_bundle_product_c == 'parent' && data.is_group_item_c == true) {
-                        message = 'Group item cannot be added in Group, It is only used in Accounts/Customer module.';
+                    if (/*data.is_bundle_product_c == 'parent' && */data.is_group_item_c == true) {
+                        message = 'Group will not be added in any item.';
                         showWarning = true;
                     }
 
                     if (showWarning) {
+                        this.showProcessing(false);
                         app.alert.show('add-item-warning', {
                             level: 'warning',
                             messages: message,
@@ -677,6 +694,7 @@
                     if (!_.isUndefined(viewDetails)) {
                         app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
                     }
+                    this.showProcessing(false);
                 }, this)
             });
         }

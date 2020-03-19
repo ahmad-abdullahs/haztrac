@@ -125,18 +125,14 @@
         var parentModel = context.get('model') || context.parent.get('model'),
                 model = this.createLinkModel(parentModel, link),
                 self = this;
-
-        var groupItemUsageAllowed = false;
-
-        if (this.parentModule == 'Accounts') {
-            groupItemUsageAllowed = true;
-        }
-
+        var bundleItemUsageAllowed = true;
         var parentModule = parentModel.module || parentModel.get("module") || parentModel.get("_module");
+
         if (parentModule == "sales_and_services") {
             model.set('account_name', parentModel.get('accounts_sales_and_services_1_name'));
             model.set('account_id', parentModel.get('accounts_sales_and_services_1accounts_ida'));
         }
+
         if (parentModule == "RevenueLineItems") {
             model.set('account_name', parentModel.get('account_name'));
             model.set('account_id', parentModel.get('account_id'));
@@ -144,6 +140,7 @@
             model.set('revenuelineitems_revenuelineitems_1_name', parentModel.get('name'));
             model.set('sales_and_services_revenuelineitems_1_name', parentModel.get('sales_and_services_revenuelineitems_1_name'));
             model.set('sales_and_services_revenuelineitems_1sales_and_services_ida', parentModel.get('sales_and_services_revenuelineitems_1sales_and_services_ida'));
+            bundleItemUsageAllowed = false;
         }
 
         app.drawer.open({
@@ -152,7 +149,8 @@
                 create: true,
                 module: model.module,
                 model: model,
-                groupItemUsageAllowed: groupItemUsageAllowed,
+                groupItemUsageAllowed: false,
+                bundleItemUsageAllowed: bundleItemUsageAllowed,
             }
         }, function (context, model) {
             if (!model) {

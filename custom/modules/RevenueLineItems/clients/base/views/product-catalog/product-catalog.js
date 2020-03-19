@@ -382,7 +382,7 @@
             iconName = 'empty';
         }
 
-        if (node.is_bundle_product_c == 'parent' && node.is_group_item_c == true) {
+        if (/*node.is_bundle_product_c == 'parent' && */node.is_group_item_c == true) {
             iconName = 'file-paperclip';
         } else if (node.is_bundle_product_c == 'parent') {
             iconName = 'file-archive';
@@ -563,6 +563,18 @@
         return this.setDateTimeFormate(app.date(value).format(app.date.convertFormat(this.getUserDateTimeFormat())));
     },
 
+    showProcessing: function (show) {
+        if (show) {
+            app.alert.show('show_processing', {
+                level: 'process',
+                title: 'Processing',
+                autoClose: false,
+            });
+        } else {
+            app.alert.dismiss('show_processing');
+        }
+    },
+
     /**
      * When a tree item's name gets clicked
      *
@@ -570,6 +582,7 @@
      * @protected
      */
     _onTreeNodeNameClicked: function (target) {
+        this.showProcessing(true);
         this._fetchRecord(target._itemId, {
             success: _.bind(function (data) {
                 var _id = _.clone(data.id);
@@ -577,7 +590,21 @@
                 var _self = this;
 
                 if (this.context.parent.get('groupItemUsageAllowed') != true && data.is_group_item_c == true) {
+                    this.showProcessing(false);
                     var message = 'Group item can only be used in Accounts/Customer module.';
+                    app.alert.show('add-item-warning', {
+                        level: 'warning',
+                        messages: message,
+                        closeable: true,
+                        autoClose: true,
+                        autoCloseDelay: 5000,
+                    });
+                    return;
+                }
+
+                if (this.context.parent.get('bundleItemUsageAllowed') == false && data.is_bundle_product_c == 'parent') {
+                    this.showProcessing(false);
+                    var message = 'Revenue Line Item Bundle will not be added within a Revenue Line Item.';
                     app.alert.show('add-item-warning', {
                         level: 'warning',
                         messages: message,
@@ -662,11 +689,13 @@
                                     }
                                     app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', model.attributes);
                                 }
-                            })
+                            });
+                            _self.showProcessing(false);
                         }
                     })
+                } else {
+                    this.showProcessing(false);
                 }
-
             }, this)
         });
     },
