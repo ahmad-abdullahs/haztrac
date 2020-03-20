@@ -168,6 +168,9 @@ $viewdefs['sales_and_services'] = array(
                                     2 => 'account_status_c',
                                     3 => 'po_required',
                                     4 => 'commentlog',
+                                    5 => 'revenuelineitems_revenuelineitems_1',
+                                    6 => 'revenuelineitems_revenuelineitems_1_right',
+                                    7 => 'sales_and_services_revenuelineitems_1',
                                 ),
                             ),
                             2 =>
@@ -510,92 +513,11 @@ $viewdefs['sales_and_services'] = array(
                                 'name' => 'contracts_sales_and_services_1_name',
                                 'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
                             ),
-                        ),
-                    ),
-                    6 =>
-                    array(
-                        'newTab' => true,
-                        'panelDefault' => 'expanded',
-                        'name' => 'LBL_RECORDVIEW_PANEL7',
-                        'label' => 'LBL_RECORDVIEW_PANEL7',
-                        'columns' => 2,
-                        'labelsOnTop' => 1,
-                        'placeholders' => 1,
-                        'fields' =>
-                        array(
-                            0 =>
+                            6 =>
                             array(
-                                'name' => 'audit',
-                                'label' => 'Audit',
-                                'type' => 'audit-list-field',
-                                'relatedModule' => 'sales_and_services',
-                                'readonly' => true,
-                                'columns' =>
-                                array(
-                                    0 =>
-                                    array(
-                                        'type' => 'field-name',
-                                        'name' => 'field_name',
-                                        'label' => 'Field',
-                                        'sortable' => true,
-                                        'width' => '20%',
-                                    ),
-                                    1 =>
-                                    array(
-                                        'type' => 'base',
-                                        'name' => 'before',
-                                        'label' => 'Old Value',
-                                        'sortable' => false,
-                                        'width' => '20%',
-                                    ),
-                                    2 =>
-                                    array(
-                                        'type' => 'base',
-                                        'name' => 'after',
-                                        'label' => 'New Value',
-                                        'sortable' => false,
-                                        'width' => '20%',
-                                    ),
-                                    3 =>
-                                    array(
-                                        'type' => 'base',
-                                        'name' => 'created_by_username',
-                                        'label' => 'Changed By',
-                                        'sortable' => true,
-                                        'width' => '10%',
-                                    ),
-                                    4 =>
-                                    array(
-                                        'type' => 'source',
-                                        'name' => 'source',
-                                        'label' => 'Source',
-                                        'sortable' => false,
-                                        'width' => '10%',
-                                        'module' => 'Users',
-                                        'link' => true,
-                                    ),
-                                    5 =>
-                                    array(
-                                        'type' => 'datetimecombo',
-                                        'name' => 'date_created',
-                                        'label' => 'Change Date',
-                                        'options' => 'date_range_search_dom',
-                                        'sortable' => true,
-                                        'width' => '20%',
-                                    ),
-                                ),
-                                'relatedFields' =>
-                                array(
-                                ),
-                                'allowedFieldList' =>
-                                array(
-//                                    0 => 'discount_price',
-//                                    1 => 'list_price',
-//                                    2 => 'cost_price',
-//                                    3 => 'product_list_name_c',
-                                ),
-                                'span' => 12,
-                            ),
+                                'name' => 'sales_and_services_revenuelineitems_1',
+                                'type' => 'relate-collection-preview',
+                            )
                         ),
                     ),
                 ),

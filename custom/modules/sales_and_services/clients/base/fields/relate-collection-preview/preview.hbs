@@ -1,0 +1,19 @@
+
+
+{{#if value.records.length}}
+    <ul class="activitystream-list results">
+        {{#each value.records}}
+            <li class="activitystream-posts-comments-container {{#eq is_bundle_product_c 'parent'}}rli-td-bcc{{/eq}} {{_backgroundColorClass}}">
+                <div class="label label-module label-module-md label-RevenueLineItems pull-left" rel="tooltip" data-placement="right" title="" data-original-title="Related Revenue Line Item" style="border-radius: 0px;">
+                    R-RL
+                </div>
+                <div {{#notEq is_bundle_product_c 'parent'}}style="margin-top: 6px;"{{else}}style="margin-top: 12px;"{{/notEq}}>
+                    <span class="tagged">{{!--{{#if rli_as_template_c}}<i class="fa fa-recycle"></i>{{/if}}--}}Related RLI : <a href="#RevenueLineItems/{{id}}"> {{name}}</a></span>
+                    {{#notEq is_bundle_product_c 'parent'}}
+                        <span class="tagged"><b>Unit Price :</b> {{discount_price}} | <b>Actual Quantity :</b> {{quantity}} | <b>UOM :</b> {{product_uom_c}} | <b>Forecast Amount :</b> {{estimated_total_amount}} | <b>Sale Amount :</b> {{total_amount}}</span>
+                    {{/notEq}}
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+{{/if}}
