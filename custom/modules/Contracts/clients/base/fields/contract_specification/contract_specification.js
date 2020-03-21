@@ -9,7 +9,10 @@
     isFirst: true,
     addClass: 'addRecord',
     setFocusEle: '',
+    isPreview: false,
+
     initialize: function (options) {
+        this.isPreview = false;
         this._super('initialize', [options]);
         this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
     },
@@ -141,6 +144,10 @@
         }, this);
 
         var fieldAction = (this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName)) ? "edit" : "detail";
+        if (this.tplName === 'preview') {
+            fieldAction = "preview";
+            this.isPreview = true;
+        }
 
         var modelRowTemplate = app.template.getField(this.type, template, this.module);
         var fieldTemplate = modelRowTemplate({
@@ -152,6 +159,7 @@
             labelsOnTop: labelsOnTop,
             modelFields: modelFields,
             uid: uid,
+            isPreview: this.isPreview,
         });
 
         this.fieldIds.push(uid);
@@ -254,7 +262,11 @@
             var sfId = $(this).attr('sfuuid');
             try {
                 var fieldToRender = self.view.fields[sfId];
-                self.view.editableFields.push(fieldToRender);
+
+                if (self.tplName != "preview") {
+                    self.view.editableFields.push(fieldToRender);
+                }
+
                 self.view._renderField(fieldToRender);
                 self.modelFields[sfId] = fieldToRender;
             } catch (e) {

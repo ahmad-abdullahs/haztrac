@@ -10,10 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="control-group {{name}}_row clearfix {{name}}-{{fieldAction}}" data-uid={{uid}}>
+
+<div class="control-group {{name}}_row clearfix {{name}}-{{fieldAction}}" data-uid={{uid}} {{#if isPreview}}style="margin-bottom: 0px;"{{/if}}>
     <div class="row-fluid" data-uid={{uid}}>
         {{#each modelFields}}
-            <div class="span{{span}} {{css_class}} record-cell">
+            <div class="span{{span}} {{css_class}} record-cell" {{#if ../isPreview}}style="min-height: 20px;"{{/if}}>
                 {{field ../view model=../model template=../fieldAction}}
             </div>
         {{/each}}

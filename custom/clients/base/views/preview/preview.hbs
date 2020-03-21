@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
+
 <div class="block preview-data">
 {{#each meta.panels}}
 {{#each fields}}
@@ -17,13 +18,17 @@
     <div class="record-cell field-row{{#if ../../hide}}{{#if ../../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}"
         {{#eq ../name "picture"}} style="display: block;"{{/eq}}
         {{#eq ../name "name"}} style="display: block;"{{/eq}}
+        {{#eq ../type "contract_specification"}} style="display: block;"{{/eq}}
         {{#eq ../type "relate-collection-preview"}} style="display: block;"{{/eq}}
         {{#eq ../type "iframe"}} style="display: block;"{{/eq}}>
-        <div class="field-label ellipsis_inline" data-name="{{../name}}">
-            <span class="preview-lock-link-wrapper hide" data-name="{{../name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="left">
-                <i class="fa fa-lock"></i>
-            </span>
-            {{str  label ../../../model.module}}</div>
+        {{#notEq ../labelsOnTop false}}
+            <div class="field-label ellipsis_inline" data-name="{{../../name}}">
+                <span class="preview-lock-link-wrapper hide" data-name="{{../../name}}" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="left">
+                    <i class="fa fa-lock"></i>
+                </span>
+                {{str  label ../../../../model.module}}
+            </div>
+        {{/notEq}}
         <div class="field-value" data-type="{{../type}}" name="{{../name}}" data-name="{{../name}}">
             {{field ../../../this model=../../../model template="preview"}}
         </div>
