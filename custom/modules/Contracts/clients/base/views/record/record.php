@@ -229,7 +229,7 @@ $viewdefs['Contracts'] = array(
                                         'css_class' => 'contract_specification_name',
                                         'label' => 'LBL_CONTRACT_SPECIFICATION_NAME',
                                         'type' => 'text',
-                                        'span' => 5,
+                                        'span' => 6,
                                         'required' => true,
                                     ),
                                     1 =>
@@ -238,7 +238,7 @@ $viewdefs['Contracts'] = array(
                                         'css_class' => 'contract_specification_text_details',
                                         'label' => 'LBL_CONTRACT_SPECIFICATION_TEXT_DETAILS',
                                         'type' => 'text',
-                                        'span' => 6,
+                                        'span' => 5,
                                     ),
                                 ),
                                 'span' => 12,
