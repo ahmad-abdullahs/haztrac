@@ -208,6 +208,7 @@ $viewdefs[$module_name] = array(
                                 'type' => 'transporter',
                                 'label' => 'LBL_TRANSPORTER',
                                 'dismiss_label' => true,
+                                'labelsOnTop' => false,
                                 'span' => 12,
                             ),
                             7 =>
