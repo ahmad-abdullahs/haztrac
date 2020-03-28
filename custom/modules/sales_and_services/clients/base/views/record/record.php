@@ -269,6 +269,8 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             11 =>
                             array(
+                                'name' => 'print_status_c',
+                                'label' => 'LBL_PRINT_STATUS',
                             ),
                             12 =>
                             array(

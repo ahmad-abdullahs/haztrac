@@ -63,6 +63,7 @@ if (isset($_REQUEST['isDuplicate']))
 $xtpl->assign("ID", $focus->id);
 $xtpl->assign("NAME", Team::getDisplayName($focus->name, $focus->name_2));
 $xtpl->assign("DESCRIPTION", $focus->description);
+$xtpl->assign("ACTIVE_MANIFEST_NUMBER", $focus->active_manifest_number);
 $xtpl->assign("TRANSPORTER_CARRIER_C", $focus->transporter_carrier_c);
 $xtpl->assign("ACCOUNT_ID_C", $focus->account_id_c);
 
@@ -88,4 +89,14 @@ $xtpl->out("main");
 
 
 echo $javascript->getScript();
-?>
+echo '<input type="hidden" name="pdf_printers_list" id="pdf_printers_list" value="' . get_select_options_with_id($app_list_strings['pdf_printers_list'], '') . '">
+<input type="hidden" name="pdf_template_type_list" id="pdf_template_type_list" value="' . get_select_options_with_id($app_list_strings['pdf_template_type_list'], '') . '">';
+
+$loadPrinterSettings = '<script>';
+$printer_setting = $focus->printer_setting;
+$printer_settingArr = json_decode(html_entity_decode($printer_setting), ENT_QUOTES);
+foreach ($printer_settingArr as $pSetting) {
+    $loadPrinterSettings .= "load_printerSetting('0','" . $pSetting['pdf_template_type'] . "','" . $pSetting['pdf_printer'] . "');";
+}
+$loadPrinterSettings .= '</script>';
+echo $loadPrinterSettings;

@@ -57,6 +57,12 @@ $viewdefs['PdfManager'] = array(
                 1 =>
                 array(
                     0 => 'description',
+                    1 =>
+                    array(
+                        'name' => 'pdf_template_type',
+                        'studio' => 'visible',
+                        'label' => 'LBL_PDF_TEMPLATE_TYPE',
+                    ),
                 ),
                 2 =>
                 array(

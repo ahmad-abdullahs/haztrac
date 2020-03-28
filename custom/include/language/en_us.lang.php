@@ -16,6 +16,7 @@ $app_strings['LBL_ADD_MULTIPLE_RLI_RECORD'] = 'Add Multiple Items';
 $app_strings['LBL_COPY_RLI_BUTTON'] = 'Copy';
 //
 $app_strings['LBL_PRINT_BUTTON_LABEL'] = 'Print';
+$app_strings['LBL_PRINT_QUEUE_BUTTON_LABEL'] = 'Print Queue';
 $app_strings['LBL_PRINT_PAPERWORK'] = 'Print Paperwork';
 $app_strings['LBL_COMPLETE_SALE'] = 'Complete Sales';
 $app_strings['LBL_CONVERT_TO_LAB_TEMPLATE'] = 'Convert To Template';
@@ -209,4 +210,26 @@ $app_list_strings['comission_subtype_flat_list'] = array(
     '' => '',
     'Per Sale' => 'Per Sale',
     'Per UOM' => 'Per UOM',
+);
+
+$app_list_strings['pdf_template_type_list'] = array(
+    '' => '',
+    'Work Order' => 'Work Order',
+    'Manifest' => 'Manifest',
+    'Labels' => 'Labels',
+    'BOI' => 'BOI\'s',
+    'Setup' => 'Setup',
+);
+
+$app_list_strings['pdf_printers_list'] = array(
+    '' => '',
+    'AZ Work Order Printer' => 'AZ Work Order Printer',
+    'AZ Manifest Printer' => 'AZ Manifest Printer',
+    'AZ Labels Printer' => 'AZ Labels Printer',
+    'CA Work Order Printer' => 'CA Work Order Printer',
+    'CA Manifest Printer' => 'CA Manifest Printer',
+    'CA Labels Printer' => 'CA Labels Printer',
+    'TX Work Order Printer' => 'TX Work Order Printer',
+    'TX Manifest Printer' => 'TX Manifest Printer',
+    'TX Labels Printer' => 'TX Labels Printer',
 );

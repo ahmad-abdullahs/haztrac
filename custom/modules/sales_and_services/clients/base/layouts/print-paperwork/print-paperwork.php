@@ -30,6 +30,9 @@ $viewdefs['sales_and_services']['base']['layout']['print-paperwork'] = array(
                                 array(
                                     'view' => 'print-paperwork',
                                 ),
+                                array(
+                                    'view' => 'pdf-templates-to-printer-mapping',
+                                ),
                             ),
                         ),
                     ),

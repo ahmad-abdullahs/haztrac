@@ -15,23 +15,32 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
     'template' => 'record',
     'buttons' => array(
         array(
-            'name' => 'cancel_button',
+            'name' => 'close_button',
             'type' => 'button',
-            'label' => 'LBL_CANCEL_BUTTON_LABEL',
+            'label' => 'LBL_CLOSE_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'events' => array(
-                'click' => 'button:cancel_button:click',
+                'click' => 'button:close_button:click',
             ),
         ),
         array(
-            'name' => 'save_button',
+            'name' => 'print_button',
             'type' => 'button',
-//            'label' => 'LBL_SAVE_BUTTON_LABEL',
             'label' => 'LBL_PRINT_BUTTON_LABEL',
             'primary' => true,
             'showOn' => 'create',
             'events' => array(
-                'click' => 'button:save_button:click',
+                'click' => 'button:print_button:click',
+            ),
+        ),
+        array(
+            'name' => 'print_queue_button',
+            'type' => 'button',
+            'label' => 'LBL_PRINT_QUEUE_BUTTON_LABEL',
+            'primary' => true,
+            'showOn' => 'create',
+            'events' => array(
+                'click' => 'button:print_queue_button:click',
             ),
         ),
         array(
@@ -67,88 +76,17 @@ $viewdefs['sales_and_services']['base']['view']['print-paperwork'] = array(
             'title' => '',
             'labelsOnTop' => true,
             'placeholders' => true,
-            'fields' =>
-            array(
-                array(
-//                    'name' => 'print_paperword_today',
-                    'name' => 'recurring_sale_c',
-                    'label' => 'LBL_PRINT_PAPERWORD_TODAY',
-                    'type' => 'bool',
-                ),
+            'newTab' => true,
+            'panelDefault' => 'expanded',
+            'fields' => array(
                 array(
                 ),
-                array(
-//                    'name' => 'print_paperword_tomorrow',
-                    'name' => 'taxable_c',
-                    'type' => 'bool',
-                    'label' => 'LBL_PRINT_PAPERWORD_TOMORROW',
-                ),
-                array(
-                ),
-                array(
-//                    'name' => 'print_paperword_tomorrow',
-                    'name' => 'payment_paid_c',
-                    'type' => 'bool',
-                    'label' => 'LBL_PRINT_PAPERWORD_AFTER_PAYMENT',
-                ),
-                array(
-                ),
-                array(
-                    'name' => 'date_start',
-                    'label' => 'LBL_PRINT_PAPERWORD_START_DATE',
-                    'type' => 'datetimecombo',
-                    'required' => true,
-                ),
-                array(
-                ),
-                array(
-                    'name' => 'date_end',
-                    'label' => 'LBL_PRINT_PAPERWORD_END_DATE',
-                    'type' => 'datetimecombo',
-                    'required' => true,
-                ),
-                array(
-                ),
-                array(
-                    'name' => 'print_manifest',
-                    'label' => 'LBL_PRINT_MANIFEST',
-                    'type' => 'button',
-                    'primary' => true,
-                    'events' => array(
-                        'click' => 'button:print_manifest:click',
-                    ),
-                ),
-                array(
-                    'name' => 'print_manifest_with_num',
-                    'label' => 'LBL_PRINT_MANIFEST_WITH_NUM',
-                    'type' => 'button',
-                    'primary' => true,
-                    'events' => array(
-                        'click' => 'button:print_manifest_with_num:click',
-                    ),
-                ),
-//                array(
-//                    'name' => 'xaxis',
-//                    'label' => 'X-Axis',
-//                    'type' => 'int',
-//                    'len' => '2',
-//                    'default' => '50',
-//                    'span' => 6
-//                ),
-//                array(
-//                    'name' => 'yaxis',
-//                    'label' => 'Y-Axis',
-//                    'type' => 'int',
-//                    'len' => '2',
-//                    'default' => '19',
-//                    'span' => 6
-//                ),
             ),
         ),
     ),
     'templateMeta' =>
     array(
-        'useTabs' => false,
+        'useTabs' => true,
         'maxColumns' => '2',
     ),
 );

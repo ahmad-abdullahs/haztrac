@@ -37,6 +37,8 @@ $viewdefs['sales_and_services'] = array(
                                     10 => 'service_site_address_state_c',
                                     11 => 'service_site_address_postalcode_c',
                                     12 => 'service_site_address_country_c',
+                                    13 => 'pdf_template_printer_widget',
+                                    14 => 'sales_and_services_revenuelineitems_1',
                                         ), getViewFields('recordview', 'sales_and_services')),
                                 'width' => 'medium',
                             ),

@@ -57,8 +57,17 @@ $xtpl->assign("RETURN_ACTION", "DetailView");
 $xtpl->assign("ACTION", "EditView");
 $xtpl->assign("NAME", Team::getDisplayName($focus->name, $focus->name_2));
 $xtpl->assign("DESCRIPTION", nl2br(url2html($focus->description)));
+$xtpl->assign("ACTIVE_MANIFEST_NUMBER", $focus->active_manifest_number);
 $xtpl->assign("TRANSPORTER_CARRIER_C", $focus->transporter_carrier_c);
 $xtpl->assign("ACCOUNT_ID_C", $focus->account_id_c);
+
+$printer_setting = json_decode(html_entity_decode($focus->printer_setting), ENT_QUOTES);
+$txt = '';
+foreach ($printer_setting as $pSetting) {
+    $txt .= '<div>' . $app_list_strings['pdf_template_type_list'][$pSetting['pdf_template_type']] . ' - ' .
+            $app_list_strings['pdf_printers_list'][$pSetting['pdf_printer']] . '</div>';
+}
+$xtpl->assign("PRINTER_SETTING", $txt);
 
 $buttons = array(<<<EOD
             <input type="submit" class="button" id="teamEditButton" title="{$app_strings['LBL_EDIT_BUTTON_TITLE']}" accessKey="{$app_strings['LBL_EDIT_BUTTON_KEY']}" value="{$app_strings['LBL_EDIT_BUTTON_LABEL']}">

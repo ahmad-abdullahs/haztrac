@@ -73,6 +73,19 @@
         <tr>
             <td width="15%" scope="row"><slot>{MOD.LBL_DESCRIPTION}</slot></td>
             <td width="35%"><slot><textarea name="description" rows="4" cols="60" tabindex="1">{DESCRIPTION}</textarea></slot></td>
+            <td width="15%" scope="row"><slot>{MOD.LBL_PRINTER_SETTING}</slot></td>
+            <td width="35%">
+                <slot>
+                    <button type="button" onclick="add_printerSetting(0)">
+                        <img src="themes/default/images/id-ff-add.png?v=XIOrSnRh3tH9Lrv48G3CXw">
+                    </button>
+                    <table id="printerSetting0_table" width="100%" class=""></table>
+                </slot>
+            </td>
+        </tr>
+        <tr>
+            <td width="15%" scope="row"><slot>{MOD.LBL_ACTIVE_MANIFEST_NUMBER}</slot></td>
+            <td width="35%"><slot><input name="active_manifest_number" rows="4" cols="60" tabindex="1"  value="{ACTIVE_MANIFEST_NUMBER}"></slot></td>
             <td width="15%" scope="row"><slot></slot></td>
             <td width="35%"><slot></slot></td>
         </tr>
@@ -82,8 +95,44 @@
 </form>
 
 <script language="JavaScript" type="text/javascript">
+    var printerLn = new Array();
+
     function set_focus() {
         document.EditView.name.focus();
+    }
+
+    function add_printerSetting(ln) {
+        var pdf_template_type_list = document.getElementById("pdf_template_type_list").value;
+        var pdf_printers_list = document.getElementById("pdf_printers_list").value;
+
+        if (printerLn[ln] == null) {
+            printerLn[ln] = 0
+        }
+
+        var tablebody = document.createElement("tbody");
+        tablebody.id = 'printerSetting' + ln + '_body' + printerLn[ln];
+        document.getElementById('printerSetting' + ln + '_table').appendChild(tablebody);
+
+        var x = tablebody.insertRow(-1);
+        x.id = 'printerSetting' + ln + '_line' + printerLn[ln];
+
+        var a = x.insertCell(0);
+        a.innerHTML = "<button type='button' id='printerSetting" + ln + "_delete" + printerLn[ln] + "' class='button' value='Remove Line' tabindex='116' onclick='clear_printerSetting(" + ln + ",this);'><img src='themes/default/images/id-ff-remove-nobg.png?v=od_iHHnXG4uB9UO_PdDhOg' alt='Remove'></button> ";
+        a.innerHTML += "<select tabindex='116' name='team_printer_setting[" + ln + "][pdf_template_type][" + printerLn[ln] + "]' id='team_printer_setting" + ln + "_pdf_template_type" + printerLn[ln] + "'>" + pdf_template_type_list + "</select> ";
+        a.innerHTML += "<select tabindex='116' name='team_printer_setting[" + ln + "][pdf_printer][" + printerLn[ln] + "]' id='team_printer_setting" + ln + "_pdf_printer" + printerLn[ln] + "'>" + pdf_printers_list + "</select> ";
+
+        printerLn[ln]++;
+        return printerLn[ln] - 1;
+    }
+
+    function clear_printerSetting(ln, cln) {
+        document.getElementById('printerSetting' + ln + '_table').deleteRow(cln.parentNode.parentNode.rowIndex);
+    }
+
+    function load_printerSetting(ln, templateType, printer) {
+        var cln = add_printerSetting(ln);
+        document.getElementById("team_printer_setting" + ln + "_pdf_template_type" + cln).value = templateType;
+        document.getElementById("team_printer_setting" + ln + "_pdf_printer" + cln).value = printer;
     }
 </script>
 <!-- END: main -->

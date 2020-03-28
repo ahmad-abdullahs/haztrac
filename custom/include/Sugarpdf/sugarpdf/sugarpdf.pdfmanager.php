@@ -497,7 +497,13 @@ class SugarpdfPdfmanager extends SugarpdfSmarty {
             }
         }
 
-        parent::Output($name, 'D');
+        $flag = 'D';
+        if ($_REQUEST['putToDir']) {
+            $name = 'pdfs/' . $_REQUEST['pdf_template_id'] . '-' . $_REQUEST['unixTimeSuffix'] . '.pdf';
+            $flag = 'F';
+        }
+
+        parent::Output($name, $flag);
     }
 
     /**

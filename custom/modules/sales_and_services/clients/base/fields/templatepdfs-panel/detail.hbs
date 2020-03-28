@@ -1,0 +1,93 @@
+<style>
+    .record .subpanel-cell .select2-container {
+        margin: 0px !important;
+    }
+    
+    .record .subpanel-cell input[type="text"],
+    .record .subpanel-cell input[type="password"],
+    .record .subpanel-cell textarea,
+    .record .subpanel-cell .uneditable-input {
+        margin: 0px !important;
+    }
+    
+    .record .subpanel-cell .input-append input[type="text"] + .add-on,
+    .record .subpanel-cell .input-append input[type="password"] + .add-on,
+    .record .subpanel-cell .input-append textarea + .add-on {
+        margin: 0px !important;
+    }
+    
+    .dropdown_upside {
+        top: auto !important;
+        bottom: 100% !important;
+        margin-bottom: 1px !important;
+    }
+    
+    .orderByservice_number {
+        width: 10%;
+    }
+    
+    @-moz-document url-prefix() {
+        .btn-group > .btn + .dropdown-toggle {
+            padding: 4.5px 7px;
+        }
+    }
+</style>
+<div data-subpanel-link="{{subpanelModule}}" class="filtered tabbable tabs-left subpanel-cell main-content" style="border: 1px solid lightslategray; height: 225px; overflow-y:auto;">
+    <ul class="nav results" style="margin-bottom: 0px !important;">
+        <li class="subpanel clearfix">
+            <div class="flex-list-view left-actions right-actions" style="">
+                <div class="flex-list-view-content">
+                    <table class="table table-striped dataTable">
+                        <thead>
+                            <tr module="{{subpanelModule}}">
+                                <th>
+                                    <div class= 'btn-group'>
+                                        <div class="btn toggle-all-checkbox" tabindex="-1" style="margin-left:0px;">
+                                            <input type="checkbox" name="all_check" class="toggle-all" style="vertical-align:middle; margin-left:6px" {{#if allqueued}}checked{{/if}}>
+                                        </div>
+                                    </div>
+                                </th>
+                                {{#each columns}}
+                                    <th class="{{sorting_class}} orderBy{{name}} sortable" data-fieldname="{{name}}" data-orderby="{{name}}" tabindex="-1" {{#if width}}style="width:{{width}};"{{/if}}>
+                                        <span>
+                                            {{str label ../subpanelModule}}
+                                        </span>
+                                    </th>
+                                {{/each}}
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each filteredCollection.models}}
+                                <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
+                                    <td class="toggle-single-checkbox">
+                                        <input type="checkbox" class="trigger_check toggle-single" data-id="{{attributes.id}}" {{#if attributes.queued}}checked{{/if}}/>
+                                    </td>
+                                    {{#each ../columnsMeta}}
+                                        {{#if readonly}}			
+                                            <td class="rowcell subpanel-field" style="">
+                                                {{field ../../../view model=../../this template="detail"}}
+                                            </td>
+                                        {{else}}
+                                            <td class="rowcell subpanel-field" style="">
+                                                {{field ../../../view model=../../this template="detail"}}
+                                            </td>
+                                        {{/if}}
+                                    {{/each}}
+                                    {{#eq template "detail"}}
+                                        <td>
+                                            <a class="rowaction btn trigger_previewrow" href="javascript:void(0);" data-event="list:previewrow:fire"  rel="tooltip" data-placement="bottom" title="Preview" track="click:" data-original-title="Preview" style="margin-left: -4px;">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    {{/eq}}
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

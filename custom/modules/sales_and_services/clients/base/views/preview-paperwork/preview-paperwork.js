@@ -24,7 +24,18 @@
         this.isNotReady = true;
         this.isRenderedBefore = false;
         this.isPdfReady();
+
+        // It listen the Eye ball Icon event and load the Pdf in the preview pane...
+        app.events.on('loadTemplateForPreview', this.loadTemplateForPreview, this);
     },
+
+    loadTemplateForPreview: function (param) {
+        this.fileURL = param.fileURL;
+        this.isNotReady = true;
+        this.isRenderedBefore = false;
+        this.isPdfReady();
+    },
+
     isPdfReady: function () {
         var self = this;
         if (self.isNotReady == true) {

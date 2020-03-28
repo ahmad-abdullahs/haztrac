@@ -1,0 +1,35 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<table style="width: 100%;">
+    <thead>
+        <tr class="control-group pdf_template_printer_widget clearfix" style="margin-bottom: 0px;">
+            <th class="record-label">
+                {{#each def.fields}}
+                    {{#if label}}
+                        <div class="span{{../span}} record-label {{../css_class}}" style="min-height: 1px;">
+                            <lable>{{str ../label ../../module}}</lable>
+                        </div>
+                    {{/if}} 
+                {{/each}}
+                {{!--<div class="span1"> 
+                    <a class="rowaction btn" href="javascript:void(0);" data-event="" rel="tooltip" data-placement="bottom" title="" track="click:" data-original-title="Sortable Rows" style="margin-left: 15px;">
+                        <i class="fa fa-sort-numeric-asc"></i>
+                    </a>
+                </div>--}}
+            </th>
+        </tr>
+    </thead>
+    <tbody class="pdf_template_printer_widget-to-insert" style="border: 1px inset;">
+    </tbody>
+</table>
+

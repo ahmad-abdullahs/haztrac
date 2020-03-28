@@ -1,5 +1,5 @@
 <!--Header-->
-<table border="0" cellspacing="0" cellpadding="0">
+<table style="font-family: 'courier new', courier; font-size: 9pt;" border="0" cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
 <td colspan="8">&nbsp;</td>
@@ -38,7 +38,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;" colspan="4">Page(s):&nbsp;</td>
-<td style="text-align: left;" colspan="4">[[pnb]] of [[nb]]</td>
+<td style="text-align: left;" colspan="4">[[pnb]] of[[nb]]</td>
 </tr>
 </tbody>
 </table>
