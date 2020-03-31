@@ -20,6 +20,14 @@ $viewdefs['Opportunities']['base']['layout']['create-preview'] = array(
             ),
         ),
         array(
+            'view' => array(
+                'type' => 'related-account-revenuelineitems',
+            ),
+            'context' => array(
+                'module' => 'RevenueLineItems',
+            ),
+        ),
+        array(
             'view' => 'product-quick-picks',
             'context' => array(
                 'module' => 'Opportunities',

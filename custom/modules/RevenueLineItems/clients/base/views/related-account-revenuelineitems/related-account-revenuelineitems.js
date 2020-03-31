@@ -55,13 +55,18 @@
         this.registerShortcuts();
         /**/
 
+        if (options.context.parent.parent) {
+            if (options.context.parent.parent.get('module') == 'Accounts') {
+                this.parentModel.on('change:account_id', _.bind(this.reloadList, this), this);
+            }
+        }
 
         this.raRLIs = App.data.createBeanCollection('RevenueLineItems');
 
         this.raRLIs.setOption('endpoint', _.bind(function (method, model, options, callbacks) {
             options.params.filter = [{
                     account_id: {
-                        '$equals': this.parentModel.get('accounts_sales_and_services_1accounts_ida')
+                        '$equals': options.account_id,
                     },
                     is_bundle_product_c: {
                         '$not_in': ['child']
@@ -90,12 +95,24 @@
         this.reloadList();
     },
 
-    reloadList: function () {
+    reloadList: function (model, value) {
         this.raRLIs.fetch({
             'limit': -1,
+            'account_id': this.getAccountId() || value,
             'success': _.bind(function (data) {
                 this.render();
             }, this)
         });
-    }
+    },
+
+    getAccountId: function () {
+        var accountId = this.parentModel.get('accounts_sales_and_services_1accounts_ida');
+        if (this.options.context.parent.parent) {
+            if (this.options.context.parent.parent.get('module') == 'Accounts') {
+                accountId = this.parentModel.get('account_id');
+            }
+        }
+
+        return accountId;
+    },
 })
