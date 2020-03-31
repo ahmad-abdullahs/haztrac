@@ -21,6 +21,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-sales_and_services_subpa
                     array(
                         0 => 'is_bundle_product_c',
                         1 => 'rli_as_template_c',
+                        2 => 'commentlog',
                     ),
                 ),
                 array(

@@ -67,6 +67,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                         'mft_part_num',
                         'estimated_total_amount',
                         'product_list_name_c',
+                        'commentlog',
                             ), getViewFields('recordview', 'RevenueLineItems')),
                 ),
                 1 =>

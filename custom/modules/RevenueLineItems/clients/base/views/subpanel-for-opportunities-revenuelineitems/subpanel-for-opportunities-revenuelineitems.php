@@ -22,6 +22,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-revenu
                     'related_fields' =>
                     array(
                         0 => 'mft_part_num',
+                        1 => 'commentlog',
                     ),
                 ),
                 1 =>

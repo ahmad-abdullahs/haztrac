@@ -18,6 +18,10 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-ht_manifest-ht_manif
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
+                    'related_fields' =>
+                    array(
+                        0 => 'commentlog',
+                    ),
                 ),
                 1 =>
                 array(

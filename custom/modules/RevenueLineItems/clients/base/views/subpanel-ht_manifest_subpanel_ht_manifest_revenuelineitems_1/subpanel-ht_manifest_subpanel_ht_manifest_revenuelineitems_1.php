@@ -18,6 +18,10 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-ht_manifest_subpanel_ht_
                     'name' => 'name',
                     'link' => true,
                     'type' => 'name',
+                    'related_fields' =>
+                    array(
+                        0 => 'commentlog',
+                    ),
                 ),
                 1 =>
                 array(

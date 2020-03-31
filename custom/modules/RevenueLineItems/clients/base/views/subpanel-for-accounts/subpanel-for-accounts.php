@@ -32,7 +32,8 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts'] = array(
                         'quantity',
                         'discount_amount',
                         'discount_price',
-                        'estimated_total_amount'
+                        'estimated_total_amount',
+                        'commentlog'
                     ),
                 ),
                 array(

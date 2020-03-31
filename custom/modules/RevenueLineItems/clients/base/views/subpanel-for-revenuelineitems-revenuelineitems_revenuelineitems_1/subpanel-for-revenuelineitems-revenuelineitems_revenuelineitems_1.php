@@ -19,6 +19,10 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-revenuelineitems-rev
                     'enabled' => true,
                     'default' => true,
                     'type' => 'open-in-drawer',
+                    'related_fields' =>
+                    array(
+                        0 => 'commentlog',
+                    ),
                 ),
                 array(
                     'name' => 'account_name',

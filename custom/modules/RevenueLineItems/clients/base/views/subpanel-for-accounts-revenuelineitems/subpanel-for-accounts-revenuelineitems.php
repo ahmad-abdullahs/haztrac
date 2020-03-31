@@ -29,6 +29,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                         3 => 'sales_and_services_revenuelineitems_1_name',
                         4 => 'rli_as_template_c',
                         5 => 'mft_part_num',
+                        6 => 'commentlog'
                     ),
                     'width' => 'medium',
                 ),
