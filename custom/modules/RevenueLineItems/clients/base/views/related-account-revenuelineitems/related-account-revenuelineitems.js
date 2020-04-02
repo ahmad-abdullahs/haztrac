@@ -47,6 +47,7 @@
         if (this.collection) {
             this.collection.orderBy = this.orderBy;
         }
+
         // Dashboard layout injects shared context with limit: 5.
         // Otherwise, we don't set so fetches will use max query in config.
         this.limit = this.context.has('limit') ? this.context.get('limit') : null;
@@ -55,14 +56,7 @@
         this.registerShortcuts();
         /**/
 
-        if (options.context.parent.parent) {
-            if (options.context.parent.parent.get('module') == 'Accounts') {
-                this.parentModel.on('change:account_id', _.bind(this.reloadList, this), this);
-            }
-        }
-
         this.raRLIs = App.data.createBeanCollection('RevenueLineItems');
-
         this.raRLIs.setOption('endpoint', _.bind(function (method, model, options, callbacks) {
             options.params.filter = [{
                     account_id: {
@@ -89,6 +83,8 @@
         }, this));
 
         this.parentModel.on('change:accounts_sales_and_services_1accounts_ida', _.bind(this.reloadList, this), this);
+        this.parentModel.on('change:account_id', _.bind(this.reloadList, this), this);
+
         // At the time of initialization it is called to load the related revenue line items dashlet.
         // When the sales and service create drawer is open from subpanel create button under Account record
         // view, It was not loading the dashlet, that's why this code is added.
@@ -96,9 +92,13 @@
     },
 
     reloadList: function (model, value) {
+        var account_id = this.getAccountId() || value;
+        if (!account_id)
+            return;
+
         this.raRLIs.fetch({
             'limit': -1,
-            'account_id': this.getAccountId() || value,
+            'account_id': account_id,
             'success': _.bind(function (data) {
                 this.render();
             }, this)
