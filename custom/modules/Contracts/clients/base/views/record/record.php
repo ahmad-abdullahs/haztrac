@@ -204,6 +204,62 @@ $viewdefs['Contracts'] = array(
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL3',
+                        'label' => 'LBL_RECORDVIEW_PANEL3',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            array(
+                                'name' => 'accounts_contact_role_widget',
+                                'type' => 'accounts_contact_role_widget',
+                                'dismiss_label' => true,
+                                'span' => 12,
+                                'related_fields' => array(
+                                    'accounts_contact_role_widget',
+                                ),
+                                'fields' => array(
+                                    array(
+                                        'name' => 'accounts_contact_role_widget_name',
+                                        'css_class' => 'accounts_contact_role_widget_name',
+                                        'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ACCOUNT',
+                                        'rname' => 'name',
+                                        'type' => 'relate',
+                                        'id_name' => 'accounts_contact_role_widget_name_id',
+                                        'module' => 'Accounts',
+                                        'link' => true,
+                                        'span' => 4,
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'accounts_contact_role_widget_contact_name',
+                                        'css_class' => 'accounts_contact_role_widget_contact_name',
+                                        'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_CONTACT_NAME',
+                                        'rname' => 'name',
+                                        'type' => 'relate',
+                                        'id_name' => 'accounts_contact_role_widget_contact_name_id',
+                                        'module' => 'Contacts',
+                                        'link' => true,
+                                        'span' => 4,
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'accounts_contact_role_widget_role',
+                                        'css_class' => 'accounts_contact_role_widget_role',
+                                        'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ROLE',
+                                        'type' => 'enum',
+                                        'options' => 'accounts_contact_role_widget_list',
+                                        'span' => 3
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
+                    3 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL2',
                         'label' => 'LBL_RECORDVIEW_PANEL2',
                         'columns' => 2,
@@ -216,7 +272,6 @@ $viewdefs['Contracts'] = array(
                                 'name' => 'contract_specification',
                                 'type' => 'contract_specification',
                                 'dismiss_label' => true,
-                                'span' => 12,
                                 'related_fields' =>
                                 array(
                                     0 => 'contract_specification',
@@ -245,7 +300,7 @@ $viewdefs['Contracts'] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'collapsed',
@@ -353,7 +408,7 @@ $viewdefs['Contracts'] = array(
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_RECORD_SHOWMORE',

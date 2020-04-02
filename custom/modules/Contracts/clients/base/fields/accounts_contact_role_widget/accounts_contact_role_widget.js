@@ -15,10 +15,12 @@
         this.isPreview = false;
         this._super('initialize', [options]);
     },
+
     getCurrentNewRowUid: function () {
         // The row with the + icon is the new row.
         return this.$('.' + this.addClass).data('uid');
     },
+
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
             if (this.action !== 'edit') {
@@ -26,6 +28,7 @@
             }
         }, this);
     },
+
     render: function () {
         // Remove the fields which we have on the view, because everytime it render, It create new fields.
         this.unsetOldFields();
@@ -34,6 +37,12 @@
         this._super('render');
         this.renderFieldsMetaAndValues();
     },
+
+    /*
+     * Check if the model has the attribute with the field id suffix
+     * unset that field and turn off the change listner.
+     * @returns {undefined}
+     */
     unsetOldFields: function () {
         if (!_.isUndefined(this.fieldIds) || !_.isNull(this.fieldIds)) {
             _.each(this.fieldIds, function (id) {
@@ -47,6 +56,13 @@
             }, this);
         }
     },
+
+    /*
+     * Render 1-   All rows one by one.
+     *        1.1- First insert the non-empty row.
+     *        1.2- Render the inner fields one by one.
+     * @returns {undefined}
+     */
     renderFieldsMetaAndValues: function () {
         var field = this.model.get(this.name) || "[]";
         var newRowObj = {};
@@ -64,7 +80,6 @@
         // If no row exist then make the first row as the primary row.
         if (!rowExist) {
             this.model.set(this.name, '[]', {silent: true});
-            newRowObj[this.name + '_primary_account'] = "1";
             var parentCtx = this.context && this.context.parent;
             if (this.view instanceof app.view.views.BaseCreateView &&
                     parentCtx.get('module') === 'Accounts' && this.module !== 'Accounts') {
@@ -89,6 +104,12 @@
             this.updateJSON();
         }
     },
+
+    /*
+     * If a single field has a value in the row, row will not be empty
+     * @param {type} rowObj
+     * @returns {bool} true if all fields are empty else false.
+     */
     isRowEmpty: function (rowObj) {
         var empty = true;
         _.each(rowObj, function (value, key) {
@@ -100,6 +121,10 @@
 
         return empty;
     },
+
+    /*
+     * Get the row template and insert it on the dom.
+     */
     insertRow: function (rowObj, isNew) {
         var labelsOnTop = false;
         if (this.isFirst) {
@@ -110,6 +135,7 @@
         this.$('.' + this.name + '-to-insert').append(fieldTemplate);
         return fieldTemplate;
     },
+
     getRowTemplate: function (rowObj, isNew, labelsOnTop) {
         var uid = _.uniqueId();
         if (isNew) {
@@ -122,6 +148,7 @@
             if (isNew) {
                 extendedObj.isNew = isNew;
             }
+
             var innerFieldName = fieldDef.name + "__" + uid;
             extendedObj.name = innerFieldName;
             fieldDef.fuid = uid;
@@ -144,6 +171,7 @@
                     this.model.on('change:' + innerFieldName, _.bind(this.updateJSON, this, _.clone(fieldDef)), this);
                 }
             }
+
             modelFields.push(_.extend({}, fieldDef, extendedObj));
         }, this);
 
@@ -157,6 +185,7 @@
         var fieldTemplate = modelRowTemplate({
             view: this.view,
             model: this.model,
+            name: this.name,
             fieldAction: fieldAction,
             isNew: isNew,
             labelsOnTop: labelsOnTop,
@@ -168,12 +197,13 @@
         this.fieldIds.push(uid);
         return fieldTemplate;
     },
+
     updateName: function (innerFieldName, model) {
         var value = model.get(innerFieldName) || '';
         var uid = (innerFieldName.split('__'))[1];
         if (uid) {
             if (_.isEmpty(value)) {
-                var fieldsToCheck = ['_primary_account__', '_role__'];
+                var fieldsToCheck = ['_role__'];
                 var keepRow = false;
                 _.each(fieldsToCheck, function (field) {
                     var val = model.get(this.name + field + uid) || '';
@@ -191,6 +221,7 @@
             }
         }
     },
+
     checkPlusButton: function (model, value) {
         var changedFields = _.keys(model.changed);
         var obj = this.parseFieldNames(changedFields);
@@ -207,6 +238,7 @@
         }
         this.updateJSON(model, value);
     },
+
     updateJSON: function (fieldMeta, model, value) {
         var jsonField = [];
         var nruid = this.getCurrentNewRowUid();
@@ -224,13 +256,6 @@
                     }
                     obj[fieldDef.id_name] = val;
                 }
-
-                if (!_.isUndefined(fieldMeta) && !_.isNull(fieldMeta)) {
-                    if (fieldMeta.type == "primary-radio" && fieldDef.type == "primary-radio" && fieldMeta.fuid != uid) {
-                        obj[fieldDef.name] = "0";
-                        this.model.set(fieldName, "0", {silent: true});
-                    }
-                }
             }, this);
             if (uid != nruid || this.enablePlusButton) {
                 jsonField.push(obj);
@@ -238,6 +263,7 @@
         }, this);
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
     },
+
     parseFieldNames: function (fieldNames) {
         var retObj = {};
         retObj.fields = [];
@@ -256,6 +282,7 @@
         }, this);
         return retObj;
     },
+
     renderInnerFields: function () {
         var self = this;
         self.modelFields = {};
@@ -282,63 +309,63 @@
             }
         });
     },
+
     deleteRow: function (evt) {
         var el = evt.currentTarget;
         var uid = $(el).data('uid');
         this.deleteRowFromUid(uid);
     },
+
     deleteRowFromUid: function (uid) {
         this.removeFieldsFromDOM(uid);
         this.unbindDataChangesFromFields(uid);
-        this.shiftPrimaryToFirst(uid);
         this.updateJSON();
     },
-    shiftPrimaryToFirst: function (uid) {
-        var isPrimary = this.model.get(this.name + '_primary_account__' + uid);
-        if (isPrimary) {
-            var firstUid = _.first(this.fieldIds);
-            this.model.set(this.name + '_primary_account__' + firstUid, "1");
-        }
-    },
+
     addRow: function (evt) {
         var el = evt.currentTarget;
         var uid = $(el).data('uid');
         this.addRowFromUid(uid);
     },
+
     addRowFromUid: function (uid) {
         this.insertRow({}, true);
         this.renderInnerFields();
         this.changeAddButtonToRemove(uid);
-        this.enablePrimaryOptions(uid);
     },
+
     changeAddButtonToRemove: function (uid) {
         this.$('.btn[data-uid=' + uid + ']').removeClass(this.addClass);
         this.$('.btn[data-uid=' + uid + ']').addClass('removeRecord');
         this.$('.btn[data-uid=' + uid + '] > i').removeClass('fa-plus');
         this.$('.btn[data-uid=' + uid + '] > i').addClass('fa-minus');
     },
-    enablePrimaryOptions: function (uid) {
-        this.$('[name=' + this.name + '_primary_account__' + uid + ']').removeAttr('disabled');
-        var field = this.view.getField(this.name + '_primary_account__' + uid);
-        field.def.isNew = false;
-        field.def.disabled = false;
-    },
+
     removeFieldsFromDOM: function (uid) {
         _.each(this.def.fields, function (fieldDef) {
             var innerFieldName = fieldDef.name + "__" + uid;
             var field = this.view.getField(innerFieldName);
             delete this.modelFields[field.sfId];
         }, this);
+
         this.fieldIds = _.without(this.fieldIds, uid);
         this.fieldIds = _.without(this.fieldIds, uid.toString());
+
         this.$('.' + this.name + '_row[data-uid=' + uid + ']').remove();
     },
+
     unbindDataChangesFromFields: function (uid) {
         _.each(this.def.fields, function (fieldDef) {
             var innerFieldName = fieldDef.name + "__" + uid;
             this.model.off('change:' + innerFieldName);
         }, this);
     },
+
+    getCurrentNewRowUid: function () {
+        // The row with the + icon is the new row.
+        return this.$('.' + this.addClass).data('uid');
+    },
+
     dispose: function () {
         _.each(this.fieldIds, function (uid) {
             this.unbindDataChangesFromFields(uid);

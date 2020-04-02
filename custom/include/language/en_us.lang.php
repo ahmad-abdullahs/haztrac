@@ -233,3 +233,15 @@ $app_list_strings['pdf_printers_list'] = array(
     'TX Manifest Printer' => 'TX Manifest Printer',
     'TX Labels Printer' => 'TX Labels Printer',
 );
+
+$app_list_strings['accounts_contact_role_widget_list'] = array(
+    '' => '',
+    'Buyer' => 'Buyer',
+    'Seller' => 'Seller',
+    'Broker' => 'Broker',
+    'Primary Contact' => 'Primary Contact',
+    'Accounting Contact' => 'Accounting Contact',
+    'Technical Contact' => 'Technical Contact',
+    'Notification Contact' => 'Notification Contact',
+    'Delivery Destination Location' => 'Delivery Destination Location',
+);
