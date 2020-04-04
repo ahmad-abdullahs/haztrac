@@ -222,6 +222,7 @@ $viewdefs['Contracts'] = array(
                                 'fields' => array(
                                     array(
                                         'name' => 'accounts_contact_role_widget_name',
+                                        'short_name' => 'accounts_contact_role_widget_name',
                                         'css_class' => 'accounts_contact_role_widget_name',
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ACCOUNT',
                                         'rname' => 'name',
@@ -231,9 +232,11 @@ $viewdefs['Contracts'] = array(
                                         'link' => true,
                                         'span' => 4,
                                         'sortable' => false,
+                                        'required' => true,
                                     ),
                                     array(
                                         'name' => 'accounts_contact_role_widget_contact_name',
+                                        'short_name' => 'accounts_contact_role_widget_contact_name',
                                         'css_class' => 'accounts_contact_role_widget_contact_name',
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_CONTACT_NAME',
                                         'rname' => 'name',
@@ -243,9 +246,17 @@ $viewdefs['Contracts'] = array(
                                         'link' => true,
                                         'span' => 4,
                                         'sortable' => false,
+                                        'required' => true,
+                                        // Filter stuff
+                                        'initial_filter' => 'filterAccountsTemplate',
+                                        'initial_filter_label' => 'LBL_FILTER_ACCOUNTS_TEMPLATE',
+                                        'filter_relate' =>
+                                        array(
+                                        ),
                                     ),
                                     array(
                                         'name' => 'accounts_contact_role_widget_role',
+                                        'short_name' => 'accounts_contact_role_widget_role',
                                         'css_class' => 'accounts_contact_role_widget_role',
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ROLE',
                                         'type' => 'enum',
@@ -272,6 +283,7 @@ $viewdefs['Contracts'] = array(
                                 'name' => 'contract_specification',
                                 'type' => 'contract_specification',
                                 'dismiss_label' => true,
+                                'span' => 12,
                                 'related_fields' =>
                                 array(
                                     0 => 'contract_specification',

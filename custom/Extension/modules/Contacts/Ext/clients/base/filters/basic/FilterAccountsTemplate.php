@@ -1,12 +1,13 @@
 <?php
-	$viewdefs['Contacts']['base']['filter']['basic']['filters'][] = array(
+
+$viewdefs['Contacts']['base']['filter']['basic']['filters'][] = array(
     'id' => 'filterAccountsTemplate',
     'name' => 'LBL_FILTER_ACCOUNTS_TEMPLATE',
     'filter_definition' => array(
         array(
-            'account_id' => ''
+            'account_id_cst' => ''
         )
     ),
     'editable' => true,
     'is_template' => true,
-); 
+);

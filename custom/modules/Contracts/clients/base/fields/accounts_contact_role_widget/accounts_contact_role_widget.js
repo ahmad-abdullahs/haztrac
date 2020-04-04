@@ -30,12 +30,41 @@
     },
 
     render: function () {
+        var self = this;
         // Remove the fields which we have on the view, because everytime it render, It create new fields.
         this.unsetOldFields();
         // Empty the fieldIds, we will have new fields as we are going to render it.
         this.fieldIds = [];
         this._super('render');
-        this.renderFieldsMetaAndValues();
+        $.when(this.renderFieldsMetaAndValues()).then(function () {
+            self.$('span[sfuuid]').each(function () {
+                var sfId = $(this).attr('sfuuid');
+                try {
+                    var fieldToRender = self.view.fields[sfId];
+                    self.setContactFilter(fieldToRender.name);
+                } catch (e) {
+                }
+            });
+        });
+    },
+
+    setContactFilter: function (innerFieldName) {
+        if (!innerFieldName)
+            return;
+
+        var fieldName = innerFieldName.split('__');
+        if (fieldName[0] == 'accounts_contact_role_widget_name') {
+            _.each(this.view.fields, function (field, key) {
+                if (field.def.fuid == fieldName[1] && field.def.short_name == 'accounts_contact_role_widget_contact_name') {
+                    this.view.fields[key].def.filter_relate = {};
+                    var idVal = this.view.model.get('accounts_contact_role_widget_name_id__' + field.def.fuid);
+                    if (idVal && !_.isEmpty(idVal)) {
+                        this.view.fields[key].def.filter_relate['accounts_contact_role_widget_name_id__' + field.def.fuid] = 'account_id_cst';
+                        this.view.fields[key]._filterOptions.filter_populate['account_id_cst'] = this.view.model.get('accounts_contact_role_widget_name_id__' + field.def.fuid);
+                    }
+                }
+            }, this);
+        }
     },
 
     /*
@@ -153,22 +182,19 @@
             extendedObj.name = innerFieldName;
             fieldDef.fuid = uid;
             this.model.set(innerFieldName, rowObj[fieldDef.name]);
-            if (this.action == 'detail' && fieldDef.css_class.indexOf('_name') !== -1 && fieldDef.css_class.indexOf('ellipsis_inline') == -1) {
-                fieldDef.css_class = fieldDef.css_class + ' ellipsis_inline';
-            } else if (this.action == 'edit' && fieldDef.css_class.indexOf('_name') !== -1) {
-                fieldDef.css_class = fieldDef.css_class.replace('ellipsis_inline', '');
-            }
+
             if (fieldDef.id_name) {
                 extendedObj.id_name = fieldDef.id_name + "__" + uid;
                 this.model.set(extendedObj.id_name, rowObj[fieldDef.id_name]);
             }
-            if (fieldDef.name == (this.name + "_name") && isNew) {
-                this.model.on('change:' + innerFieldName, this.checkPlusButton, this);
+
+            if ((fieldDef.name == (this.name + "_name") || fieldDef.name == (this.name + "_contact_name")) && isNew) {
+                this.model.on('change:' + innerFieldName, _.bind(this.checkPlusButton, this, innerFieldName), this);
             } else {
                 if (fieldDef.name == this.name + '_name') {
                     this.model.on('change:' + innerFieldName, _.bind(this.updateName, this, innerFieldName), this);
                 } else {
-                    this.model.on('change:' + innerFieldName, _.bind(this.updateJSON, this, _.clone(fieldDef)), this);
+                    this.model.on('change:' + innerFieldName, _.bind(this.updateJSON, this, innerFieldName), this);
                 }
             }
 
@@ -212,17 +238,17 @@
                     }
                 }, this);
                 if (keepRow) {
-                    this.updateJSON();
+                    this.updateJSON(innerFieldName);
                 } else {
                     this.deleteRowFromUid(uid);
                 }
             } else {
-                this.updateJSON();
+                this.updateJSON(innerFieldName);
             }
         }
     },
 
-    checkPlusButton: function (model, value) {
+    checkPlusButton: function (innerFieldName, model, value) {
         var changedFields = _.keys(model.changed);
         var obj = this.parseFieldNames(changedFields);
         var nruid = this.getCurrentNewRowUid();
@@ -236,10 +262,11 @@
         if (obj.id == nruid && value) {
             this.addRowFromUid(obj.id);
         }
-        this.updateJSON(model, value);
+        this.updateJSON(innerFieldName);
     },
 
-    updateJSON: function (fieldMeta, model, value) {
+    updateJSON: function (innerFieldName) {
+        this.handleContactFilter(innerFieldName);
         var jsonField = [];
         var nruid = this.getCurrentNewRowUid();
         _.each(this.fieldIds, function (uid) {
@@ -262,6 +289,23 @@
             }
         }, this);
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
+    },
+
+    handleContactFilter: function (innerFieldName) {
+        if (!innerFieldName)
+            return;
+
+        var fieldName = innerFieldName.split('__');
+        if (fieldName[0] == 'accounts_contact_role_widget_name') {
+            _.each(this.view.fields, function (field, key) {
+                if (field.def.fuid == fieldName[1] && field.def.short_name == 'accounts_contact_role_widget_contact_name') {
+                    this.view.fields[key].def.filter_relate = {};
+                    if (this.view.model.get('accounts_contact_role_widget_name_id__' + field.def.fuid)) {
+                        this.view.fields[key].def.filter_relate['accounts_contact_role_widget_name_id__' + field.def.fuid] = 'account_id_cst';
+                    }
+                }
+            }, this);
+        }
     },
 
     parseFieldNames: function (fieldNames) {
@@ -290,8 +334,12 @@
             var sfId = $(this).attr('sfuuid');
             try {
                 var fieldToRender = self.view.fields[sfId];
-                // Added for preview eye ball icon
-                fieldToRender.iconVisibility = true;
+                // This is added so that it should not show the icon with relate field which is empty.
+                if (!_.isEmpty(fieldToRender.model.get(fieldToRender.name))) {
+                    // Added for preview eye ball icon
+                    fieldToRender.iconVisibility = true;
+                }
+
                 // This piece of code is added to avoid the autopopulation of Account field 
                 // when the contact is created on top of any Account record, it starts auto populating the 
                 // Account id in every account field on [+] button click
