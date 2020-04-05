@@ -182,7 +182,12 @@ array (
               4 => 
               array (
                 'name' => 'tag',
-                'span' => 12,
+                'span' => 6,
+              ),
+              5 => 
+              array (
+                'name' => 'contracts_template_contract_specification_name',
+                'span' => 6,
               ),
             ),
           ),

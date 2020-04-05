@@ -14,7 +14,6 @@
     initialize: function (options) {
         this.isPreview = false;
         this._super('initialize', [options]);
-        this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
     },
 
     getCurrentNewRowUid: function () {

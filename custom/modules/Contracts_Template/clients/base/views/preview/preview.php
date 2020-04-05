@@ -1,11 +1,11 @@
 <?php
 
-$viewdefs['Contracts'] = array(
+$viewdefs['Contracts_Template'] = array(
     'base' =>
     array(
         'view' =>
         array(
-            'record' =>
+            'preview' =>
             array(
                 'buttons' =>
                 array(
@@ -147,71 +147,6 @@ $viewdefs['Contracts'] = array(
                     ),
                     1 =>
                     array(
-                        'name' => 'panel_body',
-                        'label' => 'LBL_RECORD_BODY',
-                        'columns' => 2,
-                        'labels' => true,
-                        'labelsOnTop' => true,
-                        'placeholders' => true,
-                        'newTab' => false,
-                        'panelDefault' => 'expanded',
-                        'fields' =>
-                        array(
-                            0 =>
-                            array(
-                                'name' => 'contract_template_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_CONTRACT_TEMPLATE',
-                                'type' => 'contract-template-relate',
-                            ),
-                            1 =>
-                            array(
-                            ),
-                            2 => 'reference_code',
-                            3 =>
-                            array(
-                                'name' => 'contract_number_c',
-                                'label' => 'LBL_CONTRACT_NUMBER',
-                            ),
-                            4 => 'account_name',
-                            5 => 'status',
-                            6 => 'opportunity_name',
-                            7 => 'start_date',
-                            8 => 'type_name',
-                            9 => 'end_date',
-                            10 =>
-                            array(
-                                'name' => 'total_contract_value',
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
-                                'related_fields' =>
-                                array(
-                                    0 => 'currency_id',
-                                    1 => 'base_rate',
-                                ),
-                            ),
-                            11 => 'contract_term',
-                            12 => 'expiration_notice',
-                            13 => 'company_signed_date',
-                            14 => 'description',
-                            15 => 'customer_signed_date',
-                            16 =>
-                            array(
-                                'name' => 'tag',
-                                'span' => 6,
-                            ),
-                            17 =>
-                            array(
-                                'name' => 'contract_type_c',
-                                'label' => 'LBL_CONTRACT_TYPE',
-                                'span' => 6,
-                            ),
-                        ),
-                    ),
-                    2 =>
-                    array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
                         'name' => 'LBL_RECORDVIEW_PANEL3',
@@ -221,21 +156,24 @@ $viewdefs['Contracts'] = array(
                         'placeholders' => 1,
                         'fields' =>
                         array(
-                            0 =>
+                            array(
+                                'name' => 'contract_type_c',
+                                'label' => 'LBL_CONTRACT_TYPE',
+                                'default' => true,
+                                'enabled' => true,
+                            ),
                             array(
                                 'name' => 'accounts_contact_role_widget',
                                 'type' => 'accounts_contact_role_widget',
                                 'dismiss_label' => true,
-                                'related_fields' =>
-                                array(
-                                    0 => 'accounts_contact_role_widget',
+                                'labelsOnTop' => false,
+                                'span' => 12,
+                                'related_fields' => array(
+                                    'accounts_contact_role_widget',
                                 ),
-                                'fields' =>
-                                array(
-                                    0 =>
+                                'fields' => array(
                                     array(
                                         'name' => 'accounts_contact_role_widget_name',
-                                        'short_name' => 'accounts_contact_role_widget_name',
                                         'css_class' => 'accounts_contact_role_widget_name',
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ACCOUNT',
                                         'rname' => 'name',
@@ -245,12 +183,9 @@ $viewdefs['Contracts'] = array(
                                         'link' => true,
                                         'span' => 4,
                                         'sortable' => false,
-                                        'required' => true,
                                     ),
-                                    1 =>
                                     array(
                                         'name' => 'accounts_contact_role_widget_contact_name',
-                                        'short_name' => 'accounts_contact_role_widget_contact_name',
                                         'css_class' => 'accounts_contact_role_widget_contact_name',
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_CONTACT_NAME',
                                         'rname' => 'name',
@@ -260,29 +195,20 @@ $viewdefs['Contracts'] = array(
                                         'link' => true,
                                         'span' => 4,
                                         'sortable' => false,
-                                        'required' => true,
-                                        'initial_filter' => 'filterAccountsTemplate',
-                                        'initial_filter_label' => 'LBL_FILTER_ACCOUNTS_TEMPLATE',
-                                        'filter_relate' =>
-                                        array(
-                                        ),
                                     ),
-                                    2 =>
                                     array(
                                         'name' => 'accounts_contact_role_widget_role',
-                                        'short_name' => 'accounts_contact_role_widget_role',
                                         'css_class' => 'accounts_contact_role_widget_role',
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ROLE',
                                         'type' => 'enum',
                                         'options' => 'accounts_contact_role_widget_list',
-                                        'span' => 3,
+                                        'span' => 3
                                     ),
-                                ),
-                                'span' => 12,
+                                )
                             ),
                         ),
                     ),
-                    3 =>
+                    2 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -298,6 +224,8 @@ $viewdefs['Contracts'] = array(
                                 'name' => 'contract_specification',
                                 'type' => 'contract_specification',
                                 'dismiss_label' => true,
+                                'labelsOnTop' => false,
+                                'span' => 12,
                                 'related_fields' =>
                                 array(
                                     0 => 'contract_specification',
@@ -310,7 +238,7 @@ $viewdefs['Contracts'] = array(
                                         'css_class' => 'contract_specification_name',
                                         'label' => 'LBL_CONTRACT_SPECIFICATION_NAME',
                                         'type' => 'text',
-                                        'span' => 6,
+                                        'span' => 5,
                                         'required' => true,
                                     ),
                                     1 =>
@@ -319,14 +247,14 @@ $viewdefs['Contracts'] = array(
                                         'css_class' => 'contract_specification_text_details',
                                         'label' => 'LBL_CONTRACT_SPECIFICATION_TEXT_DETAILS',
                                         'type' => 'text',
-                                        'span' => 5,
+                                        'span' => 6,
                                     ),
                                 ),
                                 'span' => 12,
                             ),
                         ),
                     ),
-                    4 =>
+                    3 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'collapsed',
@@ -434,7 +362,7 @@ $viewdefs['Contracts'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    4 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_RECORD_SHOWMORE',

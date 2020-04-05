@@ -7,8 +7,8 @@
     fieldIds: [],
     modelFields: {},
     isFirst: true,
-    enablePlusButton: false,
     addClass: 'addRecord',
+    setFocusEle: '',
     isPreview: false,
 
     initialize: function (options) {
@@ -17,55 +17,12 @@
         this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
     },
 
-    getCurrentNewRowUid: function () {
-        // The row with the + icon is the new row.
-        return this.$('.' + this.addClass).data('uid');
-    },
-
-    bindDataChange: function () {
-        this.model.on('change:' + this.name, function () {
-            if (this.action !== 'edit') {
-                this.render();
-            }
-        }, this);
-    },
-
     render: function () {
-        var self = this;
         // Remove the fields which we have on the view, because everytime it render, It create new fields.
         this.unsetOldFields();
-        // Empty the fieldIds, we will have new fields as we are going to render it.
         this.fieldIds = [];
         this._super('render');
-        $.when(this.renderFieldsMetaAndValues()).then(function () {
-            self.$('span[sfuuid]').each(function () {
-                var sfId = $(this).attr('sfuuid');
-                try {
-                    var fieldToRender = self.view.fields[sfId];
-                    self.setContactFilter(fieldToRender.name);
-                } catch (e) {
-                }
-            });
-        });
-    },
-
-    setContactFilter: function (innerFieldName) {
-        if (!innerFieldName)
-            return;
-
-        var fieldName = innerFieldName.split('__');
-        if (fieldName[0] == 'accounts_contact_role_widget_name') {
-            _.each(this.view.fields, function (field, key) {
-                if (field.def.fuid == fieldName[1] && field.def.short_name == 'accounts_contact_role_widget_contact_name') {
-                    this.view.fields[key].def.filter_relate = {};
-                    var idVal = this.view.model.get('accounts_contact_role_widget_name_id__' + field.def.fuid);
-                    if (idVal && !_.isEmpty(idVal)) {
-                        this.view.fields[key].def.filter_relate['accounts_contact_role_widget_name_id__' + field.def.fuid] = 'account_id_cst';
-                        this.view.fields[key]._filterOptions.filter_populate['account_id_cst'] = this.view.model.get('accounts_contact_role_widget_name_id__' + field.def.fuid);
-                    }
-                }
-            }, this);
-        }
+        this.renderFieldsMetaAndValues();
     },
 
     /*
@@ -74,17 +31,15 @@
      * @returns {undefined}
      */
     unsetOldFields: function () {
-        if (!_.isUndefined(this.fieldIds) || !_.isNull(this.fieldIds)) {
-            _.each(this.fieldIds, function (id) {
-                _.each(this.def.fields, function (field) {
-                    var field_name = field.name + "__" + id;
-                    if (!_.isUndefined(this.model.get(field_name))) {
-                        this.model.unset(field_name, {silent: true});
-                        this.model.off('change:' + field_name);
-                    }
-                }, this);
+        _.each(this.fieldIds, function (id) {
+            _.each(this.def.fields, function (field) {
+                var field_name = field.name + "__" + id;
+                if (this.model.has(field_name)) {
+                    this.model.unset(field_name, {silent: true});
+                    this.model.off('change:' + field_name);
+                }
             }, this);
-        }
+        }, this);
     },
 
     /*
@@ -94,9 +49,9 @@
      * @returns {undefined}
      */
     renderFieldsMetaAndValues: function () {
-        var field = this.model.get(this.name) || "[]";
-        var newRowObj = {};
-        var rowExist = false;
+        var field = this.model.get(this.name) || "[]",
+                newRowObj = {},
+                rowExist = false;
 
         // Insert row by row.
         var fieldObj = JSON.parse(field);
@@ -107,16 +62,9 @@
             }
         }, this);
 
-        // If no row exist then make the first row as the primary row.
+        // If no row exist then set field to default empty.
         if (!rowExist) {
             this.model.set(this.name, '[]', {silent: true});
-            var parentCtx = this.context && this.context.parent;
-            if (this.view instanceof app.view.views.BaseCreateView &&
-                    parentCtx.get('module') === 'Accounts' && this.module !== 'Accounts') {
-                newRowObj[this.name + '_name_id'] = parentCtx.get('model').get('id');
-                newRowObj[this.name + '_name'] = parentCtx.get('model').get('name');
-                this.enablePlusButton = true;
-            }
         }
 
         if ((this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName))) {
@@ -124,15 +72,6 @@
         }
 
         this.renderInnerFields();
-
-        // If data is already populated in the row at time of new record creation
-        // enable the [+] button for users to add another row.
-        if (this.enablePlusButton && this.fieldIds[0]) {
-            this.$('.' + this.addClass + '[data-uid=' + this.fieldIds[0] + ']').removeClass('disabled');
-//            this.model.set(this.name + '_name_id__' + this.fieldIds[0], parentCtx.get('model').get('id'));
-//            this.model.set(this.name + '_name__' + this.fieldIds[0], parentCtx.get('model').get('name'));
-            this.updateJSON();
-        }
     },
 
     /*
@@ -163,18 +102,19 @@
         }
         var fieldTemplate = this.getRowTemplate(rowObj, isNew, labelsOnTop);
         this.$('.' + this.name + '-to-insert').append(fieldTemplate);
-        return fieldTemplate;
     },
 
     getRowTemplate: function (rowObj, isNew, labelsOnTop) {
-        var uid = _.uniqueId();
+        var uid = _.uniqueId(), template = this.name + '-row',
+                modelFields = [],
+                extendedObj = {};
+
         if (isNew) {
             uid = uid + "_new";
         }
-        var modelFields = [];
-        var template = this.name + '-row';
+
         _.each(this.def.fields, function (fieldDef) {
-            var extendedObj = {};
+            extendedObj = {};
             if (isNew) {
                 extendedObj.isNew = isNew;
             }
@@ -184,12 +124,13 @@
             fieldDef.fuid = uid;
             this.model.set(innerFieldName, rowObj[fieldDef.name]);
 
-            if (fieldDef.id_name) {
-                extendedObj.id_name = fieldDef.id_name + "__" + uid;
-                this.model.set(extendedObj.id_name, rowObj[fieldDef.id_name]);
-            }
+//            if (this.action == 'detail' && fieldDef.css_class.indexOf('_name') !== -1 && fieldDef.css_class.indexOf('ellipsis_inline') == -1) {
+//                fieldDef.css_class = fieldDef.css_class + ' ellipsis_inline';
+//            } else if (this.action == 'edit' && fieldDef.css_class.indexOf('_name') !== -1) {
+//                fieldDef.css_class = fieldDef.css_class.replace('ellipsis_inline', '');
+//            }
 
-            if ((fieldDef.name == (this.name + "_name") || fieldDef.name == (this.name + "_contact_name")) && isNew) {
+            if (fieldDef.name == (this.name + "_name") && isNew) {
                 this.model.on('change:' + innerFieldName, _.bind(this.checkPlusButton, this, innerFieldName), this);
             } else {
                 if (fieldDef.name == this.name + '_name') {
@@ -230,7 +171,7 @@
         var uid = (innerFieldName.split('__'))[1];
         if (uid) {
             if (_.isEmpty(value)) {
-                var fieldsToCheck = ['_role__'];
+                var fieldsToCheck = ['_text_details__'];
                 var keepRow = false;
                 _.each(fieldsToCheck, function (field) {
                     var val = model.get(this.name + field + uid) || '';
@@ -239,17 +180,19 @@
                     }
                 }, this);
                 if (keepRow) {
-                    this.updateJSON(innerFieldName);
+                    this.updateJSON();
                 } else {
                     this.deleteRowFromUid(uid);
                 }
             } else {
-                this.updateJSON(innerFieldName);
+                this.updateJSON();
             }
         }
     },
 
     checkPlusButton: function (innerFieldName, model, value) {
+        var self = this;
+        this.setFocusEle = innerFieldName;
         var changedFields = _.keys(model.changed);
         var obj = this.parseFieldNames(changedFields);
         var nruid = this.getCurrentNewRowUid();
@@ -263,50 +206,34 @@
         if (obj.id == nruid && value) {
             this.addRowFromUid(obj.id);
         }
-        this.updateJSON(innerFieldName);
+
+        $.when(this.updateJSON()).then(function () {
+            if (!_.isEmpty(self.setFocusEle)) {
+                $('[name=' + self.setFocusEle + ']').parents('div:first').next().find('input').focus();
+                self.setFocusEle = '';
+            }
+        });
     },
 
     updateJSON: function (innerFieldName) {
-        this.handleContactFilter(innerFieldName);
         var jsonField = [];
         var nruid = this.getCurrentNewRowUid();
         _.each(this.fieldIds, function (uid) {
             var obj = {};
-            var isEmpty = false;
             _.each(this.def.fields, function (fieldDef) {
                 var fieldName = fieldDef.name + "__" + uid;
                 obj[fieldDef.name] = this.model.get(fieldName) || "";
                 if (fieldDef.id_name) {
                     var fname = fieldDef.id_name + "__" + uid;
                     var val = this.model.get(fname) || "";
-                    if (_.isEmpty(val)) {
-                        isEmpty = true;
-                    }
                     obj[fieldDef.id_name] = val;
                 }
             }, this);
-            if (uid != nruid || this.enablePlusButton) {
+            if (uid != nruid) {
                 jsonField.push(obj);
             }
         }, this);
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
-    },
-
-    handleContactFilter: function (innerFieldName) {
-        if (!innerFieldName)
-            return;
-
-        var fieldName = innerFieldName.split('__');
-        if (fieldName[0] == 'accounts_contact_role_widget_name') {
-            _.each(this.view.fields, function (field, key) {
-                if (field.def.fuid == fieldName[1] && field.def.short_name == 'accounts_contact_role_widget_contact_name') {
-                    this.view.fields[key].def.filter_relate = {};
-                    if (this.view.model.get('accounts_contact_role_widget_name_id__' + field.def.fuid)) {
-                        this.view.fields[key].def.filter_relate['accounts_contact_role_widget_name_id__' + field.def.fuid] = 'account_id_cst';
-                    }
-                }
-            }, this);
-        }
     },
 
     parseFieldNames: function (fieldNames) {
@@ -335,18 +262,6 @@
             var sfId = $(this).attr('sfuuid');
             try {
                 var fieldToRender = self.view.fields[sfId];
-                // This is added so that it should not show the icon with relate field which is empty.
-                if (!_.isEmpty(fieldToRender.model.get(fieldToRender.name))) {
-                    // Added for preview eye ball icon
-                    fieldToRender.iconVisibility = true;
-                }
-
-                // This piece of code is added to avoid the autopopulation of Account field 
-                // when the contact is created on top of any Account record, it starts auto populating the 
-                // Account id in every account field on [+] button click
-                if (self.view instanceof app.view.views.BaseCreateView) {
-                    fieldToRender.noAutoPopulate = true;
-                }
 
                 if (self.tplName != "preview") {
                     self.view.editableFields.push(fieldToRender);

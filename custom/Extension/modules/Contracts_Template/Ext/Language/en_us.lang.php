@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICES_QUOTES'] = 'Sales/Services Quotes';
 $mod_strings['LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_SALES_AND_SERVICES_TITLE'] = 'Sales &amp; Service';
@@ -29,7 +30,3 @@ $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Parties';
 $mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ACCOUNT'] = 'Account Name';
 $mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_CONTACT_NAME'] = 'Account Contact';
 $mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ROLE'] = 'Account Role';
-$mod_strings['LNK_NEW_CONTRACT_TEMPLATE'] = 'Create Contract Template';
-$mod_strings['LNK_CONTRACT_TEMPLATE_LIST'] = 'View Contract Templates';
-$mod_strings['LBL_CONTRACT_TEMPLATE_CONTRACTS_TEMPLATE_ID'] = 'Contract Template (related Contracts Template ID)';
-$mod_strings['LBL_CONTRACT_TEMPLATE'] = 'Contract Template';
