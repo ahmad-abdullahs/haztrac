@@ -173,6 +173,19 @@ $viewdefs['LR_Lab_Reports'] = array(
                     ),
                     1 =>
                     array(
+                        'newTab' => true,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'LBL_RECORDVIEW_PANEL0',
+                        'label' => 'LBL_RECORDVIEW_PANEL0',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                        ),
+                    ),
+                    2 =>
+                    array(
                         'newTab' => false,
                         'panelDefault' => 'collapsed',
                         'name' => 'LBL_RECORDVIEW_PANEL1',
@@ -190,7 +203,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    2 =>
+                    3 =>
                     array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
@@ -287,7 +300,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    4 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -334,7 +347,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    4 =>
+                    5 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -375,7 +388,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    5 =>
+                    6 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -421,7 +434,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    6 =>
+                    7 =>
                     array(
                         'newTab' => false,
                         'panelDefault' => 'expanded',
@@ -506,7 +519,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                         ),
                     ),
-                    7 =>
+                    8 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
@@ -591,7 +604,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                 ),
                 'templateMeta' =>
                 array(
-                    'useTabs' => true,
+                    'useTabs' => false,
                 ),
             ),
         ),

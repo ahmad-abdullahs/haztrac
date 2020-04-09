@@ -16,10 +16,9 @@
  * the record is deleted or not), So it is overridden to remove the data from JSON
  * where relate field record is deleted.
  */
-
 require_once 'custom/include/ModuleApiHelper/contractUtils.php';
 
-class ContractsApiHelper extends SugarBeanApiHelper {
+class Contracts_TemplateApiHelper extends SugarBeanApiHelper {
 
     // Mimic the SugarBeanApiHelper->formatForApi() class
     public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array()) {
