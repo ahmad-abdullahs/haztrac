@@ -202,7 +202,15 @@ $viewdefs['Contracts_Template'] = array(
                                         'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ROLE',
                                         'type' => 'enum',
                                         'options' => 'accounts_contact_role_widget_list',
-                                        'span' => 3
+                                        'span' => 2,
+                                    ),
+                                    array(
+                                        'name' => 'accounts_contact_role_widget_notification',
+                                        'short_name' => 'accounts_contact_role_widget_notification',
+                                        'css_class' => 'accounts_contact_role_widget_notification',
+                                        'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_NOTIFICATION',
+                                        'type' => 'bool',
+                                        'span' => 1,
                                     ),
                                 )
                             ),

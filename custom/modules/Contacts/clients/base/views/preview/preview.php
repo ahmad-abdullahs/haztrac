@@ -247,7 +247,7 @@ $viewdefs['Contacts'] = array(
                                         'label' => 'LBL_ACCOUNTS_AND_ROLES_WIDGET_ROLE',
                                         'type' => 'enum',
                                         'options' => 'contact_role_list',
-                                        'span' => 5
+                                        'span' => 4
                                     ),
                                     array(
                                         'name' => 'accounts_and_roles_widget_primary_account',
@@ -255,7 +255,7 @@ $viewdefs['Contacts'] = array(
                                         'label' => 'LBL_ACCOUNTS_AND_ROLES_WIDGET_PRIMARY',
                                         'type' => 'primary-radio',
                                         'groupname' => 'primary_account',
-                                        'span' => 1
+                                        'span' => 2
                                     ),
                                 )
                             ),

@@ -213,7 +213,7 @@ $viewdefs['Contracts_Template'] = array(
                                         'id_name' => 'accounts_contact_role_widget_contact_name_id',
                                         'module' => 'Contacts',
                                         'link' => true,
-                                        'span' => 4,
+                                        'span' => 3,
                                         'sortable' => false,
                                         'required' => true,
                                         // Filter stuff
@@ -231,6 +231,14 @@ $viewdefs['Contracts_Template'] = array(
                                         'type' => 'enum',
                                         'options' => 'accounts_contact_role_widget_list',
                                         'span' => 3
+                                    ),
+                                    array(
+                                        'name' => 'accounts_contact_role_widget_notification',
+                                        'short_name' => 'accounts_contact_role_widget_notification',
+                                        'css_class' => 'accounts_contact_role_widget_notification',
+                                        'label' => 'LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_NOTIFICATION',
+                                        'type' => 'bool',
+                                        'span' => 1,
                                     ),
                                 )
                             ),

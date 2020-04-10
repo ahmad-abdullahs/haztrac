@@ -30,3 +30,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Parties';
 $mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ACCOUNT'] = 'Account Name';
 $mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_CONTACT_NAME'] = 'Account Contact';
 $mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_ROLE'] = 'Account Role';
+$mod_strings['LBL_ACCOUNTS_CONTACT_ROLE_WIDGET_NOTIFICATION'] = 'Notification';
