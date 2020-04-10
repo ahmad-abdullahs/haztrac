@@ -15,20 +15,39 @@
  */
 ({
     extendsFrom: 'DashletToolbarView',
-    showRefreshButton: false,
+//    showRefreshButton: false,
+//    events: {
+//        'shown.bs.dropdown': '_toggleAria',
+//        'hidden.bs.dropdown': '_toggleAria',
+//        'click [name=custom_refresh_button]': 'refreshClicked',
+//    },
+//
+//    initialize: function (options) {
+//        this._super('initialize', [options]);
+//        if (this.options.layout.meta.components[0]) {
+//            if (this.options.layout.meta.components[0].view.url) {
+//                var url = this.options.layout.meta.components[0].view.url;
+//                if (this.options.context.parent.get('module') == 'LR_Lab_Reports' && url.search("Lab_Report_Preview") != -1) {
+//                    this.showRefreshButton = true;
+//                }
+//            }
+//        }
+//    },
+
+    popOutFullView: false,
+    popOutFullViewLink: 'javascript:void(0);',
     events: {
         'shown.bs.dropdown': '_toggleAria',
         'hidden.bs.dropdown': '_toggleAria',
-        'click [name=custom_refresh_button]': 'refreshClicked',
     },
 
     initialize: function (options) {
         this._super('initialize', [options]);
-        if (this.options.layout.meta.components[0]) {
-            if (this.options.layout.meta.components[0].view.url) {
-                var url = this.options.layout.meta.components[0].view.url;
-                if (this.options.context.parent.get('module') == 'LR_Lab_Reports' && url.search("Lab_Report_Preview") != -1) {
-                    this.showRefreshButton = true;
+        if (this.options.context.parent.get('module') == 'LR_Lab_Reports') {
+            if (this.options.layout.meta.components[0]) {
+                if (this.options.layout.meta.components[0].view.url) {
+                    this.popOutFullView = this.options.context.parent.get('model').get('fileExist');
+                    this.popOutFullViewLink = this.options.context.parent.get('model').get('popOutFullViewLink');
                 }
             }
         }

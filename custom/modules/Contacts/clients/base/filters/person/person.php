@@ -13,6 +13,9 @@
 
 $module = 'Contacts';
 $viewdefs[$module]['base']['filter']['person'] = array(
-    'quicksearch_field' => array_merge(array(), getViewColumns($module, 'listview')),
+    'quicksearch_field' => array_merge(array(
+        'first_name',
+        'last_name',
+            ), getViewColumns($module, 'listview')),
     'quicksearch_priority' => 2,
 );

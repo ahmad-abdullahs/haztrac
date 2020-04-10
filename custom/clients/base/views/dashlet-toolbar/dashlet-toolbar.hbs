@@ -11,9 +11,9 @@
  */
 --}}
 <div class="btn-toolbar pull-right">
-    {{#if showRefreshButton}}
+    {{#if popOutFullView}}
         <span class="detail">
-            <a href="javascript:void(0);" class="rowaction btn btn-primary" role="button" tabindex="0" name="custom_refresh_button">Refresh</a>
+            <a href="{{popOutFullViewLink}}" target="_blank" class="btn btn-primary" role="button" tabindex="0" name="popOutFullViewButton"><i class="fa fa-external-link"></i> Full View </a>
         </span>
     {{/if}}
     {{#each meta.buttons}}

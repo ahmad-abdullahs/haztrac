@@ -35,6 +35,7 @@
         app.events.trigger('loadTheLabReportInDashlet', {
             id: $(ele.currentTarget).attr('id'),
             file_ext: $(ele.currentTarget).attr('file_ext'),
+            hrefLink: $(ele.currentTarget).siblings('span').find('a').attr('href'),
             module: 'mv_Attachments',
         });
     },

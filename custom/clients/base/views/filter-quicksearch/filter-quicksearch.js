@@ -20,6 +20,8 @@
 ({
     extendsFrom: 'FilterQuicksearchView',
 
+    // See the custom/modules/Contacts/clients/base/filters/person/person.php file for quicksearch fields.
+
     /**
      * Update quick search placeholder to Search by Field1, Field2, Field3 when the module changes
      * @param string linkModuleName

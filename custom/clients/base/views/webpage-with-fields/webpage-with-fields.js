@@ -61,6 +61,10 @@
         var context = this.context.parent || this.context;
         var model = context.get('model');
         model.set('preview_doc_id', param.id + '.' + param.file_ext, {silent: true});
+        if (param.hrefLink) {
+            $('[name=popOutFullViewButton]').attr('href', param.hrefLink);
+        }
+        
         this._render();
     },
 
