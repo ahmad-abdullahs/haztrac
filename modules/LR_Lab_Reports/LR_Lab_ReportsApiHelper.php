@@ -5,6 +5,9 @@ class LR_Lab_ReportsApiHelper extends SugarBeanApiHelper {
     public function formatForApi(\SugarBean $bean, array $fieldList = array(), array $options = array()) {
         $ret = parent::formatForApi($bean, $fieldList, $options);
 
+        // This check can be added for the performance reasons, but this need to be
+        // tested throughly. It will drastically increase the performance.
+        // if(!empty($fieldList)){}
         // adding manifests
         $ret['manifests'] = array();
         $sql = <<<SQL

@@ -401,7 +401,8 @@ $viewdefs['LR_Lab_Reports'] = array(
                         array(
                             0 =>
                             array(
-                                'name' => 'lr_lab_reports_templates_lr_lab_reports_1_name',
+                                'name' => 'lr_lab_reports_analysis_templates',
+                                'type' => 'multienum-relate',
                             ),
                             1 =>
                             array(
@@ -466,7 +467,6 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'name' => 'manifests',
                                 'type' => 'manifests',
                                 'label' => 'LBL_MANIFESTS',
-                                'dismiss_label' => true,
                                 'tabindex' => '10',
                             ),
                             4 =>

@@ -312,12 +312,6 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'name' => 'sample_physical_state_c',
                                 'label' => 'LBL_SAMPLE_PHYSICAL_STATE',
                             ),
-                            4 =>
-                            array(
-                            ),
-                            5 =>
-                            array(
-                            ),
                         ),
                     ),
                     4 =>
@@ -345,29 +339,30 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                             2 =>
                             array(
-                                'name' => 'lab_analysis_c',
-                                'label' => 'LBL_LAB_ANALYSIS',
-                                'span' => 12,
+                                'name' => 'lr_lab_reports_analysis_templates',
+                                'type' => 'multienum-relate',
                             ),
                             3 =>
                             array(
-                                'name' => 'analysis_metals_c',
-                                'label' => 'LBL_ANALYSIS_METALS',
-                                'span' => 12,
+                                'name' => 'lab_analysis_c',
+                                'label' => 'LBL_LAB_ANALYSIS',
                             ),
                             4 =>
+                            array(
+                                'name' => 'analysis_metals_c',
+                                'label' => 'LBL_ANALYSIS_METALS',
+                            ),
+                            5 =>
                             array(
                                 'name' => 'special_instructions_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_SPECIAL_INSTRUCTIONS',
-                                'tabindex' => '11',
                             ),
-                            5 =>
+                            6 =>
                             array(
                                 'name' => 'instructions_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_INSTRUCTIONS',
-                                'tabindex' => '12',
                             ),
                         ),
                     ),
@@ -403,8 +398,6 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'name' => 'manifests',
                                 'type' => 'manifests',
                                 'label' => 'LBL_MANIFESTS',
-                                'dismiss_label' => true,
-                                'tabindex' => '10',
                             ),
                             4 =>
                             array(

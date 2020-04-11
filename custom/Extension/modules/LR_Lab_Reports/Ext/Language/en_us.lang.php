@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_NAME'] = 'Name';
 $mod_strings['LBL_PROJECT_NAME'] = 'Project Name ';
@@ -280,3 +281,4 @@ $mod_strings['LNK_NEW_RECORD_LR_LAB_REPORTS_TEMPLATES'] = 'Create Lab Report Tem
 $mod_strings['LNK_LIST_LR_LAB_REPORTS_TEMPLATES'] = 'View Lab Report Templates';
 $mod_strings['LBL_GENERATOR_ACCOUNT_ID'] = 'Generator (related Account ID)';
 $mod_strings['LBL_GENERATOR'] = 'Generator';
+$mod_strings['LBL_LR_LAB_REPORTS_ANALYSIS_TEMPLATES'] = 'Analysis Templates';

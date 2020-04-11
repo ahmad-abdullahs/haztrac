@@ -1,4 +1,5 @@
 <?PHP
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +14,9 @@
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
 require_once('modules/LR_Lab_Reports/LR_Lab_Reports_sugar.php');
+
 class LR_Lab_Reports extends LR_Lab_Reports_sugar {
+
     public function save($check_notify = false) {
         $ret = parent::save($check_notify);
 
@@ -28,8 +31,8 @@ class LR_Lab_Reports extends LR_Lab_Reports_sugar {
         global $db;
 
         $res = $db->query(
-            "DELETE FROM ht_manifest_lr_lab_reports_1_c WHERE ht_manifest_lr_lab_reports_1lr_lab_reports_idb = '{$this->id}'");
-        
+                "DELETE FROM ht_manifest_lr_lab_reports_1_c WHERE ht_manifest_lr_lab_reports_1lr_lab_reports_idb = '{$this->id}'");
+
         if (!empty($this->manifests)) {
             if (is_string($this->manifests)) {
                 $this->manifests = json_decode($this->manifests, true);
@@ -40,7 +43,7 @@ class LR_Lab_Reports extends LR_Lab_Reports_sugar {
                 foreach ($this->manifests as $manifests) {
                     $manifestId = $manifests['id'];
 
-                    $insertSQLs[] =<<<SQL
+                    $insertSQLs[] = <<<SQL
                         SELECT
                             UUID() as 'id',
                             NOW() as 'date_modified',
@@ -51,7 +54,7 @@ SQL;
                 }
 
                 // preparing Insert SQL for relationships
-                $insertSQL =<<<SQL
+                $insertSQL = <<<SQL
                     INSERT INTO ht_manifest_lr_lab_reports_1_c (
                         id,
                         date_modified,
@@ -70,4 +73,21 @@ SQL;
 
         $this->db->query("UPDATE {$this->table_name}_cstm SET lab_report_preview_c='$this->lab_report_preview_c' WHERE id_c='{$this->id}'");
     }
+
+}
+
+function getLabReportTemplates() {
+    $query = new SugarQuery();
+    $query->from(BeanFactory::getBean("LR_Lab_Reports_Templates"), array(
+        'team_security' => false
+    ));
+    $query->select(array('id', 'name'));
+    $query->where()->equals('deleted', 0);
+    $query->orderBy('name', 'ASC');
+    $result = $query->execute();
+    $allLabReportTemplates = array('' => '');
+    foreach ($result as $row) {
+        $allLabReportTemplates[$row['id']] = $row['name'];
+    }
+    return $allLabReportTemplates;
 }

@@ -6,10 +6,12 @@
         'click .btn[name=remove]': 'removeItem'
     },
 
+    isEmpty: false,
+
     /**
      * @inheritdoc
      */
-    _render: function() {
+    _render: function () {
         this._super('_render');
 
         var self = this;
@@ -35,7 +37,7 @@
         }
 
         var index = this._currentIndex,
-            record = this.value;
+                record = this.value;
         record[index || 0].id = model.id;
         record[index || 0].name = model.value;
 
@@ -57,13 +59,12 @@
      */
     format: function (value) {
         if (_.isEmpty(value)) {
-            if (_.isEmpty(value)) {
-                value = [{}];
-            }
+            value = [{}];
+            this.isEmpty = true;
         }
 
         if (_.isArray(value) && !_.isEmpty(value)) {
-            _.each(value, function(record, index, list) {
+            _.each(value, function (record, index, list) {
                 delete record.remove_button;
                 delete record.add_button;
 
@@ -99,7 +100,7 @@
             this._updateAndTriggerChange(this.value);
         }
     }, 0),
-    
+
     /**
      * Removes a manifest to the list
      */
