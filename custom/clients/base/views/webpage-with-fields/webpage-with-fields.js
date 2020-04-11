@@ -9,7 +9,13 @@
 
     bindDataChange: function () {
         if (!this.meta.config && !this.meta.url.includes('entryPoint')) {
-            this.model.on("change", this.render, this);
+            var context = this.context.parent || this.context;
+            var module = context.get('module');
+            if (module == 'LR_Lab_Reports') {
+                this.model.on("change:multi_files", this.render, this);
+            } else {
+                this.model.on("change", this.render, this);
+            }
         }
     },
 
@@ -64,7 +70,7 @@
         if (param.hrefLink) {
             $('[name=popOutFullViewButton]').attr('href', param.hrefLink);
         }
-        
+
         this._render();
     },
 
