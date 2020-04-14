@@ -11,6 +11,10 @@
 ({
     extendsFrom: 'RowactionField',
 
+    events: {
+        'click .print-status': 'rowActionSelect',
+    },
+
     printStatusMap: {
         'Pending': {
             color: 'red',
@@ -36,6 +40,10 @@
 
     initialize: function (options) {
         this._super('initialize', [options]);
+    },
+
+    rowActionSelect: function (evt) {
+        this.model.trigger('pullUpPrintPaperWorkDrawer');
     },
 
     _render: function () {

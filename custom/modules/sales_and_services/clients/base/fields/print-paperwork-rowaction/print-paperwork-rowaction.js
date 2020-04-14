@@ -5,6 +5,7 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         this.type = 'rowaction';
+        this.model.on('pullUpPrintPaperWorkDrawer', this.printPaperworkDrawer, this);
     },
 
     rowActionSelect: function (evt) {
@@ -52,7 +53,8 @@
                 app.error.handleHttpError(data, {});
             },
         }, {
-            iframe: this.$el
+            iframe: this.view.$el,
+            // iframe: this.$el
         });
     },
 

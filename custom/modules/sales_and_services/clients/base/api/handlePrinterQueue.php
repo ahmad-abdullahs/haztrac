@@ -46,7 +46,6 @@ class handlePrinterQueue extends SugarApi {
             $on_fly_manifest_id = $args['fields']['on_fly_manifest_id'];
             $on_fly_manifest_number = $args['fields']['on_fly_manifest_number'];
             $primaryTeamId = $args['fields']['primaryTeamId'];
-            $primaryTeamId = $args['fields']['primaryTeamId'];
 
             $sAndSBean = BeanFactory::retrieveBean('sales_and_services', $parentId);
             if ($sAndSBean) {
@@ -102,6 +101,7 @@ class handlePrinterQueue extends SugarApi {
                 $pdfTemplateId = $pdf_template_printer_row['pdf_template_printer_widget_name_id'];
                 $pdfTemplateName = $pdf_template_printer_row['pdf_template_printer_widget_name'];
                 $printerName = $pdf_template_printer_row['pdf_template_printer_widget_printer'];
+                $printQuantity = $pdf_template_printer_row['pdf_template_printer_widget_quantity'];
                 $lineNumber = $pdf_template_printer_row['pdf_template_printer_widget_line_number'];
                 $pdfTemplateType = $pdf_template_printer_row['pdf_template_printer_widget_pdf_template_type'];
 
@@ -114,6 +114,7 @@ class handlePrinterQueue extends SugarApi {
                 $queue_workorderBean->account_id_c = $accountId;
                 $queue_workorderBean->pdf_template_id = $pdfTemplateId;
                 $queue_workorderBean->selected_printer = $printerName;
+                $queue_workorderBean->quantity = $printQuantity;
                 $queue_workorderBean->line_number = $lineNumber;
                 $queue_workorderBean->pdf_template_type = $pdfTemplateType;
 

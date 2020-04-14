@@ -206,7 +206,6 @@
         }, this);
 
         var dataArr = [];
-        var lineNumber = 999;
         _.each(this.view.tabViewFieldNamesList, function (_val) {
             if (_val) {
                 // Go over all the checked pdf templates and see if the user has changed the default printer and selected the printer
@@ -216,10 +215,11 @@
                 _.each(modelsList, function (model, key) {
                     if (model) {
                         var defaultPrinter = this.view.printer_setting[model.get('pdf_template_type')] || '';
+                        var lineNumber = 999, quantity = 1;
                         if (this.view.layout.jsonFieldStructure) {
                             if (this.view.layout.jsonFieldStructure[model.get('id')]) {
-                                lineNumber = 0;
                                 defaultPrinter = this.view.layout.jsonFieldStructure[model.get('id')].pdf_template_printer_widget_printer;
+                                quantity = this.view.layout.jsonFieldStructure[model.get('id')].pdf_template_printer_widget_quantity;
                                 lineNumber = this.view.layout.jsonFieldStructure[model.get('id')].pdf_template_printer_widget_line_number;
                             }
                         }
@@ -228,12 +228,12 @@
                             'pdf_template_printer_widget_name_id': model.get('id'),
                             'pdf_template_printer_widget_name': model.get('name'),
                             'pdf_template_printer_widget_printer': defaultPrinter,
+                            'pdf_template_printer_widget_quantity': quantity || 1,
                             'pdf_template_printer_widget_pdf_template_type': model.get('pdf_template_type'),
                             'pdf_template_printer_widget_line_number': lineNumber,
                         };
                         dataArr.push(obj);
                     }
-                    lineNumber = 999;
                 }, this);
             }
         }, this);

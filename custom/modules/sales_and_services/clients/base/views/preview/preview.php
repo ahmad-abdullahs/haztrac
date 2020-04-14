@@ -195,6 +195,17 @@ $viewdefs['sales_and_services'] = array(
                                 'studio' => 'visible',
                                 'label' => 'LBL_STATUS',
                             ),
+                            5 =>
+                            array(
+                                'name' => 'ss_number',
+                                'readonly' => true,
+                                'comment' => 'Visual unique identifier',
+                                'studio' =>
+                                array(
+                                    'quickcreate' => false,
+                                ),
+                                'label' => 'LBL_SS_NUMBER',
+                            ),
                         ),
                     ),
                     1 =>
@@ -477,43 +488,26 @@ $viewdefs['sales_and_services'] = array(
                         'placeholders' => 1,
                         'fields' =>
                         array(
-                            0 =>
-                            array(
-                                'name' => 'ss_number',
-                                'readonly' => true,
-                                'comment' => 'Visual unique identifier',
-                                'studio' =>
-                                array(
-                                    'quickcreate' => false,
-                                ),
-                                'label' => 'LBL_SS_NUMBER',
-                            ),
-                            1 =>
                             array(
                                 'name' => 'svc_type_c',
                                 'label' => 'LBL_SVC_TYPE',
                             ),
-                            2 =>
                             array(
                                 'name' => 'profile_no_c',
                                 'label' => 'LBL_PROFILE_NO',
                             ),
-                            3 =>
                             array(
                                 'name' => 'svc_days_c',
                                 'label' => 'LBL_SVC_DAYS',
                             ),
-                            4 =>
                             array(
                                 'name' => 'quotes_sales_and_services_1_name',
                                 'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
                             ),
-                            5 =>
                             array(
                                 'name' => 'contracts_sales_and_services_1_name',
                                 'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
                             ),
-                            6 =>
                             array(
                                 'name' => 'sales_and_services_revenuelineitems_1',
                                 'type' => 'relate-collection-preview',

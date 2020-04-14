@@ -99,6 +99,7 @@ $viewdefs['sales_and_services']['base']['view']['pdf-templates-to-printer-mappin
                             'link' => true,
                             'span' => 5,
                             'sortable' => false,
+                            'default' => true,
                         ),
                         array(
                             'name' => 'pdf_template_printer_widget_printer',
@@ -106,7 +107,16 @@ $viewdefs['sales_and_services']['base']['view']['pdf-templates-to-printer-mappin
                             'label' => 'LBL_PDF_TEMPLATE_PRINTER_WIDGET_PRINTER',
                             'type' => 'enum',
                             'options' => 'pdf_printers_list',
-                            'span' => 5
+                            'span' => 4,
+                            'default' => true,
+                        ),
+                        array(
+                            'name' => 'pdf_template_printer_widget_quantity',
+                            'css_class' => 'pdf_template_printer_widget_quantity',
+                            'label' => 'LBL_PDF_TEMPLATE_PRINTER_WIDGET_QUANTITY',
+                            'type' => 'int',
+                            'span' => 2,
+                            'default' => true,
                         ),
                         array(
                             'name' => 'pdf_template_printer_widget_pdf_template_type',

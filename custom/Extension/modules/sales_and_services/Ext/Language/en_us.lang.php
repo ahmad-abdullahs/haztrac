@@ -120,6 +120,7 @@ $mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Audit';
 $mod_strings['LBL_PRINT_STATUS'] = 'Print Status';
 $mod_strings['LBL_PDF_TEMPLATE_PRINTER_WIDGET_NAME'] = 'PDF Template';
 $mod_strings['LBL_PDF_TEMPLATE_PRINTER_WIDGET_PRINTER'] = 'Printer';
+$mod_strings['LBL_PDF_TEMPLATE_PRINTER_WIDGET_QUANTITY'] = 'Quantity';
 $mod_strings['LBL_SALES_AND_SERVICES_QUEUE_WORKORDER_1_FROM_QUEUE_WORKORDER_TITLE'] = 'Work Order Queue';
 $mod_strings['LBL_PDF_TEMPLATE_PRINTER_WIDGET'] = 'Service Work Order';
 $mod_strings['LBL_CLOSE_BUTTON_LABEL'] = 'Close';

@@ -12,6 +12,9 @@
     addClass: 'addRecord',
     initialize: function (options) {
         this._super('initialize', [options]);
+        // This event is fired from the custom/modules/sales_and_services/clients/base/fields/templatepdfs-panel/templatepdfs-panel.js file
+        // When user checked or unchecked the Pdf Template, it listens the event and re-render the whole field
+        // So, in short the params/data received by this listner is rendered.
         app.events.on('pdf_template_printer_widget:re-render', this.reRenderField, this);
     },
 
@@ -120,12 +123,12 @@
             }
         }, this);
 
-        // If no row exist then make the first row as the primary row.
         if (!rowExist) {
             this.model.set(this.name, '[]', {silent: true});
         }
 
         if ((this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName))) {
+            // Don't show the first empty row unless added.
             if (this.dontShowFirstRow) {
             } else {
                 this.dontShowFirstRow = false;

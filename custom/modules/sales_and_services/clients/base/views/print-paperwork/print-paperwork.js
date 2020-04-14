@@ -21,6 +21,9 @@
         var self = this;
         var firstAttrFlag = true;
         this.tabViewFieldNamesList = [];
+        // Every time drawer is pulled-up it should flush the existing 
+        // printer_setting and fetch the new ones.
+        this.printer_setting = {};
 
         this._super('initialize', [options]);
 
@@ -208,6 +211,15 @@
                 $(ele).siblings('div').find('a').css({'background-color': '#e61718'});
             } else {
                 $(ele).siblings('div').find('a').css({'background-color': ''});
+            }
+        }, this);
+
+        _.each($('tbody > tr.ui-sortable-handle').find('input[name*=pdf_template_printer_widget_quantity__]'), function (ele) {
+            if (!$(ele).val() || _.isNaN(Number($(ele).val())) || Number($(ele).val()) == 0) {
+                issueExist = true;
+                $(ele).css({'background-color': '#e61718'});
+            } else {
+                $(ele).css({'background-color': ''});
             }
         }, this);
 

@@ -19,3 +19,4 @@ $mod_strings['LBL_PDF_TEMPLATE_ID'] = 'PDF Template';
 $mod_strings['LBL_PDF_TEMPLATE_NAME'] = 'PDF Template';
 $mod_strings['LBL_LINE_NUMBER'] = 'Order Number';
 $mod_strings['LBL_PDF_TEMPLATE_TYPE'] = 'Template Type';
+$mod_strings['LBL_QUANTITY'] = 'Quantity';

@@ -52,25 +52,32 @@ array (
               ),
               4 => 
               array (
+                'name' => 'quantity',
+                'label' => 'LBL_QUANTITY',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
+              array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO_NAME',
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => true,
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'date_entered',
                 'enabled' => true,
                 'default' => true,
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'pdf_template_name',
                 'label' => 'LBL_PDF_TEMPLATE_NAME',
@@ -80,7 +87,7 @@ array (
                 'sortable' => false,
                 'default' => false,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
