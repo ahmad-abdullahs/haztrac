@@ -12,7 +12,8 @@
 
         if (this.module == 'RevenueLineItems') {
             if (!_.isUndefined(this.context.attributes.parentModule)) {
-                if (this.context.attributes.parentModule == 'sales_and_services') {
+                if (this.context.attributes.parentModule == 'sales_and_services' ||
+                        this.context.attributes.parentModule == 'Accounts') {
                     this.context.set('collapsed', false);
                 }
             }

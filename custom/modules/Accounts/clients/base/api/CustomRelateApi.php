@@ -44,6 +44,9 @@ class CustomRelateApi extends RelateApi {
     }
 
     public function filterRelated(ServiceBase $api, array $args) {
+        if ($args['link_name'] == 'revenuelineitems') {
+            $args['max_num'] = -1;
+        }
         $args = $this->excludeChildRecords($args);
         return parent::filterRelated($api, $args);
     }

@@ -37,8 +37,11 @@ class handlePrinterQueue extends SugarApi {
     }
 
     public function SubmitToPrinterMethod(ServiceBase $api, array $args) {
-        // Call the handlePrinterQueueMethod, because used might have not clicked the print Queue before
+        // Call the handlePrinterQueueMethod, because user might have not clicked the print Queue before
         // So we need to create the workorder items first and then the manifest stuff...
+        global $timedate;
+        $args['print_status_c'] = 'Printed';
+        $args['print_date'] = $timedate->nowDbDate();
         if ($this->handlePrinterQueueMethod($api, $args)) {
             $parentId = $args['modelId'];
             $isManifestRequired = $args['isManifestRequired'];
@@ -47,12 +50,12 @@ class handlePrinterQueue extends SugarApi {
             $on_fly_manifest_number = $args['fields']['on_fly_manifest_number'];
             $primaryTeamId = $args['fields']['primaryTeamId'];
 
-            $sAndSBean = BeanFactory::retrieveBean('sales_and_services', $parentId);
-            if ($sAndSBean) {
-                // Set the print Status ...
-                $sAndSBean->print_status_c = 'Printed';
-                $sAndSBean->save();
-            }
+//            $sAndSBean = BeanFactory::retrieveBean('sales_and_services', $parentId);
+//            if ($sAndSBean) {
+//                // Set the print Status ...
+//                $sAndSBean->print_status_c = 'Printed';
+//                $sAndSBean->save();
+//            }
 
             if ($isManifestRequired) {
                 // Get the primary team and update the manifest number...
@@ -81,6 +84,15 @@ class handlePrinterQueue extends SugarApi {
         $pdf_template_printer_widget = $args['fields']['pdf_template_printer_widget'];
         $pdf_template_printer_widget = json_decode(html_entity_decode($pdf_template_printer_widget), ENT_QUOTES);
 
+        $printStatus = 'Queued';
+        $printDate = '';
+        if (!empty($args['print_status_c'])) {
+            $printStatus = 'Printed';
+        }
+        if (!empty($args['print_date'])) {
+            $printDate = $args['print_date'];
+        }
+
         $sAndSBean = BeanFactory::retrieveBean('sales_and_services', $parentId);
         if ($sAndSBean) {
             // Update the Sales and Services record and then create the queue_workorder records
@@ -89,7 +101,7 @@ class handlePrinterQueue extends SugarApi {
             $accountId = $sAndSBean->accounts_sales_and_services_1accounts_ida;
 
             $sAndSBean->pdf_template_printer_widget = $args['fields']['pdf_template_printer_widget'];
-            $sAndSBean->print_status_c = 'Queued';
+            $sAndSBean->print_status_c = $printStatus;
             // Set the print Status as well...
             $sAndSBean->save();
 
@@ -115,6 +127,9 @@ class handlePrinterQueue extends SugarApi {
                 $queue_workorderBean->pdf_template_id = $pdfTemplateId;
                 $queue_workorderBean->selected_printer = $printerName;
                 $queue_workorderBean->quantity = $printQuantity;
+                $queue_workorderBean->module_type = 'sales_and_services';
+                $queue_workorderBean->print_status = $printStatus;
+                $queue_workorderBean->print_date = $printDate;
                 $queue_workorderBean->line_number = $lineNumber;
                 $queue_workorderBean->pdf_template_type = $pdfTemplateType;
 
@@ -145,13 +160,13 @@ class handlePrinterQueue extends SugarApi {
         $workOrderIds = array();
 
         $sql = <<<SQL
-                    SELECT 
-                        sales_and_services_queue_workorder_1queue_workorder_idb
-                    FROM
-                        sales_and_services_queue_workorder_1_c
-                    WHERE
-                        sales_and_services_queue_workorder_1sales_and_services_ida = '$parentId'
-                            AND deleted = 0;
+            SELECT 
+                sales_and_services_queue_workorder_1queue_workorder_idb
+            FROM
+                sales_and_services_queue_workorder_1_c
+            WHERE
+                sales_and_services_queue_workorder_1sales_and_services_ida = '$parentId'
+                    AND deleted = 0;
 SQL;
 
         $res = $db->query($sql);

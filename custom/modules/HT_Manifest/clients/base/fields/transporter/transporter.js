@@ -17,7 +17,73 @@
 
     initialize: function (options) {
         this._super('initialize', [options]);
+        Handlebars.registerHelper('add', function (leftopp, rightopp) {
+            return Number(leftopp) + Number(rightopp);
+        });
         this._initPlaceholderAttribute();
+    },
+
+    render: function () {
+        this._super('render');
+
+        var sortableItems;
+        sortableItems = this.$('tbody');
+        if (sortableItems.length) {
+            _.each(sortableItems, function (sortableItem) {
+                $(sortableItem).sortable({
+                    // allow draggable items to be connected with other tbody elements
+                    connectWith: 'tbody',
+                    // allow drag to only go in Y axis direction
+                    axis: 'y',
+                    // the items to make sortable
+                    items: 'tr.sortable',
+                    // make the "helper" row (the row the user actually drags around) a clone of the original row
+                    helper: 'clone',
+                    // adds a slow animation when "dropping" a group, removing this causes the row
+                    // to immediately snap into place wherever it's sorted
+                    revert: true,
+                    // the CSS class to apply to the placeholder underneath the helper clone the user is dragging
+                    placeholder: 'ui-state-highlight',
+                    // handler for when dragging starts
+                    start: _.bind(this._onDragStart, this),
+                    // handler for when dragging stops; the "drop" event
+                    stop: _.bind(this._onDragStop, this),
+                    // handler for when dragging an item into a group
+                    over: _.bind(this._onGroupDragTriggerOver, this),
+                    // handler for when dragging an item out of a group
+                    out: _.bind(this._onGroupDragTriggerOut, this),
+                    // the cursor to use when dragging
+                    cursor: 'move'
+                });
+            }, this);
+        }
+
+    },
+    _onDragStart: function (evt, ui) {
+//        console.log('_onDragStart : ', this, evt, ui);
+    },
+    _onDragStop: function (evt, ui) {
+//        console.log('_onDragStop : ', this, evt, ui);
+
+        // This function will go over each row one by one, get the line_number value (This line_number value is the index
+        // of that data object in this.value array), extract that object from the index and push it to the new array for
+        // re-ordering the rows. 
+        // Finally set the value and render the field.
+        var newValue = [];
+
+        _.each(this.$('tbody > tr.ui-sortable-handle'), function (ele) {
+            var obj = this.value[$(ele).attr('line_number')];
+            newValue.push(obj);
+        }, this);
+
+        this.model.set(this.name, newValue);
+        this.render();
+    },
+    _onGroupDragTriggerOver: function (evt, ui) {
+//        console.log('_onGroupDragTriggerOver : ', this, evt, ui);
+    },
+    _onGroupDragTriggerOut: function (evt, ui) {
+//        console.log('_onGroupDragTriggerOut : ', this, evt, ui);
     },
 
     _initPlaceholderAttribute: function () {
@@ -46,7 +112,7 @@
 
         this._super('_render');
 
-        this.$el.parents('[data-type=' + this.name + ']').css('background-color', 'whitesmoke');
+//        this.$el.parents('[data-type=' + this.name + ']').css('background-color', 'whitesmoke');
 
         if (this.tplName !== 'edit' && this.tplName !== 'massupdate') {
             this._hasDatePicker = false;
@@ -74,7 +140,7 @@
         var $el = $(e.target);
         var plugin = $el.data('select2');
         var id = e.val;
-        var _index = $(e.target).closest('div').index();
+        var _index = $(e.target).closest('tr').index();
 
         if (_.isUndefined(id)) {
             return;
@@ -307,9 +373,7 @@
      */
     format: function (value) {
         if (_.isEmpty(value)) {
-            if (_.isEmpty(value)) {
-                value = [{}];
-            }
+            value = [{}];
         }
 
         if (_.isArray(value) && !_.isEmpty(value)) {

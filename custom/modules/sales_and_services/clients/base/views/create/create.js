@@ -40,11 +40,69 @@
      * @inheritdoc
      */
     initialize: function (options) {
+        var self = this;
+        this._viewAlerts = [];
         this.plugins = _.union(this.plugins, ['LinkedModel']);
 
         this.hasRliAccess = app.acl.hasAccess('edit', 'RevenueLineItems');
 
         this._super('initialize', [options]);
+
+        this.alerts = _.extend({}, this.alerts, {
+            showInvalidModel: function () {
+                if (!self instanceof app.view.View) {
+                    app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
+                            'an instance of this view.');
+                    return;
+                }
+                var name = 'invalid-data';
+                self._viewAlerts.push(name);
+
+                var messages = 'ERR_RESOLVE_ERRORS';
+                var nameField = self.getField('name');
+                if (!_.isEmpty(nameField._errors) || !self.model.get('name')) {
+                    messages = "Select Primary Revenuelineitem to auto-populate Sales & Service name.";
+                }
+
+                app.alert.show(name, {
+                    level: 'error',
+                    messages: messages
+                });
+            },
+            showServerError: function () {
+                if (!self instanceof app.view.View) {
+                    app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
+                            'an instance of this view.');
+                    return;
+                }
+                var name = 'server-error';
+                self._viewAlerts.push(name);
+                app.alert.show(name, {
+                    level: 'error',
+                    messages: 'ERR_GENERIC_SERVER_ERROR'
+                });
+            },
+            showSuccessButDeniedAccess: function () {
+                if (!self instanceof app.view.View) {
+                    app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
+                            'an instance of this view.');
+                    return;
+                }
+                var name = 'invalid-data';
+                self._viewAlerts.push(name);
+                app.alert.show(name, {
+                    level: 'warning',
+                    messages: 'LBL_RECORD_SAVED_ACCESS_DENIED',
+                    autoClose: true,
+                    autoCloseDelay: 9000
+                });
+            }
+        });
+
+        this.model.off('error:validation');
+        this.model.on("error:validation", function () {
+            this.alerts.showInvalidModel();
+        }, this);
     },
 
     /**

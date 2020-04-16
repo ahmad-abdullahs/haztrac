@@ -57,14 +57,6 @@ $dictionary['RevenueLineItem']['fields']['shipping_hazardous_materia_c']['depend
 $dictionary['RevenueLineItem']['fields']['state_regulated_c']['labelValue'] = 'State Regulated (Y)';
 $dictionary['RevenueLineItem']['fields']['state_regulated_c']['enforced'] = '';
 $dictionary['RevenueLineItem']['fields']['state_regulated_c']['dependency'] = '';
-$dictionary['RevenueLineItem']['fields']['proper_shipping_name_c']['labelValue'] = 'Proper Shipping Name';
-$dictionary['RevenueLineItem']['fields']['proper_shipping_name_c']['full_text_search'] = array(
-    'enabled' => '0',
-    'boost' => '1',
-    'searchable' => false,
-);
-$dictionary['RevenueLineItem']['fields']['proper_shipping_name_c']['enforced'] = '';
-$dictionary['RevenueLineItem']['fields']['proper_shipping_name_c']['dependency'] = '';
 $dictionary['RevenueLineItem']['fields']['waste_state_codes_c']['labelValue'] = 'State Waste Codes';
 $dictionary['RevenueLineItem']['fields']['waste_state_codes_c']['dependency'] = '';
 $dictionary['RevenueLineItem']['fields']['waste_state_codes_c']['visibility_grid'] = '';

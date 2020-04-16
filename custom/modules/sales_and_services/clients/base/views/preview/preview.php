@@ -233,7 +233,7 @@ $viewdefs['sales_and_services'] = array(
                                 'initial_filter_label' => 'LBL_FILTER_ACCOUNTS_TEMPLATE',
                                 'filter_relate' =>
                                 array(
-                                    'accounts_sales_and_services_1accounts_ida' => 'account_id',
+                                    'accounts_sales_and_services_1accounts_ida' => 'account_id_cst',
                                 ),
                             ),
                             2 => 'assigned_user_name',

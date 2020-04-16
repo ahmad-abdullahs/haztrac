@@ -13,6 +13,8 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
+//                    'width' => 'large',
+                    'width' => 'xlarge',
                     'type' => 'relate-populate-rli',
                     'related_fields' =>
                     array_merge(
@@ -67,12 +69,14 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'sortable' => false,
                     'enabled' => true,
                     'default' => true,
+                    'width' => 'small',
                 ),
                 array(
                     'name' => 'estimated_quantity_c',
                     'label' => 'LBL_ESTIMATED_QUANTITY',
                     'enabled' => true,
                     'default' => true,
+                    'width' => 'small',
                 ),
 //                array(
 //                    'name' => 'quantity',
@@ -84,6 +88,8 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'label' => 'LBL_UNIT_OF_MEASURE',
                     'enabled' => true,
                     'default' => true,
+                    'width' => 'small',
+//                    'width' => 'medium',
                 ),
                 array(
                     'name' => 'discount_price',
@@ -96,6 +102,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     ),
                     'currency_format' => true,
                     'default' => true,
+                    'width' => 'small',
                 ),
                 array(
                     'name' => 'estimated_total_amount',
@@ -103,6 +110,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     'enabled' => true,
                     'currency_format' => true,
                     'default' => true,
+                    'width' => 'small',
                 ),
                 array(
                     'name' => 'total_amount',
@@ -116,6 +124,7 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems'
                     ),
                     'currency_format' => true,
                     'default' => true,
+                    'width' => 'small',
                 ),
             )
         ),

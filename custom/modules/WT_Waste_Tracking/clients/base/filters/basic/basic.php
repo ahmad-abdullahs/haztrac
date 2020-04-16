@@ -15,7 +15,10 @@ if (!defined('sugarEntry') || !sugarEntry)
 $module = 'WT_Waste_Tracking';
 $viewdefs[$module]['base']['filter']['basic'] = array(
     'create' => true,
-    'quicksearch_field' => array_merge(array(), getViewColumns($module, 'listview')),
+    'quicksearch_field' => array_merge(array(
+            ), array_diff(getViewColumns($module, 'listview'), array(
+        "team_name"
+    ))),
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,
     'filters' => array(

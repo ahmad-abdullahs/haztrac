@@ -13,6 +13,11 @@
 
 $module = 'Prospects';
 $viewdefs[$module]['base']['filter']['person'] = array(
-    'quicksearch_field' => array_merge(array(), getViewColumns($module, 'listview')),
+    'quicksearch_field' => array_merge(array(
+        'first_name',
+        'last_name',
+            ), array_diff(getViewColumns($module, 'listview'), array(
+        "team_name"
+    ))),
     'quicksearch_priority' => 2,
 );

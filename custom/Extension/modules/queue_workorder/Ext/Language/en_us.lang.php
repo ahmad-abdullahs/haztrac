@@ -20,3 +20,6 @@ $mod_strings['LBL_PDF_TEMPLATE_NAME'] = 'PDF Template';
 $mod_strings['LBL_LINE_NUMBER'] = 'Order Number';
 $mod_strings['LBL_PDF_TEMPLATE_TYPE'] = 'Template Type';
 $mod_strings['LBL_QUANTITY'] = 'Quantity';
+$mod_strings['LBL_PRINT_DATE'] = 'Print Date';
+$mod_strings['LBL_MODULE_TYPE'] = 'Module Type';
+$mod_strings['LBL_PRINT_STATUS'] = 'Status';

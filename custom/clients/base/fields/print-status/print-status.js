@@ -43,7 +43,9 @@
     },
 
     rowActionSelect: function (evt) {
-        this.model.trigger('pullUpPrintPaperWorkDrawer');
+        if (this.module == 'sales_and_services') {
+            this.model.trigger('pullUpPrintPaperWorkDrawer');
+        }
     },
 
     _render: function () {
@@ -54,8 +56,8 @@
         if (!this.model.id)
             return;
 
-        if (this.model.get('print_status_c')) {
-            var printStatus = this.model.get('print_status_c');
+        if (this.model.get('print_status_c') || this.model.get('print_status')) {
+            var printStatus = this.model.get('print_status_c') || this.model.get('print_status');
             if (!_.isUndefined(this.printStatusMap[printStatus])) {
                 this.printStatusVal = this.printStatusMap[printStatus];
             }

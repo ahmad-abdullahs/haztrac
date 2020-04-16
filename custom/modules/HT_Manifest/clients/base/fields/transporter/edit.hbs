@@ -1,39 +1,76 @@
-{{#each value}}
-<div>
-    <span class="span6">
-        {{#eq @index 0}}
-            <div class="record-label" style="margin-left: 0px;">
-                {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
-            </div>
-        {{/eq}}
-        <span class="normal index">
-            <span class="edit" style="padding-left: 0px;">
-                <input type="hidden" name="{{../name}}" class="select2 inherit-width" value="{{id}}" data-rname="{{name}}" data-index="{{@index}}">
-            </span>
-        </span>
-    </span>
-    <span class="span6">
-        {{#eq @index 0}}
-            <div class="record-label">
-                {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
-            </div>
-        {{/eq}}
-        <span class="normal index">
-            <span class="edit span10">
-                <div class="input-append date">
-                    <input type="text" data-type="date" name="{{../name}}" class="datepicker" placeholder="{{../fieldPlaceholder}}" {{#if transfer_date}}value="{{formatDate transfer_date ../../dateOptions}}"{{else}}value=""{{/if}} data-index="{{@index}}">
-                    <span class="add-on" data-icon="calendar"><i class="fa fa-calendar"></i></span>
+<table style="width: 100%;">
+    <thead>
+        <tr class="control-group pdf_template_printer_widget clearfix" style="margin-bottom: 0px;">
+            <th class="record-label">
+                <div>
+                    <span class="span1">
+                        <div class="record-label pull-left">
+                            {{str 'LBL_NUM' 'HT_Manifest'}}
+                        </div>
+                    </span>
+                    <span class="span5">
+                        <div class="record-label pull-left">
+                            {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
+                        </div>
+                    </span>
+                    <span class="span5">
+                        <div class="record-label pull-left">
+                            {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
+                        </div>
+                    </span>
+                    <span class="span1">
+                        <button type="button" class="btn third pull-right" name="dragdrop" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_HOLD_TO_DRAG' 'HT_Manifest'}}" style="background: whitesmoke;"><i class="fa fa-sort-numeric-asc"></i></button>
+                    </span>
                 </div>
-            </span>
-            <span class="span2">
-                {{#if remove_button}}
-                    <button type="button" class="btn second" name="remove" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_REMOVE"}} {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}"><i class="fa fa-minus"></i></button>
-                {{/if}}
-                {{#if add_button}}
-                    <button type="button" class="btn first" name="add" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ADD"}} {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}"><i class="fa fa-plus"></i></button>
-                {{/if}}
-            </span>
-        </span>
-    </span>
-</div>
-{{/each}}
+            </th>
+        </tr>
+    </thead>
+    <tbody class="" style="border: 1px inset; background: whitesmoke;">
+        {{#each value}}
+            <tr class="control-group clearfix sortable" line_number="{{@index}}">
+                <td class="row-fluid">
+                    <div>
+                        <span class="span1">
+                            <span class="normal index">
+                                <span class="detail" {{#if @last}}style="margin-bottom: 16px;"{{else}}style="margin-bottom: 8px;"{{/if}}>
+                                    <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{add @index 1}}.">
+                                        {{add @index 1}}.
+                                    </div>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="span5">
+                            <span class="normal index">
+                                <span class="edit" {{#if @last}}style="padding-left: 0px;margin-bottom: 16px;"{{else}}style="padding-left: 0px;margin-bottom: 8px;"{{/if}}>
+                                    <input type="hidden" name="{{../name}}" class="select2 inherit-width" value="{{id}}" data-rname="{{name}}" data-index="{{@index}}">
+                                </span>
+                            </span>
+                        </span>
+                        <span class="span6">
+                            <span class="normal index">
+                                <span class="edit span10" {{#if @last}}style="margin-bottom: 16px;"{{else}}style="margin-bottom: 8px;"{{/if}}>
+                                    <div class="input-append date">
+                                        <input type="text" data-type="date" name="{{../name}}" class="datepicker" placeholder="{{../fieldPlaceholder}}" {{#if transfer_date}}value="{{formatDate transfer_date ../../dateOptions}}"{{else}}value=""{{/if}} data-index="{{@index}}">
+                                        <span class="add-on" data-icon="calendar"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </span>
+                                <span class="span2" {{#if @last}}style="margin-bottom: 16px;"{{else}}style="margin-bottom: 8px;"{{/if}}>
+                                    {{#if remove_button}}
+                                        <button type="button" class="btn second" name="remove" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_REMOVE"}} {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}"><i class="fa fa-minus"></i></button>
+                                    {{/if}}
+                                    {{#if add_button}}
+                                        <button type="button" class="btn first" name="add" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ADD"}} {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}"><i class="fa fa-plus"></i></button>
+                                    {{!--
+                                    {{else}}
+                                        <button type="button" class="btn third" name="dragdrop" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_HOLD_TO_DRAG' 'HT_Manifest'}}" style="background: whitesmoke;"><i class="fa fa-sort-numeric-asc"></i></button>
+                                    --}}
+                                    {{/if}}
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

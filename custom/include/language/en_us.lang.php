@@ -245,3 +245,9 @@ $app_list_strings['accounts_contact_role_widget_list'] = array(
     'Notification Contact' => 'Notification Contact',
     'Delivery Destination Location' => 'Delivery Destination Location',
 );
+
+$app_list_strings['queue_workorder_module_type_list'] = array(
+    '' => '',
+    'sales_and_services' => 'Sales & Service',
+    'Contracts' => 'Contracts',
+);

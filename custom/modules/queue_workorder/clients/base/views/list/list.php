@@ -89,6 +89,34 @@ array (
               ),
               9 => 
               array (
+                'name' => 'module_type',
+                'label' => 'LBL_MODULE_TYPE',
+                'enabled' => true,
+                'default' => false,
+              ),
+              10 => 
+              array (
+                'name' => 'pdf_template_type',
+                'label' => 'LBL_PDF_TEMPLATE_TYPE',
+                'enabled' => true,
+                'default' => false,
+              ),
+              11 => 
+              array (
+                'name' => 'print_date',
+                'label' => 'LBL_PRINT_DATE',
+                'enabled' => true,
+                'default' => false,
+              ),
+              12 => 
+              array (
+                'name' => 'print_status',
+                'label' => 'LBL_PRINT_STATUS',
+                'enabled' => true,
+                'default' => false,
+              ),
+              13 => 
+              array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
                 'default' => false,

@@ -26,7 +26,7 @@ $dictionary["sales_and_services"]["fields"]["contacts_sales_and_services_1_name"
   'initial_filter' =>'filterAccountsTemplate',
   'initial_filter_label' =>'LBL_FILTER_ACCOUNTS_TEMPLATE',
   'filter_relate' => array(
-	   'accounts_sales_and_services_1accounts_ida' => 'account_id'
+	   'accounts_sales_and_services_1accounts_ida' => 'account_id_cst'
   ),
   'db_concat_fields' => 
   array (
