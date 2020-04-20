@@ -92,7 +92,15 @@
     },
 
     reloadList: function (model, value) {
-        var account_id = this.getAccountId() || value;
+        var accountId = '';
+        if (this.options.context) {
+            if (this.options.context.get('parentModel')) {
+                accountId = this.options.context.get('parentModel').get('accounts_sales_and_services_1accounts_ida');
+            }
+        }
+
+        var account_id = this.getAccountId() || value || accountId;
+
         if (!account_id)
             return;
 
