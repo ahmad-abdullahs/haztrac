@@ -1,6 +1,7 @@
 ({
     extendsFrom: 'RowactionField',
     unixTimeSuffix: '',
+    pdfTemplateTypesList: {},
 
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -24,7 +25,20 @@
         // }, _.bind(function (context, taskmodel) {
         //     // These are for code reference...
         // }, this));
-        this._downloadClicked();
+        // This pdfTemplateTypesList is fetched here because we need this list before the 
+        // print-paperwork work view initialize the meta, we are using this to dynamically create 
+        // the tabs on print-paperwork drawer.
+        this.pdfTemplateTypesList = app.data.createBeanCollection('pdf_template_types');
+        this.pdfTemplateTypesList.fetch({
+            'showAlerts': false,
+            'limit': -1,
+            params: {
+                order_by: 'order_number:asc'
+            },
+            'success': _.bind(function (data) {
+                this._downloadClicked();
+            }, this)
+        });
     },
 
     _downloadClicked: function () {
@@ -44,6 +58,7 @@
                         module: self.model.module || self.model.get('_module'),
                         model: self.model,
                         unixTimeSuffix: self.unixTimeSuffix,
+                        pdfTemplateTypesList: self.pdfTemplateTypesList,
                     }
                 }, _.bind(function (context, taskmodel) {
                     // These are for code reference...

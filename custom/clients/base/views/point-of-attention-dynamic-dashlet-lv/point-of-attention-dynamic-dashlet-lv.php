@@ -27,6 +27,7 @@ $viewdefs['base']['view']['point-of-attention-dynamic-dashlet-lv'] = array(
                 //Views where this dashlet can appear
                 'view' => array(
                     'record',
+                    'records',
                 )
             )
         ),

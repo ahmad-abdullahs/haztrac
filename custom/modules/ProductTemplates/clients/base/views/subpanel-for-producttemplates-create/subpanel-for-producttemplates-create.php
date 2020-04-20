@@ -92,6 +92,7 @@ $viewdefs['ProductTemplates']['base']['view']['subpanel-for-producttemplates-cre
                         "state_regulated_c",
                         "shipping_ca_name_c",
                         "shipping_hazardous_materia_c",
+                        "consolidated_manifest",
                         "product_svc_description_c",
                         "proper_shipping_name_c",
                         "waste_state_codes_c",

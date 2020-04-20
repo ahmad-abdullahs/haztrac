@@ -126,3 +126,4 @@ $mod_strings['LBL_PDF_TEMPLATE_PRINTER_WIDGET'] = 'Service Work Order';
 $mod_strings['LBL_CLOSE_BUTTON_LABEL'] = 'Close';
 $mod_strings['LBL_ON_FLY_MANIFEST_NAME'] = 'Manifest';
 $mod_strings['LBL_ON_FLY_MANIFEST_NUMBER'] = 'Next Manifest Num.';
+$mod_strings['LBL_TABS_CONFIGURATION'] = 'Tabs Configuration';

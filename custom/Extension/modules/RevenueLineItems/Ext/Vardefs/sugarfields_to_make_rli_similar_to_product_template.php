@@ -6,6 +6,7 @@ $dictionary['RevenueLineItem']['fields']['date_cost_price'] = array(
     'type' => 'date',
     'massupdate' => false,
     'comment' => 'Starting date cost price is valid',
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );
 
 $dictionary['RevenueLineItem']['fields']['product_code_sku_c']['labelValue'] = 'Product Code \\ SKU';
@@ -49,7 +50,7 @@ $dictionary['RevenueLineItem']['fields']['waste_profile_rqrd_c']['labelValue'] =
 $dictionary['RevenueLineItem']['fields']['waste_profile_rqrd_c']['enforced'] = '';
 $dictionary['RevenueLineItem']['fields']['waste_profile_rqrd_c']['dependency'] = '';
 $dictionary['RevenueLineItem']['fields']['product_uom_c']['labelValue'] = 'Product UOM';
-$dictionary['RevenueLineItem']['fields']['product_uom_c']['dependency'] = '';
+//$dictionary['RevenueLineItem']['fields']['product_uom_c']['dependency'] = '';
 $dictionary['RevenueLineItem']['fields']['product_uom_c']['visibility_grid'] = '';
 $dictionary['RevenueLineItem']['fields']['shipping_hazardous_materia_c']['labelValue'] = 'Hazardous Material (Y)';
 $dictionary['RevenueLineItem']['fields']['shipping_hazardous_materia_c']['enforced'] = '';

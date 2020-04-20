@@ -127,21 +127,41 @@ class sales_and_servicesViewmanifest extends ViewList {
             $pdf->MultiCell(89, 5, $generatorSiteAddress['text'], 0, '', 0, 1, $generatorSiteAddress['x'], $generatorSiteAddress['y'], true);
         }
 
-//        transporter_carrier_c
-        if (!empty($salesAndServiceBean->account_id_c)) {
-            $salesAndServiceTransporterBean = BeanFactory::getBean('Accounts', $salesAndServiceBean->account_id_c, array('disable_row_level_security' => true));
+//        transporter_carrier_c Two Transporters, point 6. and 7.
+        if (!empty($salesAndServiceBean->transporter_carrier_c)) {
+            $account_id_c = array();
+            $transporter_carrier_c = json_decode(html_entity_decode($salesAndServiceBean->transporter_carrier_c), ENT_QUOTES);
+            foreach ($transporter_carrier_c as $key => $transporter_carrier_obj) {
+                array_push($account_id_c, $transporter_carrier_obj['id']);
+                if ($key == 1) {
+                    break;
+                }
+            }
 
-            // Transporter 1 Company Name
-            $pdf->SetXY(0, 0);
-            $transporter1CompanyName = array('x' => $startXIndex - 28, 'y' => $startYIndex + 25
-                , 'text' => htmlspecialchars_decode($salesAndServiceTransporterBean->shipping_address_third_party_name)); // 22, 43
-            $pdf->MultiCell(70, 5, $transporter1CompanyName['text'], 0, '', 0, 1, $transporter1CompanyName['x'], $transporter1CompanyName['y'], true);
+            if (!empty($account_id_c)) {
+                foreach ($account_id_c as $key => $value) {
+                    $salesAndServiceTransporterBean = BeanFactory::getBean('Accounts', $value, array('disable_row_level_security' => true));
+                    if ($salesAndServiceTransporterBean->id) {
+                        // Transporter 1 Company Name
+                        $pdf->SetXY(0, 0);
+                        $transporter1CompanyName = array(
+                            'x' => $startXIndex - 28,
+                            'y' => $startYIndex + (25 + ($key * 8.5)),
+                            'text' => htmlspecialchars_decode($salesAndServiceTransporterBean->shipping_address_third_party_name)
+                        ); // 22, 43
+                        $pdf->MultiCell(110, 5, $transporter1CompanyName['text'], 0, '', 0, 1, $transporter1CompanyName['x'], $transporter1CompanyName['y'], true);
 
-            // EPA ID Number
-            $pdf->SetXY(0, 0);
-            $epaIdNumber1 = array('x' => $startXIndex + 110, 'y' => $startYIndex + 25
-                , 'text' => $salesAndServiceTransporterBean->ac_usepa_id_c); // 160, 43
-            $pdf->MultiCell(70, 5, $epaIdNumber1['text'], 0, '', 0, 1, $epaIdNumber1['x'], $epaIdNumber1['y'], true);
+                        // EPA ID Number
+                        $pdf->SetXY(0, 0);
+                        $epaIdNumber1 = array(
+                            'x' => $startXIndex + 110,
+                            'y' => $startYIndex + (25 + ($key * 8.5)),
+                            'text' => $salesAndServiceTransporterBean->ac_usepa_id_c
+                        ); // 160, 43
+                        $pdf->MultiCell(70, 5, $epaIdNumber1['text'], 0, '', 0, 1, $epaIdNumber1['x'], $epaIdNumber1['y'], true);
+                    }
+                }
+            }
         }
 
         if (!empty($salesAndServiceBean->account_id1_c)) {

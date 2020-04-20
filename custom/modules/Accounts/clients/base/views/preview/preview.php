@@ -178,7 +178,8 @@ $viewdefs['Accounts'] = array(
                             4 =>
                             array(
                                 'name' => 'third_party',
-                                'label' => 'LBL_THIRD_PARTY',
+                                'label' => 'LBL_ACCOUNT_TYPE_CST_BADGE',
+                                'badge_label' => 'LBL_THIRD_PARTY',
                                 'type' => 'third-party',
                                 'readonly' => true,
                                 'dismiss_label' => true,
@@ -186,7 +187,8 @@ $viewdefs['Accounts'] = array(
                             5 =>
                             array(
                                 'name' => 'account_status',
-                                'label' => 'LBL_ACCOUNT_BADGE_STATUS',
+                                'label' => 'LBL_ACCOUNT_STATUS_BADGE',
+                                'badge_label' => 'LBL_ACCOUNT_BADGE_STATUS',
                                 'type' => 'account-status',
                                 'readonly' => true,
                                 'dismiss_label' => true,

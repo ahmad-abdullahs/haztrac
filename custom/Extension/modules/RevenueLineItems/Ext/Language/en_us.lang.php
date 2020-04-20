@@ -64,3 +64,4 @@ $mod_strings['LBL_COMMISSION_VALUE'] = 'Commission';
 $mod_strings['LBL_COMMISSION_SUBTYPE'] = 'Type';
 $mod_strings['LBL_COMMISSION_SUBTYPE_UOM'] = 'UOM';
 $mod_strings['LBL_COMMISSION_TEXT'] = 'Other';
+$mod_strings['LBL_CONSOLIDATED_MANIFEST'] = 'Consolidated Manifest';

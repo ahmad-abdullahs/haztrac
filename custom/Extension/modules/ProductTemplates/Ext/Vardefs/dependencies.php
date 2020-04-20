@@ -25,6 +25,7 @@ $dictionary['ProductTemplate']['fields']['date_cost_price']['dependency'] = 'and
 $dictionary['ProductTemplate']['fields']['cost_usdollar']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['fed_percentage']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['shipping_hazardous_materia_c']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
+$dictionary['ProductTemplate']['fields']['consolidated_manifest']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['state_regulated_c']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['proper_shipping_name_c']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['waste_state_codes_c']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';

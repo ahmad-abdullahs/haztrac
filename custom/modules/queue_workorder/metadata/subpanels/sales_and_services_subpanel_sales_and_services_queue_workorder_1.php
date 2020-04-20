@@ -35,9 +35,9 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
-  'pdf_template_type' => 
+  'pdf_template_type_name' => 
   array (
-    'type' => 'enum',
+    'type' => 'relate',
     'vname' => 'LBL_PDF_TEMPLATE_TYPE',
     'width' => 10,
     'default' => true,

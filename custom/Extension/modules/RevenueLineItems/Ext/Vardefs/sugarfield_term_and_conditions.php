@@ -9,6 +9,7 @@ $dictionary['RevenueLineItem']['fields']['customer_certificates'] = array(
     'reportable' => false,
     'duplicate_merge' => 'disabled',
     'audited' => true,
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );
 
 $dictionary['RevenueLineItem']['fields']['transporter_certificates'] = array(
@@ -20,6 +21,7 @@ $dictionary['RevenueLineItem']['fields']['transporter_certificates'] = array(
     'reportable' => false,
     'duplicate_merge' => 'disabled',
     'audited' => true,
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );
 
 $dictionary['RevenueLineItem']['fields']['consignee_certificates'] = array(
@@ -31,4 +33,5 @@ $dictionary['RevenueLineItem']['fields']['consignee_certificates'] = array(
     'reportable' => false,
     'duplicate_merge' => 'disabled',
     'audited' => true,
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );

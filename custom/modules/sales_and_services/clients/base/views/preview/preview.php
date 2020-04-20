@@ -297,6 +297,7 @@ $viewdefs['sales_and_services'] = array(
                             14 =>
                             array(
                                 'name' => 'transporter_carrier_c',
+                                'type' => 'transporter',
                                 'studio' => 'visible',
                                 'label' => 'LBL_TRANSPORTER_CARRIER',
                             ),

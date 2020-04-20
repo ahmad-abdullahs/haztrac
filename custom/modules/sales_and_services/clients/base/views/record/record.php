@@ -168,6 +168,7 @@ $viewdefs['sales_and_services'] = array(
                                     2 => 'account_status_c',
                                     3 => 'po_required',
                                     4 => 'commentlog',
+                                    5 => 'pdf_template_printer_widget',
                                 ),
                             ),
                             2 =>
@@ -285,6 +286,7 @@ $viewdefs['sales_and_services'] = array(
                             14 =>
                             array(
                                 'name' => 'transporter_carrier_c',
+                                'type' => 'transporter',
                                 'studio' => 'visible',
                                 'label' => 'LBL_TRANSPORTER_CARRIER',
                             ),

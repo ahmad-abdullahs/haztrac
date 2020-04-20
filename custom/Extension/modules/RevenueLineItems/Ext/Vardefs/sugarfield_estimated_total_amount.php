@@ -20,4 +20,5 @@ $dictionary['RevenueLineItem']['fields']['estimated_total_amount'] = array(
     'duplicate_merge_dom_value' => 0,
     'merge_filter' => 'disabled',
     'enable_range_search' => false,
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );

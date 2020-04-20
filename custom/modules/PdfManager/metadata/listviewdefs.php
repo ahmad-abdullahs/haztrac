@@ -26,14 +26,6 @@ $listViewDefs['PdfManager'] = array(
         'default' => true,
         'studio' => 'visible',
         'label' => 'LBL_BASE_MODULE',
-        'width' => '15',
-    ),
-    'pdf_template_type' =>
-    array(
-        'name' => 'pdf_template_type',
-        'default' => true,
-        'studio' => 'visible',
-        'label' => 'LBL_PDF_TEMPLATE_TYPE',
         'width' => '20',
     ),
     'published' =>
@@ -42,11 +34,11 @@ $listViewDefs['PdfManager'] = array(
         'default' => true,
         'studio' => 'visible',
         'label' => 'LBL_PUBLISHED',
-        'width' => '10',
+        'width' => '20',
     ),
     'DATE_ENTERED' =>
     array(
-        'width' => '15',
+        'width' => '20',
         'label' => 'LBL_DATE_ENTERED',
         'default' => true,
     ),

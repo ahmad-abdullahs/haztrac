@@ -32,8 +32,8 @@
         if (this.model) {
             this.model.on('change:account_status_c', function (model, value) {
                 if (value == "Account On Hold") {
-                    this.showBadge = true;
                     this.render();
+                    this.showBadge = true;
                 } else {
                     this.hide();
                 }
@@ -43,8 +43,8 @@
 
     format: function (value) {
         value = '';
-        if (this.model.get('account_status_c' == "Account On Hold")) {
-            value = this.label = app.lang.get(this.def.label, this.module);
+        if (this.model.get('account_status_c') == "Account On Hold") {
+            value = this.label = app.lang.get(this.def.badge_label, this.module);
             this.showBadge = true;
         }
 

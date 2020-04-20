@@ -44,7 +44,7 @@
         var collection = App.data.createBeanCollection('PdfManager');
         this.colOption = {
             'showAlerts': false,
-            'fields': ['id', 'name', 'pdf_template_type'],
+            'fields': ['id', 'name', 'pdf_template_type_id', 'pdf_template_type_name'],
             'limit': -1,
             'success': _.bind(function (data, response) {
                 for (var i in response) {
@@ -60,7 +60,7 @@
                         self.allqueued = false;
                     }
 
-                    model.set('default_printer', self.view.printer_setting[model.get('pdf_template_type')] || '');
+                    model.set('default_printer', self.view.printer_setting[model.get('pdf_template_type_id')] || '');
 
                     self.filteredCollection.add(model);
 
@@ -78,7 +78,7 @@
         };
 
         collection.filterDef = [{
-                pdf_template_type: {
+                pdf_template_type_id: {
                     // Filter for each field ['Work Order', 'Manifest', 'Label', 'BOI' ...]
                     $equals: this.viewDefs.filterVal,
                 }
@@ -214,7 +214,7 @@
                 var modelsList = this.view.getField(_val).getCheckedPdfs();
                 _.each(modelsList, function (model, key) {
                     if (model) {
-                        var defaultPrinter = this.view.printer_setting[model.get('pdf_template_type')] || '';
+                        var defaultPrinter = this.view.printer_setting[model.get('pdf_template_type_id')] || '';
                         var lineNumber = 999, quantity = 1;
                         if (this.view.layout.jsonFieldStructure) {
                             if (this.view.layout.jsonFieldStructure[model.get('id')]) {
@@ -229,7 +229,7 @@
                             'pdf_template_printer_widget_name': model.get('name'),
                             'pdf_template_printer_widget_printer': defaultPrinter,
                             'pdf_template_printer_widget_quantity': quantity || 1,
-                            'pdf_template_printer_widget_pdf_template_type': model.get('pdf_template_type'),
+                            'pdf_template_printer_widget_pdf_template_type_id': model.get('pdf_template_type_id'),
                             'pdf_template_printer_widget_line_number': lineNumber,
                         };
                         dataArr.push(obj);
@@ -246,7 +246,7 @@
         }, this);
 
         // Sort the dataArr on the basis of line_number.
-        // Now we have to keep the pdf_template_printer_widget_pdf_template_type and pdf_template_printer_widget_line_number saved in the object.
+        // Now we have to keep the pdf_template_printer_widget_pdf_template_type_id and pdf_template_printer_widget_line_number saved in the object.
         dataArr = _.sortBy(dataArr, 'pdf_template_printer_widget_line_number');
         app.events.trigger('pdf_template_printer_widget:re-render', JSON.stringify(dataArr));
     },

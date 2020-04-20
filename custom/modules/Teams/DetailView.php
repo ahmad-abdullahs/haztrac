@@ -61,10 +61,25 @@ $xtpl->assign("ACTIVE_MANIFEST_NUMBER", $focus->active_manifest_number);
 $xtpl->assign("TRANSPORTER_CARRIER_C", $focus->transporter_carrier_c);
 $xtpl->assign("ACCOUNT_ID_C", $focus->account_id_c);
 
+global $db;
+$selectAllPdfTemplateTypesList = array('' => '');
+$selectAllPdfTemplateTypes = "SELECT 
+                            *
+                        FROM
+                            pdf_template_types
+                        WHERE
+                            deleted = 0
+                        ORDER BY order_number;";
+$result = $db->query($selectAllPdfTemplateTypes);
+// Format the return data, id as the key name as value.
+while ($row = $db->fetchByAssoc($result)) {
+    $selectAllPdfTemplateTypesList[$row['id']] = $row['name'];
+}
+
 $printer_setting = json_decode(html_entity_decode($focus->printer_setting), ENT_QUOTES);
 $txt = '';
 foreach ($printer_setting as $pSetting) {
-    $txt .= '<div>' . $app_list_strings['pdf_template_type_list'][$pSetting['pdf_template_type']] . ' - ' .
+    $txt .= '<div>' . $selectAllPdfTemplateTypesList[$pSetting['pdf_template_type']] . ' - ' .
             $app_list_strings['pdf_printers_list'][$pSetting['pdf_printer']] . '</div>';
 }
 $xtpl->assign("PRINTER_SETTING", $txt);

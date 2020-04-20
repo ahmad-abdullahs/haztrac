@@ -48,7 +48,7 @@ $viewdefs['queue_workorder']['base']['view']['subpanel-for-sales_and_services-sa
                 ),
                 4 =>
                 array(
-                    'name' => 'pdf_template_type',
+                    'name' => 'pdf_template_type_name',
                     'label' => 'LBL_PDF_TEMPLATE_TYPE',
                     'enabled' => true,
                     'default' => true,

@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SHIPPING_UN_NA_NO'] = 'UN/NA #';
 $mod_strings['LBL_SHIPPING_DOT_NAME'] = 'Proper Shipping Name';
@@ -51,3 +52,4 @@ $mod_strings['LBL_TRANSPORTER_CERTIFICATES'] = 'Transporter Certificates';
 $mod_strings['LBL_CONSIGNEE_CERTIFICATES'] = 'Consignee Certificates';
 $mod_strings['LBL_FED_PERCENTAGE'] = 'FED %';
 $mod_strings['LBL_IS_GROUP_ITEM'] = 'Is Group Item';
+$mod_strings['LBL_CONSOLIDATED_MANIFEST'] = 'Consolidated Manifest';

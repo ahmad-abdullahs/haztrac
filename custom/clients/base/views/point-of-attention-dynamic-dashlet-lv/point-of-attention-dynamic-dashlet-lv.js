@@ -1,6 +1,12 @@
 ({
     extendsFrom: 'DashablelistView',
 
+    _defaultSettings: {
+        limit: -1,
+        filter_id: 'assigned_to_me',
+        intelligent: '0'
+    },
+
     _getListMeta: function (module) {
         return app.metadata.getView(module, 'point-of-attention-list');
     },
@@ -8,10 +14,44 @@
     // Reload the Dashlet when the Record model is changed and re-synced.
     bindDataChange: function () {
         this._super('bindDataChange');
+
+        if (this.context.parent.get('collection')) {
+            this.context.parent.get('collection').on('data:sync:complete', function () {
+                this._displayDashlet();
+            }, this);
+        }
+
         this.model.on('data:sync:complete', function () {
             this._displayDashlet();
         }, this);
     },
+
+//    _initializeSettings: function () {
+//        if (this.intelligent === '0') {
+//            _.each(this.dashletConfig.panels, function (panel) {
+//                panel.fields = panel.fields.filter(function (el) {
+//                    return el.name !== 'intelligent';
+//                });
+//            }, this);
+//            this.settings.set('intelligent', '0');
+//            this.dashModel.set('intelligent', '0');
+//        } else {
+//            if (_.isUndefined(this.settings.get('intelligent'))) {
+//                this.settings.set('intelligent', this._defaultSettings.intelligent);
+//            }
+//        }
+//        this.setLinkedFieldVisibility('1', this.settings.get('intelligent'));
+//        if (!this.settings.get('limit')) {
+//            this.settings.set('limit', this._defaultSettings.limit);
+//        }
+//        if (!this.settings.get('filter_id')) {
+//            this.settings.set('filter_id', this._defaultSettings.filter_id);
+//        }
+//        this._setDefaultModule();
+//        if (!this.settings.get('label')) {
+//            this.settings.set('label', 'LBL_MODULE_NAME');
+//        }
+//    },
 
 //    loadData: function (options) {
 //        if (!this.filterIsAccessible) {
@@ -135,11 +175,33 @@
      * @Override
      */
     _displayDashlet: function (filterDef) {
-        // Just Load one record in the view, Actually this record in list view 
-        // is the same record which is in record view.
-        filterDef = [{
-                'id': this.model.get('id'),
-            }];
+        var idsList = [];
+        if (this.context) {
+            if (this.context.parent) {
+                _.each(this.context.parent.get('collection').models, function (model) {
+                    idsList.push(model.get('id'));
+                }, this);
+            }
+        }
+
+        if (_.isEmpty(idsList)) {
+            idsList = ['fake-id'];
+        }
+
+        if (this.context.parent.get('module') == "sales_and_services" &&
+                this.context.parent.get('layout') == "records" && this.module == "queue_workorder") {
+            filterDef = [{
+                    'sales_and_services_queue_workorder_1sales_and_services_ida': {
+                        '$in': idsList
+                    },
+                }];
+        } else {
+            // Just Load one record in the view, Actually this record in list view 
+            // is the same record which is in record view.
+            filterDef = [{
+                    'id': this.model.get('id'),
+                }];
+        }
 
         this._super('_displayDashlet', [filterDef]);
     },

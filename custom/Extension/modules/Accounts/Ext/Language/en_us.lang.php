@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_PHYSICAL_ADDRESS'] = '3rd Party/Broker';
 $mod_strings['LBL_PHYSICAL_ADDRESS_ACCOUNT_ID'] = '3rd Party/Broker ID';
@@ -36,6 +37,8 @@ $mod_strings['LBL_CONTRACT_NAME'] = 'Contract Name';
 $mod_strings['LBL_HOUR_OPERATIONS'] = 'Hours of Operations';
 $mod_strings['LBL_ACCOUNT_TYPE_CST'] = 'Account Type';
 $mod_strings['LBL_ACCOUNT_STATUS'] = 'Account Status';
+$mod_strings['LBL_ACCOUNT_TYPE_CST_BADGE'] = 'Account Type Badge';
+$mod_strings['LBL_ACCOUNT_STATUS_BADGE'] = 'Account Status Badge';
 $mod_strings['LBL_BILLING_ADDRESS_STREET'] = 'Billing Street';
 $mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Service';
 $mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Railroad Information';

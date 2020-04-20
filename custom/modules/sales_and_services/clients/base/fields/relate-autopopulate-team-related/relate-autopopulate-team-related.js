@@ -39,8 +39,19 @@
                 var teamBean = app.data.createBean('Teams', {id: team.id});
                 teamBean.fetch({
                     success: function (_model) {
-                        self.model.set('account_id_c', _model.get('account_id_c'));
-                        self.model.set('transporter_carrier_c', _model.get('transporter_carrier_c'));
+//                        self.model.set('account_id_c', _model.get('account_id_c'));
+//                        self.model.set('transporter_carrier_c', _model.get('transporter_carrier_c'));
+                        self.model.set('transporter_carrier_c', JSON.stringify([
+                            {
+                                'id': _model.get('account_id_c'),
+                                'name': _model.get('transporter_carrier_c'),
+                                'add_button': true,
+                                'remove_button': true,
+                            }
+                        ]));
+
+                        var transporter_carrier_c = self.view.getField('transporter_carrier_c');
+                        transporter_carrier_c.render();
                     }
                 }, this);
             }

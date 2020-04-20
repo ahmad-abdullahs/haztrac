@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SALES_AND_SERVICE'] = 'Consolidated Generators';
 $mod_strings['LBL_HT_MANIFEST_HT_ASSETS_AND_OBJECTS_FROM_HT_ASSETS_AND_OBJECTS_TITLE'] = 'Assets &amp; Objects';
@@ -21,3 +22,4 @@ $mod_strings['LBL_HT_MANIFEST_SALES_AND_SERVICES_1_FROM_SALES_AND_SERVICES_TITLE
 $mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Audit';
 $mod_strings['LBL_NUM'] = 'Num.';
 $mod_strings['LBL_HOLD_TO_DRAG'] = 'Hold To Drag Rows';
+$mod_strings['LBL_FILTER_BY_MANIFEST_STATUS'] = 'Active Manifests';

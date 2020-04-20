@@ -212,14 +212,14 @@ $app_list_strings['comission_subtype_flat_list'] = array(
     'Per UOM' => 'Per UOM',
 );
 
-$app_list_strings['pdf_template_type_list'] = array(
-    '' => '',
-    'Work Order' => 'Work Order',
-    'Manifest' => 'Manifest',
-    'Labels' => 'Labels',
-    'BOI' => 'BOI\'s',
-    'Setup' => 'Setup',
-);
+//$app_list_strings['pdf_template_type_list'] = array(
+//    '' => '',
+//    'Work Order' => 'Work Order',
+//    'Manifest' => 'Manifest',
+//    'Labels' => 'Labels',
+//    'BOI' => 'BOI\'s',
+//    'Setup' => 'Setup',
+//);
 
 $app_list_strings['pdf_printers_list'] = array(
     '' => '',

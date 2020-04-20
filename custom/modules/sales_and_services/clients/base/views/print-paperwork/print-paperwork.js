@@ -5,6 +5,11 @@
 //        'click .btn[name=print_manifest]': 'printManifest',
 //        'click .btn[name=print_manifest_with_num]': 'printManifestWithNum',
 //    },
+    /*
+     * This file handles 2 calls 
+     * one for handlePrinterQueueRoute the print queue call.
+     * one for SubmitToPrinter the print call.
+     */
 
     /*
      * Contain the name of fields which will be shown in the Print Paperwork view tabs .
@@ -27,29 +32,31 @@
 
         this._super('initialize', [options]);
 
-        // Loop through all the PDF Template Type drop down list and add the metaata for each tab
+        // Loop through all the PDF Template Type drop down list and add the metadata for each tab
         // along with a field need to be shown in it.
-        _.each(app.lang.getAppListStrings('pdf_template_type_list'), function (val, key) {
-            if (!_.isEmpty(key)) {
-                this.tabViewFieldNamesList.push('service_panel' + '_' + key.replace(/[^A-Z0-9]/ig, "_"));
+        _.each(this.context.get('pdfTemplateTypesList').models, function (model, key) {
+            var key_field = model.get('key_field');
+            var value_field = model.get('value_field');
+            if (!_.isEmpty(key_field) && !_.isEmpty(value_field)) {
+                this.tabViewFieldNamesList.push('service_panel' + '_' + key_field.replace(/[^A-Z0-9]/ig, "_"));
                 var _meta = {
-                    name: 'panel_body' + '_' + key.replace(/[^A-Z0-9]/ig, "_"),
+                    name: 'panel_body' + '_' + key_field.replace(/[^A-Z0-9]/ig, "_"),
                     columns: 2,
-                    label: val,
+                    label: value_field,
                     title: "",
                     labelsOnTop: true,
                     placeholders: true,
                     newTab: true,
                     panelDefault: "expanded",
                     fields: [{
-                            name: 'service_panel' + '_' + key.replace(/[^A-Z0-9]/ig, "_"),
+                            name: 'service_panel' + '_' + key_field.replace(/[^A-Z0-9]/ig, "_"),
                             label: "LBL_SERVICES_PANEL",
                             type: "templatepdfs-panel",
                             relatedModule: "PdfManager",
                             readonly: "true",
                             dismiss_label: true,
                             span: 7,
-                            filterVal: key,
+                            filterVal: model.get('id'),
                             columns: [{
                                     name: "name",
                                     label: "LBL_PDFMANAGER_NAME",
@@ -80,6 +87,52 @@
                 }
             }
         }, this);
+
+        // At the end, add the setup tab.
+        var _meta = {
+            name: 'panel_body' + '_setup',
+            columns: 2,
+            label: "Setup",
+            title: "",
+            labelsOnTop: true,
+            placeholders: true,
+            newTab: true,
+            panelDefault: "expanded",
+            fields: [{
+                    name: 'tabs_configuration',
+                    label: "Setup",
+                    type: "tabs_configuration",
+                    dismiss_label: true,
+                    span: 12,
+                    fields: [{
+                            name: "tabs_configuration_name",
+                            short_name: "tabs_configuration_name",
+                            css_class: "tabs_configuration_name",
+                            label: "LBL_TABS_CONFIGURATION",
+                            type: "text",
+                            span: 6,
+                            default: true,
+                        }, {
+                            name: "tabs_configuration_name_id",
+                            short_name: "tabs_configuration_name_id",
+                            css_class: "tabs_configuration_name_id",
+                            type: "text",
+                            span: 3,
+                            default: false,
+                        }, {
+                            name: "tabs_configuration_line_number",
+                            short_name: "tabs_configuration_line_number",
+                            css_class: "tabs_configuration_line_number",
+                            type: "text",
+                            span: 3,
+                            default: false,
+                        }],
+                },
+            ],
+        };
+
+        this.meta.panels[this.meta.panels.length] = _meta;
+
 
         // Default Printer Settings... 
         _.each(this.model.get('team_name'), function (team) {
@@ -117,10 +170,12 @@
     },
 
     printCommand: function () {
+        var self = this;
         if (!this.isValidFields()) {
             return;
         }
 
+        // First select the workorders, manifest or labels etc... before printing.
         if (!this.model.get('pdf_template_printer_widget') ||
                 _.isEmpty(this.model.get('pdf_template_printer_widget')) ||
                 this.model.get('pdf_template_printer_widget') == '[]') {
@@ -132,7 +187,9 @@
             return;
         }
 
-        var self = this;
+        // Check is there any RevenueLineItem which needs the manifest, *if* so, user should select 
+        // the manifest first, otherwise it will throw the warning. 
+        // *else* straight away print the paperwork.
         var isManifestRequired = this.isManifestRequired();
         if (isManifestRequired && (!this.model.get('on_fly_manifest_name') || !this.model.get('on_fly_manifest_number'))) {
             this.layout.$el.find('div[data-name=on_fly_manifest_name]').show();

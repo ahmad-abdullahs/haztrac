@@ -44,7 +44,7 @@
     format: function (value) {
         value = '';
         if (_.contains(this.model.get('account_type_cst_c'), "3rd Party")) {
-            value = this.label = app.lang.get(this.def.label, this.module);
+            value = this.label = app.lang.get(this.def.badge_label, this.module);
             this.showBadge = true;
         }
 

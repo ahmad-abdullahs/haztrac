@@ -451,6 +451,8 @@ array (
               ),
               4 => 
               array (
+                'name' => 'consolidated_manifest',
+                'label' => 'LBL_CONSOLIDATED_MANIFEST',
               ),
               5 => 
               array (

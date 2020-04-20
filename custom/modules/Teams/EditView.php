@@ -86,11 +86,24 @@ $javascript->addFieldGeneric("name", "varchar", $mod_strings['LBL_NAME'], TRUE, 
 $xtpl->parse("main");
 $xtpl->out("main");
 
-
+global $db;
+$selectAllPdfTemplateTypesList = array('' => '');
+$selectAllPdfTemplateTypes = "SELECT 
+                                *
+                            FROM
+                                pdf_template_types
+                            WHERE
+                                deleted = 0
+                            ORDER BY order_number;";
+$result = $db->query($selectAllPdfTemplateTypes);
+// Format the return data, id as the key name as value.
+while ($row = $db->fetchByAssoc($result)) {
+    $selectAllPdfTemplateTypesList[$row['id']] = $row['name'];
+}
 
 echo $javascript->getScript();
 echo '<input type="hidden" name="pdf_printers_list" id="pdf_printers_list" value="' . get_select_options_with_id($app_list_strings['pdf_printers_list'], '') . '">
-<input type="hidden" name="pdf_template_type_list" id="pdf_template_type_list" value="' . get_select_options_with_id($app_list_strings['pdf_template_type_list'], '') . '">';
+<input type="hidden" name="pdf_template_type_list" id="pdf_template_type_list" value="' . get_select_options_with_id($selectAllPdfTemplateTypesList, '') . '">';
 
 $loadPrinterSettings = '<script>';
 $printer_setting = $focus->printer_setting;

@@ -1,8 +1,12 @@
 <?php
 
 // created: 2019-09-08 16:39:53
-$dictionary['sales_and_services']['fields']['transporter_carrier_c']['labelValue'] = 'Transporter / Carrier';
-$dictionary['sales_and_services']['fields']['transporter_carrier_c']['dependency'] = '';
+$dictionary['sales_and_services']['fields']['transporter_carrier_c'] = array(
+    'name' => 'transporter_carrier_c',
+    'vname' => 'LBL_TRANSPORTER_CARRIER',
+    'type' => 'text',
+    'source' => 'db',
+);
 
 // Below field(s) transporter_ac_usepa_id_c is added to keep the EPA ID number of Transporter for PDF Templates.
 $dictionary["sales_and_services"]["fields"]["transporter_ac_usepa_id_c"] = array(

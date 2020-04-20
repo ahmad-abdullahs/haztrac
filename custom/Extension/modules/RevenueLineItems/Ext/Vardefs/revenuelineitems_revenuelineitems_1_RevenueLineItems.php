@@ -36,6 +36,7 @@ $dictionary["RevenueLineItem"]["fields"]["revenuelineitems_revenuelineitems_1_na
     'table' => 'revenue_line_items',
     'module' => 'RevenueLineItems',
     'rname' => 'name',
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );
 $dictionary["RevenueLineItem"]["fields"]["revenuelineitems_revenuelineitems_1revenuelineitems_ida"] = array(
     'name' => 'revenuelineitems_revenuelineitems_1revenuelineitems_ida',
@@ -52,4 +53,5 @@ $dictionary["RevenueLineItem"]["fields"]["revenuelineitems_revenuelineitems_1rev
     'massupdate' => false,
     'duplicate_merge' => 'disabled',
     'hideacl' => true,
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );

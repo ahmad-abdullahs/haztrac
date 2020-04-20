@@ -7,6 +7,19 @@ class handlePrinterQueue extends SugarApi {
 
     public function registerApiRest() {
         return array(
+            'updateTabsConfigurationsDecleration' => array(
+                //request type
+                'reqType' => 'POST',
+                //endpoint path
+                'path' => array('sales_and_services', '?', 'updateTabsConfigurations'),
+                //endpoint variables
+                'pathVars' => array('module', 'record', 'action'),
+                //method to call
+                'method' => 'updateTabsConfigurationsMethod',
+                'jsonParams' => array(),
+                //short help string to be displayed in the help documentation
+                'shortHelp' => '',
+            ),
             'handlePrinterQueueDecleration' => array(
                 //request type
                 'reqType' => 'POST',
@@ -34,6 +47,75 @@ class handlePrinterQueue extends SugarApi {
                 'shortHelp' => '',
             ),
         );
+    }
+
+    public function updateTabsConfigurationsMethod(ServiceBase $api, array $args) {
+        $parentId = $args['modelId'];
+        $tabs_configuration = $args['fields']['tabs_configuration'];
+        $tabs_configuration = json_decode(html_entity_decode($tabs_configuration), ENT_QUOTES);
+        $selectAllPdfTemplateTypesList = array();
+        $tabs_configurationList = array();
+        global $db;
+
+        // Format the array, id as the key of array index.
+        foreach ($tabs_configuration as $key => $value) {
+            if (!empty($value['tabs_configuration_name_id'])) {
+                $tabs_configurationList[$value['tabs_configuration_name_id']] = $value;
+            }
+        }
+
+        $selectAllPdfTemplateTypes = "SELECT 
+                                *
+                            FROM
+                                pdf_template_types where deleted = 0;";
+        $result = $db->query($selectAllPdfTemplateTypes);
+        // Format the return data, id as the key of array index.
+        while ($row = $db->fetchByAssoc($result)) {
+            $selectAllPdfTemplateTypesList[$row['id']] = $row;
+        }
+
+        // Loop through all the existing configurations for update
+        foreach ($tabs_configurationList as $key => $value) {
+            $sql = "UPDATE pdf_template_types 
+                SET 
+                    name = {$db->quoted($value['tabs_configuration_name'])},
+                    key_field = {$db->quoted(preg_replace("/[^a-zA-Z]/", "", $value['tabs_configuration_name']))},
+                    value_field = {$db->quoted($value['tabs_configuration_name'])},
+                    order_number = '{$value['tabs_configuration_line_number']}'
+                WHERE
+                    id = '{$value['tabs_configuration_name_id']}';";
+            $db->query($sql);
+        }
+
+        // Delete rest of the tabs_configuration
+        $sql = "UPDATE pdf_template_types 
+                SET 
+                    deleted = '1'
+                WHERE
+                    id NOT IN ('" . implode("' , '", array_keys($tabs_configurationList)) . "');";
+        $db->query($sql);
+
+        // Add the new tabs_configuration
+        foreach ($tabs_configuration as $key => $value) {
+            // It means they are new, they don't have the id.
+            if (empty($value['tabs_configuration_name_id'])) {
+                $newID = create_guid();
+                $pdf_template_typesBean = BeanFactory::newBean('pdf_template_types');
+                $pdf_template_typesBean->new_with_id = true;
+                $pdf_template_typesBean->id = $newID;
+                $pdf_template_typesBean->name = $value['tabs_configuration_name'];
+                $pdf_template_typesBean->value_field = $value['tabs_configuration_name'];
+                $pdf_template_typesBean->key_field = preg_replace("/[^a-zA-Z]/", "", $value['tabs_configuration_name']);
+                $pdf_template_typesBean->order_number = $value['tabs_configuration_line_number'];
+                $pdf_template_typesBean->assigned_user_id = '1';
+                $pdf_template_typesBean->modified_user_id = '1';
+                $pdf_template_typesBean->created_by = '1';
+                $pdf_template_typesBean->team_id = '1';
+                $pdf_template_typesBean->team_set_id = '1';
+                $pdf_template_typesBean->save();
+                $pdf_template_typesBean = null;
+            }
+        }
     }
 
     public function SubmitToPrinterMethod(ServiceBase $api, array $args) {
@@ -115,7 +197,7 @@ class handlePrinterQueue extends SugarApi {
                 $printerName = $pdf_template_printer_row['pdf_template_printer_widget_printer'];
                 $printQuantity = $pdf_template_printer_row['pdf_template_printer_widget_quantity'];
                 $lineNumber = $pdf_template_printer_row['pdf_template_printer_widget_line_number'];
-                $pdfTemplateType = $pdf_template_printer_row['pdf_template_printer_widget_pdf_template_type'];
+                $pdfTemplateType = $pdf_template_printer_row['pdf_template_printer_widget_pdf_template_type_id'];
 
                 $queue_workorderBean = BeanFactory::newBean('queue_workorder');
                 $queue_workorderBean->new_with_id = true;
@@ -131,7 +213,7 @@ class handlePrinterQueue extends SugarApi {
                 $queue_workorderBean->print_status = $printStatus;
                 $queue_workorderBean->print_date = $printDate;
                 $queue_workorderBean->line_number = $lineNumber;
-                $queue_workorderBean->pdf_template_type = $pdfTemplateType;
+                $queue_workorderBean->pdf_template_type_id = $pdfTemplateType;
 
                 $queue_workorderBean->assigned_user_id = 1;
                 $queue_workorderBean->modified_user_id = 1;

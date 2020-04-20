@@ -19,6 +19,7 @@ $dictionary['RevenueLineItem']['fields']['discount_usdollar']['dependency'] = 'n
 $dictionary['RevenueLineItem']['fields']['tax_class']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['base_rate']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['shipping_hazardous_materia_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['consolidated_manifest']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['state_regulated_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['proper_shipping_name_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['erg_no_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';

@@ -96,7 +96,7 @@ array (
               ),
               10 => 
               array (
-                'name' => 'pdf_template_type',
+                'name' => 'pdf_template_type_name',
                 'label' => 'LBL_PDF_TEMPLATE_TYPE',
                 'enabled' => true,
                 'default' => false,

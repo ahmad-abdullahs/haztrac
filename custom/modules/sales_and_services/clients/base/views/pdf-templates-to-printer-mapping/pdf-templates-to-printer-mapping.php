@@ -135,7 +135,7 @@ $viewdefs['sales_and_services']['base']['view']['pdf-templates-to-printer-mappin
                 array(
                     'name' => 'on_fly_manifest_name',
                     'id_name' => 'on_fly_manifest_id',
-                    'type' => 'relate',
+                    'type' => 'manifest-relate',
                     'module' => 'HT_Manifest',
                     'label' => 'LBL_ON_FLY_MANIFEST_NAME',
                     'span' => 3,
