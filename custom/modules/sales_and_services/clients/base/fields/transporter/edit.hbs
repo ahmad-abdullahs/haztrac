@@ -18,6 +18,9 @@
                                 {{#if add_button}}
                                     <button type="button" class="btn first" name="add" data-index="{{@index}}" rel="tooltip" title="{{str "LBL_ADD"}} {{str 'LBL_MANIFESTS' 'LR_Lab_Reports'}}"><i class="fa fa-plus"></i></button>
                                 {{/if}}
+                                {{#eq @index 0}}
+                                    <button type="button" class="btn third pull-right" name="dragdrop" data-index="{{@index}}" rel="tooltip" title="{{str 'LBL_HOLD_TO_DRAG' 'sales_and_services'}}" style="background: whitesmoke;"><i class="fa fa-sort-numeric-asc"></i></button>
+                                {{/eq}}
                             </span>
                         </span>
                     </div>
