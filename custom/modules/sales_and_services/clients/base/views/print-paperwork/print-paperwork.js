@@ -88,51 +88,52 @@
             }
         }, this);
 
-        // At the end, add the setup tab.
-        var _meta = {
-            name: 'panel_body' + '_setup',
-            columns: 2,
-            label: "Setup",
-            title: "",
-            labelsOnTop: true,
-            placeholders: true,
-            newTab: true,
-            panelDefault: "expanded",
-            fields: [{
-                    name: 'tabs_configuration',
-                    label: "Setup",
-                    type: "tabs_configuration",
-                    dismiss_label: true,
-                    span: 12,
-                    fields: [{
-                            name: "tabs_configuration_name",
-                            short_name: "tabs_configuration_name",
-                            css_class: "tabs_configuration_name",
-                            label: "LBL_TABS_CONFIGURATION",
-                            type: "text",
-                            span: 6,
-                            default: true,
-                        }, {
-                            name: "tabs_configuration_name_id",
-                            short_name: "tabs_configuration_name_id",
-                            css_class: "tabs_configuration_name_id",
-                            type: "text",
-                            span: 3,
-                            default: false,
-                        }, {
-                            name: "tabs_configuration_line_number",
-                            short_name: "tabs_configuration_line_number",
-                            css_class: "tabs_configuration_line_number",
-                            type: "text",
-                            span: 3,
-                            default: false,
-                        }],
-                },
-            ],
-        };
+        // At the end, add the setup tab, if user is admin.
+        if (app.user.get('type') == 'admin') {
+            var _meta = {
+                name: 'panel_body' + '_setup',
+                columns: 2,
+                label: "Setup",
+                title: "",
+                labelsOnTop: true,
+                placeholders: true,
+                newTab: true,
+                panelDefault: "expanded",
+                fields: [{
+                        name: 'tabs_configuration',
+                        label: "Setup",
+                        type: "tabs_configuration",
+                        dismiss_label: true,
+                        span: 12,
+                        fields: [{
+                                name: "tabs_configuration_name",
+                                short_name: "tabs_configuration_name",
+                                css_class: "tabs_configuration_name",
+                                label: "LBL_TABS_CONFIGURATION",
+                                type: "text",
+                                span: 6,
+                                default: true,
+                            }, {
+                                name: "tabs_configuration_name_id",
+                                short_name: "tabs_configuration_name_id",
+                                css_class: "tabs_configuration_name_id",
+                                type: "text",
+                                span: 3,
+                                default: false,
+                            }, {
+                                name: "tabs_configuration_line_number",
+                                short_name: "tabs_configuration_line_number",
+                                css_class: "tabs_configuration_line_number",
+                                type: "text",
+                                span: 3,
+                                default: false,
+                            }],
+                    },
+                ],
+            };
 
-        this.meta.panels[this.meta.panels.length] = _meta;
-
+            this.meta.panels[this.meta.panels.length] = _meta;
+        }
 
         // Default Printer Settings... 
         _.each(this.model.get('team_name'), function (team) {

@@ -178,9 +178,11 @@
         var idsList = [];
         if (this.context) {
             if (this.context.parent) {
-                _.each(this.context.parent.get('collection').models, function (model) {
-                    idsList.push(model.get('id'));
-                }, this);
+                if (this.context.parent.get('collection')) {
+                    _.each(this.context.parent.get('collection').models, function (model) {
+                        idsList.push(model.get('id'));
+                    }, this);
+                }
             }
         }
 
