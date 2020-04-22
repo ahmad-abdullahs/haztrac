@@ -196,6 +196,9 @@
                     'sales_and_services_queue_workorder_1sales_and_services_ida': {
                         '$in': idsList
                     },
+                    'print_status': {
+                        '$in': ['Pending', 'Queued']
+                    },
                 }];
         } else {
             // Just Load one record in the view, Actually this record in list view 
