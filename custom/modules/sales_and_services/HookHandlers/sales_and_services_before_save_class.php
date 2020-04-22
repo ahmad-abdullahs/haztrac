@@ -3,7 +3,7 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
-class before_save_class {
+class sales_and_services_before_save_class {
 
     function before_save_method($bean, $event, $arguments) {
         // If user puts the S&S staus to Pending clean out the pdf_template_printer_widget field

@@ -6,9 +6,9 @@ $hook_array['before_save'][] = Array(
     //Label. A string value to identify the hook.
     'Before Save Hook for managing the relationships between accout and contacts',
     //The PHP file where your class is located.
-    'custom/modules/sales_and_services/HookHandlers/before_save_class.php',
+    'custom/modules/sales_and_services/HookHandlers/sales_and_services_before_save_class.php',
     //The class the method is in.
-    'before_save_class',
+    'sales_and_services_before_save_class',
     //The method to call.
     'before_save_method'
 );
