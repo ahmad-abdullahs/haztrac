@@ -4,18 +4,52 @@ class AccountsHooks {
 
     function beforeSave($bean, $event, $arguments) {
         // if lat long are not calculated or address changed
-        if ($bean->shipping_address_plus_code_cb == 1) {
-            $bean->lat_c = $bean->shipping_address_lat;
-            $bean->lon_c = $bean->shipping_address_lon;
-            // Important thing to remember here is that, it will update all the address fields, 
-            // regular address fields and extra address fields as well.
-            // The reason is that, this might be possible that user has updated regular and extra fields both,
-            // So in-order to be on the safe side we have updated all the fields.
-            $this->updateSalesAndServiceAddresses($bean, true);
-        } else if ($bean->service_site_address_plus_code_cb == 1) {
-            $bean->lat_c = $bean->service_site_address_lat;
-            $bean->lon_c = $bean->service_site_address_lon;
-            $this->updateSalesAndServiceAddresses($bean, true, 'service_site', '_c', '_address_name');
+        if ($bean->service_site_address_plus_code_cb == 1) {
+            // Further need to check is there any change in the value ? if so then execute the code, 
+            // otherwise it will keep on calling the updateSalesAndServiceAddresses on every save.
+            if (
+                    $bean->fetched_row['service_site_address_name'] != $bean->service_site_address_name ||
+                    $bean->fetched_row['service_site_address_street_c'] != $bean->service_site_address_street_c ||
+                    $bean->fetched_row['service_site_address_city_c'] != $bean->service_site_address_city_c ||
+                    $bean->fetched_row['service_site_address_state_c'] != $bean->service_site_address_state_c ||
+                    $bean->fetched_row['service_site_address_postalcode_c'] != $bean->service_site_address_postalcode_c ||
+                    $bean->fetched_row['service_site_address_country_c'] != $bean->service_site_address_country_c ||
+                    $bean->fetched_row['service_site_address_plus_code_cb'] != $bean->service_site_address_plus_code_cb ||
+                    $bean->fetched_row['service_site_address_plus_code_val'] != $bean->service_site_address_plus_code_val ||
+                    $bean->fetched_row['service_site_address_lat'] != $bean->service_site_address_lat ||
+                    $bean->fetched_row['service_site_address_lon'] != $bean->service_site_address_lon
+            ) {
+                $bean->lat_c = $bean->service_site_address_lat;
+                $bean->lon_c = $bean->service_site_address_lon;
+                // Important thing to remember here is that, it will update all the address fields, 
+                // regular address fields and extra address fields as well.
+                // The reason is that, this might be possible that user has updated regular and extra fields both,
+                // So in-order to be on the safe side we have updated all the fields.
+                $this->updateSalesAndServiceAddresses($bean, true, 'service_site', '_c', '_address_name');
+            }
+        } else if ($bean->shipping_address_plus_code_cb == 1) {
+            // Further need to check is there any change in the value ? if so then execute the code, 
+            // otherwise it will keep on calling the updateSalesAndServiceAddresses on every save.
+            if (
+                    $bean->fetched_row['shipping_address_third_party_name'] != $bean->shipping_address_third_party_name ||
+                    $bean->fetched_row['shipping_address_street'] != $bean->shipping_address_street ||
+                    $bean->fetched_row['shipping_address_city'] != $bean->shipping_address_city ||
+                    $bean->fetched_row['shipping_address_state'] != $bean->shipping_address_state ||
+                    $bean->fetched_row['shipping_address_postalcode'] != $bean->shipping_address_postalcode ||
+                    $bean->fetched_row['shipping_address_country'] != $bean->shipping_address_country ||
+                    $bean->fetched_row['shipping_address_plus_code_cb'] != $bean->shipping_address_plus_code_cb ||
+                    $bean->fetched_row['shipping_address_plus_code_val'] != $bean->shipping_address_plus_code_val ||
+                    $bean->fetched_row['shipping_address_lat'] != $bean->shipping_address_lat ||
+                    $bean->fetched_row['shipping_address_lon'] != $bean->shipping_address_lon
+            ) {
+                $bean->lat_c = $bean->shipping_address_lat;
+                $bean->lon_c = $bean->shipping_address_lon;
+                // Important thing to remember here is that, it will update all the address fields, 
+                // regular address fields and extra address fields as well.
+                // The reason is that, this might be possible that user has updated regular and extra fields both,
+                // So in-order to be on the safe side we have updated all the fields.
+                $this->updateSalesAndServiceAddresses($bean, true);
+            }
         } else if ($bean->different_service_site_c == 1) {
             if ($bean->fetched_row['service_site_address_plus_code_cb'] != $bean->service_site_address_plus_code_cb) {
                 $bean->lat_c = '';

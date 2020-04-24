@@ -63,13 +63,15 @@
             url = url.replace(new RegExp('{' + k + '}', 'g'), v);
         });
 
+        // This odering (service_site_address_plus_code_cb and then shipping_address_plus_code_cb) 
+        // is important otherwise it will bring issue.
         if (module == 'Accounts' && url.includes('www.google.com/maps')) {
-            if (model.get('shipping_address_plus_code_cb') == true && model.get('shipping_address_plus_code_val')) {
-                url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o&q="
-                        + encodeURIComponent(model.get('shipping_address_plus_code_val'));
-            } else if (model.get('service_site_address_plus_code_cb') == true && model.get('service_site_address_plus_code_val')) {
+            if (model.get('service_site_address_plus_code_cb') == true && model.get('service_site_address_plus_code_val')) {
                 url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o&q="
                         + encodeURIComponent(model.get('service_site_address_plus_code_val'));
+            } else if (model.get('shipping_address_plus_code_cb') == true && model.get('shipping_address_plus_code_val')) {
+                url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o&q="
+                        + encodeURIComponent(model.get('shipping_address_plus_code_val'));
             }
         }
 
