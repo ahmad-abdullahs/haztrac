@@ -37,18 +37,18 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-list'] = array(
                 'icon' => 'fa-chain-broken',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
-//            array(
-//                'type' => 'complete-sale-rowaction',
-//                'name' => 'complete_sale_button',
-//                'label' => 'LBL_COMPLETE_SALE',
-//                'acl_action' => 'edit',
-//            ),
-//            array(
-//                'type' => 'print-paperwork-rowaction',
-//                'name' => 'print_paperwork_button',
-//                'label' => 'LBL_PRINT_PAPERWORK',
-//                'acl_action' => 'edit',
-//            ),
+            array(
+                'type' => 'complete-sale-rowaction',
+                'name' => 'complete_sale_button',
+                'label' => 'LBL_COMPLETE_SALE',
+                'acl_action' => 'edit',
+            ),
+            array(
+                'type' => 'print-paperwork-rowaction',
+                'name' => 'print_paperwork_button',
+                'label' => 'LBL_PRINT_PAPERWORK',
+                'acl_action' => 'edit',
+            ),
         ),
     ),
     'last_state' => array(
