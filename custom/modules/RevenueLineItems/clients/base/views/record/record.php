@@ -315,21 +315,32 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'pricing_formula',
-                                'comment' => 'Pricing formula (ex: Fixed, Markup over Cost)',
-                                'label' => 'LBL_PRICING_FORMULA',
+                                'name' => 'list_price',
+                                'type' => 'currency',
+                                'related_fields' =>
+                                array(
+                                    0 => 'list_usdollar',
+                                    1 => 'currency_id',
+                                    2 => 'base_rate',
+                                ),
+                                'convertToBase' => true,
+                                'showTransactionalAmount' => true,
+                                'currency_field' => 'currency_id',
+                                'base_rate_field' => 'base_rate',
                             ),
                             5 =>
-                            array(
-                                'name' => 'weight',
-                            ),
-                            6 =>
                             array(
                                 'name' => 'related_rli_total_c',
                                 'label' => 'LBL_RELATED_RLI_TOTAL',
                             ),
+                            6 =>
+                            array(
+                                'name' => 'list_pricing_formula',
+                                'label' => 'List Pricing Formula',
+                            ),
                             7 =>
                             array(
+                                'name' => 'weight',
                             ),
                             8 =>
                             array(
@@ -385,18 +396,8 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'list_price',
-                                'type' => 'currency',
-                                'related_fields' =>
-                                array(
-                                    0 => 'list_usdollar',
-                                    1 => 'currency_id',
-                                    2 => 'base_rate',
-                                ),
-                                'convertToBase' => true,
-                                'showTransactionalAmount' => true,
-                                'currency_field' => 'currency_id',
-                                'base_rate_field' => 'base_rate',
+                                'name' => 'cost_pricing_formula',
+                                'label' => 'Cost Pricing Formula',
                             ),
                             5 =>
                             array(
@@ -572,11 +573,13 @@ $viewdefs['RevenueLineItems'] = array(
                                 'name' => 'sales_rep',
                                 'type' => 'sales_rep',
                                 'dismiss_label' => true,
-                                'span' => 12,
-                                'related_fields' => array(
-                                    'sales_rep',
+                                'related_fields' =>
+                                array(
+                                    0 => 'sales_rep',
                                 ),
-                                'fields' => array(
+                                'fields' =>
+                                array(
+                                    0 =>
                                     array(
                                         'name' => 'sales_rep_type',
                                         'short_name' => 'sales_rep_type',
@@ -584,8 +587,9 @@ $viewdefs['RevenueLineItems'] = array(
                                         'label' => 'LBL_SALES_REP_TYPE',
                                         'type' => 'enum',
                                         'options' => 'sales_rep_type_list',
-                                        'span' => 2
+                                        'span' => 2,
                                     ),
+                                    1 =>
                                     array(
                                         'name' => 'sales_rep_name',
                                         'short_name' => 'sales_rep_name',
@@ -599,6 +603,7 @@ $viewdefs['RevenueLineItems'] = array(
                                         'span' => 2,
                                         'sortable' => false,
                                     ),
+                                    2 =>
                                     array(
                                         'name' => 'sales_rep_comission_type',
                                         'short_name' => 'sales_rep_comission_type',
@@ -606,8 +611,9 @@ $viewdefs['RevenueLineItems'] = array(
                                         'label' => 'LBL_COMMISSION_TYPE',
                                         'type' => 'enum',
                                         'options' => 'comission_type_list',
-                                        'span' => 2
+                                        'span' => 2,
                                     ),
+                                    3 =>
                                     array(
                                         'name' => 'sales_rep_comission_value',
                                         'short_name' => 'sales_rep_comission_value',
@@ -617,8 +623,9 @@ $viewdefs['RevenueLineItems'] = array(
                                         'len' => '8',
                                         'size' => '20',
                                         'precision' => 2,
-                                        'span' => 1
+                                        'span' => 1,
                                     ),
+                                    4 =>
                                     array(
                                         'name' => 'sales_rep_comission_subtype',
                                         'short_name' => 'sales_rep_comission_subtype',
@@ -626,9 +633,9 @@ $viewdefs['RevenueLineItems'] = array(
                                         'label' => 'LBL_COMMISSION_SUBTYPE',
                                         'type' => 'enum',
                                         'options' => 'comission_subtype_percentage_list',
-                                        // 'options' => 'comission_subtype_flat_list',
-                                        'span' => 1
+                                        'span' => 1,
                                     ),
+                                    5 =>
                                     array(
                                         'name' => 'sales_rep_comission_subtype_uom',
                                         'short_name' => 'sales_rep_comission_subtype_uom',
@@ -636,53 +643,26 @@ $viewdefs['RevenueLineItems'] = array(
                                         'label' => 'LBL_COMMISSION_SUBTYPE_UOM',
                                         'type' => 'enum',
                                         'options' => 'unit_of_measure_c_list',
-                                        'span' => 2
+                                        'span' => 2,
                                     ),
+                                    6 =>
                                     array(
                                         'name' => 'sales_rep_comission_text',
                                         'short_name' => 'sales_rep_comission_text',
                                         'css_class' => 'sales_rep_comission_text',
                                         'label' => 'LBL_COMMISSION_TEXT',
                                         'type' => 'text',
-                                        'span' => 1
+                                        'span' => 1,
                                     ),
-                                )
+                                ),
+                                'span' => 12,
                             ),
                             1 =>
                             array(
                             ),
-//                            0 =>
-//                            array(
-//                                'name' => 'sales_rep_name_c',
-//                                'studio' => 'visible',
-//                                'label' => 'LBL_SALES_REP_NAME',
-//                            ),
-//                            1 =>
-//                            array(
-//                                'name' => 'commission_broker_account_c',
-//                                'studio' => 'visible',
-//                                'label' => 'LBL_COMMISSION_BROKER_ACCOUNT',
-//                            ),
-//                            2 =>
-//                            array(
-//                                'name' => 'commission_unit_price_c',
-//                                'label' => 'LBL_COMMISSION_UNIT_PRICE',
-//                            ),
-//                            3 =>
-//                            array(
-//                                'name' => 'commission_umo_c',
-//                                'label' => 'LBL_COMMISSION_UMO',
-//                            ),
-//                            4 =>
-//                            array(
-//                                'name' => 'commission_percentage_c',
-//                                'label' => 'LBL_COMMISSION_PERCENTAGE',
-//                            ),
-//                            5 =>
-//                            array(
-//                                'name' => 'commission_formula_c',
-//                                'label' => 'LBL_COMMISSION_FORMULA',
-//                            ),
+                            2 =>
+                            array(
+                            ),
                         ),
                     ),
                     8 =>

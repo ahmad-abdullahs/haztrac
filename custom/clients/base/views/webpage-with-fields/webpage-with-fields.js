@@ -40,7 +40,7 @@
 
         // (Accounts) If the model has account type Service Site and Different Service Site is checked then show the
         // Service Site Address on the Map
-        if (module == 'Accounts') {
+        if (module == 'Accounts' && url.includes('www.google.com/maps')) {
             if (model.get('different_service_site_c') == true) {
                 tempModelAttributes.billing_address_street = tempModelAttributes.shipping_address_street = model.get('service_site_address_street_c');
                 tempModelAttributes.billing_address_city = tempModelAttributes.shipping_address_city = model.get('service_site_address_city_c');
@@ -49,9 +49,29 @@
             }
         }
 
+//        var address = [];
+//        address.push(tempModelAttributes.shipping_address_street);
+//        address.push(tempModelAttributes.shipping_address_city);
+//        address.push(tempModelAttributes.shipping_address_state);
+//        address.push(tempModelAttributes.shipping_address_postalcode);
+//        address.push(tempModelAttributes.shipping_address_country);
+//        address = _.filter(address);
+//         url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o&q="
+//         + encodeURIComponent(address.join(', '));
+
         _.each(tempModelAttributes, function (v, k) {
             url = url.replace(new RegExp('{' + k + '}', 'g'), v);
         });
+
+        if (module == 'Accounts' && url.includes('www.google.com/maps')) {
+            if (model.get('shipping_address_plus_code_cb') == true && model.get('shipping_address_plus_code_val')) {
+                url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o&q="
+                        + encodeURIComponent(model.get('shipping_address_plus_code_val'));
+            } else if (model.get('service_site_address_plus_code_cb') == true && model.get('service_site_address_plus_code_val')) {
+                url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAyAAyXJDGMIgFTJXsmdQdsnoS_XDQu62o&q="
+                        + encodeURIComponent(model.get('service_site_address_plus_code_val'));
+            }
+        }
 
         return url;
     },

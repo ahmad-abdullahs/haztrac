@@ -68,3 +68,5 @@ $mod_strings['LBL_SERVICE_SITE_ADDRESS_COUNTRY'] = 'Service Site Country';
 $mod_strings['LBL_SERVICE_SITE_NAME'] = 'Service Site Name';
 $mod_strings['LBL_DIFFERENT_SERVICE_SITE'] = 'Different Service Site';
 $mod_strings['LBL_PNL_PERMITS_LICENSES_ACCOUNTS_FROM_PNL_PERMITS_LICENSES_TITLE'] = 'Permits &amp; Licenses';
+$mod_strings['LBL_ADD_PLUS_CODE'] = 'Add Plus Code';
+$mod_strings['LBL_PLUS_CODE_VAL'] = 'Plus Code';

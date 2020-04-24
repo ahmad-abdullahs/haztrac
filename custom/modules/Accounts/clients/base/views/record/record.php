@@ -159,6 +159,11 @@ $viewdefs['Accounts'] = array(
                             1 =>
                             array(
                                 'name' => 'name',
+                                'related_fields' =>
+                                array(
+                                    0 => 'lat_c',
+                                    1 => 'lon_c',
+                                ),
                             ),
                             2 =>
                             array(
@@ -267,6 +272,7 @@ $viewdefs['Accounts'] = array(
                             3 =>
                             array(
                                 'name' => 'shipping_address',
+                                'group' => 'shipping_address',
                                 'type' => 'fieldset',
                                 'css_class' => 'address',
                                 'label' => 'LBL_SHIPPING_ADDRESS',
@@ -309,6 +315,40 @@ $viewdefs['Accounts'] = array(
                                         'placeholder' => 'LBL_SHIPPING_ADDRESS_COUNTRY',
                                     ),
                                     6 =>
+                                    array(
+                                        'name' => 'shipping_address_plus_code_val',
+                                        'css_class' => 'address_country',
+                                        'placeholder' => 'LBL_PLUS_CODE_VAL',
+                                    ),
+                                    7 =>
+                                    array(
+                                        'name' => 'shipping_address_lat',
+                                        'group' => 'shipping_address',
+                                        'css_class' => 'address_city',
+                                        'placeholder' => 'LBL_LAT',
+                                    ),
+                                    8 =>
+                                    array(
+                                        'name' => 'shipping_address_lon',
+                                        'group' => 'shipping_address',
+                                        'css_class' => 'address_state',
+                                        'placeholder' => 'LBL_LON',
+                                    ),
+                                    9 =>
+                                    array(
+                                        'name' => 'shipping_address_plus_code_cb',
+                                        'group' => 'shipping_address',
+                                        'label' => 'LBL_ADD_PLUS_CODE',
+                                        'text' => 'LBL_ADD_PLUS_CODE',
+                                        'type' => 'plus_code',
+                                        'toggleFields' =>
+                                        array(
+                                            'shipping_address_plus_code_val',
+                                            'shipping_address_lat',
+                                            'shipping_address_lon',
+                                        ),
+                                    ),
+                                    10 =>
                                     array(
                                         'name' => 'copy',
                                         'label' => 'NTC_COPY_BILLING_ADDRESS',
@@ -443,6 +483,7 @@ $viewdefs['Accounts'] = array(
                             array(
                                 'name' => 'service_site_address_c',
                                 'type' => 'fieldset',
+                                'group' => 'service_site_address',
                                 'css_class' => 'address',
                                 'label' => 'LBL_SERVICE_SITE_ADDRESS',
                                 'fields' =>
@@ -482,6 +523,40 @@ $viewdefs['Accounts'] = array(
                                         'name' => 'service_site_address_country_c',
                                         'css_class' => 'address_country',
                                         'placeholder' => 'LBL_SERVICE_SITE_ADDRESS_COUNTRY',
+                                    ),
+                                    6 =>
+                                    array(
+                                        'name' => 'service_site_address_plus_code_val',
+                                        'css_class' => 'address_country',
+                                        'placeholder' => 'LBL_PLUS_CODE_VAL',
+                                    ),
+                                    7 =>
+                                    array(
+                                        'name' => 'service_site_address_lat',
+                                        'group' => 'service_site_address',
+                                        'css_class' => 'address_city',
+                                        'placeholder' => 'LBL_LAT',
+                                    ),
+                                    8 =>
+                                    array(
+                                        'name' => 'service_site_address_lon',
+                                        'group' => 'service_site_address',
+                                        'css_class' => 'address_state',
+                                        'placeholder' => 'LBL_LON',
+                                    ),
+                                    9 =>
+                                    array(
+                                        'name' => 'service_site_address_plus_code_cb',
+                                        'group' => 'service_site_address',
+                                        'label' => 'LBL_ADD_PLUS_CODE',
+                                        'text' => 'LBL_ADD_PLUS_CODE',
+                                        'type' => 'plus_code',
+                                        'toggleFields' =>
+                                        array(
+                                            'service_site_address_plus_code_val',
+                                            'service_site_address_lat',
+                                            'service_site_address_lon',
+                                        ),
                                     ),
                                 ),
                             ),

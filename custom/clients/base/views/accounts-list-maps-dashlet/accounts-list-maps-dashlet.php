@@ -1,4 +1,5 @@
 <?php
+
 $viewdefs['base']['view']['accounts-list-maps-dashlet'] = array(
     'dashlets' => array(
         array(
@@ -10,6 +11,18 @@ $viewdefs['base']['view']['accounts-list-maps-dashlet'] = array(
             'preview' => array(
                 'module' => 'Accounts',
             ),
+            //Filter array decides where this dashlet is allowed to appear
+            'filter' => array(
+                //Modules where this dashlet can appear
+                'module' => array(
+                    'Accounts',
+                ),
+                //Views where this dashlet can appear
+                'view' => array(
+//                    'record',
+                    'records',
+                )
+            )
         ),
     ),
     'panels' => array(

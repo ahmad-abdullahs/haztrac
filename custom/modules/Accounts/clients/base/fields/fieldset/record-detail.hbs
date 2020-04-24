@@ -12,17 +12,22 @@
 --}}
 {{#each fields}}
     {{#containsSubStr name "_address_city"}}<div style="display: inline-flex;width: 100% !important;">{{/containsSubStr}}
+    {{#containsSubStr name "_address_lat"}}<div data-name="{{def.group}}_lat_lon" style="display: inline-flex;width: 100% !important;">{{/containsSubStr}}
 
     <div class="fieldset-field" data-type="{{type}}" data-name="{{name}}"
         {{#eq tplName "edit"}}
             {{#containsSubStr name "_address_city"}}style=""{{/containsSubStr}}
             {{#containsSubStr name "_address_state"}}style=""{{/containsSubStr}}
             {{#containsSubStr name "_address_postalcode"}}style=""{{/containsSubStr}}
+            {{#containsSubStr name "_address_lat"}}style=""{{/containsSubStr}}
+            {{#containsSubStr name "_address_lon"}}style=""{{/containsSubStr}}
         {{/eq}}
         {{#eq tplName "detail"}}
             {{#containsSubStr name "_address_city"}}style=""{{/containsSubStr}}
             {{#containsSubStr name "_address_state"}}style=""{{/containsSubStr}}
             {{#containsSubStr name "_address_postalcode"}}style=""{{/containsSubStr}}
+            {{#containsSubStr name "_address_lat"}}style=""{{/containsSubStr}}
+            {{#containsSubStr name "_address_lon"}}style=""{{/containsSubStr}}
         {{/eq}}>
         {{#if ../def.show_child_labels}}
             <div class="record-label" data-name="{{name}}">{{str label ../module}}</div>
@@ -30,5 +35,6 @@
         {{placeholder}}
     </div>
 
+    {{#containsSubStr name "_address_lon"}}</div>{{/containsSubStr}}
     {{#containsSubStr name "_address_postalcode"}}</div>{{/containsSubStr}}
 {{/each}}

@@ -32,14 +32,14 @@
                     {{field ../../../this model=../../this template='detail'}}
                 {{/with}}
             {{/if}}
-            {{#if attributes.assigned_user_id}}
+            {{!--{{#if attributes.assigned_user_id}}
                 <a href="#{{buildRoute module="Employees" id=attributes.assigned_user_id action="detail"}}">
                     {{fieldValue this "assigned_user_name"}}&#44;
                 </a>
             {{else}}
                 {{str "LBL_UNASSIGNED" this.module}}&#44;
             {{/if}}
-            {{relativeTime attributes.record_date class='date'}}
+            {{relativeTime attributes.record_date class='date'}}--}}
         </div>
     </li>
 {{/with}}

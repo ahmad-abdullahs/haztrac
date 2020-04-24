@@ -18,6 +18,25 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                     'name' => 'name',
                     'link' => true,
                     'type' => 'name',
+                    'related_fields' =>
+                    array_merge(array(
+                        // These fields are written here because they are not in the record view.
+                        0 => 'shipping_address_street_c',
+                        1 => 'shipping_address_city_c',
+                        2 => 'shipping_address_state_c',
+                        3 => 'shipping_address_postalcode_c',
+                        4 => 'shipping_address_country_c',
+                        5 => 'lat_c',
+                        6 => 'lon_c',
+                        7 => 'service_site_address_name',
+                        8 => 'service_site_address_street_c',
+                        9 => 'service_site_address_city_c',
+                        10 => 'service_site_address_state_c',
+                        11 => 'service_site_address_postalcode_c',
+                        12 => 'service_site_address_country_c',
+                        13 => 'pdf_template_printer_widget',
+                        14 => 'sales_and_services_revenuelineitems_1',
+                            ), getViewFields('recordview', 'sales_and_services')),
                 ),
                 1 =>
                 array(

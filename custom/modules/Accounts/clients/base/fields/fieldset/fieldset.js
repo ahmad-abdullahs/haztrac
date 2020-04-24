@@ -64,12 +64,16 @@
     _renderFields: function (fields) {
         this._super('_renderFields', [fields]);
 
-        if (this.name == 'billing_address' || this.name == 'shipping_address') {
-            /*_.each(fields, function (field) {
-             if (field.name == 'billing_address_third_party_name' || field.name == 'shipping_address_third_party_name') {
-             this.set3rdPartyVisibility(this.model.get('account_type_cst_c'), field);
-             }
-             }, this);*/
+        if (this.name == 'billing_address' || this.name == 'shipping_address' ||
+                this.name == 'service_site_address_c') {
+            _.each(fields, function (field) {
+                if (field.name == 'shipping_address_plus_code_cb' || field.name == 'service_site_address_plus_code_cb') {
+                    field.handleDependentFieldsVisibility(null, this.model.get(field.name));
+                }
+//                if (field.name == 'billing_address_third_party_name' || field.name == 'shipping_address_third_party_name') {
+//                    this.set3rdPartyVisibility(this.model.get('account_type_cst_c'), field);
+//                }
+            }, this);
             this.colorAddressFields(this.model.get('account_type_cst_c'));
         }
     },

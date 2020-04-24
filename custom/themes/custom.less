@@ -112,6 +112,44 @@ html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[dat
     width: calc(100% + 1px)
 }
 
+/*SHIPPING ARRDESS*/
+html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lat"] .detail div,html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lon"] .detail div {
+    padding-right: 0;
+    padding-left: 4px
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lat"],.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lon"] {
+    flex: 0 0 auto
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lat"] .detail,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lon"] .detail {
+    max-width: inherit;
+    overflow: hidden
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lat"] .detail div,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lon"] .detail div {
+    padding-right: 4px
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="shipping_address_lat"] .address_city .ellipsis_inline {
+    width: calc(100% + 1px)
+}
+
+/*SERVICE SITE ADDRESS*/
+html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lat"] .detail div,html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lon"] .detail div {
+    padding-right: 0;
+    padding-left: 4px
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lat"],.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lon"] {
+    flex: 0 0 auto
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lat"] .detail,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lon"] .detail {
+    max-width: inherit;
+    overflow: hidden
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lat"] .detail div,.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lon"] .detail div {
+    padding-right: 4px
+}
+.record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="service_site_address_lat"] .address_city .ellipsis_inline {
+    width: calc(100% + 1px)
+}
+
 .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[data-name$="address_street_c"] {
     word-break: break-all;
     word-break: break-word;
@@ -152,6 +190,7 @@ html.rtl .record-cell .normal > .fieldset.address:not(.edit) .fieldset-field[dat
     margin-bottom: 4px;
     font-size: 14px;
     line-height: 16px;
+    padding: 3px;
 }
 
 // Height of the dashlet (Pending/Planned Activities and History dashlet)

@@ -64,6 +64,39 @@ $dependencies['Accounts']['service_site_address_c_visibility_and_required'] = ar
     ),
 );
 
+$dependencies['Accounts']['service_site_address_plus_code_cb_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('service_site_address_plus_code_cb'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'service_site_address_plus_code_val',
+                'label' => 'service_site_address_plus_code_val_label',
+                'value' => 'equal($service_site_address_plus_code_cb, true)',
+            ),
+        ),
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'service_site_address_lat',
+                'label' => 'service_site_address_lat_label',
+                'value' => 'equal($service_site_address_plus_code_cb, true)',
+            ),
+        ),
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'service_site_address_lon',
+                'label' => 'service_site_address_lon_label',
+                'value' => 'equal($service_site_address_plus_code_cb, true)',
+            ),
+        ),
+    ),
+);
+
 $dependencies['Accounts']['service_site_address_c_setvalue'] = array(
     'hooks' => array("save"),
     'trigger' => 'true',
