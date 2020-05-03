@@ -85,6 +85,14 @@ $dictionary["RevenueLineItem"]["fields"]['is_bundle_product_c'] = array(
     'custom_module' => 'RevenueLineItems',
 );
 
+$dictionary['RevenueLineItem']['fields']['createBundleLogic'] = array(
+    'name' => 'createBundleLogic',
+    'vname' => 'LBL_CREATE_BUNDLE_LOGIC',
+    'type' => 'varchar',
+    'source' => 'non-db',
+    'studio' => false,
+);
+
 $dictionary['RevenueLineItem']['fields']['executeBundleLogic'] = array(
     'name' => 'executeBundleLogic',
     'vname' => 'LBL_EXECUTE_BUNDLE_LOGIC',

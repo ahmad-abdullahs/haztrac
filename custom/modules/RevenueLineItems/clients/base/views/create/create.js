@@ -17,6 +17,7 @@
         // So that it should hide the fields, panels and tabs.
         if (_.has(app.router, 'bundleCreation') && app.router.bundleCreation) {
             this.model.set('is_bundle_product_c', 'parent');
+            this.model.set('createBundleLogic', true);
             // this.model.trigger('change:is_bundle_product_c');
         }
     },
