@@ -4978,8 +4978,8 @@ qs@6.4.0:
   resolved "https://cache.sugardev.team/repository/npm/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
 qs@~6.2.0:
-  version "6.2.0"
-  resolved "https://cache.sugardev.team/repository/npm/qs/-/qs-6.2.0.tgz#3b7848c03c2dece69a9522b0fae8c4126d745f3b"
+  version "6.2.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.3.tgz#1cfcb25c10a9b2b483053ff39f5dfc9233908cfe"
 
 qs@~6.3.0:
   version "6.3.0"
