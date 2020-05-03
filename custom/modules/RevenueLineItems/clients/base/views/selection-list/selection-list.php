@@ -124,6 +124,12 @@ $viewdefs['RevenueLineItems'] = array(
                                 'default' => true,
                             ),
                             array(
+                                'name' => 'bundle_total_c',
+                                'label' => 'LBL_BUNDLE_TOTAL',
+                                'enabled' => true,
+                                'default' => true,
+                            ),
+                            array(
                                 'name' => 'is_bundle_product_c',
                                 'label' => 'LBL_IS_BUNDLE_PRODUCT',
                                 'enabled' => true,

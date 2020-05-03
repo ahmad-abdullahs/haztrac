@@ -37,12 +37,22 @@
                            data-event="{{event}}"
                            track="click:{{event}}"
                         {{else}}
-                           href="{{route}}"
-                           data-route="{{route}}"
-                           {{#if openwindow}}
-                           data-openwindow="true"
-                           {{/if}}
-                           track="click:{{route}}"
+{{!--
+    /*
+     * Code is added to remove the href for RevenueLineItems and ProductTemplates module.
+     * Since we have custom routes in it, which does not work when user uses (ctrl + mouse click).
+     */
+--}}
+                            {{#notEq ../../../module "RevenueLineItems"}}
+                                {{#notEq ../../../../module "ProductTemplates"}}
+                                    href="{{route}}"
+                                {{/notEq}}
+                            {{/notEq}}
+                            data-route="{{route}}"
+                            {{#if openwindow}}
+                            data-openwindow="true"
+                            {{/if}}
+                            track="click:{{route}}"
                         {{/if}}>{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}{{str label ../../module}}</a>
                     </li>
                 {{/if}}

@@ -78,6 +78,7 @@
                     context: {
                         create: true,
                         model: prefill,
+                        hideGroupCheckBox: true,
                         module: module,
                     }
                 }, _.bind(self.loadParentView, self));

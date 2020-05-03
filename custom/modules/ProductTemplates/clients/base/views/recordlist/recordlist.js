@@ -57,6 +57,7 @@
                         _context = {
                             create: true,
                             model: prefill,
+                            hideGroupCheckBox: true,
                             copiedFromModelId: productTemplateModel.get('id'),
                         };
 

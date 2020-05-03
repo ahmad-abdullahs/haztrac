@@ -30,7 +30,7 @@
             } else if (!_.isEmpty(this.layout._components[0].filters.collection.models)) {
                 this.filterCollection = this.layout._components[0].filters.collection;
                 this.filterCollection.models = _.filter(this.layout._components[0].filters.collection.models, function (model) {
-                    if (model.get('editable')) {
+                    if (model.get('editable') && model.get('allow_tab') != false) {
                         return true;
                     }
                     return false;

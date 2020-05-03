@@ -466,6 +466,7 @@
                 _context = {
                     create: true,
                     model: prefill,
+                    hideGroupCheckBox: true,
                     copiedFromModelId: this.model.get('id'),
                 };
 

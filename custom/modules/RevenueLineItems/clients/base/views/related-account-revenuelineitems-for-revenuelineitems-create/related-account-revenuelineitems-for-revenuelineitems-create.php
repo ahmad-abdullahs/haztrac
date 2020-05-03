@@ -64,13 +64,21 @@ $viewdefs['RevenueLineItems']['base']['view']['related-account-revenuelineitems-
                             ), getViewFields('recordview', 'RevenueLineItems')),
                 ),
                 array(
-                    'name' => 'related_rli_total_c',
+                    'name' => 'bundle_total_c',
                     'label' => 'LBL_BUNDLE_TOTAL',
                     'sortable' => false,
                     'enabled' => true,
                     'default' => true,
                     'width' => 'small',
                 ),
+//                array(
+//                    'name' => 'related_rli_total_c',
+//                    'label' => 'LBL_RELATED_RLI_TOTAL',
+//                    'sortable' => false,
+//                    'enabled' => true,
+//                    'default' => true,
+//                    'width' => 'small',
+//                ),
                 array(
                     'name' => 'estimated_quantity_c',
                     'label' => 'LBL_ESTIMATED_QUANTITY',

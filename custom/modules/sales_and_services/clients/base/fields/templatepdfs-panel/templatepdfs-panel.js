@@ -156,10 +156,12 @@
      * Fetch related records for subpanel data.
      */
     fetchRecords: function () {
-        if (this.collection.dataFetched) {
-            return;
+        if (this.collection) {
+            if (this.collection.dataFetched) {
+                return;
+            }
+            this.collection.fetch(this.colOption);
         }
-        this.collection.fetch(this.colOption);
     },
 
     toggleAll: function (e) {

@@ -89,11 +89,17 @@ $subpanel_layout['list_fields'] = array(
         'vname' => 'LBL_UNIT_OF_MEASURE',
         'width' => 10,
     ),
-    'related_rli_total_c' =>
+//    'related_rli_total_c' =>
+//    array(
+//        'type' => 'decimal',
+//        'vname' => 'LBL_RELATED_RLI_TOTAL',
+//        'width' => 10,
+//        'default' => true,
+//    ),
     array(
-        'type' => 'decimal',
-        'vname' => 'LBL_RELATED_RLI_TOTAL',
-        'width' => 10,
+        'name' => 'bundle_total_c',
+        'label' => 'LBL_BUNDLE_TOTAL',
+        'enabled' => true,
         'default' => true,
     ),
     'total_amount' =>

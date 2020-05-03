@@ -99,7 +99,7 @@ $viewdefs['ProductTemplates']['base']['view']['recordlist'] = array(
                 'acl_action' => 'delete',
             ),
             array(
-                'type' => 'rowaction',
+                'type' => 'duplicate-button-rowaction',
                 'name' => 'duplicate_button',
                 'event' => 'list:duplicate_button:fire',
                 'label' => 'LBL_DUPLICATE_BUTTON_LABEL',

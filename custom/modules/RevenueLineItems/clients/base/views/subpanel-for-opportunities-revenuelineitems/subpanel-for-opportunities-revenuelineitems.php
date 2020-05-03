@@ -99,11 +99,17 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-revenu
                 ),
                 9 =>
                 array(
-                    'name' => 'related_rli_total_c',
-                    'label' => 'LBL_RELATED_RLI_TOTAL',
+                    'name' => 'bundle_total_c',
+                    'label' => 'LBL_BUNDLE_TOTAL',
                     'enabled' => true,
                     'default' => true,
                 ),
+//                array(
+//                    'name' => 'related_rli_total_c',
+//                    'label' => 'LBL_RELATED_RLI_TOTAL',
+//                    'enabled' => true,
+//                    'default' => true,
+//                ),
                 10 =>
                 array(
                     'name' => 'estimated_total_amount',

@@ -1,16 +1,24 @@
-/**
- * @class View.Views.Base.Accounts.CreateView
- * @alias SUGAR.App.view.views.AccountsCreateView
- * @extends View.Views.Base.CreateView
- */
 ({
     extendsFrom: 'CreateView',
+    // For now these attributes are used in RelateRecordApi... which is called when RevenueLineItem is linked to
+    // Accout, S&S or Opportunity.
     executeGroupLogic: 0,
-    exeuteBundleLogic: 0,
+    executeBundleLogic: 0,
 
     initialize: function (options) {
         this._super('initialize', [options]);
         app.controller.context.on('productCatalogDashlet:populate:RLI', this.onPopulateFromProductCatalog, this);
+    },
+
+    render: function () {
+        this._super('render');
+
+        // When creating the RevenueLineItem Bundle, set the is_bundle_product_c value to trigger the change.
+        // So that it should hide the fields, panels and tabs.
+        if (_.has(app.router, 'bundleCreation') && app.router.bundleCreation) {
+            this.model.set('is_bundle_product_c', 'parent');
+            // this.model.trigger('change:is_bundle_product_c');
+        }
     },
 
     buildSuccessMessage: function (model) {
@@ -107,8 +115,8 @@
             data.executeGroupLogic = 1;
             this.executeGroupLogic = 1;
         } else {
-            data.exeuteBundleLogic = 1;
-            this.exeuteBundleLogic = 1;
+            data.executeBundleLogic = 1;
+            this.executeBundleLogic = 1;
         }
 
         var bean;
@@ -245,5 +253,12 @@
 
         options = _.extend({}, options, self.getCustomSaveOptions(options));
         self.model.save(null, options);
+    },
+
+    _dispose: function () {
+        // Delete bundleCreation so that, if simple RevenueLineItem is created after 
+        // creating a bundle, It should not be miss guided.
+        delete app.router.bundleCreation;
+        this._super('_dispose');
     },
 })

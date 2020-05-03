@@ -1,16 +1,15 @@
 <?php
 
-$dictionary['RevenueLineItem']['fields']['related_rli_total_c'] = array(
+$dictionary['RevenueLineItem']['fields']['bundle_total_c'] = array(
     'duplicate_merge_dom_value' => 0,
-    'labelValue' => 'Bundle Forecast Total',
     'calculated' => '1',
-    'formula' => 'rollupSum($revenuelineitems_revenuelineitems_1,"total_amount")',
+    'formula' => 'rollupSum($revenuelineitems_revenuelineitems_1,"discount_price")',
     'enforced' => '1',
     'dependency' => '',
     'required' => false,
     'source' => 'custom_fields',
-    'name' => 'related_rli_total_c',
-    'vname' => 'LBL_RELATED_RLI_TOTAL',
+    'name' => 'bundle_total_c',
+    'vname' => 'LBL_BUNDLE_TOTAL',
     'massupdate' => false,
     'importable' => 'false',
     'duplicate_merge' => 'disabled',

@@ -96,7 +96,7 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                             6 =>
                             array(
-                                'type' => 'rowaction',
+                                'type' => 'duplicate-button-rowaction',
                                 'event' => 'button:duplicate_button:click',
                                 'name' => 'duplicate_button',
                                 'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
@@ -183,6 +183,8 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                             1 =>
                             array(
+                                'name' => 'bundle_total_c',
+                                'label' => 'LBL_BUNDLE_TOTAL',
                             ),
                             2 =>
                             array(
@@ -300,8 +302,6 @@ $viewdefs['ProductTemplates'] = array(
                             ),
                             5 =>
                             array(
-                                'name' => 'bundle_total_c',
-                                'label' => 'LBL_BUNDLE_TOTAL',
                             ),
                             6 =>
                             array(

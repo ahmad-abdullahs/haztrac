@@ -628,7 +628,20 @@
                 // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
                 // app.controller.context is the only consistent context to use
                 if (!_.isUndefined(viewDetails)) {
-                    app.controller.context.trigger('productCatalogDashlet:populate:RLI', data);
+                    // If the router is set with bundle creation, then the standalone item will be added 
+                    // as the Related RevenueLineItem.
+                    // Else the standalone item will be copied as the RevenueLineItem.
+                    if (_.has(app.router, 'bundleCreation') && app.router.bundleCreation) {
+                        // If item is a standalone item, then it will be added as the Related RevenueLineItem.
+                        // It its a bundle header item then it will ba added as a header Related RevenueLineItem.
+                        if (data.is_bundle_product_c != 'parent') {
+                            app.controller.context.trigger(viewDetails.cid + ':productCatalogDashlet:add', data);
+                        } else {
+                            app.controller.context.trigger('productCatalogDashlet:populate:RLI', data);
+                        }
+                    } else {
+                        app.controller.context.trigger('productCatalogDashlet:populate:RLI', data);
+                    }
                 }
 
                 if (data.is_group_item_c == true) {
@@ -675,6 +688,8 @@
                                 if (!_.isUndefined(viewDetails)) {
                                     if (notAGroup) {
                                         // To add the relationship between the revenuelineitems
+                                        // Need to further add the comments in which specific case it is required...
+                                        // Otherwise data.id is undefined or null, in most of the cases i see during debugging.
                                         model.attributes.revenuelineitems_revenuelineitems_1revenuelineitems_ida = data.id;
                                     } else if (bundleChildToParentObj[__id]) {
                                         model.attributes.idPersonallyAssigned = true;

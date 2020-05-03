@@ -110,7 +110,7 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             8 =>
                             array(
-                                'type' => 'rowaction',
+                                'type' => 'duplicate-button-rowaction',
                                 'event' => 'button:duplicate_button:click',
                                 'name' => 'duplicate_button',
                                 'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
@@ -240,30 +240,40 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'product_list_name_c',
-                                'label' => 'LBL_PRODUCT_LIST_NAME',
+                                'name' => 'bundle_total_c',
+                                'label' => 'LBL_BUNDLE_TOTAL',
                             ),
                             5 =>
                             array(
+                                'name' => 'related_rli_total_c',
+                                'label' => 'LBL_RELATED_RLI_TOTAL',
                             ),
                             6 =>
+                            array(
+                                'name' => 'product_list_name_c',
+                                'label' => 'LBL_PRODUCT_LIST_NAME',
+                            ),
+                            7 =>
+                            array(
+                            ),
+                            8 =>
                             array(
                                 'name' => 'product_svc_description_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_PRODUCT_SVC_DESCRIPTION',
                             ),
-                            7 =>
+                            9 =>
                             array(
                                 'name' => 'mandatory_print_text_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_MANDATORY_PRINT_TEXT',
                             ),
-                            8 =>
+                            10 =>
                             array(
                                 'name' => 'description',
                                 'span' => 12,
                             ),
-                            9 =>
+                            11 =>
                             array(
                                 'name' => 'additional_info_ack_c',
                                 'studio' => 'visible',
@@ -330,8 +340,6 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             5 =>
                             array(
-                                'name' => 'related_rli_total_c',
-                                'label' => 'LBL_RELATED_RLI_TOTAL',
                             ),
                             6 =>
                             array(
@@ -763,8 +771,6 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             14 =>
                             array(
-                                'name' => 'related_rli_total_c',
-                                'label' => 'LBL_RELATED_RLI_TOTAL',
                             ),
                             15 =>
                             array(
@@ -803,8 +809,6 @@ $viewdefs['RevenueLineItems'] = array(
                             5 => 'team_name',
                             6 =>
                             array(
-                                'name' => 'description',
-                                'span' => 6,
                             ),
                             7 =>
                             array(

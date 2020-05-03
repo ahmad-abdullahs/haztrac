@@ -15,7 +15,6 @@ $dictionary['RevenueLineItem']['fields']['weight']['dependency'] = 'not(equal($i
 $dictionary['RevenueLineItem']['fields']['cost_usdollar']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['date_cost_price']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['discount_usdollar']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
-//$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['tax_class']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['base_rate']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['shipping_hazardous_materia_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
@@ -50,3 +49,6 @@ $dictionary['RevenueLineItem']['fields']['best_case']['dependency'] = 'not(equal
 $dictionary['RevenueLineItem']['fields']['probability']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['sales_stage']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['date_closed']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+// Bit different
+$dictionary['RevenueLineItem']['fields']['bundle_total_c']['dependency'] = 'equal($is_bundle_product_c,"parent")';
+$dictionary['RevenueLineItem']['fields']['related_rli_total_c']['dependency'] = 'equal($is_bundle_product_c,"parent")';

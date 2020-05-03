@@ -8,48 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/**
- * A fieldset is a field that contains one or more child fields.
- * The hbs template sets the placeholders of child fields but the creation of
- * child fields reside in the controller.
- *
- * Accessibility is checked against each child field as well as the fieldset.
- * We do not hide the fieldset in the event that the fieldset is accessible and
- * all child fields are not.
- *
- * Supported properties:
- *
- * - {Array} fields List of fields that are part of the fieldset.
- * - {boolean} show_child_labels Set to `true` to show labels on child fields in
- * the record view.
- * - {boolean} inline Set to `true` to render the fieldset inline.
- * - {boolean} equal_spacing When in inline mode, setting `true` will make the
- * fields inside fieldsets to have equal spacing, rather than being left aligned.
- *
- * Example usage:
- *
- *      array(
- *          'name' => 'date_entered_by',
- *          'type' => 'fieldset',
- *          'label' => 'LBL_DATE_ENTERED',
- *          'fields' => array(
- *              array(
- *                  'name' => 'date_entered',
- *              ),
- *              array(
- *                  'type' => 'label',
- *                  'default_value' => 'LBL_BY',
- *              ),
- *              array(
- *                  'name' => 'created_by_name',
- *              ),
- *          )
- *      )
- *
- * @class View.Fields.Base.FieldsetField
- * @alias SUGAR.App.view.fields.BaseFieldsetField
- * @extends View.Fields.Base.BaseField
- */
 ({
     extendsFrom: 'FieldsetField',
 
@@ -62,6 +20,18 @@
     },
 
     _renderFields: function (fields) {
+        var plusCodeFields = [
+            'shipping_address_plus_code_val',
+            'service_site_address_plus_code_val',
+        ];
+
+        // On detail view, don't show the plus code field.
+        if (this.action == 'detail') {
+            fields = _.filter(fields, function (obj) {
+                return !_.contains(plusCodeFields, obj.name);
+            });
+        }
+
         this._super('_renderFields', [fields]);
 
         if (this.name == 'billing_address' || this.name == 'shipping_address' ||

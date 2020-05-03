@@ -84,16 +84,16 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array(
                 'ignore_role' => 0,
             ),
         ),
-        array(
-            'layout' => 'subpanel',
-            'label' => 'LBL_QUOTES_SHIPTO',
-            'override_paneltop_view' => 'panel-top-for-accounts',
-            'override_subpanel_list_view' => 'subpanel-for-accounts',
-            'context' => array(
-                'link' => 'quotes_shipto',
-                'ignore_role' => 0,
-            ),
-        ),
+//        array(
+//            'layout' => 'subpanel',
+//            'label' => 'LBL_QUOTES_SHIPTO',
+//            'override_paneltop_view' => 'panel-top-for-accounts',
+//            'override_subpanel_list_view' => 'subpanel-for-accounts',
+//            'context' => array(
+//                'link' => 'quotes_shipto',
+//                'ignore_role' => 0,
+//            ),
+//        ),
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',

@@ -44,7 +44,7 @@
                 // Fetched in descending order because when the items are added in the subpanel-for-producttemplates-create
                 // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
                 params: {
-                    order_by: "line_number:desc",
+                    order_by: "line_number:asc",
                     view: 'list',
                 },
                 success: function (coll) {
@@ -65,13 +65,22 @@
         if (options.context.parent.get('bundleTemplateModelId')) {
             var rliModel = app.data.createBean('ProductTemplates', {id: options.context.parent.get('bundleTemplateModelId')});
             var rliRelatedRLIColl = app.data.createRelatedCollection(rliModel, 'product_templates_product_templates_1');
+            // The bundle which are part of a group they have a relationship to that group and 
+            // that group line item also comes up in the collection. This filter is added to avoid the 
+            // Group line to appear in the collection.
+            rliRelatedRLIColl.filterDef = [];
+            rliRelatedRLIColl.filterDef.push({
+                'is_group_item_c': {
+                    '$equals': false
+                },
+            });
             rliRelatedRLIColl = rliRelatedRLIColl.fetch({
                 relate: true,
                 limit: -1,
                 // Fetched in descending order because when the items are added in the subpanel-for-producttemplates-create
                 // they stacked in the view over each other. in order to keep the same line order we fetch in desc order.
                 params: {
-                    order_by: "line_number:desc",
+                    order_by: "line_number:asc",
                     view: 'list',
                 },
                 success: function (coll) {
@@ -193,10 +202,14 @@
             // for adding the custom relationship between the bundle and its items, while the group relationship 
             // with each of its item is already maintained by Sugar itself.
             // Good part is that the ids which we are setting up in the Js is the record id when it saves.
-            bean.set('is_bundle_product_c', 'sub-child:' + bean.get('product_templates_product_templates_1'));
-            // We set it to empty in the Module API (after maintaing an array for later relationship maintaining), 
-            // otherwise Module API throws an error...
-            bean.unset('product_templates_product_templates_1', {silent: true});
+            if (bean.get('product_templates_product_templates_1')) {
+                // This if check is added because if the bundle inside a group is duplicated after the group is
+                // created, it does not have the bean.get('product_templates_product_templates_1') ID so it generates sub-child:undefined
+                bean.set('is_bundle_product_c', 'sub-child:' + bean.get('product_templates_product_templates_1'));
+                // We set it to empty in the Module API (after maintaing an array for later relationship maintaining), 
+                // otherwise Module API throws an error...
+                bean.unset('product_templates_product_templates_1', {silent: true});
+            }
         }
 
         return bean;

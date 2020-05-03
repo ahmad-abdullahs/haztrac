@@ -81,12 +81,18 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-accounts-revenueline
                 ),
                 6 =>
                 array(
-                    'name' => 'related_rli_total_c',
-                    'label' => 'LBL_RELATED_RLI_TOTAL',
+                    'name' => 'bundle_total_c',
+                    'label' => 'LBL_BUNDLE_TOTAL',
                     'enabled' => true,
                     'default' => true,
-                    'width' => 'xsmall',
                 ),
+//                array(
+//                    'name' => 'related_rli_total_c',
+//                    'label' => 'LBL_RELATED_RLI_TOTAL',
+//                    'enabled' => true,
+//                    'default' => true,
+//                    'width' => 'xsmall',
+//                ),
                 7 =>
                 array(
                     'name' => 'product_vendor_c',

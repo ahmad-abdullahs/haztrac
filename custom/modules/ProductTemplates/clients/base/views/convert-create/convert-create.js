@@ -39,6 +39,25 @@
         this._super('initialize', [options]);
     },
 
+    _render: function () {
+        this._super('_render');
+
+        // When converting the RevenueLineItem Bundle or making the copy of a Product bundle, this view is called. 
+        // So set the is_bundle_product_c value to trigger the change.
+        // So that it should hide the fields, panels and tabs.
+        this.model.set('is_bundle_product_c', 'parent');
+        this.model.trigger('change:is_bundle_product_c');
+        this.model.set('is_group_item_c', false);
+
+        // In convert-create either we are creating the Bundle or Product Template, 
+        // so there is no need of is_group_item_c field to show.
+        var is_group_item_c = this.getField('is_group_item_c');
+        if (is_group_item_c) {
+            is_group_item_c.hide();
+            is_group_item_c.$el.parents('div:first').addClass('vis_action_hidden');
+        }
+    },
+
     /**
      * @inheritdoc
      */
