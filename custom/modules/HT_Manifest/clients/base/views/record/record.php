@@ -166,12 +166,44 @@ $viewdefs[$module_name] = array(
                     ),
                     1 =>
                     array(
+                        'newTab' => true,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'LBL_RECORDVIEW_PANEL0',
+                        'label' => 'LBL_RECORD_BODY',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                        ),
+                    ),
+                    2 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'panel_preview',
+                        'label' => 'LBL_PANEL_PREVIEW',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'ht_manifest_preview_c',
+                                'label' => 'LBL_HT_MANIFEST_PREVIEW',
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
+                    3 =>
+                    array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
                         'columns' => 2,
                         'labelsOnTop' => true,
                         'placeholders' => true,
-                        'newTab' => true,
+                        'newTab' => false,
                         'panelDefault' => 'expanded',
                         'fields' =>
                         array(
@@ -204,28 +236,85 @@ $viewdefs[$module_name] = array(
                             ),
                             6 =>
                             array(
+                                'name' => 'manifest_days',
+                                'label' => 'LBL_MANIFEST_DAYS',
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'manifest_tenth_day_date',
+                                'label' => 'LBL_MANIFEST_TENTH_DAY_DATE',
+                            ),
+                            8 =>
+                            array(
                                 'name' => 'transporter',
                                 'type' => 'transporter',
                                 'label' => 'LBL_TRANSPORTER',
                                 'dismiss_label' => true,
                                 'span' => 12,
                             ),
-                            7 =>
+                            9 =>
                             array(
                                 'name' => 'designated_facility_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_DESIGNATED_FACILITY',
                             ),
-                            8 =>
+                            10 =>
                             array(
                                 'name' => 'complete_date_c',
                                 'label' => 'LBL_COMPLETE_DATE',
                             ),
-                            9 => 'assigned_user_name',
-                            10 => 'team_name',
+                            11 => 'assigned_user_name',
+                            12 => 'team_name',
                         ),
                     ),
-                    2 =>
+                    4 =>
+                    array(
+                        'newTab' => false,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL2',
+                        'label' => 'LBL_RECORDVIEW_PANEL2',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'multi_files',
+                                'label' => 'Attachments',
+                                'dismiss_label' => true,
+                                'type' => 'multi_file_widget',
+                                'linkField' => 'ht_manifest_mv_attachments',
+                                'relatedModule' => 'mv_Attachments',
+                                'columns' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'name' => 'uploadfile',
+                                        'label' => 'LBL_FILE_UPLOAD',
+                                        'type' => 'file',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'name' => 'category_id',
+                                        'type' => 'enum',
+                                    ),
+                                    2 =>
+                                    array(
+                                        'name' => 'lab_ref_number',
+                                        'type' => 'text',
+                                    ),
+                                    3 =>
+                                    array(
+                                        'name' => 'analysis_date',
+                                        'type' => 'date',
+                                    ),
+                                ),
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
+                    5 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_SHOW_MORE',
@@ -301,7 +390,7 @@ $viewdefs[$module_name] = array(
                             ),
                         ),
                     ),
-                    3 =>
+                    6 =>
                     array(
                         'newTab' => true,
                         'panelDefault' => 'expanded',
@@ -378,10 +467,6 @@ $viewdefs[$module_name] = array(
                                 ),
                                 'allowedFieldList' =>
                                 array(
-//                                    0 => 'discount_price',
-//                                    1 => 'list_price',
-//                                    2 => 'cost_price',
-//                                    3 => 'product_list_name_c',
                                 ),
                                 'span' => 12,
                             ),

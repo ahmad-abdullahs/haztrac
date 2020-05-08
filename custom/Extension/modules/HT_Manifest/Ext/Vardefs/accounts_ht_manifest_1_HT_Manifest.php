@@ -18,6 +18,7 @@ $dictionary["HT_Manifest"]["fields"]["accounts_ht_manifest_1_name"] = array (
   'source' => 'non-db',
   'vname' => 'LBL_ACCOUNTS_HT_MANIFEST_1_FROM_ACCOUNTS_TITLE',
   'save' => true,
+  'required' => true,
   'id_name' => 'accounts_ht_manifest_1accounts_ida',
   'link' => 'accounts_ht_manifest_1',
   'table' => 'accounts',

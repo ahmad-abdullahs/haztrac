@@ -21,6 +21,9 @@ $viewdefs['RevenueLineItems']['base']['filter']['default'] = array(
         'rli_as_template_c' =>
         array(
         ),
+        'manifest_required_c' =>
+        array(
+        ),
         'sales_stage' =>
         array(
         ),

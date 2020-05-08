@@ -19,8 +19,9 @@ class mv_AttachmentsLogicHookClass {
     }
 
     function after_save($bean) {
-        if ($bean->parent_type == 'LR_Lab_Reports' && !empty($bean->parent_id)) {
-            $notes = BeanFactory::getBean('LR_Lab_Reports', $bean->parent_id);
+        if (($bean->parent_type == 'LR_Lab_Reports' || $bean->parent_type == 'HT_Manifest') &&
+                !empty($bean->parent_id)) {
+            $notes = BeanFactory::getBean($bean->parent_type, $bean->parent_id);
             $bean->assigned_user_id = $notes->assigned_user_id;
             $bean->team_id = $notes->team_id;
             $bean->team_set_id = $notes->team_set_id;

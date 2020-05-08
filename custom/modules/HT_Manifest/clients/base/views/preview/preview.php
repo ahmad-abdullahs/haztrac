@@ -166,6 +166,25 @@ $viewdefs[$module_name] = array(
                     ),
                     1 =>
                     array(
+                        'newTab' => false,
+                        'panelDefault' => 'collapsed',
+                        'name' => 'panel_preview',
+                        'label' => 'LBL_PANEL_PREVIEW',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'ht_manifest_preview_c',
+                                'label' => 'LBL_HT_MANIFEST_PREVIEW',
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
+                    2 =>
+                    array(
                         'name' => 'panel_body',
                         'label' => 'LBL_RECORD_BODY',
                         'columns' => 2,
@@ -226,7 +245,7 @@ $viewdefs[$module_name] = array(
                             10 => 'team_name',
                         ),
                     ),
-                    2 =>
+                    3 =>
                     array(
                         'name' => 'panel_hidden',
                         'label' => 'LBL_SHOW_MORE',

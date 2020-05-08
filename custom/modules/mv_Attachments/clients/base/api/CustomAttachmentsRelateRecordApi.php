@@ -9,9 +9,17 @@ class CustomAttachmentsRelateRecordApi extends RelateRecordApi {
 
     public function registerApiRest() {
         return array_merge(parent::registerApiRest(), array(
-            'createRelatedRecord' => array(
+            'createRelatedRecordForLabReports' => array(
                 'reqType' => 'POST',
                 'path' => array('LR_Lab_Reports', '?', 'link', 'lr_lab_reports_mv_attachments'),
+                'pathVars' => array('module', 'record', '', 'link_name'),
+                'method' => 'createRelatedRecord',
+                'shortHelp' => 'Create a single record and relate it to this module',
+                'longHelp' => 'include/api/help/module_record_link_link_name_post_help.html',
+            ),
+            'createRelatedRecordForManifest' => array(
+                'reqType' => 'POST',
+                'path' => array('HT_Manifest', '?', 'link', 'ht_manifest_mv_attachments'),
                 'pathVars' => array('module', 'record', '', 'link_name'),
                 'method' => 'createRelatedRecord',
                 'shortHelp' => 'Create a single record and relate it to this module',

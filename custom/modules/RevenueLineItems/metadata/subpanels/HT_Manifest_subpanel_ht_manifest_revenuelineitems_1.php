@@ -1,5 +1,5 @@
 <?php
-// created: 2019-05-21 02:08:24
+// created: 2020-05-07 22:59:34
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -20,63 +20,45 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HT_Manifest',
     'target_record_key' => 'ht_manifest_revenuelineitems_1ht_manifest_ida',
   ),
-  'estimated_quantity_c' => 
-  array (
-    'type' => 'decimal',
-    'default' => true,
-    'vname' => 'LBL_ESTIMATED_QUANTITY',
-    'width' => 10,
-  ),
   'quantity' => 
   array (
     'vname' => 'LBL_QUANTITY',
     'width' => 10,
     'default' => true,
+    'sortable' => false,
   ),
   'product_uom_c' => 
   array (
     'type' => 'enum',
     'default' => true,
-    'vname' => 'LBL_UNIT_OF_MEASURE',
+    'vname' => 'LBL_PRODUCT_UOM',
     'width' => 10,
   ),
-  'charge_c' => 
+  'manifest_hazmat_handle_code_c' => 
   array (
-    'related_fields' => 
-    array (
-      0 => 'currency_id',
-      1 => 'base_rate',
-    ),
-    'type' => 'currency',
+    'type' => 'enum',
     'default' => true,
-    'vname' => 'LBL_CHARGE',
-    'currency_format' => true,
+    'vname' => 'LBL_MANIFEST_HAZMAT_HANDLE_CODE',
     'width' => 10,
   ),
-  'total_amount' => 
+  'proper_shipping_name_c' => 
   array (
-    'type' => 'currency',
-    'related_fields' => 
-    array (
-      0 => 'currency_id',
-      1 => 'base_rate',
-    ),
-    'vname' => 'LBL_CALCULATED_LINE_ITEM_AMOUNT',
-    'currency_format' => true,
-    'width' => 10,
     'default' => true,
-  ),
-  'close_amount_c' => 
-  array (
-    'type' => 'decimal',
-    'vname' => 'LBL_CLOSE_AMOUNT',
+    'type' => 'text',
+    'studio' => 'visible',
+    'vname' => 'LBL_PROPER_SHIPPING_NAME',
+    'sortable' => false,
     'width' => 10,
-    'default' => true,
   ),
   'discount_usdollar' => 
   array (
     'usage' => 'query_only',
     'sortable' => false,
+  ),
+  'is_bundle_product_c' => 
+  array (
+    'name' => 'is_bundle_product_c',
+    'usage' => 'query_only',
   ),
   'currency_id' => 
   array (

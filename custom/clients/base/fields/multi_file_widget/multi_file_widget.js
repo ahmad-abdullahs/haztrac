@@ -32,7 +32,7 @@
     },
 
     loadInDashlet: function (ele) {
-        app.events.trigger('loadTheLabReportInDashlet', {
+        app.events.trigger('loadTheFileInDashlet', {
             id: $(ele.currentTarget).attr('id'),
             file_ext: $(ele.currentTarget).attr('file_ext'),
             hrefLink: $(ele.currentTarget).siblings('span').find('a').attr('href'),
@@ -224,9 +224,12 @@
                             module: 'mv_Attachments',
                             id: collection.models[i]['attributes']['id']
                         }, collection.models[i]);
+
                         self.attachmentCollection.add(collection.models[i]);
+                        self.attachmentCollection.models[i].template = "detail";
+
                         if (collection.models[i].get('category_id') == 'Primary' && trigger) {
-                            app.events.trigger('loadTheLabReportInDashlet', {
+                            app.events.trigger('loadTheFileInDashlet', {
                                 id: collection.models[i].get('id'),
                                 file_ext: collection.models[i].get('file_ext'),
                                 module: 'mv_Attachments',

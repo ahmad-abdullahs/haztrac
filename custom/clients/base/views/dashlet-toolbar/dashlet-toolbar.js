@@ -43,7 +43,8 @@
 
     initialize: function (options) {
         this._super('initialize', [options]);
-        if (this.options.context.parent.get('module') == 'LR_Lab_Reports') {
+        if (this.options.context.parent.get('module') == 'LR_Lab_Reports' ||
+                this.options.context.parent.get('module') == 'HT_Manifest') {
             if (this.options.layout.meta.components[0]) {
                 if (this.options.layout.meta.components[0].view.url) {
                     this.popOutFullView = this.options.context.parent.get('model').get('fileExist');
