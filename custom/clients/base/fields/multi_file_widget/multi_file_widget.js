@@ -213,6 +213,7 @@
             var self = this;
             var collection = app.data.createRelatedCollection(this.model, this.def.linkField);
             collection.fetch({
+                view: 'list',
                 relate: true,
                 limit: -1,
                 success: function (coll) {

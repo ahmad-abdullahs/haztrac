@@ -28,6 +28,11 @@ $viewdefs['RevenueLineItems']['base']['filter']['basic']['filters'][] = array(
                 '$equals' => '',
             ),
         ),
+         array(
+            'is_bundle_product_c' => array(
+                '$not_in' => array(),
+            ),
+        ),
     ),
     'editable' => true,
     'is_template' => true,

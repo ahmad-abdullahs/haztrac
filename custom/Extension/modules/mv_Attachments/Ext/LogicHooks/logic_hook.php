@@ -3,7 +3,7 @@
 $hook_array['before_save'][] = Array(
     1,
     'Description',
-    'custom/modules/mv_Attachments/LogicHooks/addImageField.php',
+    'custom/modules/mv_Attachments/LogicHooks/LogicHookClass.php',
     'mv_AttachmentsLogicHookClass',
     'before_save'
 );

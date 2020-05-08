@@ -9,12 +9,17 @@ class mv_AttachmentsLogicHookClass {
     ];
 
     function before_save($bean, $event, $arguments) {
-        $bean->name = $bean->document_name;
-
-        if (in_array($bean->file_mime_type, self::$mimes) AND ! empty($bean->id)) {
-            $bean->image = $bean->id;
-        } else {
-            $bean->image = '';
+//        $bean->name = $bean->document_name;
+//        if (in_array($bean->file_mime_type, self::$mimes) AND ! empty($bean->id)) {
+//            $bean->image = $bean->id;
+//        } else {
+//            $bean->image = '';
+//        }
+        // new record
+        if (!isset($bean->fetched_row['id'])) {
+            $extensionArr = explode('.', $bean->filename);
+            $bean->file_ext = $extensionArr[count($extensionArr) - 1];
+            $bean->name = empty($bean->document_name) ? $bean->filename : $bean->document_name;
         }
     }
 

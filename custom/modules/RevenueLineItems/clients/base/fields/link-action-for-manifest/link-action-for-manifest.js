@@ -39,6 +39,7 @@
             'filter_populate': {
                 'account_id': [parentModel.get('accounts_ht_manifest_1accounts_ida')],
                 'manifest_required_c': 1,
+                'is_bundle_product_c': ['parent'],
             }
         });
 
