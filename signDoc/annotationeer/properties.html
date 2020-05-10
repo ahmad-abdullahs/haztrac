@@ -1,0 +1,66 @@
+<div id="propertyContentContainer">
+    <button data-remodal-action="close" class="remodal-close" ng-click="closePopup()"></button>
+    <div>
+        <div class="propertyRow" ng-show="annotation.isFormField()">
+            <span data-l10n-id="form_field_name_label">Form Field Name</span>:<br/>
+            <input id="formFieldName" type="text" ng-model="property.formFieldName" size="22" maxlength="30"
+                ng-change="updateFormFieldName()" ng-model-options="{debounce: 1000}"/><br/>
+            <span data-l10n-id="form_field_value_label">Form Field Value</span>:<br/>
+            <input id="formFieldValue" type="text" ng-model="property.formFieldValue" size="22" maxlength="50"
+               ng-change="updateFormFieldValue()" ng-model-options="{debounce: 1000}"/>
+        </div>
+        <div class="propertyRow" ng-show="annotation.annotationType == getTypeTextAnnotationTypeId()">
+            <span data-l10n-id="text_label">Text</span>
+            <span class="subLabel">(<span data-l10n-id="max_characters_label">Max characters</span>: {{getTypeTextCharLimit()}}</span>)
+            <textarea id="textAreaText" rows="10" cols="25" ng-model="property.text" size="20"
+                      ng-change="updateText()" ng-model-options="{debounce: 1000}"/>
+            <input id="inputText" type="text"  ng-model="property.text" size="21" maxlength="{{getTypeTextCharLimit()}}"
+                   ng-change="updateText()" ng-model-options="{debounce: 1000}"/>
+        </div>
+        <div class="propertyRow" ng-show="annotation.annotationType == getTypeTextAnnotationTypeId()">
+            <span data-l10n-id="font_size_label">Font Size</span>
+            <select ng-model="property.fontSize" ng-change="updateFontSize()">
+                <option ng-repeat="n in range(property.fontSizeMin, property.fontSizeMax)" value="{{n}}">{{n}}</option>
+            </select>
+        </div>
+        <div class="propertyRow" ng-class="annotation.annotationType == getTypeTextAnnotationTypeId() ? 'propertyDivider' : ''"
+             ng-show="!annotation.isFormField() && annotation.hasBackgroundColorProperty()">
+            <button class="toolbarButton" title="Background Color" ng-click="showColorPicker('background')">
+                <img src="images/color_bg.svg" width="14" height="14"/>
+                <div class="propertyColor" ng-style="{background: annotation.backgroundColor}"></div>
+            </button>
+            <input type="color" id="backgroundPaletteProperty" class="colorPickerHidden" readonly="true"/>
+            <span data-l10n-id="background_color_label">Background Color</span>
+        </div>
+        <div class="propertyRow" ng-show="!annotation.isFormField() && annotation.hasForegroundColorProperty()">
+            <button class="toolbarButton" title="Foreground Color" ng-click="showColorPicker()">
+                <img src="images/color_fg.svg" width="14" height="14"/>
+                <div class="propertyColor" ng-style="{background: annotation.color}"></div>
+            </button>
+            <input type="color" id="colorPaletteProperty" class="colorPickerHidden" readonly="true"/>
+            <span data-l10n-id="foreground_color_label">Foreground Color</span>
+        </div>
+
+        <div class="propertyDivider propertyRow" ng-show="annotation.hasMeasuring()">
+            <span data-l10n-id="measurement_type_label">Measurement Type</span><br/>
+            <select ng-options="mt.name for mt in measurementTypes"
+                ng-model="annotation.measurementTypeChosen"
+                ng-change="measurementTypeChanged()"/>
+        </div>
+        <div class="propertyDivider propertyRow" ng-show="annotation.hasLineStyle()">
+            <span data-l10n-id="border_style_label">Border Style</span><br/>
+            <select ng-options="ls.name for ls in lineStyles"
+                ng-model="annotation.lineStyleChosen"
+                ng-change="lineStyleChanged()"/>
+        </div>
+        <div class="propertyDivider propertyRow" ng-show="annotation.hasLineWidth()">
+            <span data-l10n-id="line_width_label">Line Width</span><br/>
+            <input type="range" name="lineWidth" id="lineWidth" min="1" max="5">
+        </div>
+        <div class="propertyDivider propertyRow" ng-show="annotation.hasOpacity()">
+            <span data-l10n-id="opacity_label">Opacity</span><br/>
+            <input type="range" name="opacity" id="opacity" min="0.3" max="1.0" step="0.1">
+        </div>
+
+    </div>
+</div>

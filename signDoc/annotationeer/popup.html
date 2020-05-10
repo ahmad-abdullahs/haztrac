@@ -1,0 +1,34 @@
+<!--suppress ALL -->
+<div id="popupContentContainer">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <div ng-repeat="comment in annotation.comments" id="comment_{{$index}}" ng-if="comment.modified != 'delete'" ng-mousedown="handleContextMenu($event, annotation, comment, '#comment_' + $index, $index)">
+        <img src="images/user_reply.svg" width="15" ng-show="$index > 0" class="user-reply-icon"/>
+        <span ng-class="$index == 0 ? 'annotation-form-header-username' : 'annotation-form-username'">{{comment.username}}</span>
+        <span class="action-link" ng-if="((key == 'reply' && $index < annotation.comments.length - 1) || (key == 'edit' && formComment.id != comment.id)) &&
+            ((annotation.isRootCommentEditable() && $index == 0) || $index > 0) && isBySameUser(comment)">
+            <span ng-if="$index > 0" class="delete-link uppercase" ng-click="deleteComment(annotation, comment)" data-l10n-id="delete_label">DELETE</span>
+            <span ng-if="$index > 0"> | </span>
+            <span class="edit-link uppercase" ng-click="setAnnotation(annotation, 'edit', comment)" data-l10n-id="edit_label">EDIT</span>
+        </span>
+        <br/>
+        <span class="annotation-form-header-date-created">
+            <span class="uppercase" data-l10n-id="date_modified_label">DATE MODIFIED</span>: {{ UtilService.getMomentFormattedDate(comment.dateModified, 'll') | uppercase }}
+        </span>
+        <br/>
+        <span ng-show="isCommentFeatureStatusDisplay() && comment.reviewStatuses.length > 0" class="annotation-form-header-review-status">
+            <span class="uppercase" data-l10n-id="status_label">Status</span>: &nbsp;
+            <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(comment).status}}.svg" height="13"
+                 title="{{getLatestReviewStatus(comment).status}}" data-l10n-id="{{getLatestReviewStatus(comment).status}}"/>
+        </span>
+        <div class="annotation-form-header-comment" ng-bind-html="getRootComment(annotation, comment, $index)"
+             ng-if="(key == 'reply' && $index < annotation.comments.length - 1) ||
+            (key == 'edit' && formComment.id != comment.id) || key == 'view'">
+        </div>
+        <span ng-if="(key == 'edit' && formComment.id == comment.id) ||
+            (key == 'reply' && $index == annotation.comments.length - 1)">
+            <textarea id="comment" ng-model="formComment.comment" rows="5"></textarea><br/>
+            <button class="toolbarButton annotation-form-save" accesskey="s" ng-click="saveComment()" data-l10n-id="save_label">Save</button>
+        </span>
+        <div class="hr" ng-if="annotation.comments.length > 1 && $index < annotation.comments.length - 1 && annotation.comments[annotation.comments.length - 1].modified != 'delete'"/>
+    </div>
+</div>
