@@ -11,6 +11,7 @@
     events: {
         'click .addFile': 'createRecord',
         'click .deleteFile': 'deleteRecord',
+        'click .signFile': 'signFile',
         'click .loadInDashlet': 'loadInDashlet',
     },
 
@@ -143,6 +144,25 @@
                 }
             }, self)
         });
+    },
+    /**
+     * Listener function for signing clicked record.
+     * @param {Object} e (current event)
+     */
+    signFile: function (e) {
+        var self = this;
+        var row = $(e.currentTarget).closest('tr');
+        var beanID = $(row).attr('data-id');
+
+        app.drawer.open({
+            layout: 'sign-doc',
+            context: {
+                url: 'signDoc/annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf',
+            }
+        }, _.bind(function (context, model) {
+            // comes here when its is closed
+        }, self));
+
     },
 
     fileSave: function (model, value) {

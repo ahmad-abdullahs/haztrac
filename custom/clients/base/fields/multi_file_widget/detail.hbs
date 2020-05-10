@@ -30,6 +30,15 @@
                         {{/eq}}
                     {{/if}} 
                 {{/each}}
+                {{#eq attributes.file_ext "pdf"}}
+                    <td>
+                         <div class="btn-toolbar prevent-mousedown">
+                            <div class="btn-group">
+                               <a href="javascript:void(0)" class="btn signFile" rel="tooltip" title="{{str "Sign Doc"}}"><i class="fa fa-edit"></i></a>
+                            </div>
+                         </div>
+                    </td>
+                {{/eq}}
             </tr>
         {{/each}}
     </tbody>

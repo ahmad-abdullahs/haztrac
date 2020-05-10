@@ -37,6 +37,7 @@ $app_strings['LBL_CLOSE_DRAWER_BUTTON_LABEL'] = 'Close';
 $app_strings['LBL_SHORTCUT_DRAWER_CLOSE'] = 'Close the Record View opened in the Drawer.';
 $app_strings['LBL_MULTIPLE_REVENUELINEITEMS'] = 'Add Multiple Revenue Line Items';
 $app_strings['LBL_REVENUELINEITEMS_SUBPANEL_LIST_CREATE_FROM_REVENUELINEITEMS_TITLE'] = 'Related Revenue Line Items';
+$app_strings['LBL_SIGN_DOC_TITLE'] = 'Sign Document';
 
 $app_list_strings['history_filter_options_cstm'] = array(
     0 => 'All',
