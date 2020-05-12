@@ -1699,6 +1699,7 @@ $['fn'][_0x1749('0x131')] = function(_0x556269, _0x4f191a) {
                 ;
                 _0x1c1aa0[_0x451177][_0x1749('0x4bf')] = function(_0xafb10f) {
                     _0x1e70ce = _0x556269;
+                    // every time user hit the key in Free Text inbox, it comes here.(this, ANNOTATION_TYPE_TEXT_CHAR_LIMIT)
                     _0x5d778b(this, _0x1e70ce, _0xafb10f);
                     _0x553c53(this, _0x1e70ce);
                 }
@@ -2501,7 +2502,11 @@ Default[_0x1749('0x3ad')] = 0x64;
 Default['ANNOTATION_ICON_SIDE'] = 0x16;
 Default['ANNOTATION_TYPE_TEXT_FONT_SIZE_RANGE_MIN'] = 0x6;
 Default[_0x1749('0x13a')] = 0x18;
-Default[_0x1749('0x6d')] = 0x14;
+// -chnaged to below-    Default[_0x1749('0x6d')] = 0x14;
+// ahmad
+// -----START-----
+Default[_0x1749('0x6d')] = 0x32; // Change the ANNOTATION_TYPE_TEXT_CHAR_LIMIT upto 50 
+// -----END-----
 Default[_0x1749('0x354')] = !![];
 Default['ANNOTATION_SHOW_HIDE_FEATURE'] = ![];
 Default[_0x1749('0x5e1')] = ![];
