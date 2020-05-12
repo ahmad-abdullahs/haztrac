@@ -319,7 +319,11 @@ function AnnotationSelectionHandle() {
     this['y'] = 0x0;
 }
 AnnotationSelectionHandle[_0x1749('0x25d')] = {};
-function Annotation() {
+// -chnaged to below-    function Annotation() {
+// ahmad
+// -----START-----
+function Annotation(a) {
+// -----END-----
     this['id'] = 0x0;
     this['x'] = 0x0;
     this['y'] = 0x0;
@@ -366,7 +370,15 @@ function Annotation() {
     this[_0x1749('0x19f')] = [];
     this[_0x1749('0x23a')] = [];
     this[_0x1749('0x5b1')] = Default[_0x1749('0x5ce')];
-    this[_0x1749('0x42')] = Default[_0x1749('0x474')];
+    // -chnaged to below-   this[_0x1749('0x42')] = Default[_0x1749('0x474')];
+    // ahmad
+    // -----START-----
+    if(a){
+        this[_0x1749('0x42')] = '#ffff00';
+    } else{
+        this[_0x1749('0x42')] = Default[_0x1749('0x474')];
+    }
+    // -----END-----
     this[_0x1749('0x14a')] = new Image();
     this[_0x1749('0x588')] = '';
     this[_0x1749('0x24b')] = null;
@@ -2453,8 +2465,13 @@ var rgbScreenShot = Util[_0x1749('0x38')](hexScreenShotColor);
 Default['SCREENSHOT_FILL_COLOR'] = _0x1749('0x489') + rgbScreenShot['r'] + ',\x20' + rgbScreenShot['g'] + ',\x20' + rgbScreenShot['b'] + ',\x20' + Default[_0x1749('0x54c')] + ')';
 Default['SCREENSHOT_DIM_COLOR'] = _0x1749('0x74') + Default[_0x1749('0x54c')] + ')';
 Default[_0x1749('0x4cd')] = ![];
-Default[_0x1749('0x5ce')] = '#ff0000';
-Default['DRAW_COLOR_BACKGROUND'] = '#ffff00';
+// -chnaged to below- Default[_0x1749('0x5ce')] = '#ff0000';
+// -chnaged to below- Default['DRAW_COLOR_BACKGROUND'] = '#ffff00';
+// ahmad
+// -----START-----
+Default[_0x1749('0x5ce')] = '#000000';
+Default['DRAW_COLOR_BACKGROUND'] = '#ffffff';
+// -----END-----
 Default[_0x1749('0x34d')] = 0x1;
 Default[_0x1749('0xa8')] = _0x1749('0x346');
 Default['DRAW_LINEJOIN'] = _0x1749('0x6f');
@@ -2793,7 +2810,11 @@ Page[_0x1749('0x25d')][_0x1749('0x66')] = function(_0x4ee1d7, _0x9f8a49, _0x5226
     var _0x1d83ca = _0x3bcba9[_0x1749('0x140')];
     var _0x4313fe;
     if (!_0x16cd6f) {
-        _0x4313fe = new Annotation();
+        // -chnaged to below-    _0x4313fe = new Annotation();
+        // ahmad
+        // -----START-----
+        _0x4313fe = new Annotation(1);
+        // -----END-----
         _0x4313fe[_0x1749('0x535')] = _0x9f8a49;
         _0x4313fe[_0x1749('0x25f')] = _0x4ee1d7;
     }
@@ -3954,7 +3975,17 @@ PageManager[_0x1749('0x59f')] = function(_0x585762, _0x2a9bca, _0x5bafe9, _0x12f
     if (Default[_0x1749('0x5b7')]) {
         PageManager[_0x1749('0x125')](_0x585762, $(_0x585762)[_0x1749('0x385')](_0x1749('0x3e7')) + _0x1749('0x24e'));
     }
-    PageManager['boxAnnotationGuide'] = new Annotation();
+    
+    // -chnaged to below-    PageManager['boxAnnotationGuide'] = new Annotation();
+    // ahmad
+    // -----START-----
+    if(_0x2a9bca == Annotation["TYPE_HIGHLIGHT"] || _0x2a9bca == Annotation["TYPE_CIRCLE_FILL"]){
+        PageManager['boxAnnotationGuide'] = new Annotation(1);
+    } else {
+        PageManager['boxAnnotationGuide'] = new Annotation();
+    }
+    // -----END-----
+    
     PageManager[_0x1749('0x18c')][_0x1749('0xab')] = !![];
     PageManager[_0x1749('0x18c')][_0x1749('0x25f')] = _0x2a9bca;
     if (_0x2a9bca == Annotation[_0x1749('0x342')] || _0x2a9bca == Annotation[_0x1749('0x3b2')]) {

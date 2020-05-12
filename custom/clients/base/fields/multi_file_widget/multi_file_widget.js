@@ -7,6 +7,16 @@
     columns: null,
     subpanelModel: null,
     deletedCBIIds: [],
+    // These arrays have the model attributes, dataSyncList is populated when 
+    // the collection is fetched from data:sync:complete, while timeOutCallsSyncList s populated when 
+    // the collection is fetched from window.setTimeout.
+    // So these collections are compared to confirm where the data is properly loaded or not.
+    // Means files are saved and now the file attributes like, name, file_ext, file_mime_type ... are loaded.
+    dataSyncList: [],
+    timeOutCallsSyncList: [],
+
+    callCount: 0,
+    timeOutHandle: {},
 
     events: {
         'click .addFile': 'createRecord',
@@ -28,8 +38,13 @@
         this._super('initialize', [options]);
         this.init();
         this.model.on('data:sync:complete', function () {
+            this.callCount = 0;
             this.fetchRecords(true);
         }, this);
+        this.callCount = 0;
+        this.dataSyncList = [];
+        this.timeOutCallsSyncList = [];
+        this.timeOutHandle = {};
     },
 
     loadInDashlet: function (ele) {
@@ -229,37 +244,85 @@
     },
 
     fetchRecords: function (trigger) {
-        if (!_.isEmpty(this.model.get('id')) && !_.isEmpty(this.def.linkField)) {
-            var self = this;
-            var collection = app.data.createRelatedCollection(this.model, this.def.linkField);
-            collection.fetch({
-                view: 'list',
-                relate: true,
-                limit: -1,
-                success: function (coll) {
-                    //Adding new models to collection
-                    for (var i = 0; i < collection.models.length; i++) {
-                        collection.models[i].template = "detail";
-                        collection.models[i].URL = self._createFileObj(collection.models[i]['attributes']['name'], {
-                            field: 'uploadfile',
-                            module: 'mv_Attachments',
-                            id: collection.models[i]['attributes']['id']
-                        }, collection.models[i]);
+        if (this.model) {
+            if (!_.isEmpty(this.model.get('id')) && !_.isEmpty(this.def.linkField)) {
+                var self = this;
+                var collection = app.data.createRelatedCollection(this.model, this.def.linkField);
+                collection.fetch({
+                    view: 'list',
+                    relate: true,
+                    limit: -1,
+                    success: function (coll) {
+                        // if trigger == true means called from data:sync:complete
+                        // otherwise called from window.setTimeout.
+                        if (trigger) {
+                            self.dataSyncList = [];
+                        } else {
+                            self.timeOutCallsSyncList = [];
+                        }
 
-                        self.attachmentCollection.add(collection.models[i]);
-                        self.attachmentCollection.models[i].template = "detail";
+                        _.each(coll.models, function (model) {
+                            var obj = {
+                                id: model.get('id'),
+                                name: model.get('name'),
+                                document_name: model.get('document_name'),
+                                filename: model.get('filename'),
+                                file_ext: model.get('file_ext'),
+                                file_mime_type: model.get('file_mime_type'),
+                            };
+                            if (trigger) {
+                                self.dataSyncList.push(obj);
+                            } else {
+                                self.timeOutCallsSyncList.push(obj);
+                            }
+                        });
 
-                        if (collection.models[i].get('category_id') == 'Primary' && trigger) {
-                            app.events.trigger('loadTheFileInDashlet', {
-                                id: collection.models[i].get('id'),
-                                file_ext: collection.models[i].get('file_ext'),
+                        //Adding new models to collection
+                        for (var i = 0; i < collection.models.length; i++) {
+                            collection.models[i].template = "detail";
+                            collection.models[i].URL = self._createFileObj(collection.models[i]['attributes']['name'], {
+                                field: 'uploadfile',
                                 module: 'mv_Attachments',
-                            });
+                                id: collection.models[i]['attributes']['id']
+                            }, collection.models[i]);
+
+                            self.attachmentCollection.add(collection.models[i]);
+                            self.attachmentCollection.models[i].template = "detail";
+
+                            if (collection.models[i].get('category_id') == 'Primary' && trigger) {
+                                app.events.trigger('loadTheFileInDashlet', {
+                                    id: collection.models[i].get('id'),
+                                    file_ext: collection.models[i].get('file_ext'),
+                                    module: 'mv_Attachments',
+                                });
+                            }
+                        }
+
+                        if (_.isEqual(self.dataSyncList, self.timeOutCallsSyncList)) {
+                            self.callCount++;
+                            // Make the 3 calls to confirm all the files are saved and the data loaded is the 
+                            // proper data.
+                            if (self.callCount == 3) {
+                                window.clearTimeout(self.timeOutHandle);
+                                self.callCount--;
+                                self._render();
+                                return;
+                            }
+                            self.timeOutHandle = window.setTimeout(_.bind(self.fetchRecords, self), 1500);
+                        } else {
+                            self.callCount++;
+                            if (self.callCount == 3) {
+                                window.clearTimeout(self.timeOutHandle);
+                                self.callCount--;
+                                self._render();
+                                return;
+                            }
+                            self.timeOutHandle = window.setTimeout(_.bind(self.fetchRecords, self), 1500);
+                            self._render();
                         }
                     }
-                    self._render();
-                }
-            });
+                });
+            }
         }
     },
 
