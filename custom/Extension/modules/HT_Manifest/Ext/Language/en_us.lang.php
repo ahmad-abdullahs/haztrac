@@ -33,3 +33,4 @@ $mod_strings['LBL_FILE_NAME_HEADER'] = 'File Name';
 $mod_strings['LBL_FILE_TYPE_HEADER'] = 'File Type';
 $mod_strings['LBL_REF_NUMBER_HEADER'] = 'Manifest Number';
 $mod_strings['LBL_ANALYSIS_DATE_HEADER'] = 'Date';
+$mod_strings['LBL_NOTES'] = 'Notes';

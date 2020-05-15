@@ -177,6 +177,47 @@ $viewdefs[$module_name] = array(
                         array(
                             0 =>
                             array(
+                                'name' => 'record_detail',
+                                'type' => 'record-detail',
+                                'dismiss_label' => true,
+                                'labelsOnTop' => false,
+                                'span' => 12,
+                                'columns' =>
+                                array(
+                                    array(
+                                        'name' => 'manifest_no_actual_c',
+                                        'label' => 'LBL_MANIFEST_NO_ACTUAL',
+                                        'width' => 'small',
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'status_c',
+                                        'label' => 'LBL_STATUS',
+                                        'width' => 'xsmall',
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'manifest_days',
+                                        'label' => 'LBL_MANIFEST_DAYS',
+                                        'width' => 'xsmall',
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'manifest_tenth_day_date',
+                                        'label' => 'LBL_MANIFEST_TENTH_DAY_DATE',
+                                        'width' => 'small',
+                                        'sortable' => false,
+                                    ),
+                                    array(
+                                        'name' => 'primary_team_name',
+                                        'label' => 'LBL_TEAM_BRANCH',
+                                        'width' => 'small',
+                                        'sortable' => false,
+                                    ),
+                                ),
+                            ),
+                            1 =>
+                            array(
                                 'name' => 'ht_manifest_preview_c',
                                 'label' => 'LBL_HT_MANIFEST_PREVIEW',
                                 'span' => 12,

@@ -142,7 +142,6 @@
                 deleted: false,
                 id: model.get('id'),
                 category_id: model.get('category_id'),
-                lab_ref_number: model.get('lab_ref_number'),
                 assigned_user_id: app.user.id,
             };
         }

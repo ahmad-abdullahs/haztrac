@@ -7,4 +7,5 @@ $app_list_strings['manifest_status_list'] = array(
     'Inactive' => 'Inactive',
     'Pending Analysis' => 'Pending Analysis',
     'Void' => 'Voided / Terminated',
+    'Completed' => 'Completed',
 );

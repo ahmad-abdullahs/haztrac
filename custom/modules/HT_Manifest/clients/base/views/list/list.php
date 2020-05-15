@@ -21,7 +21,7 @@ $viewdefs[$module_name] = array(
                                 'label' => 'LBL_MANIFEST_NO_ACTUAL',
                                 'enabled' => true,
                                 'default' => true,
-                                'width' => 'medium',
+                                'width' => 'small',
                             ),
                             1 =>
                             array(
@@ -80,6 +80,7 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'manifest_days',
                                 'label' => 'LBL_MANIFEST_DAYS',
+                                'type' => 'base-colorcoded',
                                 'enabled' => true,
                                 'default' => true,
                                 'width' => 'xsmall',
@@ -97,18 +98,18 @@ $viewdefs[$module_name] = array(
                             ),
                             9 =>
                             array(
-                                'name' => 'complete_date_c',
-                                'label' => 'LBL_COMPLETE_DATE',
+                                'name' => 'manifest_tenth_day_date',
+                                'label' => 'LBL_MANIFEST_TENTH_DAY_DATE',
                                 'enabled' => true,
                                 'default' => true,
                                 'width' => 'small',
                             ),
                             10 =>
                             array(
-                                'name' => 'manifest_tenth_day_date',
-                                'label' => 'LBL_MANIFEST_TENTH_DAY_DATE',
+                                'name' => 'complete_date_c',
+                                'label' => 'LBL_COMPLETE_DATE',
                                 'enabled' => true,
-                                'default' => false,
+                                'default' => true,
                                 'width' => 'small',
                             ),
                             11 =>

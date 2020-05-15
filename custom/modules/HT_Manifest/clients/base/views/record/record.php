@@ -291,23 +291,23 @@ $viewdefs[$module_name] = array(
                                     0 =>
                                     array(
                                         'name' => 'uploadfile',
-                                        'label' => 'LBL_FILE_UPLOAD',
+                                        'label' => 'LBL_FILE_NAME_HEADER',
                                         'type' => 'file',
+                                        'span' => 5,
                                     ),
                                     1 =>
                                     array(
                                         'name' => 'category_id',
+                                        'label' => 'LBL_FILE_TYPE_HEADER',
                                         'type' => 'enum',
+                                        'span' => 2,
                                     ),
                                     2 =>
                                     array(
-                                        'name' => 'lab_ref_number',
+                                        'name' => 'description',
+                                        'label' => 'LBL_NOTES',
                                         'type' => 'text',
-                                    ),
-                                    3 =>
-                                    array(
-                                        'name' => 'analysis_date',
-                                        'type' => 'date',
+                                        'span' => 4,
                                     ),
                                 ),
                                 'span' => 12,

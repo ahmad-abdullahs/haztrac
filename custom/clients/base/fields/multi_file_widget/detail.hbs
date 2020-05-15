@@ -1,47 +1,45 @@
-<table class="table table-striped dataTable">
-    <tbody>
-        <tr>
-            <td>{{str "LBL_FILE_NAME_HEADER" module}}</td>
-            <td style="text-align: center;">{{str "LBL_FILE_TYPE_HEADER" module}}</td>
-            <td style="text-align: center;">{{str "LBL_REF_NUMBER_HEADER" module}}</td>
-            <td style="text-align: center;">{{str "LBL_ANALYSIS_DATE_HEADER" module}}</td>
-            <td></td>
-        </tr>
-        {{#each attachmentCollection.models}}
-            <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
-                {{#each ../columnsMeta}} 
-                    {{#if readonly}}
-                        <td class="rowcell subpanel-field cbi-rowcell" data-name="{{name}}" style="">
-                            {{field ../../../view model=../../this template="detail"}}
-                        </td>
-                    {{else}}
-                        {{#eq name "uploadfile"}}
-                            <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="">
-                                <a name="advance-relate-preview" id="{{../../../this.attributes.id}}" file_ext="{{../../../this.attributes.file_ext}}" class="rowaction loadInDashlet" style="padding-right: 1px;" tabindex="-1">
-                                    <i rel="tooltip" title="" class="fa fa-eye" data-original-title="Preview Record">
-                                    </i>
-                                </a>
-                                {{field ../../../../view model=../../../this template=../../../template}}
-                            </td>
-                        {{else}}
-                            <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="text-align: center;">
-                                {{field ../../../../view model=../../../this template=../../../template}}
-                            </td>
-                        {{/eq}}
-                    {{/if}} 
-                {{/each}}
-                {{#eq attributes.file_ext "pdf"}}
-                    <td>
-                         <div class="btn-toolbar prevent-mousedown">
-                            <div class="btn-group">
-                               <a href="javascript:void(0)" class="btn signFile" rel="tooltip" title="{{str "Sign Doc"}}"><i class="fa fa-edit"></i></a>
-                            </div>
-                         </div>
-                    </td>
-                {{/eq}}
-            </tr>
+<div class="control-group {{name}} clearfix" style="margin-bottom: 5px;">
+    <div class="record-label">
+        {{#each def.columns}}
+            <div class="span{{span}} record-cell">
+                <lable>{{str label ../module}}</lable>
+            </div>
         {{/each}}
-    </tbody>
-</table>
+    </div>
+</div>
+
+{{#each attachmentCollection.models}}
+    <div name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="control-group clearfix">
+        <div class="row-fluid">
+            {{#each ../columnsMeta}}
+                {{#if readonly}}
+                    <div class="span{{span}} record-cell" data-name="{{name}}">
+                        {{field ../../../view model=../../this template="detail"}}
+                    </div>
+                {{else}}
+                    {{#eq name "uploadfile"}}
+                        <div class="span{{span}} record-cell cbi-rowcell"  data-name="{{name}}" style="display: inline-flex;">
+                            <a name="advance-relate-preview" id="{{../../../this.attributes.id}}" file_ext="{{../../../this.attributes.file_ext}}" class="rowaction loadInDashlet" style="padding-right: 5px;" tabindex="-1">
+                                <i rel="tooltip" title="" class="fa fa-eye" data-original-title="Preview Record"></i>
+                            </a>
+                            {{field ../../../../view model=../../../this template=../../../template}}
+                        </div>
+                    {{else}}
+                        <div class="span{{span}} record-cell cbi-rowcell" data-name="{{name}}" style="">
+                            {{field ../../../../view model=../../../this template=../../../template}}
+                        </div>
+                    {{/eq}}
+                {{/if}} 
+            {{/each}}
+            {{#eq attributes.file_ext "pdf"}}
+                <div class="btn-toolbar span1 multi-btn prevent-mousedown">
+                    <div class="btn-group" style="margin-top:0px;">
+                       <a href="javascript:void(0)" data-uid="{{uid}}" tabindex="-1" class="btn signFile" rel="tooltip" title="{{str "Sign Doc"}}"><i class="fa fa-edit"></i></a>
+                    </div>
+                </div>
+            {{/eq}}
+        </div>
+    </div>
+{{/each}}
 
 <div id="{{createWrapper}}"></div>

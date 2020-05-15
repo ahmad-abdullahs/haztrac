@@ -1,49 +1,48 @@
 {{#notEq this.view.action 'list'}}
-<table class="table table-striped dataTable">
-    <tbody>
+    <div class="control-group {{name}} clearfix" style="margin-bottom: 5px;">
+        <div class="record-label">
+            {{#each def.columns}}
+                <div class="span{{span}} record-cell {{css_class}}">
+                    <lable>{{str label ../module}}</lable>
+                </div>
+            {{/each}}
+        </div>
+    </div>
 {{/notEq}}
-    <tr>
-        <td>{{str "LBL_FILE_NAME_HEADER" module}}</td>
-        <td>{{str "LBL_FILE_TYPE_HEADER" module}}</td>
-        <td>{{str "LBL_REF_NUMBER_HEADER" module}}</td>
-        <td>{{str "LBL_ANALYSIS_DATE_HEADER" module}}</td>
-        <td></td>
-    </tr>
-    {{#each attachmentCollection.models}}
-        <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
-            {{#each ../columnsMeta}} 
+
+{{#each attachmentCollection.models}}
+    <div name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="control-group clearfix">
+        <div class="row-fluid">
+            {{#each ../columnsMeta}}
                 {{#if readonly}}
-                    <td class="rowcell subpanel-field cbi-rowcell" data-name="{{name}}" style="">
+                    <div class="span{{span}} record-cell cbi-rowcell" data-name="{{name}}">
                         {{field ../../../view model=../../this template="detail"}}
-                    </td>
+                    </div>
                 {{else}}
                     {{#eq name "uploadfile"}}
-                        <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="">
+                        <div class="span{{span}} record-cell cbi-rowcell"  data-name="{{name}}" style="">
                             {{field ../../../../view model=../../../this template=../../../template}}
-                        </td>
+                        </div>
                     {{else}}
-                        <td class="rowcell subpanel-field cbi-rowcell"  data-name="{{name}}" style="">
+                        <div class="span{{span}} record-cell cbi-rowcell"  data-name="{{name}}" style="">
                             {{field ../../../../view model=../../../this template="edit"}}
-                        </td>
+                        </div>
                     {{/eq}}
                 {{/if}} 
             {{/each}}
             {{#notEq ../view.action 'list'}}
-                <td>
-                     <div class="btn-toolbar prevent-mousedown">
-                        <div class="btn-group">
-                           <a href="javascript:void(0)" class="btn deleteFile" rel="tooltip" title="{{str "Delete File"}}"><i class="icon-plus fa fa-minus"></i></a>
-                        </div>
-                        <div class="btn-group">
-                           <a href="javascript:void(0)" class="btn addFile" rel="tooltip" title="{{str "Add File"}}"><i class="icon-plus fa fa-plus"></i></a>
-                        </div>
-                     </div>
-                </td>
+                <div class="btn-toolbar prevent-mousedown">
+                    <div class="btn-group"></div>
+                    <div class="btn-group">
+                       <a href="javascript:void(0)" class="btn deleteFile" rel="tooltip" title="{{str "Delete File"}}"><i class="icon-plus fa fa-minus"></i></a>
+                    </div>
+                    <div class="btn-group">
+                       <a href="javascript:void(0)" class="btn addFile" rel="tooltip" title="{{str "Add File"}}"><i class="icon-plus fa fa-plus"></i></a>
+                    </div>
+                </div>
             {{/notEq}}
-        </tr>
-    {{/each}}
-{{#notEq this.view.action 'list'}}
-    </tbody>
-</table>
-{{/notEq}}
+        </div>
+    </div>
+{{/each}}
+
 <div id="{{createWrapper}}"></div>

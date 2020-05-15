@@ -114,6 +114,7 @@
         for (var index in this.columns) {
             var field = this.columns[index]['name'];
             var type = this.columns[index]['type'] || false;
+            var span = this.columns[index]['span'] || 1;
             var options = this.columns[index]['options'] || false;
             var readonly = this.columns[index]['readonly'] || false;
             var link = this.columns[index]['link'] || false;
@@ -123,6 +124,9 @@
             var fmeta = this.subpanelModel.fields[field];
             if (type) {
                 fmeta['type'] = type;
+            }
+            if (span) {
+                fmeta['span'] = span;
             }
             if (options) {
                 fmeta['options'] = options;
@@ -144,7 +148,7 @@
      */
     deleteRecord: function (e) {
         var self = this;
-        var row = $(e.currentTarget).closest('tr');
+        var row = $(e.currentTarget).parents('div.control-group.clearfix');
         var beanID = $(row).attr('data-id');
         app.alert.show('delete_confirmation', {
             level: 'confirmation',
@@ -166,7 +170,7 @@
      */
     signFile: function (e) {
         var self = this;
-        var row = $(e.currentTarget).closest('tr');
+        var row = $(e.currentTarget).parents('div.control-group.clearfix');
         var beanID = $(row).attr('data-id');
 
         app.drawer.open({
@@ -410,4 +414,3 @@
         return !!this.customSupportedImageExtensions[mimeType];
     },
 })
-
