@@ -8,7 +8,7 @@ function recalculate_values() {
     $idsList = array();
 
     // Fetch all the Manifest Records
-    $sql = "SELECT id FROM ht_manifest where delete = 0";
+    $sql = "SELECT id FROM ht_manifest where deleted = 0";
     $result = $db->query($sql);
 
     // Go over each call...
