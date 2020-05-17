@@ -209,6 +209,12 @@ $viewdefs[$module_name] = array(
                                         'sortable' => false,
                                     ),
                                     array(
+                                        'name' => 'rli_galon_total',
+                                        'label' => 'LBL_RLI_GALON_TOTAL',
+                                        'width' => 'small',
+                                        'sortable' => false,
+                                    ),
+                                    array(
                                         'name' => 'primary_team_name',
                                         'label' => 'LBL_TEAM_BRANCH',
                                         'width' => 'small',

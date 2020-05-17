@@ -34,3 +34,4 @@ $mod_strings['LBL_FILE_TYPE_HEADER'] = 'File Type';
 $mod_strings['LBL_REF_NUMBER_HEADER'] = 'Manifest Number';
 $mod_strings['LBL_ANALYSIS_DATE_HEADER'] = 'Date';
 $mod_strings['LBL_NOTES'] = 'Notes';
+$mod_strings['LBL_RLI_GALON_TOTAL'] = 'Total Vol';

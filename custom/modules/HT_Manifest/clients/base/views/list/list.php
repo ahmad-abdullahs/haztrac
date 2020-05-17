@@ -22,6 +22,9 @@ $viewdefs[$module_name] = array(
                                 'enabled' => true,
                                 'default' => true,
                                 'width' => 'small',
+                                'related_fields' => array(
+                                    0 => 'rli_galon_total',
+                                ),
                             ),
                             1 =>
                             array(

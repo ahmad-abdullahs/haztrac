@@ -30,6 +30,12 @@ $viewdefs['HT_Manifest']['base']['view']['point-of-attention-list'] = array(
                     'sortable' => false,
                 ),
                 array(
+                    'name' => 'rli_galon_total',
+                    'label' => 'LBL_RLI_GALON_TOTAL',
+                    'width' => 'small',
+                    'sortable' => false,
+                ),
+                array(
                     'name' => 'team_name',
                     'label' => 'LBL_TEAM_BRANCH',
                     'sortable' => false,

@@ -5,7 +5,7 @@ $viewdefs['LR_Lab_Reports'] = array(
     array(
         'view' =>
         array(
-            'list' =>
+            'selection-list' =>
             array(
                 'panels' =>
                 array(
@@ -21,7 +21,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'link' => true,
                                 'default' => true,
                                 'enabled' => true,
-                                'width' => '25',
+                                'width' => 'small',
                             ),
                             1 =>
                             array(
@@ -29,7 +29,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'label' => 'LBL_SAMPLE_ID_NUMBER',
                                 'enabled' => true,
                                 'default' => true,
-                                'width' => '12',
+                                'width' => 'small',
                             ),
                             2 =>
                             array(
@@ -37,7 +37,7 @@ $viewdefs['LR_Lab_Reports'] = array(
                                 'label' => 'LBL_LAB_REF_NUMBER',
                                 'enabled' => true,
                                 'default' => true,
-                                'width' => '15',
+                                'width' => 'small',
                             ),
                             3 =>
                             array(

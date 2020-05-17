@@ -287,3 +287,4 @@ $mod_strings['LBL_FILE_NAME_HEADER'] = 'File Name';
 $mod_strings['LBL_FILE_TYPE_HEADER'] = 'File Type';
 $mod_strings['LBL_REF_NUMBER_HEADER'] = 'Lab Ref Number';
 $mod_strings['LBL_ANALYSIS_DATE_HEADER'] = 'Analysis Date';
+$mod_strings['LBL_MANIFEST_GALON_TOTAL'] = 'UOM Total';
