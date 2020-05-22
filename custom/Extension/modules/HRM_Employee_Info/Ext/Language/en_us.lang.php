@@ -10,3 +10,4 @@ $mod_strings['LNK_IMPORT_HRM_EMPLOYEE_INFO'] = 'Import Employees Contact';
 $mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Search Employee Contact';
 $mod_strings['LBL_HRM_EMPLOYEE_INFO_SUBPANEL_TITLE'] = 'Employees Contact';
 $mod_strings['LBL_HOMEPAGE_TITLE'] = 'My Employees Contact';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Private Details';

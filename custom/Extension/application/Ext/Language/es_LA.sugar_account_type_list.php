@@ -1,5 +1,5 @@
 <?php
- // created: 2019-09-07 11:49:42
+ // created: 2020-05-10 12:10:53
 
 $app_list_strings['account_type_list']=array (
   'Customer' => 'Customer',
@@ -10,4 +10,5 @@ $app_list_strings['account_type_list']=array (
   'Government' => 'Government',
   'Separate Svc Site' => 'Service Site',
   '' => '',
+  'Competitor' => 'Competitor',
 );
