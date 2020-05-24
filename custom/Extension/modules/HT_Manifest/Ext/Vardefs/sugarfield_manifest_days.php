@@ -4,7 +4,15 @@ $dictionary['HT_Manifest']['fields']['manifest_days'] = array(
     'name' => 'manifest_days',
     'vname' => 'LBL_MANIFEST_DAYS',
     'type' => 'varchar',
-    'formula' => 'ifElse(equal($complete_date_c,""),floor(add(multiply(daysUntil($start_date_c),-1),1)),$manifest_days)',
+    'formula' => 'ifElse(
+	equal($start_date_c,""),
+	"",
+	ifElse(
+		equal($complete_date_c,""),
+		ceil(add(abs(daysUntil($start_date_c)),1)),
+		ceil(add(abs(subtract(daysUntil($start_date_c),daysUntil($complete_date_c))),1))
+	)
+)',
     'labelValue' => 'Days',
     'calculated' => '1',
     'enforced' => '1',

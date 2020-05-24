@@ -24,7 +24,16 @@ class HT_Manifest extends HT_Manifest_sugar {
 
         $ret = parent::save($check_notify);
 
-        $this->updateTransporters();
+        // Check added to confirm the save is called from the view, not from some 
+        // 1- script bean save
+        // 2- scheduler bean save
+        // 3- mass update save
+        // This is necessary to confirm this because transporter multirow field 
+        // becomes empty when its saved from anywhere other than view, because transporter
+        // data is not passed in the POST request.
+        if (isset($_REQUEST['view'])) {
+            $this->updateTransporters();
+        }
 
         return $ret;
     }

@@ -20,14 +20,23 @@ class LR_Lab_Reports extends LR_Lab_Reports_sugar {
     public function save($check_notify = false) {
         $ret = parent::save($check_notify);
 
-        $this->updateTransporters();
+        // Check added to confirm the save is called from the view, not from some 
+        // 1- script bean save
+        // 2- scheduler bean save
+        // 3- mass update save
+        // This is necessary to confirm this because manifests multirow field 
+        // becomes empty when its saved from anywhere other than view, because manifests
+        // data is not passed in the POST request.
+        if (isset($_REQUEST['view'])) {
+            $this->updateManifest();
+        }
 
         $this->setPreviewURL();
 
         return $ret;
     }
 
-    private function updateTransporters() {
+    private function updateManifest() {
         global $db;
 
         $res = $db->query(
