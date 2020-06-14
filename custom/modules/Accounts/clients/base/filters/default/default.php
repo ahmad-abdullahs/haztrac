@@ -1,5 +1,5 @@
 <?php
-// created: 2019-08-10 11:28:59
+// created: 2020-05-28 21:14:26
 $viewdefs['Accounts']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -75,10 +75,16 @@ $viewdefs['Accounts']['base']['filter']['default'] = array (
     'ownership' => 
     array (
     ),
+    'team_name' => 
+    array (
+    ),
     'employees' => 
     array (
     ),
     'sic_code' => 
+    array (
+    ),
+    'parent_name' => 
     array (
     ),
     'ticker_symbol' => 

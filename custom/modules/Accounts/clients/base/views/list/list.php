@@ -1,131 +1,227 @@
 <?php
-
-$viewdefs['Accounts'] = array(
-    'base' =>
-    array(
-        'view' =>
-        array(
-            'list' =>
-            array(
-                'panels' =>
-                array(
-                    0 =>
-                    array(
-                        'name' => 'panel_header',
-                        'label' => 'LBL_PANEL_1',
-                        'fields' =>
-                        array(
-                            0 =>
-                            array(
-                                'name' => 'name',
-                                'link' => true,
-                                'label' => 'LBL_LIST_ACCOUNT_NAME',
-                                'enabled' => true,
-                                'default' => true,
-                                'related_fields' =>
-                                array_merge(array(
-                                    0 => 'shipping_address_street',
-                                    1 => 'shipping_address_city',
-                                    2 => 'shipping_address_state',
-                                    3 => 'shipping_address_postalcode',
-                                    4 => 'shipping_address_country',
-                                    5 => 'lat_c',
-                                    6 => 'lon_c',
-                                    7 => 'service_site_address_name',
-                                    8 => 'service_site_address_street_c',
-                                    9 => 'service_site_address_city_c',
-                                    10 => 'service_site_address_state_c',
-                                    11 => 'service_site_address_postalcode_c',
-                                    12 => 'service_site_address_country_c',
-                                        ), getViewFields('recordview', 'Accounts')),
-                                'width' => 'xlarge',
-                            ),
-                            1 =>
-                            array(
-                                'name' => 'shipping_address_city',
-                                'label' => 'LBL_SHIPPING_ADDRESS_CITY',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            2 =>
-                            array(
-                                'name' => 'shipping_address_state',
-                                'label' => 'LBL_SHIPPING_ADDRESS_STATE',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            3 =>
-                            array(
-                                'name' => 'phone_office',
-                                'label' => 'LBL_LIST_PHONE',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            4 =>
-                            array(
-                                'name' => 'ac_usepa_id_c',
-                                'label' => 'LBL_AC_USEPA_ID',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            5 =>
-                            array(
-                                'name' => 'assigned_user_name',
-                                'label' => 'LBL_LIST_ASSIGNED_USER',
-                                'id' => 'ASSIGNED_USER_ID',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            6 =>
-                            array(
-                                'name' => 'email',
-                                'label' => 'LBL_EMAIL_ADDRESS',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            7 =>
-                            array(
-                                'name' => 'team_name',
-                                'label' => 'LBL_TEAMS',
-                                'enabled' => true,
-                                'id' => 'TEAM_ID',
-                                'link' => true,
-                                'sortable' => false,
-                                'default' => true,
-                            ),
-                            8 =>
-                            array(
-                                'name' => 'date_modified',
-                                'enabled' => true,
-                                'default' => true,
-                            ),
-                            9 =>
-                            array(
-                                'name' => 'date_entered',
-                                'type' => 'datetime',
-                                'label' => 'LBL_DATE_ENTERED',
-                                'enabled' => true,
-                                'default' => true,
-                                'readonly' => true,
-                            ),
-                            10 =>
-                            array(
-                                'name' => 'billing_address_city',
-                                'label' => 'LBL_LIST_CITY',
-                                'enabled' => true,
-                                'default' => false,
-                            ),
-                            11 =>
-                            array(
-                                'name' => 'billing_address_country',
-                                'label' => 'LBL_BILLING_ADDRESS_COUNTRY',
-                                'enabled' => true,
-                                'default' => false,
-                            ),
-                        ),
-                    ),
+$viewdefs['Accounts'] = 
+array (
+  'base' => 
+  array (
+    'view' => 
+    array (
+      'list' => 
+      array (
+        'panels' => 
+        array (
+          0 => 
+          array (
+            'name' => 'panel_header',
+            'label' => 'LBL_PANEL_1',
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'name',
+                'link' => true,
+                'label' => 'LBL_LIST_ACCOUNT_NAME',
+                'enabled' => true,
+                'default' => true,
+                'related_fields' => 
+                array (
+                  0 => 'shipping_address_street',
+                  1 => 'shipping_address_city',
+                  2 => 'shipping_address_state',
+                  3 => 'shipping_address_postalcode',
+                  4 => 'shipping_address_country',
+                  5 => 'lat_c',
+                  6 => 'lon_c',
+                  7 => 'service_site_address_name',
+                  8 => 'service_site_address_street_c',
+                  9 => 'service_site_address_city_c',
+                  10 => 'service_site_address_state_c',
+                  11 => 'service_site_address_postalcode_c',
+                  12 => 'service_site_address_country_c',
+                  13 => 'name',
+                  14 => 'third_party',
+                  15 => 'account_status',
+                  16 => 'account_type_cst_c',
+                  17 => 'tag',
+                  18 => 'billing_address',
+                  19 => 'shipping_address',
+                  20 => 'physical_address_account_name',
+                  21 => 'parent_name',
+                  22 => 'ac_usepa_id_c',
+                  23 => 'website',
+                  24 => 'phone_office',
+                  25 => 'assigned_user_name',
+                  26 => 'phone_alternate',
+                  27 => 'phone_fax',
+                  28 => 'account_status_c',
+                  29 => 'account_number_c',
+                  30 => 'email',
+                  31 => 'service_level',
+                  32 => 'account_terms_c',
+                  33 => 'hour_operations_c',
+                  34 => 'po_required',
+                  35 => 'different_service_site_c',
+                  36 => 'service_instruction_c',
+                  37 => 'service_site_address_c',
+                  38 => 'hint_account_industry_c',
+                  39 => 'hint_account_industry_tags_c',
+                  40 => 'rail_cif_num_c',
+                  41 => 'rail_track_num_c',
+                  42 => 'rail_served_c',
+                  43 => 'rail_address_street_c',
+                  44 => 'rail_notes_c',
+                  45 => 'industry',
+                  46 => 'legal_business_name_c',
+                  47 => 'ein_taxid_c',
+                  48 => 'company_scac_code_c',
+                  49 => 'contract_name_c',
+                  50 => 'ownership',
+                  51 => 'parent_company_c',
+                  52 => 'description',
+                  53 => 'hint_account_fiscal_year_end_c',
+                  54 => 'ticker_symbol',
+                  55 => 'annual_revenue',
+                  56 => 'employees',
+                  57 => 'sic_code',
+                  58 => 'hint_account_naics_code_lbl_c',
+                  59 => 'duns_num',
+                  60 => 'twitter',
+                  61 => 'hint_account_facebook_handle_c',
+                  62 => 'role_assigned_c',
+                  63 => 'audit',
+                  64 => 'date_entered_by',
+                  65 => 'date_modified_by',
+                  66 => 'lat_c',
+                  67 => 'lon_c',
+                  68 => 'billing_address_third_party_name',
+                  69 => 'billing_address_street',
+                  70 => 'billing_address_city',
+                  71 => 'billing_address_state',
+                  72 => 'billing_address_postalcode',
+                  73 => 'billing_address_country',
+                  74 => 'shipping_address_third_party_name',
+                  75 => 'shipping_address_street',
+                  76 => 'shipping_address_city',
+                  77 => 'shipping_address_state',
+                  78 => 'shipping_address_postalcode',
+                  79 => 'shipping_address_country',
+                  80 => 'shipping_address_plus_code_val',
+                  81 => 'shipping_address_lat',
+                  82 => 'shipping_address_lon',
+                  83 => 'shipping_address_plus_code_cb',
+                  84 => 'copy',
+                  85 => 'service_site_address_name',
+                  86 => 'service_site_address_street_c',
+                  87 => 'service_site_address_city_c',
+                  88 => 'service_site_address_state_c',
+                  89 => 'service_site_address_postalcode_c',
+                  90 => 'service_site_address_country_c',
+                  91 => 'service_site_address_plus_code_val',
+                  92 => 'service_site_address_lat',
+                  93 => 'service_site_address_lon',
+                  94 => 'service_site_address_plus_code_cb',
+                  95 => 'date_entered',
+                  96 => 'created_by_name',
+                  97 => 'date_modified',
+                  98 => 'modified_by_name',
                 ),
+                'width' => 'xlarge',
+              ),
+              1 => 
+              array (
+                'name' => 'shipping_address_city',
+                'label' => 'LBL_SHIPPING_ADDRESS_CITY',
+                'enabled' => true,
+                'default' => true,
+              ),
+              2 => 
+              array (
+                'name' => 'shipping_address_state',
+                'label' => 'LBL_SHIPPING_ADDRESS_STATE',
+                'enabled' => true,
+                'default' => true,
+              ),
+              3 => 
+              array (
+                'name' => 'phone_office',
+                'label' => 'LBL_LIST_PHONE',
+                'enabled' => true,
+                'default' => true,
+              ),
+              4 => 
+              array (
+                'name' => 'ac_usepa_id_c',
+                'label' => 'LBL_AC_USEPA_ID',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
+              array (
+                'name' => 'assigned_user_name',
+                'label' => 'LBL_LIST_ASSIGNED_USER',
+                'id' => 'ASSIGNED_USER_ID',
+                'enabled' => true,
+                'default' => true,
+              ),
+              6 => 
+              array (
+                'name' => 'email',
+                'label' => 'LBL_EMAIL_ADDRESS',
+                'enabled' => true,
+                'default' => true,
+              ),
+              7 => 
+              array (
+                'name' => 'team_name',
+                'label' => 'LBL_TEAMS',
+                'enabled' => true,
+                'id' => 'TEAM_ID',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              8 => 
+              array (
+                'name' => 'date_modified',
+                'enabled' => true,
+                'default' => true,
+              ),
+              9 => 
+              array (
+                'name' => 'parent_name',
+                'label' => 'LBL_MEMBER_OF',
+                'enabled' => true,
+                'id' => 'PARENT_ID',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              10 => 
+              array (
+                'name' => 'date_entered',
+                'type' => 'datetime',
+                'label' => 'LBL_DATE_ENTERED',
+                'enabled' => true,
+                'default' => true,
+                'readonly' => true,
+              ),
+              11 => 
+              array (
+                'name' => 'billing_address_city',
+                'label' => 'LBL_LIST_CITY',
+                'enabled' => true,
+                'default' => false,
+              ),
+              12 => 
+              array (
+                'name' => 'billing_address_country',
+                'label' => 'LBL_BILLING_ADDRESS_COUNTRY',
+                'enabled' => true,
+                'default' => false,
+              ),
             ),
+          ),
         ),
+      ),
     ),
+  ),
 );
