@@ -22,6 +22,8 @@
                 // app.controller.context is the only consistent context to use
                 if (thisOfCall.context.parent.get('copyFeature')) {
                     if (data.is_bundle_product_c != 'parent' && !_.isUndefined(viewDetails)) {
+                        // Unset the actual quantity at time of copy.
+                        data.quantity = 0;
                         // Unset the Manifest from revenuelineitem at time of copy.
                         data.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
                         data.ht_manifest_revenuelineitems_1_name = '';
@@ -50,6 +52,8 @@
                         },
                         success: function (coll) {
                             if (thisOfCall.context.parent.get('copyFeature')) {
+                                // Unset the actual quantity at time of copy.
+                                data.quantity = 0;
                                 // Unset the Manifest from revenuelineitem at time of copy.
                                 data.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
                                 data.ht_manifest_revenuelineitems_1_name = '';
@@ -70,6 +74,8 @@
 //                                    model.attributes.product_template_id = '';
 //                                    model.attributes.product_template_name = '';
                                     if (thisOfCall.context.parent.get('copyFeature')) {
+                                        // Unset the actual quantity at time of copy.
+                                        model.attributes.quantity = 0;
                                         // Unset the Manifest from revenuelineitem at time of copy.
                                         model.attributes.ht_manifest_revenuelineitems_1ht_manifest_ida = '';
                                         model.attributes.ht_manifest_revenuelineitems_1_name = '';

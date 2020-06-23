@@ -72,6 +72,8 @@
                                 model: prefill,
                                 copiedFromModelId: salesAndServiceModel.get('id'),
                                 copyFeature: true,
+                                // Never operate on the collection models here, because it will be again fetched in 
+                                // the custom/include/javascript/sugar7/plugins/PopulateRLIS.js file, so changes added here will be lost.
                                 _relatedCollections: _.clone(salesAndServiceModel._relatedCollections),
                             }
                         }, function (context, newModel) {

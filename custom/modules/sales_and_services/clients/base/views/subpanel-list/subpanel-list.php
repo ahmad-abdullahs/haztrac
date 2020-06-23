@@ -38,6 +38,20 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-list'] = array(
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
             array(
+                'type' => 'rowaction',
+                'name' => 'duplicate_button',
+                'event' => 'list:duplicate_button:fire',
+                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
+                'acl_action' => 'create',
+            ),
+//            array(
+//                'type' => 'convertbutton',
+//                'icon' => 'fa-exchange',
+//                'name' => 'record_convert',
+//                'label' => 'LBL_CONVERT_BUTTON_TITLE',
+//                'acl_action' => 'edit',
+//            ),
+            array(
                 'type' => 'complete-sale-rowaction',
                 'name' => 'complete_sale_button',
                 'label' => 'LBL_COMPLETE_SALE',

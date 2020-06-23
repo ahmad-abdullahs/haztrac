@@ -165,6 +165,7 @@ $viewdefs['sales_and_services'] = array(
                                 array(
                                     'commentlog',
                                     'pdf_template_printer_widget',
+                                    'print_date',
                                     // At time of copy we also need these fields to be populated
                                     'ac_usepa_id_c',
                                     'account_number_c',

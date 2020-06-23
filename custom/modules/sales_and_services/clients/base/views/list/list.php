@@ -79,13 +79,23 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             5 =>
                             array(
+                                'name' => 'service_manifest_c',
+                                'label' => 'LBL_SERVICE_MANIFEST',
+                                'enabled' => true,
+                                'id' => 'HT_MANIFEST_ID_C',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => true,
+                            ),
+                            6 =>
+                            array(
                                 'name' => 'on_date_c',
                                 'label' => 'LBL_ON_DATE',
                                 'enabled' => true,
                                 'default' => true,
                                 'width' => 'xsmall',
                             ),
-                            6 =>
+                            7 =>
                             array(
                                 'name' => 'on_time_c',
                                 'label' => 'LBL_ON_TIME',
@@ -93,7 +103,7 @@ $viewdefs['sales_and_services'] = array(
                                 'default' => true,
                                 'width' => 'xsmall',
                             ),
-                            7 =>
+                            8 =>
                             array(
                                 'name' => 'svc_days_c',
                                 'label' => 'LBL_SVC_DAYS',
@@ -101,7 +111,7 @@ $viewdefs['sales_and_services'] = array(
                                 'default' => true,
                                 'width' => 'xxsmall',
                             ),
-                            8 =>
+                            9 =>
                             array(
                                 'name' => 'estimated_rli_total',
                                 'label' => 'LBL_ESTIMATED_RLI_TOTAL',
@@ -109,7 +119,7 @@ $viewdefs['sales_and_services'] = array(
                                 'default' => true,
                                 'width' => 'xxsmall',
                             ),
-                            9 =>
+                            10 =>
                             array(
                                 'name' => 'rli_total_c',
                                 'label' => 'LBL_RLI_TOTAL',
@@ -117,7 +127,7 @@ $viewdefs['sales_and_services'] = array(
                                 'default' => true,
                                 'width' => 'xxsmall',
                             ),
-                            10 =>
+                            11 =>
                             array(
                                 'name' => 'payment_status_c',
                                 'label' => 'LBL_PAYMENT_STATUS',
@@ -125,7 +135,7 @@ $viewdefs['sales_and_services'] = array(
                                 'default' => true,
                                 'width' => 'xsmall',
                             ),
-                            11 =>
+                            12 =>
                             array(
                                 'name' => 'contracts_sales_and_services_1_name',
                                 'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
@@ -135,19 +145,19 @@ $viewdefs['sales_and_services'] = array(
                                 'sortable' => false,
                                 'default' => false,
                             ),
-                            12 =>
+                            13 =>
                             array(
                                 'name' => 'date_entered',
                                 'enabled' => true,
                                 'default' => false,
                             ),
-                            13 =>
+                            14 =>
                             array(
                                 'name' => 'date_modified',
                                 'enabled' => true,
                                 'default' => false,
                             ),
-                            14 =>
+                            15 =>
                             array(
                                 'name' => 'quotes_sales_and_services_1_name',
                                 'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
@@ -157,14 +167,14 @@ $viewdefs['sales_and_services'] = array(
                                 'sortable' => false,
                                 'default' => false,
                             ),
-                            15 =>
+                            16 =>
                             array(
                                 'name' => 'po_number_c',
                                 'label' => 'LBL_PO_NUMBER',
                                 'enabled' => true,
                                 'default' => false,
                             ),
-                            16 =>
+                            17 =>
                             array(
                                 'name' => 'contacts_sales_and_services_1_name',
                                 'label' => 'LBL_CONTACTS_SALES_AND_SERVICES_1_FROM_CONTACTS_TITLE',
@@ -174,14 +184,14 @@ $viewdefs['sales_and_services'] = array(
                                 'sortable' => false,
                                 'default' => false,
                             ),
-                            17 =>
+                            18 =>
                             array(
                                 'name' => 'svc_type_c',
                                 'label' => 'LBL_SVC_TYPE',
                                 'enabled' => true,
                                 'default' => false,
                             ),
-                            18 =>
+                            19 =>
                             array(
                                 'name' => 'team_name',
                                 'label' => 'LBL_TEAM',

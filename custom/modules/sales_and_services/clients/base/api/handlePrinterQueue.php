@@ -184,6 +184,7 @@ class handlePrinterQueue extends SugarApi {
 
             $sAndSBean->pdf_template_printer_widget = $args['fields']['pdf_template_printer_widget'];
             $sAndSBean->print_status_c = $printStatus;
+            $sAndSBean->print_date = $printDate;
             // Set the print Status as well...
             $sAndSBean->save();
 

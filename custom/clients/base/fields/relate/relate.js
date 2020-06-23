@@ -114,4 +114,35 @@
 
         return value;
     },
+
+    openSelectDrawer: function () {
+        var layout = 'selection-list';
+        var context = {
+            module: this.getSearchModule(),
+            fields: this.getSearchFields(),
+            filterOptions: this.getFilterOptions()
+        };
+
+        if (!!this.def.isMultiSelect) {
+            layout = 'multi-selection-list';
+            _.extend(context, {
+                preselectedModelIds: _.clone(this.model.get(this.def.id_name)),
+                maxSelectedRecords: this._maxSelectedRecords,
+                isMultiSelect: true
+            });
+        }
+
+        if (this.options.context.get('parentModel')) {
+            app.drawer.open({
+                layout: layout,
+                context: context,
+                immediateParentModel: _.clone(this.options.context.get('parentModel')),
+            }, _.bind(this.setValue, this));
+        } else {
+            app.drawer.open({
+                layout: layout,
+                context: context,
+            }, _.bind(this.setValue, this));
+        }
+    },
 })

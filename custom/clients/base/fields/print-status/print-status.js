@@ -58,8 +58,15 @@
 
         if (this.model.get('print_status_c') || this.model.get('print_status')) {
             var printStatus = this.model.get('print_status_c') || this.model.get('print_status');
+            var printDate = this.model.get('print_date');
             if (!_.isUndefined(this.printStatusMap[printStatus])) {
                 this.printStatusVal = this.printStatusMap[printStatus];
+                if (printStatus == "Printed" && printDate) {
+                    var temp = _.clone(this.printStatusMap[printStatus]);
+                    temp.labelVal = temp.labelVal + ' on (' + moment.utc(printDate).format('MM/DD/YYYY') + ')';
+                    temp.titleVal = temp.labelVal;
+                    this.printStatusVal = temp;
+                }
             }
         }
 

@@ -31,7 +31,8 @@ class HT_Manifest extends HT_Manifest_sugar {
         // This is necessary to confirm this because transporter multirow field 
         // becomes empty when its saved from anywhere other than view, because transporter
         // data is not passed in the POST request.
-        if (isset($_REQUEST['view'])) {
+        // viewed is added to check if it's created from the selection list create drawer. 
+        if (isset($_REQUEST['view']) || (isset($_REQUEST['viewed']) && $_REQUEST['__sugar_url'] == 'v11_4/HT_Manifest')) {
             $this->updateTransporters();
         }
 

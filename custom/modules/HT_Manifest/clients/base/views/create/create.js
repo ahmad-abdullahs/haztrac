@@ -18,6 +18,27 @@
         this._super('initialize', [options]);
     },
 
+    render: function () {
+        this._super('render');
+        this.populateDataFromSalesAndService();
+    },
+
+    populateDataFromSalesAndService: function () {
+        if (this.context.get('immediateParentModel')) {
+            var transporter = [];
+            this.model.set('team_name', this.context.get('immediateParentModel').get('team_name'));
+            var transporter_carrier_c = JSON.parse(this.context.get('immediateParentModel').get('transporter_carrier_c'));
+            _.each(transporter_carrier_c, function (val, key) {
+                transporter.push({
+                    id: val.id,
+                    name: val.name,
+                    transfer_date: '',
+                });
+            });
+            this.model.set('transporter', transporter);
+        }
+    },
+
     bindDataChange: function () {
         this._super('bindDataChange');
 

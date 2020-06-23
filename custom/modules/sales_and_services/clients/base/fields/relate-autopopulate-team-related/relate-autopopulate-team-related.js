@@ -4,6 +4,11 @@
         this._super('initialize', [options]);
     },
 
+    _render: function () {
+        this._super('_render');
+        this.setTransporter(this.model.get('team_name'));
+    },
+
     /*
      * Relate field is overitten to auto populate the default transporter.
      * On Sales and service create view when account is selected, it auto populate the team field.
@@ -32,9 +37,13 @@
 
         this._super('updateRelatedFields', [model]);
 
+        this.setTransporter(newData.team_name);
+    },
+
+    setTransporter: function (team_name) {
         // ++
         var self = this;
-        _.each(newData.team_name, function (team) {
+        _.each(team_name, function (team) {
             if (team.primary) {
                 var teamBean = app.data.createBean('Teams', {id: team.id});
                 teamBean.fetch({
