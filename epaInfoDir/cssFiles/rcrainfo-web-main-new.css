@@ -1,0 +1,184 @@
+caption,h1,h2,h3,h4,h5,h6,legend {
+    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-weight:600;
+    line-height:1.3;
+    margin:0;
+    text-rendering:optimizeLegibility
+}
+
+
+ul {
+    padding-left: 1.2em;
+    list-style:none !important;
+}
+
+aside.col dd, aside.col ol, aside.col p, aside.col ul, aside.col .fieldset-description, aside.col .form-actions, aside.col .form-item, aside.col .pane-content > .node {
+    padding-bottom: 1.3714em;
+}
+
+.main-column ul#rcrabreadcrumbs li {
+    white-space: normal !important;
+}
+
+.main-column ul#rcrabreadcrumbs {
+    list-style:none !important;
+    margin:4px -10px 1em;
+    padding:0 10px;
+    overflow:hidden
+}
+.main-column ul#rcrabreadcrumbs li {
+    background:url('i/icons.png') no-repeat -13px -115px;
+    list-style:none !important;
+    display:block;
+    float:left;
+    padding-left:12px;
+    white-space:nowrap
+}
+.main-column ul#rcrabreadcrumbs li.first {
+    background:none;
+    padding-left:0
+}
+.main-column ul#rcrabreadcrumbs li.first a {
+    padding-left:0
+}
+ul#rcrabreadcrumbs li a {
+    padding:0 2px
+}
+ul#rcrabreadcrumbs li a:focus,ul#rcrabreadcrumbs li a:hover {
+    color:#47aa42
+}
+
+#areanav_popout {
+    background-color: #fff;
+    background-image: url('i/bg-areanav-top.png');
+    margin-right: 3px;
+    width: 10px;
+}
+
+#areanav_popout ul{
+    display:none;
+}
+
+#areanav_popout:hover ul {
+    width: 25%;
+    display: inline;
+}
+
+#main-content #areanav_popout #first-level {
+    background-color: #0071bc;
+    color: #fff;
+    list-style: none;
+    margin: 0;
+    position: absolute;
+    top: 11px;
+    left: 0px;
+}
+
+#main-content #areanav_popout .menu-link:not(:hover) {
+    color: #fff;
+}
+
+form fieldset {
+    border: none;
+}
+
+#main-content a {
+    text-decoration: none;
+}
+
+#main-content a:focus, #main-content a:hover {
+    color: #47aa42;
+    text-decoration: underline;
+}
+/*
+************* Tables ***********************************************
+*/
+
+.tablebord th.sortable, .tablebord th.sortable a {
+    text-align: center;
+}
+
+table.table th, table.tablebord th {
+    font-weight: bold;
+}
+caption, th {
+    color: #069 !important;
+}
+table, td, th, tr {
+    font-size: 100%;
+}
+
+table,td,th,tr {
+    vertical-align:top
+}
+table.table,table.tablebord {
+    border-collapse:collapse;
+    margin:0 0 10px
+}
+table.tablebord {
+    border:1px solid #ddd;
+    border-width:1px 0 0 1px
+}
+table.table caption,table.tablebord caption {
+    background-color:#eee;
+    padding:5px;
+    font-weight:bold
+}
+table.table th,table.table td,table.tablebord th,table.tablebord td {
+    padding:5px;
+    border:1px solid #ddd;
+    border-width:0 0 1px
+}
+table.table thead,table.table tfoot,table.tablebord thead,table.tablebord tfoot {
+    background-color:#ccc;
+    font-weight:bold
+}
+table.table th,table.tablebord th {
+    background-color:#ccc;
+    border:1px solid #ddd;
+    border-width:0 1px;
+    font-weight:bold
+}
+table.tablebord th,table.tablebord td {
+    border-width:0 1px 1px 0
+}
+table th.header {
+    background-image:url('i/sort.png');
+    background-repeat:no-repeat;
+    background-position:right -42px;
+    cursor:pointer;
+    padding-right:20px
+}
+table th.headerSortUp {
+    background-position:right -96px
+}
+table th.headerSortDown {
+    background-position:right 14px
+}
+tr.tint,tr.odd {
+    background-color:#eee
+}
+
+/*
+************* Tags ***********************************************
+*/
+textarea.lbl-over-input {
+    width:95% !important;
+}
+
+textarea#notes {
+    /*
+        rows: 1;
+    */
+    resize: none;
+}
+
+.lbl-over-input, .lbl-over-input240, .text-box300 {
+    width: 95% !important;
+    display: block;
+    *display: block;
+}
+
+.hidden {
+    display: none;
+}

@@ -71,3 +71,4 @@ $mod_strings['LBL_PNL_PERMITS_LICENSES_ACCOUNTS_FROM_PNL_PERMITS_LICENSES_TITLE'
 $mod_strings['LBL_ADD_PLUS_CODE'] = 'Add Plus Code';
 $mod_strings['LBL_PLUS_CODE_VAL'] = 'Plus Code';
 $mod_strings['LBL_QUOTES_BILLTO'] = 'Quotes';
+$mod_strings['LBL_EPA_DASHLET_TITLE'] = 'EPA Company Site Details';

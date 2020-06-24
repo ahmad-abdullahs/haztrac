@@ -9,5 +9,13 @@ $viewdefs['Accounts']['base']['layout']['create-preview'] = array(
                 'module' => 'sales_and_services',
             ),
         ),
+        array(
+            'view' => array(
+                'type' => 'rcrapublic-epa-create',
+            ),
+            'context' => array(
+                'module' => 'Accounts',
+            ),
+        ),
     ),
 );
