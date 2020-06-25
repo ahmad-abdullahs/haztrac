@@ -61,3 +61,19 @@ function getCertificatesForConsignee() {
     }
     return $allTermAndConditions;
 }
+
+function getCertificatesForShipper() {
+    $query = new SugarQuery();
+    $query->from(BeanFactory::getBean("wp_terms_and_conditions"), array(
+        'team_security' => false
+    ));
+    $query->select(array('id', 'name'));
+    $query->where()->equals('module_type_c', 'Shipper Certificate');
+    $query->orderBy('name', 'ASC');
+    $result = $query->execute();
+    $allTermAndConditions = array('' => '');
+    foreach ($result as $row) {
+        $allTermAndConditions[$row['id']] = $row['name'];
+    }
+    return $allTermAndConditions;
+}

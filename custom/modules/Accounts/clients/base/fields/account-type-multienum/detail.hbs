@@ -12,7 +12,20 @@
 --}}
 {{#if this.def.isMultiSelect}}
     {{#if value}}
-        <div class="ellipsis_inline" data-placement="bottom" title="{{#each value}}{{#eachOptions ../items}}{{#eq key ../this}}{{#notEq @index 0}}, {{/notEq}}{{value}}{{/eq}}{{/eachOptions}}{{/each}}">{{#each value}}{{#eachOptions ../items}}{{#eq key ../this}}{{#notEq @index 0}}, {{/notEq}}{{value}}{{/eq}}{{/eachOptions}}{{/each}}</div>
+        <div class="select2-container select2-container-multi select2-choices-pills-close select2" style="width: 100%;" title="{{#each value}}{{#eachOptions ../items}}{{#eq key ../this}}{{#notEq @index 0}}, {{/notEq}}{{value}}{{/eq}}{{/eachOptions}}{{/each}}">
+            <ul class="select2-choices" style="border: 0px;">
+                {{#each value}}
+                    {{#eachOptions ../items}}
+                        {{#eq key ../this}}
+                            <li class="select2-search-choice">
+                                <div>{{value}}</div>
+                                <a href="#" class="select2-search-choice-close" tabindex="-1"></a>
+                            </li>
+                        {{/eq}}
+                    {{/eachOptions}}
+                {{/each}}
+            </ul>
+        </div>
     {{/if}}
 {{else}}
     {{#if value}}

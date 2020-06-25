@@ -23,7 +23,10 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         app.events.on('data:sync:complete', function (method, model, options) {
-            this.$el.find('div.vis_action_hidden').addClass('hide');
+            // Execute after 1 seconds (1000 milliseconds):
+            setTimeout(_.bind(function () {
+                this.$el.find('div.vis_action_hidden').addClass('hide');
+            }, this), 250);
         }, this);
     },
 })

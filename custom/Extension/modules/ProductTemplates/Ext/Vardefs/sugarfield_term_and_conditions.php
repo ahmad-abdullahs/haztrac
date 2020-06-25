@@ -32,3 +32,14 @@ $dictionary['ProductTemplate']['fields']['consignee_certificates'] = array(
     'duplicate_merge' => 'disabled',
     'audited' => true,
 );
+
+$dictionary['ProductTemplate']['fields']['shipper_certificates'] = array(
+    'name' => 'shipper_certificates',
+    'type' => 'multienum',
+    'isMultiSelect' => true,
+    'function' => 'getPTCertificatesForShipper',
+    'vname' => 'LBL_SHIPPER_CERTIFICATES',
+    'reportable' => false,
+    'duplicate_merge' => 'disabled',
+    'audited' => true,
+);

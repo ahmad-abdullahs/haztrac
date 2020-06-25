@@ -40,19 +40,29 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                 ),
                 1 =>
                 array(
+                    'name' => 'service_manifest_c',
+                    'label' => 'LBL_SERVICE_MANIFEST',
+                    'enabled' => true,
+                    'id' => 'HT_MANIFEST_ID_C',
+                    'link' => true,
+                    'sortable' => false,
+                    'default' => true,
+                ),
+                2 =>
+                array(
                     'name' => 'estimated_rli_total',
                     'label' => 'LBL_ESTIMATED_RLI_TOTAL',
                     'enabled' => true,
                     'default' => true,
                 ),
-                2 =>
+                3 =>
                 array(
                     'name' => 'rli_total_c',
                     'label' => 'LBL_RLI_TOTAL',
                     'enabled' => true,
                     'default' => true,
                 ),
-                3 =>
+                4 =>
                 array(
                     'type' => 'varchar',
                     'default' => true,
@@ -60,7 +70,7 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                     'enabled' => true,
                     'name' => 'profile_no_c',
                 ),
-                4 =>
+                5 =>
                 array(
                     'type' => 'date',
                     'default' => true,
@@ -68,7 +78,7 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                     'enabled' => true,
                     'name' => 'on_date_c',
                 ),
-                5 =>
+                6 =>
                 array(
                     'type' => 'varchar',
                     'default' => true,
@@ -76,7 +86,7 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                     'enabled' => true,
                     'name' => 'on_time_c',
                 ),
-                6 =>
+                7 =>
                 array(
                     'type' => 'varchar',
                     'default' => true,
@@ -84,7 +94,7 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                     'enabled' => true,
                     'name' => 'svc_days_c',
                 ),
-                7 =>
+                8 =>
                 array(
                     'type' => 'enum',
                     'default' => true,

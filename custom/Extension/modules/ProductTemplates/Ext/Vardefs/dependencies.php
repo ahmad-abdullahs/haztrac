@@ -39,6 +39,7 @@ $dictionary['ProductTemplate']['fields']['hide_price_from_paperwork_c']['depende
 $dictionary['ProductTemplate']['fields']['customer_certificates']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['transporter_certificates']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['consignee_certificates']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
+$dictionary['ProductTemplate']['fields']['shipper_certificates']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['waste_profile_relate_c']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 $dictionary['ProductTemplate']['fields']['manifest_additional_info_c']['dependency'] = 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))';
 // Bit different

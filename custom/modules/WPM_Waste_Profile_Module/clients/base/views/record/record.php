@@ -251,6 +251,9 @@ $viewdefs[$module_name] = array(
                             ),
                             5 =>
                             array(
+                                'name' => 'waste_profile_num_c',
+                                'label' => 'LBL_WASTE_PROFILE_NUM',
+                                'readonly' => true,
                             ),
                             6 =>
                             array(
@@ -258,9 +261,8 @@ $viewdefs[$module_name] = array(
                             ),
                             7 =>
                             array(
-                                'name' => 'waste_profile_num_c',
-                                'label' => 'LBL_WASTE_PROFILE_NUM',
-                                'readonly' => true,
+                                'name' => 'third_party_waste_profile_c',
+                                'label' => 'LBL_THIRD_PARTY_WASTE_PROFILE',
                             ),
                             8 =>
                             array(
@@ -268,6 +270,8 @@ $viewdefs[$module_name] = array(
                             ),
                             9 =>
                             array(
+                                'name' => 'third_party_waste_profile_no_c',
+                                'label' => 'LBL_THIRD_PARTY_WASTE_PROFILE_NO',
                             ),
                         ),
                     ),

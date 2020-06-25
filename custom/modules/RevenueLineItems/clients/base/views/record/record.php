@@ -443,6 +443,8 @@ $viewdefs['RevenueLineItems'] = array(
                             ),
                             3 =>
                             array(
+                                'name' => 'shipper_certificates',
+                                'label' => 'LBL_SHIPPER_CERTIFICATES',
                             ),
                         ),
                     ),

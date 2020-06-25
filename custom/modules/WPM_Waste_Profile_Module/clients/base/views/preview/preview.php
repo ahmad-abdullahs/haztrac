@@ -224,20 +224,13 @@ $viewdefs[$module_name] = array(
                             ),
                             6 =>
                             array(
-                                'name' => 'tag',
-                                'span' => 12,
+                                'name' => 'third_party_waste_profile_c',
+                                'label' => 'LBL_THIRD_PARTY_WASTE_PROFILE',
                             ),
                             7 =>
                             array(
-                            ),
-                            8 =>
-                            array(
-                            ),
-                            9 =>
-                            array(
-                            ),
-                            10 =>
-                            array(
+                                'name' => 'third_party_waste_profile_no_c',
+                                'label' => 'LBL_THIRD_PARTY_WASTE_PROFILE_NO',
                             ),
                         ),
                     ),

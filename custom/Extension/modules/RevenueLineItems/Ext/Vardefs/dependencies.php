@@ -40,6 +40,7 @@ $dictionary['RevenueLineItem']['fields']['list_price']['dependency'] = 'not(equa
 $dictionary['RevenueLineItem']['fields']['customer_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['transporter_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['consignee_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
+$dictionary['RevenueLineItem']['fields']['shipper_certificates']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['ht_manifest_revenuelineitems_1_name']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['waste_profile_relate_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';
 $dictionary['RevenueLineItem']['fields']['manifest_additional_info_c']['dependency'] = 'not(equal($is_bundle_product_c,"parent"))';

@@ -68,6 +68,9 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-sales_and_services-s
                         'estimated_total_amount',
                         'product_list_name_c',
                         'commentlog',
+                        'waste_profile_relate_c_waste_profile_num_c',
+                        'third_party_waste_profile_c',
+                        'third_party_waste_profile_no_c',
                             ), getViewFields('recordview', 'RevenueLineItems')),
                 ),
                 1 =>

@@ -35,3 +35,15 @@ $dictionary['RevenueLineItem']['fields']['consignee_certificates'] = array(
     'audited' => true,
     'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );
+
+$dictionary['RevenueLineItem']['fields']['shipper_certificates'] = array(
+    'name' => 'shipper_certificates',
+    'type' => 'multienum',
+    'isMultiSelect' => true,
+    'function' => 'getCertificatesForShipper',
+    'vname' => 'LBL_CUSTOMER_CERTIFICATES',
+    'reportable' => false,
+    'duplicate_merge' => 'disabled',
+    'audited' => true,
+    'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
+);

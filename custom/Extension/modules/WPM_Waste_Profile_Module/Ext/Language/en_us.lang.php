@@ -152,3 +152,5 @@ $mod_strings['LBL_RECORDVIEW_PANEL11'] = 'Review &amp; Acceptance';
 $mod_strings['LBL_PROFILE_PREVIEW'] = 'Profile Preview';
 $mod_strings['LBL_RECORDVIEW_PANEL12'] = 'Profile Preview';
 $mod_strings['LBL_RECORDVIEW_PANEL0'] = 'Profile';
+$mod_strings['LBL_THIRD_PARTY_WASTE_PROFILE'] = 'Third Party Profile';
+$mod_strings['LBL_THIRD_PARTY_WASTE_PROFILE_NO'] = 'External Profile No';

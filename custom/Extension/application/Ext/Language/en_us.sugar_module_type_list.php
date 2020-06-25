@@ -7,5 +7,6 @@ $app_list_strings['module_type_list'] = array(
     'Consignee Certificate' => 'Consignee Certificate',
     'Customer Certificate' => 'Customer Certificate',
     'Transporter Certificate' => 'Transporter Certificate',
+    'Shipper Certificate' => 'Shipper Certificate',
     'Waste Profile Certificate' => 'Waste Profile Certificate',
 );
