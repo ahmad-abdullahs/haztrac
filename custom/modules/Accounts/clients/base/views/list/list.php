@@ -67,6 +67,7 @@ $viewdefs['Accounts'] = array(
                                 'label' => 'LBL_AC_USEPA_ID',
                                 'enabled' => true,
                                 'default' => true,
+                                'type' => 'epa-info',
                             ),
                             5 =>
                             array(

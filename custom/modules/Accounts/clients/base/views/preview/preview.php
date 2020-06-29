@@ -159,6 +159,12 @@ $viewdefs['Accounts'] = array(
                             1 =>
                             array(
                                 'name' => 'name',
+                                'related_fields' =>
+                                array(
+                                    0 => 'lat_c',
+                                    1 => 'lon_c',
+                                    2 => 'ac_usepa_id_external_info_c',
+                                ),
                             ),
                             2 =>
                             array(

@@ -1,7 +1,11 @@
 <?php
 
-// http://localhost/haztrac/#bwc/index.php?entryPoint=TestActionEntryPointRegistry
+// http://localhost/haztrac/#bwc/index.php?entryPoint=getEPAInformationBySiteId
 // https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/showhdcurrent/false/null/null/null/HIR009719056
+// https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlersearch2/false/ALL/null/null/null/ALL/ALL/HONOLULU/96819/DANIEL+K.+INOUYE+%28IMO+9719056%29/PIER+51+SAND+ISLAND+ACCESS+RD
+// https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlersearch2/false/HI/null/null/null/ALL/ALL/HONOLULU/96819/DANIEL+K.+INOUYE+%28IMO+9719056%29/PIER+51+SAND+ISLAND+ACCESS+RD
+// https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlersearch2/false/ALL/null/null/null/ALL/ALL/HONOLULU/96819/null/PIER+51+SAND+ISLAND+ACCESS+RD
+// https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlerindex
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');

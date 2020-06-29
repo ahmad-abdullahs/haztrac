@@ -163,6 +163,7 @@ $viewdefs['Accounts'] = array(
                                 array(
                                     0 => 'lat_c',
                                     1 => 'lon_c',
+                                    2 => 'ac_usepa_id_external_info_c',
                                 ),
                             ),
                             2 =>
@@ -382,6 +383,7 @@ $viewdefs['Accounts'] = array(
                             array(
                                 'name' => 'ac_usepa_id_c',
                                 'label' => 'LBL_AC_USEPA_ID',
+                                'type' => 'epa-info',
                             ),
                             8 =>
                             array(
