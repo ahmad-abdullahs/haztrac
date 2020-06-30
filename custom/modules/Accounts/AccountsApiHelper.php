@@ -10,7 +10,7 @@ class AccountsApiHelper extends SugarBeanApiHelper {
         global $sugar_config;
 
         if (!empty($data['ac_usepa_id_external_info_c'])) {
-            $data['ac_usepa_id_external_info_c'] = $sugar_config['site_url'] . '/' . $data['ac_usepa_id_external_info_c'];
+            $data['ac_usepa_id_external_info_c'] = $sugar_config['site_url'] . '/' . "epaInfoDir/{$data['ac_usepa_id_c']}.html";
         }
 
         if (!file_exists("epaInfoDir/{$data['ac_usepa_id_c']}.html")) {
