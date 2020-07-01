@@ -214,6 +214,14 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             4 =>
                             array(
+                                'name' => 'sales_and_service_status',
+                                'label' => 'LBL_SALES_AND_SERVICE_STATUS_BADGE',
+                                'type' => 'sales-and-service-status',
+                                'readonly' => true,
+                                'dismiss_label' => true,
+                            ),
+                            5 =>
+                            array(
                                 'name' => 'status_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_STATUS',
@@ -290,8 +298,8 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             10 =>
                             array(
-                                'name' => 'taxable_c',
-                                'label' => 'LBL_TAXABLE',
+                                'name' => 'status_c',
+                                'label' => 'LBL_STATUS',
                             ),
                             11 =>
                             array(
@@ -1239,6 +1247,11 @@ $viewdefs['sales_and_services'] = array(
 //                                    3 => 'product_list_name_c',
                                 ),
                                 'span' => 12,
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'taxable_c',
+                                'label' => 'LBL_TAXABLE',
                             ),
                         ),
                     ),

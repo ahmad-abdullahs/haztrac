@@ -132,3 +132,4 @@ $mod_strings['LBL_HOLD_TO_DRAG'] = 'Hold To Drag Rows';
 $mod_strings['LBL_SERVICE_MANIFEST_HT_MANIFEST_ID'] = 'Manifest (related Manifest ID)';
 $mod_strings['LBL_SERVICE_MANIFEST'] = 'Manifest';
 $mod_strings['LBL_PRINT_DATE'] = 'Print Date';
+$mod_strings['LBL_SALES_AND_SERVICE_STATUS_BADGE'] = 'Status Badge';

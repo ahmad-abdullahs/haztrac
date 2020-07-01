@@ -191,9 +191,11 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             4 =>
                             array(
-                                'name' => 'status_c',
-                                'studio' => 'visible',
-                                'label' => 'LBL_STATUS',
+                                'name' => 'sales_and_service_status',
+                                'label' => 'LBL_SALES_AND_SERVICE_STATUS_BADGE',
+                                'type' => 'sales-and-service-status',
+                                'readonly' => true,
+                                'dismiss_label' => true,
                             ),
                             5 =>
                             array(
@@ -288,27 +290,22 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             11 =>
                             array(
-                                'name' => 'taxable_c',
-                                'label' => 'LBL_TAXABLE',
-                            ),
-                            12 =>
-                            array(
                                 'name' => 'estimated_rli_total',
                                 'label' => 'LBL_ESTIMATED_RLI_TOTAL',
                             ),
-                            13 =>
+                            12 =>
                             array(
                                 'name' => 'rli_total_c',
                                 'label' => 'LBL_RLI_TOTAL',
                             ),
-                            14 =>
+                            13 =>
                             array(
                                 'name' => 'transporter_carrier_c',
                                 'type' => 'transporter',
                                 'studio' => 'visible',
                                 'label' => 'LBL_TRANSPORTER_CARRIER',
                             ),
-                            15 =>
+                            14 =>
                             array(
                                 'name' => 'destination_ship_to_c',
                                 'studio' => 'visible',
@@ -403,6 +400,11 @@ $viewdefs['sales_and_services'] = array(
                                     ),
                                 ),
                             ),
+                            3 =>
+                            array(
+                                'name' => 'taxable_c',
+                                'label' => 'LBL_TAXABLE',
+                            ),
                         ),
                     ),
                     3 =>
@@ -447,38 +449,28 @@ $viewdefs['sales_and_services'] = array(
                             ),
                             1 =>
                             array(
-                                'name' => 'status_c',
-                                'label' => 'LBL_STATUS',
-                            ),
-                            2 =>
-                            array(
-                                'name' => 'account_terms_c',
-                                'label' => 'LBL_ACCOUNT_TERMS',
-                            ),
-                            3 =>
-                            array(
                                 'name' => 'payment_status_c',
                                 'label' => 'LBL_PAYMENT_STATUS',
                             ),
-                            4 =>
+                            2 =>
                             array(
                                 'name' => 'payment_reference_c',
                                 'label' => 'LBL_PAYMENT_REFERENCE',
                             ),
-                            5 =>
+                            3 =>
                             array(
                                 'name' => 'closing_notes_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_CLOSING_NOTES',
                                 'span' => 6,
                             ),
-                            6 =>
+                            4 =>
                             array(
                                 'name' => 'lab_result_c',
                                 'studio' => 'visible',
                                 'label' => 'LBL_LAB_RESULT',
                             ),
-                            7 =>
+                            5 =>
                             array(
                                 'name' => 'sales_and_service_total_c',
                                 'label' => 'LBL_SALES_AND_SERVICE_TOTAL',
