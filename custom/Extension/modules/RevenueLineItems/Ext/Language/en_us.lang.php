@@ -70,3 +70,4 @@ $mod_strings['LBL_VENDOR_PRODUCT_SVC_DESCRP'] = 'Vendor Product Description (Buy
 $mod_strings['LBL_LIST_PRICING_FORMULA'] = 'List Pricing Formula';
 $mod_strings['LBL_COST_PRICING_FORMULA'] = 'Cost Pricing Formula';
 $mod_strings['LBL_FILTER_RLI_BY_ACCOUNT_ON_MANIFEST'] = 'Company Related, Manifest Required RLIs';
+$mod_strings['LBL_PRIMARY_RLI'] = 'Primary Item';

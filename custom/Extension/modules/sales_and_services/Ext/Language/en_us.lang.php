@@ -133,3 +133,5 @@ $mod_strings['LBL_SERVICE_MANIFEST_HT_MANIFEST_ID'] = 'Manifest (related Manifes
 $mod_strings['LBL_SERVICE_MANIFEST'] = 'Manifest';
 $mod_strings['LBL_PRINT_DATE'] = 'Print Date';
 $mod_strings['LBL_SALES_AND_SERVICE_STATUS_BADGE'] = 'Status Badge';
+$mod_strings['LBL_ACTUAL_RLI_QUANTITY_TOTAL'] = 'Total Qty';
+$mod_strings['LBL_PRIMARY_RLI_UOM'] = 'Primary RLI UOM';

@@ -18,6 +18,7 @@
     },
     bindDataChange: function () {
         this._super('bindDataChange');
+        var self = this;
         if (this.model) {
             this.model.on('change:' + this.name, function (model, value) {
                 var fieldName1 = 'physical_address_account_name',
@@ -28,10 +29,10 @@
                 if (physical_address_account_name) {
                     if (_.contains(value, "3rd Party")) {
                         physical_address_account_name.show();
-                        $('div.record-cell[data-name=' + fieldName1 + ']').show();
+                        self.view.$el.find('div.record-cell[data-name=' + fieldName1 + ']').show();
                     } else {
                         physical_address_account_name.hide();
-                        $('div.record-cell[data-name=' + fieldName1 + ']').hide();
+                        self.view.$el.find('div.record-cell[data-name=' + fieldName1 + ']').hide();
                         this.model.set('physical_address_account_id', '');
                         this.model.set('physical_address_account_name', '');
                     }

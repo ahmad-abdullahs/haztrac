@@ -1,0 +1,39 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{#if this.def.isMultiSelect}}
+    {{#if value}}
+        <div class="select2-container select2-container-multi select2-choices-pills-close select2" style="width: 100%;" title="{{#each value}}{{#eachOptions ../items}}{{#eq key ../this}}{{#notEq @index 0}}, {{/notEq}}{{value}}{{/eq}}{{/eachOptions}}{{/each}}">
+            <ul class="select2-choices" style="border: 0px;">
+                {{#each value}}
+                    {{#eachOptions ../items}}
+                        {{#eq key ../this}}
+                            <li class="select2-search-choice">
+                                <div>{{value}}</div>
+                            </li>
+                        {{/eq}}
+                    {{/eachOptions}}
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+{{else}}
+    {{#if value}}
+        {{#eachOptions items}}
+            {{#eq this.key ../value}}
+                <div class="ellipsis_inline" data-placement="bottom" title="{{value}}">
+                    {{value}}
+                </div>
+            {{/eq}}
+        {{/eachOptions}}
+    {{/if}}
+{{/if}}

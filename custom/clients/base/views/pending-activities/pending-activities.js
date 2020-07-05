@@ -8,6 +8,30 @@
         this._super('initialize', [options]);
     },
 
+    _getFilters: function (index) {
+
+        var today = app.date().formatServer(true);
+        var tab = this.tabs[index];
+        var filter = {};
+        var filters = [];
+        var defaultFilters = {
+            today: {$lte: today},
+            future: {$gt: today}
+        };
+
+        filter[tab.filter_applied_to] = defaultFilters[this.getDate()];
+        if (this.tabs[index].module == "sales_and_services") {
+            filter['accounts_sales_and_services_1accounts_ida'] = {$equals: this.model.get('id')};
+        } else if (_.contains(["Meetings", "Calls", "Tasks", /*"Emails"*/], this.tabs[index].module)) {
+            filter['parent_type'] = {$equals: "Accounts"};
+            filter['parent_id'] = {$equals: this.model.get('id')};
+        }
+
+        filters.push(filter);
+
+        return filters;
+    },
+
     /**
      * @inheritdoc
      */

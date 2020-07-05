@@ -13,38 +13,103 @@
 <div class="tab-pane active">
     {{#if collection.length}}
         <ul class="unstyled listed" data-action="pagination-body">
-            {{#each collection.models}}
-                <li>
-                    {{#if ../../row_actions}}
-                        <div class="actions pull-right">
-                            {{#each ../../row_actions}}
-                                {{field ../../../this model=../this}}
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                    <p class="pullLeft">
-                        {{!--{{#if attributes.assigned_user_id}}
-                            <a href="#{{buildRoute module="Employees" id=attributes.assigned_user_id action="detail"}}" class="pull-left avatar avatar-md" data-title="{{fieldValue this "assigned_user_name"}}">
-                                <img src="{{fieldValue this "picture_url"}}" alt="{{fieldValue this "assigned_user_name"}}">
-                            </a>
-                        {{else}}
-                            <span class="fa fa-stack pull-left">
-                                <i class="fa fa-user fa-stack-base"></i>
-                                <i class="fa fa-question-circle fa-light"></i>
-                            </span>
-                        {{/if}}--}}
-                        <a href="#{{buildRoute model=this action="detail"}}">{{fieldValue this "name"}}</a>
-                    </p>
-                    {{!--<div class="details pullLeft">
-                        {{#if attributes.assigned_user_id}}
-                            <a href="#{{buildRoute module="Employees" id=attributes.assigned_user_id action="detail"}}">{{fieldValue this "assigned_user_name"}}</a>&#44;
-                        {{else}}
-                            {{str "LBL_UNASSIGNED" this.module}}&#44;
+            {{#eq collection.link.name "accounts_sales_and_services_1"}}
+                <table class="table table-striped dataTable" id="custom-account-history-table">
+                    <thead>
+                        <tr>
+                            <th class="sorting sorting_ orderByac_usepa_id_c cell-" data-orderby="" title="Complete Date" style="min-width: 80px;">
+                                <span>Complete Date</span>
+                            </th>
+                            <th class="sorting sorting_ orderByaccount_status_c cell-" data-orderby="" title="Name" style="min-width: 80px;">
+                                <span>Name</span>
+                            </th>
+                            <th class="sorting sorting_ orderByaccount_number_c cell-" data-orderby="" title="Total Qty" style="min-width: 80px;">
+                                <span>Total Qty</span>
+                            </th>
+                            <th class="sorting sorting_ orderByaccount_number_c cell-" data-orderby="" title="UOM" style="min-width: 80px;">
+                                <span>UOM</span>
+                            </th>
+                            <th class="sorting sorting_ orderByaccount_number_c cell-" data-orderby="" title="Sales Total" style="min-width: 80px;">
+                                <span>Sales Total</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each collection.models}}
+                            <tr class="single">
+                                <td>
+                                    <span class="list">
+                                        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{fieldValue this "complete_date_c"}}">
+                                            {{fieldValue this "complete_date_c"}}
+                                        </div>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="list">
+                                        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{fieldValue this "name"}}">
+                                            <a href="#{{buildRoute model=this action="detail"}}">{{fieldValue this "name"}}</a>
+                                        </div>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="list">
+                                        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="">
+                                            {{fieldValue this "actual_rli_quantity_total"}}
+                                        </div>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="list">
+                                        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="">
+                                            {{fieldValue this "primary_rli_uom"}}
+                                        </div>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="list">
+                                        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{fieldValue this "rli_total_c"}}">
+                                            {{#if this.attributes.rli_total_c}}${{/if}}{{fieldValue this "rli_total_c"}}
+                                        </div>
+                                    </span>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                {{#each collection.models}}
+                    <li>
+                        {{#if ../../row_actions}}
+                            <div class="actions pull-right">
+                                {{#each ../../row_actions}}
+                                    {{field ../../../this model=../this}}
+                                {{/each}}
+                            </div>
                         {{/if}}
-                        {{relativeTime attributes.record_date class="date"}}
-                    </div>--}}
-                </li>
-            {{/each}}
+                        <p class="pullLeft">
+                            {{!--{{#if attributes.assigned_user_id}}
+                                <a href="#{{buildRoute module="Employees" id=attributes.assigned_user_id action="detail"}}" class="pull-left avatar avatar-md" data-title="{{fieldValue this "assigned_user_name"}}">
+                                    <img src="{{fieldValue this "picture_url"}}" alt="{{fieldValue this "assigned_user_name"}}">
+                                </a>
+                            {{else}}
+                                <span class="fa fa-stack pull-left">
+                                    <i class="fa fa-user fa-stack-base"></i>
+                                    <i class="fa fa-question-circle fa-light"></i>
+                                </span>
+                            {{/if}}--}}
+                            <a href="#{{buildRoute model=this action="detail"}}">{{fieldValue this "name"}}</a>
+                        </p>
+                        {{!--<div class="details pullLeft">
+                            {{#if attributes.assigned_user_id}}
+                                <a href="#{{buildRoute module="Employees" id=attributes.assigned_user_id action="detail"}}">{{fieldValue this "assigned_user_name"}}</a>&#44;
+                            {{else}}
+                                {{str "LBL_UNASSIGNED" this.module}}&#44;
+                            {{/if}}
+                            {{relativeTime attributes.record_date class="date"}}
+                        </div>--}}
+                    </li>
+                {{/each}}
+            {{/eq}}
         </ul>
     {{else}}
         <div class="block-footer">{{#if ../collection.dataFetched}}{{str "LBL_NO_DATA_AVAILABLE" this.module}}{{else}}{{str "LBL_LOADING" this.module}}{{/if}}</div>
