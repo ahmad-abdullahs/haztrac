@@ -272,6 +272,7 @@ $viewdefs['sales_and_services'] = array(
                             5 =>
                             array(
                                 'name' => 'account_terms_c',
+                                'type' => 'account-terms',
                                 'label' => 'LBL_ACCOUNT_TERMS',
                             ),
                             6 =>

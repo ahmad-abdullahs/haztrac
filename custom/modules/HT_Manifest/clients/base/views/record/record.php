@@ -219,6 +219,7 @@ $viewdefs[$module_name] = array(
                             array(
                                 'name' => 'manifest_no_actual_c',
                                 'label' => 'LBL_MANIFEST_NO_ACTUAL',
+                                'type' => 'manifest-no',
                             ),
                             3 =>
                             array(

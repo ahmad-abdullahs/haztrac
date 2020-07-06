@@ -36,6 +36,7 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-for-accounts-accounts_
                         12 => 'service_site_address_country_c',
                         13 => 'pdf_template_printer_widget',
                         14 => 'sales_and_services_revenuelineitems_1',
+                        15 => 'team_name',
                             ), getViewFields('recordview', 'sales_and_services')),
                 ),
                 1 =>

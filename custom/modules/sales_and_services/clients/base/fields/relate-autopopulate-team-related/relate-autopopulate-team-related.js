@@ -35,9 +35,68 @@
             return;
         }
 
-        this._super('updateRelatedFields', [model]);
+        if (newData.account_terms_c) {
+            newData.account_terms_c = newData.account_terms_c + '->';
+        }
 
         this.setTransporter(newData.team_name);
+        // We are triggering the event to notify the Sales and Service create to 
+        // bind the on change event after, once the fields are auto populated from 
+        // Accounts relate field.
+//        app.events.trigger('custom:bind:onChange:forCreateView');
+
+        // if this.def.auto_populate is true set new data and doesn't show alert message
+        if (!_.isUndefined(this.def.auto_populate) && this.def.auto_populate == true) {
+            // if we have a currency_id, set it first to trigger the currency conversion before setting
+            // the values to the model, this prevents double conversion from happening
+            if (!_.isUndefined(newData.currency_id)) {
+                this.model.set({currency_id: newData.currency_id});
+                delete newData.currency_id;
+            }
+            this.model.set(newData);
+            return;
+        }
+
+        // load template key for confirmation message from defs or use default
+        var messageTplKey = this.def.populate_confirm_label || 'TPL_OVERWRITE_POPULATED_DATA_CONFIRM',
+                messageTpl = Handlebars.compile(app.lang.get(messageTplKey, this.getSearchModule())),
+                fieldMessageTpl = app.template.getField(
+                        this.type,
+                        'overwrite-confirmation',
+                        this.model.module),
+                messages = [],
+                relatedModuleSingular = app.lang.getModuleName(this.def.module);
+
+        _.each(newData, function (value, field) {
+            var before = this.model.get(field),
+                    after = value;
+
+            if (before !== after) {
+                var def = this.model.fields[field];
+                messages.push(fieldMessageTpl({
+                    before: before,
+                    after: after,
+                    field_label: app.lang.get(def.label || def.vname || field, this.module)
+                }));
+            }
+        }, this);
+
+        app.alert.show('overwrite_confirmation', {
+            level: 'confirmation',
+            messages: messageTpl({
+                values: new Handlebars.SafeString(messages.join(', ')),
+                moduleSingularLower: relatedModuleSingular.toLowerCase()
+            }),
+            onConfirm: function () {
+                // if we have a currency_id, set it first to trigger the currency conversion before setting
+                // the values to the model, this prevents double conversion from happening
+                if (!_.isUndefined(newData.currency_id)) {
+                    self.model.set({currency_id: newData.currency_id});
+                    delete newData.currency_id;
+                }
+                self.model.set(newData);
+            }
+        });
     },
 
     setTransporter: function (team_name) {

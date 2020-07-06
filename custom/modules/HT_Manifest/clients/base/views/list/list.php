@@ -18,6 +18,7 @@ $viewdefs[$module_name] = array(
                             0 =>
                             array(
                                 'name' => 'manifest_no_actual_c',
+                                'type' => 'manifest-no',
                                 'label' => 'LBL_MANIFEST_NO_ACTUAL',
                                 'enabled' => true,
                                 'default' => true,

@@ -6,12 +6,12 @@ if (!defined('sugarEntry') || !sugarEntry)
 class sales_and_services_before_save_class {
 
     function before_save_method($bean, $event, $arguments) {
+        global $db, $timedate;
         // If user puts the S&S staus to Pending clean out the pdf_template_printer_widget field
         // and delete all the linked queue_workorder records.
         if ($bean->print_status_c != $bean->fetched_row['print_status_c'] && $bean->print_status_c == "Pending") {
             $bean->pdf_template_printer_widget = "";
 
-            global $db, $timedate;
             $sql = <<<SQL
                     SELECT 
                     queue_workorder.id AS id
@@ -34,6 +34,19 @@ SQL;
                     $queue_workorderBean->mark_deleted($queue_workorderBean->id);
                     $queue_workorderBean->save();
                 }
+            }
+        }
+
+        // Update the Account Terms field for future transactions if sales and service account terms are changes
+        // update these terms in accounts if you gives the confirmation ...
+        if ($bean->allowAccountTermsUpdate == true || $bean->allowAccountTermsUpdate == 1) {
+            if (!empty($bean->accounts_sales_and_services_1accounts_ida)) {
+                $sql = "UPDATE accounts_cstm 
+                    SET 
+                        account_terms_c = '{$bean->account_terms_c}'
+                    WHERE
+                        id_c = '{$bean->accounts_sales_and_services_1accounts_ida}'";
+                $db->query($sql);
             }
         }
     }
