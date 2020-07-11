@@ -60,13 +60,17 @@
                     }
                 }, _.bind(function () {
                     // On Close
-                    self.collection.fetch();
+                    if (self.collection) {
+                        self.collection.fetch();
+                    }
                 }, this), _.bind(function (renderedComponent) {
                     // On Open make the record view in edit mode.
                     renderedComponent.context.trigger('button:edit_button:click');
-                    if (self.model.module == 'RevenueLineItems') {
-                        // We have trigger this because it was not triggering the dependency...
-                        renderedComponent.model.trigger('change:is_bundle_product_c');
+                    if (self.model) {
+                        if (self.model.module == 'RevenueLineItems') {
+                            // We have trigger this because it was not triggering the dependency...
+                            renderedComponent.model.trigger('change:is_bundle_product_c');
+                        }
                     }
                     // We can handle it this way also by apassing it into the context.
                     // action: model.get('is_bundle_product_c') == 'child' ? 'edit' : 'detail',

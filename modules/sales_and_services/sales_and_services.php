@@ -103,3 +103,19 @@ class sales_and_services extends sales_and_services_sugar {
     }
 
 }
+
+function getAssestAndObjects() {
+    $query = new SugarQuery();
+    $query->from(BeanFactory::getBean("HT_Assets_and_Objects"), array(
+        'team_security' => false
+    ));
+    $query->select(array('id', 'name'));
+    $query->where()->equals('deleted', 0);
+    $query->orderBy('name', 'ASC');
+    $result = $query->execute();
+    $allAssestAndObjects = array('' => '');
+    foreach ($result as $row) {
+        $allAssestAndObjects[$row['id']] = $row['name'];
+    }
+    return $allAssestAndObjects;
+}

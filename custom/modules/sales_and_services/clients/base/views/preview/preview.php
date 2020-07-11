@@ -311,6 +311,12 @@ $viewdefs['sales_and_services'] = array(
                                 'studio' => 'visible',
                                 'label' => 'LBL_DESTINATION_SHIP_TO',
                             ),
+                            15 =>
+                            array(
+                                'name' => 'sales_and_service_assets_and_objects',
+                                'type' => 'multienum-relate',
+                                'label' => 'LBL_SALES_AND_SERVICE_ASSETS_AND_OBJECTS',
+                            ),
 //                            16 =>
 //                            array(
 //                                'name' => 'commentlog',

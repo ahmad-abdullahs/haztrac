@@ -10,7 +10,9 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         app.events.on('data:sync:complete', function (method, model, options) {
-            this.$el.find('div.vis_action_hidden').addClass('hide');
+            if (this.$el) {
+                this.$el.find('div.vis_action_hidden').addClass('hide');
+            }
         }, this);
     },
 })

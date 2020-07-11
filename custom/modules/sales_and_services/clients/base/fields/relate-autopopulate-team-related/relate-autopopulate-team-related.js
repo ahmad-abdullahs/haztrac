@@ -6,7 +6,10 @@
 
     _render: function () {
         this._super('_render');
-        this.setTransporter(this.model.get('team_name'));
+        // This should not run on the record view, but only on the create view.
+        if (this.view.name != 'record') {
+            this.setTransporter(this.model.get('team_name'));
+        }
     },
 
     /*

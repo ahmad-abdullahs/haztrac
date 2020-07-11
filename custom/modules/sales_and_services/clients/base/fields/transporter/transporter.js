@@ -98,6 +98,23 @@
                 plugin.opts.element.on("select2-open", plugin.setTransIndex);
             }
         });
+
+        // Add the rounded style to div around the Transporter / Carrier and Ship To / TSDF fields
+        if (this.view.name != 'preview') {
+            this.addStyleArroundDiv();
+        }
+    },
+
+    addStyleArroundDiv: function () {
+        // parent('div.row-fluid') added to avoid the preview div been selected
+        var parentDiv = this.$el.parents().find('div[data-type="transporter"]').parent('div.row-fluid');
+        parentDiv.attr('style', 'border: groove;border-color: lightgray;-webkit-border-radius: 10px;margin-bottom: 10px;margin-left: 1px;margin-right: 1px;');
+
+        var transporter = this.$el.parents().find('div.record-cell[data-type="transporter"]');
+        transporter.attr('style', 'margin-top: 6px;margin-bottom: -10px;');
+
+        var shipToTSDF = transporter.siblings('div');
+        shipToTSDF.attr('style', 'margin-top: 6px;margin-bottom: -10px;');
     },
 
     /**

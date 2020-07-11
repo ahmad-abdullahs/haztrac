@@ -97,7 +97,9 @@
         app.events.on('data:sync:complete', function (method, model, options) {
             // Execute after 1 seconds (1000 milliseconds):
             setTimeout(_.bind(function () {
-                this.$el.find('div.vis_action_hidden').addClass('hide');
+                if (this.$el) {
+                    this.$el.find('div.vis_action_hidden').addClass('hide');
+                }
             }, this), 250);
         }, this);
     },

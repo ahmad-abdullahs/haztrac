@@ -135,3 +135,4 @@ $mod_strings['LBL_PRINT_DATE'] = 'Print Date';
 $mod_strings['LBL_SALES_AND_SERVICE_STATUS_BADGE'] = 'Status Badge';
 $mod_strings['LBL_ACTUAL_RLI_QUANTITY_TOTAL'] = 'Total Qty';
 $mod_strings['LBL_PRIMARY_RLI_UOM'] = 'Primary RLI UOM';
+$mod_strings['LBL_SALES_AND_SERVICE_ASSETS_AND_OBJECTS'] = 'Assets';
