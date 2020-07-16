@@ -9,7 +9,7 @@
         var model = context.get('model');
 
         model.on('change:shipping_address_street', _.bind(this.getRCRAEpaInfoBySearch, this));
-        model.on('change:shipping_address_city', _.bind(this.getRCRAEpaInfoBySearch, this));
+        model.on('change:shipping_address_state', _.bind(this.getRCRAEpaInfoBySearch, this));
         model.on('change:shipping_address_postalcode', _.bind(this.getRCRAEpaInfoBySearch, this));
     },
 
@@ -18,13 +18,13 @@
         var context = this.context.parent || this.context;
         var model = context.get('model');
 
-        if (model.get('shipping_address_street') && model.get('shipping_address_city') && model.get('shipping_address_postalcode')) {
+        if (model.get('shipping_address_street') && model.get('shipping_address_state') && model.get('shipping_address_postalcode')) {
             // Show Processing alert.
             app.alert.show('get_epa_info', {level: 'process', title: 'Fetching EPA (United States Environmental Protection Agency) Information'});
             // Make a call to update the RLIS
             app.api.call('read', app.api.buildURL('Accounts/'
                     + model.get('shipping_address_street') + '/' +
-                    model.get('shipping_address_city') + '/' +
+                    model.get('shipping_address_state') + '/' +
                     model.get('shipping_address_postalcode') + '/' +
                     '/getEPAInfoBySearch'), {}, {
                 success: function (data) {

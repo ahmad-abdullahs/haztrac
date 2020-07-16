@@ -26,7 +26,7 @@ class getEPAInformation extends SugarApi {
                 //endpoint path
                 'path' => array('Accounts', '?', '?', '?', 'getEPAInfoBySearch'),
                 //endpoint variables
-                'pathVars' => array('', 'street', 'city', 'postalcode', ''),
+                'pathVars' => array('', 'street', 'state', 'postalcode', ''),
                 //method to call
                 'method' => 'getEPAInformationBySearchMethod',
                 //short help string to be displayed in the help documentation
@@ -116,7 +116,72 @@ class getEPAInformation extends SugarApi {
         return '';
     }
 
+    /**
+     * Main Link
+     * https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlerindex    
+     */
     public function getEPAInformationBySearchMethod($api, array $args) {
+//        $statesList = array(
+//            "AL" => "ALABAMA",
+//            "AK" => "ALASKA",
+//            "AS" => "AMERICAN SAMOA",
+//            "AZ" => "ARIZONA",
+//            "AR" => "ARKANSAS",
+//            "CA" => "CALIFORNIA",
+//            "CO" => "COLORADO",
+//            "CT" => "CONNECTICUT",
+//            "DE" => "DELAWARE",
+//            "DC" => "DISTRICT OF COLUMBIA",
+//            "FL" => "FLORIDA",
+//            "GA" => "GEORGIA",
+//            "GU" => "GUAM",
+//            "HI" => "HAWAII",
+//            "ID" => "IDAHO",
+//            "IL" => "ILLINOIS",
+//            "IN" => "INDIANA",
+//            "IA" => "IOWA",
+//            "KS" => "KANSAS",
+//            "KY" => "KENTUCKY",
+//            "LA" => "LOUISIANA",
+//            "ME" => "MAINE",
+//            "MD" => "MARYLAND",
+//            "MA" => "MASSACHUSETTS",
+//            "MI" => "MICHIGAN",
+//            "MN" => "MINNESOTA",
+//            "MS" => "MISSISSIPPI",
+//            "MO" => "MISSOURI",
+//            "MT" => "MONTANA",
+//            "NN" => "NAVAJO NATION",
+//            "NE" => "NEBRASKA",
+//            "NV" => "NEVADA",
+//            "NH" => "NEW HAMPSHIRE",
+//            "NJ" => "NEW JERSEY",
+//            "NM" => "NEW MEXICO",
+//            "NY" => "NEW YORK",
+//            "NC" => "NORTH CAROLINA",
+//            "ND" => "NORTH DAKOTA",
+//            "MP" => "NORTHERN MARIANAS",
+//            "OH" => "OHIO",
+//            "OK" => "OKLAHOMA",
+//            "OR" => "OREGON",
+//            "PA" => "PENNSYLVANIA",
+//            "PR" => "PUERTO RICO",
+//            "RI" => "RHODE ISLAND",
+//            "SC" => "SOUTH CAROLINA",
+//            "SD" => "SOUTH DAKOTA",
+//            "TN" => "TENNESSEE",
+//            "TX" => "TEXAS",
+//            "TT" => "TRUST TERRITORIES",
+//            "UT" => "UTAH",
+//            "VT" => "VERMONT",
+//            "VI" => "VIRGIN ISLANDS",
+//            "VA" => "VIRGINIA",
+//            "WA" => "WASHINGTON",
+//            "WV" => "WEST VIRGINIA",
+//            "WI" => "WISCONSIN",
+//            "WY" => "WYOMING",
+//        );
+
         $siteIdsList = array();
         // Randon number for the file name
         $randomNumber = rand();
@@ -124,10 +189,22 @@ class getEPAInformation extends SugarApi {
 //        $city = urlencode("Honolulu");
 //        $street = urlencode("Pier 51 SAND ISLAND ACCESS RD");
 //        $postalcode = urlencode("96819");
-        $city = urlencode($args['city']);
+//        $state = urlencode($args['state']);
         $street = urlencode($args['street']);
         $postalcode = urlencode($args['postalcode']);
-        $link = "https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlersearch2/false/ALL/null/null/null/ALL/ALL/{$city}/{$postalcode}/null/{$street}";
+
+        $searchLevel = "ALL";
+//        if (array_key_exists($state, $statesList)) {
+//            $searchLevel = $state;
+//        } else if (array_search($state, $statesList)) {
+//            $searchLevel = array_search($state, $statesList);
+//        }
+//        $link = "https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlersearch2/false/ALL/null/null/null/ALL/ALL/{$city}/{$postalcode}/null/{$street}";
+
+        $link = "https://rcrapublic.epa.gov/rcrainfoweb/action/modules/hd/handlersearch2/false/{$searchLevel}/null/null/null/ALL/ALL/null/{$postalcode}/null/{$street}";
+
+        $GLOBALS['log']->fatal('$link : ' . print_r($link, 1));
+
         $fileName = "epaInfoDir/{$randomNumber}.html";
 
         unlink($fileName);

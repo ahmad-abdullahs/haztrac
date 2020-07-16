@@ -126,6 +126,18 @@ $viewdefs[$module_name] = array(
                     ),
                     3 =>
                     array(
+                        'type' => 'button',
+                        'name' => 'renew_drawer_button',
+                        'label' => 'LBL_RENEW_LICENSE_DRAWER_BUTTON_LABEL',
+                        'css_class' => 'btn btn-primary',
+                        'showOn' => 'view',
+                        'events' =>
+                        array(
+                            'click' => 'button:renew_drawer_button:click',
+                        ),
+                    ),
+                    4 =>
+                    array(
                         'name' => 'sidebar_toggle',
                         'type' => 'sidebartoggle',
                     ),
@@ -191,6 +203,10 @@ $viewdefs[$module_name] = array(
                                 'label' => 'LBL_LICENSE_PREVIEW',
                                 'span' => 12,
                             ),
+//                            1 =>
+//                            array(
+//                                'name' => 'pnl_permits_licenses_pnl_permits_licenses_1_name',
+//                            ),
                         ),
                     ),
                     2 =>

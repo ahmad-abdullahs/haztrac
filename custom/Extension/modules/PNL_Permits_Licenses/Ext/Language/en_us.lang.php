@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_NAME'] = 'Name';
 $mod_strings['LBL_ISSUING_DATE'] = 'issuing date';
@@ -18,3 +17,4 @@ $mod_strings['LBL_MODULE_NAME'] = 'Permits &amp; Licenses';
 $mod_strings['LNK_IMPORT_PNL_PERMITS_LICENSES'] = 'Import Permits &amp; Licenses';
 $mod_strings['LBL_PNL_PERMITS_LICENSES_SUBPANEL_TITLE'] = 'Permits &amp; Licenses';
 $mod_strings['LBL_HOMEPAGE_TITLE'] = 'My Permits &amp; Licenses';
+$mod_strings['LBL_PNL_PERMITS_LICENSES_PNL_PERMITS_LICENSES_1_FROM_PNL_PERMITS_LICENSES_R_TITLE'] = 'Previous Licenses';
