@@ -174,6 +174,10 @@ $viewdefs['base']['view']['pending-activities'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'on_date_c',
+                'on_time_c',
+                'estimated_rli_quantity',
+                'primary_rli_uom',
+                'estimated_rli_total',
             ),
         ),
         array(

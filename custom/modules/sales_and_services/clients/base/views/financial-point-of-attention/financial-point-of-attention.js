@@ -9,22 +9,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 ({
-    /*
-     * custom/modules/Opportunities/clients/base/views/archive-service/archive-service.js 
-     */
     extendsFrom: 'sales_and_servicesCustomPointOfAttentionView',
     initialize: function (options) {
         this._super('initialize', [options]);
 
         // Set empty to these values to avoid the No-Data text in the field
-        this.model.set({
-            'rli_extd_price': '',
-            'extd_cost': '',
-            'extd_list': '',
-            'profit': '',
-            'profit_margin': '',
-            'commission': '',
-        });
+//        this.model.set({
+//            'rli_extd_price': '',
+//            'extd_cost': '',
+//            'extd_list': '',
+//            'profit': '',
+//            'profit_margin': '',
+//            'commission': '',
+//        });
     },
     render: function () {
         this._super('render');

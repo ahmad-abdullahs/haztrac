@@ -8,6 +8,33 @@
         this._super('initialize', [options]);
     },
 
+    events: function () {
+        var prototype = Object.getPrototypeOf(this);
+        var parentEvents = _.result(prototype, 'events');
+
+        return _.extend({}, parentEvents);
+    },
+
+    bindCollectionAdd: function (model) {
+        if (model.link) {
+            if (model.link.name == "accounts_sales_and_services_1") {
+                if (model.get('on_date_c')) {
+                    var completeDate = moment.utc(model.get('on_date_c')).format('MM/DD/YYYY');
+                    model.set('on_date_c', completeDate);
+                }
+                if (model.get('primary_rli_uom')) {
+                    var ddList = app.lang.getAppListStrings('unit_of_measure_c_list');
+                    var valueToDisplay = ddList[model.get('primary_rli_uom')];
+                    if (valueToDisplay) {
+                        model.set('primary_rli_uom', valueToDisplay);
+                    }
+                }
+            }
+        }
+        var tab = this._getTab(model.collection);
+        model.set('record_date', model.get(tab.record_date));
+    },
+
     _getFilters: function (index) {
 
         var today = app.date().formatServer(true);
@@ -73,7 +100,7 @@
         this._super('_renderHtml');
 
         this.$el.children().find('div.tab-content').css({
-            height: '140px'
+            height: '180px'
         });
 
         if (this.meta.config) {

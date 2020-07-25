@@ -79,6 +79,18 @@
 //                    '<div class="flex-list-view left-actions quote-data-table-scrollable"></div>'
 //                    );
 //        }
+
+        // On Accounts and Opportunities creation block the RevenueLineItems manual creation.
+        if (this.collection.length == 1) {
+            if (!this.collection.models[0].has('name') || !this.collection.models[0].has('name')) {
+                _.each(this.fields, function (field) {
+                    if (!_.isUndefined(field.name) && !_.isNull(field.model)) {
+                        field.setDisabled(true);
+                        field.render();
+                    }
+                }, this);
+            }
+        }
     },
 
     _onDragStart: function (evt, ui) {

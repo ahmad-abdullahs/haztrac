@@ -789,7 +789,7 @@
         var elIdName = this._getPhaserCanvasId();
         var $el = this.$('#' + elIdName);
         var gameConfig = {
-            height: 260,
+            height: 180,
             parent: elIdName,
             renderer: Phaser.CANVAS,
             transparent: true,

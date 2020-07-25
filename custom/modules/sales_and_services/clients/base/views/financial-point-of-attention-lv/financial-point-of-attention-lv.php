@@ -7,28 +7,33 @@ $viewdefs['sales_and_services']['base']['view']['financial-point-of-attention-lv
             'label' => 'LBL_PANEL_1',
             'fields' => array(
                 array(
-                    'name' => 'rli_extd_price',
+                    'name' => 'estimated_rli_total',
                     'label' => 'LBL_RLI_EXTD_PRICE',
+                    'type' => 'currency',
                 ),
                 array(
-                    'name' => 'extd_cost',
+                    'name' => 'estimated_rli_cost',
                     'label' => 'LBL_EXTD_COST',
+                    'type' => 'currency',
                 ),
                 array(
-                    'name' => 'extd_list',
+                    'name' => 'estimated_rli_list',
                     'label' => 'LBL_EXTD_LIST',
+                    'type' => 'currency',
                 ),
                 array(
-                    'name' => 'profit',
+                    'name' => 'estimated_rli_profit',
                     'label' => 'LBL_PROFIT',
+                    'type' => 'currency',
                 ),
                 array(
-                    'name' => 'profit_margin',
+                    'name' => 'estimated_rli_profit_margin',
                     'label' => 'LBL_PROFIT_MARGIN',
                 ),
                 array(
                     'name' => 'commission',
                     'label' => 'LBL_COMMISSION',
+                    'type' => 'currency',
                 ),
             )
         ),

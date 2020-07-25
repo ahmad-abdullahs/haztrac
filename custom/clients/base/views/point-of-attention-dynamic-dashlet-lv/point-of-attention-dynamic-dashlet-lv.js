@@ -24,6 +24,56 @@
         this.model.on('data:sync:complete', function () {
             this._displayDashlet();
         }, this);
+
+        this.model.on('change', function () {
+            this.initDashlet();
+        }, this);
+    },
+
+    _render: function () {
+        // Only render the view when user is admin or the
+        // regular user is in Manager: Financial team
+        var showDashlet = false;
+        if (app.user.get('type') == "user") {
+            var myTeams = app.user.get('my_teams');
+            _.each(myTeams, function (team) {
+                if (team.name == "Manager: Financial") {
+                    showDashlet = true;
+                }
+            });
+
+            // These fields should be hidden from the non-admin users.
+            // So when the user is non-admin he will not be able to see these fields 
+            // unless he is in Manager: Financial Team 
+            var fieldsList = [
+                'estimated_rli_total',
+                'estimated_rli_cost',
+                'estimated_rli_list',
+                'estimated_rli_profit',
+                'estimated_rli_profit_margin',
+                'commission'
+            ];
+
+            var flag = true;
+            if (this.options.meta && !showDashlet) {
+                _.each(this.options.meta.display_columns, function (name) {
+                    if (!_.contains(fieldsList, name) && flag) {
+                        showDashlet = true;
+                    } else {
+                        showDashlet = false;
+                        flag = false;
+                    }
+                });
+            }
+        } else if (app.user.get('type') == "admin") {
+            showDashlet = true;
+        }
+
+        // This main-pane check is added to render the dashlet edit view 
+        // for configuration or field list change
+        if (showDashlet || this.layout.name == "main-pane") {
+            this._super('_render');
+        }
     },
 
 //    _initializeSettings: function () {

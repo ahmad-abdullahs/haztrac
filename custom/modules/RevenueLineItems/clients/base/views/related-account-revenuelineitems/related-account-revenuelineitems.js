@@ -89,6 +89,8 @@
         // When the sales and service create drawer is open from subpanel create button under Account record
         // view, It was not loading the dashlet, that's why this code is added.
         this.reloadList();
+
+        this.$el.find('div.list-view').css('max-height', '200px');
     },
 
     reloadList: function (model, value) {
@@ -111,6 +113,11 @@
                 this.render();
             }, this)
         });
+    },
+
+    render: function () {
+        this._super('render');
+        this.$el.find('div.list-view').css('max-height', '200px');
     },
 
     getAccountId: function () {

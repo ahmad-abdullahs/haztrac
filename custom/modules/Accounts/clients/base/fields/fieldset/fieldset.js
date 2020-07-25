@@ -61,10 +61,10 @@
 
     colorAddressFields: function (value) {
         if (_.contains(value, "3rd Party")) {
-            this.view.$el.find('[data-name=billing_address]').find('input,textarea').css('background-color', '#ddffa8');
-            this.view.$el.find('[data-name=shipping_address]').find('input,textarea').css('background-color', '#ddffa8');
-            this.view.$el.find('[data-fieldname=billing_address]').find('.address.fieldset').css('background-color', '#ddffa8');
-            this.view.$el.find('[data-fieldname=shipping_address]').find('.address.fieldset').css('background-color', '#ddffa8');
+            this.view.$el.find('[data-name=billing_address]').find('input,textarea').css('background-color', '#d9d68a');
+            this.view.$el.find('[data-name=shipping_address]').find('input,textarea').css('background-color', '#d9d68a');
+            this.view.$el.find('[data-fieldname=billing_address]').find('.address.fieldset').css('background-color', '#d9d68a');
+            this.view.$el.find('[data-fieldname=shipping_address]').find('.address.fieldset').css('background-color', '#d9d68a');
         } else {
             this.view.$el.find('[data-name=billing_address]').find('input,textarea').css('background-color', '');
             this.view.$el.find('[data-name=shipping_address]').find('input,textarea').css('background-color', '');
@@ -73,8 +73,8 @@
         }
 
 //        if (_.contains(value, "Separate Svc Site")) {
-//            this.view.$el.find('[data-name=service_site_address_c]').find('input,textarea').css('background-color', '#ddffa8');
-//            this.view.$el.find('[data-fieldname=service_site_address_c]').find('.address.fieldset').css('background-color', '#ddffa8');
+//            this.view.$el.find('[data-name=service_site_address_c]').find('input,textarea').css('background-color', '#d9d68a');
+//            this.view.$el.find('[data-fieldname=service_site_address_c]').find('.address.fieldset').css('background-color', '#d9d68a');
 //        } else {
 //            this.view.$el.find('[data-name=service_site_address_c]').find('input,textarea').css('background-color', '');
 //            this.view.$el.find('[data-fieldname=service_site_address_c]').find('.address.fieldset').css('background-color', '');

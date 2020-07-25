@@ -1,6 +1,6 @@
 <?php
 
-$mod_strings['LBL_RLI_EXTD_PRICE'] = 'RLI Extd Price';
+$mod_strings['LBL_RLI_EXTD_PRICE'] = 'Forecasted Price';
 $mod_strings['LBL_EXTD_COST'] = 'Extd Cost';
 $mod_strings['LBL_EXTD_LIST'] = 'Extd List';
 $mod_strings['LBL_PROFIT'] = 'Profit';

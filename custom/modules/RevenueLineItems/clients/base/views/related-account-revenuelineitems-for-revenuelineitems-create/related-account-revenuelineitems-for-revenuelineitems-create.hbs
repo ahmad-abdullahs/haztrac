@@ -21,8 +21,8 @@
                                             <thead>
                                                 <tr>
                                                 {{#each fields}}
-                                                    <th class="list-row-header {{#if widthClass}} {{widthClass}}{{/if}}" title="{{str label 'sales_and_services'}}" {{#if styles}} style="{{styles}}"{{/if}}>
-                                                         <span>
+                                                    <th class="list-row-header {{#if widthClass}} {{widthClass}}{{/if}}" title="{{str label 'sales_and_services'}}" {{#if styles}} style="{{styles}}line-height: 10px;"{{else}}style="line-height: 10px;"{{/if}}>
+                                                        <span style="overflow-y: hidden;">
                                                              {{str label 'sales_and_services'}}
                                                          </span>
                                                     </th>
