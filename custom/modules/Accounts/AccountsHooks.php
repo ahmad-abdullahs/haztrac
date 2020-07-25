@@ -83,6 +83,18 @@ class AccountsHooks {
                 $this->updateSalesAndServiceAddresses($bean);
             }
         }
+
+        // This code is added to ensure the EPA Info if user has added the 
+        // wrong address and later added the right EPA ID No.
+        if (!empty($bean->ac_usepa_id_c)) {
+            // Check if the EPA Info exist then its fine otherwise call the appi
+            require_once 'custom/modules/Accounts/clients/base/api/getEPAInformation.php';
+            $epaInfoHandler = new getEPAInformation();
+            $epaInfoHandler->getEPAInformationMethod(null, array(
+                'epaID' => $bean->ac_usepa_id_c,
+                'fetchIfNotExist' => true
+            ));
+        }
     }
 
     private function updateSalesAndServiceAddresses($bean, $extraFieldToCopy = false, $type = 'shipping', $suffix = '', $addressNameField = '_address_third_party_name') {

@@ -51,6 +51,10 @@ class getEPAInformation extends SugarApi {
         $epaId = $args['epaID'];
         if ($epaId) {
             // $epaId = 'HIR009719056';
+            if (file_exists("epaInfoDir/{$epaId}.html") && isset($args['fetchIfNotExist']) && $args['fetchIfNotExist'] == true) {
+                return;
+            }
+
             // First delete the file if it exists already
             unlink("epaInfoDir/{$epaId}");
             // Get the content from this website and put in the directory
