@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-21 15:28:15
+ // created: 2020-06-27 16:00:19
 
 $app_list_strings['lab_analysis_list']=array (
   'Aniline Point F' => 'Aniline Point, °F',
@@ -46,4 +46,5 @@ $app_list_strings['lab_analysis_list']=array (
   'Water by Distillation' => 'Water by Distillation, Vol% (D95)',
   'Water by Karl Fisher' => 'Water by Karl Fisher, Vol% (E203)',
   'VOC 8260' => 'EPA Volatile Organic Compounds, VOC, PPM (SW8260)',
+  'VOC 8260B' => 'EPA Halogenated, VOC, PPM (SW8260B)',
 );

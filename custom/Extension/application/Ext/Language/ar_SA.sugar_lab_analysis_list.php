@@ -1,5 +1,5 @@
 <?php
- // created: 2020-01-21 15:28:15
+ // created: 2020-06-27 16:00:19
 
 $app_list_strings['lab_analysis_list']=array (
   'API Gravity 60' => 'API Gravity @ 60°F',
@@ -46,4 +46,5 @@ $app_list_strings['lab_analysis_list']=array (
   'N2 Nitrogen' => 'Nitrogen (N2), PPM',
   'Visc 100' => 'Viscosity cSt @ 100C/212F (D445)',
   'VOC 8260' => 'EPA Volatile Organic Compounds, VOC, PPM (SW8260)',
+  'VOC 8260B' => 'EPA Halogenated, VOC, PPM (SW8260B)',
 );
