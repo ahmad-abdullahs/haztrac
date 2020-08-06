@@ -12,15 +12,20 @@ $viewdefs['sales_and_services']['base']['view']['financial-point-of-attention-lv
                     'type' => 'currency',
                 ),
                 array(
+                    'name' => 'rli_total_c',
+                    'label' => 'LBL_RLI_TOTAL',
+                    'type' => 'currency',
+                ),
+                array(
                     'name' => 'estimated_rli_cost',
                     'label' => 'LBL_EXTD_COST',
                     'type' => 'currency',
                 ),
-                array(
-                    'name' => 'estimated_rli_list',
-                    'label' => 'LBL_EXTD_LIST',
-                    'type' => 'currency',
-                ),
+//                array(
+//                    'name' => 'estimated_rli_list',
+//                    'label' => 'LBL_EXTD_LIST',
+//                    'type' => 'currency',
+//                ),
                 array(
                     'name' => 'estimated_rli_profit',
                     'label' => 'LBL_PROFIT',

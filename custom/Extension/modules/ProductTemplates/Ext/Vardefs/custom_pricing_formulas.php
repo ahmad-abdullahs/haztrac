@@ -15,5 +15,6 @@ $dictionary["ProductTemplate"]["fields"]["cost_pricing_formula"] = array(
     'vname' => 'LBL_COST_PRICING_FORMULA',
     'type' => 'varchar',
     'len' => '255',
+    'audited' => true,
     'dependency' => 'and(not(equal($is_bundle_product_c,"parent")),not(equal($is_group_item_c,true)))',
 );

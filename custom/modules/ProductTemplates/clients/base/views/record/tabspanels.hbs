@@ -10,6 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
+
+
+{{! ADDING record-panel-background COLOR TO THE REVENUELINEITEMS RECORD VIEW PANELS }}
+
+
 {{! if the first panel uses panels, then the rest use panels, so don't use tabview }}
 <div class="record tab-layout">
 {{#if view.meta.firstPanelIsTab}}
@@ -55,6 +60,12 @@
                         {{str label ../../../view.module}}
                     </h4>
                     <div class="pull-right">
+                        {{#if buttonOnHeader}}
+                            {{#if ../../../../view.createMode}}
+                            {{else}}
+                                <button class="btn btn-warning" href="javascript:void(0);" name="track_vendor_cost" data-event="button:track_vendor_cost:click" track="click:track_vendor_cost" style="margin-right: 10px;margin-top: 3px;text-align: center;background: darkgray;">Track Vendor Cost</button>
+                            {{/if}}
+                        {{/if}}
                         <button class="btn btn-invisible record-panel-arrow">
                             <i class="fa fa-chevron-{{#eq panelState "collapsed"}}down{{/eq}}{{#notEq panelState "collapsed"}}up{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
                         </button>

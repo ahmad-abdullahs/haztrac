@@ -12,3 +12,4 @@ $dictionary['ProductTemplate']['fields']['cost_price']['merge_filter'] = 'disabl
 $dictionary['ProductTemplate']['fields']['cost_price']['unified_search'] = false;
 $dictionary['ProductTemplate']['fields']['cost_price']['calculated'] = false;
 $dictionary['ProductTemplate']['fields']['cost_price']['enable_range_search'] = false;
+$dictionary['ProductTemplate']['fields']['cost_price']['required'] = true;

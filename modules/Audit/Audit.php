@@ -176,7 +176,7 @@ class Audit extends SugarBean
         }
 
         Container::getInstance()->get(AuditFormatter::class)->formatRows($rows);
-
+        $rows = array_merge($rows,$return);
         return $rows;
     }
 

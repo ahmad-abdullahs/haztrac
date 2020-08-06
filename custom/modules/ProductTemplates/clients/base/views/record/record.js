@@ -41,6 +41,10 @@
      * @inheritdoc
      */
     initialize: function (options) {
+        this.events = _.extend({}, this.events, options.def.events, {
+            'click [name="track_vendor_cost"]': 'trackVendorCost'
+        });
+
         this.plugins = _.union(this.plugins, ['LinkedModel']);
 
         this.hasRliAccess = app.acl.hasAccess('edit', 'RevenueLineItems');
@@ -52,6 +56,7 @@
             this.productBundleIds = [];
             this.fetchProductBundle();
         }, this);
+
         app.events.on('setButtonStates', _.bind(function () {
             this.model.set({is_bundle_product_c: 'parent'}, {silent: true});
             this.model.set({
@@ -64,6 +69,64 @@
             });
             this.setButtonStates(this.STATE.EDIT);
         }, this), this);
+
+        // This code is added to make the record view in edit mode when the vendor_product_svc_descrp_c
+        // field is updated in the magnifier popup.
+        this.model.on('editClicked', function () {
+            this.setButtonStates('edit');
+            this.action = 'edit';
+            this.toggleEdit(true);
+        }, this);
+
+        _.each(this.fields, function (field) {
+            if (_.contains(['cost_price', 'date_cost_price'], field.name)) {
+                field.setDisabled(true);
+            }
+        }, this);
+    },
+
+    render: function () {
+        this._super('render');
+        var self = this;
+
+        // On record view disable the fields, because they will be enabled when 
+        // Track vendor cost button is used
+        var disableFields = setInterval(function () {
+            _.each(self.fields, function (field) {
+                if (_.contains(['cost_price', 'date_cost_price'], field.name)) {
+                    field.setDisabled(true);
+                    field.render();
+                }
+            }, self);
+
+            var date_cost_price = self.getField('date_cost_price');
+            if (date_cost_price.isDisabled()) {
+                clearInterval(disableFields);
+            }
+        }, 1000);
+    },
+
+    trackVendorCost: function (event) {
+        // When track button is clicked, set the record in edit mode.
+        this.setButtonStates('edit');
+        this.action = 'edit';
+        this.toggleEdit(true);
+
+        // Clear these fields...
+        this.model.set({
+            'cost_price': '',
+            'date_cost_price': '',
+        });
+
+        // Enable the fields so user can set the values in it 
+        _.each(this.fields, function (field) {
+            if (_.contains(['cost_price', 'date_cost_price'], field.name)) {
+                field.setDisabled(false);
+            }
+        }, this);
+
+        event.stopPropagation();
+        event.preventDefault();
     },
 
     toggleEdit: function (isEdit) {

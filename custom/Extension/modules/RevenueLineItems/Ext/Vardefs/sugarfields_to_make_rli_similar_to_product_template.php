@@ -7,6 +7,7 @@ $dictionary['RevenueLineItem']['fields']['date_cost_price'] = array(
     'massupdate' => false,
     'comment' => 'Starting date cost price is valid',
     'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
+    'audited' => true,
 );
 
 $dictionary['RevenueLineItem']['fields']['product_code_sku_c']['labelValue'] = 'Product Code \\ SKU';

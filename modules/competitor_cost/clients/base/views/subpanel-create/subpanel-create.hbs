@@ -1,0 +1,45 @@
+<fieldset style="border:1px solid grey !important;padding:10px;">
+<legend style="border:none !important;width:auto;"> Add / Edit </legend>
+{{#each grid}}
+	<div class="row-fluid panel_body">
+		{{#each this}}
+			<div class="span{{span}} record-cell" data-type="{{type}}" data-name="{{name}}" 
+					{{#eq name 'ogi_quantity_new'}} style = "margin-left: 0px;"{{/eq}}>
+				<div class="record-label" data-name="{{name}}">
+					{{#if dismiss_label}}
+						<br>
+					{{else}}
+						{{#if label}}
+							{{str label ../../../../module}}
+						{{else}}
+							{{str vname ../../../../module}}
+						{{/if}}
+					{{/if}}
+				</div>
+				<span class="normal index" data-fieldname="{{name}}" data-index="">
+				<span class="edit">
+				{{#if name}}
+					{{field ../../../this model=../../../model template="edit"}}
+				{{/if}}
+				</span>
+				</span>
+			</div>
+		{{/each}}
+	</div>
+{{/each}}
+<div class="btn-toolbar pull-right">
+	<span class="detail">
+	<a class="btn btn-invisible btn-link" href="javascript:void(0);" id="oaf_cancel_button">
+	Cancel</a>
+	</span>
+	<span class="detail">
+	<a class="rowaction btn btn-primary" href="javascript:void(0);" id="oaf_save_button">
+	Save</a>
+	</span>
+	
+	<span class="detail">
+	<a class="rowaction btn btn-primary" href="javascript:void(0);" id="oaf_save_button_dummy" style="display:none;" disabled>
+	Save</a>
+	</span>
+</div>
+</fieldset>

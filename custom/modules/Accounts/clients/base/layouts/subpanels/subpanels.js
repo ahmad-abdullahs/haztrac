@@ -28,11 +28,19 @@
      */
     registerModelEvents: function () {
         this.model.on('change:account_type_cst_c', function (model) {
-            var link = 'product_templates_accounts';
+            var vendorLink = 'product_templates_accounts';
+            var competitorLink = 'accounts_competitor_cost_1';
+
             if (_.contains(model.get('account_type_cst_c'), "Vendor")) {
-                this.unhideSubpanel(link);
+                this.unhideSubpanel(vendorLink);
             } else {
-                this.hideSubpanel(link);
+                this.hideSubpanel(vendorLink);
+            }
+
+            if (_.contains(model.get('account_type_cst_c'), "Competitor")) {
+                this.unhideSubpanel(competitorLink);
+            } else {
+                this.hideSubpanel(competitorLink);
             }
         }, this);
     },

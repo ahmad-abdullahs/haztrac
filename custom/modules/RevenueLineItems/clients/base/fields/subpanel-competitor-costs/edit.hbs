@@ -1,0 +1,122 @@
+<style>
+    .record .subpanel-cell .select2-container{
+        margin: 0px !important;
+    }
+    .record .subpanel-cell input[type="text"], .record .subpanel-cell input[type="password"], .record .subpanel-cell textarea, .record .subpanel-cell .uneditable-input{
+        margin: 0px !important;
+    }
+    .record .subpanel-cell .input-append input[type="text"] + .add-on, .record .subpanel-cell .input-append input[type="password"] + .add-on, .record .subpanel-cell .input-append textarea + .add-on{
+        margin: 0px !important;
+    }
+    .dropdown_upside{
+        top: auto !important;
+        bottom: 100% !important;
+        margin-bottom: 1px !important;
+    }
+</style>
+
+<div data-subpanel-link="{{subpanelModule}}" id="{{div_id}}" class="filtered tabbable tabs-left subpanel-cell" style="border: 1px solid lightslategray; height: 225px; overflow-y:auto;">
+    <ul class="nav results">
+        <li class="subpanel clearfix">
+            <div class="flex-list-view left-actions right-actions" style="">
+                <div class="flex-list-view-content">
+                    <table class="table table-striped dataTable custom">
+                        <thead>
+                                <tr module="{{subpanelModule}}">
+                                    <th></th>
+                                    {{#each columns}}
+                                        <th class="{{sorting_class}} orderBy{{name}} sortable" data-fieldname="{{name}}" data-orderby="{{name}}" tabindex="-1" {{#if width}}style="width:{{width}};"{{/if}}>
+                                            <span>
+                                                {{str label ../subpanelModule}}
+                                            </span>
+                                        </th>
+                                    {{/each}}
+                                    <th>
+                                        <span class="actions btn-group pull-right panel-top" style="width:51px !important;height:20px !important;">
+                                            <span class="small" >
+                                                <a class="rowaction btn trigger_create" href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="" name="create_button" data-original-title="Create">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </span>
+                                            <a track="click:actiondropdown" class="btn dropdown-toggle disabled" data-toggle="dropdown" href="javascript:void(0);" data-placement="bottom" rel="tooltip" title="" data-original-title="Actions">
+                                                <span class="fa fa-caret-down"></span>
+                                            </a>
+                                        </span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th data-target="alert-container" class="alert alert-warning hide" colspan="6">
+                                        <div data-target="alert"></div>
+                                    </th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            {{#each filteredCollection.models}}
+                                <tr name="{{../subpanelModule}}_{{attributes.id}}" module="{{../subpanelModule}}" data-id="{{attributes.id}}" class="single">
+                                    {{#eq template "detail"}}
+                                        <td>
+                                            <a class="fa fa-pencil trigger_inline_edit" href="javascript:void(0);" style=""></a>
+                                        </td>
+                                    {{/eq}}
+
+                                    {{#eq template "edit"}}
+                                        <td>
+                                            <a class="btn btn-invisible btn-link remove_inline_edit" href="javascript:void(0);">Cancel</a>
+                                        </td>
+                                    {{/eq}}
+
+                                    {{#each ../columnsMeta}}
+                                        {{#if readonly}}			
+                                            <td class="rowcell subpanel-field" style="line-height: 30px !important;">
+                                                    {{field ../../../view model=../../this template="detail"}}
+                                            </td>
+                                        {{else}}
+                                            <td class="rowcell subpanel-field" style="line-height: 30px !important;">
+                                                    {{field ../../../view model=../../this template=../../template}}
+                                            </td>
+                                        {{/if}}
+                                    {{/each}}
+                                    {{#eq template "detail"}}
+                                        <td>
+                                            <span class="overflow-visible list">
+                                                <span class="actions btn-group list">
+                                                    <span class="small">
+                                                    <a class="rowaction btn trigger_preview" href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="" track="click:" data-original-title="Preview">
+                                                    <i class="fa fa-eye"></i></a>
+                                                    </span><a track="click:actiondropdown" class="btn dropdown-toggle"  href="javascript:void(0);" data-toggle="dropdown" data-placement="bottom" rel="tooltip" title="" data-original-title="Actions"><span class="fa fa-caret-down"></span></a>
+                                                    <ul data-menu="dropdown" class="dropdown-menu" role="menu" style="letter-spacing: 0em;left:auto !important;">
+                                                        <li>
+                                                            <span class="list">
+                                                                <a class="rowaction trigger_edit" href="javascript:void(0);" data-event="list:editrow:fire" name="edit_button" track="click:edit_button">
+                                                                        Edit
+                                                                </a>
+                                                            </span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="list">
+                                                                <a class="rowaction trigger_delete" href="javascript:void(0);" data-event="list:unlinkrow:fire">
+                                                                        Delete
+                                                                </a>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                                <span class="list"></span>
+                                            </span>
+                                        </td>
+                                    {{/eq}}
+                                    {{#eq template "edit"}}
+                                        <td>
+                                            <a class="rowaction btn btn-primary trigger_inline_save" href="javascript:void(0);" style="margin: 0px !important;width: 70%;">Save</a>
+                                        </td>
+                                    {{/eq}}
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="{{createWrapper}}"></div>

@@ -343,6 +343,7 @@ $viewdefs['ProductTemplates'] = array(
                         'columns' => 2,
                         'labelsOnTop' => 1,
                         'placeholders' => 1,
+                        'buttonOnHeader' => true,
                         'fields' =>
                         array(
                             0 =>
@@ -393,7 +394,9 @@ $viewdefs['ProductTemplates'] = array(
                             7 =>
                             array(
                                 'name' => 'vendor_product_svc_descrp_c',
+                                'type' => 'magnifier-text',
                                 'studio' => 'visible',
+                                'showButton' => true,
                                 'label' => 'LBL_VENDOR_PRODUCT_SVC_DESCRP',
                             ),
                         ),
@@ -740,6 +743,9 @@ $viewdefs['ProductTemplates'] = array(
                                     1 => 'list_price',
                                     2 => 'cost_price',
                                     3 => 'product_list_name_c',
+                                    4 => 'date_cost_price',
+                                    5 => 'cost_pricing_formula',
+                                    6 => 'product_vendor_c',
                                 ),
                                 'span' => 12,
                             ),

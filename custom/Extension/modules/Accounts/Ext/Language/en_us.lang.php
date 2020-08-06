@@ -52,6 +52,7 @@ $mod_strings['LBL_RAIL_TRACK_NUM'] = 'Track Number';
 $mod_strings['LBL_RAIL_SERVED'] = 'Rail Served By';
 $mod_strings['LBL_RAIL_NOTES'] = 'Rail Description/Notes';
 $mod_strings['LBL_FILTER_BY_TRANSPORTER_TAG'] = 'Transporters';
+$mod_strings['LBL_FILTER_BY_COMPETITOR'] = 'Competitors';
 $mod_strings['LBL_LIST_TRANSFER_DATE'] = 'Transfer Date';
 $mod_strings['LBL_PO_REQUIRED'] = 'PO Required';
 $mod_strings['LBL_BILLING_ADDRESS_THIRD_PARTY_NAME'] = 'Billing Name';

@@ -56,3 +56,5 @@ $mod_strings['LBL_IS_GROUP_ITEM'] = 'Is Group Item';
 $mod_strings['LBL_CONSOLIDATED_MANIFEST'] = 'Consolidated Manifest';
 $mod_strings['LBL_LIST_PRICING_FORMULA'] = 'List Pricing Formula';
 $mod_strings['LBL_COST_PRICING_FORMULA'] = 'Cost Pricing Formula';
+$mod_strings['LBL_UPDATE_BUTTON_LABEL'] = 'Update';
+$mod_strings['LBL_UPDATE_DESCRIPTION'] = 'Update Description';

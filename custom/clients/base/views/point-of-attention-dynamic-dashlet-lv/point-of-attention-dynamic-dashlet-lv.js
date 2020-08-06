@@ -46,9 +46,7 @@
             // So when the user is non-admin he will not be able to see these fields 
             // unless he is in Manager: Financial Team 
             var fieldsList = [
-                'estimated_rli_total',
                 'estimated_rli_cost',
-                'estimated_rli_list',
                 'estimated_rli_profit',
                 'estimated_rli_profit_margin',
                 'commission'

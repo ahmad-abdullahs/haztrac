@@ -77,7 +77,7 @@
                         var model = app.data.createBean(this.subpanelModule, data.records[i]);
                         model.template = "list";
 
-                        if (_.contains(['discount_price', 'list_price', 'cost_price'], model.get('field_name')) && model.get('data_type') == 'currency') {
+                        if (_.contains(['discount_price', 'list_price', 'cost_price', 'date_cost_price'], model.get('field_name')) && model.get('data_type') == 'currency') {
                             model.set('before', app.currency.formatAmountLocale(model.get('before') || 0, '-99'));
                             model.set('after', app.currency.formatAmountLocale(model.get('after') || 0, '-99'));
                         }
@@ -91,13 +91,66 @@
                         }
                     }
 
-                    self._render();
+                    self._renderData();
 
                 };
                 app.api.call(method, url, options.attributes, callbacks);
             }
         });
         this.collection = new AuditCollection();
+    },
+
+    _renderData: function () {
+        var parentModule = this.module;
+        var fields = app.metadata.getModule(parentModule).fields;
+
+        _.each(this.filteredCollection.models, function (model) {
+            model.fields = app.utils.deepCopy(this.columnsMeta);
+
+            var before = _.findWhere(model.fields, {name: 'before'});
+            _.extend(before, fields[model.get('field_name')], {name: 'before'});
+
+            var after = _.findWhere(model.fields, {name: 'after'});
+            _.extend(after, fields[model.get('field_name')], {name: 'after'});
+
+            // FIXME: Temporary fix due to time constraints, proper fix will be addressed in TY-359
+            // We can check just `before` since `before` and `after` refer to same field
+            if (_.contains(['multienum', 'enum'], before['type']) && before['function']) {
+                before['type'] = 'base';
+                after['type'] = 'base';
+            }
+
+            // FIXME: This method should not be used as a public method (though
+            // it's being used everywhere in the app) this should be reviewed
+            // when SC-3607 gets in
+            model.fields = app.metadata._patchFields(
+                    'Audit',
+                    app.metadata.getModule('Audit'),
+                    model.fields
+                    );
+
+            if (model.get('data_type') == 'date') {
+                model.set('before', this.formatDate(model.get('before')));
+                model.set('after', this.formatDate(model.get('after')));
+            }
+
+        }, this);
+
+        this._render();
+    },
+
+    formatDate: function (value) {
+        if (!value) {
+            return value;
+        }
+
+        value = app.date(value);
+
+        if (!value.isValid()) {
+            return;
+        }
+
+        return value.formatUser(true);
     },
 
     /**

@@ -15,5 +15,6 @@ $dictionary["RevenueLineItem"]["fields"]["cost_pricing_formula"] = array(
     'vname' => 'LBL_COST_PRICING_FORMULA',
     'type' => 'varchar',
     'len' => '255',
+    'audited' => true,
     'dependency' => 'not(equal($is_bundle_product_c,"parent"))',
 );
