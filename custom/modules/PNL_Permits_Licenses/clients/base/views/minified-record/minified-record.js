@@ -68,6 +68,7 @@
         copyModel.set('pnl_permitfbdeicenses_ida', originalModel.get('id'));
         // Setting status to Expired for the old license
         copyModel.set('status_id', 'Expired');
+        copyModel.set('archived', '1');
 
         // Create an dummy view to save the copyModel save
         var createView = app.view.createView({
