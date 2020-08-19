@@ -16,10 +16,36 @@
 ({
     extendsFrom: 'FloatField',
 
+    initialize: function (options) {
+        this._super('initialize', [options]);
+        //add validation tasks
+        this.model.addValidationTask(this.name + '_ValidationTask', _.bind(this._doValidateFloatField, this));
+    },
+
+    _doValidateFloatField: function (fields, errors, callback) {
+        var value = this.model.get(this.name);
+        if (this.def.format && value) {
+            if (value.toString().includes('%')) {
+                value = value.toString().replace(/%/g, "");
+                this.model.set(this.name, value, {
+                    'silent': true
+                });
+
+                if (!_.isNaN(Number(value))) {
+                    delete errors[this.name];
+                }
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
     format: function (value) {
         var format = '';
-        if (this.def.format) {
-            format = '%'
+        if (this.def.format && value) {
+            if (!value.toString().includes('%')) {
+                format = '%'
+            }
         }
 
         if (this.def.disable_num_format || _.isNull(value) || _.isUndefined(value) || _.isNaN(value)) {
@@ -34,5 +60,5 @@
         }
 
         return app.utils.formatNumber(value, this.def.precision, this.def.precision, number_grouping_separator, decimal_separator) + format;
-    }
+    },
 })
