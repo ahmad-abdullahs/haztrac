@@ -116,6 +116,17 @@ array (
           array (
             'name' => 'wpm_waste_profile_module_documents_1_name',
           ),
+          1 => 
+          array (
+            'name' => 'producttemplates_documents_1_name',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'kbcontents_documents_1_name',
+          ),
         ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 

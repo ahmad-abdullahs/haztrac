@@ -302,6 +302,7 @@ $viewdefs['RevenueLineItems'] = array(
                             array(
                                 'name' => 'fed_percentage',
                                 'label' => 'LBL_FED_PERCENTAGE',
+                                'format' => true,
                             ),
                             2 =>
                             array(

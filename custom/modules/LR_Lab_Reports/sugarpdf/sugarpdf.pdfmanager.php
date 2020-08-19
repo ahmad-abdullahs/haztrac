@@ -17,7 +17,11 @@ class LR_Lab_ReportsSugarpdfPdfmanager extends SugarpdfPdfmanager {
         }
 
         $this->ss->assign('fields', $fields);
+        $e = new Exception();
+        $GLOBALS['log']->fatal("stack trace : " . print_r($e->getTraceAsString(), 1));
 
+//        $GLOBALS['log']->fatal('$fields : ' . print_r($fields, 1));
+        
         if (!empty($_REQUEST['pdf_template_id']) && $_REQUEST['pdf_template_id'] == $sugar_config['coc_pdf_template']) {
             $filenameParts = array('COC');
             if (!empty($this->bean) && !empty($this->bean->commodity_c)) {

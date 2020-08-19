@@ -24,8 +24,8 @@
                     layouts = app.metadata.getModule(options.module, 'layouts');
             if (layouts && layouts.subpanels && layouts.subpanels.meta) {
                 // This line is commented to stop displaying subpanels in Product Template.
-//                hasSubpanels = (layouts.subpanels.meta.components.length > 0);
-                hasSubpanels = false;
+                hasSubpanels = (layouts.subpanels.meta.components.length > 0);
+//                hasSubpanels = false;
             }
 
             if (!hasSubpanels) {

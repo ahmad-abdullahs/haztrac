@@ -144,6 +144,13 @@ $viewdefs[$module_name] = array(
                                 'related_fields' =>
                                 array(
                                     0 => 'commentlog',
+                                    1 => 'manifest_no_actual_c',
+                                    2 => 'status_c',
+                                    3 => 'manifest_days',
+                                    4 => 'manifest_tenth_day_date',
+                                    5 => 'rli_galon_total',
+                                    6 => 'primary_team_name',
+                                    7 => 'team_name',
                                 ),
                             ),
                             2 =>

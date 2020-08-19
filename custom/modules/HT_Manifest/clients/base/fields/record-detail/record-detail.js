@@ -46,6 +46,9 @@
 
     bindDataChange: function () {
         this._super('bindDataChange');
+        this.model.on('data:sync:complete', function () {
+            this.render();
+        }, this);
     },
 
     _loadTemplate: function () {

@@ -1,4 +1,4 @@
-<?php
+{{!--
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,6 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-$app_list_strings['moduleList']['wp_terms_and_conditions'] = 'Terms and Conditions';
-$app_list_strings['moduleListSingular']['wp_terms_and_conditions'] = 'Terms and Conditions';
+--}}
+<input type="text" data-type="date" name="{{name}}" value="{{value}}"
+    {{#if def.placeholder}} placeholder="{{str def.placeholder module}}"{{/if}}
+       disabled>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
