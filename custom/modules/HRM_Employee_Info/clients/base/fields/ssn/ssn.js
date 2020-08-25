@@ -41,13 +41,4 @@
     toggleDiv: function (ele) {
         $('#ssn-full-text').toggle();
     },
-
-    /**
-     * @inheritdoc
-     *
-     * Trim whitespace from value if it is a String.
-     */
-//    unformat: function(value) {
-//        return _.isString(value) ? value.trim() : value;
-//    }
 })
