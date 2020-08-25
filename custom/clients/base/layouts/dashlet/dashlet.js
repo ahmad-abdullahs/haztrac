@@ -60,4 +60,40 @@
         }
     },
 
+    setDashletMetadata: function (meta) {
+        var metadata = this.model.get("metadata"),
+                component = this.getCurrentComponent(metadata, this.index);
+
+        _.each(meta, function (value, key) {
+            this[key] = value;
+        }, component);
+
+        this.model.set("metadata", app.utils.deepCopy(metadata), {silent: true});
+        this.model.trigger("change:layout");
+        //auto save
+        if (this.model.mode === 'view') {
+            this.model.save(null, {
+                silent: true,
+                //Show alerts for this request
+                showAlerts: true,
+                success: _.bind(function () {
+                    if (this.model) {
+                        this.model.unset('updated');
+                    } else {
+                        // ++
+                        // This piece of code is added to refresh the route when 
+                        // Financial Detail or Account Details record view dashlet configuration are edited in
+                        // the drawer opened on top of Sales and Service List view.
+                        // Step 1: Go to Sales and Service list view
+                        // Step 2: Click and record, it will be opened in the drawer.
+                        // Step 3: Edit Financial Detail or Account Details record view dashlet and Save
+                        // Step 4: Issue Reproduced
+                        app.router.refresh();
+                    }
+                }, this)
+            });
+        }
+        return component;
+    },
+
 })

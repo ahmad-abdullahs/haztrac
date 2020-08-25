@@ -1,0 +1,19 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{#if value}}
+<div class="ellipsis_inline" data-placement="bottom" {{#if def.highlight}}style="background:{{def.backcolor}}; color:{{def.textcolor}}"{{/if}} {{#if dir}} dir="{{dir}}"{{/if}} title="{{value}}">
+    <a name="ssn-preview" class="rowaction ssn-preview" style="padding-right: 5px;" tabindex="-1">
+        <i rel="tooltip" title="" class="fa fa-eye" data-original-title="Preview"></i>
+    </a>{{value}} <span id="ssn-full-text" style="display:none; padding-left: 15px;color: red;font-weight: bold;">{{originalValue}}</span>
+</div>
+{{/if}}
