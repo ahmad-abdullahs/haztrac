@@ -127,6 +127,17 @@ array (
           array (
             'name' => 'kbcontents_documents_1_name',
           ),
+          1 => 
+          array (
+            'name' => 'hrm_employee_training_documents_1_name',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'hrm_employee_info_documents_1_name',
+          ),
         ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 

@@ -13,3 +13,5 @@ $mod_strings['LBL_RENEWAL_REFRESHER'] = 'Renewal / Refresher';
 $mod_strings['LBL_RENEW_BY_DATE'] = 'Renew By Date';
 $mod_strings['LBL_FREQUENCY'] = 'Frequency';
 $mod_strings['LBL_RENEWAL_DAYS'] = 'Renewal Days';
+$mod_strings['LBL_HRM_EMPLOYEE_INFO_HRM_EMPLOYEE_TRAINING_1_FROM_HRM_EMPLOYEE_INFO_TITLE'] = 'Employees Attendees ';
+$mod_strings['LBL_HRM_EMPLOYEE_INFO_HRM_EMPLOYEE_TRAINING_1_FROM_HRM_EMPLOYEE_TRAINING_TITLE'] = 'Employees Attendees ';
