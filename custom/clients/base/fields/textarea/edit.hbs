@@ -10,13 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#if def.showButton}}
-    <span class="small pull-right" style="margin-top: -25px;">
-        <a href="javascript:void(0);" class="rowaction btn btn-warning" rel="tooltip" data-event="button:open_magnify_popup_button:click" role="button" tabindex="0" name="open_magnify_popup_button" track="click:open_magnify_popup_button" data-original-title="Magnify" style="background: darkgray;">
-            <i class="fa fa-search"></i>
-        </a>
-    </span>
-{{/if}}
+{{#notEq def.showButton false}}
+    {{#eq def.dbType undefined}}
+        <span class="small pull-right" style="margin-top: -25px;">
+            <a href="javascript:void(0);" class="rowaction btn btn-warning" rel="tooltip" data-event="button:open_magnify_popup_button:click" role="button" tabindex="0" name="open_magnify_popup_button" track="click:open_magnify_popup_button" data-original-title="Magnify" style="background: darkgray;">
+                <i class="fa fa-search"></i>
+            </a>
+        </span>
+    {{/eq}}
+{{/notEq}}
 
 <textarea rows="{{def.rows}}" cols="{{def.cols}}" name="{{name}}"
           {{#if def.placeholder}} placeholder="{{str def.placeholder module}}"{{/if}}

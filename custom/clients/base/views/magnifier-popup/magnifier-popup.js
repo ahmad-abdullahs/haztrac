@@ -11,7 +11,7 @@
         if (this.layout) {
             this.layout.on('app:view:magnifier-popup', function () {
                 // Populate all the fields from parent model to context model.
-                this.context.get('model').set(this.context.get('parentModel').attributes);
+                this.context.get('model').set(this.context.originalModel.attributes);
                 this.render();
 
                 this.$('.modal').modal({
@@ -36,12 +36,12 @@
         // starts listening the app event and trigger the edit.
         // Now calling on the model level, this will not be the issue becuase each view has
         // its own model.
-        this.context.get('parentModel').trigger('editClicked');
+        this.context.originalModel.trigger('editClicked');
 
         var createModel = this.context.get('model');
 
         _.each(createModel.changed, function (val, key) {
-            this.context.get('parentModel').set(key, val);
+            this.context.originalModel.set(key, val);
         }, this);
 
         this.saveComplete();
@@ -56,7 +56,10 @@
 
     /**Overriding the base saveComplete method*/
     saveComplete: function () {
-        this._super('saveComplete');
+        //reset the form
+        this.$('.modal').modal('hide').find('form').get(0).reset();
+        //reset the `Save` button
+        this.disableButtons(false);
         app.$contentEl.removeAttr('aria-hidden');
         this._disposeView();
     },

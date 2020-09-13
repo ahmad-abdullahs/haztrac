@@ -16,6 +16,17 @@
 ({
     extendsFrom: 'RecordView',
 
+    initialize: function (options) {
+        this._super('initialize', [options]);
+        // This code is added to make the record view in edit mode when the 
+        // update button is clicked on magnifier-popup view.
+        this.model.on('editClicked', function () {
+            this.setButtonStates('edit');
+            this.action = 'edit';
+            this.toggleEdit(true);
+        }, this);
+    },
+
     /**
      * Don't save the last tab state, It's done application wide.
      * @inheritdoc

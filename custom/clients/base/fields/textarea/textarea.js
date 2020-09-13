@@ -46,6 +46,7 @@
             });
 
             context.prepare();
+            context.originalModel = this.model;
 
             /** Create a new view object */
             magnifierView = app.view.createView({
@@ -54,6 +55,9 @@
                 layout: this.view.layout,
                 module: context.module,
             });
+
+            magnifierView.meta.panels[0].fields[0].name = this.viewDefs.name;
+            magnifierView.meta.panels[0].fields[0].label = this.viewDefs.label;
 
             /** add the new view to the components list of the record layout */
             this.view.layout._components.push(magnifierView);

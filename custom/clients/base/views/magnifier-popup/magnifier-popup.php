@@ -22,8 +22,9 @@ $viewdefs['base']['view']['magnifier-popup'] = array(
             'fields' => array(
                 0 =>
                 array(
+                    // Name and label will be changed in the magnifier-text.js file
                     'name' => 'vendor_product_svc_descrp_c',
-                    'type' => 'magnifier-text',
+                    'type' => 'textarea',
                     'showButton' => false,
                     'label' => 'LBL_VENDOR_PRODUCT_SVC_DESCRP',
                     'default' => true,
