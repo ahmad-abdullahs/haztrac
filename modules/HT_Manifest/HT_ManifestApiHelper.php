@@ -62,13 +62,15 @@ SQL;
         while ($row = $db->fetchByAssoc($res)) {
             if (!empty($row['id']) && !empty($row['file_ext'])) {
                 $ret['preview_doc_id'] = $row['id'] . '.' . $row['file_ext'];
-                $ret['ht_manifest_preview_c'] = "{$sugar_config['site_url']}/pdfs/{$ret['preview_doc_id']}#zoom=60";
                 if (file_exists("pdfs/{$ret['preview_doc_id']}")) {
+                    $ret['ht_manifest_preview_c'] = "{$sugar_config['site_url']}/pdfs/{$ret['preview_doc_id']}#zoom=60";
+                    
                     if ($row['file_ext'] == 'pdf') {
                         $ret['popOutFullViewLink'] = "#bwc/index.php?entryPoint=openpdf&id={$row['id']}&module=mv_Attachments";
                     } else {
                         $ret['popOutFullViewLink'] = "{$sugar_config['site_url']}/rest/v11_4/mv_Attachments/{$row['id']}/file/uploadfile?force_download=0&1586557374461=1&platform=base";
                     }
+                    
                     $ret['fileExist'] = true;
                 }
             }

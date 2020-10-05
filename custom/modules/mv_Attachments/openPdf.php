@@ -4,10 +4,16 @@ global $sugar_config;
 if (isset($_REQUEST['id']) && !empty($_REQUEST['id'])) {
     require_once 'include/upload_file.php';
     $uploadDir = 'pdfs/';
+
+
     $filename = $_REQUEST['id'] . '.pdf';
 
     $f = new UploadFile();
     $f->temp_file_location = $uploadDir . $_REQUEST['id'] . '.pdf';
+
+    if (!empty($_REQUEST['uploadDir'])) {
+        $f->temp_file_location = $_REQUEST['uploadDir'] . '/' . $_REQUEST['id'];
+    }
 
     if (!empty($_REQUEST['module']) && !empty($_REQUEST['id'])) {
         $record = BeanFactory::retrieveBean($_REQUEST['module'], $_REQUEST['id']);

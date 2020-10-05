@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SALES_AND_SERVICE'] = 'Consolidated Generators';
 $mod_strings['LBL_HT_MANIFEST_HT_ASSETS_AND_OBJECTS_FROM_HT_ASSETS_AND_OBJECTS_TITLE'] = 'Assets &amp; Objects';
@@ -35,3 +34,4 @@ $mod_strings['LBL_REF_NUMBER_HEADER'] = 'Manifest Number';
 $mod_strings['LBL_ANALYSIS_DATE_HEADER'] = 'Date';
 $mod_strings['LBL_NOTES'] = 'Notes';
 $mod_strings['LBL_RLI_GALON_TOTAL'] = 'Total Vol';
+$mod_strings['LBL_NOTES_SUBPANEL_TITLE'] = 'Notes';
