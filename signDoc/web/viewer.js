@@ -256,7 +256,6 @@ function webViewerLoad() {
   window.PDFViewerApplication = pdfjsWebApp.PDFViewerApplication;
   window.PDFViewerApplicationOptions = pdfjsWebAppOptions.AppOptions;
   var event = document.createEvent('CustomEvent');
-  console.log(PDFViewerApplication);
   event.initCustomEvent('webviewerloaded', true, true, {});
   document.dispatchEvent(event);
   pdfjsWebApp.PDFViewerApplication.run(config);
@@ -758,6 +757,7 @@ var PDFViewerApplication = {
               this.pdfSidebar = new _pdf_sidebar.PDFSidebar(sidebarConfig, eventBus, this.l10n);
               this.pdfSidebar.onToggled = this.forceRendering.bind(this);
               this.pdfSidebarResizer = new _pdf_sidebar_resizer.PDFSidebarResizer(appConfig.sidebarResizer, eventBus, this.l10n);
+
             case 39:
             case "end":
               return _context5.stop();
@@ -1535,10 +1535,12 @@ var PDFViewerApplication = {
     this.pdfRenderingQueue.renderHighestPriority();
   },
   beforePrint: function beforePrint() {
+      
     var _this7 = this;
 
     if (this.printService) {
       return;
+      
     }
 
     if (!this.supportsPrinting) {
@@ -1586,9 +1588,6 @@ var PDFViewerApplication = {
     this.pdfPresentationMode.request();
   },
   bindEvents: function bindEvents() {
-console.log('bindevents');
-console.log(PDFViewerApplication.eventBus);
-console.log('------------------------');
     var eventBus = this.eventBus,
         _boundEvents = this._boundEvents;
     _boundEvents.beforePrint = this.beforePrint.bind(this);
@@ -1597,10 +1596,7 @@ console.log('------------------------');
     eventBus.on('hashchange', webViewerHashchange);
     eventBus.on('beforeprint', _boundEvents.beforePrint);
     eventBus.on('afterprint', _boundEvents.afterPrint);
-    eventBus.on('pagerendered', function(e) {
-      console.log('viewer.js pagerendered');
-      webViewerPageRendered(e);
-    });
+    eventBus.on('pagerendered', webViewerPageRendered);
     eventBus.on('textlayerrendered', webViewerTextLayerRendered);
     eventBus.on('updateviewarea', webViewerUpdateViewarea);
     eventBus.on('pagechanging', webViewerPageChanging);
@@ -1634,10 +1630,6 @@ console.log('------------------------');
     eventBus.on('updatefindmatchescount', webViewerUpdateFindMatchesCount);
     eventBus.on('updatefindcontrolstate', webViewerUpdateFindControlState);
     eventBus.on('fileinputchange', webViewerFileInputChange);
-
-    var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('eventbus', true, true);
-    document.dispatchEvent(event);
   },
   bindWindowEvents: function bindWindowEvents() {
     var eventBus = this.eventBus,
@@ -1901,7 +1893,6 @@ var webViewerOpenFileViaURL;
 }
 
 function webViewerPageRendered(evt) {
-  console.log('webViewerPageRendered');
   var pageNumber = evt.pageNumber;
   var pageIndex = pageNumber - 1;
   var pageView = PDFViewerApplication.pdfViewer.getPageView(pageIndex);
@@ -15296,9 +15287,11 @@ function renderPage(activeServiceOnEntry, pdfDocument, pageNumber, size) {
       }),
       intent: 'print'
     };
-    return pdfPage.render(renderContext).promise.then(function() {
-      PageManager.printPreviewPage(ctx, pdfPage.pageIndex, PRINT_UNITS);
+   // return pdfPage.render(renderContext).promise;
+   return pdfPage.render(renderContext).promise.then(function() {
+    PageManager.printPreviewPage(ctx, pdfPage.pageIndex, PRINT_UNITS);
     });
+
   }).then(function () {
     return {
       width: width,

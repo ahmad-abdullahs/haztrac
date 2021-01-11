@@ -1,34 +1,204 @@
-<!--suppress ALL -->
-<div id="popupContentContainer">
+
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div id="popupContentContainer">
+
     <button data-remodal-action="close" class="remodal-close"></button>
-    <div ng-repeat="comment in annotation.comments" id="comment_{{$index}}" ng-if="comment.modified != 'delete'" ng-mousedown="handleContextMenu($event, annotation, comment, '#comment_' + $index, $index)">
-        <img src="images/user_reply.svg" width="15" ng-show="$index > 0" class="user-reply-icon"/>
-        <span ng-class="$index == 0 ? 'annotation-form-header-username' : 'annotation-form-username'">{{comment.username}}</span>
-        <span class="action-link" ng-if="((key == 'reply' && $index < annotation.comments.length - 1) || (key == 'edit' && formComment.id != comment.id)) &&
-            ((annotation.isRootCommentEditable() && $index == 0) || $index > 0) && isBySameUser(comment)">
-            <span ng-if="$index > 0" class="delete-link uppercase" ng-click="deleteComment(annotation, comment)" data-l10n-id="delete_label">DELETE</span>
-            <span ng-if="$index > 0"> | </span>
-            <span class="edit-link uppercase" ng-click="setAnnotation(annotation, 'edit', comment)" data-l10n-id="edit_label">EDIT</span>
-        </span>
-        <br/>
-        <span class="annotation-form-header-date-created">
-            <span class="uppercase" data-l10n-id="date_modified_label">DATE MODIFIED</span>: {{ UtilService.getMomentFormattedDate(comment.dateModified, 'll') | uppercase }}
-        </span>
-        <br/>
-        <span ng-show="isCommentFeatureStatusDisplay() && comment.reviewStatuses.length > 0" class="annotation-form-header-review-status">
-            <span class="uppercase" data-l10n-id="status_label">Status</span>: &nbsp;
-            <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(comment).status}}.svg" height="13"
-                 title="{{getLatestReviewStatus(comment).status}}" data-l10n-id="{{getLatestReviewStatus(comment).status}}"/>
-        </span>
-        <div class="annotation-form-header-comment" ng-bind-html="getRootComment(annotation, comment, $index)"
-             ng-if="(key == 'reply' && $index < annotation.comments.length - 1) ||
-            (key == 'edit' && formComment.id != comment.id) || key == 'view'">
-        </div>
-        <span ng-if="(key == 'edit' && formComment.id == comment.id) ||
-            (key == 'reply' && $index == annotation.comments.length - 1)">
-            <textarea id="comment" ng-model="formComment.comment" rows="5"></textarea><br/>
-            <button class="toolbarButton annotation-form-save" accesskey="s" ng-click="saveComment()" data-l10n-id="save_label">Save</button>
-        </span>
-        <div class="hr" ng-if="annotation.comments.length > 1 && $index < annotation.comments.length - 1 && annotation.comments[annotation.comments.length - 1].modified != 'delete'"/>
+
+    <!--2nd For Shop Febrication -->
+
+
+    <div ng-if="(annotation.inspection_type == 3 &amp;&amp; key ==&#39;create&#39;)">
+          <h2>Create Piece Information</h2>
+          <input type="checkbox" ng-model="formComment.ckb_allpart" id="ckb_allpart" value="1"> All Parts and Pieces<br>
+          <textarea id="mark" ng-model="formComment.mark" rows="2" placeholder="Enter Mark"></textarea><br>
+          <textarea id="location" ng-model="formComment.location" rows="2" placeholder="Enter Location"></textarea><br>
+          <!-- <input type="text" id="mark" ng-model="formPieceinfo.mark" value=""/><br/>
+          <input type="text" id="location" ng-model="formPieceinfo.location" value=""/><br/> -->
+          <button class="toolbarButton annotation-form-save" accesskey="s" ng-click="savePieceinfo()" data-l10n-id="savePiece_label">Save</button>
+
     </div>
+
+    <div ng-if="(annotation.inspection_type == 3 &amp;&amp; key ==&#39;reply&#39;)">
+          <h2>Attach Welder Variable</h2>
+            <div>
+              <!-- ng-change="getWelderinfo()"   -->
+              <input type="date" data-date-format="MM DD YYYY" ng-model="formComment.date" id="datepicker_febrication" onchange="parent.getWelderinfo()">
+              <div id="welderdropdown_div">
+              <select ng-model="formComment.weldervar" id="weldervar" width="250px;">
+                <option value="">-Select Welder Variable</option>
+                <option ng-repeat="weldersinfo in annotation.weldersinfo" value="{{weldersinfo.welder_id}}">{{weldersinfo.welder_num}} {{weldersinfo.welder_name}}</option>
+              </select>
+              </div>
+              <br>
+
+              <span>
+                  <input type="checkbox" ng-model="formComment.non_destructive" value="1">Magnetic Particle
+                  <input type="checkbox" ng-model="formComment.non_ultrasonic" value="2">Ultrasonic Testing
+                  <br>
+              </span>
+              <textarea id="comment" ng-model="formComment.comment" rows="5" placeholder="Enter Comment"></textarea><br>
+
+            <br>
+            <span style="font-size: 12px;">
+                <input type="radio" ng-model="formComment.status" value="0">Ongoing
+                <input type="radio" ng-model="formComment.status" value="2">Deviation
+                <input type="radio" ng-model="formComment.status" value="4">Notable Items
+                <input type="radio" ng-model="formComment.status" value="1">Compliant<br>
+                <input type="radio" ng-model="formComment.status" value="5">Notable Item/Deviation Addressed
+                <input type="radio" ng-model="formComment.status" value="3">VT Complete Pending NDT
+                <br>
+            </span>
+
+            <br>
+            </div>
+          <button class="toolbarButton annotation-form-save" accesskey="s" ng-click="saveWelderinfo()">Save</button>
+
+    </div>
+
+    <div ng-if="(annotation.inspection_type == 3 &amp;&amp; key ==&#39;edit&#39;)">
+      <h2>Edit Piece Information</h2>
+
+      <textarea id="mark" ng-model="formComment.mark" rows="2" placeholder="Enter Mark"></textarea><br>
+
+      <textarea id="location" ng-model="formComment.location" rows="2" placeholder="Enter Location"></textarea><br>
+      <button class="toolbarButton annotation-form-save" accesskey="s" ng-click="updatePieceinfo()" data-l10n-id="savePiece_label">Save</button>
+
+    </div>
+
+
+  <div ng-if="(annotation.inspection_type != 3)">
+
+
+      <div ng-if="(annotation.inspection_type == 2 &amp;&amp; key ==&#39;view&#39;)" style="overflow: scroll;min-height:500px;">
+        <!-- <div ng-repeat="comment in annotation.comments " > -->
+              <div ng-if="(key == &#39;view&#39; &amp;&amp; formComment.file_attachment!=null || formComment.file_attachment!=&#39;&#39;)">
+
+              <a download="" title="Click to Download">
+              <div id="watermark">Inspection #:{{annotation.req_no}} <br> Annotation #:{{annotation.srno}}</div>
+              <img src="./popup_files/{{formComment.file_attachment}}" style="width:550px;">
+
+              </a>
+              </div>
+        <!-- </div> -->
+      </div>
+
+      <div ng-if="(annotation.inspection_type == 2 &amp;&amp; key !=&#39;view&#39;)">
+          <div><center>Annotation #:{{annotation.srno}}</center></div>
+        <img style="float: right;" ng-if="(annotation.view_mode != 0) &amp;&amp; (annotation.readOnly == 0) &amp;&amp; (annotation.comments.length &lt;3)" src="./popup_files/delete.svg" height="14" title="Delete Annotation" class="button annotation-action-icon" ng-click="delete(annotation)">
+
+    <div ng-repeat="comment in annotation.comments " id="comment_{{$index}}" len="{{annotation.comments.length}}" ng-if="comment.modified != &#39;delete&#39;" ng-mousedown="handleContextMenu($event, annotation, comment, &#39;#comment_&#39; + $index, $index)">
+        <img ng-if="((key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1))" src="./popup_files/user_reply.svg" width="15" ng-show="$index &gt;= 0" class="user-reply-icon">
+        <span ng-if="((key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1))" ng-class="$index == 0 ? &#39;annotation-form-header-username&#39; : &#39;annotation-form-username&#39;">{{comment.user_name}}</span>
+        <span class="action-link" ng-if="((key == &#39;reply&#39;) || (key == &#39;edit&#39; &amp;&amp; formComment.id != comment.id)) &amp;&amp;
+            ((annotation.isRootCommentEditable() &amp;&amp; $index == 0) || $index &gt; 0) &amp;&amp; isBySameUser(comment) &amp;&amp; annotation.view_mode != 0">
+            <span ng-if="($index == annotation.comments.length-2 &amp;&amp; $index != 0) &amp;&amp; (annotation.readOnly == 0)" class="delete-link uppercase" ng-click="deleteComment(annotation, comment)">Delete Comment</span>
+            <span ng-if="$index &gt; 0"> |</span>
+            <span ng-if="($index == annotation.comments.length-2 &amp;&amp; $index != 0) &amp;&amp; (annotation.readOnly == 0) " c="{{$index}}{{annotation.comments.length-2}}" class="edit-link uppercase" ng-click="setAnnotation(annotation, &#39;edit&#39;, comment)" data-l10n-id="edit_label">EDIT</span>
+
+        </span>
+
+        <br>
+        <span ng-if="(key == &#39;edit&#39; &amp;&amp; formComment.id == comment.id) ||
+            (key == &#39;reply&#39; &amp;&amp; $index == annotation.comments.length - 1 ) &amp;&amp; (annotation.view_mode != 0)" style="font-size: 12px;">
+            <span><input type="radio" ng-model="formComment.status" value="0">Ongoing</span>
+            <span ng-if="(annotation.type_user==3)"><input type="radio" ng-model="formComment.status" value="2">Deviation</span>
+            <span><input type="radio" ng-model="formComment.status" value="4">Notable Items</span>
+            <span ng-if="(annotation.type_user==3)"><input type="radio" ng-model="formComment.status" value="1">Compliant</span><br>
+            <span><input type="radio" ng-model="formComment.status" value="5">Notable Item/Deviation Addressed</span>
+
+            <br>
+        </span>
+        <br>
+        <span ng-if="((key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1))" class="annotation-form-header-date-created" ng-show="$index &gt;= 0">
+            <span class="uppercase" data-l10n-id="date_modified_label">DATE MODIFIED</span>: {{ UtilService.getMomentFormattedDate(comment.dateModified, 'll') | uppercase }} {{ UtilService.getMomentFormattedDate(comment.dateModified, 'LT') | uppercase }}
+            <!-- <input type="date" data-date-format="MM DD YYYY" ng-model="formComment.date" id="datepicker_edit" /> -->
+        </span>
+
+        <br>
+        <span ng-show="isCommentFeatureStatusDisplay() &amp;&amp; comment.reviewStatuses.length &gt; 0" class="annotation-form-header-review-status">
+            <span class="uppercase" data-l10n-id="status_label">Status</span>: &nbsp;
+            <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(comment).status}}.svg" height="13" title="{{getLatestReviewStatus(comment).status}}" data-l10n-id="{{getLatestReviewStatus(comment).status}}">
+        </span>
+        <div class="annotation-form-header-comment" ng-bind-html="getRootComment(annotation, comment, $index)" ng-if="(key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1) ||
+            (key == &#39;edit&#39; &amp;&amp; formComment.id != comment.id) || key == &#39;view&#39;">
+        </div>
+          <div ng-if="(key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1 &amp;&amp; comment.file_attachment!=null || formComment.file_attachment!=&#39;&#39;)">
+        <img ng-if="(comment.file_attachment!=&#39;&#39;)" style="cursor: pointer;" ng-click="setImageAnnotation(annotation, &#39;view&#39;, comment)" src="./popup_files/{{comment.file_attachment}}" width="150px;">
+        </div>
+
+        <span ng-if="(key == &#39;edit&#39; &amp;&amp; formComment.id == comment.id) ||
+            (key == &#39;reply&#39; &amp;&amp; $index == annotation.comments.length - 1)">
+            <span ng-if="(annotation.type_user == 3)">
+                <select ng-model="formComment.selectrev"><option value="">-Inspection Number--</option>
+                  <option ng-repeat="request in annotation.request_revision " value="{{request.inspection}}">{{request.inspection}} - {{request.inspection_date}}</option>
+                </select>
+            </span>
+            <textarea ng-if="annotation.view_mode != 0" id="comment" ng-model="formComment.comment" rows="5"></textarea><br>
+            <input ng-if="annotation.view_mode != 0" type="file" ng-model="formComment.myImage" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)"><img width="80" ng-src="{{src}}"><br>
+            <button ng-if="annotation.view_mode != 0" class="toolbarButton annotation-form-save" accesskey="s" ng-click="saveComment()" data-l10n-id="save_label">Save</button>
+        </span>
+        <div class="hr" ng-if="annotation.comments.length &gt; 1 &amp;&amp; $index &lt; annotation.comments.length - 1 &amp;&amp; annotation.comments[annotation.comments.length - 1].modified != &#39;delete&#39;">
+    </div>
+
 </div>
+
+
+
+</div>
+
+    <div ng-if="(annotation.inspection_type == 6 &amp;&amp; key !=&#39;view&#39;)">
+        <div><center>Annotation #:{{annotation.srno}}</center></div>
+        <img style="float: right;" ng-if="(annotation.view_mode != 0) &amp;&amp; (annotation.readOnly == 0) &amp;&amp; (annotation.comments.length &lt;3)" src="./popup_files/delete.svg" height="14" title="Delete Annotation" class="button annotation-action-icon" ng-click="delete(annotation)">
+
+        <div ng-repeat="comment in annotation.comments " id="comment_{{$index}}" len="{{annotation.comments.length}}" ng-if="comment.modified != &#39;delete&#39;" ng-mousedown="handleContextMenu($event, annotation, comment, &#39;#comment_&#39; + $index, $index)">
+            <img ng-if="((key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1))" src="./popup_files/user_reply.svg" width="15" ng-show="$index &gt;= 0" class="user-reply-icon">
+            <span ng-if="((key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1))" ng-class="$index == 0 ? &#39;annotation-form-header-username&#39; : &#39;annotation-form-username&#39;">{{comment.user_name}}</span>
+            <span class="action-link" ng-if="((key == &#39;reply&#39;) || (key == &#39;edit&#39; &amp;&amp; formComment.id != comment.id)) &amp;&amp;
+            ((annotation.isRootCommentEditable() &amp;&amp; $index == 0) || $index &gt; 0) &amp;&amp; isBySameUser(comment) &amp;&amp; annotation.view_mode != 0">
+            <span ng-if="($index == annotation.comments.length-2 &amp;&amp; $index != 0) &amp;&amp; (annotation.readOnly == 0)" class="delete-link uppercase" ng-click="deleteComment(annotation, comment)">Delete Comment</span>
+            <span ng-if="$index &gt; 0"> |</span>
+            <span ng-if="($index == annotation.comments.length-2 &amp;&amp; $index != 0) &amp;&amp; (annotation.readOnly == 0) " c="{{$index}}{{annotation.comments.length-2}}" class="edit-link uppercase" ng-click="setAnnotation(annotation, &#39;edit&#39;, comment)" data-l10n-id="edit_label">EDIT</span>
+
+        </span>
+            <br>
+            <span ng-if="(key == &#39;edit&#39; &amp;&amp; formComment.id == comment.id) ||
+            (key == &#39;reply&#39; &amp;&amp; $index == annotation.comments.length - 1 ) &amp;&amp; (annotation.view_mode != 0)" style="font-size: 12px;">
+            <span><input type="radio" ng-model="formComment.status" value="0">Ongoing</span>
+
+            <br>
+        </span>
+
+            <br>
+            <span ng-if="((key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1))" class="annotation-form-header-date-created" ng-show="$index &gt;= 0">
+            <span class="uppercase" data-l10n-id="date_modified_label">DATE MODIFIED</span>: {{ UtilService.getMomentFormattedDate(comment.dateModified, 'll') | uppercase }} {{ UtilService.getMomentFormattedDate(comment.dateModified, 'LT') | uppercase }}
+
+        </span>
+
+            <br>
+            <span ng-show="isCommentFeatureStatusDisplay() &amp;&amp; comment.reviewStatuses.length &gt; 0" class="annotation-form-header-review-status">
+            <span class="uppercase" data-l10n-id="status_label">Status</span>: &nbsp;
+            <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(comment).status}}.svg" height="13" title="{{getLatestReviewStatus(comment).status}}" data-l10n-id="{{getLatestReviewStatus(comment).status}}">
+        </span>
+            <div class="annotation-form-header-comment" ng-bind-html="getRootComment(annotation, comment, $index)" ng-if="(key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1) ||
+            (key == &#39;edit&#39; &amp;&amp; formComment.id != comment.id) || key == &#39;view&#39;">
+            </div>
+            <div ng-if="(key == &#39;reply&#39; &amp;&amp; $index &lt; annotation.comments.length - 1 &amp;&amp; comment.file_attachment!=null || formComment.file_attachment!=&#39;&#39;)">
+                <img ng-if="(comment.file_attachment!=&#39;&#39;)" style="cursor: pointer;" ng-click="setImageAnnotation(annotation, &#39;view&#39;, comment)" src="./popup_files/{{comment.file_attachment}}" width="150px;">
+            </div>
+            <span ng-if="(key == &#39;edit&#39; &amp;&amp; formComment.id == comment.id) ||
+            (key == &#39;reply&#39; &amp;&amp; $index == annotation.comments.length - 1)">
+            <textarea ng-if="annotation.view_mode != 0" id="comment" ng-model="formComment.comment" rows="5"></textarea><br>
+            <input ng-if="annotation.view_mode != 0" type="file" ng-model="formComment.myImage" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
+                  <img width="80" ng-src="{{src}}"><br>
+            <button ng-if="annotation.view_mode != 0" class="toolbarButton annotation-form-save" accesskey="s" ng-click="saveComment()" data-l10n-id="save_label">Save</button>
+        </span>
+            <div class="hr" ng-if="annotation.comments.length &gt; 1 &amp;&amp; $index &lt; annotation.comments.length - 1 &amp;&amp; annotation.comments[annotation.comments.length - 1].modified != &#39;delete&#39;">
+        </div>
+    </div>
+
+
+
+    <!-- </div> -->
+
+</div>
+</div></div></body></html>

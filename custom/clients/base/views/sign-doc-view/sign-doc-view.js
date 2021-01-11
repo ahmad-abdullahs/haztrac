@@ -18,6 +18,7 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         this.url = this.options.context.get('url');
+        this.document_id = this.options.context.get('document_id');
     },
 
     _renderHtml: function () {

@@ -1,0 +1,1307 @@
+/*noinspection CssUnknownProperty*/
+.selectTextDisabled {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.separator {
+    padding: 8px 0;
+    width: 1px;
+    background-color: hsla(0,0%,0%,.5);
+    z-index: 99;
+    box-shadow: 0 0 0 1px hsla(0,0%,100%,.08);
+    display: inline-block;
+    margin: 8px 2px;
+}
+
+html[dir='ltr'] .colorPicker img {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 3px;
+    left: 7px;
+}
+
+html[dir='rtl'] .colorPicker img {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 3px;
+    right: 7px;
+}
+
+.colorPicker div {
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    bottom: 2px;
+}
+
+.colorPicker input {
+    display: none;
+}
+
+.minicolors-swatch {
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    border: 0 !important;
+}
+
+.colorPickerHidden {
+    position: absolute;
+    top: auto;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Do not add rtl for this one as the color picker will be out of place. */
+html[dir='rtl'] .minicolors {
+    right: 173px !important;
+}
+
+.strikeThrough {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+html[dir='ltr'] .strikeThroughVertical {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 2px solid;
+}
+
+html[dir='rtl'] .strikeThroughVertical {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    right: 50%;
+    border-right: 2px solid;
+}
+
+.strikeThroughHorizontal {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 2px solid;
+}
+
+#stampList {
+    height: 200px;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+#digitalSignatureList {
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+/* http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropDown */
+.dropDownButton {
+    position: relative;
+    display: inline-block;
+}
+
+.dropDownButton ul * {
+    color: #cccccc !important;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.dropDownButton-content {
+    display: none;
+    position: absolute;
+    background-color: #404040;
+    min-width: 140px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.dropDownButton-content li {
+    width: 100%;
+}
+
+/* For stamp/images that do not have a delete button beside it. */
+.dropDownButton-content li > a:first-child:nth-last-child(1) {
+    display: inline-block;
+    padding: 15px;
+}
+
+.dropDownButton-content li > a:first-child:nth-last-child(2) {
+    display: inline-block;
+    padding: 15px;
+}
+
+.dropDownButton a {
+    color: black;
+    text-decoration: none;
+}
+
+.dropDownButton li:hover {
+    background-color: hsla(0, 0%, 0%, .7);
+}
+
+.show {
+    display: block;
+}
+
+@media all and (max-width: 320px) {
+    html[dir='ltr'] .innerCenter {
+        right: -20% !important;
+    }
+
+    html[dir='rtl'] .innerCenter {
+        left: -20% !important;
+    }
+
+    html[dir='ltr'] #stampList {
+        right: 0;
+    }
+
+    html[dir='rtl'] #stampList {
+        right: 0;
+    }
+}
+
+#sidebarContainer {
+    z-index: 9999 !important;
+}
+
+html[dir='ltr'] #toolbarAnnotations {
+    width: 100%;
+    float: left;
+}
+
+html[dir='rtl'] #toolbarAnnotations {
+    width: 100%;
+    float: right;
+}
+
+html[dir='ltr'] #toolbarAnnotationsLeft {
+    margin-left: -1px;
+}
+html[dir='rtl'] #toolbarAnnotationsRight {
+    margin-right: -1px;
+}
+
+html[dir='ltr'] #toolbarAnnotationsLeft,
+html[dir='rtl'] #toolbarAnnotationsRight {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+html[dir='ltr'] #toolbarAnnotationsRight,
+html[dir='rtl'] #toolbarAnnotationsLeft {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+html[dir='ltr'] #toolbarAnnotationsLeft > *,
+html[dir='ltr'] #toolbarAnnotationsMiddle > *,
+html[dir='ltr'] #toolbarAnnotationsRight > * {
+    position: relative;
+    float: left;
+}
+
+html[dir='rtl'] #toolbarAnnotationsLeft > *,
+html[dir='rtl'] #toolbarAnnotationsMiddle > *,
+html[dir='rtl'] #toolbarAnnotationsRight > * {
+    position: relative;
+    float: right;
+}
+
+/* Override sidebar icon */
+#sidebarToggle::before {
+    content: '' !important;
+}
+
+/* Override these viewer.css styles */
+
+/*
+Override some properties in the text layer positioning of Div layers so that in IE, range.getClientRects()
+will work correctly. DO NOT make RTL.
+- https://github.com/mozilla/pdf.js/issues/5513
+*/
+.textLayer > div, .textLayer > span {
+    /* Removed !important in position attribute because text selection direction behavior is opposite. */
+    position: relative;
+    float: left !important;
+    margin-bottom: -100%;
+    margin-right: -100%;
+}
+
+.grab-to-pan-grab {
+    cursor: url('../web/images/grab.cur'), move !important;
+}
+
+.grab-to-pan-grabbing {
+    cursor: url("../web/images/grabbing.cur"), move !important;
+}
+
+#viewerContainer {
+    top: 64px !important;
+}
+
+/* We now have 2 rows of toolbar, so we increase the height */
+#toolbarContainer {
+    height: 64px !important;
+}
+
+/* modified so multi-layered canvas will overlap */
+.pdfViewer .page canvas {
+    margin: 0;
+    position: absolute;
+}
+
+/* Settings for annotation list */
+#annotationList {
+    border-collapse: collapse;
+    color: white;
+    /* To avoid lines (from border-bottom) shown when filter form is slide up. */
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+#annotationList tr {
+    border-bottom: solid grey 1px;
+}
+
+#annotationList tr:hover {
+    background-color: hsla(0, 0%, 0%, 0.7);
+}
+
+#annotationList tr.selected {
+    background-color: grey;
+}
+
+#annotationList td {
+    padding: 5px;
+    vertical-align: middle;
+}
+
+#annotationList .username {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#annotationList .page {
+    font-size: 11px;
+}
+
+html[dir='ltr'] #annotationList .review-status-icon {
+    margin-left: 5px;
+    float: right;
+    width: 13px;
+}
+
+html[dir='rtl'] #annotationList .review-status-icon {
+    margin-right: 5px;
+    float: left;
+    width: 13px;
+}
+
+#comment-list .username {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+#comment-list .comment {
+    font-size: 12px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+#comment-list .date  {
+    font-size: 9px;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+#comment-list.top-border {
+    /*border-top: 1px solid #cccccc;*/
+    /*margin-top: 5px;*/
+    margin-bottom: 5px;
+}
+
+/* https://two-wrongs.com/draw-a-tree-structure-with-only-css */
+
+#comment-list, #comment-list ul, #comment-list li {
+    position: relative;
+}
+
+html[dir='ltr'] #comment-list ul {
+    list-style: none;
+    padding-left: 0;
+    padding-top: 5px;
+}
+
+html[dir='rtl'] #comment-list ul {
+    list-style: none;
+    padding-right: 0;
+    padding-top: 5px;
+}
+
+html[dir='ltr'] #comment-list ul ul {
+    padding-left: 10px;
+    padding-top: 0;
+}
+
+html[dir='rtl'] #comment-list ul ul {
+    padding-right: 10px;
+    padding-top: 0;
+}
+
+html[dir='ltr'] #comment-list ul ul li::before, #comment-list ul ul li::after {
+    content: '';
+    position: absolute;
+    left: -9px;
+}
+
+html[dir='rtl'] #comment-list ul ul li::before, #comment-list ul ul li::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+}
+
+/* Horizontal line */
+#comment-list ul ul li::before {
+    border-top: 1px solid #cccccc;
+    top: 13px;
+    width: 8px;
+    height: 0;
+}
+
+/* Vertical line for list item except last child. */
+html[dir='ltr'] #comment-list ul ul > li.normal-child::after {
+    border-left: 1px solid #cccccc;
+    height: 100% !important;
+    width: 0;
+    top: 5px;
+}
+
+html[dir='rtl'] #comment-list ul ul > li.normal-child::after {
+    border-right: 1px solid #cccccc;
+    height: 100% !important;
+    width: 0;
+    top: 5px;
+}
+
+/* Vertical line for list item last child. */
+html[dir='ltr'] #comment-list ul ul > li.last-child::after {
+    border-left: 1px solid #cccccc;
+    height: 8px;
+    width: 0;
+    top: 5px;
+}
+
+html[dir='rtl'] #comment-list ul ul > li.last-child::after {
+    border-right: 1px solid #cccccc;
+    height: 8px;
+    width: 0;
+    top: 5px;
+}
+
+#comment-list .comment-container {
+    padding-top: 8px;
+}
+
+#comment-list li {
+    border-top: none !important;
+    border-bottom: none !important;
+    line-height: normal !important;
+}
+
+#comment-list .comment-container span {
+    padding: 0 !important;
+    display: inline !important;
+}
+
+html[dir='ltr'] .expand-collapse {
+    float: left;
+    padding-left: 2px
+}
+
+html[dir='rtl'] .expand-collapse {
+    float: right;
+    padding-right: 2px
+}
+
+img.button:hover {
+    opacity: 0.8;
+}
+
+/* Annotation form */
+textarea {
+    resize: none;
+    width: 100%;
+}
+
+.annotation-form-header-username {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.annotation-form-header-date-created {
+    font-size: 10px;
+}
+
+.annotation-form-header-review-status {
+    font-size: 10px;
+    align-items: center;
+}
+
+.annotation-form-header-comment {
+    font-size: 12px;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 5px;
+}
+
+.annotation-form-username {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.annotation-form-date-created {
+    font-size: 12px;
+}
+
+.annotation-form-save {
+    width: auto !important;
+    color: black;
+    border: solid darkslategrey 1px;
+}
+
+div.hr {
+    min-height: 1px;
+    max-height: 1px;
+    clear: both;
+    width: 100%;
+    border-bottom: 1px solid darkslategrey;
+    height: 1px; padding-top:5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#popupContainer {
+    max-width: 480px;
+}
+
+html[dir='ltr'] #popupContainer div div {
+    text-align: left;
+}
+
+html[dir='rtl'] #popupContainer div div {
+    text-align: right;
+}
+
+#popupContainer .edit-link {
+    cursor: pointer;
+}
+
+#popupContainer .delete-link {
+    cursor: pointer;
+}
+
+html[dir='ltr'] #popupContainer .action-link {
+    font-size: 8px;
+    float: right;
+    color: blue;
+}
+
+html[dir='rtl'] #popupContainer .action-link {
+    font-size: 8px;
+    float: left;
+    color: blue;
+}
+
+.annotation-row {
+    display: table;
+}
+
+.annotation-icon {
+    margin: 0 auto;
+    width: 20px;
+    transform : translateY(5px);
+    vertical-align: middle;
+}
+
+html[dir='ltr'] .annotation-detail {
+    display: table-cell;
+    padding-left: 7px;
+    width: 100%;
+}
+
+html[dir='rtl'] .annotation-detail {
+    display: table-cell;
+    padding-right: 7px;
+    width: 100%;
+}
+
+html[dir='ltr'] .annotation-action {
+    width: 100%;
+    text-align: right;
+    margin-top: 5px;
+}
+
+html[dir='rtl'] .annotation-action {
+    width: 100%;
+    text-align: left;
+    margin-top: 5px;
+}
+
+html[dir='ltr'] .annotation-action-icon {
+    margin-left: 10px;
+}
+
+html[dir='rtl'] .annotation-action-icon {
+    margin-right: 10px;
+}
+
+.user-reply-icon {
+    transform : translateY(2px);
+}
+
+#playerContainer {
+    width: 450px !important;
+}
+
+/* This hides the swatch preview when a color is chosen in the custom color picker */
+html[dir='ltr'] .minicolors-theme-default .minicolors-swatch {
+    margin-left: -10000px;
+}
+
+html[dir='rtl'] .minicolors-theme-default .minicolors-swatch {
+    margin-right: -10000px;
+}
+
+#propertiesContainer {
+    max-width: 280px;
+}
+
+html[dir='ltr'] .propertyRow {
+    color: white;
+    font-size: 15px !important;
+    text-align: left;
+    vertical-align:middle;
+}
+
+html[dir='rtl'] .propertyRow {
+    color: white;
+    font-size: 15px !important;
+    text-align: right;
+    vertical-align:middle;
+}
+
+.propertyRow select {
+    text-align: center !important;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.properties-background {
+    background: #333333 !important;
+}
+
+.propertyColor {
+    width: 16px;
+    height: 2px;
+}
+
+.propertyDivider {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid gray;
+}
+
+.propertyRow select {
+    border: solid 1px #cccccc;
+    width: 100%;
+}
+
+.propertyRow input[type="text"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: solid 1px #cccccc;
+    transition: border 0.3s;
+    height: 20px;
+    width: 100%;
+}
+
+.propertyRow input[type="text"]:focus,
+.propertyRow input[type="text"].focus {
+    border: solid 1px #cccccc;
+}
+
+.propertyRow input[type="range"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 20px;
+    width: 100%;
+    background: none;
+}
+
+/* For Firefox only. */
+.propertyRow input[type="range"]::-moz-range-track {
+    width: 100%;
+}
+
+/* Disable tooltip in IE because input range will display incorrectly if step is decimal. */
+::-ms-tooltip { display: none; }
+
+.propertyRow span.subLabel {
+    font-size: 10px;
+}
+
+.filter-annotation-container {
+    border-bottom: solid grey 1px;
+}
+
+.filter-annotation-container > button > img {
+    width: 16px;
+}
+
+html[dir='ltr'] .filter-annotation-container > button {
+    display: table-cell;
+    float: left;
+}
+
+html[dir='rtl'] .filter-annotation-container > button {
+    display: table-cell;
+    float: right;
+}
+
+html[dir='ltr'] .filter-annotation-container > button:nth-last-child(3) {
+    display: table-cell;
+    float: right;
+    margin-right: 2px;
+}
+
+html[dir='ltr'] .filter-annotation-container > button:nth-last-child(3) {
+    display: table-cell;
+    float: left;
+    margin-right: 2px;
+}
+
+#search-comments-container {
+    display: flex;
+    width: 100%;
+}
+
+#search-comments-container > div {
+    display: none;
+    width: 100%;
+}
+
+#filter-options-container {
+    display: flex;
+}
+
+#filter-options-container > div {
+    display: none;
+    width: 100%;
+}
+
+#filter-option-comment-by {
+    display: block;
+}
+
+#filter-option-type {
+    display: block;
+}
+
+html[dir='ltr'] div[id^="filter-option-"] > span {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: white;
+    padding: 3px;
+    text-align: center;
+    border: solid 1px gray;
+    float: left;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin: 3px 3px 7px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    /*noinspection CssUnknownProperty*/
+    -o-user-select: none;
+    -moz-user-select: none;
+}
+
+html[dir='rtl'] div[id^="filter-option-"] > span {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: white;
+    padding: 3px;
+    text-align: center;
+    border: solid 1px gray;
+    float: right;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin: 3px 3px 7px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    /*noinspection CssUnknownProperty*/
+    -o-user-select: none;
+    -moz-user-select: none;
+}
+
+div[id^="filter-option-"] > span.selected-filter {
+    background-color: gray;
+    color: white;
+}
+
+div[id^="filter-option-"] span img {
+    width: 16px;
+    height: 16px;
+}
+
+html[dir='ltr'] .filter-option-header {
+    background-color: gray;
+    color: white;
+    float: left;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 100%;
+    padding: 3px 0;
+    margin-bottom: 5px;
+    text-indent: 5px;
+}
+
+html[dir='rtl'] .filter-option-header {
+    background-color: gray;
+    color: white;
+    float: right;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 100%;
+    padding: 3px 0;
+    margin-bottom: 5px;
+    text-indent: 5px;
+}
+
+html[dir='ltr'] input#search-comments-input {
+    width: 100%;
+    clear: none !important;
+    float: left !important;
+    margin: 0 2px 2px 2px;
+}
+
+html[dir='rtl'] input#search-comments-input {
+    width: 100%;
+    clear: none !important;
+    float: right !important;
+    margin: 0 2px 2px 2px;
+}
+
+div#search-comments-container > div {
+    margin: 3px 0;
+}
+
+div#sort-container {
+    display: flex;
+}
+
+div#sort-container > div {
+    display: none;
+    width: 100%;
+}
+
+html[dir='ltr'] select#sort-select {
+    width: 100%;
+    clear: none !important;
+    float: left !important;
+    margin: 2px 2px 5px 2px;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    padding: 2px;
+}
+
+html[dir='rtl'] select#sort-select {
+    width: 100%;
+    clear: none !important;
+    float: right !important;
+    margin: 2px 2px 5px 2px;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    padding: 2px;
+}
+
+select#sort-select option {
+    background: #373737;
+}
+
+html[dir='ltr'] button#hide-filter-form-button {
+    float: right;
+}
+
+html[dir='rtl'] button#hide-filter-form-button {
+    float: left;
+}
+
+/*
+Hide IE's clear button in the input field as this prevents ng-change from getting
+triggered in Angular JS.
+*/
+/*noinspection CssInvalidPseudoSelector*/
+#filter::-ms-clear {
+    display: none;
+}
+
+/* Copied from viewer.css .textLayer with some attributes removed. */
+.freeTextLayer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.freeTextLayer > div {
+    position: absolute;
+    white-space: pre-wrap;
+    cursor: text;
+    -webkit-transform-origin: 0% 0%;
+    -moz-transform-origin: 0% 0%;
+    -o-transform-origin: 0% 0%;
+    -ms-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+}
+
+/* Set minimum width so that area border is visible as guide. */
+/*noinspection CssUnknownProperty*/
+.freeTextLayer div[contenteditable] {
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -o-user-select: text;
+    min-width: 5px;
+    outline: solid 2px;
+}
+
+/* Ensures in Firefox that height will not be zero if empty. Executes only if Firefox. */
+@-moz-document url-prefix() {
+    .freeTextLayer div[contenteditable]:before {
+        content: '\feff';
+    }
+}
+
+html[dir='ltr'] .freeText_button {
+    position: absolute;
+    bottom: 0;
+    text-align: right;
+}
+
+html[dir='rtl'] .freeText_button {
+    position: absolute;
+    bottom: 0;
+    text-align: left;
+}
+
+span#form_field_group .separator {
+    margin: 0 !important;
+}
+
+#digitalSignatureContainer {
+    max-width: 500px;
+    max-height: 400px;
+}
+
+#digitalSignatureContainer canvas {
+    border: 1px solid black;
+    width: 100% !important;
+}
+
+#signature-pad div.footer {
+    margin-top: 10px !important;
+}
+
+#signature-pad div.footer .description {
+    color: #c3c3c3;
+    text-align: center;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    vertical-align: middle;
+}
+
+#signature-pad .save-use, #signature-pad .just-use {
+    width: 80px !important;
+    color: black;
+    border: solid darkslategrey 1px;
+}
+
+/* Removes remodal's blurry text effect. */
+.remodal-is-opening, .remodal-is-opened {
+    transform: none !important;
+}
+
+/* Lowered animation speed because in Chrome, when modal with textarea opens agan, there is an ugly vibrate effect. */
+.remodal-is-opening {
+    -webkit-animation-duration: 0.15s !important;
+}
+
+/* This block of code re-adjusts the rotate buttons in the innerCenter div layer and secondary toolbar menu. */
+@media all and (max-width: 830px) {
+    #aPageRotateCw, #aPageRotateCcw {
+        display: none !important;
+    }
+
+    #secondaryPageRotateCw, #secondaryPageRotateCcw {
+        display: block !important;
+    }
+}
+
+@media all and (max-width: 1030px) {
+    .sidebarOpen #aPageRotateCw, .sidebarOpen #aPageRotateCcw {
+        display: none !important;
+    }
+
+    #secondaryPageRotateCw, #secondaryPageRotateCcw {
+        display: block !important;
+    }
+}
+
+/* Override opentip max width so that long text will not go beyond its tool tip area. */
+.opentip-container {
+    width: auto !important;
+}
+
+.opentip-container > canvas {
+    width: calc(100% + 25px) !important;
+}
+
+.opentip-container .pre-tag {
+    font-family: monospace;
+    white-space: pre-line
+}
+
+/* For review status indicator in menu item. */
+html[dir='ltr'] .review-status-chosen:before {
+    position: absolute;
+    top: 1%;
+    left: .5em;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    content:'\2713';
+    color: black;
+}
+
+html[dir='rtl'] .review-status-chosen:before {
+    position: absolute;
+    top: 1%;
+    right: .5em;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    content:'\2713';
+    color: black;
+}
+
+/* For stamp uploader dialog. */
+div#uploadStampContainer {
+    max-width: 400px;
+}
+
+form#stamp-dropzone {
+    min-height: 125px;
+}
+
+html[dir='ltr'] button#bookmark_add {
+    display: inline-block;
+    background: url('images/add.svg') no-repeat center left 20px;
+    background-size: 16px 16px;
+    height: 30px;
+    width: 95%;
+    font-size: 12px;
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+}
+
+html[dir='rtl'] button#bookmark_add {
+    display: inline-block;
+    background: url('images/add.svg') no-repeat center right 20px;
+    background-size: 16px 16px;
+    height: 30px;
+    width: 95%;
+    font-size: 12px;
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* Range slider styling for all browsers including IE */
+input[type=range] {
+    -webkit-appearance: none;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: cornflowerblue;
+    margin-top: -5px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: cornflowerblue;
+}
+
+input[type=range]:-moz-focusring {
+    outline: none;
+}
+
+input[type=range]::-ms-track {
+    height: 5px;
+
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: cornflowerblue;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+/* For JSTree. */
+
+/* Hack to feature word wrapping. */
+.jstree  {
+    background: none !important;
+}
+
+/* This results in selection shown as whole row. No solution to base it if width overlaps parent element. */
+/*noinspection CssInvalidPropertyValue*/
+div#bookmarksView {
+    height: 100%;
+}
+
+.jstree a {
+    white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    /*noinspection CssInvalidPropertyValue*/
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    word-wrap: break-word;      /* IE */
+    height: auto !important;
+    font-size: 13px;
+    word-break: keep-all; /* This stops the word breaking. */
+    position: relative;
+    width: calc(100% - 37px);
+    line-height: 1.5 !important;
+    color: hsla(0, 0%, 100%, .8) !important;
+}
+
+.jstree-rename-input {
+    position: relative;
+    overflow: hidden;
+    width: calc(100% - 32px) !important;
+    max-width: calc(100% - 32px) !important;
+    box-sizing: border-box;
+    resize: none;
+    border-radius: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+html[dir='ltr'] .jstree a, .jstree-rename-input {
+    left: 24px;
+}
+
+html[dir='rtl'] .jstree a, .jstree-rename-input {
+    right: 24px;
+}
+
+.jstree li {
+    overflow: hidden;
+}
+
+.jstree li.jstree-node i {
+    position: absolute !important;
+}
+
+.jstree li > ins {
+    vertical-align: top;
+}
+
+/* Override background so that selection color will not be visible. */
+/* This is due to our overriding some attributes for word wrap. */
+span.jstree-clicked {
+    background: none !important;
+}
+
+/* For JSTree context menu. */
+.vakata-context {
+    padding: 0 !important;
+    z-index: 10000;
+}
+
+.vakata-context li > a  {
+    line-height: 2.2em !important;
+    font-size: 14px !important;
+}
+
+/* Remove the icon and separator. */
+.vakata-context li > a > i {
+    display: none !important;
+    margin: 0 !important;
+}
+
+html[dir='ltr'] .vakata-context li > a > span {
+    margin: 0 !important;
+    border-left: 0 !important;
+    background: none !important;
+}
+
+html[dir='rtl'] .vakata-context li > a > span {
+    margin: 0 !important;
+    border-right: 0 !important;
+    background: none !important;
+}
+
+/*
+This CSS is a workaround for viewers v2.0 and beyond because it seems the code is tied
+to the sidebar views and the thumbnails somehow need to be visible.
+*/
+div#thumbnailView.hidden {
+    display: block !important;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#confirmContainer {
+    max-width: 400px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+
+/* Use rotate counter and rotate counter clockwise icons of PDF.JS because they are clearer and finer in resolution. */
+#aPageRotateCcw::before {
+    content: url(../web/images/secondaryToolbarButton-rotateCcw.png);
+}
+
+#aPageRotateCw::before {
+    content: url(../web/images/secondaryToolbarButton-rotateCw.png);
+}
+
+@media
+screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 2dppx),
+screen and (-webkit-min-device-pixel-ratio: 1.1), screen and (min-resolution: 1.1dppx)
+{
+    #aPageRotateCcw::before {
+        content: url(../web/images/secondaryToolbarButton-rotateCcw@2x.png);
+    }
+
+    #aPageRotateCw::before {
+        content: url(../web/images/secondaryToolbarButton-rotateCw@2x.png);
+    }
+
+    #filter-search-comments-button.toolbarButton > img {
+        content: url(../web/images/toolbarButton-search@2x.png);
+    }
+}
+
+div#calibrateContainer {
+    max-width: 280px;
+    background: #333333 !important;
+}

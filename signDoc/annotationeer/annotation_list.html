@@ -1,29 +1,30 @@
-<div ng-controller="AnnotationListController">
+
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div ng-controller="AnnotationListController">
     <div class="filter-annotation-container">
         <button id="filter-button" class="toolbarButton" title="Filter Options" data-l10n-id="filter_options" ng-click="showHideFilterOptionsForm()">
-            <img src="images/filter.svg"/>
+            <img src="./annotation_list_files/filter.svg">
         </button>
 
         <button id="filter-search-comments-button" class="toolbarButton" title="Search Comments" data-l10n-id="search_comments_filter" ng-click="showHideSearchCommentsForm()">
-            <img src="../web/images/toolbarButton-search.png"/>
+            <img src="./annotation_list_files/toolbarButton-search.png">
         </button>
 
         <button id="clear-filter-button" class="toolbarButton" title="Clear Filter" data-l10n-id="clear_filter" ng-click="clearFilter()">
-            <img src="images/clear_filter.svg"/>
+            <img src="./annotation_list_files/clear_filter.svg">
         </button>
 
         <button id="sort-button" class="toolbarButton" title="Sort annotations/comments" data-l10n-id="sort_annotation_comment" ng-click="showHideSortOptions()">
-            <img src="images/az.svg"/>
+            <img src="./annotation_list_files/az.svg">
         </button>
 
         <button id="hide-filter-form-button" class="toolbarButton" title="Hide Filter Form" data-l10n-id="hide_filter_form" ng-click="hideFilterForm(this)">
-            <img src="images/collapse.svg"/>
+            <img src="./annotation_list_files/collapse.svg">
         </button>
 
         <div id="search-comments-container">
             <div>
-                <input type="text" id="search-comments-input" class="toolbarField" title="Search Comments" data-l10n-id="search_comments"
-                    ng-model="filter.text" ng-change="filterAnnotations()" ng-model-options="{debounce: 1000}"/>
+                <input type="text" id="search-comments-input" class="toolbarField" title="Search Comments" data-l10n-id="search_comments" ng-model="filter.text" ng-change="filterAnnotations()" ng-model-options="{debounce: 1000}">
             </div>
         </div>
 
@@ -50,56 +51,67 @@
     </div>
     <table id="annotationList" width="100%" cellspacing="0" cellpadding="0">
         <!-- Use "track by" https://stackoverflow.com/questions/24144970/angular-ng-repeat-causes-flickering -->
-        <tr id="{{annotation.id}}" ng-repeat="annotation in annotations | orderBy: [ sortOption, 'pageIndex', annotation.id ] track by annotation.id"
-            ng-class="annotation.selected ? 'selected' : ''" ng-show="partOfFilteredResult(annotation)">
+        <tbody><tr id="{{annotation.id}}" ng-repeat="annotation in annotations | orderBy: [ sortOption, &#39;pageIndex&#39;, annotation.id ] track by annotation.id" ng-class="annotation.selected ? &#39;selected&#39; : &#39;&#39;" ng-show="partOfFilteredResult(annotation)">
             <td width="100%" ng-mousedown="clickedRow($event, annotation);
                 !isShowComments() ? handleContextMenu($event, annotation, annotation.comments[0],
-                'right', 'tr#' + annotation.id, true) : return;">
+                &#39;right&#39;, &#39;tr#&#39; + annotation.id, true) : return;">
                 <div class="annotation-row">
-                    <img ng-src="images/{{getImage(annotation.annotationType)}}" height="20" class="annotation-icon"/>
+                    <img ng-src="images/{{getImage(annotation.annotationType)}}" height="20" class="annotation-icon">
                     <div class="annotation-detail" id="annotation_{{annotation.id}}">
-                        <span class="username">{{annotation.comments.length > 0 ? annotation.comments[0].username : 'No Username'}}</span>
+                      <span class="username">{{annotation.comments.length &gt; 0 ? annotation.comments[annotation.comments.length-1].user_name : 'No Username'}} - {{annotation.srno}} </span>
+                        <br>
+                        <div class="username" ng-repeat="comment in annotation.comments | orderBy: &#39;-id&#39; | limitTo: 1" ng-switch="{{comment.status}}">
+                          <span ng-switch-when="0" ng-style="{&#39;background-color&#39;: &#39;#0433ff&#39;}">Ongoing</span>
+                          <span ng-switch-when="1" ng-style="{&#39;background-color&#39;: &#39;green&#39;}">Compliant</span>
+                          <span ng-switch-when="2" ng-style="{&#39;background-color&#39;: &#39;#d9534f&#39;}">Deviation</span>
+                          <span ng-switch-when="4" ng-style="{&#39;background-color&#39;: &#39;#d9534f&#39;}">Notable Items</span>
+                          <span ng-switch-when="5" ng-style="{&#39;background-color&#39;: &#39;#0433ff&#39;}">Notable Item/Deviation Addressed</span>
+                          <span ng-switch-default="" ng-style="{&#39;background-color&#39;: &#39;#0433ff&#39;}">Pending</span>
+                        </div>
+                        <div ng-if="(annotation.inspection_type == 3)">
+                          <span class="page" ng-model="mark">Mark: {{annotation.mark}} </span><br>
+                          <span class="page" ng-model="location">Location: {{annotation.mark_location}} </span><br>
+                        </div>
                         <span ng-if="isShowComments()" class="review-status-icon" id="sidebar_menu_{{annotation.id}}">
-                            <img src="images/dots.svg" width="11" ng-click="handleContextMenu($event, annotation, comment, 'left', '#sidebar_menu_' + annotation.id)"/>
+                            <img src="./annotation_list_files/dots.svg" width="11" ng-click="handleContextMenu($event, annotation, comment, &#39;left&#39;, &#39;#sidebar_menu_&#39; + annotation.id)">
                         </span>
-                        <span ng-if="isCommentFeatureStatusDisplay() && annotation.comments[0].reviewStatuses.length > 0" class="review-status-icon" id="annotation_{{$index}}">
-                            <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(annotation.comments[0]).status}}.svg" height="13"
-                                title="{{getLatestReviewStatus(annotation.comments[0]).status}}" data-l10n-id="{{getLatestReviewStatus(annotation.comments[0]).status}}"/>
+                        <span ng-if="isCommentFeatureStatusDisplay() &amp;&amp; annotation.comments[0].reviewStatuses.length &gt; 0" class="review-status-icon" id="annotation_{{$index}}">
+                            <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(annotation.comments[0]).status}}.svg" height="13" title="{{getLatestReviewStatus(annotation.comments[0]).status}}" data-l10n-id="{{getLatestReviewStatus(annotation.comments[0]).status}}">
                         </span>
-                        <br/><span class="page"><span data-l10n-id="page_label">Page</span> {{annotation.pageIndex + 1}} - {{ UtilService.getMomentFormattedDate(annotation.dateCreated, 'll') }}</span>
+                        <br><span class="page"><span data-l10n-id="page_label">Page</span> {{annotation.pageIndex + 1}} - {{ UtilService.getMomentFormattedDate(annotation.comments[annotation.comments.length-1].dateCreated, 'll') }}</span>
                     </div>
                 </div>
                 <div class="annotation-action">
-                    <img ng-if="!annotation.isFormField() && isShowComments()" id="img_{{annotation.id}}" ng-src="images/{{annotationShowComments.id == annotation.id ? 'collapse' : 'expand'}}.svg"
-                         height="20" class="expand-collapse" ng-click="showComments(annotation)" ng-class="alwaysExpandComments() ? 'hidden' : ''"/>
-                    <br ng-if="isShowComments() && !alwaysExpandComments()"/>
+                    <img ng-if="!annotation.isFormField() &amp;&amp; isShowComments()" id="img_{{annotation.id}}" ng-src="images/{{annotationShowComments.id == annotation.id ? &#39;collapse&#39; : &#39;expand&#39;}}.svg" height="20" class="expand-collapse" ng-click="showComments(annotation)" ng-class="alwaysExpandComments() ? &#39;hidden&#39; : &#39;&#39;">
+                    <br ng-if="isShowComments() &amp;&amp; !alwaysExpandComments()">
                     <span ng-if="!isShowComments()">
                         <!-- Measurement area annotation root comment should not be editable, contains area value. -->
-                        <img ng-show="useShowHideAnnotationFeature()" ng-src="images/{{annotation.hidden && 'eye_show.svg' || 'eye_hide.svg'}}" width="16" height="16" class="button annotation-action-icon" ng-click="showHide(annotation)"/>
-                        <img ng-show="annotation.canContainComments() && (annotation.readOnlyComment)" src="images/view_comment.svg" height="20" title="View Comments" class="button annotation-action-icon" ng-click="view(annotation)" data-l10n-id="view"/>
-                        <img ng-show="annotation.canContainComments() && !annotation.readOnlyComment && isBySameUser(annotation.comments[0])" src="images/edit.svg" height="16" title="Edit" ng-class="!annotation.isRootCommentEditable() ? 'hidden' : ''" class="button annotation-action-icon" ng-click="edit(annotation)" data-l10n-id="edit"/>
-                        <img ng-show="annotation.canContainComments() && !annotation.readOnlyComment" src="images/reply.svg" height="16" title="Reply" class="button annotation-action-icon" ng-click="reply(annotation)" data-l10n-id="reply"/>
-                        <img ng-show="!annotation.isReadOnly() && isBySameUser(annotation.comments[0])" src="images/delete.svg" height="16" title="Delete" class="button annotation-action-icon" ng-click="delete(annotation)" data-l10n-id="delete"/>
+                        <img ng-show="useShowHideAnnotationFeature()" ng-src="images/{{annotation.hidden &amp;&amp; &#39;eye_show.svg&#39; || &#39;eye_hide.svg&#39;}}" width="16" height="16" class="button annotation-action-icon" ng-click="showHide(annotation)">
+                        <img ng-show="annotation.canContainComments() &amp;&amp; (annotation.readOnlyComment)" src="./annotation_list_files/view_comment.svg" height="20" title="View Comments" class="button annotation-action-icon" ng-click="view(annotation)" data-l10n-id="view">
+                        <img ng-show="annotation.canContainComments() &amp;&amp; !annotation.readOnlyComment" src="./annotation_list_files/reply.svg" height="16" title="Reply" class="button annotation-action-icon" ng-click="reply(annotation)" data-l10n-id="reply">
+                        <span ng-if="annotation.commons.length &lt;= 1 &amp;&amp; annotation.view_mode != 0 ">
+                        <img ng-show="annotation.canContainComments() &amp;&amp; !annotation.readOnlyComment &amp;&amp; isBySameUser(annotation.comments[0])" src="./annotation_list_files/edit.svg" height="16" title="Edit" ng-class="!annotation.isRootCommentEditable() ? &#39;hidden&#39; : &#39;&#39;" class="button annotation-action-icon" ng-click="edit(annotation)" data-l10n-id="edit">
+                        </span>
+                        <img ng-if="annotation.view_mode != 0 " ng-show="!annotation.isReadOnly() &amp;&amp; isBySameUser(annotation.commons[0])" src="./annotation_list_files/delete.svg" height="16" title="Delete" class="button annotation-action-icon" ng-click="delete(annotation)" data-l10n-id="delete">
+
                     </span>
                 </div>
                 <div id="comment-list" class="top-border" ng-if="alwaysExpandComments() || annotationShowComments.id == annotation.id">
                     <ul class="comment">
                         <li ng-bind-html="annotation.getRootComment() | newline"></li>
-                        <ul ng-if="annotation.comments.length > 1">
-                            <li ng-repeat="comment in annotation.comments" ng-if="$index > 0 && comment.comment != ''
-                            && comment.modified != 'delete'"
-                                ng-class="isLastComment(comment, annotation) ? 'last-child' : 'normal-child'">
+                        <ul ng-if="annotation.comments.length &gt; 1">
+                            <li ng-repeat="comment in annotation.comments" ng-if="$index &gt; 0 &amp;&amp; comment.comment != &#39;&#39;
+                            &amp;&amp; comment.modified != &#39;delete&#39;" ng-class="isLastComment(comment, annotation) ? &#39;last-child&#39; : &#39;normal-child&#39;">
                                 <div class="comment-container" id="comment_{{$index}}">
                                     <span class="username">{{comment.username}}</span>
                                     <span class="review-status-icon">
-                                        <img id="dot_{{comment.id}}" src="images/dots.svg" width="11" ng-click="handleContextMenu($event, annotation, comment, 'left', '#dot_' + comment.id)"/>
+                                        <img id="dot_{{comment.id}}" src="./annotation_list_files/dots.svg" width="11" ng-click="handleContextMenu($event, annotation, comment, &#39;left&#39;, &#39;#dot_&#39; + comment.id)">
                                     </span>
-                                    <span ng-if="isCommentFeatureStatusDisplay() && comment.reviewStatuses.length > 0" class="review-status-icon">
-                                        <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(comment).status}}.svg" height="13"
-                                             title="{{getLatestReviewStatus(comment).status}}" data-l10n-id="{{getLatestReviewStatus(comment).status}}"/>
+                                    <span ng-if="isCommentFeatureStatusDisplay() &amp;&amp; comment.reviewStatuses.length &gt; 0" class="review-status-icon">
+                                        <img ng-src="{{getReviewStatusFolderUrl()}}status_{{getLatestReviewStatus(comment).status}}.svg" height="13" title="{{getLatestReviewStatus(comment).status}}" data-l10n-id="{{getLatestReviewStatus(comment).status}}">
                                     </span>
-                                    <br/><span class="comment" ng-bind-html="comment.comment | newline"></span>
-                                    <br/><span class="date"><span class="uppercase" data-l10n-id="modified_label">MODIFIED</span>: {{comment.dateModified | date: "MMM d, yyyy" | uppercase}}</span>
+                                    <br><span class="comment" ng-bind-html="comment.comment | newline"></span>
+                                    <br><span class="date"><span class="uppercase" data-l10n-id="modified_label">MODIFIED</span>: {{comment.dateModified | date: "MMM d, yyyy" | uppercase}}</span>
                                 </div>
                             </li>
                         </ul>
@@ -107,5 +119,6 @@
                 </div>
             </td>
         </tr>
-    </table>
+    </tbody></table>
 </div>
+</body></html>

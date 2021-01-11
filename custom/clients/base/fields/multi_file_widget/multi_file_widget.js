@@ -22,6 +22,7 @@
         'click .addFile': 'createRecord',
         'click .deleteFile': 'deleteRecord',
         'click .signFile': 'signFile',
+        'click .copyLinkToShare': 'copyLinkToShare',
         'click .loadInDashlet': 'loadInDashlet',
     },
 
@@ -177,11 +178,31 @@
             layout: 'sign-doc',
             context: {
                 url: 'signDoc/annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf',
+                document_id: beanID,
             }
         }, _.bind(function (context, model) {
             // comes here when its is closed
         }, self));
 
+    },
+    /**
+     * Listener function for copying link to share with someone for external use.
+     * @param {Object} e (current event)
+     */
+    copyLinkToShare: function (e) {
+        var self = this;
+        var row = $(e.currentTarget).parents('div.control-group.clearfix');
+        var beanID = $(row).attr('data-id');
+
+        var url = app.config.signDocURL.url + 'annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf' +
+                '&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') + '&document_id=' + beanID +
+                '&hostUrl=' + app.config.signDocURL.url;
+
+        $('#copyLinkToShareInput').val(url);
+        var copyText = document.getElementById("copyLinkToShareInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
     },
 
     fileSave: function (model, value) {

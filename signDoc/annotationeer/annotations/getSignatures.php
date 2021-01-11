@@ -7,6 +7,9 @@ require_once 'signDoc_utils.php';
 require_once 'signDoc_dbConnection.php';
 
 $sugar_user_id = $_GET['sugar_user_id'];
+$document_id = $_GET['document_id'];
+
+$innerIdsCounter = 1;
 
 $returnData = array(
     'settings' => array(
@@ -36,9 +39,107 @@ if (mysqli_num_rows($result) > 0) {
             'height' => $row["height"],
         ));
     }
-} else {
-    echo "0 results";
 }
+
+$fieldsMappingList = array(
+    'annotationType' => 'annotation_type_id',
+    'backgroundColor' => 'background_color',
+    'calibrationMeasurementType' => 'calibration_measurement_type_id',
+    'calibrationValue' => 'calibration_value',
+    'color' => 'color',
+    'comments' => 'comments',
+    'dateCreated' => 'date_created',
+    'dateModified' => 'date_modified',
+    'docId' => 'doc_id',
+    'drawingPositions' => 'drawing_positions',
+    'font' => 'font',
+    'fontSize' => 'font_size',
+    'formFieldName' => 'form_field_name',
+    'formFieldValue' => 'form_field_value',
+//    'highlightTextRects' => 'highlight_text_rects',
+    'icon' => 'icon',
+    'id' => 'id',
+    'lineStyle' => 'line_style_id',
+    'lineWidth' => 'line_width',
+    'measurementType' => 'measurement_type_id',
+    'opacity' => 'opacity',
+    'pageHeight' => 'page_height',
+    'pageIndex' => 'page_index',
+    'pageWidth' => 'page_width',
+    'readOnly' => 'read_only',
+    'readOnlyComment' => 'read_only_comment',
+    'text' => 'text',
+//    'origH' => 'coordinate',
+//    'origW' => '',
+//    'origX' => '',
+//    'origY' => '',
+);
+
+$sql = "SELECT * FROM signdoc_annotations where document_id='{$document_id}' AND deleted=0 ORDER BY annotation_id";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $fetchedAnnotation = json_decode($row['annotation']);
+
+
+        $annotation = array();
+        foreach ($fieldsMappingList as $key => $value) {
+            $annotation[$value] = $fetchedAnnotation->$key;
+        }
+        $annotation['document_id'] = $row['document_id'];
+        $annotation['id'] = $row['annotation_id'];
+        $annotation['coordinate'] = $fetchedAnnotation->origX . "," . $fetchedAnnotation->origY . "," .
+                $fetchedAnnotation->origW . "," . $fetchedAnnotation->origH;
+
+        // For Text Highlighting etc...
+        $annotation['highlight_text_rects'] = array();
+        foreach ($fetchedAnnotation->highlightTextRects as $key => $dimension) {
+            ///////////////////////////
+//            error_log(print_r($dimension, TRUE));
+
+            $highlightTextRects = array();
+
+            $highlightTextRects['annotation_id'] = $row['annotation_id'];
+            $highlightTextRects['coordinate'] = $dimension->origLeft . "," . $dimension->origTop . "," .
+                    $dimension->origWidth . "," . $dimension->origHeight;
+            $highlightTextRects['dom_rotate_angle'] = $dimension->domRotateAngle;
+            $highlightTextRects['id'] = $innerIdsCounter;
+
+//            error_log(print_r($highlightTextRects, TRUE));
+
+            array_push($annotation['highlight_text_rects'], $highlightTextRects);
+            $innerIdsCounter++;
+        }
+
+        // For Drawing etc...
+        $annotation['drawing_positions'] = array();
+        foreach ($fetchedAnnotation->drawingPositions as $key => $dimension) {
+            ///////////////////////////
+//            error_log(print_r($dimension, TRUE));
+
+            $drawingPositions = array();
+
+            $drawingPositions['annotation_id'] = $row['annotation_id'];
+            $drawingPositions['coordinate'] = $dimension->origX . "," . $dimension->origY;
+            $drawingPositions['id'] = $innerIdsCounter;
+
+//            error_log(print_r($drawingPositions, TRUE));
+
+            array_push($annotation['drawing_positions'], $drawingPositions);
+            $innerIdsCounter++;
+        }
+
+        // Stamp
+        if ($annotation['annotation_type_id'] == '12' || $annotation['annotation_type_id'] == '23') {
+            $annotation['icon'] = $fetchedAnnotation->iconSrc;
+        }
+
+        array_push($returnData['annotations'], $annotation);
+    }
+}
+
 
 mysqli_close($conn);
 

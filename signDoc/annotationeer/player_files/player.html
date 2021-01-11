@@ -1,6 +1,12 @@
+<!-----------------------------------------------------------------
+ Copyright (C) 2016-Present Mark Chester Goking <chitgoks@gmail.com>.
+ This file is part of Annotationeer and it can not be copied
+ and/or distributed without the express permission of the author.
+------------------------------------------------------------------->
 <!DOCTYPE html>
-<!-- saved from url=(0014)about:internet -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>
+<html>
+
+<body>
 
 <div class="player">
     <button data-remodal-action="close" class="remodal-close"></button>
@@ -15,41 +21,41 @@
 
 	<audio id="audioPlayer"></audio>
 
-    <input id="slider_audio" type="range" value="0" step="any" max="1" class="slider_audio">
+    <input id="slider_audio" type ="range" value="0" step="any"  max="1" class="slider_audio"/>
 
-    <br><br>
+    <br/><br/>
 
-    <div>
+    <div >
 
         <button id="play" onclick="play()" class="button_icon">
-            <img src="./player_files/play.svg" width="32" height="32">
+            <img src="record_mp3/play.svg" width="32" height="32"/>
         </button>
 
         <button id="stop" onclick="stop()" class="button_icon">
-            <img src="./player_files/stop.svg" width="32" height="32">
+            <img src="record_mp3/stop.svg" width="32" height="32"/>
         </button>
 
         <button id="record" onclick="record()" class="button_icon">
-            <img src="./player_files/record.svg" width="32" height="32">
+            <img src="record_mp3/record.svg" width="32" height="32"/>
         </button>
 
         <button id="rewind" onclick="rewind()" class="button_icon">
-            <img src="./player_files/rewind.svg" width="32" height="32">
+            <img src="record_mp3/rewind.svg" width="32" height="32"/>
         </button>
 
         <button id="forward" onclick="forward()" class="button_icon">
-            <img src="./player_files/forward.svg" width="32" height="32">
+            <img src="record_mp3/forward.svg" width="32" height="32"/>
         </button>
 
-        <input id="slider_volume" type="range" min="0" max="1" step="0.1" value="1" class="slider">
+        <input id="slider_volume" type ="range" min="0" max="1" step="0.1" value="1" class="slider" />
 
         <button id="volume" title="Volume" onclick="setVolumeState()" class="button_icon">
-            <img src="./player_files/volume.svg" width="16" height="16">
+            <img src="record_mp3/volume.svg" width="16" height="16"/>
         </button>
 
-        <input id="slider_speed" type="range" min="1" max="2" step="0.1" value="1" class="slider">
+        <input id="slider_speed" type ="range" min="1" max="2" step="0.1" value="1" class="slider" />
 
-        <img src="./player_files/speed.svg" class="img" width="16" height="16">
+        <img src="record_mp3/speed.svg" class="img" width="16" height="16"/>
 
     </div>
 
@@ -256,5 +262,5 @@
 </script>
 
 
-
-</body></html>
+</body>
+</html>
