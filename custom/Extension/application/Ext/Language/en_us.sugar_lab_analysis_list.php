@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-27 16:00:19
+ // created: 2020-12-20 19:10:41
 
 $app_list_strings['lab_analysis_list']=array (
   'Aniline Point F' => 'Aniline Point, °F',
@@ -34,6 +34,7 @@ $app_list_strings['lab_analysis_list']=array (
   'Pour Point F' => 'Pour Point, °F',
   'Reid Vapor Pressure PSIA' => 'Reid Vapor Pressure, PSIA',
   'Sediment by Extraction Wt' => 'Sediment by Extraction, Wt%',
+  'D 1298' => 'Specific Gravity (D1298)',
   'Styrene PPM' => 'Styrene, PPM',
   'Sulfur Wt' => 'Sulfur, Wt% (D4294)',
   'Total Acid Number' => 'Total Acid Number (TAN), Mg_KOH/gm',
