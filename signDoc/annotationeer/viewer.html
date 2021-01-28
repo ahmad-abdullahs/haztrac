@@ -20,10 +20,8 @@
         full_name = url.searchParams.get("full_name");
         document_id = url.searchParams.get("document_id");
         hostUrl = url.searchParams.get("hostUrl");
-//        console.log("sugar_user_id : ", sugar_user_id);
-//        console.log("full_name : ", full_name);
-//        console.log("document_id : ", document_id);
-//        console.log("hostUrl : ", hostUrl);
+//        is_locked = url.searchParams.get("is_locked");
+        is_locked = 0;
     </script>
 
     <!-- This is for versions prior to v1.9.426 because l1on.js exists as a file. Uncomment this line to enable it. -->
@@ -63,8 +61,44 @@
     <script src="scripts/override.js"></script>
 </head>
 
-<body tabindex="1" class="loadingInProgress">
-
+<body tabindex="1" class="loadingInProgress" onload="manageControlsOnLock();">
+<script>
+    function manageControlsOnLock() {
+        if(document_id){
+            $.ajax({
+                url: 'annotations/checkIfLocked.php?document_id=' + document_id,
+                type: 'GET',
+                success: function (response) {
+                    var response = JSON.parse(response);
+                    is_locked = response['is_locked'];
+                    if(is_locked == "1"){
+                        $('.toolbarButton').each(function(){
+                            $(this).addClass('hidden');
+                        });
+                        $('.separator').each(function(){
+                            $(this).addClass('hidden');
+                        });
+                        $('#scaleSelect').prop('disabled', true);
+                        $('#pageNumber').prop('disabled', true);
+                    }
+                }
+            });
+        }
+        
+        if (parent.SUGAR) {
+            if (parent.document.getElementById('signDocframe').getAttribute('is_locked') == "1") {
+                $('.toolbarButton').each(function(){
+                    $(this).addClass('hidden');
+                });
+                $('.separator').each(function(){
+                    $(this).addClass('hidden');
+                });
+                $('#scaleSelect').prop('disabled', true);
+                $('#pageNumber').prop('disabled', true);
+            }
+        }
+    }
+</script>
 <div id="outerContainer">
     <div id="sidebarContainer">
         <div id="toolbarSidebar">
@@ -281,9 +315,9 @@
                             <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                         </button>
 
-                        <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="32" data-l10n-id="open_file">
+<!--                        <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="32" data-l10n-id="open_file">
                             <span data-l10n-id="open_file_label">Open</span>
-                        </button>
+                        </button>-->
 
                         <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33" data-l10n-id="print">
                             <span data-l10n-id="print_label">Print</span>
@@ -461,6 +495,9 @@
                         <li><a onclick="PageManager.showDigitalSignaturePad()"><img src="images/add.svg" height="16"/> &nbsp; &nbsp; <span data-l10n-id="add_new_label">ADD NEW</span></a></li>
                     </ul>
                 </div>
+                <button id="eraser" class="toolbarButton annotation" title="Eraser" onclick="PageManager.eraseAnnotation(this)" data-l10n-id="eraser">
+                    <img src="images/eraser.svg" width="16" height="16"/>
+                </button>
                 <span id="form_field_group" class="hidden">
                     <div class="separator"></div>
                     <button id="text_field" class="toolbarButton annotation" title="Text Field" onclick="PageManager.createAnnotation(this, Annotation.TYPE_FORM_TEXT_FIELD, $(this).children('img').attr('src'))" data-l10n-id="text_field">

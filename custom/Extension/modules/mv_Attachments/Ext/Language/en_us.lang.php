@@ -15,3 +15,4 @@ $mod_strings['LBL_SUBPANEL_FROM_ATTACHMENTS'] = 'Attachments';
 $mod_strings['LBL_LIST_DOCUMENT_NAME'] = 'Attachment Name';
 $mod_strings['LBL_ANALYSIS_DATE'] = 'Analysis Date';
 $mod_strings['LBL_LAB_REF_NUMBER'] = 'Lab Ref Number';
+$mod_strings['LBL_IS_LOCKED'] = 'Is Locked';

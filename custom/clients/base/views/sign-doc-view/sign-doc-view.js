@@ -19,6 +19,7 @@
         this._super('initialize', [options]);
         this.url = this.options.context.get('url');
         this.document_id = this.options.context.get('document_id');
+        this.is_locked = this.options.context.get('is_locked');
     },
 
     _renderHtml: function () {

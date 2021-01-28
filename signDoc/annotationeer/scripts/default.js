@@ -202,7 +202,8 @@ Default.DRAW_WIDTH_THICKNESS_FOR_MOUSE_CLICK = 6;
  * @default 10
  * @type {number}
  */
-Default.DRAW_POINT_MINIMUM = 10;
+// ahmad
+Default.DRAW_POINT_MINIMUM = 1;
 
 /**
  * The default border color for annotations that use this feature.

@@ -25,6 +25,16 @@ class CustomAttachmentsRelateRecordApi extends RelateRecordApi {
                 'shortHelp' => 'Create a single record and relate it to this module',
                 'longHelp' => 'include/api/help/module_record_link_link_name_post_help.html',
             ),
+            'lockOrUnlockDoc' => array(
+                'reqType' => 'POST',
+                'path' => array('HT_Manifest', '?', 'lockOrUnlockDoc'),
+                'pathVars' => array('module', 'recordId', 'lockOrUnlockDoc'),
+                'method' => 'lockOrUnlockDoc',
+                'exceptions' => array(
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                ),
+            ),
         ));
     }
 
@@ -45,6 +55,22 @@ class CustomAttachmentsRelateRecordApi extends RelateRecordApi {
         }
 
         return $data;
+    }
+
+    public function lockOrUnlockDoc(ServiceBase $api, array $args) {
+        global $db;
+        $recordId = $args['recordId'];
+        $flag = $args['flag'];
+
+        $update = "UPDATE mv_attachments 
+                SET 
+                    is_locked = '{$flag}'
+                WHERE
+                    id = '{$recordId}'";
+
+        $db->query($update, true);
+
+        return $update;
     }
 
 }

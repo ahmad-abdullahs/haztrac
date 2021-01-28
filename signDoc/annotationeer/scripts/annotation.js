@@ -43,7 +43,7 @@ function PDFDocument() {
  * <p>An annotation comment can be set a status when reviewed by users.</p>
  * @namespace ReviewStatus
  */
-ReviewStatus.prototype = { };
+ReviewStatus.prototype = {};
 
 /**
  * @constructor
@@ -82,7 +82,7 @@ function ReviewStatus() {
  * <p>Represents the digital signature created by the user.</p>
  * @namespace DigitalSignature
  */
-DigitalSignature.prototype = { };
+DigitalSignature.prototype = {};
 
 /**
  * @constructor
@@ -120,7 +120,7 @@ function DigitalSignature() {
  * <p>The watermark orientation that will be used as an option for the user to select when rendering watermarks.</p>
  * @namespace WatermarkOrientation
  */
-var WatermarkOrientation = { };
+var WatermarkOrientation = {};
 
 /**
  * @memberof WatermarkOrientation
@@ -153,7 +153,7 @@ WatermarkOrientation.UPPER_LEFT_HORIZONTAL = 4;
  * @namespace AnnotationType
  */
 AnnotationType.prototype = {
-    init: function(id, icon) {
+    init: function (id, icon) {
         this.id = id;
         this.icon = icon;
     }
@@ -173,7 +173,7 @@ function AnnotationType(id, icon) {
  * <p>Comment entry of an annotation.</p>
  * @namespace Comment
  */
-Comment.prototype = { };
+Comment.prototype = {};
 
 /**
  * @constructor
@@ -242,23 +242,20 @@ DrawingPosition.prototype = {
      * @param {number} angle The angle of the canvas.
      * @param {decimal} scale The scale of the canvas.
      */
-    rotate: function(canvas, angle, scale) {
+    rotate: function (canvas, angle, scale) {
         var bx = this.origX * scale;
         var by = this.origY * scale;
 
         if (angle == 90) {
             this.x = canvas.height - by;
             this.y = bx;
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.x = by;
             this.y = canvas.width - bx;
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.x = canvas.height - bx;
             this.y = canvas.width - by;
-        }
-        else {
+        } else {
             this.x = bx;
             this.y = by;
         }
@@ -272,38 +269,33 @@ DrawingPosition.prototype = {
      * @param {decimal} scale The scale of the canvas.
      * @param {boolean} useDisplayCoordinate
      */
-    calculateOrigPosition: function(canvas, angle, scale, useDisplayCoordinate) {
-		PageManager.consoleLog('DrawingPosition.calculateOrigPosition()');
+    calculateOrigPosition: function (canvas, angle, scale, useDisplayCoordinate) {
+        PageManager.consoleLog('DrawingPosition.calculateOrigPosition()');
         var x = useDisplayCoordinate ? this.x : this.origX;
         var y = useDisplayCoordinate ? this.y : this.origY;
 
         if (x < 0) {
             this.x = x = (1 * scale);
-        }
-        else if (x >= canvas.width) {
+        } else if (x >= canvas.width) {
             this.x = x = canvas.width - (1 * scale);
         }
 
         if (y < 0) {
             this.y = y = (1 * scale);
-        }
-        else if (y >= canvas.height) {
+        } else if (y >= canvas.height) {
             this.y = y = canvas.height - (1 * scale);
         }
 
         if (angle == 90) {
             this.origX = y / scale;
             this.origY = Math.ceil((canvas.width - x) / scale);
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.origX = Math.ceil((canvas.width - x) / scale);
             this.origY = Math.ceil((canvas.height - y) / scale);
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.origX = Math.ceil((canvas.height - y) / scale);
             this.origY = x / scale;
-        }
-        else {
+        } else {
             this.origX = x / scale;
             this.origY = y / scale;
         }
@@ -321,7 +313,7 @@ DrawingPosition.prototype = {
  * @param {string} json The json string.
  * @returns {DrawingPosition}
  */
-DrawingPosition.createFromJSON = function(json) {
+DrawingPosition.createFromJSON = function (json) {
     if (typeof json === 'string')
         json = JSON.parse(json);
 
@@ -464,7 +456,7 @@ HighlightTextRect.prototype = {
      * @param {number} angle The angle of the canvas.
      * @param {decimal} scale The scale of the canvas.
      */
-    rotate: function(canvas, angle, scale) {
+    rotate: function (canvas, angle, scale) {
         var bLeft = parseFloat(this.origLeft) * scale;
         var bTop = parseFloat(this.origTop) * scale;
         var bRight = parseFloat(this.origRight) * scale;
@@ -479,24 +471,21 @@ HighlightTextRect.prototype = {
             this.width = bHeight;
             this.right = this.left + this.width;
             this.bottom = this.top + this.height;
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.left = bTop;
             this.top = canvas.height - bLeft - bWidth;
             this.height = bWidth;
             this.width = bHeight;
             this.right = this.left + this.width;
             this.bottom = this.top + this.height;
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.left = canvas.width - bLeft - bWidth;
             this.top = canvas.height - bTop - bHeight;
             this.width = bWidth;
             this.height = bHeight;
             this.right = this.left + this.width;
             this.bottom = this.top + this.height;
-        }
-        else {
+        } else {
             this.left = bLeft;
             this.top = bTop;
             this.right = bRight;
@@ -512,8 +501,8 @@ HighlightTextRect.prototype = {
      * @param {number} angle The angle of the canvas.
      * @param {decimal} scale The scale of the canvas.
      */
-    calculateOrigBound: function(canvas, angle, scale) {
-		PageManager.consoleLog('HighlightTextRect.calculateOrigBound()');
+    calculateOrigBound: function (canvas, angle, scale) {
+        PageManager.consoleLog('HighlightTextRect.calculateOrigBound()');
         var x = this.left;
         var y = this.top;
         var w = this.width;
@@ -524,20 +513,17 @@ HighlightTextRect.prototype = {
             this.origTop = Math.ceil((canvas.width - (x + w)) / scale);
             this.origWidth = h / scale;
             this.origHeight = w / scale;
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.origLeft = Math.ceil((canvas.width - (x + w)) / scale);
             this.origTop = Math.ceil((canvas.height - (y + h)) / scale);
             this.origWidth = w / scale;
             this.origHeight = h / scale;
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.origLeft = Math.ceil((canvas.height - (y + h)) / scale);
             this.origTop = x / scale;
             this.origWidth = h / scale;
             this.origHeight = w / scale;
-        }
-        else {
+        } else {
             this.origLeft = x / scale;
             this.origTop = y / scale;
             this.origWidth = w / scale;
@@ -553,7 +539,7 @@ HighlightTextRect.prototype = {
      * @param {number} elementAngle The rotation angle of the text in rotation angle 0 of the PDF.JS Viewer.
      * @param {number} pdfViewerAngle The rotation angle of the PDF.JS Viewer.
      */
-    setDomRotateAngle: function(elementAngle, pdfViewerAngle) {
+    setDomRotateAngle: function (elementAngle, pdfViewerAngle) {
         this.domRotateAngle = elementAngle - pdfViewerAngle;
 
         if (this.domRotateAngle == -90)
@@ -562,7 +548,7 @@ HighlightTextRect.prototype = {
             this.domRotateAngle = 90;
     },
 
-    getAngleBasedOnDomRotateAngle: function(angle) {
+    getAngleBasedOnDomRotateAngle: function (angle) {
         var finalAngle = (this.domRotateAngle + angle) % 360;
         if (finalAngle < 0) {
             finalAngle += 360;
@@ -574,13 +560,13 @@ HighlightTextRect.prototype = {
      * @function
      * @returns {string}
      */
-    toString: function() {
+    toString: function () {
         return '{ left: ' + this.origLeft + ', top: ' + this.origTop + ', width: ' + this.origWidth + ', ' + ', height: ' + this.origHeight + '}';
     }
 
 };
 
-HighlightTextRect.createFromJSON = function(json) {
+HighlightTextRect.createFromJSON = function (json) {
     if (typeof json === 'string')
         json = JSON.parse(json);
 
@@ -714,7 +700,7 @@ function Annotation(a) {
      * should indicate that the annotation is still in creation stage while this variable is true.
      */
     this.dummy = false;
-    
+
     /**
      * Circle type annotation will have its own x, y coordinate stored
      * because the x, y, w, h will still be used when annotation is
@@ -739,7 +725,7 @@ function Annotation(a) {
      * handles will be increased based on the number of points in its array.
      */
     this.selectionHandles = [];
-    for (var i=0; i<Default.ANNOTATION_SELECTION_MAX_POINTS; i++) {
+    for (var i = 0; i < Default.ANNOTATION_SELECTION_MAX_POINTS; i++) {
         this.selectionHandles.push(new AnnotationSelectionHandle());
     }
 
@@ -849,10 +835,10 @@ function Annotation(a) {
     // Used to hold recorded audio data for playing
     this.audio = null;
     /*
-      Used to indicate that this annotation has an audio associated with it but not
-      downloaded yet due to it being an existing annotation from the server so if the
-      user decides to listen on the audio, it will check if this is true then will
-      download the audio from the server before assigning it to the audio property.
+     Used to indicate that this annotation has an audio associated with it but not
+     downloaded yet due to it being an existing annotation from the server so if the
+     user decides to listen on the audio, it will check if this is true then will
+     download the audio from the server before assigning it to the audio property.
      */
     this.audioAvailable = false;
     /**
@@ -889,7 +875,7 @@ Annotation.prototype = {
      * @param {decimal} scale The scale of the canvas.
      * @param {boolean} printPreview If this is to be drawn during print preview.
      */
-    draw: function(context, angle, scale, printPreview) {
+    draw: function (context, angle, scale, printPreview) {
         if (this.drawingPositions.length == 0 && (Math.abs(this.w) < 0 || Math.abs(this.h) < 0))
             return;
 
@@ -908,8 +894,7 @@ Annotation.prototype = {
             var rgbColor = Util.hexToRgb(this.backgroundColor);
             context.fillStyle = 'rgba(' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b + ', ' + this.opacity + ')';
             context.fillRect(this.x, this.y, this.w, this.h);
-        }
-        else if (this.annotationType == Annotation.TYPE_BOX || this.annotationType == Annotation.TYPE_SCREENSHOT) {
+        } else if (this.annotationType == Annotation.TYPE_BOX || this.annotationType == Annotation.TYPE_SCREENSHOT) {
             if (this.annotationType == Annotation.TYPE_SCREENSHOT) {
                 context.fillStyle = Default.SCREENSHOT_FILL_COLOR;
                 context.fillRect(this.x, this.y, this.w, this.h);
@@ -921,24 +906,23 @@ Annotation.prototype = {
                 context.strokeRect(this.x, this.y, this.w, this.h);
             else
                 this.drawCloud(context, this.lineWidth, this.color, scale, 8, true);
-        }
-        else if (this.annotationType == Annotation.TYPE_CIRCLE_FILL || this.annotationType == Annotation.TYPE_CIRCLE_STROKE) {
+        } else if (this.annotationType == Annotation.TYPE_CIRCLE_FILL || this.annotationType == Annotation.TYPE_CIRCLE_STROKE) {
             /**
              * http://jsfiddle.net/AbdiasSoftware/37vge/
              * If circleStartX and other circle variables have values, that means user is creating or resizing it.
              * If no value is assigned, use the x, y, w, h values to calculate the values of the circle variables.
              */
             var radiusX = (this.circleLastX > 0 ? this.circleLastX - this.circleStartX : (this.x + this.w) - this.x) * 0.5,
-                radiusY = (this.circleLastY > 0 ? this.circleLastY - this.circleStartY : (this.y + this.h) - this.y) * 0.5,
-                centerX = (this.circleStartX > 0 ? this.circleStartX : this.x) + radiusX,
-                centerY = (this.circleStartY > 0 ? this.circleStartY : this.y) + radiusY,
-                step = 0.05,
-                pi2 = Math.PI * 2 - step;
+                    radiusY = (this.circleLastY > 0 ? this.circleLastY - this.circleStartY : (this.y + this.h) - this.y) * 0.5,
+                    centerX = (this.circleStartX > 0 ? this.circleStartX : this.x) + radiusX,
+                    centerY = (this.circleStartY > 0 ? this.circleStartY : this.y) + radiusY,
+                    step = 0.05,
+                    pi2 = Math.PI * 2 - step;
 
             context.beginPath();
             context.moveTo(centerX + radiusX * Math.cos(0), centerY + radiusY * Math.sin(0));
 
-            for(var a=step; a<pi2; a+=step) {
+            for (var a = step; a < pi2; a += step) {
                 context.lineTo(centerX + radiusX * Math.cos(a), centerY + radiusY * Math.sin(a));
             }
 
@@ -948,16 +932,14 @@ Annotation.prototype = {
                 var rgbColor = Util.hexToRgb(this.backgroundColor);
                 context.fillStyle = 'rgba(' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b + ', ' + this.opacity + ')';
                 context.fill();
-            }
-            else {
+            } else {
                 // Use 3 digit hex color code because small ellipse curve is not smooth if 6 digit is used. No idea why.
                 context.strokeStyle = Util.getShortHexColorCode(this.color);
                 context.stroke();
             }
 
             context.closePath();
-        }
-        else if (this.usesImage()) {
+        } else if (this.usesImage()) {
             if (angle != 0) {
                 var x, y;
                 var w = this.w;
@@ -988,15 +970,12 @@ Annotation.prototype = {
                     context.rotate(angle * Math.PI / 180);
                     context.drawImage(this.icon, 0, 0, w, h);
                     context.restore();
-                }
-                else
-                     Util.changeColorOfDrawnImage(context, this.icon, this.backgroundColor, x, y, w, h, angle * Math.PI / 180, false, printPreview);
-            }
-            else {
+                } else
+                    Util.changeColorOfDrawnImage(context, this.icon, this.backgroundColor, x, y, w, h, angle * Math.PI / 180, false, printPreview);
+            } else {
                 if (this.annotationType == Annotation.TYPE_STAMP || this.annotationType == Annotation.TYPE_DIGITAL_SIGNATURE) {
                     context.drawImage(this.icon, this.x, this.y, this.w, this.h);
-                }
-                else
+                } else
                     Util.changeColorOfDrawnImage(context, this.icon, this.color, this.x, this.y, this.w, this.h, false, printPreview);
             }
         }
@@ -1006,8 +985,8 @@ Annotation.prototype = {
          * will have stroke values included. These calls will restrict the styling to this shape only.
          */
         else if (this.annotationType == Annotation.TYPE_LINE ||
-            this.annotationType == Annotation.TYPE_ARROW ||
-            this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE)
+                this.annotationType == Annotation.TYPE_ARROW ||
+                this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE)
         {
             if (this.drawingPositions.length < 2)
                 return;
@@ -1022,14 +1001,14 @@ Annotation.prototype = {
 
             if (this.annotationType != Annotation.TYPE_LINE) {
                 var distance = Util.getDistance(this.drawingPositions[0].x, this.drawingPositions[0].y,
-                    this.drawingPositions[1].x, this.drawingPositions[1].y);
-                    
+                        this.drawingPositions[1].x, this.drawingPositions[1].y);
+
                 if (!Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH || distance > (Default.ARROW_SIZE * scale) * 2 * (this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE ? 2 : 1))
                     this.drawLineArrowhead(context, this.annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE, true, scale);
 
                 // Draw measurement label.
                 if (this.annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE &&
-                    (!Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH || !this.isArrowNotLongEnough(scale))) {
+                        (!Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH || !this.isArrowNotLongEnough(scale))) {
                     var font = (Default.ANNOTATION_MEASUREMENT_DISTANCE_LABEL_FONT_SIZE * scale) + Default.FONT_SIZE_TYPE + ' ' + this.font;
                     var padding = 5 * scale;
                     var gap = 5 * scale;
@@ -1040,15 +1019,14 @@ Annotation.prototype = {
             }
 
             context.stroke();
-        }
-        else if (this.annotationType == Annotation.TYPE_POLY_LINE ||
-            this.annotationType == Annotation.TYPE_POLYGON ||
-            this.annotationType == Annotation.TYPE_MEASUREMENT_AREA)
+        } else if (this.annotationType == Annotation.TYPE_POLY_LINE ||
+                this.annotationType == Annotation.TYPE_POLYGON ||
+                this.annotationType == Annotation.TYPE_MEASUREMENT_AREA)
         {
             // http://stackoverflow.com/questions/34853113/drawing-multiple-polygons-in-js
             context.beginPath();
 
-            for (var i=0; i<this.drawingPositions.length; i++) {
+            for (var i = 0; i < this.drawingPositions.length; i++) {
                 if (i === 0)
                     context.moveTo(this.drawingPositions[i].x, this.drawingPositions[i].y);
                 else
@@ -1064,18 +1042,16 @@ Annotation.prototype = {
                 this.text = Util.getAreaFromPixels(this, this.getArea());
                 this.drawTextInsideShape(context, angle, scale);
             }
-        }
-        else if (this.annotationType === Annotation.TYPE_CLOUD) {
+        } else if (this.annotationType === Annotation.TYPE_CLOUD) {
             this.drawCloud(context, this.lineWidth, this.color, scale);
-        }
-        else if (this.annotationType === Annotation.TYPE_DRAWING) {
+        } else if (this.annotationType === Annotation.TYPE_DRAWING) {
             context.save();
             context.lineJoin = 'round';
             context.lineCap = 'round';
 
             // We place selected code here because we fill a wider drawing to represent the selection color
             if (this.selected) {
-                for (var p=0; p<this.drawingPositions.length; p++) {
+                for (var p = 0; p < this.drawingPositions.length; p++) {
                     if (p == 0) {
                         context.moveTo(this.drawingPositions[p].x, this.drawingPositions[p].y);
                         context.beginPath();
@@ -1086,7 +1062,7 @@ Annotation.prototype = {
                 }
             }
 
-            for (var p=0; p<this.drawingPositions.length; p++) {
+            for (var p = 0; p < this.drawingPositions.length; p++) {
                 if (p == 0) {
                     context.moveTo(this.drawingPositions[p].x, this.drawingPositions[p].y);
                     context.beginPath();
@@ -1097,17 +1073,16 @@ Annotation.prototype = {
             }
 
             context.restore();
-        }
-        else if (this.hasFieldSet()) {
+        } else if (this.hasFieldSet()) {
             var group = [];
             var page = pages[Default.canvasIdName + (this.pageIndex + 1)];
 
             if (page)
-                for (var ca=0; ca<page.canvasAnnotations.length; ca++) {
+                for (var ca = 0; ca < page.canvasAnnotations.length; ca++) {
                     if (!page.canvasAnnotations[ca].hasFieldSet() ||
-                        page.canvasAnnotations[ca].formFieldName != this.formFieldName ||
-                        page.canvasAnnotations[ca].pageIndex != this.pageIndex ||
-                        page.canvasAnnotations[ca].annotationType != this.annotationType)
+                            page.canvasAnnotations[ca].formFieldName != this.formFieldName ||
+                            page.canvasAnnotations[ca].pageIndex != this.pageIndex ||
+                            page.canvasAnnotations[ca].annotationType != this.annotationType)
                         continue;
 
                     group.push(page.canvasAnnotations[ca]);
@@ -1135,17 +1110,16 @@ Annotation.prototype = {
                 var rgbColor = Util.hexToRgb(this.backgroundColor);
                 context.fillStyle = 'rgba(' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b + ', ' + this.opacity + ')';
 
-                for (var htr=0; htr<this.highlightTextRects.length; htr++) {
+                for (var htr = 0; htr < this.highlightTextRects.length; htr++) {
                     context.fillRect(this.highlightTextRects[htr].left, this.highlightTextRects[htr].top,
-                        this.highlightTextRects[htr].width, this.highlightTextRects[htr].height);
+                            this.highlightTextRects[htr].width, this.highlightTextRects[htr].height);
                 }
-            }
-            else {
+            } else {
                 context.lineWidth = scale;
                 context.strokeStyle = this.color;
                 context.beginPath();
 
-                for (var htr=0; htr<this.highlightTextRects.length; htr++) {
+                for (var htr = 0; htr < this.highlightTextRects.length; htr++) {
                     if (this.annotationType == Annotation.TYPE_TEXT_UNDERLINE) {
                         switch (angle) {
                             case 0:
@@ -1229,8 +1203,7 @@ Annotation.prototype = {
                                 }
                                 break;
                         }
-                    }
-                    else if (this.annotationType == Annotation.TYPE_TEXT_STRIKE_THROUGH || this.annotationType == Annotation.TYPE_TEXT_REPLACE) {
+                    } else if (this.annotationType == Annotation.TYPE_TEXT_STRIKE_THROUGH || this.annotationType == Annotation.TYPE_TEXT_REPLACE) {
                         switch (angle) {
                             case 0:
                             case 180:
@@ -1277,22 +1250,20 @@ Annotation.prototype = {
                     this.drawQuadraticCurveTriangle(context, angle, this.highlightTextRects[this.highlightTextRects.length - 1])
                 }
             }
-        }
-        else if (this.annotationType == Annotation.TYPE_TEXT && printPreview) {
+        } else if (this.annotationType == Annotation.TYPE_TEXT && printPreview) {
             if (this.icon) {
                 context.save();
                 context.translate(this.x, this.y);
                 context.drawImage(this.icon, 0, 0, this.w, this.h);
                 context.restore();
             }
-        }
-        else if (this.annotationType == Annotation.TYPE_TEXT_INSERT) {
+        } else if (this.annotationType == Annotation.TYPE_TEXT_INSERT) {
             this.drawQuadraticCurveTriangle(context, angle);
         }
 
         if (Default.ANNOTATION_SELECTABLE_TEXT_AS_DIV) {
             var highlightedTexts = PageManager.getPageContainer(this.pageIndex + 1).find('div[id=highlight' + this.id + ']');
-            for (var ht=0; ht<highlightedTexts.length; ht++) {
+            for (var ht = 0; ht < highlightedTexts.length; ht++) {
                 highlightedTexts[ht].style.border = '';
             }
         }
@@ -1302,30 +1273,27 @@ Annotation.prototype = {
         if ((this.selected || this.selectable) && !printPreview) {
             if (this.isSelectableTextType()) {
                 if (Default.ANNOTATION_SELECTABLE_TEXT_AS_DIV) {
-                    for (var ht=0; ht<highlightedTexts.length; ht++) {
+                    for (var ht = 0; ht < highlightedTexts.length; ht++) {
                         highlightedTexts[ht].style.border = Default.ANNOTATION_SELECTION_BOX_COLOR_TYPE_TEXT;
                     }
-                }
-                else {
+                } else {
                     context.strokeStyle = Default.ANNOTATION_SELECTED_COLOR;
                     context.lineWidth = Default.ANNOTATION_SELECTED_LINEWIDTH * scale;
 
-                    for (var htr=0; htr<this.highlightTextRects.length; htr++) {
+                    for (var htr = 0; htr < this.highlightTextRects.length; htr++) {
                         context.strokeRect(this.highlightTextRects[htr].left, this.highlightTextRects[htr].top,
-                            this.highlightTextRects[htr].width, this.highlightTextRects[htr].height);
+                                this.highlightTextRects[htr].width, this.highlightTextRects[htr].height);
                     }
                 }
-            }
-            else if (this.drawingPositions.length > 0 && this.annotationType != Annotation.TYPE_DRAWING) {
+            } else if (this.drawingPositions.length > 0 && this.annotationType != Annotation.TYPE_DRAWING) {
                 if ((!this.selected && this.selectable)) {
                     if (this.annotationType == Annotation.TYPE_CLOUD) {
                         this.drawCloud(context, Default.ANNOTATION_SELECTED_LINEWIDTH, Default.ANNOTATION_SELECTED_COLOR, scale);
-                    }
-                    else {
+                    } else {
                         context.strokeStyle = Default.ANNOTATION_SELECTED_COLOR;
                         context.lineWidth = Default.ANNOTATION_SELECTED_LINEWIDTH * scale;
 
-                        for (var d=0; d<this.drawingPositions.length; d++) {
+                        for (var d = 0; d < this.drawingPositions.length; d++) {
                             if (d == 0)
                                 context.moveTo(this.drawingPositions[d].x, this.drawingPositions[d].y);
                             else
@@ -1335,8 +1303,7 @@ Annotation.prototype = {
                         context.stroke();
                     }
 
-                }
-                else {
+                } else {
                     var half = (Default.ANNOTATION_SELECTION_BOX_SIZE / 2) * scale;
 
                     /**
@@ -1345,12 +1312,12 @@ Annotation.prototype = {
                      */
                     if (this.selectionHandles.length < this.drawingPositions.length) {
                         var diff = this.drawingPositions.length - this.selectionHandles.length;
-                        for (var d=0; d<diff; d++) {
+                        for (var d = 0; d < diff; d++) {
                             this.selectionHandles.push(new AnnotationSelectionHandle());
                         }
                     }
 
-                    for (var d=0; d<this.drawingPositions.length; d++) {
+                    for (var d = 0; d < this.drawingPositions.length; d++) {
                         this.selectionHandles[d].x = this.drawingPositions[d].x - half;
                         this.selectionHandles[d].y = this.drawingPositions[d].y - half;
                         this.selectionHandles[d].x = this.drawingPositions[d].x - half;
@@ -1359,8 +1326,8 @@ Annotation.prototype = {
 
                     context.fillStyle = Default.ANNOTATION_SELECTION_BOX_COLOR;
                     var length = this.isPolyLineType() ? this.drawingPositions.length :
-                        this.selectionHandles.length;
-                    for (var i=0; i<length; i++) {
+                            this.selectionHandles.length;
+                    for (var i = 0; i < length; i++) {
                         if (!this.isPolyLineType() && i > 1)
                             continue;
 
@@ -1368,8 +1335,7 @@ Annotation.prototype = {
                         context.fillRect(cur.x, cur.y, Default.ANNOTATION_SELECTION_BOX_SIZE * scale, Default.ANNOTATION_SELECTION_BOX_SIZE * scale);
                     }
                 }
-            }
-            else {
+            } else {
                 context.strokeStyle = Default.ANNOTATION_SELECTED_COLOR;
                 context.lineWidth = Default.ANNOTATION_SELECTED_LINEWIDTH * scale;
                 context.strokeRect(this.x, this.y, this.w, this.h);
@@ -1413,7 +1379,7 @@ Annotation.prototype = {
                 this.selectionHandles[7].y = this.y + this.h - half;
 
                 context.fillStyle = Default.ANNOTATION_SELECTION_BOX_COLOR;
-                for (var i=0; i<this.selectionHandles.length; i++) {
+                for (var i = 0; i < this.selectionHandles.length; i++) {
                     var cur = this.selectionHandles[i];
                     context.fillRect(cur.x, cur.y, Default.ANNOTATION_SELECTION_BOX_SIZE * scale, Default.ANNOTATION_SELECTION_BOX_SIZE * scale);
                 }
@@ -1432,21 +1398,20 @@ Annotation.prototype = {
      * @param {boolean} arrowEnd Draw arrowhead on end point.
      * @returns {boolean}
      */
-    drawLineArrowhead: function(context, arrowStart, arrowEnd, scale) {
+    drawLineArrowhead: function (context, arrowStart, arrowEnd, scale) {
         var p1 = this.drawingPositions[0];
         var p2 = this.drawingPositions[1];
 
         // context.lineCap = 'round';
-        
-        if (arrowStart) { 
+
+        if (arrowStart) {
             var lineAngle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
             var delta = Math.PI / Default.ARROW_SIZE;
-            for (var i=0; i<2; i++) {
+            for (var i = 0; i < 2; i++) {
                 if (i == 0) {
                     context.moveTo(p1.x + (Default.ARROWHEAD_LENGTH * scale) * Math.cos(lineAngle + delta), p1.y + (Default.ARROWHEAD_LENGTH * scale) * Math.sin(lineAngle + delta));
-                    context.lineTo(p1.x, p1.y);                    
-                }
-                else {
+                    context.lineTo(p1.x, p1.y);
+                } else {
                     context.lineTo(p1.x + (Default.ARROWHEAD_LENGTH * scale) * Math.cos(lineAngle + delta), p1.y + (Default.ARROWHEAD_LENGTH * scale) * Math.sin(lineAngle + delta));
                 }
                 delta *= -1;
@@ -1456,12 +1421,11 @@ Annotation.prototype = {
         if (arrowEnd) {
             var lineAngle = Math.atan2(p1.y - p2.y, p1.x - p2.x);
             var delta = Math.PI / Default.ARROW_SIZE;
-            for (var i=0; i<2; i++) {
+            for (var i = 0; i < 2; i++) {
                 if (i == 0) {
                     context.moveTo(p2.x + (Default.ARROWHEAD_LENGTH * scale) * Math.cos(lineAngle + delta), p2.y + (Default.ARROWHEAD_LENGTH * scale) * Math.sin(lineAngle + delta));
-                    context.lineTo(p2.x, p2.y);                    
-                }
-                else {
+                    context.lineTo(p2.x, p2.y);
+                } else {
                     context.lineTo(p2.x + (Default.ARROWHEAD_LENGTH * scale) * Math.cos(lineAngle + delta), p2.y + (Default.ARROWHEAD_LENGTH * scale) * Math.sin(lineAngle + delta));
                 }
                 delta *= -1;
@@ -1479,7 +1443,7 @@ Annotation.prototype = {
      * @param {object} e The event object.
      * @returns {boolean}
      */
-    contains: function(mouseX, mouseY, e) {
+    contains: function (mouseX, mouseY, e) {
         // If radius is not null, this means this is a tap touch event using finger or stylus
         //if (e && e.changedTouches) {
         //    // In case there is no radius within the touch event, set default to 1. This means
@@ -1500,10 +1464,10 @@ Annotation.prototype = {
         //    return Util.isRectCircleColliding(circle, rect);
         //}
         //else
-            return (
-               ((mouseX >= this.x && mouseX <= this.x + this.w) || (mouseX <= this.x && mouseX >= this.x + this.w)) &&
-               ((mouseY >= this.y && mouseY <= this.y + this.h) || (mouseY <= this.y && mouseY >= this.y + this.h))
-            );
+        return (
+                ((mouseX >= this.x && mouseX <= this.x + this.w) || (mouseX <= this.x && mouseX >= this.x + this.w)) &&
+                ((mouseY >= this.y && mouseY <= this.y + this.h) || (mouseY <= this.y && mouseY >= this.y + this.h))
+                );
     },
 
     /**
@@ -1515,7 +1479,7 @@ Annotation.prototype = {
      * @param {number} angle The angle of the canvas.
      * @param {decimal} scale The scale of the canvas.
      */
-    drawTextInsideShape: function(context, angle, scale) {
+    drawTextInsideShape: function (context, angle, scale) {
         if (!Default.ANNOTATION_DRAW_TEXT_IN_SHAPE || PageManager.startCreatingAnnotation)
             return;
 
@@ -1535,8 +1499,7 @@ Annotation.prototype = {
         if (angle == 0 || angle == 180) {
             var textX = textWidth / 2;
             x = x - (angle == 180 ? -textX : textX);
-        }
-        else if (angle == 90 || angle == 270) {
+        } else if (angle == 90 || angle == 270) {
             var textX = textWidth / 2;
             y = y - (angle == 270 ? -textX : textX);
         }
@@ -1558,7 +1521,7 @@ Annotation.prototype = {
      * @param {number} angle The angle of the canvas.
      * @param {decimal} scale The scale of the canvas.
      */
-    rotate: function(canvas, angle, scale) {
+    rotate: function (canvas, angle, scale) {
         var bx = this.origX * scale;
         var by = this.origY * scale;
         var bw = this.origW * scale;
@@ -1569,20 +1532,17 @@ Annotation.prototype = {
             this.y = bx;
             this.h = bw;
             this.w = bh;
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.x = by;
             this.y = canvas.width - bx - bw;
             this.h = bw;
             this.w = bh;
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.x = canvas.height - bx - bw;
             this.y = canvas.width - by - bh;
             this.w = bw;
             this.h = bh;
-        }
-        else {
+        } else {
             this.x = bx;
             this.y = by;
             this.w = bw;
@@ -1600,8 +1560,8 @@ Annotation.prototype = {
      * @param {decimal} scale The scale of the canvas.
      * @param {object} div The div layer of the free text annotation if annotation type is {@link Annotation.TYPE_TEXT}
      */
-    rotateText: function(canvas, angle, scale, div) {
-		PageManager.consoleLog('Annotation.rotateText()');
+    rotateText: function (canvas, angle, scale, div) {
+        PageManager.consoleLog('Annotation.rotateText()');
         var x = this.origX * scale;
         var y = this.origY * scale;
         var w = this.origW * scale;
@@ -1616,8 +1576,7 @@ Annotation.prototype = {
             div.css('top', this.y + (this.h < 0 ? this.h : 0));
             div.css('transform-origin', '0 0');
             div.css('transform', 'rotate(90deg)');
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.x = y;
             this.y = canvas.width - x - w;
             this.h = w;
@@ -1626,8 +1585,7 @@ Annotation.prototype = {
             div.css('top', (this.y + this.h) + (this.h < 0 ? Math.abs(this.h) : 0));
             div.css('transform-origin', '0 0');
             div.css('transform', 'rotate(-90deg)');
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.x = canvas.height - x - w;
             this.y = canvas.width - y - h;
             this.w = w;
@@ -1635,8 +1593,7 @@ Annotation.prototype = {
             div.css('left', this.x + (w < 0 ? w : 0));
             div.css('top', this.y + (h < 0 ? h : 0));
             div.css('transform', 'rotate(180deg)');
-        }
-        else {
+        } else {
             this.x = x;
             this.y = y;
             this.w = w;
@@ -1658,23 +1615,20 @@ Annotation.prototype = {
      * @param {number} angle The angle of the canvas.
      * @param {decimal} scale The scale of the canvas.
      */
-    rotatePoint: function(canvas, angle, scale) {
+    rotatePoint: function (canvas, angle, scale) {
         var bx = this.origX * scale;
         var by = this.origY * scale;
 
         if (angle == 90) {
             this.x = canvas.height - by;
             this.y = bx;
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.x = by;
             this.y = canvas.width - bx;
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.x = canvas.height - bx;
             this.y = canvas.width - by;
-        }
-        else {
+        } else {
             this.x = bx;
             this.y = by;
         }
@@ -1685,8 +1639,8 @@ Annotation.prototype = {
      * @function
      * @returns {string}
      */
-    toString: function() {
-        return 'id: ' + this.id + ', rect[' + this.x + ', ' + this.y + ', ' + this.w + ', '+ this.h + '] orig:[' + this.origX + ', ' + this.origY + ', ' + this.origW + ', ' + this.origH + ']';
+    toString: function () {
+        return 'id: ' + this.id + ', rect[' + this.x + ', ' + this.y + ', ' + this.w + ', ' + this.h + '] orig:[' + this.origX + ', ' + this.origY + ', ' + this.origW + ', ' + this.origH + ']';
     },
 
     /**
@@ -1698,14 +1652,14 @@ Annotation.prototype = {
      * @param {object} annotation The annotation object.
      * @returns {string}
      */
-    getTextBelowIt: function(annotation) {
-		PageManager.consoleLog('Annotation.getTextBelowIt()');
+    getTextBelowIt: function (annotation) {
+        PageManager.consoleLog('Annotation.getTextBelowIt()');
 
         var div = PageManager.getPageContainer(this.pageIndex + 1).find('.textLayer');
         var divs = $(div).children();
         var buffer = '';
 
-        divs.each(function(index) {
+        divs.each(function (index) {
             var x = parseFloat(div.css('left'));
             var y = parseFloat(div.css('top'));
             var w = parseFloat(div.attr('data-canvas-width'));
@@ -1722,7 +1676,7 @@ Annotation.prototype = {
 
                 var letterBuffer = '';
 
-                $(divSpan).find('span[annot="true"]').each(function() {
+                $(divSpan).find('span[annot="true"]').each(function () {
                     if (annotation.intersects($(this).offset().left - div.offset().left, $(this).offset().top - div.offset().top, $(this).width(), $(this).height()))
                     {
                         letterBuffer += $(this).text();
@@ -1744,7 +1698,7 @@ Annotation.prototype = {
         return buffer;
     },
 
-    intersects: function(x2, y2, w2, h2) {
+    intersects: function (x2, y2, w2, h2) {
         return !(this.x > x2 + w2 || this.x + this.w < x2 || this.y > y2 + h2 || this.y + this.h < y2);
     },
 
@@ -1756,7 +1710,7 @@ Annotation.prototype = {
      * @param {decimal} scale The scale of the canvas.
      * @param {boolean} useDisplayCoordinate
      */
-    calculateOrigBound: function(canvas, angle, scale, useDisplayCoordinate) {
+    calculateOrigBound: function (canvas, angle, scale, useDisplayCoordinate) {
         var x = useDisplayCoordinate ? this.x : this.origX;
         var y = useDisplayCoordinate ? this.y : this.origY;
         var w = useDisplayCoordinate ? this.w : this.origW;
@@ -1782,16 +1736,13 @@ Annotation.prototype = {
         if (w < 0) {
             if (x + w < 0) {
                 this.x = x = Math.abs(w);
-            }
-            else if (x >= canvas.width) {
+            } else if (x >= canvas.width) {
                 this.x = x = canvas.width;
             }
-        }
-        else {
+        } else {
             if (x < 0) {
                 this.x = x = 1;
-            }
-            else if (x + w >= canvas.width) {
+            } else if (x + w >= canvas.width) {
                 this.x = x = canvas.width - w - 1;
             }
         }
@@ -1799,16 +1750,13 @@ Annotation.prototype = {
         if (h < 0) {
             if (y + h < 0) {
                 this.y = y = Math.abs(h);
-            }
-            else if (y >= canvas.height) {
+            } else if (y >= canvas.height) {
                 this.y = y = canvas.height;
             }
-        }
-        else {
+        } else {
             if (y < 0) {
                 this.y = y = 1;
-            }
-            else if (y + h >= canvas.height) {
+            } else if (y + h >= canvas.height) {
                 this.y = y = canvas.height - h - 1;
             }
         }
@@ -1818,20 +1766,17 @@ Annotation.prototype = {
             this.origY = Math.ceil((canvas.width - (x + w)) / scale);
             this.origW = h / scale;
             this.origH = w / scale;
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             this.origX = Math.ceil((canvas.width - (x + w)) / scale);
             this.origY = Math.ceil((canvas.height - (y + h)) / scale);
             this.origW = w / scale;
             this.origH = h / scale;
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             this.origX = Math.ceil((canvas.height - (y + h)) / scale);
             this.origY = x / scale;
             this.origW = h / scale;
             this.origH = w / scale;
-        }
-        else {
+        } else {
             this.origX = x / scale;
             this.origY = y / scale;
             this.origW = w / scale;
@@ -1857,8 +1802,7 @@ Annotation.prototype = {
                 ff.css('width', Math.abs(angle != 0 && angle != 180 ? this.h : this.w));
                 ff.css('height', Math.abs(angle != 0 && angle != 180 ? this.w : this.h));
             }
-        }
-        else if (this.annotationType == Annotation.TYPE_TEXT) {
+        } else if (this.annotationType == Annotation.TYPE_TEXT) {
             var freeText = $('#' + Default.ANNOTATION_ID_PREFIX_FREE_TEXT + (this.id ? this.id : ''));
             freeText.css('left', (this.x + (angle == 90 ? this.w : 0)));
             freeText.css('top', (this.y + (angle == 270 ? this.h : 0)));
@@ -1881,9 +1825,9 @@ Annotation.prototype = {
      * @param {object} e The mouse event object.
      * @returns {boolean}
      */
-    containsHighlightText: function(mouseX, mouseY, e) {
+    containsHighlightText: function (mouseX, mouseY, e) {
         if (this.highlightTextRects) {
-            for (var i=0; i<this.highlightTextRects.length; i++) {
+            for (var i = 0; i < this.highlightTextRects.length; i++) {
                 if (e && e.changedTouches) {
                     var circle = {
                         x: mouseX,
@@ -1900,13 +1844,12 @@ Annotation.prototype = {
 
                     if (Util.isRectCircleColliding(circle, rect))
                         return true;
-                }
-                else
-                    if (((mouseX >= this.highlightTextRects[i].left && mouseX <= this.highlightTextRects[i].left + this.highlightTextRects[i].width) ||
+                } else
+                if (((mouseX >= this.highlightTextRects[i].left && mouseX <= this.highlightTextRects[i].left + this.highlightTextRects[i].width) ||
                         (mouseX <= this.highlightTextRects[i].left && mouseX >= this.highlightTextRects[i].left + this.highlightTextRects[i].width)) &&
                         ((mouseY >= this.highlightTextRects[i].top && mouseY <= this.highlightTextRects[i].top + this.highlightTextRects[i].height) ||
-                        (mouseY <= this.highlightTextRects[i].top && mouseY >= this.highlightTextRects[i].top + this.highlightTextRects[i].height)))
-                        return true;
+                                (mouseY <= this.highlightTextRects[i].top && mouseY >= this.highlightTextRects[i].top + this.highlightTextRects[i].height)))
+                    return true;
             }
         }
 
@@ -1918,7 +1861,7 @@ Annotation.prototype = {
      * @function
      * @returns {string}
      */
-    getHighlightTextColor: function() {
+    getHighlightTextColor: function () {
         return this.backgroundColor;
     },
 
@@ -1928,14 +1871,14 @@ Annotation.prototype = {
      * @function
      * @returns {string}
      */
-    toStringHighlightTextCoordinates: function() {
+    toStringHighlightTextCoordinates: function () {
         if (!this.highlightTextRects)
             return null;
 
         var str = '';
-        for (var i=0; i<this.highlightTextRects.length; i++) {
+        for (var i = 0; i < this.highlightTextRects.length; i++) {
             str += this.highlightTextRects[i].origLeft + ',' + this.highlightTextRects[i].origTop + ',' +
-                this.highlightTextRects[i].origWidth + ',' + this.highlightTextRects[i].origHeight + ',';
+                    this.highlightTextRects[i].origWidth + ',' + this.highlightTextRects[i].origHeight + ',';
         }
 
         return str.length > 0 ? str.substring(0, str.length - 1) : str;
@@ -1951,17 +1894,16 @@ Annotation.prototype = {
      * @param {decimal} mouseY The Y coordinate of the mouse cursor.
      * @returns {boolean}
      */
-    containsDrawing: function(page, mouseX, mouseY) {
+    containsDrawing: function (page, mouseX, mouseY) {
         if (!this.drawingPositions || this.drawingPositions.length === 0) {
             return false;
         }
 
         if (this.drawingPositions.length === 2) {
             return this.hasArrowHead() ?
-             this.containsLineArrowhead(mouseX, mouseY, PDFViewerApplication.pdfViewer.currentScale) :
-             this.containsLine(this.drawingPositions[0], this.drawingPositions[1], mouseX, mouseY, PDFViewerApplication.pdfViewer.currentScale);
-        }
-        else if (this.annotationType === Annotation.TYPE_CLOUD) {
+                    this.containsLineArrowhead(mouseX, mouseY, PDFViewerApplication.pdfViewer.currentScale) :
+                    this.containsLine(this.drawingPositions[0], this.drawingPositions[1], mouseX, mouseY, PDFViewerApplication.pdfViewer.currentScale);
+        } else if (this.annotationType === Annotation.TYPE_CLOUD) {
             // We use the original implementation for now because it is hard to find a formula for this one.
             var cache = document.createElement('canvas');
             cache.height = page.ctx.canvas.height;
@@ -1972,7 +1914,7 @@ Annotation.prototype = {
             cache_ctx.beginPath();
             cache_ctx.lineWidth = this.lineWidth + Default.DRAW_WIDTH_THICKNESS_FOR_MOUSE_CLICK;
 
-            for (var p=0; p<this.drawingPositions.length; p++) {
+            for (var p = 0; p < this.drawingPositions.length; p++) {
                 if (p == 0)
                     cache_ctx.moveTo(this.drawingPositions[p].x, this.drawingPositions[p].y);
                 else
@@ -1997,30 +1939,29 @@ Annotation.prototype = {
             }
 
             return result;
-        }
-        else {
+        } else {
             // Drawing or other polylines.
             return this.containsConnectingline(mouseX, mouseY, PDFViewerApplication.pdfViewer.currentScale);
         }
     },
 
-    containsLineArrowhead: function(mouseX, mouseY, scale) {
+    containsLineArrowhead: function (mouseX, mouseY, scale) {
         var p1 = this.drawingPositions[0];
         var p2 = this.drawingPositions[1];
         var inLine = this.containsLine(p1, p2, mouseX, mouseY, scale);
         if (inLine)
             return true;
-        
-        if (this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE) { 
+
+        if (this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE) {
             var lineAngle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
             var delta = Math.PI / Default.ARROW_SIZE;
-            for (var i=0; i<2; i++) {
+            for (var i = 0; i < 2; i++) {
                 inLine = false;
                 x = p1.x + (Default.ARROWHEAD_LENGTH * scale) * Math.cos(lineAngle + delta)
                 y = p1.y + (Default.ARROWHEAD_LENGTH * scale) * Math.sin(lineAngle + delta)
-                inLine = this.containsLine(p1, {x: x, y: y }, mouseX, mouseY, scale);
-                delta *= (-1 );
-                
+                inLine = this.containsLine(p1, {x: x, y: y}, mouseX, mouseY, scale);
+                delta *= (-1);
+
                 if (inLine)
                     return true;
             }
@@ -2028,12 +1969,12 @@ Annotation.prototype = {
 
         var lineAngle = Math.atan2(p1.y - p2.y, p1.x - p2.x);
         var delta = Math.PI / Default.ARROW_SIZE;
-        for (i=0; i<2; i++) {
+        for (i = 0; i < 2; i++) {
             inLine = false;
             x = p2.x + (Default.ARROWHEAD_LENGTH * scale) * Math.cos(lineAngle + delta)
             y = p2.y + (Default.ARROWHEAD_LENGTH * scale) * Math.sin(lineAngle + delta)
-            inLine = this.containsLine(p2, {x: x, y: y }, mouseX, mouseY, scale);
-            delta *= (-1 );
+            inLine = this.containsLine(p2, {x: x, y: y}, mouseX, mouseY, scale);
+            delta *= (-1);
 
             if (inLine)
                 return true;
@@ -2052,28 +1993,26 @@ Annotation.prototype = {
      * @param {decimal} scale The scale value.
      * @returns {boolean} Returns true if inside line.
      */
-    containsLine: function(startPoint, endPoint, mouseX, mouseY, scale) {
+    containsLine: function (startPoint, endPoint, mouseX, mouseY, scale) {
         if (this.drawingPositions.length < 2)
             return false;
-        
+
         var lineThickness = this.lineWidth * scale;
         var L2 = (((endPoint.x - startPoint.x) * (endPoint.x - startPoint.x)) + ((endPoint.y - startPoint.y) * (endPoint.y - startPoint.y)));
-        if (L2 === 0) 
+        if (L2 === 0)
             return false;
 
         var r = (((mouseX - startPoint.x) * (endPoint.x - startPoint.x)) + ((mouseY - startPoint.y) * (endPoint.y - startPoint.y))) / L2;
-    
+
         // Assume line thickness is circular.
         if (r < 0) {
             // Outside startPoint.
             return (Math.sqrt(((startPoint.x - mouseX) * (startPoint.x - mouseX)) + ((startPoint.y - mouseY) * (startPoint.y - mouseY))) <= lineThickness);
-        } 
-        else if (0 <= r && r <= 1) {
+        } else if (0 <= r && r <= 1) {
             // On the line segment.
             var s = (((startPoint.y - mouseY) * (endPoint.x - startPoint.x)) - ((startPoint.x - mouseX) * (endPoint.y - startPoint.y))) / L2;
             return (Math.abs(s) * Math.sqrt(L2) <= lineThickness);
-        }
-        else {
+        } else {
             // Outside endPoint.
             return (Math.sqrt(((endPoint.x - mouseX) * (endPoint.x - mouseX)) + ((endPoint.y - mouseY) * (endPoint.y - mouseY))) <= lineThickness);
         }
@@ -2088,24 +2027,23 @@ Annotation.prototype = {
      * @param {decimal} scale The scale value.
      * @returns {boolean} Returns true if inside the polyline.
      */
-    containsConnectingline: function(mouseX, mouseY, scale) {
+    containsConnectingline: function (mouseX, mouseY, scale) {
         if (this.annotationType == Annotation.TYPE_CLOUD || this.drawingPositions.length <= 2)
             return false;
-        
-        for (var i=0; i<this.drawingPositions.length; i++) {     
+
+        for (var i = 0; i < this.drawingPositions.length; i++) {
             var inLine = false;
 
             if (i === this.drawingPositions.length - 1) {
-                if (this.annotationType ===  Annotation.TYPE_DRAWING || this.annotationType === Annotation.TYPE_POLYLINE) 
+                if (this.annotationType === Annotation.TYPE_DRAWING || this.annotationType === Annotation.TYPE_POLYLINE)
                     break;
                 // If not polyline, then use the first coordinate as the closing coordinate.
-                else 
-                   inLine = this.containsLine(this.drawingPositions[i], this.drawingPositions[0], mouseX, mouseY, scale);
-            }
-            else
+                else
+                    inLine = this.containsLine(this.drawingPositions[i], this.drawingPositions[0], mouseX, mouseY, scale);
+            } else
                 inLine = this.containsLine(this.drawingPositions[i], this.drawingPositions[i + 1], mouseX, mouseY, scale);
 
-            if (inLine) 
+            if (inLine)
                 return true;
         }
 
@@ -2117,7 +2055,7 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isResizable: function() {
+    isResizable: function () {
         if (this.isReadOnly())
             return false;
 
@@ -2141,20 +2079,31 @@ Annotation.prototype = {
         }
     },
 
-    isMovable: function() {
+    isMovable: function () {
         if (this.isReadOnly())
             return false;
 
         return !(this.annotationType == Annotation.TYPE_DRAWING ||
-            this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT ||
-            this.annotationType == Annotation.TYPE_TEXT_STRIKE_THROUGH ||
-            this.annotationType == Annotation.TYPE_TEXT_UNDERLINE ||
-            this.annotationType == Annotation.TYPE_TEXT_INSERT ||
-            this.annotationType == Annotation.TYPE_TEXT_REPLACE ||
-            this.annotationType == Annotation.TYPE_HYPERLINK);
+                this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT ||
+                this.annotationType == Annotation.TYPE_TEXT_STRIKE_THROUGH ||
+                this.annotationType == Annotation.TYPE_TEXT_UNDERLINE ||
+                this.annotationType == Annotation.TYPE_TEXT_INSERT ||
+                this.annotationType == Annotation.TYPE_TEXT_REPLACE ||
+                this.annotationType == Annotation.TYPE_HYPERLINK);
     },
 
-    isReadOnly: function() {
+    isReadOnly: function () {
+        // ahmad
+        // We will check if document is locked then 
+        // We return readOnly true for each annotation.
+        if (parent.SUGAR) {
+            if (parent.document.getElementById('signDocframe').getAttribute('is_locked') == "1") {
+                return true;
+            }
+        } else if (is_locked == "1") {
+            return true;
+        }
+
         return Default.ANNOTATIONS_READ_ONLY || this.readOnly;
     },
 
@@ -2166,27 +2115,27 @@ Annotation.prototype = {
      * @param {boolean} reload If the annotation is reloaded when the Annotationeer instance is already running. The page
      * where the annotation belongs to needs to be repainted once the image is loaded.
      */
-    setIconSource: function(src, reload) {
+    setIconSource: function (src, reload) {
         if (typeof src == 'string' && !src.startsWith('http') &&
-            !src.startsWith('data:image') && !src.startsWith(Url.stampFolderUrl))
-            src =  Url.stampFolderUrl + src;
+                !src.startsWith('data:image') && !src.startsWith(Url.stampFolderUrl))
+            src = Url.stampFolderUrl + src;
 
         if (!this.icon)
             this.icon = new Image();
 
         if (reload) {
             var annot = this;
-            this.icon.onload = function() {
+            this.icon.onload = function () {
                 var page = pages[Default.canvasIdName + (annot.pageIndex + 1)];
-                if (page) page.invalidate();
+                if (page)
+                    page.invalidate();
             }
         }
 
         if (Util.isImage(src)) {
             this.icon = src;
             this.iconSrc = this.icon.src;
-        }
-        else {
+        } else {
             this.icon.src = src;
             this.iconSrc = src;
         }
@@ -2197,12 +2146,12 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isArrowNotLongEnough: function(scale) {
+    isArrowNotLongEnough: function (scale) {
         if (!this.drawingPositions || this.drawingPositions.length != 2)
             return false;
 
         var distance = Util.getDistance(this.drawingPositions[0].x, this.drawingPositions[0].y,
-            this.drawingPositions[1].x, this.drawingPositions[1].y);
+                this.drawingPositions[1].x, this.drawingPositions[1].y);
         return (distance < (Default.ARROW_SIZE * scale) * 2 * (this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE ? 2 : 1));
     },
 
@@ -2211,11 +2160,11 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isSelectableTextType: function() {
+    isSelectableTextType: function () {
         return this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT ||
-            this.annotationType == Annotation.TYPE_TEXT_UNDERLINE ||
-            this.annotationType == Annotation.TYPE_TEXT_STRIKE_THROUGH ||
-            this.annotationType == Annotation.TYPE_TEXT_REPLACE;
+                this.annotationType == Annotation.TYPE_TEXT_UNDERLINE ||
+                this.annotationType == Annotation.TYPE_TEXT_STRIKE_THROUGH ||
+                this.annotationType == Annotation.TYPE_TEXT_REPLACE;
     },
 
     /**
@@ -2223,7 +2172,7 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isBasedOnDivLayer: function() {
+    isBasedOnDivLayer: function () {
         return this.isSelectableTextType() || this.annotationType == Annotation.TYPE_TEXT;
     },
 
@@ -2233,7 +2182,7 @@ Annotation.prototype = {
      * @function
      * @returns {decimal}
      */
-    getArea: function() {
+    getArea: function () {
         if (this.drawingPositions.length == 0)
             return 0;
 
@@ -2242,9 +2191,9 @@ Annotation.prototype = {
         // The last vertex is the 'previous' one to the first
         var j = this.drawingPositions.length - 1;
 
-        for (var i=0; i<this.drawingPositions.length; i++) {
+        for (var i = 0; i < this.drawingPositions.length; i++) {
             area = area + (this.drawingPositions[j].origX + this.drawingPositions[i].origX) *
-                (this.drawingPositions[j].origY - this.drawingPositions[i].origY);
+                    (this.drawingPositions[j].origY - this.drawingPositions[i].origY);
             // j is previous vertex to i
             j = i;
         }
@@ -2256,11 +2205,11 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasEditableProperties: function() {
+    hasEditableProperties: function () {
         return (!this.usesImage() ||
-            this.annotationType == Annotation.TYPE_STICKY_NOTE ||
-            this.annotationType == Annotation.TYPE_TEXT_INSERT) &&
-            this.annotationType != Annotation.TYPE_HYPERLINK;
+                this.annotationType == Annotation.TYPE_STICKY_NOTE ||
+                this.annotationType == Annotation.TYPE_TEXT_INSERT) &&
+                this.annotationType != Annotation.TYPE_HYPERLINK;
     },
 
     /**
@@ -2268,12 +2217,12 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasBackgroundColorProperty: function() {
+    hasBackgroundColorProperty: function () {
         return this.annotationType == Annotation.TYPE_HIGHLIGHT ||
-            this.annotationType == Annotation.TYPE_CIRCLE_FILL ||
-            this.annotationType == Annotation.TYPE_TEXT ||
-            this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT || 
-            this.annotationType == Annotation.TYPE_STICKY_NOTE;
+                this.annotationType == Annotation.TYPE_CIRCLE_FILL ||
+                this.annotationType == Annotation.TYPE_TEXT ||
+                this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT ||
+                this.annotationType == Annotation.TYPE_STICKY_NOTE;
     },
 
     /**
@@ -2281,9 +2230,9 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasForegroundColorProperty: function() {
+    hasForegroundColorProperty: function () {
         return this.annotationType == Annotation.TYPE_TEXT ||
-            !this.hasBackgroundColorProperty();
+                !this.hasBackgroundColorProperty();
     },
 
     /**
@@ -2298,14 +2247,14 @@ Annotation.prototype = {
      * from the touch radius has a diameter value.
      * @returns {boolean}
      */
-    getSelectionHandleIndex: function(mouseX, mouseY, radius) {
+    getSelectionHandleIndex: function (mouseX, mouseY, radius) {
         var circle = {
             x: mouseX,
             y: mouseY,
             r: radius
         };
 
-        for (var i=0; i<this.selectionHandles.length; i++) {
+        for (var i = 0; i < this.selectionHandles.length; i++) {
             var rect = {
                 x: this.selectionHandles[i].x,
                 y: this.selectionHandles[i].y,
@@ -2325,12 +2274,12 @@ Annotation.prototype = {
      * @function
      * @returns {string}
      */
-    getTooltip: function() {
+    getTooltip: function () {
         var comment = this.getRootComment();
         return (comment != '' ? (Default.ANNOTATIONS_TOOLTIP_MAX_CHARS > 0 &&
-            comment.length > Default.ANNOTATIONS_TOOLTIP_MAX_CHARS ?
-            comment.substring(0, Default.ANNOTATIONS_TOOLTIP_MAX_CHARS) + '...' : comment) :
-            Message.NO_COMMENT);
+                comment.length > Default.ANNOTATIONS_TOOLTIP_MAX_CHARS ?
+                comment.substring(0, Default.ANNOTATIONS_TOOLTIP_MAX_CHARS) + '...' : comment) :
+                Message.NO_COMMENT);
     },
 
     /**
@@ -2338,11 +2287,11 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    usesImage: function() {
+    usesImage: function () {
         return this.annotationType == Annotation.TYPE_AUDIO ||
-            this.annotationType == Annotation.TYPE_STICKY_NOTE ||
-            this.annotationType == Annotation.TYPE_STAMP ||
-            this.annotationType == Annotation.TYPE_DIGITAL_SIGNATURE;
+                this.annotationType == Annotation.TYPE_STICKY_NOTE ||
+                this.annotationType == Annotation.TYPE_STAMP ||
+                this.annotationType == Annotation.TYPE_DIGITAL_SIGNATURE;
     },
 
     /**
@@ -2350,14 +2299,14 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isNonToggable: function() {
+    isNonToggable: function () {
         return this.annotationType == Annotation.TYPE_AUDIO ||
-            this.annotationType == Annotation.TYPE_TEXT ||
-            this.annotationType == Annotation.TYPE_SCREENSHOT ||
-            this.annotationType == Annotation.TYPE_STICKY_NOTE ||
-            this.usesImage() ||
-            this.isPolyLineType() ||
-            this.isFormField();
+                this.annotationType == Annotation.TYPE_TEXT ||
+                this.annotationType == Annotation.TYPE_SCREENSHOT ||
+                this.annotationType == Annotation.TYPE_STICKY_NOTE ||
+                this.usesImage() ||
+                this.isPolyLineType() ||
+                this.isFormField();
     },
 
     /**
@@ -2366,7 +2315,7 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isRootCommentEditable: function() {
+    isRootCommentEditable: function () {
         return !this.hasMeasuring() && this.annotationType != Annotation.TYPE_TEXT;
     },
 
@@ -2375,9 +2324,9 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasMeasuring: function() {
+    hasMeasuring: function () {
         return this.annotationType == Annotation.TYPE_MEASUREMENT_AREA ||
-            this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE;
+                this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE;
     },
 
     /**
@@ -2385,10 +2334,10 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    canContainComments: function() {
+    canContainComments: function () {
         return !this.isFormField() &&
-            this.annotationType != Annotation.TYPE_DIGITAL_SIGNATURE &&
-            this.annotationType != Annotation.TYPE_HYPERLINK;
+                this.annotationType != Annotation.TYPE_DIGITAL_SIGNATURE &&
+                this.annotationType != Annotation.TYPE_HYPERLINK;
     },
 
     /**
@@ -2396,13 +2345,13 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isFormField: function() {
+    isFormField: function () {
         return this.annotationType == Annotation.TYPE_FORM_TEXT_FIELD ||
-            this.annotationType == Annotation.TYPE_FORM_CHECKBOX ||
-            this.annotationType == Annotation.TYPE_FORM_RADIO_BUTTON ||
-            this.annotationType == Annotation.TYPE_FORM_TEXT_AREA ||
-            this.annotationType == Annotation.TYPE_FORM_COMBO_BOX ||
-            this.annotationType == Annotation.TYPE_FORM_BUTTON;
+                this.annotationType == Annotation.TYPE_FORM_CHECKBOX ||
+                this.annotationType == Annotation.TYPE_FORM_RADIO_BUTTON ||
+                this.annotationType == Annotation.TYPE_FORM_TEXT_AREA ||
+                this.annotationType == Annotation.TYPE_FORM_COMBO_BOX ||
+                this.annotationType == Annotation.TYPE_FORM_BUTTON;
     },
 
     /**
@@ -2410,9 +2359,9 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasFieldSet: function() {
+    hasFieldSet: function () {
         return this.annotationType == Annotation.TYPE_FORM_CHECKBOX ||
-            this.annotationType == Annotation.TYPE_FORM_RADIO_BUTTON;
+                this.annotationType == Annotation.TYPE_FORM_RADIO_BUTTON;
     },
 
     /**
@@ -2420,7 +2369,7 @@ Annotation.prototype = {
      * @function
      * @returns {string}
      */
-    getRootComment: function() {
+    getRootComment: function () {
         if (this.annotationType == Annotation.TYPE_MEASUREMENT_AREA)
             return Util.getAreaFromPixels(this, this.getArea());
         else if (this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE || this.annotationType == Annotation.TYPE_TEXT)
@@ -2434,7 +2383,7 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasLineStyle: function() {
+    hasLineStyle: function () {
         return this.annotationType == Annotation.TYPE_BOX;
     },
 
@@ -2443,10 +2392,10 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasOpacity: function() {
+    hasOpacity: function () {
         return this.annotationType == Annotation.TYPE_HIGHLIGHT ||
-            this.annotationType == Annotation.TYPE_CIRCLE_FILL ||
-            this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT;
+                this.annotationType == Annotation.TYPE_CIRCLE_FILL ||
+                this.annotationType == Annotation.TYPE_TEXT_HIGHLIGHT;
     },
 
     /**
@@ -2454,10 +2403,10 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasTwoEndPoints: function() {
+    hasTwoEndPoints: function () {
         return this.annotationType == Annotation.TYPE_LINE ||
-            this.annotationType == Annotation.TYPE_ARROW ||
-            this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE;
+                this.annotationType == Annotation.TYPE_ARROW ||
+                this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE;
     },
 
     /**
@@ -2465,11 +2414,11 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    isPolyLineType: function() {
+    isPolyLineType: function () {
         return this.annotationType == Annotation.TYPE_CLOUD ||
-            this.annotationType == Annotation.TYPE_POLY_LINE ||
-            this.annotationType == Annotation.TYPE_POLYGON ||
-            this.annotationType == Annotation.TYPE_MEASUREMENT_AREA;
+                this.annotationType == Annotation.TYPE_POLY_LINE ||
+                this.annotationType == Annotation.TYPE_POLYGON ||
+                this.annotationType == Annotation.TYPE_MEASUREMENT_AREA;
     },
 
     /**
@@ -2477,13 +2426,13 @@ Annotation.prototype = {
      * @function
      * @returns {boolean|*}
      */
-    hasLineWidth: function() {
+    hasLineWidth: function () {
         return this.annotationType == Annotation.TYPE_BOX ||
-            this.annotationType == Annotation.TYPE_CIRCLE_STROKE ||
-            this.annotationType == Annotation.TYPE_DRAWING ||
-            this.annotationType == Annotation.TYPE_LINE ||
-            this.annotationType == Annotation.TYPE_ARROW ||
-            this.isPolyLineType();
+                this.annotationType == Annotation.TYPE_CIRCLE_STROKE ||
+                this.annotationType == Annotation.TYPE_DRAWING ||
+                this.annotationType == Annotation.TYPE_LINE ||
+                this.annotationType == Annotation.TYPE_ARROW ||
+                this.isPolyLineType();
     },
 
     /**
@@ -2491,9 +2440,9 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-    hasArrowHead: function() {
+    hasArrowHead: function () {
         return this.annotationType == Annotation.TYPE_MEASUREMENT_DISTANCE ||
-            this.annotationType == Annotation.TYPE_ARROW;
+                this.annotationType == Annotation.TYPE_ARROW;
     },
 
     /**
@@ -2507,7 +2456,7 @@ Annotation.prototype = {
      * @param {decimal} radius The radius of the cloud. This is an override option via parameter.
      * @param {boolean} isBox If the annotation type is {@link Annotation.TYPE_BOX}.
      */
-    drawCloud: function(context, lineWidth, color, scale, radius, isBox) {
+    drawCloud: function (context, lineWidth, color, scale, radius, isBox) {
         // Same code as above, the difference is only the line width.
         var radius = (radius ? radius : Default.CLOUD_RADIUS) * scale;
         var overlap = Default.CLOUD_OVERLAP;
@@ -2551,8 +2500,7 @@ Annotation.prototype = {
                 dp.x = this.x;
                 dp.y = this.y + this.h;
                 dps.push(dp);
-            }
-            else if (this.w < 0 || this.h < 0) {
+            } else if (this.w < 0 || this.h < 0) {
                 // Upper left.
                 dp = new DrawingPosition();
                 dp.x = this.x + this.w;
@@ -2608,7 +2556,7 @@ Annotation.prototype = {
         }
 
         var prev = points[points.length - 1];
-        for (var i=0; i<points.length; i++) {
+        for (var i = 0; i < points.length; i++) {
             var curr = points[i];
 
             var dx = curr.x - prev.x;
@@ -2623,11 +2571,12 @@ Annotation.prototype = {
 
             if (stretch) {
                 var n = (len / delta + 0.5) | 0;
-                if (n < 1) n = 1;
+                if (n < 1)
+                    n = 1;
                 d = len / n;
             }
 
-            for (var a=0; a+0.1*d<len; a+=d) {
+            for (var a = 0; a + 0.1 * d < len; a += d) {
                 circle.push({
                     x: prev.x + a * dx,
                     y: prev.y + a * dy
@@ -2639,7 +2588,7 @@ Annotation.prototype = {
 
         // Determine intersection angles of circles
         var prev = circle[circle.length - 1];
-        for (var i=0; i<circle.length; i++) {
+        for (var i = 0; i < circle.length; i++) {
             var curr = circle[i];
             var angle = Util.intersectAngle(prev, curr, radius);
 
@@ -2657,7 +2606,7 @@ Annotation.prototype = {
 
         var incise = Math.PI * Default.CLOUD_INCISE / 180;
 
-        for (var i=0; i<circle.length; i++) {
+        for (var i = 0; i < circle.length; i++) {
             context.beginPath();
             context.arc(circle[i].x, circle[i].y, radius, circle[i].begin, circle[i].end + incise);
             context.stroke();
@@ -2671,14 +2620,14 @@ Annotation.prototype = {
      * @function
      * @returns {boolean}
      */
-	isReviewStatusable: function() {
+    isReviewStatusable: function () {
         // We remove this because anybody should be able to add a comment status regardless
         // if the annotation is read-only or not.
-		//if (this.readOnly)
-		//	return false;
+        //if (this.readOnly)
+        //	return false;
 
-		return this.annotationType != Annotation.TYPE_DIGITAL_SIGNATURE;
-	},
+        return this.annotationType != Annotation.TYPE_DIGITAL_SIGNATURE;
+    },
 
     /**
      * <p>Draws a triangle with quadratic curves on the side. The lineTo() function is not really needed but
@@ -2689,7 +2638,7 @@ Annotation.prototype = {
      * @param rect The rectangle of HighlightTextRect which will be used as basis for drawing this in text replace annotation.
      * This assumes the rect's domRotateAngle is 0 as doing it for others is too much work.
      */
-    drawQuadraticCurveTriangle: function(context, angle, rect) {
+    drawQuadraticCurveTriangle: function (context, angle, rect) {
         context.beginPath();
 
         var h = rect ? (angle == 90 || angle == 270 ? rect.width : rect.height) / 2 : this.h;
@@ -2710,8 +2659,7 @@ Annotation.prototype = {
             context.quadraticCurveTo(x + (w / 2), y + (h / 2), x + w, y + h);
             // Bottom right to left.
             context.lineTo(x, y + h);
-        }
-        else if (angle == 90) {
+        } else if (angle == 90) {
             if (rect) {
                 x = rect.left;
                 y = rect.bottom - (w / 2);
@@ -2724,8 +2672,7 @@ Annotation.prototype = {
             context.quadraticCurveTo(x + (w / 2), y + (h / 2), x, y + h);
             // Bottom left to top.
             context.lineTo(x, y);
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             if (rect) {
                 x = rect.left - (w / 2);
                 y = rect.top;
@@ -2738,8 +2685,7 @@ Annotation.prototype = {
             context.quadraticCurveTo(x + (w / 2), y + (h / 2), x + w, y);
             // Top left to right.
             context.lineTo(x, y);
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             if (rect) {
                 x = rect.right - w;
                 y = rect.top - (w / 2);
@@ -2768,7 +2714,7 @@ Annotation.prototype = {
  * @param {string} json The JSON string.
  * @returns {Annotation}
  */
-Annotation.createFromJSON = function(json){
+Annotation.createFromJSON = function (json) {
     if (typeof json === 'string')
         json = JSON.parse(json);
 
@@ -2785,23 +2731,20 @@ Annotation.createFromJSON = function(json){
                 array[a] = DrawingPosition.createFromJSON(array[a]);
             }
             obj[key] = array;
-        }
-        else if (key == 'highlightTextRects') {
+        } else if (key == 'highlightTextRects') {
             var array = json[key];
             for (var a in array) {
                 array[a] = HighlightTextRect.createFromJSON(array[a]);
             }
             obj[key] = array;
-        }
-        else if (key == 'iconSrc') {
+        } else if (key == 'iconSrc') {
             if (json[key] != '') {
                 obj.icon = new Image();
                 // This may be a url. If so, get the image file name.
                 obj.setIconSource(json[key].startsWith('data:image') ? json[key] : 'images/' + json[key].split('/').pop());
                 obj.setIconSource(json[key].startsWith('data:image') ? json[key] : 'images/' + json[key].split('/').pop());
             }
-        }
-        else
+        } else
             obj[key] = json[key];
     }
     return obj;
@@ -2814,7 +2757,7 @@ Annotation.createFromJSON = function(json){
  * @param {object} annotation The annotation object.
  * @returns {Annotation.Annotation}
  */
-Annotation.clone = function(annotation) {
+Annotation.clone = function (annotation) {
     var clone = Annotation.createFromJSON(Util.jsonStringify(annotation));
     clone.icon = annotation.icon;
     return clone;
@@ -3005,7 +2948,7 @@ Annotation.TYPE_SCREENSHOT = -9999;
  * The measurement unit type.
  * @namespace MeasurementType
  */
-var MeasurementType = { };
+var MeasurementType = {};
 
 /**
  * The property for measurement unit INCHES.
@@ -3039,7 +2982,7 @@ MeasurementType.FOOT_INCH = 4;
  * The line style for border.
  * @namespace LineStyle
  */
-var LineStyle = { };
+var LineStyle = {};
 
 /**
  * The property for line style SOLID.

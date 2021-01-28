@@ -13236,11 +13236,12 @@ function () {
           source: self
         });
       });
-      items.openFile.addEventListener('click', function () {
-        eventBus.dispatch('openfile', {
-          source: self
-        });
-      });
+      // ahmad
+//      items.openFile.addEventListener('click', function () {
+//        eventBus.dispatch('openfile', {
+//          source: self
+//        });
+//      });
       items.print.addEventListener('click', function () {
         eventBus.dispatch('print', {
           source: self

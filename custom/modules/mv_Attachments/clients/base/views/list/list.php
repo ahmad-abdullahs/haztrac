@@ -22,6 +22,10 @@ $viewdefs[$module_name] = array(
                                 'link' => true,
                                 'default' => true,
                                 'enabled' => true,
+                                'related_fields' =>
+                                array(
+                                    0 => 'is_locked',
+                                ),
                             ),
                             1 =>
                             array(

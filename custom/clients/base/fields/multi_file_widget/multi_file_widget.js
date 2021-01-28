@@ -23,6 +23,7 @@
         'click .deleteFile': 'deleteRecord',
         'click .signFile': 'signFile',
         'click .copyLinkToShare': 'copyLinkToShare',
+        'click .lockAnnotation': 'lockAnnotation',
         'click .loadInDashlet': 'loadInDashlet',
     },
 
@@ -173,12 +174,15 @@
         var self = this;
         var row = $(e.currentTarget).parents('div.control-group.clearfix');
         var beanID = $(row).attr('data-id');
+        var model = self.attachmentCollection.get(beanID);
+        var flag = (model.get('is_locked')) ? '1' : '0';
 
         app.drawer.open({
             layout: 'sign-doc',
             context: {
                 url: 'signDoc/annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf',
                 document_id: beanID,
+                is_locked: flag,
             }
         }, _.bind(function (context, model) {
             // comes here when its is closed
@@ -193,16 +197,43 @@
         var self = this;
         var row = $(e.currentTarget).parents('div.control-group.clearfix');
         var beanID = $(row).attr('data-id');
+        var model = self.attachmentCollection.get(beanID);
+        var flag = (model.get('is_locked')) ? '1' : '0';
 
         var url = app.config.signDocURL.url + 'annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf' +
                 '&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') + '&document_id=' + beanID +
-                '&hostUrl=' + app.config.signDocURL.url;
+                '&hostUrl=' + app.config.signDocURL.url + '&is_locked=' + flag;
 
         $('#copyLinkToShareInput').val(url);
         var copyText = document.getElementById("copyLinkToShareInput");
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
+    },
+    /**
+     * Listener function for locking the document to edit.
+     * @param {Object} e (current event)
+     */
+    lockAnnotation: function (e) {
+        var self = this;
+        var row = $(e.currentTarget).parents('div.control-group.clearfix');
+        var beanID = $(row).attr('data-id');
+        if (beanID) {
+            var model = self.attachmentCollection.get(beanID);
+            var flag = (!model.get('is_locked')) ? '1' : '0';
+            // Send and api call to lock/unlock the document
+            var url = 'HT_Manifest/' + beanID + '/lockOrUnlockDoc';
+
+            app.api.call('create', app.api.buildURL(url), {'flag': flag}, {
+                success: _.bind(function (result) {
+                    self.attachmentCollection.reset();
+                    self.fetchRecords(true);
+                }),
+                error: _.bind(function (err) {
+                    console.log(err);
+                }, this),
+            });
+        }
     },
 
     fileSave: function (model, value) {

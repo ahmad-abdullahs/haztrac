@@ -69,7 +69,8 @@ Message.loadTranslations = function() {
 					continue;
 
 				if (values[k] && values[k].startsWith('{{') && values[k].endsWith('}}')) {
-					break;
+                                    // ahmad
+					//break;
 				}
 
 				Message[prop] = values[k];
