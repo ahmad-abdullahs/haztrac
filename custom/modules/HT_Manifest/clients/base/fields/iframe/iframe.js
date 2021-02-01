@@ -42,7 +42,7 @@
     signFile: function (e) {
         var self = this;
         var beanID = this.model.attributes.document_id;
-        var flag = (this.model.attributes.is_locked) ? '1' : '0';
+        var flag = (this.model.attributes.is_locked) ? 1 : 0;
 
         app.drawer.open({
             layout: 'sign-doc',
@@ -62,17 +62,24 @@
      */
     copyLinkToShare: function (e) {
         var beanID = this.model.attributes.document_id;
-        var flag = (this.model.attributes.is_locked) ? '1' : '0';
+        var flag = (this.model.attributes.is_locked) ? 1 : 0;
+        var today = moment();
+        var dateOfExpiry = today.add(1, 'day').utc().format();
 
         var url = app.config.signDocURL.url + 'annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf' +
-                '&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') + '&document_id=' + beanID +
-                '&hostUrl=' + app.config.signDocURL.url + '&is_locked=' + flag;
+                '&token=' + window.btoa('&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') +
+                        '&document_id=' + beanID + '&hostUrl=' + app.config.signDocURL.url + '&is_locked=' + flag +
+                        '&dateOfExpiry=' + dateOfExpiry);
 
         $('#copyLinkToShareInput').val(url);
         var copyText = document.getElementById("copyLinkToShareInput");
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
+
+        // When user click the copy link button it should lock the document. 
+        e.keptLock = true;
+        this.lockAnnotation(e);
     },
 
     /**
@@ -82,10 +89,14 @@
     lockAnnotation: function (e) {
         var self = this;
         var beanID = this.model.attributes.document_id;
-        var flag = (!this.model.attributes.is_locked) ? '1' : '0';
+        var flag = (!this.model.attributes.is_locked) ? 1 : 0;
         if (beanID) {
             // Send and api call to lock/unlock the document
             var url = 'HT_Manifest/' + beanID + '/lockOrUnlockDoc';
+
+            if (_.has(e, "keptLock")) {
+                flag = flag || ((e.keptLock) ? 1 : 0);
+            }
 
             app.api.call('create', app.api.buildURL(url), {'flag': flag}, {
                 success: _.bind(function (result) {

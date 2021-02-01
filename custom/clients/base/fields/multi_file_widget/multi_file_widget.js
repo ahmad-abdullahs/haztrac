@@ -175,7 +175,7 @@
         var row = $(e.currentTarget).parents('div.control-group.clearfix');
         var beanID = $(row).attr('data-id');
         var model = self.attachmentCollection.get(beanID);
-        var flag = (model.get('is_locked')) ? '1' : '0';
+        var flag = (model.get('is_locked')) ? 1 : 0;
 
         app.drawer.open({
             layout: 'sign-doc',
@@ -198,17 +198,24 @@
         var row = $(e.currentTarget).parents('div.control-group.clearfix');
         var beanID = $(row).attr('data-id');
         var model = self.attachmentCollection.get(beanID);
-        var flag = (model.get('is_locked')) ? '1' : '0';
+        var flag = (model.get('is_locked')) ? 1 : 0;
+        var today = moment();
+        var dateOfExpiry = today.add(1, 'day').utc().format();
 
         var url = app.config.signDocURL.url + 'annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf' +
-                '&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') + '&document_id=' + beanID +
-                '&hostUrl=' + app.config.signDocURL.url + '&is_locked=' + flag;
+                '&token=' + window.btoa('&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') +
+                        '&document_id=' + beanID + '&hostUrl=' + app.config.signDocURL.url + '&is_locked=' + flag +
+                        '&dateOfExpiry=' + dateOfExpiry);
 
         $('#copyLinkToShareInput').val(url);
         var copyText = document.getElementById("copyLinkToShareInput");
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
+        
+        // When user click the copy link button it should lock the document. 
+        e.keptLock = true;
+        this.lockAnnotation(e);
     },
     /**
      * Listener function for locking the document to edit.
@@ -220,7 +227,12 @@
         var beanID = $(row).attr('data-id');
         if (beanID) {
             var model = self.attachmentCollection.get(beanID);
-            var flag = (!model.get('is_locked')) ? '1' : '0';
+            var flag = (!model.get('is_locked')) ? 1 : 0;
+
+            if (_.has(e, "keptLock")) {
+                flag = flag || ((e.keptLock) ? 1 : 0);
+            }
+
             // Send and api call to lock/unlock the document
             var url = 'HT_Manifest/' + beanID + '/lockOrUnlockDoc';
 

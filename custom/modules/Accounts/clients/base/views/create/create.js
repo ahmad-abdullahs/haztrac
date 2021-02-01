@@ -257,6 +257,42 @@
         self.model.save(null, options);
     },
 
+    bindDataChange: function () {
+        this.model.on('change:shipping_address_plus_code_val', _.bind(
+                this.getLonLat, this, 'shipping_address_lat', 'shipping_address_lon'), this);
+        this.model.on('change:service_site_address_plus_code_val', _.bind(
+                this.getLonLat, this, 'service_site_address_lat', 'service_site_address_lon'), this);
+        this._super('bindDataChange');
+    },
+
+    /*
+     * This function is added to find the logitude and latitude on fly from Plus Code.
+     * When Plus code field is changed it automatically populate the co-ordinates.
+     */
+    getLonLat: function (latFieldName, lngFieldName, model, value) {
+        var self = this;
+        if (!_.isEmpty(value)) {
+            if (typeof (google) == "undefined") {
+                return;
+            }
+            //  JW5F+QP Palmdale, CA, USA
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({address: value}, (results, status) => {
+                if (status === "OK") {
+                    var _lat = results[0].geometry.location.lat(),
+                            _lng = results[0].geometry.location.lng();
+
+                    self.model.set({
+                        [latFieldName]: _lat,
+                        [lngFieldName]: _lng,
+                    });
+                } else {
+                    console.log("Geocode was not successful for the following reason: " + status);
+                }
+            });
+        }
+    },
+
     /**
      * @inheritdoc
      */

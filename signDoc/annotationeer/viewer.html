@@ -12,10 +12,46 @@
     <!-- Annotationeer i18n and i10n -->
     <link rel="resource" type="application/l10n"  href="locale/locale.properties"/>
     <link rel="stylesheet" href="../web/viewer.css"/>
+    <script src="moment.min.js"></script>
     
     <script>
         var url_string = window.location.href;
         var url = new URL(url_string);
+        
+        var token = url.searchParams.get("token");
+        var decodedString = window.atob(token);
+        url.search = url.search + '&' + decodedString;
+        
+        if (!parent.SUGAR) {
+            dateOfExpiryStr = url.searchParams.get("dateOfExpiry");
+            dateOfExpiry = moment(dateOfExpiryStr);
+
+            var nowDate = moment().utc();
+            var nowDateStr = moment().utc().format();
+
+            if(!nowDate.isSameOrBefore(dateOfExpiry)){
+                if (window.confirm("Your link has been been expired.")) {
+                    window.location.replace(url.searchParams.get("hostUrl") + 'annotationeer/linkexpired.html');
+                } else{
+                    window.location.replace(url.searchParams.get("hostUrl") + 'annotationeer/linkexpired.html');
+                }
+            }
+
+            var checkLinkExpiry = setInterval(function () {
+                var nowDate = moment().utc();
+                var nowDateStr = moment().utc().format();
+
+                if(!nowDate.isSameOrBefore(dateOfExpiry)){
+                    clearInterval(checkLinkExpiry);
+                    if (window.confirm("Your link has been been expired.")) {
+                        window.location.replace(url.searchParams.get("hostUrl") + 'annotationeer/linkexpired.html');
+                    } else {
+                        window.location.replace(url.searchParams.get("hostUrl") + 'annotationeer/linkexpired.html');
+                    }
+                }
+            }, 6000);
+        }
+        
         sugar_user_id = url.searchParams.get("sugar_user_id");
         full_name = url.searchParams.get("full_name");
         document_id = url.searchParams.get("document_id");
@@ -40,7 +76,6 @@
     <script src="angular-sanitize.min.js"></script>
     <script src="angular.ng-modules.js"></script>
     <script src="remodal.min.js"></script>
-    <script src="moment.min.js"></script>
     <script src="jSignature.min.js"></script>
     <script src="dom-to-image.min.js"></script>
     <script src="rangefix.min.js"></script>
