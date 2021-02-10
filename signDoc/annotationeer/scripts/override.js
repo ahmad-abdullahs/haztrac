@@ -1174,13 +1174,24 @@ PageManager.eraseAnnotation = function (button) {
 PageManager.removeAllAnnotations = function (button) {
     PageManager.consoleLog('Annotationeer.removeAllAnnotations()');
     if (annotations.length > 0) {
+        var _document_id = '';
+        if (parent.SUGAR) {
+            var ele = parent.document.getElementById('signDocframe');
+            if (!ele) {
+                ele = parent.document.getElementById('signDocframeRecordPreview');
+            }
+            _document_id = ele.getAttribute('document_id');
+        } else {
+            _document_id = document_id;
+        }
+
         var result = confirm("Are you sure you want to remove all annotations?");
         if (result == true) {
             $.ajax({
                 url: Url.restUrl + Url.annotationDeleteUrl + '/all',
                 type: 'delete',
                 data: Util.jsonStringify({
-                    document_id: document_id,
+                    document_id: _document_id,
                     id: 'all',
                 }),
                 contentType: 'application/json',
