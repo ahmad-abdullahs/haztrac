@@ -1,4 +1,3 @@
-{{!--
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -9,9 +8,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
---}}
-{{#if value}}
-    {{#notEq value 'http://'}}
-        <iframe id="{{elementId}}" src="{{value}}" document_id="{{document_id}}" is_locked="1" height="{{def.height}}" width="100%"{{#if dir}} dir="{{dir}}"{{/if}}></iframe>
-    {{/notEq}}
-{{/if}}
+/**
+ * @class View.Layouts.Base.SelectionListLayout
+ * @alias SUGAR.App.view.layouts.BaseSelectionListLayout
+ * @extends View.Layout
+ */
+({
+    extendsFrom: 'SelectionListLayout',
+
+    initialize: function (options) {
+        this._super('initialize', [options]);
+    },
+
+})

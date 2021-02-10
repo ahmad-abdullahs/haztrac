@@ -52,3 +52,10 @@ Changed text from SugarCRM to HAZTRAC
 // Below mentioned function is customized, in future try to make them in upgrade safe manner...
 modules/Audit/Audit.php
 added ++ $rows = array_merge($rows,$return); on line 179.
+-----------------------------------------5--------------------------------------
+**************************** Non Upgrade Safe Change # 5 ***********************
+--------------------------------------------------------------------------------
+
+// Below mentioned function is customized, in future try to make them in upgrade safe manner...
+styleguide/assets/css/iframe-sugar.css
+Changed from html,body{margin: 0;padding: 0;display: inline-block} to html,body{margin: 0;padding: 0;display: block}

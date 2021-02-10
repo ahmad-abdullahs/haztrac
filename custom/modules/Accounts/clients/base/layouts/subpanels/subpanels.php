@@ -123,13 +123,13 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array(
                 'link' => 'members',
             ),
         ),
-        array(
-            'layout' => 'subpanel',
-            'label' => 'LBL_LEADS_SUBPANEL_TITLE',
-            'context' => array(
-                'link' => 'leads',
-            ),
-        ),
+//        array(
+//            'layout' => 'subpanel',
+//            'label' => 'LBL_LEADS_SUBPANEL_TITLE',
+//            'context' => array(
+//                'link' => 'leads',
+//            ),
+//        ),
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_BUGS_SUBPANEL_TITLE',
@@ -151,13 +151,13 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
-        array(
-            'layout' => 'subpanel',
-            'label' => 'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE',
-            'context' => array(
-                'link' => 'campaigns',
-            ),
-        ),
+//        array(
+//            'layout' => 'subpanel',
+//            'label' => 'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE',
+//            'context' => array(
+//                'link' => 'campaigns',
+//            ),
+//        ),
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',

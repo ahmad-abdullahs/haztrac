@@ -121,7 +121,12 @@
         }
         
         if (parent.SUGAR) {
-            if (parent.document.getElementById('signDocframe').getAttribute('is_locked') == "1") {
+            var ele = parent.document.getElementById('signDocframe');
+            if(!ele){
+                ele = parent.document.getElementById('signDocframeRecordPreview');
+            }
+            
+            if (ele.getAttribute('is_locked') == "1") {
                 $('.toolbarButton').each(function(){
                     $(this).addClass('hidden');
                 });
@@ -532,6 +537,9 @@
                 </div>
                 <button id="eraser" class="toolbarButton annotation" title="Eraser" onclick="PageManager.eraseAnnotation(this)" data-l10n-id="eraser">
                     <img src="images/eraser.svg" width="16" height="16"/>
+                </button>
+                <button id="remove_all_annotations" class="toolbarButton annotation" title="Remove All Annotation" onclick="PageManager.removeAllAnnotations(this)" data-l10n-id="remove_all_annotations">
+                    <img src="images/remove_all_annotations.svg" width="16" height="16"/>
                 </button>
                 <span id="form_field_group" class="hidden">
                     <div class="separator"></div>

@@ -66,7 +66,8 @@ SQL;
                 $ret['is_locked'] = ($row['is_locked'] == 1) ? true : false;
                 $ret['document_id'] = $row['id'];
                 if (file_exists("pdfs/{$ret['preview_doc_id']}")) {
-                    $ret['ht_manifest_preview_c'] = "{$sugar_config['site_url']}/pdfs/{$ret['preview_doc_id']}#zoom=60";
+//                    $ret['ht_manifest_preview_c'] = "{$sugar_config['site_url']}/pdfs/{$ret['preview_doc_id']}#zoom=60";
+                    $ret['ht_manifest_preview_c'] = "{$sugar_config['site_url']}/signDoc/annotationeer/viewer.html?file=../../pdfs/{$ret['preview_doc_id']}";
 
                     if ($row['file_ext'] == 'pdf') {
                         $ret['popOutFullViewLink'] = "#bwc/index.php?entryPoint=openpdf&id={$row['id']}&module=mv_Attachments";

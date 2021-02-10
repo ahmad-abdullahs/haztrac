@@ -15,6 +15,8 @@
         this._super('initialize', [options]);
         this.context.on('button:cancel_button:click', function () {
             app.drawer.close();
+            // Reolad the Manifest preview dashlet on the detail view.
+            app.events.trigger('reloadDashlet');
         }, this);
     },
 

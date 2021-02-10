@@ -77,9 +77,14 @@ Annotationeer.downloadAnnotations = function (reload) {
     // ahmad
     // -----START-----
     if (parent.SUGAR) {
+        var ele = parent.document.getElementById('signDocframe');
+        if (!ele) {
+            ele = parent.document.getElementById('signDocframeRecordPreview');
+        }
+
         var annotationURL = Url.restUrl + 'annotations/' + Annotationeer.currentDocument.documentId +
                 '?sugar_user_id=' + parent.SUGAR.App.user.get('id') +
-                '&document_id=' + parent.document.getElementById('signDocframe').getAttribute('document_id');
+                '&document_id=' + ele.getAttribute('document_id');
     } else {
         var annotationURL = Url.restUrl + 'annotations/' + Annotationeer.currentDocument.documentId +
                 '?sugar_user_id=' + sugar_user_id +
@@ -317,7 +322,12 @@ Annotationeer.saveAnnotation = function (annotation, text, doNotTriggerEvent) {
     // ahmad
     // -----START-----
     if (parent.SUGAR) {
-        annotation.document_id = parent.document.getElementById('signDocframe').getAttribute('document_id');
+        var ele = parent.document.getElementById('signDocframe');
+        if (!ele) {
+            ele = parent.document.getElementById('signDocframeRecordPreview');
+        }
+
+        annotation.document_id = ele.getAttribute('document_id');
     } else {
         annotation.document_id = document_id;
     }
@@ -1065,7 +1075,12 @@ Annotationeer.deleteAnnotation = function (annotation, fromAngular, doNotTrigger
         // ahmad
         // -----START-----
         if (parent.SUGAR) {
-            annotation.document_id = parent.document.getElementById('signDocframe').getAttribute('document_id');
+            var ele = parent.document.getElementById('signDocframe');
+            if (!ele) {
+                ele = parent.document.getElementById('signDocframeRecordPreview');
+            }
+
+            annotation.document_id = ele.getAttribute('document_id');
         } else {
             annotation.document_id = document_id;
         }
@@ -1153,5 +1168,34 @@ PageManager.eraseAnnotation = function (button) {
 
     if (Default.ANNOTATION_BUTTON_TOGGLED_CHANGE_TITLE) {
         PageManager.translateDOML10n(button, $(button).attr('data-l10n-id') + '_stop');
+    }
+};
+
+PageManager.removeAllAnnotations = function (button) {
+    PageManager.consoleLog('Annotationeer.removeAllAnnotations()');
+    if (annotations.length > 0) {
+        var result = confirm("Are you sure you want to remove all annotations?");
+        if (result == true) {
+            $.ajax({
+                url: Url.restUrl + Url.annotationDeleteUrl + '/all',
+                type: 'delete',
+                data: Util.jsonStringify({
+                    document_id: document_id,
+                    id: 'all',
+                }),
+                contentType: 'application/json',
+                dataType: 'json',
+                cache: false,
+                success: function (xhr, status, msg) {
+                    PageManager.consoleLog(msg.responseJSON.message);
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    PageManager.consoleLog('Error deleting annotations: ' + error);
+                }
+            });
+        }
+    } else {
+        alert("There is no annotation available on the document.");
     }
 };

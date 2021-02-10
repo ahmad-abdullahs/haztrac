@@ -17,6 +17,6 @@
 {{/if}}
 {{#if value}}
     {{#notEq value 'http://'}}
-        <iframe src="{{value}}" height="{{def.height}}" width="100%"{{#if dir}} dir="{{dir}}"{{/if}}></iframe>
+        <iframe id="{{elementId}}" src="{{value}}" document_id="{{document_id}}" is_locked="1" height="{{def.height}}" width="100%"{{#if dir}} dir="{{dir}}"{{/if}}></iframe>
     {{/notEq}}
 {{/if}}

@@ -83,12 +83,14 @@
         var settings = _.extend({}, this._defaultOptions, this.settings.attributes);
         this.settings.set(settings);
         app.events.on('loadTheFileInDashlet', this.loadTheFileInDashlet, this);
+        app.events.on('reloadDashlet', this._render, this);
     },
 
     loadTheFileInDashlet: function (param) {
         var context = this.context.parent || this.context;
         var model = context.get('model');
         model.set('preview_doc_id', param.id + '.' + param.file_ext, {silent: true});
+        model.set('document_id', param.id, {silent: true});
         if (param.hrefLink) {
             $('[name=popOutFullViewButton]').attr('href', param.hrefLink);
         }
