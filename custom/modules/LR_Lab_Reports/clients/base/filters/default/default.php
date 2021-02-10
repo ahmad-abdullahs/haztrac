@@ -1,5 +1,5 @@
 <?php
-// created: 2019-10-25 22:57:28
+// created: 2021-01-29 20:36:01
 $viewdefs['LR_Lab_Reports']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -17,6 +17,9 @@ $viewdefs['LR_Lab_Reports']['base']['filter']['default'] = array (
     array (
     ),
     'accounts_lr_lab_reports_3_name' => 
+    array (
+    ),
+    'sample_date_time_c' => 
     array (
     ),
     'subcategory_id' => 
@@ -43,6 +46,12 @@ $viewdefs['LR_Lab_Reports']['base']['filter']['default'] = array (
     array (
       'predefined_filter' => true,
       'vname' => 'LBL_FAVORITES_FILTER',
+    ),
+    'lab_ref_number_c' => 
+    array (
+    ),
+    'analysis_date_c' => 
+    array (
     ),
   ),
 );

@@ -15,7 +15,7 @@ $popupMeta = array (
     'listviewdefs' => array (
   'DOCUMENT_NAME' => 
   array (
-    'width' => '40',
+    'width' => 10,
     'label' => 'LBL_NAME',
     'link' => true,
     'default' => true,
@@ -29,13 +29,29 @@ $popupMeta = array (
     'default' => true,
     'name' => 'sample_id_number_c',
   ),
-  'OTHER_REF_NUMBER_C' => 
+  'SAMPLE_DATE_TIME_C' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_OTHER_REF_NUMBER',
+    'type' => 'datetimecombo',
+    'label' => 'LBL_SAMPLE_DATE_TIME',
     'width' => 10,
     'default' => true,
-    'name' => 'other_ref_number_c',
+    'name' => 'sample_date_time_c',
+  ),
+  'ANALYSIS_DATE_C' => 
+  array (
+    'type' => 'date',
+    'label' => 'LBL_ANALYSIS_DATE',
+    'width' => 10,
+    'default' => true,
+    'name' => 'analysis_date_c',
+  ),
+  'LAB_REF_NUMBER_C' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_LAB_REF_NUMBER',
+    'width' => 10,
+    'default' => true,
+    'name' => 'lab_ref_number_c',
   ),
   'STATUS_ID' => 
   array (
@@ -51,6 +67,7 @@ $popupMeta = array (
     'label' => 'LBL_MANIFEST_GALON_TOTAL',
     'width' => 10,
     'default' => true,
+    'name' => 'manifest_galon_total',
   ),
   'ACCOUNTS_LR_LAB_REPORTS_1_NAME' => 
   array (
@@ -59,7 +76,7 @@ $popupMeta = array (
     'default' => true,
     'label' => 'LBL_ACCOUNTS_LR_LAB_REPORTS_1_FROM_ACCOUNTS_TITLE_CST',
     'id' => 'ACCOUNTS_LR_LAB_REPORTS_1ACCOUNTS_IDA',
-    'width' => 10,
+    'width' => '25',
     'name' => 'accounts_lr_lab_reports_1_name',
   ),
   'ACCOUNTS_LR_LAB_REPORTS_2_NAME' => 
@@ -97,7 +114,7 @@ $popupMeta = array (
   array (
     'type' => 'varchar',
     'label' => 'LBL_COMMODITY',
-    'width' => 10,
+    'width' => '25',
     'default' => true,
     'name' => 'commodity_c',
   ),
