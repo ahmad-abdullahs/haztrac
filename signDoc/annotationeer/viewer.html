@@ -116,7 +116,7 @@
                     is_locked = response['is_locked'];
                     if(is_locked == "1"){
                         $('.toolbarButton').each(function(){
-                            if($(this)[0].id != 'print'){
+                            if($(this)[0].id != 'print' && $(this)[0].id != 'secondaryPrint'){
                                 $(this).addClass('hidden');
                             }
                         });
@@ -138,7 +138,7 @@
             
             if (ele.getAttribute('is_locked') == "1") {
                 $('.toolbarButton').each(function(){
-                    if($(this)[0].id != 'print'){
+                    if($(this)[0].id != 'print' && $(this)[0].id != 'secondaryPrint'){
                         $(this).addClass('hidden');
                     }
                 });
