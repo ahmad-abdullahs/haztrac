@@ -146,10 +146,12 @@ function getViewerConfiguration() {
       zoomIn: document.getElementById('zoomIn'),
       zoomOut: document.getElementById('zoomOut'),
       viewFind: document.getElementById('viewFind'),
-      openFile: document.getElementById('openFile'),
+      // ahmad
+//      openFile: document.getElementById('openFile'),
       print: document.getElementById('print'),
       presentationModeButton: document.getElementById('presentationMode'),
-      download: document.getElementById('download'),
+      // ahmad
+//      download: document.getElementById('download'),
       viewBookmark: document.getElementById('viewBookmark')
     },
     secondaryToolbar: {
@@ -157,9 +159,11 @@ function getViewerConfiguration() {
       toggleButton: document.getElementById('secondaryToolbarToggle'),
       toolbarButtonContainer: document.getElementById('secondaryToolbarButtonContainer'),
       presentationModeButton: document.getElementById('secondaryPresentationMode'),
-      openFileButton: document.getElementById('secondaryOpenFile'),
+      //ahmad
+//      openFileButton: document.getElementById('secondaryOpenFile'),
       printButton: document.getElementById('secondaryPrint'),
-      downloadButton: document.getElementById('secondaryDownload'),
+      //ahmad
+//      downloadButton: document.getElementById('secondaryDownload'),
       viewBookmarkButton: document.getElementById('secondaryViewBookmark'),
       firstPageButton: document.getElementById('firstPage'),
       lastPageButton: document.getElementById('lastPage'),
@@ -1607,9 +1611,11 @@ var PDFViewerApplication = {
     eventBus.on('namedaction', webViewerNamedAction);
     eventBus.on('presentationmodechanged', webViewerPresentationModeChanged);
     eventBus.on('presentationmode', webViewerPresentationMode);
-    eventBus.on('openfile', webViewerOpenFile);
+      // ahmad
+//    eventBus.on('openfile', webViewerOpenFile);
     eventBus.on('print', webViewerPrint);
-    eventBus.on('download', webViewerDownload);
+      // ahmad
+//    eventBus.on('download', webViewerDownload);
     eventBus.on('firstpage', webViewerFirstPage);
     eventBus.on('lastpage', webViewerLastPage);
     eventBus.on('nextpage', webViewerNextPage);
@@ -1687,9 +1693,11 @@ var PDFViewerApplication = {
     eventBus.off('namedaction', webViewerNamedAction);
     eventBus.off('presentationmodechanged', webViewerPresentationModeChanged);
     eventBus.off('presentationmode', webViewerPresentationMode);
-    eventBus.off('openfile', webViewerOpenFile);
+      // ahmad
+//    eventBus.off('openfile', webViewerOpenFile);
     eventBus.off('print', webViewerPrint);
-    eventBus.off('download', webViewerDownload);
+      // ahmad
+//    eventBus.off('download', webViewerDownload);
     eventBus.off('firstpage', webViewerFirstPage);
     eventBus.off('lastpage', webViewerLastPage);
     eventBus.off('nextpage', webViewerNextPage);
@@ -12625,18 +12633,20 @@ function () {
       eventName: 'presentationmode',
       close: true
     }, {
-      element: options.openFileButton,
-      eventName: 'openfile',
-      close: true
-    }, {
+      // ahmad
+//      element: options.openFileButton,
+//      eventName: 'openfile',
+//      close: true
+//    }, {
       element: options.printButton,
       eventName: 'print',
       close: true
     }, {
-      element: options.downloadButton,
-      eventName: 'download',
-      close: true
-    }, {
+      // ahmad
+//      element: options.downloadButton,
+//      eventName: 'download',
+//      close: true
+//    }, {
       element: options.viewBookmarkButton,
       eventName: null,
       close: true
@@ -13247,11 +13257,12 @@ function () {
           source: self
         });
       });
-      items.download.addEventListener('click', function () {
-        eventBus.dispatch('download', {
-          source: self
-        });
-      });
+      // ahmad
+//      items.download.addEventListener('click', function () {
+//        eventBus.dispatch('download', {
+//          source: self
+//        });
+//      });
       items.scaleSelect.oncontextmenu = _ui_utils.noContextMenuHandler;
       eventBus.on('localized', function () {
         _this._localized();

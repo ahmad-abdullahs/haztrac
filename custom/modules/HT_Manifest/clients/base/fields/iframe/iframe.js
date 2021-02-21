@@ -30,6 +30,7 @@
         this._super('initialize', [options]);
         // This is added to render the iframe when document is signed on the listview 
         app.events.on('reloadDashlet', this._render, this);
+        app.events.on('lockAnnotationOnDrawerClose', this.lockAnnotationOnDrawerClose, this);
     },
 
     format: function (value) {
@@ -101,7 +102,6 @@
      * @param {Object} e (current event)
      */
     lockAnnotation: function (e) {
-        var self = this;
         var beanID = this.model.attributes.document_id;
         var flag = (!this.model.attributes.is_locked) ? 1 : 0;
         if (beanID) {
@@ -112,19 +112,38 @@
                 flag = flag || ((e.keptLock) ? 1 : 0);
             }
 
-            app.api.call('create', app.api.buildURL(url), {'flag': flag}, {
-                success: _.bind(function (result) {
-                    // Fetch the respective model and render the field so that it should update the icon 
+            // end lock/unlock call
+            this.makeLockCall(url, flag);
+        }
+    },
+
+    makeLockCall: function (url, flag) {
+        var self = this;
+        app.api.call('create', app.api.buildURL(url), {'flag': flag}, {
+            success: _.bind(function (result) {
+                // Fetch the respective model and render the field so that it should update the icon 
+                if (!_.isNull(self.model) && !_.isUndefined(self.model)) {
                     self.model.fetch({
                         'success': _.bind(function (model) {
                             self.render();
                         }, this)
                     }, this);
-                }),
-                error: _.bind(function (err) {
-                    console.log(err);
-                }, this),
-            });
+                }
+            }),
+            error: _.bind(function (err) {
+                console.log(err);
+            }, this),
+        });
+    },
+
+    /*
+     * Automatically lock the document when drawer is closed
+     */
+    lockAnnotationOnDrawerClose: function (param) {
+        var url = 'HT_Manifest/' + param.document_id + '/lockOrUnlockDoc';
+        var flag = 1;
+        if (!_.isUndefined(param.document_id) && !_.isEmpty(param.document_id)) {
+            this.makeLockCall(url, flag);
         }
     },
 })

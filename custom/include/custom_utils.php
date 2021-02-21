@@ -15,7 +15,10 @@ function getViewColumns($module, $view = 'listview') {
         $groups [$colTypes[$column]] = $parser->$function();
     }
     foreach ($groups['Default'] as $key => $value) {
-        array_push($fieldsList, $key);
+        // Bool is excluded, otherwise it was not letting anything to filter
+        if ($value['type'] != 'bool') {
+            array_push($fieldsList, $key);
+        }
     }
     return $fieldsList;
 }

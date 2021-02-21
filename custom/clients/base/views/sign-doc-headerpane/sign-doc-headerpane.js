@@ -14,6 +14,11 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         this.context.on('button:cancel_button:click', function () {
+            // make the document closed automatically
+            app.events.trigger('lockAnnotationOnDrawerClose', {
+                'document_id': $('#signDocframe').attr('document_id')
+            });
+            // close the drawer
             app.drawer.close();
             // Reolad the Manifest preview dashlet on the detail view.
             app.events.trigger('reloadDashlet');

@@ -78,7 +78,7 @@ function Page() {
  * @memberof Page
  * @param {string} canvasIdName Initializes the {@link Page} object based on the canvas id name.
  */
-Page.prototype.init = function(canvasIdName) {
+Page.prototype.init = function (canvasIdName) {
     this.canvas = document.getElementById(canvasIdName);
 
     this.ctx = this.canvas.getContext('2d');
@@ -89,35 +89,52 @@ Page.prototype.init = function(canvasIdName) {
     this.gctx = this.ghostcanvas.getContext('2d');
 
     // Fixes a problem where double clicking causes text to get selected on the canvas
-    this.canvas.onselectstart = function() { return false; };
+    this.canvas.onselectstart = function () {
+        return false;
+    };
 
     // Fixes mouse co-ordinate problems when there's a border or padding
     // See getMouse for more details
     if (document.defaultView && document.defaultView.getComputedStyle) {
-        this.stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['paddingLeft'], 10)     || 0;
-        this.stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['paddingTop'], 10)      || 0;
-        this.styleBorderLeft  = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['borderLeftWidth'], 10) || 0;
-        this.styleBorderTop   = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['borderTopWidth'], 10)  || 0;
+        this.stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['paddingLeft'], 10) || 0;
+        this.stylePaddingTop = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['paddingTop'], 10) || 0;
+        this.styleBorderLeft = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['borderLeftWidth'], 10) || 0;
+        this.styleBorderTop = parseInt(document.defaultView.getComputedStyle(this.canvas, null)['borderTopWidth'], 10) || 0;
     }
 
     var self = this;
 
     if (Util.isMobile()) {
-        this.canvas.addEventListener('touchstart', function(e) {
-            self.mouseDown(e, true);
+        this.canvas.addEventListener('touchstart', function (e) {
+            // ahmad
+            if (parent.SUGAR) {
+                var ele = parent.document.getElementById('signDocframe');
+                if (!ele) {
+                    ele = parent.document.getElementById('signDocframeRecordPreview');
+                }
+
+                if (ele.getAttribute('is_locked') == "1") {
+                    return true;
+                } else {
+                    self.mouseDown(e, true);
+                }
+            } else if (is_locked == "1") {
+                return true;
+            } else {
+                self.mouseDown(e, true);
+            }
         });
 
-        this.canvas.addEventListener('touchmove', function(e) {
+        this.canvas.addEventListener('touchmove', function (e) {
             self.mouseMove(e, true);
         });
 
-        this.canvas.addEventListener('touchend', function(e) {
+        this.canvas.addEventListener('touchend', function (e) {
             e.preventDefault();
             self.mouseUp(e);
         });
-    }
-    else {
-          $(this.canvas).mousestop(Default.MOUSE_STOP_DELAY , function(e, data) {
+    } else {
+        $(this.canvas).mousestop(Default.MOUSE_STOP_DELAY, function (e, data) {
             self.showHideTooltip(true, data.mousemove);
         });
         // this.canvas.mousestop(Default.MOUSE_STOP_DELAY , function(e, data) {
@@ -125,28 +142,44 @@ Page.prototype.init = function(canvasIdName) {
         // });
     }
 
-    this.canvas.onmousedown = function(e) {
-        self.mouseDown(e);
+    this.canvas.onmousedown = function (e) {
+        // ahmad
+        if (parent.SUGAR) {
+            var ele = parent.document.getElementById('signDocframe');
+            if (!ele) {
+                ele = parent.document.getElementById('signDocframeRecordPreview');
+            }
+
+            if (ele.getAttribute('is_locked') == "1") {
+                return true;
+            } else {
+                self.mouseDown(e);
+            }
+        } else if (is_locked == "1") {
+            return true;
+        } else {
+            self.mouseDown(e);
+        }
     };
 
-    this.canvas.onmousemove = function(e) {
+    this.canvas.onmousemove = function (e) {
         if (self.canvas._tippy && self.canvas._tippy.state.isVisible)
             self.canvas._tippy.hide();
 
         self.mouseMove(e);
     };
 
-    this.canvas.onmouseup = function(e) {
+    this.canvas.onmouseup = function (e) {
         self.mouseUp(e);
     };
 
     // disable browser context menus in canvas, so only annotation popup menu will appear
-    this.canvas.oncontextmenu = function(e) {
+    this.canvas.oncontextmenu = function (e) {
         e.preventDefault();
         return false;
     };
 
-    this.canvas.ondblclick = function(e) {
+    this.canvas.ondblclick = function (e) {
         if (PageManager.selectedAnnotations.length > 1) {
             e.preventDefault();
             return;
@@ -162,7 +195,7 @@ Page.prototype.init = function(canvasIdName) {
  * @memberof Page
  * @param {object} c The canvas object.
  */
-Page.prototype.clear = function(c) {
+Page.prototype.clear = function (c) {
     c.clearRect(0, 0, $(this.canvas).width(), $(this.canvas).height());
 };
 
@@ -172,13 +205,13 @@ Page.prototype.clear = function(c) {
  * @memberof Page
  * @param {decimal} scale The current scale value. If null, use PDFViewerApplication.pdfViewer.currentScale.
  */
-Page.prototype.mainDraw = function(scale) {
+Page.prototype.mainDraw = function (scale) {
 
     this.clear(this.ctx);
 
     if ((PageManager.startCreatingAnnotation && PageManager.boxAnnotationGuide &&
-		PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_SCREENSHOT) ||
-        this.screenshotAnnotation)
+            PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_SCREENSHOT) ||
+            this.screenshotAnnotation)
     {
         // dim background
         this.ctx.fillStyle = Default.SCREENSHOT_DIM_COLOR;
@@ -190,7 +223,7 @@ Page.prototype.mainDraw = function(scale) {
 
     // Display annotations
     if (this.canvasAnnotations)
-        for (var i=0; i<this.canvasAnnotations.length; i++) {
+        for (var i = 0; i < this.canvasAnnotations.length; i++) {
             if (this.canvasAnnotations[i].isBasedOnDivLayer()) {
                 if (Default.ANNOTATION_SELECTABLE_TEXT_AS_DIV) {
                     var div = $('div#' + Default.ANNOTATION_ID_PREFIX_HIGHLIGHT_TEXT + this.canvasAnnotations[i].id);
@@ -202,11 +235,9 @@ Page.prototype.mainDraw = function(scale) {
                             var rgbColor = Util.hexToRgb(this.canvasAnnotations[i].backgroundColor);
                             var whatColor = 'rgba(' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b + ', ' + Default.FILL_OPACITY + ')';
                             div.css('background-color', whatColor);
-                        }
-                        else if (this.canvasAnnotations[i].annotationType === Annotation.TYPE_TEXT_STRIKE_THROUGH) {
+                        } else if (this.canvasAnnotations[i].annotationType === Annotation.TYPE_TEXT_STRIKE_THROUGH) {
                             div.find('div').css('border-top-color', this.canvasAnnotations[i].color);
-                        }
-                        else {
+                        } else {
                             var boxShadow = div.css('box-shadow');
 
                             if (!boxShadow)
@@ -229,8 +260,7 @@ Page.prototype.mainDraw = function(scale) {
                     divFreeText.css('color', whatColor);
                     divFreeText.css('display', this.canvasAnnotations[i].hidden ? 'none' : 'block');
                 }
-            }
-            else if (this.canvasAnnotations[i].isFormField()) {
+            } else if (this.canvasAnnotations[i].isFormField()) {
                 var inputFormField = $('input#' + Default.ANNOTATION_ID_PREFIX_FORM_FIELD + this.canvasAnnotations[i].id);
                 if (this.canvasAnnotations[i].hidden)
                     inputFormField.attr('hidden', true);
@@ -255,7 +285,7 @@ Page.prototype.mainDraw = function(scale) {
  * @memberof Page
  * @param {decimal} scale The current scale value. If null, use PDFViewerApplication.pdfViewer.currentScale.
  */
-Page.prototype.invalidate = function(scale) {
+Page.prototype.invalidate = function (scale) {
     this.mainDraw(scale);
 };
 
@@ -268,7 +298,7 @@ Page.prototype.invalidate = function(scale) {
  * @param {object} self The page object.
  * @param {boolean} calculateOnly Acts as a helper method to calculate coordinates insted of setting the mx and my properties.
  */
-Page.prototype.getMouse = function(e, self, calculateOnly) {
+Page.prototype.getMouse = function (e, self, calculateOnly) {
     var tempX = 0;
     var tempY = 0;
 
@@ -277,27 +307,29 @@ Page.prototype.getMouse = function(e, self, calculateOnly) {
     if (evt.pageX || evt.pageY) {
         tempX = evt.pageX;
         tempY = evt.pageY;
-    }
-    else {
+    } else {
         tempX = evt.clientX +
-        (document.documentElement.scrollLeft ||
-        document.body.scrollLeft) -
-        document.documentElement.clientLeft;
+                (document.documentElement.scrollLeft ||
+                        document.body.scrollLeft) -
+                document.documentElement.clientLeft;
         // tempY = evt.clientY +
         // (document.documentElement.scrollTop ||
         // document.body.scrollTop) -
         // document.documentElement.clientTop;
     }
 
-    if (tempX < 0) { tempX = 0; }
-    if (tempY < 0) { tempY = 0; }
+    if (tempX < 0) {
+        tempX = 0;
+    }
+    if (tempY < 0) {
+        tempY = 0;
+    }
 
     var offset = $(self.canvas).offset();
 
     if (calculateOnly) {
-        return { x: tempX - offset.left, y: tempY - offset.top };
-    }
-    else {
+        return {x: tempX - offset.left, y: tempY - offset.top};
+    } else {
         this.mx = tempX - offset.left;
         this.my = tempY - offset.top;
     }
@@ -314,7 +346,7 @@ Page.prototype.getMouse = function(e, self, calculateOnly) {
  * @param {boolean} isAddedAfterLoad Indicates if annotation is added after document is loaded.
  * @param {boolean} doNotTriggerEvent Trigger an event or not.
  */
-Page.prototype.addAnnotation = function(tempAnnotation, angle, scale, useOrigDimension, isAddedAfterLoad, doNotTriggerEvent) {
+Page.prototype.addAnnotation = function (tempAnnotation, angle, scale, useOrigDimension, isAddedAfterLoad, doNotTriggerEvent) {
     var annotation = new Annotation();
     //annotation.user_name=parent.user_name;
     annotation.x = useOrigDimension ? tempAnnotation.origX : tempAnnotation.x;
@@ -376,19 +408,17 @@ Page.prototype.addAnnotation = function(tempAnnotation, angle, scale, useOrigDim
                 this.invalidate();
                 return;
             }
-        }
-        else if (annotation.hasTwoEndPoints()) {
+        } else if (annotation.hasTwoEndPoints()) {
             if (annotation.drawingPositions.length === 1) {
                 tempAnnotation.drawingPositions = [];
-				PageManager.showAlert(Message.ARROW_CREATE_REQUIREMENT, 'info');
+                PageManager.showAlert(Message.ARROW_CREATE_REQUIREMENT, 'info');
                 return;
-            }
-            else if (annotation.isArrowNotLongEnough(scale)) {
+            } else if (annotation.isArrowNotLongEnough(scale)) {
                 if (((annotation.annotationType === Annotation.TYPE_ARROW || annotation.annotationType === Annotation.TYPE_LINE) && Default.ANNOTATION_ARROW_MINIMUM_LENGTH) ||
-                    (annotation.annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE && Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH))
+                        (annotation.annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE && Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH))
                 {
                     tempAnnotation.drawingPositions = [];
-					PageManager.showAlert(Message.ARROW_CREATE_LONGER, 'info');
+                    PageManager.showAlert(Message.ARROW_CREATE_LONGER, 'info');
                     return;
                 }
             }
@@ -398,7 +428,7 @@ Page.prototype.addAnnotation = function(tempAnnotation, angle, scale, useOrigDim
 
     if (isAddedAfterLoad) {
         if (annotation.drawingPositions.length > 0) {
-            for (var i=0; i<annotation.drawingPositions.length; i++) {
+            for (var i = 0; i < annotation.drawingPositions.length; i++) {
                 var drawingPosition = annotation.drawingPositions[i];
                 drawingPosition.origX = drawingPosition.x;
                 drawingPosition.origY = drawingPosition.y;
@@ -410,15 +440,14 @@ Page.prototype.addAnnotation = function(tempAnnotation, angle, scale, useOrigDim
 
         if (Util.isFunction(Annotationeer.saveAnnotation))
             Annotationeer.saveAnnotation(annotation,
-                Default.ANNOTATION_GET_TEXT_BELOW_IT &&
-                (annotation.annotationType === Annotation.TYPE_HIGHLIGHT ||
-                annotation.annotationType === Annotation.TYPE_BOX) ? annotation.getTextBelowIt(annotation) : '',
-                doNotTriggerEvent);
+                    Default.ANNOTATION_GET_TEXT_BELOW_IT &&
+                    (annotation.annotationType === Annotation.TYPE_HIGHLIGHT ||
+                            annotation.annotationType === Annotation.TYPE_BOX) ? annotation.getTextBelowIt(annotation) : '',
+                    doNotTriggerEvent);
         else
-			PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
-    }
-    else {
-		PageManager.updateAnnotationListAfterSave(annotation, false, doNotTriggerEvent);
+            PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
+    } else {
+        PageManager.updateAnnotationListAfterSave(annotation, false, doNotTriggerEvent);
     }
 };
 
@@ -437,15 +466,16 @@ Page.prototype.addAnnotation = function(tempAnnotation, angle, scale, useOrigDim
  * @param {object} selectionNodeBasis This element will be the basis to determine what angle it is currently positioned.
  * @return {Annotation}
  */
-Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView, annotation, color, selectionNodeBasis) {
-	PageManager.consoleLog('Page.highlightText()');
+Page.prototype.highlightText = function (type, pageIndex, angle, scale, pageView, annotation, color, selectionNodeBasis) {
+    PageManager.consoleLog('Page.highlightText()');
     var page = window.PDFViewerApplication.pdfViewer._pages[pageIndex];
-    if (!page) page = pageView;
+    if (!page)
+        page = pageView;
 
     var pageElement = page.canvas.parentElement;
     var pageRect = page.canvas.getClientRects()[0];
-    var selectionRectangles = annotation ? annotation.highlightTextRects:
-        (Util.isIOSDevice() && PageManager.iosSelectedTextClientRects ? PageManager.iosSelectedTextClientRects : PageManager.getSelectedTextClientRects());
+    var selectionRectangles = annotation ? annotation.highlightTextRects :
+            (Util.isIOSDevice() && PageManager.iosSelectedTextClientRects ? PageManager.iosSelectedTextClientRects : PageManager.getSelectedTextClientRects());
     var viewport = page.viewport;
 
     var newAnnotation;
@@ -460,27 +490,27 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
         newAnnotation.annotationType = type;
     }
 
-    for (var i=0; i<selectionRectangles.length; i++) {
+    for (var i = 0; i < selectionRectangles.length; i++) {
         var r = selectionRectangles[i];
 
         if (annotation) {
-			// Rotate Annotationeer's canvas instead of PDF.JS'.
+            // Rotate Annotationeer's canvas instead of PDF.JS'.
             r.rotate(this.canvas, angle, scale);
         }
         if (!pageRect)
             continue;
 
         var rect = viewport.convertToPdfPoint
-        (
-            (annotation ? ($(pageElement).offset().left + r.left) : r.left) - pageRect.left,
-            (annotation ? ($(pageElement).offset().top + r.top) : r.top) - pageRect.top
-        ).concat
-        (
-            viewport.convertToPdfPoint(
-                (annotation ? ($(pageElement).offset().left + r.right) : r.right) - pageRect.left,
-                (annotation ? ($(pageElement).offset().top + r.bottom) : r.bottom) - pageRect.top
-            )
-        );
+                (
+                        (annotation ? ($(pageElement).offset().left + r.left) : r.left) - pageRect.left,
+                        (annotation ? ($(pageElement).offset().top + r.top) : r.top) - pageRect.top
+                        ).concat
+                (
+                        viewport.convertToPdfPoint(
+                                (annotation ? ($(pageElement).offset().left + r.right) : r.right) - pageRect.left,
+                                (annotation ? ($(pageElement).offset().top + r.bottom) : r.bottom) - pageRect.top
+                                )
+                        );
 
         var bounds = viewport.convertToViewportRectangle(rect);
         var left = Math.min(bounds[0], bounds[2]);
@@ -497,13 +527,13 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
          */
         var add = true;
         var elements = $(pageElement).children('div[id="' + Default.ANNOTATION_ID_PREFIX_HIGHLIGHT_TEXT + '"]');
-        for (var e=0; e<elements.length; e++) {
+        for (var e = 0; e < elements.length; e++) {
             var element = elements[e];
             if (((Math.abs(Math.round(parseFloat($(element).css('left'))) - Math.round(left)) <= 5 &&
-                Math.abs(Math.round(parseFloat($(element).css('top'))) - Math.round(top)) <= 5)) ||
-                (Math.round(parseFloat($(element).css('left'))) ==  Math.round(left) &&
-                Math.round(parseFloat($(element).css('top'))) ==  Math.round(top))
-            )
+                    Math.abs(Math.round(parseFloat($(element).css('top'))) - Math.round(top)) <= 5)) ||
+                    (Math.round(parseFloat($(element).css('left'))) == Math.round(left) &&
+                            Math.round(parseFloat($(element).css('top'))) == Math.round(top))
+                    )
             {
                 add = false;
                 break;
@@ -517,8 +547,8 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
          */
         if (add) {
             var domRotateAngle = selectionNodeBasis ?
-                Util.getRotationDegrees(selectionNodeBasis ? selectionNodeBasis : $('#highlights' + annotation.id)) :
-                selectionRectangles[i].getAngleBasedOnDomRotateAngle(rotateAngle);
+                    Util.getRotationDegrees(selectionNodeBasis ? selectionNodeBasis : $('#highlights' + annotation.id)) :
+                    selectionRectangles[i].getAngleBasedOnDomRotateAngle(rotateAngle);
 
             if (Default.ANNOTATION_SELECTABLE_TEXT_AS_DIV) {
                 var whatStyle = '';
@@ -529,8 +559,7 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
                     var rgbColor = Util.hexToRgb(annotation ? annotation.backgroundColor : newAnnotation.backgroundColor);
                     whatColor = 'rgba(' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b + ', ' + Default.FILL_OPACITY + ')';
                     whatStyle = 'background-color: ' + whatColor + ';';
-                }
-                else if (type == Annotation.TYPE_TEXT_UNDERLINE) {
+                } else if (type == Annotation.TYPE_TEXT_UNDERLINE) {
                     whatColor = (annotation ? annotation.color : newAnnotation.color);
 
                     switch (domRotateAngle) {
@@ -556,8 +585,8 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
 
                 var el = document.createElement('div');
                 el.setAttribute('style', 'position: absolute; ' + whatStyle +
-                    'left:' + left + 'px; top:' + top + 'px;' +
-                    'width:' + width + 'px; height:' + height + 'px;');
+                        'left:' + left + 'px; top:' + top + 'px;' +
+                        'width:' + width + 'px; height:' + height + 'px;');
                 el.setAttribute('id', Default.ANNOTATION_ID_PREFIX_HIGHLIGHT_TEXT);
 
                 pageElement.appendChild(el);
@@ -619,15 +648,15 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
                 rectBound.right = left + width;
                 rectBound.bottom = top + height;
                 rectBound.setDomRotateAngle(domRotateAngle, rotateAngle);
-				// Use Annotationeer's canvas instead of PDF.JS canvas as parameter.
+                // Use Annotationeer's canvas instead of PDF.JS canvas as parameter.
                 rectBound.calculateOrigBound(this.canvas, angle, PDFViewerApplication.pdfViewer.currentScale);
 
                 newAnnotation.highlightTextRects.push(rectBound);
 
-				// We use the page object's width and height property instead of the page.canvas because
-				// screen scale affects the canvas width and height property but maintains the values in
-				// its style property but is still not accurate. The page's values meanwhile give the
-				// correct values.
+                // We use the page object's width and height property instead of the page.canvas because
+                // screen scale affects the canvas width and height property but maintains the values in
+                // its style property but is still not accurate. The page's values meanwhile give the
+                // correct values.
                 newAnnotation.pageWidth = parseInt(PageManager.getPageWidth(page.width, page.height) / scale);
                 newAnnotation.pageHeight = parseInt(PageManager.getPageHeight(page.width, page.height) / scale);
                 newAnnotation.text = Util.isIOSDevice() ? PageManager.iosSelectedText : PageManager.getSelectedText();
@@ -638,7 +667,7 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
 
     var annotationToUse = annotation ? annotation : newAnnotation;
     var rects = [];
-    for (var h=0; h<annotationToUse.highlightTextRects.length; h++) {
+    for (var h = 0; h < annotationToUse.highlightTextRects.length; h++) {
         var rect = annotationToUse.highlightTextRects[h];
         rects.push({
             x: rect.origLeft,
@@ -672,9 +701,9 @@ Page.prototype.highlightText = function(type, pageIndex, angle, scale, pageView,
  * @param {string} text
  * @returns {object}
  */
-Page.prototype.getTextHeight = function(font, text) {
+Page.prototype.getTextHeight = function (font, text) {
 
-    var text = $('<span>' + text + '</span>').css({ fontFamily: font });
+    var text = $('<span>' + text + '</span>').css({fontFamily: font});
     var block = $('<div style="display: inline-block; width: 1px; height: 0;"></div>');
 
     var div = $('<div></div>');
@@ -686,15 +715,15 @@ Page.prototype.getTextHeight = function(font, text) {
     try {
         var result = {};
 
-        block.css({ verticalAlign: 'baseline' });
+        block.css({verticalAlign: 'baseline'});
         result.ascent = block.offset().top - text.offset().top;
 
-        block.css({ verticalAlign: 'bottom' });
+        block.css({verticalAlign: 'bottom'});
         result.height = block.offset().top - text.offset().top;
 
         result.descent = result.height - result.ascent;
 
-    } catch(e) {
+    } catch (e) {
         // do nothing
     } finally {
         if (div)
@@ -718,8 +747,8 @@ Page.prototype.getTextHeight = function(font, text) {
  * @param {boolean} doNotTriggerEvent Trigger an event or not.
  * @param {boolean} editable This indicates the free text annotation is multi-line.
  */
-Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, useOrig, doNotTriggerEvent, editable) {
-	PageManager.consoleLog('Page.addText()');
+Page.prototype.addText = function (annotation, angle, scale, isAddedAfterLoad, useOrig, doNotTriggerEvent, editable) {
+    PageManager.consoleLog('Page.addText()');
 
     if (!isAddedAfterLoad || (useOrig && annotation.hasDimension)) {
         annotation.x = annotation.origX * scale;
@@ -731,7 +760,8 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
     // Check if exist. If yes, remove then re-create.
     var idToUse = annotation.id != 0 ? annotation.id : '';
     var exist = $('#' + Default.ANNOTATION_ID_PREFIX_FREE_TEXT + idToUse);
-    if (exist.length > 0) exist.remove();
+    if (exist.length > 0)
+        exist.remove();
     var el = document.createElement('div');
 
     var rgbColor = Util.hexToRgb(annotation.backgroundColor);
@@ -742,13 +772,13 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
      * annotation, pressing ESCAPE key will make it a 1 liner instead.
      */
     el.setAttribute('style', 'position: absolute; color: ' + annotation.color + '; outline-color:' + annotation.color + '; ' +
-        'background:' + background + '; ' + 'left:' + annotation.x + 'px; top:' + annotation.y + 'px; ' +
-        'font:' + (annotation.fontSize * scale) + Default.FONT_SIZE_TYPE + ' ' + Default.FONT_TYPE + ';' +
-        (Util.isIE() ? 'white-space: nowrap;' : ''));
+            'background:' + background + '; ' + 'left:' + annotation.x + 'px; top:' + annotation.y + 'px; ' +
+            'font:' + (annotation.fontSize * scale) + Default.FONT_SIZE_TYPE + ' ' + Default.FONT_TYPE + ';' +
+            (Util.isIE() ? 'white-space: nowrap;' : ''));
     el.setAttribute('id', Default.ANNOTATION_ID_PREFIX_FREE_TEXT + idToUse);
     el.innerHTML = annotation.text;
 
-	PageManager.getPageContainer(annotation.pageIndex + 1).find(editable ? '.freeTextLayer' : '.canvasWrapper').append(el);
+    PageManager.getPageContainer(annotation.pageIndex + 1).find(editable ? '.freeTextLayer' : '.canvasWrapper').append(el);
 
     var canvasAnnotations = this.canvasAnnotations;
     var canvas = this.canvas;
@@ -762,7 +792,7 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
         $(el).css('zIndex', '9999999');
 
         // setTimeout() is used here or else the div will not be in editing mode.
-        setTimeout(function() {
+        setTimeout(function () {
             $(el).trigger('focus');
         }, 10);
 
@@ -775,13 +805,12 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
          * characters, we use a custom function getSelectionTextInfo() to detect if caret position
          * is at the end or not. If it is, add 2 BR tags else just 1.
          */
-        $(el).keydown(function(e) {
+        $(el).keydown(function (e) {
             // Trap the return key being pressed
             if (e.keyCode == 13) {
                 if (Default.TYPE_TEXT_1_LINER) {
                     e.stopPropagation();
-                }
-                else {
+                } else {
                     // IE does not support document.execCommand()
                     if (Util.isIE())
                         return true;
@@ -796,20 +825,19 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
             // Escape key, in case user cancels, call focus out to save annotation.
             if (e.keyCode == 27) {
                 $('body').focus();
-            }
-            else
+            } else
                 e.stopPropagation();
         });
 
         if (Default.TYPE_TEXT_1_LINER)
             $(el).limitText(Default.ANNOTATION_TYPE_TEXT_CHAR_LIMIT);
 
-        $(el).dblclick(function() {
+        $(el).dblclick(function () {
             if ($(this).is(":focus"))
                 $(el).trigger('focusout');
         });
 
-        $(el).focusout(function() {
+        $(el).focusout(function () {
             $(this).unbind('focusout');
             $(this).unbind('keydown');
             $(this).unbind('dblclick');
@@ -825,7 +853,7 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
             if ($(el).text().trim().length == 0)
                 $(el).html(Default.TYPE_TEXT_DEFAULT_TEXT_IF_EMPTY);
 
-            annotation.text = $(el).html().replace(/<div>/gi,'<br/>').replace(/<\/div>/gi,'');
+            annotation.text = $(el).html().replace(/<div>/gi, '<br/>').replace(/<\/div>/gi, '');
 
             if (angle > 0 && !annotation.hasDimension) {
                 var divFreeText = $('#' + Default.ANNOTATION_ID_PREFIX_FREE_TEXT + idToUse);
@@ -875,8 +903,7 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
                             annotation.h = el.getBoundingClientRect().height;
                             // Re-adjust y coordinate using new text's detail
                             annotation.y = annotation.y - annotation.h;
-                        }
-                        else {
+                        } else {
                             annotation.w = el.getBoundingClientRect().width;
                             annotation.h = el.getBoundingClientRect().height;
                             annotation.x = x;
@@ -905,14 +932,13 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
                 if (Util.isFunction(Annotationeer.saveAnnotation))
                     Annotationeer.saveAnnotation(annotation, null, doNotTriggerEvent);
                 else
-					PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
+                    PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
             }
 
             PageManager.setFreeTextImageToAnnotation(annotation, 'clone_' + annotation.id);
             resetVar();
         });
-    }
-    else {
+    } else {
         annotation.text = $(el).html();
 
         /**
@@ -962,8 +988,7 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
                         annotation.h = el.getBoundingClientRect().height;
                         // Re-adjust y coordinate using new text's detail
                         annotation.y = annotation.y - annotation.h;
-                    }
-                    else {
+                    } else {
                         annotation.w = el.getBoundingClientRect().width;
                         annotation.h = el.getBoundingClientRect().height;
                         annotation.x = x;
@@ -992,7 +1017,7 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
             if (Util.isFunction(Annotationeer.saveAnnotation))
                 Annotationeer.saveAnnotation(annotation, null, doNotTriggerEvent);
             else
-				PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
+                PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
         }
 
         PageManager.setFreeTextImageToAnnotation(annotation, 'clone_' + annotation.id);
@@ -1005,7 +1030,7 @@ Page.prototype.addText = function(annotation, angle, scale, isAddedAfterLoad, us
  * @memberof Page
  * @param {object} e The event object.
  */
-Page.prototype.doubleClick = function(e) {
+Page.prototype.doubleClick = function (e) {
 
     if (PageManager.selectedAnnotations.length > 1)
         return;
@@ -1018,21 +1043,20 @@ Page.prototype.doubleClick = function(e) {
          */
         if (PageManager.boxAnnotationGuide && PageManager.boxAnnotationGuide.isPolyLineType()) {
             if (PageManager.boxAnnotationGuide.drawingPositions.length - 2 > 2) {
-				PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 2, 2);
+                PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 2, 2);
 
                 var boundingBox = Util.getBoundingBoxOfPoints(PageManager.boxAnnotationGuide.drawingPositions);
-				PageManager.boxAnnotationGuide.x = boundingBox.x;
-				PageManager.boxAnnotationGuide.y = boundingBox.y;
-				PageManager.boxAnnotationGuide.w = boundingBox.w;
-				PageManager.boxAnnotationGuide.h = boundingBox.h;
+                PageManager.boxAnnotationGuide.x = boundingBox.x;
+                PageManager.boxAnnotationGuide.y = boundingBox.y;
+                PageManager.boxAnnotationGuide.w = boundingBox.w;
+                PageManager.boxAnnotationGuide.h = boundingBox.h;
 
                 this.canvasAnnotations.splice(this.canvasAnnotations.length - 1, 1);
                 this.addAnnotation(PageManager.boxAnnotationGuide, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, false, true);
-				this.invalidate();
+                this.invalidate();
                 resetVar();
-            }
-            else {
-				PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
+            } else {
+                PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
             }
         }
 
@@ -1043,20 +1067,19 @@ Page.prototype.doubleClick = function(e) {
      * This code is only for TYPE_TEXT annotations because we add an option to allow the
      * user to edit the text if the annotation gets double clicked.
      */
-    for (var c=0; c<this.canvasAnnotations.length; c++) {
+    for (var c = 0; c < this.canvasAnnotations.length; c++) {
         if (this.canvasAnnotations[c].isReadOnly() ||
-            (!this.canvasAnnotations[c].isSelectableTextType() && !this.canvasAnnotations[c].contains(this.mx, this.my, e)) ||
-            (this.canvasAnnotations[c].isSelectableTextType() && !this.canvasAnnotations[c].containsHighlightText(this.mx, this.my, e)))
+                (!this.canvasAnnotations[c].isSelectableTextType() && !this.canvasAnnotations[c].contains(this.mx, this.my, e)) ||
+                (this.canvasAnnotations[c].isSelectableTextType() && !this.canvasAnnotations[c].containsHighlightText(this.mx, this.my, e)))
             continue;
 
         if (Default.DOUBLE_CLICK_WHAT_EVENT == Default.DOUBLE_CLICK_SHOW_PROPERTIES) {
             if (this.canvasAnnotations[c].annotationType === Annotation.TYPE_TEXT) {
                 if (rotateAngle != 0) {
                     if (Message.FREETEXT_ROTATE_MODIFY)
-						PageManager.showAlert(Message.FREETEXT_ROTATE_MODIFY, 'info');
-                }
-                else {
-					PageManager.clearSelectedAnnotationArray();
+                        PageManager.showAlert(Message.FREETEXT_ROTATE_MODIFY, 'info');
+                } else {
+                    PageManager.clearSelectedAnnotationArray();
                     this.invalidate();
                     var annotation = this.canvasAnnotations[c];
                     this.canvasAnnotations.splice(c, 1);
@@ -1072,12 +1095,10 @@ Page.prototype.doubleClick = function(e) {
                         Util.selectRange(caretRange);
                     }, 10);
                 }
-            }
-            else
-				PageManager.openAnnotationPropertiesForm(this.canvasAnnotations[c]);
-        }
-        else if (Default.DOUBLE_CLICK_WHAT_EVENT == Default.DOUBLE_CLICK_SHOW_COMMENT_POPUP) {
-			Annotationeer.editAnnotation(this.canvasAnnotations[c], 'edit');
+            } else
+                PageManager.openAnnotationPropertiesForm(this.canvasAnnotations[c]);
+        } else if (Default.DOUBLE_CLICK_WHAT_EVENT == Default.DOUBLE_CLICK_SHOW_COMMENT_POPUP) {
+            Annotationeer.editAnnotation(this.canvasAnnotations[c], 'edit');
         }
 
         break;
@@ -1091,15 +1112,15 @@ Page.prototype.doubleClick = function(e) {
  * @param {object} e The mouse event object.
  * @param {string} touch If this is a touch device or not.
  */
-Page.prototype.mouseDown = function(e, touch) {
+Page.prototype.mouseDown = function (e, touch) {
     // If hand tool mode, then ignore events in the annotation canvas layer
     if (PageManager.getHandTool().active)
         return;
 
-	PageManager.closeAllDropDown();
+    PageManager.closeAllDropDown();
 
     if (touch || e.which == 1)
-		PageManager.leftButtonMouseClicked = true;
+        PageManager.leftButtonMouseClicked = true;
     else if (e.which == 3)
         return;
 
@@ -1112,7 +1133,7 @@ Page.prototype.mouseDown = function(e, touch) {
     if (PageManager.startDraw) {
         if (PageManager.leftButtonMouseClicked) {
             this.isDrawing = true;
-			PageManager.drawingGuide = [];
+            PageManager.drawingGuide = [];
             this.ctx.moveTo(this.mx, this.my);
             this.ctx.beginPath();
         }
@@ -1121,11 +1142,11 @@ Page.prototype.mouseDown = function(e, touch) {
 
     if (PageManager.startCreatingAnnotation && PageManager.leftButtonMouseClicked) {
         if (PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_TEXT) {
-			Annotationeer.showTextInput(this, this.mx, this.my);
+            Annotationeer.showTextInput(this, this.mx, this.my);
             e.preventDefault();
             // We set this variable manually instead of depending on the resetVar() function because
             // it is called when focusout gets triggered which gets executed after mouse down event.
-			PageManager.startCreatingAnnotation = false;
+            PageManager.startCreatingAnnotation = false;
             return;
         }
 
@@ -1133,32 +1154,29 @@ Page.prototype.mouseDown = function(e, touch) {
             this.isCreatingAnnotation = true;
         }
 
-		PageManager.boxAnnotationGuide.x = this.mx;
-		PageManager.boxAnnotationGuide.y = this.my;
-		PageManager.boxAnnotationGuide.pageIndex = this.pageIndex;
+        PageManager.boxAnnotationGuide.x = this.mx;
+        PageManager.boxAnnotationGuide.y = this.my;
+        PageManager.boxAnnotationGuide.pageIndex = this.pageIndex;
 
         if (PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_SCREENSHOT) {
             this.screenshotAnnotation = PageManager.boxAnnotationGuide;
             this.screenshotAnnotation.pageIndex = this.pageIndex;
-        }
-        else  {
+        } else {
             if (PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_CIRCLE_FILL ||
-				PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_CIRCLE_STROKE) {
-				PageManager.boxAnnotationGuide.circleStartX = this.mx;
-				PageManager.boxAnnotationGuide.circleStartY = this.my;
-            }
-            else if (PageManager.boxAnnotationGuide.hasTwoEndPoints()) {
+                    PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_CIRCLE_STROKE) {
+                PageManager.boxAnnotationGuide.circleStartX = this.mx;
+                PageManager.boxAnnotationGuide.circleStartY = this.my;
+            } else if (PageManager.boxAnnotationGuide.hasTwoEndPoints()) {
                 var drawingPosition = new DrawingPosition();
                 drawingPosition.x = this.mx;
                 drawingPosition.y = this.my;
-				PageManager.boxAnnotationGuide.drawingPositions.push(drawingPosition);
+                PageManager.boxAnnotationGuide.drawingPositions.push(drawingPosition);
             }
 
             if (PageManager.boxAnnotationGuide.isPolyLineType()) {
                 if (this.canvasAnnotations.length == 0 || !this.canvasAnnotations[this.canvasAnnotations.length - 1].dummy)
                     this.canvasAnnotations.push(PageManager.boxAnnotationGuide);
-            }
-            else
+            } else
                 this.canvasAnnotations.push(PageManager.boxAnnotationGuide);
         }
 
@@ -1167,25 +1185,25 @@ Page.prototype.mouseDown = function(e, touch) {
 
     // We are over a selection box
     if (PageManager.expectResize !== -1) {
-		PageManager.isResizeDrag = true;
+        PageManager.isResizeDrag = true;
         return;
     }
 
     if (!this.canvasAnnotations)
         return;
 
-    for (var i=this.canvasAnnotations.length-1; i>= 0; i--) {
+    for (var i = this.canvasAnnotations.length - 1; i >= 0; i--) {
         /**
          * Since mouse move is not possible in touch event scenarios, we detect if an annotation is already
          * selected, then check to see if its selection handles fall within the touch coordinates. If so,
          * bypass the next block of code.
          */
         if (touch && this.canvasAnnotations[i].selected) {
-			PageManager.expectResize = this.canvasAnnotations[i].getSelectionHandleIndex(this.mx, this.my,
-                e.changedTouches[0].radiusX ? e.changedTouches[0].radiusX : 1);
+            PageManager.expectResize = this.canvasAnnotations[i].getSelectionHandleIndex(this.mx, this.my,
+                    e.changedTouches[0].radiusX ? e.changedTouches[0].radiusX : 1);
 
             if (PageManager.expectResize !== -1) {
-				PageManager.isResizeDrag = true;
+                PageManager.isResizeDrag = true;
                 break;
             }
         }
@@ -1203,24 +1221,22 @@ Page.prototype.mouseDown = function(e, touch) {
             if (e.ctrlKey) {
                 if (this.canvasAnnotations[i].selected) {
                     this.canvasAnnotations[i].clicked = false;
-					PageManager.removeSelectedAnnotation(this.canvasAnnotations[i], true);
-                }
-                else {
+                    PageManager.removeSelectedAnnotation(this.canvasAnnotations[i], true);
+                } else {
                     PageManager.addSelectedAnnotation(this.canvasAnnotations[i]);
                 }
-            }
-            else {
+            } else {
                 if (PageManager.selectedAnnotations.length > 0) {
-					PageManager.clearSelectedAnnotationArray(true, false, true);
+                    PageManager.clearSelectedAnnotationArray(true, false, true);
                 }
 
                 this.canvasAnnotations[i].clicked = true;
                 PageManager.addSelectedAnnotation(this.canvasAnnotations[i]);
             }
 
-			PageManager.leftButtonMouseClickedAnnotation = this.canvasAnnotations[i];
+            PageManager.leftButtonMouseClickedAnnotation = this.canvasAnnotations[i];
 
-			PageManager.consoleLog('Total selected annotations: ' + PageManager.selectedAnnotations.length);
+            PageManager.consoleLog('Total selected annotations: ' + PageManager.selectedAnnotations.length);
 
             // Do not set offsetX and offsetY as var because its range of availability will not expand
             // through other mouse events like mouseMove and mouseDown
@@ -1253,7 +1269,7 @@ Page.prototype.mouseDown = function(e, touch) {
  * @param {object} e The mouse event object.
  * @param {string} touch If this is a touch device or not.
  */
-Page.prototype.mouseMove = function(e, touch) {
+Page.prototype.mouseMove = function (e, touch) {
     // If hand tool mode, then ignore events in the annotation canvas layer
     if (PageManager.getHandTool().active)
         return;
@@ -1278,8 +1294,7 @@ Page.prototype.mouseMove = function(e, touch) {
                 PageManager.setCursor(this.canvas, 'radio_button', 'crosshair');
             else
                 this.canvas.style.cursor = 'crosshair';
-        }
-        else if (PageManager.startDraw || this.isDrawing) {
+        } else if (PageManager.startDraw || this.isDrawing) {
             this.canvas.style.cursor = 'default';
         }
     }
@@ -1297,7 +1312,7 @@ Page.prototype.mouseMove = function(e, touch) {
         var drawingPosition = new DrawingPosition();
         drawingPosition.x = this.mx;
         drawingPosition.y = this.my;
-		PageManager.drawingGuide.push(drawingPosition);
+        PageManager.drawingGuide.push(drawingPosition);
 
         this.ctx.lineWidth = PageManager.boxAnnotationGuide.lineWidth * PDFViewerApplication.pdfViewer.currentScale;
         this.ctx.strokeStyle = PageManager.boxAnnotationGuide.color;
@@ -1305,18 +1320,17 @@ Page.prototype.mouseMove = function(e, touch) {
         this.ctx.stroke();
 
         return;
-    }
-    else if (this.isCreatingAnnotation) {
+    } else if (this.isCreatingAnnotation) {
         if (PageManager.boxAnnotationGuide.usesImage())
             return;
 
-		PageManager.boxAnnotationGuide.w = this.mx - PageManager.boxAnnotationGuide.x;
-		PageManager.boxAnnotationGuide.h = this.my - PageManager.boxAnnotationGuide.y;
+        PageManager.boxAnnotationGuide.w = this.mx - PageManager.boxAnnotationGuide.x;
+        PageManager.boxAnnotationGuide.h = this.my - PageManager.boxAnnotationGuide.y;
 
         if (PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_CIRCLE_FILL ||
-			PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_CIRCLE_STROKE) {
-			PageManager.boxAnnotationGuide.circleLastX = this.mx;
-			PageManager.boxAnnotationGuide.circleLastY = this.my;
+                PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_CIRCLE_STROKE) {
+            PageManager.boxAnnotationGuide.circleLastX = this.mx;
+            PageManager.boxAnnotationGuide.circleLastY = this.my;
         }
         /**
          * While the arrow annotation will not have any use for the x, y, w, h dimension,
@@ -1328,18 +1342,18 @@ Page.prototype.mouseMove = function(e, touch) {
             drawingPosition.y = this.my;
 
             if (PageManager.boxAnnotationGuide.drawingPositions.length > 1)
-				PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
+                PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
 
-			PageManager.boxAnnotationGuide.drawingPositions.push(drawingPosition);
+            PageManager.boxAnnotationGuide.drawingPositions.push(drawingPosition);
 
             /**
              * If measurement annotation, update original coordinates at 100% so that
              * the label value for the measurement will be correct and fixed.
              */
             if (PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE)
-                for (var i=0; i<PageManager.boxAnnotationGuide.drawingPositions.length; i++) {
-					PageManager.boxAnnotationGuide.drawingPositions[i].calculateOrigPosition(this.canvas, rotateAngle,
-                        PDFViewerApplication.pdfViewer.currentScale, true);
+                for (var i = 0; i < PageManager.boxAnnotationGuide.drawingPositions.length; i++) {
+                    PageManager.boxAnnotationGuide.drawingPositions[i].calculateOrigPosition(this.canvas, rotateAngle,
+                            PDFViewerApplication.pdfViewer.currentScale, true);
                 }
         }
 
@@ -1351,39 +1365,38 @@ Page.prototype.mouseMove = function(e, touch) {
     if (PageManager.selectedAnnotations.length == 1 && PageManager.selectedAnnotations[0].pageIndex == this.pageIndex)
     {
         if (PageManager.selectedAnnotations[0].isMovable() && PageManager.selectedAnnotations[0].selected &&
-            (PageManager.selectedAnnotations[0].clicked || PageManager.selectedAnnotations[0].moving) &&
-			PageManager.leftButtonMouseClicked && !PageManager.isResizeDrag)
+                (PageManager.selectedAnnotations[0].clicked || PageManager.selectedAnnotations[0].moving) &&
+                PageManager.leftButtonMouseClicked && !PageManager.isResizeDrag)
         {
             if (touch)
                 e.preventDefault();
 
             if (PageManager.selectedAnnotations[0].clicked) {
-				PageManager.selectedAnnotations[0].clicked = false;
-				PageManager.selectedAnnotations[0].moving = true;
+                PageManager.selectedAnnotations[0].clicked = false;
+                PageManager.selectedAnnotations[0].moving = true;
             }
 
-			PageManager.selectedAnnotations[0].x = this.mx - offsetX;
-			PageManager.selectedAnnotations[0].y = this.my - offsetY;
+            PageManager.selectedAnnotations[0].x = this.mx - offsetX;
+            PageManager.selectedAnnotations[0].y = this.my - offsetY;
 
             if (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_TEXT) {
                 var ht = $('#' + Default.ANNOTATION_ID_PREFIX_FREE_TEXT + PageManager.selectedAnnotations[0].id);
                 ht.css('left', PageManager.selectedAnnotations[0].x + (rotateAngle == 90 ? PageManager.selectedAnnotations[0].w : 0));
                 ht.css('top', PageManager.selectedAnnotations[0].y + (rotateAngle == 270 ? PageManager.selectedAnnotations[0].h : 0));
-            }
-            else if (PageManager.selectedAnnotations[0].drawingPositions.length > 0) {
+            } else if (PageManager.selectedAnnotations[0].drawingPositions.length > 0) {
                 // Formula taken from
                 // http://stackoverflow.com/questions/32450669/how-to-drag-connected-lines-using-html5-canvas
-                for (var d=0; d<PageManager.selectedAnnotations[0].drawingPositions.length; d++) {
+                for (var d = 0; d < PageManager.selectedAnnotations[0].drawingPositions.length; d++) {
                     if (PageManager.selectedAnnotations[0].drawingPositions[d].lastX <= 0)
-						PageManager.selectedAnnotations[0].drawingPositions[d].lastX = this.mx;
+                        PageManager.selectedAnnotations[0].drawingPositions[d].lastX = this.mx;
                     if (PageManager.selectedAnnotations[0].drawingPositions[d].lastY <= 0)
-						PageManager.selectedAnnotations[0].drawingPositions[d].lastY = this.my;
+                        PageManager.selectedAnnotations[0].drawingPositions[d].lastY = this.my;
 
-					PageManager.selectedAnnotations[0].drawingPositions[d].x += this.mx - PageManager.selectedAnnotations[0].drawingPositions[d].lastX;
-					PageManager.selectedAnnotations[0].drawingPositions[d].y += this.my - PageManager.selectedAnnotations[0].drawingPositions[d].lastY;
+                    PageManager.selectedAnnotations[0].drawingPositions[d].x += this.mx - PageManager.selectedAnnotations[0].drawingPositions[d].lastX;
+                    PageManager.selectedAnnotations[0].drawingPositions[d].y += this.my - PageManager.selectedAnnotations[0].drawingPositions[d].lastY;
 
-					PageManager.selectedAnnotations[0].drawingPositions[d].lastX = this.mx;
-					PageManager.selectedAnnotations[0].drawingPositions[d].lastY = this.my;
+                    PageManager.selectedAnnotations[0].drawingPositions[d].lastX = this.mx;
+                    PageManager.selectedAnnotations[0].drawingPositions[d].lastY = this.my;
                 }
 
                 var boundingBox = Util.getBoundingBoxOfPoints(PageManager.selectedAnnotations[0].drawingPositions);
@@ -1394,8 +1407,7 @@ Page.prototype.mouseMove = function(e, touch) {
             }
 
             this.invalidate();
-        }
-        else if (PageManager.isResizeDrag) {
+        } else if (PageManager.isResizeDrag) {
             if (touch)
                 e.preventDefault();
 
@@ -1403,14 +1415,13 @@ Page.prototype.mouseMove = function(e, touch) {
                 return;
 
             if (PageManager.selectedAnnotations[0].drawingPositions.length > 0) {
-				PageManager.selectedAnnotations[0].drawingPositions[PageManager.expectResize].x = this.mx;
-				PageManager.selectedAnnotations[0].drawingPositions[PageManager.expectResize].y = this.my;
+                PageManager.selectedAnnotations[0].drawingPositions[PageManager.expectResize].x = this.mx;
+                PageManager.selectedAnnotations[0].drawingPositions[PageManager.expectResize].y = this.my;
 
                 if (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE)
-					PageManager.selectedAnnotations[0].drawingPositions[PageManager.expectResize].calculateOrigPosition(this.canvas,
-                        rotateAngle, PDFViewerApplication.pdfViewer.currentScale, true);
-            }
-            else {
+                    PageManager.selectedAnnotations[0].drawingPositions[PageManager.expectResize].calculateOrigPosition(this.canvas,
+                            rotateAngle, PDFViewerApplication.pdfViewer.currentScale, true);
+            } else {
                 // Time To resize!
                 var oldX = PageManager.selectedAnnotations[0].x;
                 var oldY = PageManager.selectedAnnotations[0].y;
@@ -1419,38 +1430,38 @@ Page.prototype.mouseMove = function(e, touch) {
                 // 5  6  7
                 switch (PageManager.expectResize) {
                     case 0:
-						PageManager.selectedAnnotations[0].x = this.mx;
-						PageManager.selectedAnnotations[0].y = this.my;
-						PageManager.selectedAnnotations[0].w += oldX - this.mx;
-						PageManager.selectedAnnotations[0].h += oldY - this.my;
+                        PageManager.selectedAnnotations[0].x = this.mx;
+                        PageManager.selectedAnnotations[0].y = this.my;
+                        PageManager.selectedAnnotations[0].w += oldX - this.mx;
+                        PageManager.selectedAnnotations[0].h += oldY - this.my;
                         break;
                     case 1:
-						PageManager.selectedAnnotations[0].y = this.my;
-						PageManager.selectedAnnotations[0].h += oldY - this.my;
+                        PageManager.selectedAnnotations[0].y = this.my;
+                        PageManager.selectedAnnotations[0].h += oldY - this.my;
                         break;
                     case 2:
-						PageManager.selectedAnnotations[0].y = this.my;
-						PageManager.selectedAnnotations[0].w = this.mx - oldX;
-						PageManager.selectedAnnotations[0].h += oldY - this.my;
+                        PageManager.selectedAnnotations[0].y = this.my;
+                        PageManager.selectedAnnotations[0].w = this.mx - oldX;
+                        PageManager.selectedAnnotations[0].h += oldY - this.my;
                         break;
                     case 3:
-						PageManager.selectedAnnotations[0].x = this.mx;
-						PageManager.selectedAnnotations[0].w += oldX - this.mx;
+                        PageManager.selectedAnnotations[0].x = this.mx;
+                        PageManager.selectedAnnotations[0].w += oldX - this.mx;
                         break;
                     case 4:
-						PageManager.selectedAnnotations[0].w = this.mx - oldX;
+                        PageManager.selectedAnnotations[0].w = this.mx - oldX;
                         break;
                     case 5:
-						PageManager.selectedAnnotations[0].x = this.mx;
-						PageManager.selectedAnnotations[0].w += oldX - this.mx;
-						PageManager.selectedAnnotations[0].h = this.my - oldY;
+                        PageManager.selectedAnnotations[0].x = this.mx;
+                        PageManager.selectedAnnotations[0].w += oldX - this.mx;
+                        PageManager.selectedAnnotations[0].h = this.my - oldY;
                         break;
                     case 6:
-						PageManager.selectedAnnotations[0].h = this.my - oldY;
+                        PageManager.selectedAnnotations[0].h = this.my - oldY;
                         break;
                     case 7:
-						PageManager.selectedAnnotations[0].w = this.mx - oldX;
-						PageManager.selectedAnnotations[0].h = this.my - oldY;
+                        PageManager.selectedAnnotations[0].w = this.mx - oldX;
+                        PageManager.selectedAnnotations[0].h = this.my - oldY;
                         break;
                 }
             }
@@ -1459,18 +1470,17 @@ Page.prototype.mouseMove = function(e, touch) {
         }
 
         /**
-          * If annotation type is circle, set the circleLastX and circleLastY as the moving coordinates
-          * because the x and y variables serve as the starting point to how the circle was created.
-          */
+         * If annotation type is circle, set the circleLastX and circleLastY as the moving coordinates
+         * because the x and y variables serve as the starting point to how the circle was created.
+         */
         if (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_CIRCLE_FILL ||
-			PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_CIRCLE_STROKE)
-		{
-			PageManager.selectedAnnotations[0].circleStartX = PageManager.selectedAnnotations[0].x;
-			PageManager.selectedAnnotations[0].circleStartY = PageManager.selectedAnnotations[0].y;
-			PageManager.selectedAnnotations[0].circleLastX = PageManager.selectedAnnotations[0].x + PageManager.selectedAnnotations[0].w;
-			PageManager.selectedAnnotations[0].circleLastY = PageManager.selectedAnnotations[0].y + PageManager.selectedAnnotations[0].h;
-        }
-        else if (PageManager.selectedAnnotations[0].isFormField()) {
+                PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_CIRCLE_STROKE)
+        {
+            PageManager.selectedAnnotations[0].circleStartX = PageManager.selectedAnnotations[0].x;
+            PageManager.selectedAnnotations[0].circleStartY = PageManager.selectedAnnotations[0].y;
+            PageManager.selectedAnnotations[0].circleLastX = PageManager.selectedAnnotations[0].x + PageManager.selectedAnnotations[0].w;
+            PageManager.selectedAnnotations[0].circleLastY = PageManager.selectedAnnotations[0].y + PageManager.selectedAnnotations[0].h;
+        } else if (PageManager.selectedAnnotations[0].isFormField()) {
             var ff = $('#' + Default.ANNOTATION_ID_PREFIX_FORM_FIELD + PageManager.selectedAnnotations[0].id);
             ff.css('left', PageManager.selectedAnnotations[0].x + (rotateAngle == 90 ? Math.abs(PageManager.selectedAnnotations[0].w) : 0));
             ff.css('top', PageManager.selectedAnnotations[0].y + (rotateAngle == 270 ? Math.abs(PageManager.selectedAnnotations[0].h) : 0));
@@ -1489,7 +1499,7 @@ Page.prototype.mouseMove = function(e, touch) {
     }
 
     if (Default.ANNOTATION_SELECTABLE_TEXT_SHOW_ON_HOVER && !PageManager.leftButtonMouseClicked)
-        for (var i=0; i<this.canvasAnnotations.length; i++) {
+        for (var i = 0; i < this.canvasAnnotations.length; i++) {
             if (this.canvasAnnotations[i].isReadOnly())
                 continue;
 
@@ -1499,7 +1509,7 @@ Page.prototype.mouseMove = function(e, touch) {
 
     // if there's a selection see if we grabbed one of the selection handles
     if (PageManager.selectedAnnotations.length == 1 && PageManager.selectedAnnotations[0] !== null && !PageManager.isResizeDrag) {
-        for (var i=0; i<PageManager.selectedAnnotations[0].selectionHandles.length; i++) {
+        for (var i = 0; i < PageManager.selectedAnnotations[0].selectionHandles.length; i++) {
             // 0  1  2
             // 3     4
             // 5  6  7
@@ -1507,14 +1517,13 @@ Page.prototype.mouseMove = function(e, touch) {
 
             // We do not need to use the ghost context because selection handles will always be rectangles
             if (this.mx >= cur.x && this.mx <= cur.x + (Default.ANNOTATION_SELECTION_BOX_SIZE * PDFViewerApplication.pdfViewer.currentScale) &&
-                this.my >= cur.y && this.my <= cur.y + (Default.ANNOTATION_SELECTION_BOX_SIZE * PDFViewerApplication.pdfViewer.currentScale)) {
+                    this.my >= cur.y && this.my <= cur.y + (Default.ANNOTATION_SELECTION_BOX_SIZE * PDFViewerApplication.pdfViewer.currentScale)) {
                 // We found one!
-				PageManager.expectResize = i;
+                PageManager.expectResize = i;
 
                 if (PageManager.selectedAnnotations[0].drawingPositions.length > 0) {
                     this.canvas.style.cursor = 'alias';
-                }
-                else {
+                } else {
                     switch (i) {
                         case 0:
                             this.canvas.style.cursor = PageManager.selectedAnnotations[0].w < 0 && PageManager.selectedAnnotations[0].h < 0 ? 'se-resize' : PageManager.selectedAnnotations[0].w < 0 || PageManager.selectedAnnotations[0].h < 0 ? 'sw-resize' : 'nw-resize';
@@ -1547,8 +1556,8 @@ Page.prototype.mouseMove = function(e, touch) {
 
         }
         // not over a selection box, return to normal
-		PageManager.isResizeDrag = false;
-		PageManager.expectResize = -1;
+        PageManager.isResizeDrag = false;
+        PageManager.expectResize = -1;
         this.canvas.style.cursor = 'default';
     }
 };
@@ -1559,18 +1568,18 @@ Page.prototype.mouseMove = function(e, touch) {
  * @memberof Page
  * @param {object} e The mouse event object.
  */
-Page.prototype.mouseUp = function(e) {
+Page.prototype.mouseUp = function (e) {
     // If hand tool mode, then ignore events in the annotation canvas layer
     if (PageManager.getHandTool().active)
         return;
 
-	PageManager.leftButtonMouseClicked = false;
-	PageManager.leftButtonMouseClickedAnnotation = null;
+    PageManager.leftButtonMouseClicked = false;
+    PageManager.leftButtonMouseClickedAnnotation = null;
 
     Page.prototype.getMouse(e, this);
 
     if ($('#togglePageColorPicker').hasClass('toggled')) {
-		PageManager.convertColor(PageManager.getPageColor(this.pageIndex, this.mx, this.my));
+        PageManager.convertColor(PageManager.getPageColor(this.pageIndex, this.mx, this.my));
         resetVar();
         return;
     }
@@ -1594,36 +1603,32 @@ Page.prototype.mouseUp = function(e) {
          * annotation's bound area.
          */
         var annotations = PageManager.selectedAnnotations.length > 0 ? PageManager.selectedAnnotations : this.canvasAnnotations;
-        for (var i=annotations.length-1; i>= 0; i--) {
+        for (var i = annotations.length - 1; i >= 0; i--) {
             var process = false;
             if (annotations[i].isSelectableTextType() && annotations[i].containsHighlightText(this.mx, this.my)) {
                 process = true;
-            }
-            else if (annotations[i].drawingPositions.length > 0 &&
-               annotations[i].containsDrawing(this, this.mx, this.my))
+            } else if (annotations[i].drawingPositions.length > 0 &&
+                    annotations[i].containsDrawing(this, this.mx, this.my))
             {
-               process = true;
-            }
-            else if (annotations[i].contains(this.mx, this.my)) {
+                process = true;
+            } else if (annotations[i].contains(this.mx, this.my)) {
                 process = true;
             }
 
             if (process) {
                 if (PageManager.selectedAnnotations.length > 0) {
                     annotations[i].moving = false;
-                }
-                else {
-					PageManager.addSelectedAnnotation(annotations[i]);
+                } else {
+                    PageManager.addSelectedAnnotation(annotations[i]);
                     this.invalidate();
                 }
 
                 if (PageManager.selectedAnnotations.length > 0) {
                     if (Util.isFunction(Annotationeer.displayAnnotationMenu)) {
                         e.stopPropagation();
-						Annotationeer.displayAnnotationMenu(PageManager.selectedAnnotations, e.clientX, e.clientY);
-                    }
-                    else
-						PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_DISPLAY, 'info');
+                        Annotationeer.displayAnnotationMenu(PageManager.selectedAnnotations, e.clientX, e.clientY);
+                    } else
+                        PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_DISPLAY, 'info');
                 }
 
                 break;
@@ -1646,11 +1651,11 @@ Page.prototype.mouseUp = function(e) {
 
             // We at least set a minimum of 10 points to allow an annotation to be called a drawing
             if (PageManager.drawingGuide.length < Default.DRAW_POINT_MINIMUM) {
-				PageManager.drawingGuide = [];
+                PageManager.drawingGuide = [];
                 pages[p].invalidate();
 
                 if (Message.DRAWING_CREATE_REQUIREMENT)
-					PageManager.showAlert(Message.DRAWING_CREATE_REQUIREMENT, 'info');
+                    PageManager.showAlert(Message.DRAWING_CREATE_REQUIREMENT, 'info');
 
                 return;
             }
@@ -1661,7 +1666,7 @@ Page.prototype.mouseUp = function(e) {
             annotation.pageWidth = parseInt(PageManager.getPageWidth(pages[p].canvas.width, pages[p].canvas.height) / PDFViewerApplication.pdfViewer.currentScale);
             annotation.pageHeight = parseInt(PageManager.getPageHeight(pages[p].canvas.width, pages[p].canvas.height) / PDFViewerApplication.pdfViewer.currentScale);
 
-            for (var i=0; i<PageManager.drawingGuide.length; i++) {
+            for (var i = 0; i < PageManager.drawingGuide.length; i++) {
                 var drawingPosition = PageManager.drawingGuide[i];
                 annotation.drawingPositions.push(drawingPosition);
             }
@@ -1674,7 +1679,7 @@ Page.prototype.mouseUp = function(e) {
 
             pages[p].addAnnotation(annotation, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, false, true);
 
-			PageManager.drawingGuide = [];
+            PageManager.drawingGuide = [];
 
             if (Default.ANNOTATION_BUTTON_TOGGLED || !annotation.isNonToggable) {
                 // We call invalidate here because if this does not get called, the resetVar() below
@@ -1685,38 +1690,35 @@ Page.prototype.mouseUp = function(e) {
 
             // Call function with no parameters since the purpose is to reset the button states and page's var.
             resetVar(false, false, pages[p]);
-        }
-        else if (pages[p].isCreatingAnnotation) {
+        } else if (pages[p].isCreatingAnnotation) {
             if (PageManager.boxAnnotationGuide.annotationType === Annotation.TYPE_SCREENSHOT) {
                 PageManager.screenShot(pages[p].screenshotAnnotation);
                 pages[p].screenshotAnnotation = null;
-            }
-            else {
+            } else {
                 if (PageManager.boxAnnotationGuide.isPolyLineType()) {
                     if (PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_POLY_LINE &&
-						PageManager.boxAnnotationGuide.drawingPositions.length > 2 &&
-                        Math.abs(this.mx - PageManager.boxAnnotationGuide.drawingPositions[0].x) < Default.END_CLICK_RADIUS &&
-                        Math.abs(this.my -PageManager.boxAnnotationGuide.drawingPositions[0].y) < Default.END_CLICK_RADIUS)
+                            PageManager.boxAnnotationGuide.drawingPositions.length > 2 &&
+                            Math.abs(this.mx - PageManager.boxAnnotationGuide.drawingPositions[0].x) < Default.END_CLICK_RADIUS &&
+                            Math.abs(this.my - PageManager.boxAnnotationGuide.drawingPositions[0].y) < Default.END_CLICK_RADIUS)
                     {
                         // Polygon is now closed
                         pages[p].isCreatingAnnotation = false;
-						PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
+                        PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
 
                         var boundingBox = Util.getBoundingBoxOfPoints(PageManager.boxAnnotationGuide.drawingPositions);
-						PageManager.boxAnnotationGuide.x = boundingBox.x;
-						PageManager.boxAnnotationGuide.y = boundingBox.y;
-						PageManager.boxAnnotationGuide.w = boundingBox.w;
-						PageManager.boxAnnotationGuide.h = boundingBox.h;
-                    }
-                    else {
+                        PageManager.boxAnnotationGuide.x = boundingBox.x;
+                        PageManager.boxAnnotationGuide.y = boundingBox.y;
+                        PageManager.boxAnnotationGuide.w = boundingBox.w;
+                        PageManager.boxAnnotationGuide.h = boundingBox.h;
+                    } else {
                         var drawingPosition = new DrawingPosition();
                         drawingPosition.x = this.mx;
                         drawingPosition.y = this.my;
 
                         if (PageManager.boxAnnotationGuide.drawingPositions.length == 0)
-							PageManager.boxAnnotationGuide.drawingPositions.push(drawingPosition);
+                            PageManager.boxAnnotationGuide.drawingPositions.push(drawingPosition);
                         else
-							PageManager.boxAnnotationGuide.drawingPositions[PageManager.boxAnnotationGuide.drawingPositions.length - 1] = drawingPosition;
+                            PageManager.boxAnnotationGuide.drawingPositions[PageManager.boxAnnotationGuide.drawingPositions.length - 1] = drawingPosition;
                     }
 
                     if (pages[p].pageIndex == PageManager.boxAnnotationGuide.pageIndex) {
@@ -1731,51 +1733,48 @@ Page.prototype.mouseUp = function(e) {
                             dp.x = this.mx;
                             dp.y = this.my;
 
-							PageManager.boxAnnotationGuide.drawingPositions.push(dp);
+                            PageManager.boxAnnotationGuide.drawingPositions.push(dp);
 
                             if (Util.isMobile() && PageManager.boxAnnotationGuide.drawingPositions.length > 3)
                                 $('#markText').removeClass('hidden');
 
                             return;
                         }
-                    }
-                    else {
-						PageManager.boxAnnotationGuide.drawingPositions = [];
+                    } else {
+                        PageManager.boxAnnotationGuide.drawingPositions = [];
                         this.invalidate();
 
                         if (Message.POLY_LINE_CREATE_WRONG_PAGE)
-							PageManager.showAlert(Message.POLY_LINE_CREATE_WRONG_PAGE, 'info');
+                            PageManager.showAlert(Message.POLY_LINE_CREATE_WRONG_PAGE, 'info');
 
                         return;
                     }
-                }
-                else if (PageManager.boxAnnotationGuide.drawingPositions.length > 0) {
-					PageManager.boxAnnotationGuide.pageWidth = parseInt(PageManager.getPageWidth(pages[p].canvas.width, pages[p].canvas.height) / PDFViewerApplication.pdfViewer.currentScale);
-					PageManager.boxAnnotationGuide.pageHeight = parseInt(PageManager.getPageHeight(pages[p].canvas.width, pages[p].canvas.height) / PDFViewerApplication.pdfViewer.currentScale);
+                } else if (PageManager.boxAnnotationGuide.drawingPositions.length > 0) {
+                    PageManager.boxAnnotationGuide.pageWidth = parseInt(PageManager.getPageWidth(pages[p].canvas.width, pages[p].canvas.height) / PDFViewerApplication.pdfViewer.currentScale);
+                    PageManager.boxAnnotationGuide.pageHeight = parseInt(PageManager.getPageHeight(pages[p].canvas.width, pages[p].canvas.height) / PDFViewerApplication.pdfViewer.currentScale);
 
                     var boundingBox = Util.getBoundingBoxOfPoints(PageManager.boxAnnotationGuide.drawingPositions);
-					PageManager.boxAnnotationGuide.x = boundingBox.x;
-					PageManager.boxAnnotationGuide.y = boundingBox.y;
-					PageManager.boxAnnotationGuide.w = boundingBox.w;
-					PageManager.boxAnnotationGuide.h = boundingBox.h;
-                }
-                else if (PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_HIGHLIGHT &&
-					PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_BOX &&
-					PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_CIRCLE_FILL &&
-					PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_CIRCLE_STROKE) {
-					PageManager.boxAnnotationGuide.x = pages[p].mx - Default.CURSOR_CROSSHAIR_PIXEL_SIZE;
-					PageManager.boxAnnotationGuide.y = pages[p].my - Default.CURSOR_CROSSHAIR_PIXEL_SIZE;
+                    PageManager.boxAnnotationGuide.x = boundingBox.x;
+                    PageManager.boxAnnotationGuide.y = boundingBox.y;
+                    PageManager.boxAnnotationGuide.w = boundingBox.w;
+                    PageManager.boxAnnotationGuide.h = boundingBox.h;
+                } else if (PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_HIGHLIGHT &&
+                        PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_BOX &&
+                        PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_CIRCLE_FILL &&
+                        PageManager.boxAnnotationGuide.annotationType != Annotation.TYPE_CIRCLE_STROKE) {
+                    PageManager.boxAnnotationGuide.x = pages[p].mx - Default.CURSOR_CROSSHAIR_PIXEL_SIZE;
+                    PageManager.boxAnnotationGuide.y = pages[p].my - Default.CURSOR_CROSSHAIR_PIXEL_SIZE;
 
                     if (PageManager.boxAnnotationGuide.usesImage()) {
-						PageManager.boxAnnotationGuide.w = PageManager.boxAnnotationGuide.icon.width;
-						PageManager.boxAnnotationGuide.h = PageManager.boxAnnotationGuide.icon.height;
+                        PageManager.boxAnnotationGuide.w = PageManager.boxAnnotationGuide.icon.width;
+                        PageManager.boxAnnotationGuide.h = PageManager.boxAnnotationGuide.icon.height;
                     }
 
-					PageManager.boxAnnotationGuide.w = PageManager.boxAnnotationGuide.w * PDFViewerApplication.pdfViewer.currentScale;
-					PageManager.boxAnnotationGuide.h = PageManager.boxAnnotationGuide.h * PDFViewerApplication.pdfViewer.currentScale;
+                    PageManager.boxAnnotationGuide.w = PageManager.boxAnnotationGuide.w * PDFViewerApplication.pdfViewer.currentScale;
+                    PageManager.boxAnnotationGuide.h = PageManager.boxAnnotationGuide.h * PDFViewerApplication.pdfViewer.currentScale;
                 }
 
-                for (var i=0; i<pages[p].canvasAnnotations.length; i++) {
+                for (var i = 0; i < pages[p].canvasAnnotations.length; i++) {
                     if (pages[p].canvasAnnotations[i].id == 0) {
                         pages[p].canvasAnnotations.splice(i, 1);
                         break;
@@ -1784,8 +1783,7 @@ Page.prototype.mouseUp = function(e) {
 
                 if (PageManager.boxAnnotationGuide.isFormField()) {
                     pages[p].addFormField(PageManager.boxAnnotationGuide, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, false, true);
-                }
-                else {
+                } else {
                     pages[p].addAnnotation(PageManager.boxAnnotationGuide, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, false, true);
                 }
             }
@@ -1799,7 +1797,7 @@ Page.prototype.mouseUp = function(e) {
 
             if (!PageManager.boxAnnotationGuide.isNonToggable()) {
                 var annotationButtons = $('.annotation');
-                for (var ab=0; ab<annotationButtons.length; ab++) {
+                for (var ab = 0; ab < annotationButtons.length; ab++) {
                     if ($(annotationButtons[ab]).hasClass('toggled'))
                         recentlyToggledButton = $(annotationButtons[ab]);
                 }
@@ -1818,33 +1816,33 @@ Page.prototype.mouseUp = function(e) {
         }
 
         if (PageManager.selectedAnnotations.length == 1 && PageManager.selectedAnnotations[0].pageIndex == pages[p].pageIndex &&
-            (PageManager.selectedAnnotations[0].moving || PageManager.isResizeDrag))
+                (PageManager.selectedAnnotations[0].moving || PageManager.isResizeDrag))
         {
-			PageManager.selectedAnnotations[0].dateModified = new Date();
+            PageManager.selectedAnnotations[0].dateModified = new Date();
 
             if (PageManager.selectedAnnotations[0].drawingPositions.length > 0) {
                 // Check first if length is beyond minimum, else set minimum length, for arrow and distance measurement.
                 if (PageManager.selectedAnnotations[0].drawingPositions.length == 2 &&
-                    ((PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE && Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH) ||
-                    (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_ARROW || PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_LINE)))
+                        ((PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE && Default.ANNOTATION_MEASUREMENT_DISTANCE_MINIMUM_LENGTH) ||
+                                (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_ARROW || PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_LINE)))
                 {
                     var distance = Util.getDistance(PageManager.selectedAnnotations[0].drawingPositions[0].x,
-						PageManager.selectedAnnotations[0].drawingPositions[0].y,
-						PageManager.selectedAnnotations[0].drawingPositions[1].x,
-						PageManager.selectedAnnotations[0].drawingPositions[1].y);
+                            PageManager.selectedAnnotations[0].drawingPositions[0].y,
+                            PageManager.selectedAnnotations[0].drawingPositions[1].x,
+                            PageManager.selectedAnnotations[0].drawingPositions[1].y);
                     var scale = PDFViewerApplication.pdfViewer.currentScale;
                     if (distance < (Default.ARROW_SIZE * scale) * 2 * (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE ? 2 : 1)) {
                         var angle = Util.getAngle(PageManager.selectedAnnotations[0].drawingPositions[0].x, PageManager.selectedAnnotations[0].drawingPositions[0].y,
-							PageManager.selectedAnnotations[0].drawingPositions[1].x, PageManager.selectedAnnotations[0].drawingPositions[1].y, false);
+                                PageManager.selectedAnnotations[0].drawingPositions[1].x, PageManager.selectedAnnotations[0].drawingPositions[1].y, false);
                         var point = Util.getPointFromDistance(PageManager.selectedAnnotations[0].drawingPositions[0].x, PageManager.selectedAnnotations[0].drawingPositions[0].y,
-                            angle, (Default.ARROW_SIZE * scale) * 2 * (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE ? 2 : 1) + (1 * scale));
+                                angle, (Default.ARROW_SIZE * scale) * 2 * (PageManager.selectedAnnotations[0].annotationType === Annotation.TYPE_MEASUREMENT_DISTANCE ? 2 : 1) + (1 * scale));
 
-						PageManager.selectedAnnotations[0].drawingPositions[1].x = point.x;
-						PageManager.selectedAnnotations[0].drawingPositions[1].y = point.y;
+                        PageManager.selectedAnnotations[0].drawingPositions[1].x = point.x;
+                        PageManager.selectedAnnotations[0].drawingPositions[1].y = point.y;
                     }
                 }
 
-                for (var i=0; i<PageManager.selectedAnnotations[0].drawingPositions.length; i++) {
+                for (var i = 0; i < PageManager.selectedAnnotations[0].drawingPositions.length; i++) {
                     var drawingPosition = PageManager.selectedAnnotations[0].drawingPositions[i];
                     drawingPosition.origX = drawingPosition.x;
                     drawingPosition.origY = drawingPosition.y;
@@ -1852,17 +1850,17 @@ Page.prototype.mouseUp = function(e) {
                 }
 
                 var boundingBox = Util.getBoundingBoxOfPoints(PageManager.selectedAnnotations[0].drawingPositions);
-				PageManager.selectedAnnotations[0].x = boundingBox.x;
-				PageManager.selectedAnnotations[0].y = boundingBox.y;
-				PageManager.selectedAnnotations[0].w = boundingBox.w;
-				PageManager.selectedAnnotations[0].h = boundingBox.h;
+                PageManager.selectedAnnotations[0].x = boundingBox.x;
+                PageManager.selectedAnnotations[0].y = boundingBox.y;
+                PageManager.selectedAnnotations[0].w = boundingBox.w;
+                PageManager.selectedAnnotations[0].h = boundingBox.h;
             }
 
-			PageManager.selectedAnnotations[0].calculateOrigBound(pages[p].canvas, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, true);
+            PageManager.selectedAnnotations[0].calculateOrigBound(pages[p].canvas, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, true);
 
             if (PageManager.selectedAnnotations[0].moving || PageManager.isResizeDrag) {
-				PageManager.selectedAnnotations[0].moving = false;
-				PageManager.selectedAnnotations[0].modified = 'update';
+                PageManager.selectedAnnotations[0].moving = false;
+                PageManager.selectedAnnotations[0].modified = 'update';
 
                 // We call invalidate because if the user moves the annotation and the mouseUp ends up on the next or
                 // previous page, the annotation's position must be refreshed with the newly adjusted position
@@ -1871,13 +1869,13 @@ Page.prototype.mouseUp = function(e) {
                 if (Util.isFunction(Annotationeer.saveAnnotation))
                     Annotationeer.saveAnnotation(PageManager.selectedAnnotations[0]);
                 else
-					PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
+                    PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
             }
         }
     }
 
-	PageManager.isResizeDrag = false;
-	PageManager.expectResize = -1;
+    PageManager.isResizeDrag = false;
+    PageManager.expectResize = -1;
 };
 
 /**
@@ -1891,8 +1889,8 @@ Page.prototype.mouseUp = function(e) {
  * @param {boolean} useOrig Use original dimension or not.
  * @param {boolean} doNotTriggerEvent Trigger an event or not.
  */
-Page.prototype.addFormField = function(annotation, angle, scale, useOrig, isAddedAfterLoad, doNotTriggerEvent) {
-	PageManager.consoleLog('Page.addFormField()');
+Page.prototype.addFormField = function (annotation, angle, scale, useOrig, isAddedAfterLoad, doNotTriggerEvent) {
+    PageManager.consoleLog('Page.addFormField()');
 
     var formField = document.createElement('input');
     formField.setAttribute('id', Default.ANNOTATION_ID_PREFIX_FORM_FIELD + (annotation.id != 0 ? annotation.id : ''));
@@ -1914,30 +1912,27 @@ Page.prototype.addFormField = function(annotation, angle, scale, useOrig, isAdde
         formField.style.borderStyle = 'solid';
         formField.style.borderWidth = '1px';
         formField.style.font = (annotation.fontSize * scale) + Default.FONT_SIZE_TYPE + ' ' + Default.FONT_TYPE;
-    }
-    else if (annotation.annotationType === Annotation.TYPE_FORM_CHECKBOX)
+    } else if (annotation.annotationType === Annotation.TYPE_FORM_CHECKBOX)
         formField.setAttribute('type', 'checkbox');
     else if (annotation.annotationType === Annotation.TYPE_FORM_RADIO_BUTTON)
         formField.setAttribute('type', 'radio');
 
     if (!annotation.hasDimension) {
         annotation.w = annotation.annotationType === Annotation.TYPE_FORM_TEXT_FIELD ?
-            (angle != 0 && angle != 180 ? Default.FORM_FIELD_TEXTFIELD_SIZE_HEIGHT : Default.FORM_FIELD_TEXTFIELD_SIZE_WIDTH) * scale :
-            Default.FORM_FIELD_SIZE_MINIMUM * scale;
+                (angle != 0 && angle != 180 ? Default.FORM_FIELD_TEXTFIELD_SIZE_HEIGHT : Default.FORM_FIELD_TEXTFIELD_SIZE_WIDTH) * scale :
+                Default.FORM_FIELD_SIZE_MINIMUM * scale;
         annotation.h = annotation.annotationType === Annotation.TYPE_FORM_TEXT_FIELD ?
-            (angle !=0 && angle != 180 ? Default.FORM_FIELD_TEXTFIELD_SIZE_WIDTH : Default.FORM_FIELD_TEXTFIELD_SIZE_HEIGHT) * scale :
-            Default.FORM_FIELD_SIZE_MINIMUM * scale;
+                (angle != 0 && angle != 180 ? Default.FORM_FIELD_TEXTFIELD_SIZE_WIDTH : Default.FORM_FIELD_TEXTFIELD_SIZE_HEIGHT) * scale :
+                Default.FORM_FIELD_SIZE_MINIMUM * scale;
         annotation.hasDimension = true;
 
         if (angle == 90) {
             formField.style.transformOrigin = '0 0';
             formField.style.transform = 'rotate(90deg)';
-        }
-        else if (angle == 270) {
+        } else if (angle == 270) {
             formField.style.transformOrigin = '0 0';
             formField.style.transform = 'rotate(-90deg)';
-        }
-        else if (angle == 180) {
+        } else if (angle == 180) {
             formField.style.transform = 'rotate(180deg)';
         }
     }
@@ -1945,7 +1940,7 @@ Page.prototype.addFormField = function(annotation, angle, scale, useOrig, isAdde
     // If using native Javascript, the px string must be appended.
     formField.style.position = 'absolute';
     formField.style.left = (annotation.x + (angle == 90 ? Math.abs(annotation.w) : 0)) + 'px';
-    formField.style.top = (annotation.y + (angle == 270 ? Math.abs(annotation.h) : 0))+ 'px';
+    formField.style.top = (annotation.y + (angle == 270 ? Math.abs(annotation.h) : 0)) + 'px';
     formField.style.width = Math.abs(annotation.w) + 'px';
     formField.style.height = Math.abs(annotation.h) + 'px';
 
@@ -1954,7 +1949,7 @@ Page.prototype.addFormField = function(annotation, angle, scale, useOrig, isAdde
      * default width and height for form fields because the values differ on rotation. Because of this,
      * we can add the form field at the bottom after all attributes have been set.
      */
-	PageManager.getPageContainer(annotation.pageIndex + 1).find('.canvasWrapper').append(formField);
+    PageManager.getPageContainer(annotation.pageIndex + 1).find('.canvasWrapper').append(formField);
 
     this.canvasAnnotations.push(annotation);
 
@@ -1964,7 +1959,7 @@ Page.prototype.addFormField = function(annotation, angle, scale, useOrig, isAdde
         if (Util.isFunction(Annotationeer.saveAnnotation))
             Annotationeer.saveAnnotation(annotation, null, doNotTriggerEvent);
         else
-			PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
+            PageManager.showAlert(Message.FUNC_UNDEFINED_ANNO_SAVE, 'info');
     }
 };
 
@@ -1978,14 +1973,14 @@ Page.prototype.addFormField = function(annotation, angle, scale, useOrig, isAdde
  * @param {decimal} lastPointX The last point x coordinate of the annotation.
  * @param {decimal} lastPointY The last point y coordinate of the annotation.
  */
-Page.prototype.showPolyLineCreateMenu = function(menuX, menuY, lastPointX, lastPointY) {
+Page.prototype.showPolyLineCreateMenu = function (menuX, menuY, lastPointX, lastPointY) {
     if (!PageManager.startCreatingAnnotation || (PageManager.startCreatingAnnotation && PageManager.boxAnnotationGuide.drawingPositions.length < 3))
         return;
 
     var items = {
-        'cancel': { name: '<span data-l10n-id="cancel_label">Cancel</span>', isHtmlName: true },
+        'cancel': {name: '<span data-l10n-id="cancel_label">Cancel</span>', isHtmlName: true},
         'sep': '---------',
-        'complete' : { name: '<span data-l10n-id="complete_label">Complete</span>', isHtmlName: true }
+        'complete': {name: '<span data-l10n-id="complete_label">Complete</span>', isHtmlName: true}
     };
 
     var page = this;
@@ -1994,43 +1989,43 @@ Page.prototype.showPolyLineCreateMenu = function(menuX, menuY, lastPointX, lastP
         selector: 'canvas#' + Default.canvasIdName + (this.pageIndex + 1),
         trigger: 'none',
         zIndex: 99999,
-        callback: function(key) {
+        callback: function (key) {
             switch (key) {
                 case 'cancel':
                     // Since user cancelled it, remove annotation and let user create again.
                     page.canvasAnnotations.splice(page.canvasAnnotations.length - 1);
                     page.invalidate();
-					PageManager.boxAnnotationGuide.drawingPositions = [];
+                    PageManager.boxAnnotationGuide.drawingPositions = [];
                     break;
                 case 'complete':
                     // Remove extra drawing position entry because of the mouse click.
-					PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
+                    PageManager.boxAnnotationGuide.drawingPositions.splice(PageManager.boxAnnotationGuide.drawingPositions.length - 1, 1);
                     // Update last drawing position's coordinates based on last mouse click of the user before menu was shown.
-					PageManager.boxAnnotationGuide.drawingPositions[PageManager.boxAnnotationGuide.drawingPositions.length - 1].x = lastPointX;
-					PageManager.boxAnnotationGuide.drawingPositions[PageManager.boxAnnotationGuide.drawingPositions.length - 1].y = lastPointY;
+                    PageManager.boxAnnotationGuide.drawingPositions[PageManager.boxAnnotationGuide.drawingPositions.length - 1].x = lastPointX;
+                    PageManager.boxAnnotationGuide.drawingPositions[PageManager.boxAnnotationGuide.drawingPositions.length - 1].y = lastPointY;
 
                     var boundingBox = Util.getBoundingBoxOfPoints(PageManager.boxAnnotationGuide.drawingPositions);
-					PageManager.boxAnnotationGuide.x = boundingBox.x;
-					PageManager.boxAnnotationGuide.y = boundingBox.y;
-					PageManager.boxAnnotationGuide.w = boundingBox.w;
-					PageManager.boxAnnotationGuide.h = boundingBox.h;
+                    PageManager.boxAnnotationGuide.x = boundingBox.x;
+                    PageManager.boxAnnotationGuide.y = boundingBox.y;
+                    PageManager.boxAnnotationGuide.w = boundingBox.w;
+                    PageManager.boxAnnotationGuide.h = boundingBox.h;
 
                     // Remove extra annotation added to canvas' annotation list because of the mouse click.
                     page.canvasAnnotations.splice(page.canvasAnnotations.length - 1, 1);
                     // Add the final created annotation
                     page.addAnnotation(PageManager.boxAnnotationGuide, rotateAngle, PDFViewerApplication.pdfViewer.currentScale, false, true);
-					page.invalidate();
+                    page.invalidate();
                     resetVar();
                     break;
             }
         },
         items: items,
         events: {
-			show: function() {
-				PageManager.translateEachL10n($('ul.context-menu-list'));
-			},
-            hide: function() {
-                $.contextMenu('destroy',  'canvas#' + Default.canvasIdName + (page.pageIndex + 1));
+            show: function () {
+                PageManager.translateEachL10n($('ul.context-menu-list'));
+            },
+            hide: function () {
+                $.contextMenu('destroy', 'canvas#' + Default.canvasIdName + (page.pageIndex + 1));
             }
         }
     });
@@ -2047,12 +2042,12 @@ Page.prototype.showPolyLineCreateMenu = function(menuX, menuY, lastPointX, lastP
  * @param {object} mouseEvent The mouse event object.
  * @returns {boolean}
  */
-Page.prototype.isMouseCoordinateInAnnotationArea = function(annotation, mouseEvent) {
+Page.prototype.isMouseCoordinateInAnnotationArea = function (annotation, mouseEvent) {
     // This condition is different for these types of annotations because their coordinates
     // are based on a DIV element's position, not canvas
     return ((annotation.isSelectableTextType() && annotation.containsHighlightText(this.mx, this.my, mouseEvent)) ||
-        (annotation.drawingPositions.length > 0 && annotation.containsDrawing(this, this.mx, this.my)) ||
-        (annotation.drawingPositions.length === 0 && annotation.contains(this.mx, this.my, mouseEvent)));
+            (annotation.drawingPositions.length > 0 && annotation.containsDrawing(this, this.mx, this.my)) ||
+            (annotation.drawingPositions.length === 0 && annotation.contains(this.mx, this.my, mouseEvent)));
 };
 
 /**
@@ -2062,20 +2057,34 @@ Page.prototype.isMouseCoordinateInAnnotationArea = function(annotation, mouseEve
  * @param {boolean} show Shows or hide the tooltip in the page.
  * @param {object} event The event
  */
-Page.prototype.showHideTooltip = function(show, event) {
+Page.prototype.showHideTooltip = function (show, event) {
     if (PageManager.isResizeDrag || PageManager.startCreatingAnnotation || PageManager.startDrawing || PageManager.leftButtonMouseClicked)
         return;
+
+    //ahmad
+    if (parent.SUGAR) {
+        var ele = parent.document.getElementById('signDocframe');
+        if (!ele) {
+            ele = parent.document.getElementById('signDocframeRecordPreview');
+        }
+
+        if (ele.getAttribute('is_locked') == "1") {
+            return true;
+        }
+    } else if (is_locked == "1") {
+        return true;
+    }
 
     if (!Util.isMobile() && Default.ANNOTATIONS_TOOLTIP)
         if (show) {
             // Hover tooltip if on top of annotation shape.
-            for (var i=this.canvasAnnotations.length-1; i>=0; i--) {
+            for (var i = this.canvasAnnotations.length - 1; i >= 0; i--) {
                 if (this.canvasAnnotations[i].isFormField())
                     continue;
 
                 if ((this.canvasAnnotations[i].drawingPositions.length === 0 && this.canvasAnnotations[i].contains(this.mx, this.my)) ||
-                    (this.canvasAnnotations[i].drawingPositions.length > 0 && this.canvasAnnotations[i].containsDrawing(this, this.mx, this.my)) ||
-                    (this.canvasAnnotations[i].highlightTextRects.length > 0 && this.canvasAnnotations[i].containsHighlightText(this.mx, this.my)))
+                        (this.canvasAnnotations[i].drawingPositions.length > 0 && this.canvasAnnotations[i].containsDrawing(this, this.mx, this.my)) ||
+                        (this.canvasAnnotations[i].highlightTextRects.length > 0 && this.canvasAnnotations[i].containsHighlightText(this.mx, this.my)))
                 {
                     if (this.canvasAnnotations[i].moving)
                         return;
@@ -2088,15 +2097,15 @@ Page.prototype.showHideTooltip = function(show, event) {
 
                     var content = document.createElement('div');
                     content.innerHTML = this.canvasAnnotations[i].isFormField() ?
-                    '<strong data-l10n-id="name_label">Name</strong>: ' + (this.canvasAnnotations[i].formFieldName ?
-                        this.canvasAnnotations[i].formFieldName : Message.NOT_ASSIGNED) + '<br/>' +
-                    '<strong data-l10n-id="value_label">Value</strong>: ' + (this.canvasAnnotations[i].formFieldValue ?
-                        this.canvasAnnotations[i].formFieldValue : Message.NOT_ASSIGNED) :
-                    '<strong>' + comment.user_name + '</strong>' +
-                    ' - <small>' + Util.getMomentFormattedDate(date) +
-                    ' - ' + (this.canvasAnnotations[i].comments.length - 1) +
-                    ' <span data-l10n-id="replies_label">replies</span></small><br/>' +
-                    '<span class="pre-tag">' + this.canvasAnnotations[i].getTooltip() + '</span>';
+                            '<strong data-l10n-id="name_label">Name</strong>: ' + (this.canvasAnnotations[i].formFieldName ?
+                                    this.canvasAnnotations[i].formFieldName : Message.NOT_ASSIGNED) + '<br/>' +
+                            '<strong data-l10n-id="value_label">Value</strong>: ' + (this.canvasAnnotations[i].formFieldValue ?
+                                    this.canvasAnnotations[i].formFieldValue : Message.NOT_ASSIGNED) :
+                            '<strong>' + comment.user_name + '</strong>' +
+                            ' - <small>' + Util.getMomentFormattedDate(date) +
+                            ' - ' + (this.canvasAnnotations[i].comments.length - 1) +
+                            ' <span data-l10n-id="replies_label">replies</span></small><br/>' +
+                            '<span class="pre-tag">' + this.canvasAnnotations[i].getTooltip() + '</span>';
                     var x = event.clientX;
                     var y = event.clientY;
 
@@ -2128,7 +2137,7 @@ Page.prototype.showHideTooltip = function(show, event) {
                     });
 
                     var self = this;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         self.canvas._tippy.show();
                     });
                     return;
@@ -2137,8 +2146,7 @@ Page.prototype.showHideTooltip = function(show, event) {
 
             if (this.canvas._tippy && this.canvas._tippy.state.isVisible)
                 this.canvas._tippy.hide();
-        }
-        else {
-            $.contextMenu('destroy',  '#' + Default.canvasIdName + this.pageIndex);;
+        } else {
+            $.contextMenu('destroy', '#' + Default.canvasIdName + this.pageIndex);
         }
 }

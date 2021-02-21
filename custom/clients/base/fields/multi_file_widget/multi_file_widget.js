@@ -47,6 +47,7 @@
         this.dataSyncList = [];
         this.timeOutCallsSyncList = [];
         this.timeOutHandle = {};
+        app.events.on('lockAnnotationOnDrawerClose', this.lockAnnotationOnDrawerClose, this);
     },
 
     loadInDashlet: function (ele) {
@@ -212,7 +213,7 @@
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
-        
+
         // When user click the copy link button it should lock the document. 
         e.keptLock = true;
         this.lockAnnotation(e);
@@ -236,15 +237,32 @@
             // Send and api call to lock/unlock the document
             var url = 'HT_Manifest/' + beanID + '/lockOrUnlockDoc';
 
-            app.api.call('create', app.api.buildURL(url), {'flag': flag}, {
-                success: _.bind(function (result) {
-                    self.attachmentCollection.reset();
-                    self.fetchRecords(true);
-                }),
-                error: _.bind(function (err) {
-                    console.log(err);
-                }, this),
-            });
+            // end lock/unlock call
+            this.makeLockCall(url, flag);
+        }
+    },
+
+    makeLockCall: function (url, flag) {
+        var self = this;
+        app.api.call('create', app.api.buildURL(url), {'flag': flag}, {
+            success: _.bind(function (result) {
+                self.attachmentCollection.reset();
+                self.fetchRecords(true);
+            }),
+            error: _.bind(function (err) {
+                console.log(err);
+            }, this),
+        });
+    },
+
+    /*
+     * Automatically lock the document when drawer is closed
+     */
+    lockAnnotationOnDrawerClose: function (param) {
+        var url = 'HT_Manifest/' + param.document_id + '/lockOrUnlockDoc';
+        var flag = 1;
+        if (!_.isUndefined(param.document_id) && !_.isEmpty(param.document_id)) {
+            this.makeLockCall(url, flag);
         }
     },
 
