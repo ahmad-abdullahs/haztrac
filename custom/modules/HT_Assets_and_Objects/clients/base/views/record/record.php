@@ -169,11 +169,6 @@ array (
             array (
               0 => 
               array (
-                'name' => 'asset_object_marking_no_c',
-                'label' => 'LBL_ASSET_OBJECT_MARKING_NO',
-              ),
-              1 => 
-              array (
                 'name' => 'asset_number',
                 'readonly' => true,
                 'comment' => 'Visual unique identifier',
@@ -183,80 +178,90 @@ array (
                 ),
                 'label' => 'LBL_ASSET_NUMBER',
               ),
+              1 => 
+              array (
+                'name' => 'operational_status_c',
+                'label' => 'LBL_OPERATIONAL_STATUS',
+              ),
               2 => 
+              array (
+                'name' => 'asset_object_marking_no_c',
+                'label' => 'LBL_ASSET_OBJECT_MARKING_NO',
+              ),
+              3 => 
+              array (
+                'name' => 'fuel_type_c',
+                'label' => 'LBL_FUEL_TYPE',
+              ),
+              4 => 
               array (
                 'name' => 'asset_type_c',
                 'label' => 'LBL_ASSET_TYPE',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'make_c',
                 'label' => 'LBL_MAKE',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'model_year_c',
                 'label' => 'LBL_MODEL_YEAR',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'model_c',
                 'label' => 'LBL_MODEL',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'serial_vin_c',
                 'label' => 'LBL_SERIAL_VIN',
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'license_number_c',
                 'label' => 'LBL_LICENSE_NUMBER',
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'object_no_c',
                 'label' => 'LBL_OBJECT_NO',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'ins_exp_c',
                 'label' => 'LBL_INS_EXP',
               ),
-              10 => 'assigned_user_name',
-              11 => 'team_name',
-              12 => 
-              array (
-                'name' => 'tag',
-                'span' => 12,
-              ),
-              13 => 
+              12 => 'assigned_user_name',
+              13 => 'team_name',
+              14 => 
               array (
                 'name' => 'weight_gvw_lb_c',
                 'label' => 'LBL_WEIGHT_GVW_LB',
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'weight_tare_lb_c',
                 'label' => 'LBL_WEIGHT_TARE_LB',
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'weight_load_limit_c',
                 'label' => 'LBL_WEIGHT_LOAD_LIMIT',
               ),
-              16 => 
+              17 => 
               array (
                 'name' => 'asset_location_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ASSET_LOCATION',
               ),
-              17 => 
+              18 => 
               array (
                 'name' => 'volume_gallons_c',
                 'label' => 'LBL_VOLUME_GALLONS',
               ),
-              18 => 
+              19 => 
               array (
                 'name' => 'volume_bbl_c',
                 'label' => 'LBL_VOLUME_BBL',
@@ -282,6 +287,35 @@ array (
               ),
               1 => 
               array (
+                'name' => 'commentlog',
+                'displayParams' => 
+                array (
+                  'type' => 'commentlog',
+                  'fields' => 
+                  array (
+                    0 => 'entry',
+                    1 => 'date_entered',
+                    2 => 'created_by_name',
+                  ),
+                  'max_num' => 100,
+                ),
+                'studio' => 
+                array (
+                  'listview' => false,
+                  'recordview' => true,
+                ),
+                'label' => 'LBL_COMMENTLOG',
+              ),
+              2 => 
+              array (
+              ),
+              3 => 
+              array (
+                'name' => 'tag',
+                'span' => 12,
+              ),
+              4 => 
+              array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
                 'inline' => true,
@@ -304,7 +338,7 @@ array (
                   ),
                 ),
               ),
-              2 => 
+              5 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,

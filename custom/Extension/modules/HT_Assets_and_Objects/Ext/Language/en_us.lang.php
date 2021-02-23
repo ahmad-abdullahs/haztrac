@@ -27,3 +27,5 @@ $mod_strings['LBL_VOLUME_GALLONS'] = 'Total Gallons Qty (G)';
 $mod_strings['LBL_ASSET_LOCATION'] = 'Asset Location';
 $mod_strings['LBL_ASSET_OBJECT_MARKING_NO'] = 'Equipment / Marking No.';
 $mod_strings['LBL_LICENSE_NUMBER'] = 'License Number';
+$mod_strings['LBL_OPERATIONAL_STATUS'] = 'Op Status';
+$mod_strings['LBL_FUEL_TYPE'] = 'Fuel Type';

@@ -35,3 +35,5 @@ $mod_strings['LBL_ANALYSIS_DATE_HEADER'] = 'Date';
 $mod_strings['LBL_NOTES'] = 'Notes';
 $mod_strings['LBL_RLI_GALON_TOTAL'] = 'Total Vol';
 $mod_strings['LBL_NOTES_SUBPANEL_TITLE'] = 'Notes';
+$mod_strings['LBL_EPA_CODES'] = 'EPA Waste Codes';
+$mod_strings['LBL_STATE_CODES'] = 'State Waste Codes';

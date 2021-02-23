@@ -20,7 +20,6 @@ array (
                 'label' => 'LBL_ASSET_OBJECT_MARKING_NO',
                 'enabled' => true,
                 'default' => true,
-                'width' => 'xsmall',
               ),
               1 => 
               array (
@@ -44,7 +43,7 @@ array (
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
-                'width' => 'medium',
+                'width' => '32',
               ),
               4 => 
               array (
@@ -52,7 +51,6 @@ array (
                 'label' => 'LBL_ASSET_TYPE',
                 'enabled' => true,
                 'default' => true,
-                'width' => 'small',
               ),
               5 => 
               array (
@@ -60,7 +58,6 @@ array (
                 'label' => 'LBL_MODEL_YEAR',
                 'enabled' => true,
                 'default' => true,
-                'width' => 'xsmall',
               ),
               6 => 
               array (
@@ -68,7 +65,6 @@ array (
                 'label' => 'LBL_MAKE',
                 'enabled' => true,
                 'default' => true,
-                'width' => 'small',
               ),
               7 => 
               array (
@@ -93,7 +89,7 @@ array (
                 'label' => 'LBL_TEAM',
                 'default' => true,
                 'enabled' => true,
-                'width' => 'small',
+                'width' => '9',
               ),
               10 => 
               array (
@@ -102,15 +98,78 @@ array (
                 'default' => true,
                 'enabled' => true,
                 'link' => true,
-                'width' => 'small',
+                'width' => '9',
               ),
               11 => 
+              array (
+                'name' => 'operational_status_c',
+                'label' => 'LBL_OPERATIONAL_STATUS',
+                'enabled' => true,
+                'default' => true,
+              ),
+              12 => 
               array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => false,
               ),
-              12 => 
+              13 => 
+              array (
+                'name' => 'weight_load_limit_c',
+                'label' => 'LBL_WEIGHT_LOAD_LIMIT',
+                'enabled' => true,
+                'default' => false,
+              ),
+              14 => 
+              array (
+                'name' => 'license_number_c',
+                'label' => 'LBL_LICENSE_NUMBER',
+                'enabled' => true,
+                'default' => false,
+              ),
+              15 => 
+              array (
+                'name' => 'volume_bbl_c',
+                'label' => 'LBL_VOLUME_BBL',
+                'enabled' => true,
+                'default' => false,
+              ),
+              16 => 
+              array (
+                'name' => 'serial_vin_c',
+                'label' => 'LBL_SERIAL_VIN',
+                'enabled' => true,
+                'default' => false,
+              ),
+              17 => 
+              array (
+                'name' => 'weight_tare_lb_c',
+                'label' => 'LBL_WEIGHT_TARE_LB',
+                'enabled' => true,
+                'default' => false,
+              ),
+              18 => 
+              array (
+                'name' => 'ins_exp_c',
+                'label' => 'LBL_INS_EXP',
+                'enabled' => true,
+                'default' => false,
+              ),
+              19 => 
+              array (
+                'name' => 'volume_gallons_c',
+                'label' => 'LBL_VOLUME_GALLONS',
+                'enabled' => true,
+                'default' => false,
+              ),
+              20 => 
+              array (
+                'name' => 'weight_gvw_lb_c',
+                'label' => 'LBL_WEIGHT_GVW_LB',
+                'enabled' => true,
+                'default' => false,
+              ),
+              21 => 
               array (
                 'name' => 'date_entered',
                 'enabled' => true,

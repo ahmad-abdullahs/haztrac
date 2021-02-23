@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-02 09:09:04
+// created: 2021-02-22 10:36:23
 $viewdefs['HT_Manifest']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -51,6 +51,15 @@ $viewdefs['HT_Manifest']['base']['filter']['default'] = array (
     array (
     ),
     'team_name' => 
+    array (
+    ),
+    'epa_codes_c' => 
+    array (
+    ),
+    'state_codes_c' => 
+    array (
+    ),
+    'description' => 
     array (
     ),
   ),

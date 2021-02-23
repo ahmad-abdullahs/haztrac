@@ -1,10 +1,10 @@
 <?php
- // created: 2019-09-07 22:01:18
+ // created: 2021-02-20 14:31:52
 $dictionary['HT_Assets_and_Objects']['fields']['license_number_c']['labelValue']='License Number';
 $dictionary['HT_Assets_and_Objects']['fields']['license_number_c']['full_text_search']=array (
-  'enabled' => '0',
+  'enabled' => true,
   'boost' => '1',
-  'searchable' => false,
+  'searchable' => true,
 );
 $dictionary['HT_Assets_and_Objects']['fields']['license_number_c']['enforced']='';
 $dictionary['HT_Assets_and_Objects']['fields']['license_number_c']['dependency']='';

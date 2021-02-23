@@ -1,5 +1,5 @@
 <?php
-// created: 2019-10-05 11:24:30
+// created: 2021-02-20 14:22:06
 $viewdefs['HT_Assets_and_Objects']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -27,6 +27,33 @@ $viewdefs['HT_Assets_and_Objects']['base']['filter']['default'] = array (
       'vname' => 'LBL_FAVORITES_FILTER',
     ),
     'team_name' => 
+    array (
+    ),
+    'model_year_c' => 
+    array (
+    ),
+    'weight_tare_lb_c' => 
+    array (
+    ),
+    'license_number_c' => 
+    array (
+    ),
+    'make_c' => 
+    array (
+    ),
+    'serial_vin_c' => 
+    array (
+    ),
+    'asset_location_c' => 
+    array (
+    ),
+    'weight_gvw_lb_c' => 
+    array (
+    ),
+    'model_c' => 
+    array (
+    ),
+    'asset_number' => 
     array (
     ),
     'asset_object_marking_no_c' => 

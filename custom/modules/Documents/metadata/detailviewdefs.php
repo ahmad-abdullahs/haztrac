@@ -134,6 +134,10 @@ array (
           array (
             'name' => 'hrm_employee_info_documents_1_name',
           ),
+          1 => 
+          array (
+            'name' => 'pnl_permits_licenses_documents_1_name',
+          ),
         ),
       ),
       'LBL_REVISIONS_PANEL' => 
