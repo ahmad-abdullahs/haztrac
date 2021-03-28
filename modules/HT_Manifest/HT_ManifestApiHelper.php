@@ -70,7 +70,10 @@ SQL;
                     $ret['ht_manifest_preview_c'] = "{$sugar_config['site_url']}/signDoc/annotationeer/viewer.html?file=../../pdfs/{$ret['preview_doc_id']}";
 
                     if ($row['file_ext'] == 'pdf') {
-                        $ret['popOutFullViewLink'] = "#bwc/index.php?entryPoint=openpdf&id={$row['id']}&module=mv_Attachments";
+//                        $ret['popOutFullViewLink'] = "#bwc/index.php?entryPoint=openpdf&id={$row['id']}&module=mv_Attachments";
+                        $ret['popOutFullViewLink'] = "{$sugar_config['site_url']}/signDoc/annotationeer/viewer.html?file=../../pdfs/{$row['id']}.pdf&token="
+                                . base64_encode("sugar_user_id=1&full_name=Administrator&document_id={$row['id']}&hostUrl={$sugar_config['site_url']}/signDoc/"
+                                        . "&is_locked={$row['is_locked']}&dateOfExpiry=" . gmdate("Y-m-d\TH:i:s\Z", strtotime("+1 day")));
                     } else {
                         $ret['popOutFullViewLink'] = "{$sugar_config['site_url']}/rest/v11_4/mv_Attachments/{$row['id']}/file/uploadfile?force_download=0&1586557374461=1&platform=base";
                     }
