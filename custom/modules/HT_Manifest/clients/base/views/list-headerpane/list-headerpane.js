@@ -26,22 +26,6 @@
     },
 
     bindDataChange: function () {
-//        this.on('render', function () {
-//            // switching from mgr to rep leaves $el null, so make sure we grab a fresh reference
-//            // to the field if it's there but $el is null in the current reference
-//            if (!this.saveDraftBtnField || (this.saveDraftBtnField && _.isNull(this.saveDraftBtnField.$el))) {
-//                // get reference to the Save Draft button Field
-//                this.saveDraftBtnField = this.getField('save_draft_button');
-//            }
-//            if (!this.commitBtnField || (this.commitBtnField && _.isNull(this.commitBtnField.$el))) {
-//                // get reference to the Commit button Field
-//                this.commitBtnField = this.getField('commit_button');
-//            }
-//
-//            this.saveDraftBtnField.setDisabled();
-//            this.commitBtnField.setDisabled();
-//        }, this);
-
         this.context.on('button:email_manifest_button:click', function () {
             var documentLinksList = this.getManifestDocumentLinks();
             this.prePopulateComposeEmailDrawer(documentLinksList);
@@ -52,7 +36,9 @@
 
     getManifestDocumentLinks: function () {
         var documentLinksList = [];
+        var companyIds = [];
         var filterpanel = this.layout.getComponent('filterpanel');
+
         if (filterpanel) {
             var list = filterpanel.getComponent('list');
             if (list) {
@@ -66,6 +52,7 @@
                         });
                     } else {
                         _.each(recordlist.massCollection.models, function (model) {
+                            companyIds.push(model.get('accounts_ht_manifest_1accounts_ida'));
                             if (model.get('popOutFullViewLink')) {
                                 documentLinksList.push({
                                     name: model.get('name'),
@@ -76,8 +63,19 @@
                                 });
                             }
                         }, this);
+
+                        companyIds = _.filter(_.uniq(companyIds));
+                        if (companyIds.length > 1) {
+                            app.alert.show('differentCompaniesSelected', {
+                                level: 'warning',
+                                messages: 'Please select Manifest(s) from same Company.',
+                                autoClose: true
+                            });
+                            return [];
+                        }
+
                         if (documentLinksList.length == 0) {
-                            app.alert.show('no', {
+                            app.alert.show('noDocumentsAttached', {
                                 level: 'warning',
                                 messages: 'Selected Manifest(s) does not have the documents attached.',
                                 autoClose: true
@@ -120,9 +118,6 @@
             }, {});
             app.api.call('read', url, {}, {
                 success: _.bind(function (response) {
-
-                    console.log('response : ', response);
-
                     self.toRecepientsList = [];
                     self.contactsList = [];
 
@@ -164,7 +159,6 @@
                         parent_id: accountsList[0],
                         parent_name: self.accountsIdNameList[accountsList[0]],
                     }, _.bind(function (context, model) {
-                        console.log('Return back model : ', model);
                         if (model) {
                             var controllerContext = app.controller.context;
                             var controllerContextModule = controllerContext.get('module');
