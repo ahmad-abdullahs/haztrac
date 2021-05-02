@@ -250,6 +250,9 @@ array (
               ),
               16 => 
               array (
+                'name' => 'rli_galon_total',
+                'comment' => 'Rollup of all RevenueLineItems linked to the manifest where product_uom_c is each galon (ea Gal)',
+                'label' => 'LBL_RLI_GALON_TOTAL',
               ),
             ),
           ),

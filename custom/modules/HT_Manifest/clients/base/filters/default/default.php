@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-22 10:36:23
+// created: 2021-04-22 14:16:48
 $viewdefs['HT_Manifest']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -36,6 +36,12 @@ $viewdefs['HT_Manifest']['base']['filter']['default'] = array (
     array (
     ),
     'accounts_ht_manifest_1_name' => 
+    array (
+    ),
+    'complete_date_c' => 
+    array (
+    ),
+    'accounts_ht_manifest_2_name' => 
     array (
     ),
     'start_date_c' => 
