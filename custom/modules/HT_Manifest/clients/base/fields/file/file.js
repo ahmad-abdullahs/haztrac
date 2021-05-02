@@ -31,12 +31,16 @@
         if (!_.isEqual(file_mime_type.indexOf('pdf'), -1) ||
                 !_.isEqual(file_ext.indexOf('pdf'), -1) ||
                 !_.isEqual(filename.indexOf('.pdf'), -1)) {
+            var url = this.getFullViewUrl(this.model);
+            // 1
+//            debugger;
             mimeType = 'application/pdf';
             return {
                 name: value,
                 mimeType: mimeType,
                 docType: docType,
-                url: '#bwc/index.php?entryPoint=openpdf&id=' + this.model.get('id') + '&module=' + this.module,
+                url: url,
+//                url: '#bwc/index.php?entryPoint=openpdf&id=' + this.model.get('id') + '&module=' + this.module,
             };
         } else {
             return {
@@ -51,5 +55,17 @@
                 })
             };
         }
+    },
+
+    getFullViewUrl: function (model) {
+        var beanID = model.get('id');
+        var flag = (model.get('is_locked')) ? 1 : 0;
+        var today = moment();
+        var dateOfExpiry = today.add(1, 'day').utc().format();
+
+        return app.config.signDocURL.url + 'annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf' +
+                '&token=' + window.btoa('&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') +
+                        '&document_id=' + beanID + '&hostUrl=' + app.config.signDocURL.url + '&is_locked=' + flag +
+                        '&dateOfExpiry=' + dateOfExpiry);
     },
 })

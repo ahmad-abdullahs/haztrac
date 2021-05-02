@@ -2097,10 +2097,12 @@ Annotation.prototype = {
         // We will check if document is locked then 
         // We return readOnly true for each annotation.
         if (parent.SUGAR) {
-            var ele = parent.document.getElementById('signDocframe');
-            if (!ele) {
-                ele = parent.document.getElementById('signDocframeRecordPreview');
-            }
+//            console.log('---> annotation.js : ', window.frameElement.id);
+            var ele = parent.document.getElementById(window.frameElement.id);
+//            var ele = parent.document.getElementById('signDocframe');
+//            if (!ele) {
+//                ele = parent.document.getElementById('signDocframeRecordPreview');
+//            }
 
             if (ele.getAttribute('is_locked') == "1") {
                 return true;

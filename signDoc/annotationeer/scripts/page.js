@@ -108,10 +108,12 @@ Page.prototype.init = function (canvasIdName) {
         this.canvas.addEventListener('touchstart', function (e) {
             // ahmad
             if (parent.SUGAR) {
-                var ele = parent.document.getElementById('signDocframe');
-                if (!ele) {
-                    ele = parent.document.getElementById('signDocframeRecordPreview');
-                }
+//                console.log('---> page.js : ', window.frameElement.id);
+                var ele = parent.document.getElementById(window.frameElement.id);
+//                var ele = parent.document.getElementById('signDocframe');
+//                if (!ele) {
+//                    ele = parent.document.getElementById('signDocframeRecordPreview');
+//                }
 
                 if (ele.getAttribute('is_locked') == "1") {
                     return true;
@@ -145,10 +147,12 @@ Page.prototype.init = function (canvasIdName) {
     this.canvas.onmousedown = function (e) {
         // ahmad
         if (parent.SUGAR) {
-            var ele = parent.document.getElementById('signDocframe');
-            if (!ele) {
-                ele = parent.document.getElementById('signDocframeRecordPreview');
-            }
+//            console.log('---> page.js : ', window.frameElement.id);
+            var ele = parent.document.getElementById(window.frameElement.id);
+//            var ele = parent.document.getElementById('signDocframe');
+//            if (!ele) {
+//                ele = parent.document.getElementById('signDocframeRecordPreview');
+//            }
 
             if (ele.getAttribute('is_locked') == "1") {
                 return true;
@@ -2063,10 +2067,12 @@ Page.prototype.showHideTooltip = function (show, event) {
 
     //ahmad
     if (parent.SUGAR) {
-        var ele = parent.document.getElementById('signDocframe');
-        if (!ele) {
-            ele = parent.document.getElementById('signDocframeRecordPreview');
-        }
+//        console.log('---> page.js : ', window.frameElement.id);
+        var ele = parent.document.getElementById(window.frameElement.id);
+//        var ele = parent.document.getElementById('signDocframe');
+//        if (!ele) {
+//            ele = parent.document.getElementById('signDocframeRecordPreview');
+//        }
 
         if (ele.getAttribute('is_locked') == "1") {
             return true;

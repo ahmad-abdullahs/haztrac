@@ -25,9 +25,19 @@ class CustomAttachmentsRelateRecordApi extends RelateRecordApi {
                 'shortHelp' => 'Create a single record and relate it to this module',
                 'longHelp' => 'include/api/help/module_record_link_link_name_post_help.html',
             ),
-            'lockOrUnlockDoc' => array(
+            'lockOrUnlockHT_ManifestDoc' => array(
                 'reqType' => 'POST',
                 'path' => array('HT_Manifest', '?', 'lockOrUnlockDoc'),
+                'pathVars' => array('module', 'recordId', 'lockOrUnlockDoc'),
+                'method' => 'lockOrUnlockDoc',
+                'exceptions' => array(
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                ),
+            ),
+            'lockOrUnlockLR_Lab_ReportsDoc' => array(
+                'reqType' => 'POST',
+                'path' => array('LR_Lab_Reports', '?', 'lockOrUnlockDoc'),
                 'pathVars' => array('module', 'recordId', 'lockOrUnlockDoc'),
                 'method' => 'lockOrUnlockDoc',
                 'exceptions' => array(

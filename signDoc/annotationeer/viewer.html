@@ -131,10 +131,12 @@
         }
         
         if (parent.SUGAR) {
-            var ele = parent.document.getElementById('signDocframe');
-            if(!ele){
-                ele = parent.document.getElementById('signDocframeRecordPreview');
-            }
+//            console.log('---> viewer.html : ', window.frameElement.id);
+            var ele = parent.document.getElementById(window.frameElement.id);
+//            var ele = parent.document.getElementById('signDocframe');
+//            if(!ele){
+//                ele = parent.document.getElementById('signDocframeRecordPreview');
+//            }
             
             if (ele.getAttribute('is_locked') == "1") {
                 $('.toolbarButton').each(function(){

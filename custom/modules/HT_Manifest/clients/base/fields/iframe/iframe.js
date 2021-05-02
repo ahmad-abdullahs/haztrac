@@ -42,9 +42,13 @@
             // Only add these values to hbs if its not the record view, because 
             // if we add these attributes in the record view then in the signDoc/annotationeer/viewer.html
             // it will start pointing wrong element at parent.document.getElementById
-            if (this.view.name != 'record') {
-                this.document_id = model.get('document_id');
+            this.document_id = model.get('document_id');
+            if (this.view.name == 'preview') {
+                this.elementId = 'signDocframeSubpanelPreview';
+            } else if (this.view.name != 'record') {
                 this.elementId = 'signDocframeRecordPreview';
+            } else {
+                this.elementId = 'signDocframeRecord';
             }
         }
         return this._super('format', [value]);

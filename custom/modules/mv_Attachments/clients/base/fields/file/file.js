@@ -29,6 +29,8 @@
         if (!_.isEqual(file_mime_type.indexOf('pdf'), -1) ||
                 !_.isEqual(file_ext.indexOf('pdf'), -1) ||
                 !_.isEqual(filename.indexOf('.pdf'), -1)) {
+            // 3
+//            debugger;
             mimeType = 'application/pdf';
             return {
                 name: value,

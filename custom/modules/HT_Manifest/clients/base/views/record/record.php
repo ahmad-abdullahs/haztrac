@@ -171,7 +171,7 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
+            'newTab' => true,
             'panelDefault' => 'expanded',
             'fields' => 
             array (

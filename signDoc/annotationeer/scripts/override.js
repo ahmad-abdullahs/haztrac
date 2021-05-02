@@ -77,10 +77,12 @@ Annotationeer.downloadAnnotations = function (reload) {
     // ahmad
     // -----START-----
     if (parent.SUGAR) {
-        var ele = parent.document.getElementById('signDocframe');
-        if (!ele) {
-            ele = parent.document.getElementById('signDocframeRecordPreview');
-        }
+//        console.log('---> override.js : ', window.frameElement.id);
+        var ele = parent.document.getElementById(window.frameElement.id);
+//        var ele = parent.document.getElementById('signDocframe');
+//        if (!ele) {
+//            ele = parent.document.getElementById('signDocframeRecordPreview');
+//        }
 
         var annotationURL = Url.restUrl + 'annotations/' + Annotationeer.currentDocument.documentId +
                 '?sugar_user_id=' + parent.SUGAR.App.user.get('id') +
@@ -322,10 +324,12 @@ Annotationeer.saveAnnotation = function (annotation, text, doNotTriggerEvent) {
     // ahmad
     // -----START-----
     if (parent.SUGAR) {
-        var ele = parent.document.getElementById('signDocframe');
-        if (!ele) {
-            ele = parent.document.getElementById('signDocframeRecordPreview');
-        }
+//        console.log('---> override.js : ', window.frameElement.id);
+        var ele = parent.document.getElementById(window.frameElement.id);
+//        var ele = parent.document.getElementById('signDocframe');
+//        if (!ele) {
+//            ele = parent.document.getElementById('signDocframeRecordPreview');
+//        }
 
         annotation.document_id = ele.getAttribute('document_id');
     } else {
@@ -1075,10 +1079,12 @@ Annotationeer.deleteAnnotation = function (annotation, fromAngular, doNotTrigger
         // ahmad
         // -----START-----
         if (parent.SUGAR) {
-            var ele = parent.document.getElementById('signDocframe');
-            if (!ele) {
-                ele = parent.document.getElementById('signDocframeRecordPreview');
-            }
+//            console.log('---> override.js : ', window.frameElement.id);
+            var ele = parent.document.getElementById(window.frameElement.id);
+//            var ele = parent.document.getElementById('signDocframe');
+//            if (!ele) {
+//                ele = parent.document.getElementById('signDocframeRecordPreview');
+//            }
 
             annotation.document_id = ele.getAttribute('document_id');
         } else {
@@ -1176,10 +1182,12 @@ PageManager.removeAllAnnotations = function (button) {
     if (annotations.length > 0) {
         var _document_id = '';
         if (parent.SUGAR) {
-            var ele = parent.document.getElementById('signDocframe');
-            if (!ele) {
-                ele = parent.document.getElementById('signDocframeRecordPreview');
-            }
+//            console.log('---> override.js : ', window.frameElement.id);
+            var ele = parent.document.getElementById(window.frameElement.id);
+//            var ele = parent.document.getElementById('signDocframe');
+//            if (!ele) {
+//                ele = parent.document.getElementById('signDocframeRecordPreview');
+//            }
             _document_id = ele.getAttribute('document_id');
         } else {
             _document_id = document_id;

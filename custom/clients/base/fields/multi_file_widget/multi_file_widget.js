@@ -54,9 +54,19 @@
         app.events.trigger('loadTheFileInDashlet', {
             id: $(ele.currentTarget).attr('id'),
             file_ext: $(ele.currentTarget).attr('file_ext'),
-            hrefLink: $(ele.currentTarget).siblings('span').find('a').attr('href'),
+            hrefLink: this.getFullViewUrl($(ele.currentTarget).attr('id'), 1),
+//            hrefLink: $(ele.currentTarget).siblings('span').find('a').attr('href'),
             module: 'mv_Attachments',
         });
+    },
+
+    getFullViewUrl: function (beanID, flag) {
+        var today = moment();
+        var dateOfExpiry = today.add(1, 'day').utc().format();
+
+        return app.config.signDocURL.url + 'annotationeer/viewer.html?file=../../pdfs/' + beanID + '.pdf' +
+                '&token=' + window.btoa('&sugar_user_id=' + app.user.get('id') + '&full_name=' + app.user.get('full_name') +
+                        '&document_id=' + beanID + '&hostUrl=' + app.config.signDocURL.url + '&is_locked=1&dateOfExpiry=' + dateOfExpiry);
     },
 
     init: function () {
@@ -467,14 +477,15 @@
 
         if ((!_.isEqual(file_mime_type.indexOf('pdf'), -1) ||
                 !_.isEqual(file_ext.indexOf('pdf'), -1) ||
-                !_.isEqual(filename.indexOf('.pdf'), -1))
-                ) {
+                !_.isEqual(filename.indexOf('.pdf'), -1))) {
+            var url = this.getFullViewUrl(model.get('id'), 1);
             mimeType = 'application/pdf';
             return {
                 name: value,
                 mimeType: mimeType,
                 docType: docType,
-                url: '#bwc/index.php?entryPoint=openpdf&id=' + model.get('id'),
+                url: url,
+//                url: '#bwc/index.php?entryPoint=openpdf&id=' + model.get('id'),
             };
         } else {
             return {

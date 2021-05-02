@@ -16,6 +16,7 @@
 ({
     extendsFrom: 'ListHeaderpaneView',
     toRecepientsList: [],
+    ccRecepientsList: [],
     contactsList: [],
     accountsIdNameList: {},
     /**
@@ -56,7 +57,7 @@
                             if (model.get('popOutFullViewLink')) {
                                 documentLinksList.push({
                                     name: model.get('name'),
-                                    manifest_number: model.get('manifest_number'),
+                                    manifest_no_actual_c: model.get('manifest_no_actual_c'),
                                     link: model.get('popOutFullViewLink'),
                                     accounts_ht_manifest_1accounts_ida: model.get('accounts_ht_manifest_1accounts_ida'),
                                     accounts_ht_manifest_1_name: model.get('accounts_ht_manifest_1_name'),
@@ -119,7 +120,32 @@
             app.api.call('read', url, {}, {
                 success: _.bind(function (response) {
                     self.toRecepientsList = [];
+                    self.ccRecepientsList = [];
                     self.contactsList = [];
+
+                    if (!_.isEmpty(app.user.get('email'))) {
+                        _.each(app.user.get('email'), function (emailObj) {
+                            var ccBean = app.data.createBean('EmailParticipants', {
+                                _link: 'cc',
+                                email_address_id: emailObj.email_address_id,
+                                email_address: emailObj.email_address
+                            });
+
+                            ccBean.set({
+                                parent: {
+                                    _acl: {},
+                                    type: 'Users',
+                                    id: app.user.get('id'),
+                                    name: app.user.get('full_name') || ''
+                                },
+                                parent_type: 'Users',
+                                parent_id: app.user.get('id'),
+                                parent_name: app.user.get('full_name') || ''
+                            });
+
+                            self.ccRecepientsList.push(ccBean);
+                        });
+                    }
 
                     _.each(response.records, function (record) {
                         if (!_.isEmpty(record.email)) {
@@ -155,6 +181,7 @@
                         // body
                         description_html: self.getEmailHTML(documentLinksList),
                         to: self.toRecepientsList,
+                        cc: self.ccRecepientsList,
                         parent_type: 'Accounts',
                         parent_id: accountsList[0],
                         parent_name: self.accountsIdNameList[accountsList[0]],
@@ -209,7 +236,7 @@
 <p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
 <ol style="background: #f2f2f2;">';
         _.each(documentLinksList, function (item) {
-            innerContent += '<li><a href="' + item.link + '" data-mce-href="' + item.link + '">' + item.manifest_number + '</a></li>';
+            innerContent += '<li><a href="' + item.link + '" data-mce-href="' + item.link + '">' + item.manifest_no_actual_c + '</a></li>';
         }, this);
 
         body += innerContent;
