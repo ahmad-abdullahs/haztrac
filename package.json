@@ -54,7 +54,7 @@
     "strip-json-comments": "^2.0.1",
     "stylelint-config-standard": "^17.0.0",
     "typescript": "2.6.1",
-    "underscore": "1.9.1",
+    "underscore": "1.12.1",
     "underscore.string": "2.3.3",
     "yargs": "^11.0.0",
     "zip-folder": "1.0.0"
