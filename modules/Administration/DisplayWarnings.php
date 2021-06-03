@@ -170,12 +170,12 @@ if($smtp_error) {
         $_SESSION['license_seats_needed'] =  $licenseInfo['active_users'] - $licenseInfo['license_users'];
     }
 
-    if ($_SESSION['license_seats_needed'] > 0) {
-        $licenseInfo = $licenseInfo ?? getLicenseUsers();
-        displayAdminError(translate('WARN_LICENSE_SEATS', 'Administration')
-            . $licenseInfo['active_users'] . translate('WARN_LICENSE_SEATS2', 'Administration')
-            .  $licenseInfo['license_users'] . translate('WARN_LICENSE_SEATS3', 'Administration'));
-    }
+//    if ($_SESSION['license_seats_needed'] > 0) {
+//        $licenseInfo = $licenseInfo ?? getLicenseUsers();
+//        displayAdminError(translate('WARN_LICENSE_SEATS', 'Administration')
+//            . $licenseInfo['active_users'] . translate('WARN_LICENSE_SEATS2', 'Administration')
+//            .  $licenseInfo['license_users'] . translate('WARN_LICENSE_SEATS3', 'Administration'));
+//    }
         //END REQUIRED CODE DO NOT MODIFY
         if(empty($GLOBALS['sugar_config']['admin_access_control'])){
 			if (isset($_SESSION['available_version'])){

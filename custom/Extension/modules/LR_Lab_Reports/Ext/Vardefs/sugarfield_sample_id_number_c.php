@@ -8,5 +8,6 @@ $dictionary['LR_Lab_Reports']['fields']['sample_id_number_c']['full_text_search'
 );
 $dictionary['LR_Lab_Reports']['fields']['sample_id_number_c']['enforced']='';
 $dictionary['LR_Lab_Reports']['fields']['sample_id_number_c']['dependency']='';
+$dictionary['LR_Lab_Reports']['fields']['sample_id_number_c']['readonly']=true;
 
  ?>

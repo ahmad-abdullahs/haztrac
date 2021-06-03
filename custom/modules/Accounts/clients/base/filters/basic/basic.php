@@ -15,9 +15,14 @@ if (!defined('sugarEntry') || !sugarEntry)
 $module = 'Accounts';
 $viewdefs[$module]['base']['filter']['basic'] = array(
     'create' => true,
+    // Seems like the permission issue but the acual problem was
+    // due to team_name and parent_name field in the quicksearch filter
+    // So we have excluded these fields.
+    // Need to find out the reason by looking at the query.
     'quicksearch_field' => array_merge(array(
             ), array_diff(getViewColumns($module, 'listview'), array(
-        "team_name"
+        "team_name",
+        "parent_name",
     ))),
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,
