@@ -28,4 +28,14 @@ class HT_ManifestRelationshipHooks {
         }
     }
 
+    function before_save($bean, $event, $arguments) {
+        if (!empty($bean->link_lr_lab_report_id)) {
+            // Add relationship
+            if ($bean->load_relationship('ht_manifest_lr_lab_reports_1')) {
+                $bean->ht_manifest_lr_lab_reports_1->add($bean->link_lr_lab_report_id);
+            }
+        }
+        $bean->link_lr_lab_report_id = '';
+    }
+
 }
