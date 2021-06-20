@@ -352,7 +352,7 @@
 
     updateRowIndexing: function (fieldNames) {
         _.each(this.$('div[name*=transporter_row_index]'), function (ele, index) {
-            $(ele).html(index + '.');
+            $(ele).html((index + 1) + '.');
         });
     },
 
