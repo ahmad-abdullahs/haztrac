@@ -1,0 +1,28 @@
+{{#each value}}
+<div>
+    <span class="span6">
+        {{#eq @index 0}}
+            <div class="record-label" style="margin-left: 0px; margin-bottom: 5px;">
+                {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
+            </div>
+        {{/eq}}
+        <span class="normal index">
+            <span class="detail" style="padding-left: 0px; margin-bottom: 0px;">
+                {{name}}
+            </span>
+        </span>
+    </span>
+    <span class="span6">
+        {{#eq @index 0}}
+            <div class="record-label" style="margin-bottom: 5px;">
+                {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
+            </div>
+        {{/eq}}
+        <span class="normal index">
+            <span class="detail" style="margin-bottom: 0px;">
+                {{#if transfer_date}}{{formatDate transfer_date ../../dateOptions}}{{/if}}
+            </span>
+        </span>
+    </span>
+</div>
+{{/each}}

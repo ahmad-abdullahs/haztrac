@@ -24,6 +24,7 @@
      */
     initialize: function (options) {
         this._super('initialize', [options]);
+        app.events.on('showMafiestTotalVolume', this.showMafiestTotalVolume, this);
     },
 
     bindDataChange: function () {
@@ -33,6 +34,38 @@
         }, this);
 
         this._super('bindDataChange');
+    },
+
+    showMafiestTotalVolume: function () {
+        var rliGalonTotal = 0.00;
+        var rliGalonTotalField = this.getField('rli_galon_total_title');
+
+        if (rliGalonTotalField) {
+            var filterpanel = this.layout.getComponent('filterpanel');
+
+            if (filterpanel) {
+                var list = filterpanel.getComponent('list');
+                if (list) {
+                    var recordlist = list.getComponent('recordlist');
+                    if (recordlist) {
+                        if (recordlist.massCollection.length == 0) {
+                            // Clear the display
+                            rliGalonTotalField.def.default_value = '';
+                            rliGalonTotalField.render();
+                        } else {
+                            // Show the mafiest total volume
+                            _.each(recordlist.massCollection.models, function (model) {
+                                rliGalonTotal += model.get('rli_galon_total');
+                            }, this);
+
+                            rliGalonTotal = app.utils.formatNumber(rliGalonTotal, 0, 2);
+                            rliGalonTotalField.def.default_value = 'Selected Total Volume : ' + rliGalonTotal;
+                            rliGalonTotalField.render();
+                        }
+                    }
+                }
+            }
+        }
     },
 
     getManifestDocumentLinks: function () {

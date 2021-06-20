@@ -30,9 +30,9 @@
             var transporter_carrier_c = JSON.parse(this.context.get('immediateParentModel').get('transporter_carrier_c'));
             _.each(transporter_carrier_c, function (val, key) {
                 transporter.push({
-                    id: val.id,
-                    name: val.name,
-                    transfer_date: '',
+                    transporter_name_id: val.id,
+                    transporter_name: val.name,
+                    transporter_transfer_date: '',
                 });
             });
             this.model.set('transporter', transporter);

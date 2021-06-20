@@ -1,0 +1,53 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{#eq fieldAction 'edit'}}
+    <tr class="control-group transporter_row clearfix transporter-{{fieldAction}} sortable ui-sortable-handle" line_number="" data-uid={{uid}}>
+        <td class="row-fluid" data-uid={{uid}}>
+{{/eq}}
+
+{{#eq fieldAction 'detail'}}
+    <span class="span12" style="margin-left: auto; background: whitesmoke;">
+{{/eq}}
+        <div>
+            <div class="span1">
+                {{#eq fieldAction 'edit'}}
+                    <div name="transporter_row_index" id="transporter_row_index" class="ellipsis_inline" data-placement="bottom" data-original-title="1.">1.</div>
+                {{/eq}} 
+                {{#eq fieldAction 'detail'}} 
+                    <div class="ellipsis_inline" data-placement="bottom" data-original-title="{{rowIndex}}.">{{rowIndex}}.</div>
+                {{/eq}}
+            </div>
+
+            {{#each modelFields}}
+                <div class="span{{span}} {{css_class}} record-cell" {{#if ../isPreview}}style="min-height: 20px;"{{/if}}>
+                    {{field ../view model=../model template=../fieldAction}}
+                </div>
+            {{/each}}
+
+            {{#eq fieldAction "edit"}}
+                <div class="btn-toolbar multi-btn prevent-mousedown">
+                    <div class="btn-group {{#if isNew}}{{else}}prevent-mousedown{{/if}}" style="margin-top:0px;">
+                       <a href="javascript:void(0)" data-uid="{{uid}}" class="btn {{#if isNew}}addRecord{{else}}removeRecord{{/if}} {{#if isNew}}disabled{{/if}}" rel="tooltip" title="{{#if isNew}}{{str "LBL_ADD"}}{{else}}{{str "LBL_REMOVE"}}{{/if}}"><i class="fa fa-{{#if isNew}}plus{{else}}minus{{/if}}"></i></a>
+                    </div>
+                </div>
+            {{/eq}}
+        </div>
+{{#eq fieldAction 'detail'}}
+    </span>
+{{/eq}}
+
+{{#eq fieldAction 'edit'}}
+        </td>
+    </tr>
+{{/eq}}
+

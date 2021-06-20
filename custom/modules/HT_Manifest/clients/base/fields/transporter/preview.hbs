@@ -1,28 +1,54 @@
-{{#each value}}
-<div>
-    <span class="span6">
-        {{#eq @index 0}}
+
+{{#if previewData}}
+    {{#each previewData}}
+        <div>
+            <span class="span6">
+                {{#eq @index 0}}
+                    <div class="record-label" style="margin-left: 0px; margin-bottom: 5px;">
+                        {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
+                    </div>
+                {{/eq}}
+                <span class="normal index">
+                    <span class="detail" style="padding-left: 0px; margin-bottom: 0px;">
+                        <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{this.transporter_name}}">
+                            <a href="#Accounts/{{this.transporter_name_id}}">{{this.transporter_name}}</a>
+                        </div>
+                    </span>
+                </span>
+            </span>
+            <span class="span6">
+                {{#eq @index 0}}
+                    <div class="record-label" style="margin-bottom: 5px;">
+                        {{str 'LBL_TRANSPORTER_TRANSFER_DATE' 'HT_Manifest'}}
+                    </div>
+                {{/eq}}
+                <span class="normal index">
+                    <span class="detail" style="margin-bottom: 0px;">
+                        {{#if transporter_transfer_date}}{{formatDate transporter_transfer_date ../../dateOptions}}{{/if}}
+                    </span>
+                </span>
+            </span>
+        </div>
+    {{/each}}
+{{else}}
+    <div>
+        <span class="span6">
             <div class="record-label" style="margin-left: 0px; margin-bottom: 5px;">
                 {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
             </div>
-        {{/eq}}
-        <span class="normal index">
-            <span class="detail" style="padding-left: 0px; margin-bottom: 0px;">
-                {{name}}
+            <span class="normal index">
+                <span class="detail" style="padding-left: 0px; margin-bottom: 0px;">
+                </span>
             </span>
         </span>
-    </span>
-    <span class="span6">
-        {{#eq @index 0}}
+        <span class="span6">
             <div class="record-label" style="margin-bottom: 5px;">
-                {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
+                {{str 'LBL_TRANSPORTER_TRANSFER_DATE' 'HT_Manifest'}}
             </div>
-        {{/eq}}
-        <span class="normal index">
-            <span class="detail" style="margin-bottom: 0px;">
-                {{#if transfer_date}}{{formatDate transfer_date ../../dateOptions}}{{/if}}
+            <span class="normal index">
+                <span class="detail" style="margin-bottom: 0px;">
+                </span>
             </span>
         </span>
-    </span>
-</div>
-{{/each}}
+    </div>
+{{/if}}

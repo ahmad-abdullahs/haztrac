@@ -73,8 +73,8 @@ class HT_Manifest extends HT_Manifest_sugar {
             if (!empty($this->transporter)) {
                 $insertSQLs = array();
                 foreach ($this->transporter as $transporter) {
-                    $transporterId = $transporter['id'];
-                    $transferDate = $transporter['transfer_date'];
+                    $transporterId = $transporter['transporter_name_id'];
+                    $transferDate = $transporter['transporter_transfer_date'];
 
                     if (!empty($transporterId)) {
                         if (empty($transferDate)) {

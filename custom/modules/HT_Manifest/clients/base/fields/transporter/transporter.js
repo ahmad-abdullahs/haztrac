@@ -1,13 +1,18 @@
 ({
-    extendsFrom: 'RelateField',
+    extendsFrom: 'BaseField',
 
     events: {
-        'click .btn[name=add]': 'addItem',
-        'click .btn[name=remove]': 'removeItem'
+        'click .removeRecord:not(.disabled)': 'deleteRow',
+        'click .addRecord:not(.disabled)': 'addRow',
     },
 
-    dateTag: 'input[data-type=date]',
-    fieldPlaceholder: '',
+    fieldIds: [],
+    previewData: [],
+    modelFields: {},
+    isFirst: true,
+    enablePlusButton: false,
+    addClass: 'addRecord',
+    isPreview: false,
 
     dateOptions: {
         hash: {
@@ -16,15 +21,38 @@
     },
 
     initialize: function (options) {
+        this.previewData = [];
+        this.isPreview = false;
         this._super('initialize', [options]);
-        Handlebars.registerHelper('add', function (leftopp, rightopp) {
-            return Number(leftopp) + Number(rightopp);
-        });
-        this._initPlaceholderAttribute();
+        fawad = this;
+    },
+
+    format: function (value) {
+        this.previewData = JSON.parse(value || "[]");
+        return this._super("format", [value]);
+    },
+
+    getCurrentNewRowUid: function () {
+        // The row with the + icon is the new row.
+        return this.$('.' + this.addClass).data('uid');
+    },
+
+    bindDataChange: function () {
+        this.model.on('change:' + this.name, function () {
+            if (this.action !== 'edit') {
+                this.render();
+            }
+        }, this);
     },
 
     render: function () {
+        console.log('RENDER IS CALLING');
+        // Remove the fields which we have on the view, because everytime it render, It create new fields.
+        this.unsetOldFields();
+        // Empty the fieldIds, we will have new fields as we are going to render it.
+        this.fieldIds = [];
         this._super('render');
+        this.renderFieldsMetaAndValues();
 
         var sortableItems;
         sortableItems = this.$('tbody');
@@ -58,10 +86,13 @@
             }, this);
         }
 
+        this.updateRowIndexing();
     },
+
     _onDragStart: function (evt, ui) {
 //        console.log('_onDragStart : ', this, evt, ui);
     },
+
     _onDragStop: function (evt, ui) {
 //        console.log('_onDragStop : ', this, evt, ui);
 
@@ -69,455 +100,375 @@
         // of that data object in this.value array), extract that object from the index and push it to the new array for
         // re-ordering the rows. 
         // Finally set the value and render the field.
-        var newValue = [];
+//        var newValue = [];
+//        _.each(this.$('tbody > tr.ui-sortable-handle'), function (ele) {
+//            var obj = this.value[$(ele).attr('line_number')];
+//            newValue.push(obj);
+//        }, this);
+//
+//        newValue = JSON.stringify(newValue);
+//        this.model.set(this.name, newValue);
+//        this.render();
 
-        _.each(this.$('tbody > tr.ui-sortable-handle'), function (ele) {
-            var obj = this.value[$(ele).attr('line_number')];
-            newValue.push(obj);
+        var line_number = 1;
+        _.each(this.$('tbody > tr.ui-sortable-handle').find('input[name*=transporter_name__]'), function (ele) {
+            if ($(ele).val() && $(ele).attr('name').split('__')[1]) {
+                this.model.set('transporter_line_number__' + $(ele).attr('name').split('__')[1], line_number, {
+                    silent: true
+                });
+                line_number++;
+            }
         }, this);
-
-        this.model.set(this.name, newValue);
-        this.render();
+        this.updateJSON();
     },
+
     _onGroupDragTriggerOver: function (evt, ui) {
 //        console.log('_onGroupDragTriggerOver : ', this, evt, ui);
     },
+
     _onGroupDragTriggerOut: function (evt, ui) {
 //        console.log('_onGroupDragTriggerOut : ', this, evt, ui);
     },
 
-    _initPlaceholderAttribute: function () {
-        var placeholder = app.date.toDatepickerFormat(this.getUserDateFormat());
-
-        this.fieldPlaceholder = this.def.placeholder && app.lang.get(
-                this.def.placeholder,
-                this.module,
-                {format: placeholder}
-        ) || placeholder;
-
-        return this;
-    },
-
-    getUserDateFormat: function () {
-        return app.user.getPreference('datepref');
-    },
-
-    /**
-     * @inheritdoc
-     */
-    _render: function () {
-        if (this._hasDatePicker) {
-            this.$(this.dateTag).datepicker('hide');
-        }
-
-        this._super('_render');
-
-//        this.$el.parents('[data-type=' + this.name + ']').css('background-color', 'whitesmoke');
-
-        if (this.tplName !== 'edit' && this.tplName !== 'massupdate') {
-            this._hasDatePicker = false;
-            return;
-        }
-
-        var self = this;
-        this.$(this.dateTag).each(function (index, el) {
-            self._setupDatePicker(el);
-        });
-
-        this.$(this.fieldTag).each(function (index, el) {
-            var plugin = $(el).data("select2");
-            // If there is a plugin but no record index, set it
-            if (!_.isUndefined(plugin) && _.isUndefined(plugin.setTransIndex)) {
-                plugin.setTransIndex = function () {
-                    self._currentIndex = $(this).data("index");
-                };
-                plugin.opts.element.on("select2-open", plugin.setTransIndex);
-            }
-        });
-    },
-
-    _onSelect2Change: function (e) {
-        var $el = $(e.target);
-        var plugin = $el.data('select2');
-        var id = e.val;
-        var _index = $(e.target).closest('tr').index();
-
-        if (_.isUndefined(id)) {
-            return;
-        }
-
-        // For multiselect fields, we update the data-rname attributes
-        // so it stays in sync with the id list, and allows us to use
-        // 'setValue' method. The use of 'setValue' method is required
-        // to re-render the field.
-        if (this.def.isMultiSelect) {
-            var dataRname = plugin.opts.element.data('rname');
-            dataRname = dataRname ? dataRname.split(this._separator) : [];
-            var ids = $el.select2('val');
-
-            if (e.added) {
-                dataRname.push(e.added.text);
-            } else if (e.removed) {
-                dataRname = _.without(dataRname, e.removed.text);
-            } else {
-                return;
-            }
-            var models = _.map(ids, function (id, index) {
-                return {id: id, value: dataRname[index]};
-            });
-
-            this.setValue(models);
-            return;
-        }
-
-        var value = (id) ? plugin.selection.find('span').text() : $el.data('rname');
-        var collection = plugin.context;
-        var attributes = {};
-        if (collection && !_.isEmpty(id)) {
-            // if we have search results use that to set new values
-            var model = collection.get(id);
-            attributes.id = model.id;
-            attributes.value = model.get(this.getRelatedModuleField());
-            _.each(model.attributes, function (value, field) {
-                if (app.acl.hasAccessToModel('view', model, field)) {
-                    attributes[field] = attributes[field] || model.get(field);
-                }
-            });
-        } else if (e.currentTarget.value && value) {
-            // if we have previous values keep them
-            attributes.id = value;
-            attributes.value = e.currentTarget.value;
-        } else {
-            // default to empty
-            attributes.id = '';
-            attributes.value = '';
-        }
-
-        // _index is added to fix the bug, In edit mode when user hit the cross x icon on the relate field
-        // despite of clearing the respective field, it clears the 0th index of field which was a bug
-        // It is fixed through getting the index of div in the span.
-        // <span>
-        //      <div>Relate Field 1</div>
-        //      <div>Relate Field 2</div>
-        //      <div>Relate Field 3</div>
-        // </span>
-        this.setValue(attributes, _index);
-    },
-
-    /**
-     * Called to update value when a selection is made from options view dialog
-     * @param model New value for teamset
-     */
-    setValue: function (model, _index) {
-        if (!model) {
-            return;
-        }
-
-        var index = this._currentIndex, record = this.value;
-        if (!_.isUndefined(_index) && !_.isNull(_index)) {
-            index = _index;
-        }
-
-        record[index || 0].id = model.id;
-        record[index || 0].name = model.value;
-
-        this._updateAndTriggerChange(record);
-    },
-
-    /**
-     * Forcing change event on value update since backbone isn't picking up on changes within an object within the array.
-     * @param value New value for teamset field
-     * @private
-     */
-    _updateAndTriggerChange: function (value) {
-        // update dates in the value
-        var self = this;
-        this.$(this.dateTag).each(function (index, el) {
-            var dateVal = app.date(
-                    self.$(el).val(),
-                    app.date.convertFormat(self.getUserDateFormat()),
-                    true
-                    );
-
-            if (!_.isUndefined(value[index])) {
-                if (dateVal.isValid()) {
-                    value[index]['transfer_date'] = dateVal.formatServer(true);
-                } else {
-                    value[index]['transfer_date'] = '';
-                }
-            }
-        });
-
-        this.model.unset(this.name, {silent: true}).set(this.name, value);
-        this.render();
-    },
-
-    /**
-     * Return user date format.
-     *
-     * @return {String} User date format.
-     */
-    getUserDateFormat: function () {
-        return app.user.getPreference('datepref');
-    },
-
-    /**
-     * Patches our `dom_cal_*` metadata for use with date picker plugin since
-     * they're very similar.
-     *
-     * @private
-     */
-    _patchPickerMeta: function () {
-        var pickerMap = [], pickerMapKey, calMapIndex, mapLen, domCalKey,
-                calProp, appListStrings, calendarPropsMap, i, filterIterator;
-
-        appListStrings = app.metadata.getStrings('app_list_strings');
-
-        filterIterator = function (v, k, l) {
-            return v[1] !== "";
-        };
-
-        // Note that ordering here is used in following for loop
-        calendarPropsMap = ['dom_cal_day_long', 'dom_cal_day_short', 'dom_cal_day_min', 'dom_cal_month_long', 'dom_cal_month_short'];
-
-        for (calMapIndex = 0, mapLen = calendarPropsMap.length; calMapIndex < mapLen; calMapIndex++) {
-
-            domCalKey = calendarPropsMap[calMapIndex];
-            calProp = appListStrings[domCalKey];
-
-            // Patches the metadata to work w/datepicker; initially, "calProp" will look like:
-            // {0: "", 1: "Sunday", 2: "Monday", 3: "Tuesday", 4: "Wednesday", 5: "Thursday", 6: "Friday", 7: "Saturday"}
-            // But we need:
-            // ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-            if (!_.isUndefined(calProp) && !_.isNull(calProp)) {
-                // Reject the first 0: "" element and then map out the new language tuple
-                // so it's back to an array of strings
-                calProp = _.filter(calProp, filterIterator).map(function (prop) {
-                    return prop[1];
-                });
-                //e.g. pushed the Sun in front to end (as required by datepicker)
-                calProp.push(calProp);
-            }
-            switch (calMapIndex) {
-                case 0:
-                    pickerMapKey = 'day';
-                    break;
-                case 1:
-                    pickerMapKey = 'daysShort';
-                    break;
-                case 2:
-                    pickerMapKey = 'daysMin';
-                    break;
-                case 3:
-                    pickerMapKey = 'months';
-                    break;
-                case 4:
-                    pickerMapKey = 'monthsShort';
-                    break;
-            }
-            pickerMap[pickerMapKey] = calProp;
-        }
-        return pickerMap;
-    },
-
-    /**
-     * Set up date picker.
-     *
-     * We rely on the library to confirm that the date picker is only created
-     * once.
-     *
-     * @protected
-     */
-    _setupDatePicker: function (el) {
-        var self = this;
-        var $field = this.$(el),
-                userDateFormat = this.getUserDateFormat(),
-                options = {
-                    format: app.date.toDatepickerFormat(userDateFormat),
-                    languageDictionary: this._patchPickerMeta(),
-                    weekStart: parseInt(app.user.getPreference('first_day_of_week'), 10)
-                };
-
-        var appendToTarget = this._getAppendToTarget();
-        if (appendToTarget) {
-            options['appendTo'] = appendToTarget;
-        }
-
-        $field.datepicker(options).on('changeDate', function (ev) {
-            self.$(this).change();
-        });
-        this._hasDatePicker = true;
-    },
-
-    /**
-     * Retrieve an element against which the date picker should be appended to.
-     *
-     * @return {jQuery/undefined} Element against which the date picker should
-     *   be appended to, `undefined` if none.
-     * @private
-     */
-    _getAppendToTarget: function () {
-        var component = this.closestComponent('main-pane') ||
-                this.closestComponent('drawer') ||
-                this.closestComponent('preview-pane');
-
-        if (component) {
-            return component.$el;
-        }
-
-        return;
-    },
-
-    /**
-     * @inheritdoc
-     */
-    format: function (value) {
-        if (_.isEmpty(value)) {
-            value = [{}];
-        }
-
-        if (_.isArray(value) && !_.isEmpty(value)) {
-            _.each(value, function (record, index, list) {
-                delete record.remove_button;
-                delete record.add_button;
-
-                if (index === list.length - 1) {
-                    record.add_button = true;
-                }
-
-                if (list.length !== 1) {
-                    record.remove_button = true;
-                }
-            });
-        }
-
-        if (this.action !== 'edit' && !this.context.get('create')) {
-            _.each(value, function (eachTransfer, index) {
-                this.buildRoute(this.getSearchModule(), eachTransfer['id'], value, index);
+    unsetOldFields: function () {
+        if (!_.isUndefined(this.fieldIds) || !_.isNull(this.fieldIds)) {
+            _.each(this.fieldIds, function (id) {
+                _.each(this.def.fields, function (field) {
+                    var field_name = field.name + "__" + id;
+                    if (!_.isUndefined(this.model.get(field_name))) {
+                        this.model.unset(field_name, {silent: true});
+                        this.model.off('change:' + field_name);
+                    }
+                }, this);
             }, this);
         }
-
-        return value;
     },
 
-    buildRoute: function (module, id, value, index) {
-        if (_.isUndefined(id)) {
-            return;
+    renderFieldsMetaAndValues: function () {
+        var field = this.model.get(this.name) || "[]";
+        var newRowObj = {};
+        var rowExist = false;
+
+        // Insert row by row.
+        var fieldObj = JSON.parse(field);
+        _.each(fieldObj, function (rowObj, index) {
+            if (!this.isRowEmpty(rowObj)) {
+                rowExist = true;
+                this.insertRow(rowObj, false, (index + 1));
+            }
+        }, this);
+
+        // If no row exist then make the first row as the primary row.
+        if (!rowExist) {
+            this.model.set(this.name, '[]', {silent: true});
+            newRowObj[this.name + '_primary_account'] = "1";
+            var parentCtx = this.context && this.context.parent;
+            if (this.view instanceof app.view.views.BaseCreateView &&
+                    parentCtx.get('module') === 'Accounts' && this.module !== 'Accounts') {
+                newRowObj[this.name + '_name_id'] = parentCtx.get('model').get('id');
+                newRowObj[this.name + '_name'] = parentCtx.get('model').get('name');
+                this.enablePlusButton = true;
+            }
         }
 
-        var oldModule = module;
-        // This is a workaround until bug 61478 is resolved to keep parity with 6.7
-        if (module === 'Users' && this.context.get('module') !== 'Users') {
-            module = 'Employees';
+        if ((this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName))) {
+            this.insertRow(newRowObj, true);
         }
 
-        if (_.isEmpty(module)) {
-            return;
-        }
+        this.renderInnerFields();
 
-        var relatedRecord = this.model.get('ht_manifest_accounts_1');
-        var action = this.viewDefs.route ? this.viewDefs.route.action : 'view';
-
-        if (relatedRecord && app.acl.hasAccess(action, oldModule, {acls: relatedRecord._acl})) {
-            this.href = '#' + app.router.buildRoute(module, id);
-            //FIXME SC-6128 will remove this deprecated block.
-        } else if (!relatedRecord) {
-            value[index]['href'] = '#' + app.router.buildRoute(module, id);
-            value[index]['iconVisibility'] = true;
-        } else {
-            // if no access to module, remove the href
-            value[index]['href'] = undefined;
-            value[index]['iconVisibility'] = false;
+        // If data is already populated in the row at time of new record creation
+        // enable the [+] button for users to add another row.
+        if (this.enablePlusButton && this.fieldIds[0]) {
+            this.$('.' + this.addClass + '[data-uid=' + this.fieldIds[0] + ']').removeClass('disabled');
+//            this.model.set(this.name + '_name_id__' + this.fieldIds[0], parentCtx.get('model').get('id'));
+//            this.model.set(this.name + '_name__' + this.fieldIds[0], parentCtx.get('model').get('name'));
+            this.updateJSON();
         }
     },
 
-    /**
-     * @inheritdoc
-     */
-    getSearchModule: function () {
-        return 'Accounts';
-    },
-
-    /**
-     * Adds a transporter to the list
-     */
-    addItem: _.debounce(function (evt) {
-        var index = $(evt.currentTarget).data('index');
-        //Only allow adding a Team when ones been selected (SP-534)
-        if (!index || this.value[index].id) {
-            this.value.push({});
-            this._currentIndex++;
-            this._updateAndTriggerChange(this.value);
-        }
-    }, 0),
-
-    /**
-     * Removes a transporter to the list
-     */
-    removeItem: _.debounce(function (evt) {
-        var index = $(evt.currentTarget).data('index');
-        if (_.isNumber(index)) {
-            // Do not remove last team.
-            if (index === 0 && this.value.length === 1) {
+    isRowEmpty: function (rowObj) {
+        var empty = true;
+        _.each(rowObj, function (value, key) {
+            if (!_.isEmpty(value)) {
+                empty = false;
                 return;
             }
+        });
 
-            if (this._currentIndex === this.value.length - 1) {
-                this._currentIndex--;
+        return empty;
+    },
+
+    insertRow: function (rowObj, isNew, index) {
+        var labelsOnTop = false;
+        if (this.isFirst) {
+            labelsOnTop = true;
+            this.isFirst = false;
+        }
+        var fieldTemplate = this.getRowTemplate(rowObj, isNew, labelsOnTop, index);
+        this.$('.' + this.name + '-to-insert').append(fieldTemplate);
+        return fieldTemplate;
+    },
+
+    getRowTemplate: function (rowObj, isNew, labelsOnTop, index) {
+        var uid = _.uniqueId();
+        if (isNew) {
+            uid = uid + "_new";
+        }
+        var modelFields = [];
+        var template = this.name + '-row';
+        _.each(this.def.fields, function (fieldDef) {
+            var extendedObj = {};
+            if (isNew) {
+                extendedObj.isNew = isNew;
+            }
+            var innerFieldName = fieldDef.name + "__" + uid;
+            extendedObj.name = innerFieldName;
+            fieldDef.fuid = uid;
+            this.model.set(innerFieldName, rowObj[fieldDef.name]);
+            if (this.action == 'detail' && fieldDef.css_class.indexOf('_name') !== -1 && fieldDef.css_class.indexOf('ellipsis_inline') == -1) {
+                fieldDef.css_class = fieldDef.css_class + ' ellipsis_inline';
+            } else if (this.action == 'edit' && fieldDef.css_class.indexOf('_name') !== -1) {
+                fieldDef.css_class = fieldDef.css_class.replace('ellipsis_inline', '');
+            }
+            if (fieldDef.id_name) {
+                extendedObj.id_name = fieldDef.id_name + "__" + uid;
+                this.model.set(extendedObj.id_name, rowObj[fieldDef.id_name]);
+            }
+            if (fieldDef.name == (this.name + "_name") && isNew) {
+                this.model.on('change:' + innerFieldName, this.checkPlusButton, this);
+            } else {
+                if (fieldDef.name == this.name + '_name') {
+                    this.model.on('change:' + innerFieldName, _.bind(this.updateName, this, innerFieldName), this);
+                } else {
+                    this.model.on('change:' + innerFieldName, _.bind(this.updateJSON, this, _.clone(fieldDef)), this);
+                }
             }
 
-            this.value.splice(index, 1);
-            // this._updateAndTriggerChange(this.value);
+            if (fieldDef.default != false) {
+                modelFields.push(_.extend({}, fieldDef, extendedObj));
+            }
+        }, this);
 
-            this.model.unset(this.name, {silent: true}).set(this.name, this.value);
-            this.render();
-        }
-    }, 0),
-
-    /**
-     * @inheritdoc
-     */
-    bindDomChange: function () {
-        var $el = this.$(this.dateTag);
-        if ($el.length) {
-            var self = this;
-            $el.on('change', function () {
-                self._updateAndTriggerChange(self.value);
-            });
-        }
-        this._super('bindDomChange');
-    },
-
-    /**
-     * @inheritdoc
-     */
-    unbindDom: function () {
-        this.$(this.dateTag).off();
-        this._super('unbindDom');
-    },
-
-    /**
-     * @inheritdoc
-     */
-    _dispose: function () {
-        if (this._hasDatePicker) {
-            if (!_.isUndefined(this.$(this.fieldTag).data('datepicker')))
-                $(window).off('resize', this.$(this.fieldTag).data('datepicker').place);
+        var fieldAction = (this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName)) ? "edit" : "detail";
+        if (this.tplName === 'preview') {
+            fieldAction = "preview";
+            this.isPreview = true;
         }
 
-        this._super('_dispose');
+        var modelRowTemplate = app.template.getField(this.type, template, this.module);
+        var fieldTemplate = modelRowTemplate({
+            view: this.view,
+            model: this.model,
+            fieldAction: fieldAction,
+            isNew: isNew,
+            labelsOnTop: labelsOnTop,
+            modelFields: modelFields,
+            uid: uid,
+            isPreview: this.isPreview,
+            rowIndex: index, // for row numbering on the detail view
+        });
+
+        this.fieldIds.push(uid);
+        return fieldTemplate;
     },
 
-    getFilterOptions: function (force) {
-        this._filterOptions = new app.utils.FilterOptions()
-                .config({
-                    'initial_filter': 'filterByTransporterTag',
-                    'initial_filter_label': 'LBL_FILTER_BY_TRANSPORTER_TAG',
-                    'filter_populate': {
-                        'tag': ['Transporter'],
+    updateName: function (innerFieldName, model) {
+        var value = model.get(innerFieldName) || '';
+        var uid = (innerFieldName.split('__'))[1];
+        if (uid) {
+            if (_.isEmpty(value)) {
+                var fieldsToCheck = ['_name__', '_name_id__'];
+                var keepRow = false;
+                _.each(fieldsToCheck, function (field) {
+                    var val = model.get(this.name + field + uid) || '';
+                    if (!_.isEmpty(val)) {
+                        keepRow = true;
                     }
-                })
-                .format();
-        return this._filterOptions;
+                }, this);
+                if (keepRow) {
+                    this.updateJSON();
+                } else {
+                    this.deleteRowFromUid(uid);
+                }
+            } else {
+                this.updateJSON();
+            }
+        }
+    },
+
+    checkPlusButton: function (model, value) {
+        var changedFields = _.keys(model.changed);
+        var obj = this.parseFieldNames(changedFields);
+        var nruid = this.getCurrentNewRowUid();
+        if (value) {
+            if (obj.isNew) {
+                this.$('.' + this.addClass + '[data-uid=' + obj.id + ']').removeClass('disabled');
+            }
+        } else {
+            this.$('.' + this.addClass + '[data-uid=' + obj.id + ']').addClass('disabled');
+        }
+        if (obj.id == nruid && value) {
+            this.addRowFromUid(obj.id);
+        }
+        this.updateJSON(model, value);
+    },
+
+    updateJSON: function (fieldMeta, model, value) {
+        var jsonField = [];
+        var nruid = this.getCurrentNewRowUid();
+        _.each(this.fieldIds, function (uid, key) {
+            var obj = {};
+            var isEmpty = false;
+            _.each(this.def.fields, function (fieldDef, _key) {
+                var fieldName = fieldDef.name + "__" + uid;
+
+                if (fieldDef.short_name == 'transporter_line_number') {
+                    // To keep the line number ordering...
+                    obj[fieldDef.name] = this.model.get(fieldName) || (key + 1);
+                } else {
+                    obj[fieldDef.name] = this.model.get(fieldName) || "";
+                }
+
+                if (fieldDef.id_name) {
+                    var fname = fieldDef.id_name + "__" + uid;
+                    var val = this.model.get(fname) || "";
+                    if (_.isEmpty(val)) {
+                        isEmpty = true;
+                    }
+                    obj[fieldDef.id_name] = val;
+                }
+            }, this);
+            if (uid != nruid || this.enablePlusButton) {
+                jsonField.push(obj);
+            }
+        }, this);
+
+        console.log('jsonField before : ', jsonField);
+
+        jsonField = _.sortBy(jsonField, 'transporter_line_number');
+
+        console.log('jsonField after : ', jsonField);
+
+        this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
+        this.previewData = jsonField;
+
+        this.updateRowIndexing();
+    },
+
+    updateRowIndexing: function (fieldNames) {
+        _.each(this.$('div[name*=transporter_row_index]'), function (ele, index) {
+            console.log(ele, index);
+            $(ele).html(index + '.');
+        });
+    },
+
+    parseFieldNames: function (fieldNames) {
+        var retObj = {};
+        retObj.fields = [];
+        retObj.isNew = false;
+        _.each(fieldNames, function (name) {
+            if (name.indexOf("__") !== -1) {
+                var parts = name.split("__");
+                var secPart = parts.length > 1 ? parts[1].split("_") : parts[0].split("_");
+                var thrdPart = secPart[1] || false;
+                if (thrdPart) {
+                    retObj.isNew = true;
+                }
+                retObj.fields.push(parts[0]);
+                retObj.id = parts[1];
+            }
+        }, this);
+        return retObj;
+    },
+
+    renderInnerFields: function () {
+        var self = this;
+        self.modelFields = {};
+        this.$('span[sfuuid]').each(function () {
+            var sfId = $(this).attr('sfuuid');
+            try {
+                var fieldToRender = self.view.fields[sfId];
+                // Added for preview eye ball icon
+                fieldToRender.iconVisibility = true;
+                // This piece of code is added to avoid the autopopulation of Account field 
+                // when the contact is created on top of any Account record, it starts auto populating the 
+                // Account id in every account field on [+] button click
+                if (self.view instanceof app.view.views.BaseCreateView) {
+                    fieldToRender.noAutoPopulate = true;
+                }
+
+                if (self.tplName != "preview") {
+                    self.view.editableFields.push(fieldToRender);
+                }
+
+                self.view._renderField(fieldToRender);
+                self.modelFields[sfId] = fieldToRender;
+            } catch (e) {
+            }
+        });
+    },
+
+    deleteRow: function (evt) {
+        var el = evt.currentTarget;
+        var uid = $(el).data('uid');
+        this.deleteRowFromUid(uid);
+    },
+
+    deleteRowFromUid: function (uid) {
+        this.removeFieldsFromDOM(uid);
+        this.unbindDataChangesFromFields(uid);
+        this.updateJSON();
+    },
+
+    addRow: function (evt) {
+        var el = evt.currentTarget;
+        var uid = $(el).data('uid');
+        this.addRowFromUid(uid);
+    },
+
+    addRowFromUid: function (uid) {
+        this.insertRow({}, true);
+        this.renderInnerFields();
+        this.changeAddButtonToRemove(uid);
+    },
+
+    changeAddButtonToRemove: function (uid) {
+        this.$('.btn[data-uid=' + uid + ']').removeClass(this.addClass);
+        this.$('.btn[data-uid=' + uid + ']').addClass('removeRecord');
+        this.$('.btn[data-uid=' + uid + '] > i').removeClass('fa-plus');
+        this.$('.btn[data-uid=' + uid + '] > i').addClass('fa-minus');
+    },
+
+    removeFieldsFromDOM: function (uid) {
+        _.each(this.def.fields, function (fieldDef) {
+            var innerFieldName = fieldDef.name + "__" + uid;
+            var field = this.view.getField(innerFieldName);
+            // This check is added because it throws undefined error for default = false field.
+            // Since they have the attribute in model but they are not the actual fields.
+            if (field) {
+                delete this.modelFields[field.sfId];
+            }
+        }, this);
+        this.fieldIds = _.without(this.fieldIds, uid);
+        this.fieldIds = _.without(this.fieldIds, uid.toString());
+        this.$('.' + this.name + '_row[data-uid=' + uid + ']').remove();
+    },
+
+    unbindDataChangesFromFields: function (uid) {
+        _.each(this.def.fields, function (fieldDef) {
+            var innerFieldName = fieldDef.name + "__" + uid;
+            this.model.off('change:' + innerFieldName);
+        }, this);
+    },
+
+    dispose: function () {
+        _.each(this.fieldIds, function (uid) {
+            this.unbindDataChangesFromFields(uid);
+        }, this);
+        this.fieldIds = [];
+        this.modelFields = {};
+        this.isFirst = true;
+        this._super('dispose');
     },
 })

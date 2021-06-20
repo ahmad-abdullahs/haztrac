@@ -10,9 +10,9 @@ class HT_ManifestApiHelper extends SugarBeanApiHelper {
 
         $sql = <<<SQL
                 SELECT 
-                accounts.id AS 'id',
-                accounts.name AS 'name',
-                ht_manifest_accounts_1_c.transfer_date AS 'transfer_date'
+                accounts.id AS 'transporter_name_id',
+                accounts.name AS 'transporter_name',
+                ht_manifest_accounts_1_c.transfer_date AS 'transporter_transfer_date'
             FROM
                 ht_manifest_accounts_1_c ht_manifest_accounts_1_c
                     INNER JOIN
@@ -28,6 +28,8 @@ SQL;
         while ($row = $db->fetchByAssoc($res)) {
             $ret['transporter'][] = $row;
         }
+        
+        $ret['transporter'] = json_encode($ret['transporter']);
 
         $sql = <<<SQL
                 SELECT 

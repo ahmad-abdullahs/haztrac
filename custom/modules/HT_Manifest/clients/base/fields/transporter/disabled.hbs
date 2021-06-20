@@ -1,0 +1,31 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{log "disabled"}}
+<style>
+input[name=survey_score], input[name=qa_score]{
+	width: 25% !important;
+	margin-left: 0% !important;
+}
+</style>
+{{#each relatedFields}}
+	{{#eq ffield.type "int"}}
+		<span class="span3" style="display: inline;  margin-left: 0px;">{{str ../label ../../module}}</span>
+	{{/eq}}
+	{{#with ffield}}
+		{{field ../../view model=../../model template="disabled"}}
+	{{/with}}
+	{{#eq ffield.type "bool"}}
+		<span style="display: inline;">{{str ../label ../../module}}</span>
+	{{/eq}}
+	<br><br>
+{{/each}}

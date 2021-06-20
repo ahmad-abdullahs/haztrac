@@ -1,0 +1,63 @@
+<table style="width: 100%;">
+    <thead>
+        <tr class="control-group pdf_template_printer_widget clearfix" style="margin-bottom: 0px;">
+            <th class="record-label">
+                <div>
+                    <span class="span1">
+                        <div class="record-label pull-left">
+                            {{str 'LBL_NUM' 'HT_Manifest'}}
+                        </div>
+                    </span>
+                    <span class="span5">
+                        <div class="record-label pull-left">
+                            {{str 'LBL_TRANSPORTER' 'HT_Manifest'}}
+                        </div>
+                    </span>
+                    <span class="span6">
+                        <div class="record-label pull-left">
+                            {{str 'LBL_TRANSFER_DATE' 'HT_Manifest'}}
+                        </div>
+                    </span>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="" style="border: 1px inset; background: whitesmoke;">
+        {{#each value}}
+            <tr class="control-group clearfix sortable">
+                <td class="row-fluid">
+                    <div>
+                        <span class="span1">
+                            <span class="normal index">
+                                <span class="detail" {{#if @last}}style="margin-bottom: 8px;"{{else}}style="margin-bottom: 8px;"{{/if}}>
+                                    <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{add @index 1}}.">
+                                        {{add @index 1}}.
+                                    </div>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="span5">
+                            <span style="display: flex;">
+                                {{#if iconVisibility}}
+                                    <a name="advance-relate-preview" class="rowaction" data-href="{{../href}}" style="padding-right: 5px;">
+                                        <i rel="tooltip" title="Preview Record" class="fa fa-eye">
+                                        </i>
+                                    </a>
+                                {{/if}}
+                                {{#if href}}<a class="ellipsis_inline" data-placement="bottom" title="{{../name}}" href="{{../href}}">{{../name}}</a>{{else}}{{../name}}{{/if}}
+                            </span>
+                        </span>
+                        <span class="span6">
+                            <span class="normal index">
+                                <span class="detail" {{#if @last}}style="margin-bottom: 8px;"{{else}}style="margin-bottom: 8px;"{{/if}}>
+                                    {{#if transfer_date}}{{formatDate transfer_date ../../dateOptions}}{{/if}}
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+

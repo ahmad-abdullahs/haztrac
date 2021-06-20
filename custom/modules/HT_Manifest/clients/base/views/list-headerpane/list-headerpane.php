@@ -21,6 +21,11 @@ $viewdefs['HT_Manifest']['base']['view']['list-headerpane'] = array(
             'name' => 'collection-count',
             'type' => 'collection-count',
         ),
+        array(
+            'name' => 'rli_galon_total_title',
+            'type' => 'label',
+            'default_value' => '',
+        ),
     ),
     'buttons' => array(
         array(
