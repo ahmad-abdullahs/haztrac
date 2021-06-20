@@ -224,13 +224,6 @@ $viewdefs[$module_name] = array(
                                 'label' => 'LBL_MANIFEST_TENTH_DAY_DATE',
                             ),
                             10 =>
-//              array (
-//                'name' => 'transporter',
-//                'type' => 'transporter',
-//                'label' => 'LBL_TRANSPORTER',
-//                'dismiss_label' => true,
-//                'span' => 12,
-//              ),
                             array(
                                 'name' => 'transporter',
                                 'type' => 'transporter',

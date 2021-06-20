@@ -24,7 +24,6 @@
         this.previewData = [];
         this.isPreview = false;
         this._super('initialize', [options]);
-        fawad = this;
     },
 
     format: function (value) {
@@ -46,7 +45,6 @@
     },
 
     render: function () {
-        console.log('RENDER IS CALLING');
         // Remove the fields which we have on the view, because everytime it render, It create new fields.
         this.unsetOldFields();
         // Empty the fieldIds, we will have new fields as we are going to render it.
@@ -344,11 +342,7 @@
             }
         }, this);
 
-        console.log('jsonField before : ', jsonField);
-
         jsonField = _.sortBy(jsonField, 'transporter_line_number');
-
-        console.log('jsonField after : ', jsonField);
 
         this.model.set(this.name, JSON.stringify(jsonField), {silent: true});
         this.previewData = jsonField;
@@ -358,7 +352,6 @@
 
     updateRowIndexing: function (fieldNames) {
         _.each(this.$('div[name*=transporter_row_index]'), function (ele, index) {
-            console.log(ele, index);
             $(ele).html(index + '.');
         });
     },
