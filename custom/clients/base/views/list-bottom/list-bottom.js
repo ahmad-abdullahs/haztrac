@@ -22,7 +22,7 @@
         'click [data-action="show-more-50"]': 'showMoreRecords50',
         'click [data-action="show-more-100"]': 'showMoreRecords100',
         'click [data-action="show-more-200"]': 'showMoreRecords200',
-        'click [data-action="show-more-all"]': 'showMoreRecordsAll',
+//        'click [data-action="show-more-all"]': 'showMoreRecordsAll',
     },
 
     initialize: function (options) {
@@ -72,7 +72,7 @@
         this._showMoreRecords(200);
     },
 
-    showMoreRecordsAll: function () {
-        this._showMoreRecords(-1);
-    },
+//    showMoreRecordsAll: function () {
+//        this._showMoreRecords(-1);
+//    },
 })
