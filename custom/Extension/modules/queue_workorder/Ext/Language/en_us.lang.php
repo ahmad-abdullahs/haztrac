@@ -23,3 +23,4 @@ $mod_strings['LBL_QUANTITY'] = 'Quantity';
 $mod_strings['LBL_PRINT_DATE'] = 'Print Date';
 $mod_strings['LBL_MODULE_TYPE'] = 'Module Type';
 $mod_strings['LBL_PRINT_STATUS'] = 'Status';
+$mod_strings['LBL_SALES_AND_SERVICES_QUEUE_WORKORDER_1_FROM_SALES_AND_SERVICES_TITLE'] = 'Sales & Service';

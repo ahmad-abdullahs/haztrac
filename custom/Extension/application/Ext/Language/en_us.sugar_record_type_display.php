@@ -1,3 +1,4 @@
 <?php
-// created: 2019-07-08 12:50:28
-$app_list_strings['record_type_display']['sales_and_services'] = 'Sales &amp; Service';
+
+// created: 2021-07-29 17:21:57
+$app_list_strings['record_type_display']['sales_and_services'] = 'Sales & Service';

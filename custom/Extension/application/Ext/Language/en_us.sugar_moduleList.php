@@ -1,6 +1,6 @@
 <?php
 
-// created: 2020-04-10 15:14:22
+// created: 2021-07-29 17:21:53
 $app_list_strings['moduleList']['Home'] = 'Home';
 $app_list_strings['moduleList']['Contacts'] = 'Contacts';
 $app_list_strings['moduleList']['Accounts'] = 'Accounts';
@@ -34,7 +34,7 @@ $app_list_strings['moduleList']['OutboundEmail'] = 'Email Settings';
 $app_list_strings['moduleList']['DataPrivacy'] = 'Data Privacy';
 $app_list_strings['moduleList']['KBContents'] = 'Knowledge Base';
 $app_list_strings['moduleList']['HT_SS_Quotes'] = 'Sales/Services Quotes';
-$app_list_strings['moduleList']['sales_and_services'] = 'Sales &amp; Service';
+$app_list_strings['moduleList']['sales_and_services'] = 'Sales & Service';
 $app_list_strings['moduleList']['HT_Assets_and_Objects'] = 'Assets &amp; Objects';
 $app_list_strings['moduleList']['HT_Manifest'] = 'Manifest';
 $app_list_strings['moduleList']['EV_Events'] = 'Events';
@@ -42,7 +42,7 @@ $app_list_strings['moduleList']['V_Vendors'] = 'Vendors';
 $app_list_strings['moduleList']['LR_Lab_Reports'] = 'Lab Reports';
 $app_list_strings['moduleList']['PNL_Permits_Licenses'] = 'Permits &amp; Licenses';
 $app_list_strings['moduleList']['HRM_Employee_Training'] = 'Employee Training';
-$app_list_strings['moduleList']['HRM_Employee_Info'] = 'Employees Contact';
+$app_list_strings['moduleList']['HRM_Employee_Info'] = 'Employees Info';
 $app_list_strings['moduleList']['HT_PO'] = 'POs';
 $app_list_strings['moduleList']['LR_Lab_Reports_Templates'] = 'Lab Report Templates';
 $app_list_strings['moduleList']['WT_Waste_Tracking'] = 'Container/Waste Gerneration Tracking';
@@ -50,9 +50,12 @@ $app_list_strings['moduleList']['WPM_Waste_Profile_Module'] = 'Waste Profile';
 $app_list_strings['moduleList']['waste_constituents'] = 'Waste Constituents';
 $app_list_strings['moduleList']['waste_composition'] = 'Waste Compositions';
 $app_list_strings['moduleList']['WPM_Waste_Profile_Template'] = 'Waste Profile Templates';
-$app_list_strings['moduleList']['wp_terms_and_conditions'] = 'Terms and Conditions';
 $app_list_strings['moduleList']['contract_specification'] = 'Contract Specifications';
 $app_list_strings['moduleList']['mv_Attachments'] = 'Attachments';
 $app_list_strings['moduleList']['queue_workorder'] = 'Work Order Queue';
-$app_list_strings['moduleList']['RevenueLineItems'] = 'Revenue Line Items';
 $app_list_strings['moduleList']['Contracts_Template'] = 'Contracts Template';
+$app_list_strings['moduleList']['pdf_template_types'] = 'PDF Template Types';
+$app_list_strings['moduleList']['competitor_cost'] = 'Competitor Costs';
+$app_list_strings['moduleList']['wp_terms_and_conditions'] = 'Terms and Conditions';
+$app_list_strings['moduleList']['Doc_Manager'] = 'Document Manager';
+$app_list_strings['moduleList']['RevenueLineItems'] = 'Revenue Line Items';
