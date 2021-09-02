@@ -1,0 +1,52 @@
+// https://helpcenter.onlyoffice.com/installation/docs-community-install-ubuntu.aspx
+// Check Kernel Version
+hostnamectl | grep Kernel
+
+// Clone Only Office
+git clone https://github.com/ONLYOFFICE/web-apps.git
+
+// Set Permissions
+sudo chmod -R 775 onlyoffice_php/
+sudo chown -R fawad:fawad onlyoffice_php/
+
+// Only Office Server Installation
+sudo apt-get install postgresql
+
+sudo -i -u postgres psql -c "CREATE DATABASE onlyoffice;"
+sudo -i -u postgres psql -c "CREATE USER onlyoffice WITH password 'onlyoffice';"
+sudo -i -u postgres psql -c "GRANT ALL privileges ON DATABASE onlyoffice TO onlyoffice;"
+
+sudo apt-get install rabbitmq-server
+sudo apt-get install nginx-extras
+
+echo onlyoffice-documentserver onlyoffice/ds-port select 5000 | sudo debconf-set-selections
+
+sudo apt-get update
+
+sudo apt-get install libstdc++6
+systemctl status  nginx.service
+systemctl restart  nginx.service
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
+sudo echo "deb https://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /etc/apt/sources.list.d/onlyoffice.list
+sudo apt-get update
+sudo apt-get install ttf-mscorefonts-installer
+sudo apt-get install onlyoffice-documentserver
+
+sudo supervisorctl start ds:example
+sudo sed 's,autostart=false,autostart=true,' -i /etc/supervisor/conf.d/ds-example.conf
+
+sudo su - postgres
+
+docbuilder /var/www/html/onlyoffice_document_editor/temp/input.1908775179.docbuilder
+
+onlyoffice-documentbuilder /var/www/html/onlyoffice_document_editor/temp/input.1908775179.docbuilder
+
+sudo apt-get install libstdc++6 libcurl3-gnutls libc6 libxml2 libcurl3 fonts-dejavu fonts-opensymbol
+sudo apt-get install fonts-liberation ttf-mscorefonts-installer fonts-crosextra-carlito
+
+// Open incoming TCP port 5000 to any source IP address
+sudo ufw allow from any to any port 5000 proto tcp
+
+-- sudo supervisorctl restart all
+-- onlyoffice-documentbuilder /var/www/html/onlyoffice_document_editor/temp/input.1908775179.docbuilder
