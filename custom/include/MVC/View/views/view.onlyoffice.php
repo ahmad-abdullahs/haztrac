@@ -13,7 +13,7 @@ class ViewOnlyoffice extends SugarView {
     function preDisplay() {
         global $db, $current_user, $timedate, $sugar_config;
 
-        $template_file_path = "{$sugar_config['onlyoffice_upload_dir']}/{$_REQUEST['onlyoffice_template_id']}";
+        $template_file_path = "{$sugar_config['onlyoffice_upload_dir1']}/{$_REQUEST['onlyoffice_template_id']}";
 
         $this->script = '';
         $this->script .= 'builder.OpenFile("' . $template_file_path . '.docx");' . PHP_EOL;
@@ -45,7 +45,7 @@ class ViewOnlyoffice extends SugarView {
         }
 //        $saveFileName = "{$db->quoted($sugar_config['onlyoffice_upload_dir'] . "/" . $this->bean->name . ".docx")}";
 
-        $saveFileName = "{$sugar_config['onlyoffice_upload_dir']}/parsed_{$_REQUEST['onlyoffice_template_id']}.docx";
+        $saveFileName = "{$sugar_config['onlyoffice_upload_dir1']}/parsed_{$_REQUEST['onlyoffice_template_id']}.docx";
 
         $this->script .= 'builder.SaveFile("docx", "' . $saveFileName . '");' . PHP_EOL;
         $this->script .= "builder.CloseFile();" . PHP_EOL;
