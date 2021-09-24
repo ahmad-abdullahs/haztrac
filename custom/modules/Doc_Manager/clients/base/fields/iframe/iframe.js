@@ -41,7 +41,7 @@
                                     base_module: self.model.get('base_module'),
                                     initiator: self.view.name,
                                 }, "*");
-                                if (notifyCounter > 3) {
+                                if (notifyCounter > 9) {
                                     clearInterval(notifyOnlyOfficeToSetModule);
                                 }
                                 notifyCounter++;

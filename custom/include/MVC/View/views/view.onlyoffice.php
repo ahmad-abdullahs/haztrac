@@ -25,7 +25,8 @@ class ViewOnlyoffice extends SugarView {
         $data = $this->bean->toArray();
 
         foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
-            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $key . '}", "replaceString": "' . $data[$key] . '"});' . PHP_EOL;
+            $dataStr = str_replace(array("\r", "\n"), ' ', $data[$key]);
+            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $key . '}", "replaceString": "' . $dataStr . '"});' . PHP_EOL;
         }
 
         foreach ($fieldsArrList['linksArr'] as $key => $value) {
@@ -36,7 +37,8 @@ class ViewOnlyoffice extends SugarView {
                 $relatedBeans = $this->bean->$link->getBeans();
                 foreach ($relatedBeans as $relatedBean) {
                     foreach ($value as $_key => $_value) {
-                        $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $_key . '}", "replaceString": "' . $relatedBean->$_key . '"});' . PHP_EOL;
+                        $dataStr = str_replace(array("\r", "\n"), ' ', $relatedBean->$_key);
+                        $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $_key . '}", "replaceString": "' . $dataStr . '"});' . PHP_EOL;
                     }
                 }
             }
