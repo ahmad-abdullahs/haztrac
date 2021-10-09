@@ -40,6 +40,7 @@ $app_strings['LBL_SHORTCUT_DRAWER_CLOSE'] = 'Close the Record View opened in the
 $app_strings['LBL_MULTIPLE_REVENUELINEITEMS'] = 'Add Multiple Revenue Line Items';
 $app_strings['LBL_REVENUELINEITEMS_SUBPANEL_LIST_CREATE_FROM_REVENUELINEITEMS_TITLE'] = 'Related Revenue Line Items';
 $app_strings['LBL_SIGN_DOC_TITLE'] = 'Sign Document';
+$app_strings['LBL_UPLOAD_ONLYOFFICE_FILE_TITLE'] = 'Upload Document';
 $app_strings['LBL_UPDATE_DESCRIPTION'] = 'Update Description';
 $app_strings['LBL_UPDATE_BUTTON_LABEL'] = 'Update';
 

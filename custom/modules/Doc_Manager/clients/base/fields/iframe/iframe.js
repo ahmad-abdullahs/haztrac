@@ -15,6 +15,7 @@
  */
 ({
     extendsFrom: 'IframeField',
+    timerId: [],
 
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -26,7 +27,7 @@
         var self = this;
         var notifyCounter = 1;
 
-        var notifyOnlyOfficeToSetModule = setInterval(function () {
+        var intervalId = setInterval(function () {
             if (self.$) {
                 var ele = self.$('#onlyOfficeFrame');
                 if (ele.length) {
@@ -42,7 +43,9 @@
                                     initiator: self.view.name,
                                 }, "*");
                                 if (notifyCounter > 9) {
-                                    clearInterval(notifyOnlyOfficeToSetModule);
+                                    _.each(self.timerId, function (id) {
+                                        clearInterval(id);
+                                    });
                                 }
                                 notifyCounter++;
                             }
@@ -51,6 +54,8 @@
                 }
             }
         }, 1000);
+
+        this.timerId.push(intervalId);
     },
 
     _render: function () {
@@ -79,5 +84,12 @@
         }
 
         return this.value;
+    },
+
+    _dispose: function () {
+        this._super('_dispose');
+        _.each(this.timerId, function (id) {
+            clearInterval(id);
+        });
     },
 })

@@ -16,16 +16,16 @@
  *
  */
 
-if (typeof jQuery != "undefined") {
+        if (typeof jQuery != "undefined") {
     jq = jQuery.noConflict();
-
+    responseDataG = {};
     user = getUrlVars()["user"];
     if ("" != user && undefined != user)
         jq("#user").val(user);
     else
         user = jq("#user").val();
 
-    jq(document).on("change", "#user", function() {
+    jq(document).on("change", "#user", function () {
         window.location = "?user=" + jq(this).val();
     });
 
@@ -46,12 +46,33 @@ if (typeof jQuery != "undefined") {
                     theme: true,
                     title: "File upload" + "<div class=\"dialog-close\"></div>",
                     message: jq("#mainProgress"),
-                    overlayCSS: { "background-color": "#aaa" },
-                    themedCSS: { width: "539px", top: "20%", left: "50%", marginLeft: "-269px" }
+                    overlayCSS: {"background-color": "#aaa"},
+                    themedCSS: {width: "539px", top: "20%", left: "50%", marginLeft: "-269px"}
                 });
+                jq("#reloadPage").addClass("disable");
+                jq("#openRecord").addClass("disable");
                 jq("#beginEdit, #beginView, #beginEmbedded").addClass("disable");
 
-                data.submit();
+                data.submit().done(function (responseData) {
+                    responseDataG = responseData;
+                    if (responseData.id !== undefined) {
+                        var messageString = parent.SUGAR.App.lang.get('LBL_RECORD_SAVED_SUCCESS', 'Doc_Manager', {
+                            'module': 'Doc_Manager',
+                            'moduleSingularLower': parent.SUGAR.App.lang.getModuleName('Doc_Manager'),
+                            'id': responseData.id,
+                            'name': responseData.name,
+                        });
+                        parent.SUGAR.App.alert.show('create-success', {
+                            level: 'success',
+                            messages: messageString,
+                            autoClose: true,
+                            autoCloseDelay: 10000,
+                            onLinkClick: function () {
+                                app.alert.dismiss('create-success');
+                            }
+                        });
+                    }
+                });
             },
             always: function (e, data) {
                 if (!jq("#mainProgress").is(":visible")) {
@@ -84,7 +105,7 @@ if (typeof jQuery != "undefined") {
         if (timer != null) {
             clearTimeout(timer);
         }
-        
+
         if (!jq("#mainProgress").is(":visible")) {
             return;
         }
@@ -113,14 +134,14 @@ if (typeof jQuery != "undefined") {
                 contentType: "text/xml",
                 type: "post",
                 dataType: "json",
-                data: JSON.stringify({filename : fileName, fileUri : fileUri || "", filePass: filePass}),
+                data: JSON.stringify({filename: fileName, fileUri: fileUri || "", filePass: filePass}),
                 url: requestAddress,
                 complete: function (data) {
                     var responseText = data.responseText;
                     try {
                         var response = jq.parseJSON(responseText);
-                    } catch (e)	{
-                        response = { error: e };
+                    } catch (e) {
+                        response = {error: e};
                     }
 
                     if (response.error) {
@@ -177,6 +198,8 @@ if (typeof jQuery != "undefined") {
             return;
         }
         jq("#step3").addClass("done").removeClass("current");
+        jq("#reloadPage").removeClass("disable");
+        jq("#openRecord").removeClass("disable");
         jq("#beginView, #beginEmbedded").removeClass("disable");
 
         var fileName = jq("#hiddenFileName").val();
@@ -193,8 +216,8 @@ if (typeof jQuery != "undefined") {
 
         function getCookie(name) {
             let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                    ));
             return matches ? decodeURIComponent(matches[1]) : null;
         }
         function setCookie(name, value) {
@@ -202,7 +225,8 @@ if (typeof jQuery != "undefined") {
         }
 
         var langId = getCookie("ulang");
-        if (langId) langSel.val(langId);
+        if (langId)
+            langSel.val(langId);
 
         langSel.on("change", function () {
             setCookie("ulang", langSel.val());
@@ -244,6 +268,19 @@ if (typeof jQuery != "undefined") {
         document.location.reload();
     });
 
+    jq(document).on("click", "#reloadPage:not(.disable)", function () {
+        jq('#hiddenFileName').val("");
+        jq.unblockUI();
+        document.location.reload();
+    });
+
+    jq(document).on("click", "#openRecord:not(.disable)", function () {
+        jq('#hiddenFileName').val("");
+        jq.unblockUI();
+        var url = "#Doc_Manager" + "/" + responseDataG.id;
+        parent.SUGAR.App.router.navigate(url, {trigger: true, replace: true});
+    });
+
     jq(document).on("click", "#beginEmbedded:not(.disable)", function () {
         var fileId = encodeURIComponent(jq('#hiddenFileName').val());
         var url = "doceditor.php?type=embedded&fileID=" + fileId + "&user=" + user;
@@ -255,13 +292,17 @@ if (typeof jQuery != "undefined") {
     });
 
     jq(document).on("click", ".reload-page", function () {
-        setTimeout(function () { document.location.reload(); }, 1000);
+        setTimeout(function () {
+            document.location.reload();
+        }, 1000);
         return true;
     });
 
     jq(document).on("mouseup", ".reload-page", function (event) {
         if (event.which == 2) {
-            setTimeout(function () { document.location.reload(); }, 1000);
+            setTimeout(function () {
+                document.location.reload();
+            }, 1000);
         }
         return true;
     });
@@ -324,4 +365,5 @@ function getUrlVars() {
         vars[hash[0]] = hash[1];
     }
     return vars;
-};
+}
+;

@@ -7,7 +7,7 @@ git clone https://github.com/ONLYOFFICE/web-apps.git
 
 // Set Permissions
 sudo chmod -R 775 onlyoffice_php/
-sudo chown -R fawad:fawad onlyoffice_php/
+sudo chown -R www-data:www-data onlyoffice_php/
 
 // Only Office Server Installation
 sudo apt-get install postgresql
