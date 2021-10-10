@@ -25,8 +25,9 @@ class ViewOnlyoffice extends SugarView {
         $data = $this->bean->toArray();
 
         foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
-            $dataStr = str_replace(array("\r", "\n"), ' ', $data[$key]);
-            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $key . '}", "replaceString": "' . $dataStr . '"});' . PHP_EOL;
+            $dataStr = $this->getCleanString($data[$key]);
+            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $key . '}", '
+                    . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
         }
 
         foreach ($fieldsArrList['linksArr'] as $key => $value) {
@@ -37,12 +38,14 @@ class ViewOnlyoffice extends SugarView {
                 $relatedBeans = $this->bean->$link->getBeans();
                 foreach ($relatedBeans as $relatedBean) {
                     foreach ($value as $_key => $_value) {
-                        $dataStr = str_replace(array("\r", "\n"), ' ', $relatedBean->$_key);
-                        $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $_key . '}", "replaceString": "' . $dataStr . '"});' . PHP_EOL;
+                        $dataStr = $this->getCleanString($relatedBean->$_key);
+                        $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $_key . '}", '
+                                . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
                     }
                 }
             }
         }
+
 //        $saveFileName = "{$db->quoted($sugar_config['onlyoffice_upload_dir'] . "/" . $this->bean->name . ".docx")}";
 
         $saveFileName = "{$sugar_config['onlyoffice_upload_dir1']}/parsed_{$_REQUEST['onlyoffice_template_id']}.docx";
@@ -127,27 +130,14 @@ class ViewOnlyoffice extends SugarView {
     }
 
     function display() {
-//        ob_clean();
-//
-//        if ($this->templateBean == null) {
-//            return;
-//        }
-//
-//        $content = $this->getWordContent();
-//
-//        header('Content-Type: ' . $this->templateBean->file_mime_type);
-//        header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
-//        header('Pragma: public');
-//        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-//        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-//        header('Content-Length: ' . strlen($content));
-//        header('Content-Disposition: inline; filename="' . $this->templateBean->filename . '"');
-//
-//        echo $content;
+        
     }
 
-//    function getWordContent() {
-//        $temp_doc_name = $this->templateProcessor->save();
-//        return file_get_contents($temp_doc_name);
-//    }
+    function getCleanString($param) {
+        $dataStr = from_html(html_entity_decode(htmlspecialchars_decode($param)));
+        $dataStr = str_replace(array("\r", "\n"), ' ', $dataStr);
+        $dataStr = str_replace('"', '\"', $dataStr);
+        return $dataStr;
+    }
+
 }
