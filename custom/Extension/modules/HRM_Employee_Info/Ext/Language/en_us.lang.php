@@ -1,4 +1,5 @@
 <?php
+
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LNK_NEW_RECORD'] = 'Create Employee Contact';
 $mod_strings['LNK_LIST'] = 'View Employees Contact';
@@ -36,3 +37,4 @@ $mod_strings['LBL_EMPLOYEE_ETHNICITY'] = 'Ethnicity';
 $mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Preferred Doctor';
 $mod_strings['LBL_RECORDVIEW_PANEL9'] = 'New Panel 9';
 $mod_strings['LBL_EMPLOYEE_TWIC_EXP'] = 'TWIC Expiration ';
+$mod_strings['LBL_EMPLOYEE_ID_NUM'] = 'Employee ID No';

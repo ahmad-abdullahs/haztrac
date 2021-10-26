@@ -14,4 +14,5 @@ $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET'] = 'Account Name';
 $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ACCOUNT'] = 'Account Name';
 $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ROLE'] = 'Role';
 $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_PRIMARY'] = 'Primary';
+$mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ADD_ROLE'] = 'Add Role';
 $mod_strings['LBL_FILTER_ACCOUNTS_TEMPLATE'] = 'Filter By Account';

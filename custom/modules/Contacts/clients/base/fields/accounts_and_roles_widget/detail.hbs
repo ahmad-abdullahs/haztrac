@@ -13,9 +13,12 @@
 <div class="control-group accounts_and_roles_widget clearfix" style="margin-bottom: 0px;">
     <div class="record-label">
         {{#each def.fields}}
-            <div class="span{{span}} record-label {{css_class}}">
-                <lable>{{str label ../module}}</lable>
-            </div>
+            {{#if this.dismiss_label}}
+            {{else}}
+                <div class="span{{span}} record-label {{css_class}}">
+                        <lable>{{str label ../../module}}</lable>
+                </div>
+            {{/if}}
         {{/each}}
             <div class="btn-toolbar prevent-mousedown"></div>
     </div>

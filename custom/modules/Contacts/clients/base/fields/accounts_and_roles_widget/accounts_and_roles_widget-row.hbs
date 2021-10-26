@@ -13,13 +13,21 @@
 <div class="control-group accounts_and_roles_widget_row clearfix accounts_and_roles_widget-{{fieldAction}}" data-uid={{uid}} {{#if isPreview}}style="margin-bottom: 0px;"{{/if}}>
     <div class="row-fluid" data-uid={{uid}}>
         {{#each modelFields}}
-            <div class="span{{span}} {{css_class}} record-cell" {{#if ../isPreview}}style="min-height: 20px;"{{/if}}>
-                {{field ../view model=../model template=../fieldAction}}
-            </div>
+                {{#eq groupname "add_role"}}
+                    {{#eq ../../fieldAction "edit"}}
+                        <div class="span{{span}} {{css_class}} record-cell" {{#if ../../../isPreview}}style="min-height: 20px;"{{/if}}>
+                            {{field ../../../view model=../../../model template=../../../fieldAction}}
+                        </div>
+                    {{/eq}}
+                {{else}}
+                    <div class="span{{span}} {{css_class}} record-cell" {{#if ../../isPreview}}style="min-height: 20px;"{{/if}}>
+                        {{field ../../view model=../../model template=../../fieldAction}}
+                    </div>
+                {{/eq}}
         {{/each}}
         {{#eq fieldAction "edit"}}
-            <div class="btn-toolbar multi-btn prevent-mousedown">
-                <div class="btn-group {{#if isNew}}{{else}}prevent-mousedown{{/if}}" style="margin-top:-5px;">
+            <div class="span1 btn-toolbar multi-btn prevent-mousedown">
+                <div class="btn-group {{#if isNew}}{{else}}prevent-mousedown{{/if}}" style="">
                    <a href="javascript:void(0)" data-uid="{{uid}}" class="btn {{#if isNew}}addRecord{{else}}removeRecord{{/if}} {{#if isNew}}disabled{{/if}}" rel="tooltip" title="{{#if isNew}}{{str "LBL_ADD"}}{{else}}{{str "LBL_REMOVE"}}{{/if}}"><i class="fa fa-{{#if isNew}}plus{{else}}minus{{/if}}"></i></a>
                 </div>
             </div>

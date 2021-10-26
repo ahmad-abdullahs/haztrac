@@ -13,12 +13,40 @@
 <div class="control-group accounts_and_roles_widget clearfix" style="margin-bottom: 0px;">
     <div class="record-label">
         {{#each def.fields}}
-            <div class="span{{span}} record-label {{css_class}}">
-                <lable>{{str label ../module}}</lable>
-            </div>
+            {{#if this.dismiss_label}}
+            {{else}}
+                <div class="span{{span}} record-label {{css_class}}">
+                        <lable>{{str label ../../module}}</lable>
+                </div>
+            {{/if}}
         {{/each}}
             <div class="btn-toolbar prevent-mousedown"></div>
     </div>
 </div>
+
+<div class="span12 record-cell edit" data-name="option-to-add-div" style="display: none;">
+    <span class="normal index" data-index="">
+        <span class="edit" tabindex="-1">
+            <div class="span8" style="margin-left: -10px;">
+                <input type="text" data-name="option-input" value="">
+            </div>
+            <div class="pull-left span2 record-cell" data-type="" data-name="">
+                <span class="normal index" data-fieldname="" data-index="">
+                    <span class="pull-right edit">
+                        <a class="btn btn-primary saveOption" href="javascript:void(0);" name="save_option">Save</a>
+                    </span>
+                </span>
+            </div>
+            <div class="pull-left span2 record-cell" data-type="" data-name="">
+                <span class="normal index" data-fieldname="" data-index="">
+                    <span class=" edit">
+                        <a class="btn btn-primary cancelOption" href="javascript:void(0);" name="cancel_option">Cancel</a>
+                    </span>
+                </span>
+            </div>
+        </span>
+    </span>
+</div>
+
 <div class="accounts_and_roles_widget-to-insert"></div>
 

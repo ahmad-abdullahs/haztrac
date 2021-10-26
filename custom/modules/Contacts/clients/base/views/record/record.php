@@ -237,7 +237,7 @@ $viewdefs['Contacts'] = array(
                                         'id_name' => 'accounts_and_roles_widget_name_id',
                                         'module' => 'Accounts',
                                         'link' => true,
-                                        'span' => 6,
+                                        'span' => 5,
                                         'sortable' => false,
                                     ),
                                     array(
@@ -247,6 +247,15 @@ $viewdefs['Contacts'] = array(
                                         'type' => 'enum',
                                         'options' => 'contact_role_list',
                                         'span' => 4
+                                    ),
+                                    array(
+                                        'name' => 'accounts_and_roles_widget_add_role',
+                                        'css_class' => 'pull-left addOption',
+                                        'label' => '➕',
+                                        'type' => 'button',
+                                        'groupname' => 'add_role',
+                                        'dismiss_label' => true,
+                                        'span' => 1, 
                                     ),
                                     array(
                                         'name' => 'accounts_and_roles_widget_primary_account',
@@ -259,8 +268,7 @@ $viewdefs['Contacts'] = array(
                                 )
                             ),
                             9 => 'email',
-                            10 =>
-                            array(
+                            10 => array(
                                 'name' => 'tag',
                                 'span' => 6,
                             ),

@@ -3,6 +3,9 @@
     events: {
         'click .removeRecord:not(.disabled)': 'deleteRow',
         'click .addRecord:not(.disabled)': 'addRow',
+        'click .addOption:not(.disabled)': 'addOption',
+        'click .saveOption:not(.disabled)': 'saveOption',
+        'click .cancelOption:not(.disabled)': 'cancelOption',
     },
     fieldIds: [],
     modelFields: {},
@@ -311,6 +314,84 @@
         this.changeAddButtonToRemove(uid);
         this.enablePrimaryOptions(uid);
     },
+    addOption: function (evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        // Show the input Div
+        this.$('[data-name="option-to-add-div"]').toggle();
+    },
+
+    saveOption: function (evt) {
+        var self = this;
+        var optionValue = this.$('[data-name="option-input"]').val();
+        optionValue = optionValue.replace(/['"]+/g, '').trim();
+        // Check if this is a new option or the existig one?
+        // If new then add, if existing discard it.
+        var roleField = null;
+        _.each(this.modelFields, function (field, index) {
+            if (field.name.includes("accounts_and_roles_widget_role") && _.isNull(roleField)) {
+                roleField = field;
+            }
+        });
+
+        var roleKeys = app.lang.getAppListKeys(roleField.items)
+        if (!_.contains(roleKeys, optionValue)) {
+            // Get all the Role dropdown fields and Add the Option
+            var fieldsList = [];
+            _.each(this.modelFields, function (field, index) {
+                if (field.name.includes("accounts_and_roles_widget_role")) {
+                    fieldsList.push(field);
+                    field.items[optionValue] = optionValue;
+                    field.render();
+                }
+            });
+
+            app.alert.show('adding_option', {
+                level: 'process',
+                title: 'Adding the Option, Please wait.'
+            });
+
+            // Make an api call to add the option in the list 
+            app.api.call('create', app.api.buildURL('DropdownListKey/add'), {
+                "list_name": "contact_role_list",
+                "item_key": optionValue,
+                "item_value": optionValue,
+                "lang": "en_us",
+            }, {
+                success: function (data) {
+//                    self.view.refreshPage = true;
+                    app.metadata.sync();
+                    app.alert.dismiss('adding_option');
+                    app.alert.show('role_option_added', {
+                        level: 'info',
+                        autoClose: true,
+                        messages: 'New Option (' + optionValue + ') is added to the list.',
+                    });
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+            // Hide the input Div
+            this.$('[data-name="option-to-add-div"]').toggle();
+            this.$('[data-name="option-input"]').val('');
+        } else {
+            app.alert.show('role_option_already_exist', {
+                level: 'info',
+                autoClose: true,
+                messages: 'Option already exist.',
+            });
+        }
+        evt.preventDefault();
+    },
+
+    cancelOption: function (evt) {
+        // Hide the input Div
+        this.$('[data-name="option-to-add-div"]').toggle();
+        this.$('[data-name="option-input"]').val('');
+        evt.preventDefault();
+    },
+
     changeAddButtonToRemove: function (uid) {
         this.$('.btn[data-uid=' + uid + ']').removeClass(this.addClass);
         this.$('.btn[data-uid=' + uid + ']').addClass('removeRecord');
