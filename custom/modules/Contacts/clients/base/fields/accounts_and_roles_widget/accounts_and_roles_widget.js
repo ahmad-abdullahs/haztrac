@@ -347,8 +347,8 @@
             });
 
             app.alert.show('adding_option', {
-                level: 'process',
-                title: 'Adding the Option, Please wait.'
+                level: 'warning',
+                title: 'Adding the Role Option, Please wait until the Role is added and success message is delivered.'
             });
 
             // Make an api call to add the option in the list 
@@ -360,12 +360,13 @@
             }, {
                 success: function (data) {
 //                    self.view.refreshPage = true;
-                    app.metadata.sync();
-                    app.alert.dismiss('adding_option');
-                    app.alert.show('role_option_added', {
-                        level: 'info',
-                        autoClose: true,
-                        messages: 'New Option (' + optionValue + ') is added to the list.',
+                    app.metadata.sync(function () {
+                        app.alert.dismiss('adding_option');
+                        app.alert.show('role_option_added', {
+                            level: 'info',
+                            autoClose: true,
+                            messages: 'New Option (' + optionValue + ') is added to the list.',
+                        });
                     });
                 },
                 error: function (e) {
