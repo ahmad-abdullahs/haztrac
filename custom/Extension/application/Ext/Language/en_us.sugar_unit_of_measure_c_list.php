@@ -1,5 +1,5 @@
 <?php
- // created: 2019-09-28 10:38:47
+ // created: 2021-09-03 23:31:13
 
 $app_list_strings['unit_of_measure_c_list']=array (
   '' => '',
@@ -15,6 +15,7 @@ $app_list_strings['unit_of_measure_c_list']=array (
   'Cu Yd' => 'ea\\CuYD',
   'ea Liter' => 'ea\\Ltr',
   'ea Lb' => 'ea\\LB',
+  'ea m3' => 'ea\\m3',
   'ea Pickup' => 'ea\\PU',
   'ea Short Ton' => 'ea\\Ton',
   'ea Long Ton' => 'ea\\LGTon',

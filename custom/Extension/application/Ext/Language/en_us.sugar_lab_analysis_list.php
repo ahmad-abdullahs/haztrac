@@ -1,5 +1,5 @@
 <?php
- // created: 2020-12-20 19:10:41
+ // created: 2021-09-03 15:45:19
 
 $app_list_strings['lab_analysis_list']=array (
   'Aniline Point F' => 'Aniline Point, °F',
@@ -39,7 +39,7 @@ $app_list_strings['lab_analysis_list']=array (
   'Sulfur Wt' => 'Sulfur, Wt% (D4294)',
   'Total Acid Number' => 'Total Acid Number (TAN), Mg_KOH/gm',
   'Total Halogens PPM' => 'Total Halogens, PPM (SW9075)',
-  'TPS' => 'Total Potential Sediment, (ISO10307-2)',
+  'TPS' => 'Total Sediment Potential | TSP (ISO10307-2)',
   'Vapor Pressure  60 F PSIA' => 'Vapor Pressure @ 60°F, PSIA (D2879)',
   'Visc 100' => 'Viscosity cSt @ 100C/212F (D445)',
   'Visc 40' => 'Viscosity cSt @ 40C/104F (D445)',
