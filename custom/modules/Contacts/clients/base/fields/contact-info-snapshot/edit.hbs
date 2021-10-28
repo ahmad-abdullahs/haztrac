@@ -1,0 +1,12 @@
+<a href="{{#if fullRoute}}#{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
+    class="rowaction{{#if def.button}} btn{{/if}}{{#if def.primary}} btn-primary{{/if}}"
+{{#if def.event}}
+    data-event="{{def.event}}"
+{{/if}}
+{{#if def.tooltip}}
+    rel="tooltip"
+    data-placement="bottom"
+    title="{{str def.tooltip module}}"
+{{/if}}
+    {{#if ariaLabel}}aria-label="{{ariaLabel}}"{{/if}}
+    role="button" tabindex="{{tabIndex}}" name="{{name}}" track="click:{{#if name}}{{name}}{{else}}{{label}}{{/if}}">{{#if def.icon}}<i class="fa {{def.icon}}"></i> {{/if}}{{str label}}</a>

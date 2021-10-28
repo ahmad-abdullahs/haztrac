@@ -128,9 +128,15 @@ $viewdefs['Contacts'] = array(
                             ),
                             12 =>
                             array(
-                                'type' => 'divider',
+                                'type' => 'contact-info-snapshot',
+                                'label' => 'LBL_CONTACT_INFO_SNAPSHOT',
+                                'acl_action' => 'view',
                             ),
                             13 =>
+                            array(
+                                'type' => 'divider',
+                            ),
+                            14 =>
                             array(
                                 'type' => 'rowaction',
                                 'event' => 'button:delete_button:click',
@@ -198,7 +204,7 @@ $viewdefs['Contacts'] = array(
                         'columns' => 2,
                         'labelsOnTop' => true,
                         'placeholders' => true,
-                        'newTab' => false,
+                        'newTab' => true,
                         'panelDefault' => 'expanded',
                         'fields' =>
                         array(
@@ -223,11 +229,13 @@ $viewdefs['Contacts'] = array(
                                 'name' => 'accounts_and_roles_widget',
                                 'type' => 'accounts_and_roles_widget',
                                 'dismiss_label' => true,
-                                'span' => 6,
-                                'related_fields' => array(
-                                    'accounts_and_roles_widget',
+                                'related_fields' =>
+                                array(
+                                    0 => 'accounts_and_roles_widget',
                                 ),
-                                'fields' => array(
+                                'fields' =>
+                                array(
+                                    0 =>
                                     array(
                                         'name' => 'accounts_and_roles_widget_name',
                                         'css_class' => 'accounts_and_roles_widget_name',
@@ -240,14 +248,16 @@ $viewdefs['Contacts'] = array(
                                         'span' => 5,
                                         'sortable' => false,
                                     ),
+                                    1 =>
                                     array(
                                         'name' => 'accounts_and_roles_widget_role',
                                         'css_class' => 'accounts_and_roles_widget_role',
                                         'label' => 'LBL_ACCOUNTS_AND_ROLES_WIDGET_ROLE',
                                         'type' => 'enum',
                                         'options' => 'contact_role_list',
-                                        'span' => 4
+                                        'span' => 4,
                                     ),
+                                    2 =>
                                     array(
                                         'name' => 'accounts_and_roles_widget_add_role',
                                         'css_class' => 'pull-left addOption',
@@ -255,20 +265,22 @@ $viewdefs['Contacts'] = array(
                                         'type' => 'button',
                                         'groupname' => 'add_role',
                                         'dismiss_label' => true,
-                                        'span' => 1, 
+                                        'span' => 1,
                                     ),
+                                    3 =>
                                     array(
                                         'name' => 'accounts_and_roles_widget_primary_account',
                                         'css_class' => 'accounts_and_roles_widget_name_primary_account',
                                         'label' => 'LBL_ACCOUNTS_AND_ROLES_WIDGET_PRIMARY',
                                         'type' => 'primary-radio',
                                         'groupname' => 'primary_account',
-                                        'span' => 1
+                                        'span' => 1,
                                     ),
-                                )
+                                ),
                             ),
                             9 => 'email',
-                            10 => array(
+                            10 =>
+                            array(
                                 'name' => 'tag',
                                 'span' => 6,
                             ),
@@ -480,10 +492,39 @@ $viewdefs['Contacts'] = array(
                             ),
                         ),
                     ),
+                    3 =>
+                    array(
+                        'newTab' => true,
+                        'panelDefault' => 'expanded',
+                        'name' => 'LBL_RECORDVIEW_PANEL1',
+                        'label' => 'LBL_RECORDVIEW_PANEL1',
+                        'columns' => 2,
+                        'labelsOnTop' => 1,
+                        'placeholders' => 1,
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'contact_history_c',
+                                'studio' => 'visible',
+                                'readonly' => true,
+                                'label' => 'LBL_CONTACT_HISTORY',
+                                'span' => 12,
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'contact_to_account_history',
+                                'studio' => 'visible',
+                                'readonly' => true,
+                                'label' => 'LBL_CONTACT_TO_ACCOUNT_HISTORY',
+                                'span' => 12,
+                            ),
+                        ),
+                    ),
                 ),
                 'templateMeta' =>
                 array(
-                    'useTabs' => false,
+                    'useTabs' => true,
                 ),
             ),
         ),

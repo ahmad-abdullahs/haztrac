@@ -1,5 +1,4 @@
 <?php
-
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICE_QUOTES_BILL_TO'] = 'Sales/Services Quotes (Bill To)';
 $mod_strings['LBL_SERVICE_QUOTES_SHIP_TO'] = 'Sales/Services Quotes (Ship To)';
@@ -16,3 +15,7 @@ $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ROLE'] = 'Role';
 $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_PRIMARY'] = 'Primary';
 $mod_strings['LBL_ACCOUNTS_AND_ROLES_WIDGET_ADD_ROLE'] = 'Add Role';
 $mod_strings['LBL_FILTER_ACCOUNTS_TEMPLATE'] = 'Filter By Account';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Contact Audit';
+$mod_strings['LBL_CONTACT_TO_ACCOUNT_HISTORY'] = 'Account Name | Role | Primary Audit';
+$mod_strings['LBL_CONTACT_INFO_SNAPSHOT'] = 'Take Snapshot';
+$mod_strings['LBL_CONTACT_HISTORY'] = 'Snapshot History';

@@ -1,14 +1,15 @@
 <?php
+ // created: 2021-10-27 04:15:10
 
-// created: 2019-08-04 17:18:29
-
-$app_list_strings['contact_role_list'] = array(
-    '' => '',
-    'Primary' => 'Primary',
-    'Secondary' => 'Secondary',
-    'Broker' => 'Broker',
-    '3rd Party' => '3rd Party Primary Contact',
-    'EHS' => 'EHS Contact',
-    'Accounting Pay Prime' => 'Accounts Payable Prime',
-    'Accounting Pay Add' => 'Accounts Payable Additional',
+$app_list_strings['contact_role_list']=array (
+  '' => '',
+  'Primary' => 'Primary',
+  'Secondary' => 'Secondary',
+  'Broker' => 'Broker',
+  '3rd Party' => '3rd Party Primary Contact',
+  'EHS' => 'EHS Contact',
+  'Accounting Pay Prime' => 'Accounts Payable Prime',
+  'Accounting Pay Add' => 'Accounts Payable Additional',
+  'Operation Manager' => 'Operation Manager',
+  'kaka bali' => 'kaka bali',
 );
