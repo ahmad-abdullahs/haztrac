@@ -60,7 +60,7 @@ added ++ $rows = array_merge($rows,$return); on line 179.
 styleguide/assets/css/iframe-sugar.css
 Changed from html,body{margin: 0;padding: 0;display: inline-block} to html,body{margin: 0;padding: 0;display: block}
 
------------------------------------------5--------------------------------------
+-----------------------------------------6--------------------------------------
 **************************** Non Upgrade Safe Change # 6 ***********************
 --------------------------------------------------------------------------------
 
@@ -68,3 +68,16 @@ Changed from html,body{margin: 0;padding: 0;display: inline-block} to html,body{
 // subscription warning on the Admin page.
 modules/Administration/DisplayWarnings.php
 Lines commented from 173 to 178
+
+-----------------------------------------7--------------------------------------
+**************************** Non Upgrade Safe Change # 7 ***********************
+--------------------------------------------------------------------------------
+// Below mentioned lines of code is added to achieve the filter functionality (last 45 days, 
+// next 45 days, last 60 days, next 60 days) for Permits and Licenses Expiration Dashlet.
+include/TimeDate.php
+Lines added from 1729 to 1732
+src/Elasticsearch/Query/Aggregation/DateRangeAggregation.php
+Lines added from 58 to 61
+include/SearchForm/SearchForm2.php
+Lines added from 1198 to 1201
+

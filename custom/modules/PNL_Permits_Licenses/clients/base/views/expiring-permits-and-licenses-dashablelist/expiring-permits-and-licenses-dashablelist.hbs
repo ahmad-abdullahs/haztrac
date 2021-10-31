@@ -1,0 +1,42 @@
+<div class="control-group dashlet-options">
+    <div class="controls">
+        <div class="row-fluid">
+            <div class="span6">
+                {{#each dashletConfig.filter}}
+                    {{field ../this model=../settings template="edit"}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+{{#if collection.dataFetched}}
+    {{#each meta.panels}}
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    {{#each fields}}
+                        <th class="{{#isSortable ../../module this}}sorting sorting_{{#eq ../../../collection.orderBy.field name}}{{../../../../orderBy.direction}}{{/eq}} orderBy{{name}}{{/isSortable}}{{#if widthClass}} {{widthClass}}{{/if}}"
+                        {{#if styles}} style="{{styles}}"{{/if}}
+                        {{#if name}} data-fieldname="{{name}}"{{/if}} data-orderby="{{orderBy}}">
+                            <span>{{str label ../../module}}</span>
+                        </th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ../collection.models}}
+                    <tr class="single">
+                        {{#each ../fields}}
+                            <td{{#if align}} class="{{align}}"{{/if}}>{{field ../../../this model=../this template=../../../viewName}}</td>
+                        {{/each}}
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{/each}}
+    {{#unless collection.length}}
+        <div class="block-footer">
+            {{str "LBL_NO_DATA_AVAILABLE"}}
+        </div>
+    {{/unless}}
+{{/if}}

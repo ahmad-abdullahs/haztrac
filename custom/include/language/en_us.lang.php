@@ -257,3 +257,6 @@ $app_list_strings['queue_workorder_module_type_list'] = array(
     'sales_and_services' => 'Sales & Service',
     'Contracts' => 'Contracts',
 );
+
+$app_strings['LBL_DASHLET_EXPIRING_PERMITS_AND_LICENSES_LISTVIEW_NAME'] = 'Expiring Permits & Licenses';
+$app_strings['LBL_DASHLET_EXPIRING_PERMITS_AND_LICENSES_LISTVIEW_DESCRIPTION'] = 'Lists records from Permits & Licenses according to criteria you define.';

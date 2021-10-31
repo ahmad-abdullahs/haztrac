@@ -54,3 +54,10 @@ $app_strings['LBL_LAB_TESTS_DASHLET_VIEW_DESCRIPTION'] = 'Display Lab Tests on t
 
 $app_strings['LBL_SYSTEM_FOLDER_DASHLET_VIEW'] = 'System Folder';
 $app_strings['LBL_SYSTEM_FOLDER_DASHLET_VIEW_DESCRIPTION'] = 'Displays system folder and files.';
+$app_list_strings['pnl_permits_licenses_expiration_date_range_dom'] = array(
+    'all' => 'All',
+    'next_7_days' => 'Next 7 Days',
+    'next_30_days' => 'Next 30 Days',
+    'next_45_days' => 'Next 45 Days',
+    'next_60_days' => 'Next 60 Days',
+);
