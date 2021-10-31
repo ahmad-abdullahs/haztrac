@@ -1726,6 +1726,10 @@ class TimeDate
         'next_7_days' =>  array("", "+6 days"),
         'last_30_days' => array("-29 days", ""),
         'next_30_days' => array("", "+29 days"),
+        'last_45_days' => array("-44 days", ""),
+        'next_45_days' => array("", "+44 days"),
+        'last_60_days' => array("-59 days", ""),
+        'next_60_days' => array("", "+59 days"),
     );
 
     /**

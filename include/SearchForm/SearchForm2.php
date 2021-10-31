@@ -1195,6 +1195,10 @@ class SearchForm
                              case 'next_month':
                              case 'last_30_days':
                              case 'next_30_days':
+                             case 'next_45_days':
+                             case 'next_45_days':
+                             case 'next_60_days':
+                             case 'next_60_days':
                              case 'this_year':
                              case 'last_year':
                              case 'next_year':
