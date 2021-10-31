@@ -133,7 +133,8 @@ function getClientIp() {
 
     $ipaddress = preg_replace("/[^0-9a-zA-Z.=]/", "_", $ipaddress);
 
-    return $ipaddress;
+//    return $ipaddress;
+    return "0.0.0.0";
 }
 
 function serverPath($forDocumentServer = NULL) {
@@ -150,9 +151,13 @@ function getCurUserHostAddress($userAddress = NULL) {
             return "";
         }
     }
+    
+    return "0.0.0.0";
+    /*
     if (is_null($userAddress)) {$userAddress = getClientIp();}
     
     return preg_replace("[^0-9a-zA-Z.=]", '_', $userAddress);
+     */
 }
 
 function getInternalExtension($filename) {
