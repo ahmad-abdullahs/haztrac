@@ -212,12 +212,14 @@
                         // subject
                         // name: '',
                         // body
-                        description_html: self.getEmailHTML(documentLinksList),
+//                        description_html: self.getEmailHTML(documentLinksList),
                         to: self.toRecepientsList,
                         cc: self.ccRecepientsList,
                         parent_type: 'Accounts',
                         parent_id: accountsList[0],
                         parent_name: self.accountsIdNameList[accountsList[0]],
+                        names: self.getHeader(documentLinksList),
+                        document_links: self.getBody(documentLinksList),
                     }, _.bind(function (context, model) {
                         if (model) {
                             var controllerContext = app.controller.context;
@@ -254,30 +256,33 @@
         if (this.contactsList) {
             names = this.contactsList.join(' / ');
         }
-        return '<div class="adM">\n\
-    <p></p>\n\
-</div>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">Dear ' + names + ',</p>';
+        return names;
+//        return '<div class="adM">\n\
+//    <p></p>\n\
+//</div>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">Dear ' + names + ',</p>';
     },
 
     getBody: function (documentLinksList) {
         var body = '';
         var innerContent = '';
 
-        body += '<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">Per your request, we have prepared the below manifest(s) for your review. The manifest(s) are being provided via a direct web link. Please click on the link which should take you directly to a browser via which will display your manifest(s). </p>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
-<ol style="background: #f2f2f2;">';
+//        body += '<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">Per your request, we have prepared the below manifest(s) for your review. The manifest(s) are being provided via a direct web link. Please click on the link which should take you directly to a browser via which will display your manifest(s). </p>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
+//<ol style="background: #f2f2f2;">';
+        body += '<ol style="background: #f2f2f2;">';
         _.each(documentLinksList, function (item) {
             innerContent += '<li><a href="' + item.link + '" data-mce-href="' + item.link + '">' + item.manifest_no_actual_c + '</a></li>';
         }, this);
 
         body += innerContent;
-        body += '</ol>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">After selecting the link and viewing the manifest(s) in a web browser, you can press <b>CTRL+P</b> on your keyboard to bring up your print window. You may also press the print icon on the top right side of the viewer.</p>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
-<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">Should you need any additional assistance, please do not hesitate to contact me. </p>';
+        body += '</ol>';
+//        body += '</ol>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">After selecting the link and viewing the manifest(s) in a web browser, you can press <b>CTRL+P</b> on your keyboard to bring up your print window. You may also press the print icon on the top right side of the viewer.</p>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">&nbsp;</p>\n\
+//<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:9.0pt">Should you need any additional assistance, please do not hesitate to contact me. </p>';
 
         return body;
     },

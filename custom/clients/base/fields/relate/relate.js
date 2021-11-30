@@ -17,7 +17,7 @@
     iconVisibility: false,
     bannedFields: [],
     initialize: function (options) {
-        this.bannedFields = ['assigned_user_name', 'modified_by_name', 'created_by_name'];
+        this.bannedFields = ['assigned_user_name', 'modified_by_name', 'created_by_name', 'custom_user_name'];
         this.iconVisibility = false;
         this.events = _.extend({}, this.events, {
             'click a[name=advance-relate-preview]': 'showPreview',
