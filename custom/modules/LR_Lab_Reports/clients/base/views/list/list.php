@@ -250,6 +250,35 @@ array (
               ),
               28 => 
               array (
+                'name' => 'sample_size_c',
+                'label' => 'LBL_SAMPLE_SIZE',
+                'enabled' => true,
+                'default' => false,
+              ),
+              29 => 
+              array (
+                'name' => 'sample_physical_state_c',
+                'label' => 'LBL_SAMPLE_PHYSICAL_STATE',
+                'enabled' => true,
+                'default' => false,
+              ),
+              30 => 
+              array (
+                'name' => 'lab_type_c',
+                'label' => 'LBL_LAB_TYPE',
+                'enabled' => true,
+                'default' => false,
+              ),
+              31 => 
+              array (
+                'name' => 'report_number',
+                'label' => 'LBL_NUMBER',
+                'enabled' => true,
+                'readonly' => true,
+                'default' => false,
+              ),
+              32 => 
+              array (
                 'name' => 'modified_by_name',
                 'label' => 'LBL_MODIFIED_USER',
                 'id' => 'USERS_ID',

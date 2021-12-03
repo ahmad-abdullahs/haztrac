@@ -143,6 +143,13 @@ array (
             'name' => 'pnl_permits_licenses_documents_1_name',
           ),
         ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sales_and_services_documents_1_name',
+          ),
+        ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 
       array (

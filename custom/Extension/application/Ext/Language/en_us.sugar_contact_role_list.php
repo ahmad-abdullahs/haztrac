@@ -11,5 +11,7 @@ $app_list_strings['contact_role_list']=array (
   'Accounting Pay Prime' => 'Accounts Payable Prime',
   'Accounting Pay Add' => 'Accounts Payable Additional',
   'Operation Manager' => 'Operation Manager',
-  'kaka bali' => 'kaka bali',
+  'Sales Manager' => 'Sales Manager',
+  'Area Manager' => 'Area Manager',
 );
+
