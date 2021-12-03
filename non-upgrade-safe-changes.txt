@@ -81,3 +81,13 @@ Lines added from 58 to 61
 include/SearchForm/SearchForm2.php
 Lines added from 1198 to 1201
 
+/*
+-----------------------------------------8--------------------------------------
+**************************** Non Upgrade Safe Change # 8 ***********************
+--------------------------------------------------------------------------------
+// Below mentioned lines of code is changes to avoid the UserSignatures relate field 
+// to be disabled in the OutboundEmail create and record view.
+clients/base/fields/relate/relate.js
+Lines chnaged from 266 to 274
+*/
+

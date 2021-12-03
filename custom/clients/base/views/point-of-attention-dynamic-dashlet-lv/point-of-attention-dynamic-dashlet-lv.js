@@ -47,6 +47,7 @@
             // unless he is in Manager: Financial Team 
             var fieldsList = [
                 'estimated_rli_cost',
+                'extended_rli_cost',
                 'estimated_rli_profit',
                 'estimated_rli_profit_margin',
                 'commission'

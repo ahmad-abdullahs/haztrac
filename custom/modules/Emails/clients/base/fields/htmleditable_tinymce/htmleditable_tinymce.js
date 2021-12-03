@@ -16,6 +16,34 @@
 ({
     extendsFrom: 'EmailsHtmleditable_tinymceField',
 
+//    bindDataChange: function () {
+//        this._super('bindDataChange');
+//
+//        var self = this;
+//
+//        if (this.model) {
+//            this.model.on('change:outbound_email_id', function (model, value) {
+//                console.log("bindDataChange : ", value);
+//                // Fetch the signature 
+//                // Set it to current_signature 
+//                // Then insert it
+//            }, this);
+//        }
+//    },
+    
+    /*
+var fromList = this.context.get('cache:Emails:outbound_email_id:items');
+var ids = Object.keys(fromList);
+
+if(!_.isEmpty(ids)){
+    var fromEmailId = ids[0];
+    console.log('fromEmailId', fromEmailId, fromList[fromEmailId]);
+    var outboundEmailBean = App.data.createBean('OutboundEmail', {id: fromEmailId});
+    outboundEmailBean.fetch();
+//     outboundEmailBean.fetch({fields: ['id','user_signature_id']});
+}
+*/
+
     /**
      * Inserts the template into the editor.
      *

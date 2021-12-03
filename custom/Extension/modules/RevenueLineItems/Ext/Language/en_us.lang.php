@@ -77,3 +77,4 @@ $mod_strings['LBL_DELETE_SUCCESS_CC'] = 'Record is successfully deleted.';
 $mod_strings['LBL_DELETE_ERROR_CC'] = 'Unable to remove the record.';
 $mod_strings['LBL_UPDATE_BUTTON_LABEL'] = 'Update';
 $mod_strings['LBL_UPDATE_DESCRIPTION'] = 'Update Description';
+$mod_strings['LBL_EXTENDED_COST'] = 'Extended Cost';

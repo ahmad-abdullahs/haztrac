@@ -263,10 +263,17 @@
                 if (!_.isUndefined(searchModule)) {
                     if (!app.acl.hasAccess('list', searchModule) ||
                         !_.contains(app.metadata.getModuleNames(), searchModule)) {
-                        this._renderDisabledDropdown();
-                        break;
+//                        // Non-Upgrade Safe Change 
+//                        // This check is added to avoid the UserSignatures relate field 
+//                        // to be disabled in the OutboundEmail create and record view
+//                        if (searchModule == 'UserSignatures') {
+//
+//                        } else {
+                            this._renderDisabledDropdown();
+                            break;
+                        }
                     }
-                }
+//                }
                 if (_.isUndefined(this.filters)) {
                     this._createFiltersCollection({
                         success: _.bind(function() {

@@ -1,328 +1,221 @@
 <?php
-$viewdefs['sales_and_services'] = 
-array (
-  'base' => 
-  array (
-    'view' => 
-    array (
-      'list' => 
-      array (
-        'panels' => 
-        array (
-          0 => 
-          array (
-            'label' => 'LBL_PANEL_1',
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'name',
-                'label' => 'LBL_NAME',
-                'default' => true,
-                'enabled' => true,
-                'link' => true,
-                'type' => 'open-in-drawer',
-                'related_fields' => 
-                array (
-                  0 => 'shipping_address_street_c',
-                  1 => 'shipping_address_city_c',
-                  2 => 'shipping_address_state_c',
-                  3 => 'shipping_address_postalcode_c',
-                  4 => 'shipping_address_country_c',
-                  5 => 'lat_c',
-                  6 => 'lon_c',
-                  7 => 'service_site_address_name',
-                  8 => 'service_site_address_street_c',
-                  9 => 'service_site_address_city_c',
-                  10 => 'service_site_address_state_c',
-                  11 => 'service_site_address_postalcode_c',
-                  12 => 'service_site_address_country_c',
-                  13 => 'pdf_template_printer_widget',
-                  14 => 'sales_and_services_revenuelineitems_1',
-                  15 => 'name',
-                  16 => 'sales_and_service_status',
-                  17 => 'status_c',
-                  18 => 'accounts_sales_and_services_1_name',
-                  19 => 'contacts_sales_and_services_1_name',
-                  20 => 'assigned_user_name',
-                  21 => 'po_number_c',
-                  22 => 'account_terms_c',
-                  23 => 'on_date_c',
-                  24 => 'on_time_c',
-                  25 => 'instructions_notes_c',
-                  26 => 'internal_notes_c',
-                  27 => 'print_status_c',
-                  28 => 'estimated_rli_total',
-                  29 => 'rli_total_c',
-                  30 => 'transporter_carrier_c',
-                  31 => 'destination_ship_to_c',
-                  32 => 'sales_and_service_assets_and_objects',
-                  33 => 'complete_date_c',
-                  34 => 'payment_status_c',
-                  35 => 'payment_reference_c',
-                  36 => 'closing_notes_c',
-                  37 => 'lab_result_c',
-                  38 => 'sales_and_service_total_c',
-                  39 => 'description',
-                  40 => 'date_modified_by',
-                  41 => 'date_entered_by',
-                  42 => 'recurring_sale_c',
-                  43 => 'recurring_start_date_c',
-                  44 => 'timings',
-                  45 => 'occurs_c',
-                  46 => 'daily_repeat_on',
-                  47 => 'weekly_repeat_on',
-                  48 => 'monthly_repeat_on_one',
-                  49 => 'monthly_repeat_on_two',
-                  50 => 'monthly_repeat_on_three',
-                  51 => 'yearly_repeat_on_one',
-                  52 => 'yearly_repeat_on_two',
-                  53 => 'yearly_repeat_on_three',
-                  54 => 'ss_number',
-                  55 => 'svc_type_c',
-                  56 => 'profile_no_c',
-                  57 => 'svc_days_c',
-                  58 => 'quotes_sales_and_services_1_name',
-                  59 => 'contracts_sales_and_services_1_name',
-                  60 => 'audit',
-                  61 => 'taxable_c',
-                  62 => 'commentlog',
-                  63 => 'pdf_template_printer_widget',
-                  64 => 'print_date',
-                  65 => 'ac_usepa_id_c',
-                  66 => 'account_number_c',
-                  67 => 'account_status_c',
-                  68 => 'po_required',
-                  69 => 'billing_address_third_party_name',
-                  70 => 'billing_address_street_c',
-                  71 => 'billing_address_city_c',
-                  72 => 'billing_address_state_c',
-                  73 => 'billing_address_postalcode_c',
-                  74 => 'billing_address_country_c',
-                  75 => 'shipping_address_third_party_name',
-                  76 => 'shipping_address_street_c',
-                  77 => 'shipping_address_city_c',
-                  78 => 'shipping_address_state_c',
-                  79 => 'shipping_address_postalcode_c',
-                  80 => 'shipping_address_country_c',
-                  81 => 'service_site_address_name',
-                  82 => 'service_site_address_street_c',
-                  83 => 'service_site_address_city_c',
-                  84 => 'service_site_address_state_c',
-                  85 => 'service_site_address_postalcode_c',
-                  86 => 'service_site_address_country_c',
-                  87 => 'lat_c',
-                  88 => 'lon_c',
-                  89 => 'date_modified',
-                  90 => 'modified_by_name',
-                  91 => 'date_entered',
-                  92 => 'created_by_name',
-                  93 => 'end_date_option_c',
-                  94 => 'grid_start',
-                  95 => 'recurring_end_date_c',
-                  96 => 'occurrences_c',
-                  97 => 'grid_end',
-                  98 => 'daily_repeats_on_c',
-                  99 => 'daily_skip_weekends_c',
-                  100 => 'filler_field',
-                  101 => 'daily_after_no_of_days_c',
-                  102 => 'weekly_repeats_on_c',
-                  103 => 'weekly_by_day_of_the_week_c',
-                  104 => 'weekly_after_no_of_weeks_c',
-                  105 => 'monthly_repeats_on_c',
-                  106 => 'monthly_after_no_of_months_c',
-                  107 => 'monthly_on_the_specific_day_of_month_c',
-                  108 => 'monthly_skip_weekends_c',
-                  109 => 'monthly_specific_day_of_month_c',
-                  110 => 'monthly_by_day_of_week_on_c',
-                  111 => 'monthly_week_no_c',
-                  112 => 'monthly_month_day_c',
-                  113 => 'yearly_repeat_every_year_c',
-                  114 => 'yearly_on_specific_date_c',
-                  115 => 'yearly_skip_weekends_c',
-                  116 => 'yearly_on_specific_month_c',
-                  117 => 'yearly_date_of_month_c',
-                  118 => 'yearly_by_day_of_the_week_c',
-                  119 => 'yearly_week_no_c',
-                  120 => 'yearly_by_day_of_the_week_li_c',
-                  121 => 'yearly_by_day_of_week_month_c',
+
+$viewdefs['sales_and_services'] = array(
+    'base' =>
+    array(
+        'view' =>
+        array(
+            'list' =>
+            array(
+                'panels' =>
+                array(
+                    0 =>
+                    array(
+                        'label' => 'LBL_PANEL_1',
+                        'fields' =>
+                        array(
+                            0 =>
+                            array(
+                                'name' => 'name',
+                                'label' => 'LBL_NAME',
+                                'default' => true,
+                                'enabled' => true,
+                                'link' => true,
+                                'type' => 'open-in-drawer',
+                                'related_fields' =>
+                                array_merge(array(
+                                    0 => 'shipping_address_street_c',
+                                    1 => 'shipping_address_city_c',
+                                    2 => 'shipping_address_state_c',
+                                    3 => 'shipping_address_postalcode_c',
+                                    4 => 'shipping_address_country_c',
+                                    5 => 'lat_c',
+                                    6 => 'lon_c',
+                                    7 => 'service_site_address_name',
+                                    8 => 'service_site_address_street_c',
+                                    9 => 'service_site_address_city_c',
+                                    10 => 'service_site_address_state_c',
+                                    11 => 'service_site_address_postalcode_c',
+                                    12 => 'service_site_address_country_c',
+                                    13 => 'pdf_template_printer_widget',
+                                    14 => 'sales_and_services_revenuelineitems_1',
+                                        ), getViewFields('recordview', 'sales_and_services')),
+                                'width' => 'medium',
+                            ),
+                            1 =>
+                            array(
+                                'name' => 'ss_number',
+                                'label' => 'LBL_SS_NUMBER',
+                                'enabled' => true,
+                                'readonly' => true,
+                                'default' => true,
+                                'width' => 'xxsmall',
+                            ),
+                            2 =>
+                            array(
+                                'name' => 'mft_part_num',
+                                'label' => 'LBL_MFT_PART_NUM',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xsmall',
+                            ),
+                            3 =>
+                            array(
+                                'name' => 'status_c',
+                                'label' => 'LBL_STATUS',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xsmall',
+                            ),
+                            4 =>
+                            array(
+                                'name' => 'accounts_sales_and_services_1_name',
+                                'label' => 'LBL_ACCOUNTS_SALES_AND_SERVICES_1_FROM_ACCOUNTS_TITLE',
+                                'enabled' => true,
+                                'id' => 'ACCOUNTS_SALES_AND_SERVICES_1ACCOUNTS_IDA',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => true,
+                                'width' => 'xsmall',
+                            ),
+                            5 =>
+                            array(
+                                'name' => 'service_manifest_c',
+                                'label' => 'LBL_SERVICE_MANIFEST',
+                                'enabled' => true,
+                                'id' => 'HT_MANIFEST_ID_C',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => true,
+                            ),
+                            6 =>
+                            array(
+                                'name' => 'on_date_c',
+                                'label' => 'LBL_ON_DATE',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xsmall',
+                            ),
+                            7 =>
+                            array(
+                                'name' => 'on_time_c',
+                                'label' => 'LBL_ON_TIME',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xsmall',
+                            ),
+                            8 =>
+                            array(
+                                'name' => 'svc_days_c',
+                                'label' => 'LBL_SVC_DAYS',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xxsmall',
+                            ),
+                            9 =>
+                            array(
+                                'name' => 'estimated_rli_total',
+                                'label' => 'LBL_ESTIMATED_RLI_TOTAL',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xxsmall',
+                            ),
+                            10 =>
+                            array(
+                                'name' => 'rli_total_c',
+                                'label' => 'LBL_RLI_TOTAL',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xxsmall',
+                            ),
+                            11 =>
+                            array(
+                                'name' => 'payment_status_c',
+                                'label' => 'LBL_PAYMENT_STATUS',
+                                'enabled' => true,
+                                'default' => true,
+                                'width' => 'xsmall',
+                            ),
+                            12 =>
+                            array(
+                                'name' => 'complete_date_c',
+                                'label' => 'LBL_COMPLETE_DATE',
+                                'enabled' => true,
+                                'default' => true,
+                            ),
+                            13 =>
+                            array(
+                                'name' => 'contracts_sales_and_services_1_name',
+                                'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
+                                'enabled' => true,
+                                'id' => 'CONTRACTS_SALES_AND_SERVICES_1CONTRACTS_IDA',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => false,
+                            ),
+                            14 =>
+                            array(
+                                'name' => 'date_entered',
+                                'enabled' => true,
+                                'default' => false,
+                            ),
+                            15 =>
+                            array(
+                                'name' => 'date_modified',
+                                'enabled' => true,
+                                'default' => false,
+                            ),
+                            16 =>
+                            array(
+                                'name' => 'quotes_sales_and_services_1_name',
+                                'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
+                                'enabled' => true,
+                                'id' => 'QUOTES_SALES_AND_SERVICES_1QUOTES_IDA',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => false,
+                            ),
+                            17 =>
+                            array(
+                                'name' => 'po_number_c',
+                                'label' => 'LBL_PO_NUMBER',
+                                'enabled' => true,
+                                'default' => false,
+                            ),
+                            18 =>
+                            array(
+                                'name' => 'contacts_sales_and_services_1_name',
+                                'label' => 'LBL_CONTACTS_SALES_AND_SERVICES_1_FROM_CONTACTS_TITLE',
+                                'enabled' => true,
+                                'id' => 'CONTACTS_SALES_AND_SERVICES_1CONTACTS_IDA',
+                                'link' => true,
+                                'sortable' => false,
+                                'default' => false,
+                            ),
+                            19 =>
+                            array(
+                                'name' => 'svc_type_c',
+                                'label' => 'LBL_SVC_TYPE',
+                                'enabled' => true,
+                                'default' => false,
+                            ),
+                            20 =>
+                            array(
+                                'name' => 'team_name',
+                                'label' => 'LBL_TEAM',
+                                'default' => false,
+                                'enabled' => true,
+                                'width' => '9',
+                            ),
+                        ),
+                    ),
                 ),
-                'width' => 'medium',
-              ),
-              1 => 
-              array (
-                'name' => 'ss_number',
-                'label' => 'LBL_SS_NUMBER',
-                'enabled' => true,
-                'readonly' => true,
-                'default' => true,
-                'width' => 'xxsmall',
-              ),
-              2 => 
-              array (
-                'name' => 'mft_part_num',
-                'label' => 'LBL_MFT_PART_NUM',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xsmall',
-              ),
-              3 => 
-              array (
-                'name' => 'status_c',
-                'label' => 'LBL_STATUS',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xsmall',
-              ),
-              4 => 
-              array (
-                'name' => 'accounts_sales_and_services_1_name',
-                'label' => 'LBL_ACCOUNTS_SALES_AND_SERVICES_1_FROM_ACCOUNTS_TITLE',
-                'enabled' => true,
-                'id' => 'ACCOUNTS_SALES_AND_SERVICES_1ACCOUNTS_IDA',
-                'link' => true,
-                'sortable' => false,
-                'default' => true,
-                'width' => 'xsmall',
-              ),
-              5 => 
-              array (
-                'name' => 'service_manifest_c',
-                'label' => 'LBL_SERVICE_MANIFEST',
-                'enabled' => true,
-                'id' => 'HT_MANIFEST_ID_C',
-                'link' => true,
-                'sortable' => false,
-                'default' => true,
-              ),
-              6 => 
-              array (
-                'name' => 'on_date_c',
-                'label' => 'LBL_ON_DATE',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xsmall',
-              ),
-              7 => 
-              array (
-                'name' => 'on_time_c',
-                'label' => 'LBL_ON_TIME',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xsmall',
-              ),
-              8 => 
-              array (
-                'name' => 'svc_days_c',
-                'label' => 'LBL_SVC_DAYS',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xxsmall',
-              ),
-              9 => 
-              array (
-                'name' => 'estimated_rli_total',
-                'label' => 'LBL_ESTIMATED_RLI_TOTAL',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xxsmall',
-              ),
-              10 => 
-              array (
-                'name' => 'rli_total_c',
-                'label' => 'LBL_RLI_TOTAL',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xxsmall',
-              ),
-              11 => 
-              array (
-                'name' => 'payment_status_c',
-                'label' => 'LBL_PAYMENT_STATUS',
-                'enabled' => true,
-                'default' => true,
-                'width' => 'xsmall',
-              ),
-              12 => 
-              array (
-                'name' => 'complete_date_c',
-                'label' => 'LBL_COMPLETE_DATE',
-                'enabled' => true,
-                'default' => true,
-              ),
-              13 => 
-              array (
-                'name' => 'contracts_sales_and_services_1_name',
-                'label' => 'LBL_CONTRACTS_SALES_AND_SERVICES_1_FROM_CONTRACTS_TITLE',
-                'enabled' => true,
-                'id' => 'CONTRACTS_SALES_AND_SERVICES_1CONTRACTS_IDA',
-                'link' => true,
-                'sortable' => false,
-                'default' => false,
-              ),
-              14 => 
-              array (
-                'name' => 'date_entered',
-                'enabled' => true,
-                'default' => false,
-              ),
-              15 => 
-              array (
-                'name' => 'date_modified',
-                'enabled' => true,
-                'default' => false,
-              ),
-              16 => 
-              array (
-                'name' => 'quotes_sales_and_services_1_name',
-                'label' => 'LBL_QUOTES_SALES_AND_SERVICES_1_FROM_QUOTES_TITLE',
-                'enabled' => true,
-                'id' => 'QUOTES_SALES_AND_SERVICES_1QUOTES_IDA',
-                'link' => true,
-                'sortable' => false,
-                'default' => false,
-              ),
-              17 => 
-              array (
-                'name' => 'po_number_c',
-                'label' => 'LBL_PO_NUMBER',
-                'enabled' => true,
-                'default' => false,
-              ),
-              18 => 
-              array (
-                'name' => 'contacts_sales_and_services_1_name',
-                'label' => 'LBL_CONTACTS_SALES_AND_SERVICES_1_FROM_CONTACTS_TITLE',
-                'enabled' => true,
-                'id' => 'CONTACTS_SALES_AND_SERVICES_1CONTACTS_IDA',
-                'link' => true,
-                'sortable' => false,
-                'default' => false,
-              ),
-              19 => 
-              array (
-                'name' => 'svc_type_c',
-                'label' => 'LBL_SVC_TYPE',
-                'enabled' => true,
-                'default' => false,
-              ),
-              20 => 
-              array (
-                'name' => 'team_name',
-                'label' => 'LBL_TEAM',
-                'default' => false,
-                'enabled' => true,
-                'width' => '9',
-              ),
+                'orderBy' =>
+                array(
+                    'field' => 'date_modified',
+                    'direction' => 'desc',
+                ),
             ),
-          ),
         ),
-        'orderBy' => 
-        array (
-          'field' => 'date_modified',
-          'direction' => 'desc',
-        ),
-      ),
     ),
-  ),
 );

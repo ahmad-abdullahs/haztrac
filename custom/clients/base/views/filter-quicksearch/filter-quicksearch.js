@@ -56,6 +56,7 @@
             "PNL_Permits_Licenses",
             "LR_Lab_Reports_Templates",
             "WT_Waste_Tracking",
+            "Quotes",
         ];
         if (modules.indexOf(linkModuleName) != '-1') {
             label = app.lang.get('LBL_SEARCH_BY') + ' anything';

@@ -36,12 +36,19 @@ $viewdefs['sales_and_services']['base']['view']['point-of-attention-list'] = arr
                     'sortable' => false,
                 ),
                 array(
-                    'name' => 'estimated_rli_cost',
+                    'name' => 'extended_rli_cost',
                     'label' => 'LBL_EXTD_COST',
                     'type' => 'currency',
                     'width' => 'xsmall',
                     'sortable' => false,
                 ),
+//                array(
+//                    'name' => 'estimated_rli_cost',
+//                    'label' => 'LBL_EXTD_COST',
+//                    'type' => 'currency',
+//                    'width' => 'xsmall',
+//                    'sortable' => false,
+//                ),
 //                array(
 //                    'name' => 'estimated_rli_list',
 //                    'label' => 'LBL_EXTD_LIST',
