@@ -22,6 +22,7 @@
                 model: model,
                 modelId: recordId,
                 initiatedByMapView: true,
+                completeSales: true,
 //                loadSpecifiedPanels: [
 //                    'sales_and_services_revenuelineitems_1',
 //                ],

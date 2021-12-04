@@ -8,6 +8,10 @@
         // Add listener for custom button
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
         this.model.on('change:recurring_sale_c', this.takeUserToRecurringTab, this);
+        this.model.on('change:status_c', this.handleCompletionPanel, this);
+        this.model.on('change:complete_date_c', _.bind(this.handleCompletionPanelFieldsStyle, this, 'complete_date_c'), this);
+        this.model.on('change:payment_reference_c', _.bind(this.handleCompletionPanelFieldsStyle, this, 'payment_reference_c'), this);
+        this.model.on('change:payment_status_c', _.bind(this.handleCompletionPanelFieldsStyle, this, 'payment_status_c'), this);
         // Add listener for print_paperwork_button
         this.context.on('button:print_paperwork_button:click', this.printPaperworkDrawer, this);
         /*This makes the field colored in detail view...*/
@@ -141,6 +145,132 @@
 //                }
             });
         });
+    },
+
+    _renderFields: function () {
+        this._super('_renderFields');
+
+        var self = this;
+
+        // Execute after 1.5 seconds (1500 milliseconds):
+        setTimeout(_.bind(function () {
+            if (this.context) {
+                if (this.context.get('completeSales')) {
+                    var payment_status_c = this.getField('payment_status_c');
+                    payment_status_c.$el.find('[name="payment_status_c"]').siblings('div').children('a').css('background-color', '#F4ED9C');
+
+                    var complete_date_c = this.getField('complete_date_c');
+                    complete_date_c.$el.find('[name="complete_date_c"]').css('background-color', '#F4ED9C');
+
+                    var complete_date_c = this.getField('payment_reference_c');
+                    complete_date_c.$el.find('[name="payment_reference_c"]').css('background-color', '#F4ED9C');
+
+                    $.when(this.triggerEdit()).then(function () {
+                        //*** Make the Actual quantity, Unit of Measure and Unit price fields coloured.
+                        if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+                            // simple decimal field 
+                            // $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#F4ED9C');
+                            _.each(self.model._relatedCollections.sales_and_services_revenuelineitems_1.models, function (colModel) {
+                                $('tr[name*=RevenueLineItems_' + colModel.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
+                                colModel.on('change:quantity', _.bind(self.handleRevenueLineItemsSubPanelFieldsStyle, self, 'quantity'), self);
+                            });
+                        }
+                    });
+                }
+            }
+        }, this), 1500);
+    },
+
+    handleRevenueLineItemsSubPanelFieldsStyle: function (fieldName, model, fieldValue) {
+        if (this.context) {
+            if (this.context.get('completeSales')) {
+                if (!_.isEmpty(fieldValue)) {
+                    $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '');
+                }
+                /*else {
+                    $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
+                }*/
+            }
+        }
+    },
+
+    handleCompletionPanelFieldsStyle: function (fieldName, model, fieldValue) {
+        if (this.context) {
+            if (this.context.get('completeSales')) {
+                var field = this.getField(fieldName);
+                // Text and Date Fields
+                if (fieldName == 'complete_date_c' || fieldName == 'payment_reference_c') {
+                    if (!_.isEmpty(fieldValue)) {
+                        field.$el.find('[name="' + fieldName + '"]').css('background-color', '');
+                    } 
+                    /*else {
+                        field.$el.find('[name="' + fieldName + '"]').css('background-color', '#F4ED9C');
+                    }*/
+                }
+
+                // Drop Down Field
+                if (fieldName == 'payment_status_c') {
+                    if (!_.isEmpty(fieldValue)) {
+                        field.$el.find('[name="' + fieldName + '"]').siblings('div').children('a').css('background-color', '');
+                    } 
+                    /*else {
+                        field.$el.find('[name="' + fieldName + '"]').siblings('div').children('a').css('background-color', '#F4ED9C');
+                    }*/
+                }
+            }
+        }
+    },
+
+    _initTabsAndPanels: function () {
+        this._super('_initTabsAndPanels');
+
+        // Set panel_completion (Completion) state on the basis of status_c (Status)
+        // If status is Complete (Won), completion_panel shall remain open, otherwise 
+        // it will be collapsed all the time. 
+        _.each(this.meta.panels, function (panel) {
+            if (panel.name == "panel_completion") {
+                if (this.model.get('status_c') != "Complete") {
+                    var panelState = "collapsed";
+                } else {
+                    var panelState = "expanded";
+                }
+            }
+            panel.panelState = panelState || panel.panelDefault;
+        }, this);
+    },
+
+    handleCompletionPanel: function (model, fieldValue) {
+        if (fieldValue != "Complete") {
+            this.hideCompletionPanel(this.$el.find("[data-panelname='panel_completion']").children('div:first'));
+        } else {
+            this.showCompletionPanel(this.$el.find("[data-panelname='panel_completion']").children('div:first'));
+        }
+    },
+
+    showCompletionPanel: function (e) {
+        var $panelHeader = e;
+        if ($panelHeader && $panelHeader.next()) {
+            $panelHeader.next().show();
+            $panelHeader.removeClass('panel-inactive');
+            $panelHeader.addClass('panel-active');
+        }
+        if ($panelHeader && $panelHeader.find('i')) {
+            $panelHeader.find('i').removeClass('fa-chevron-down');
+            $panelHeader.find('i').addClass('fa-chevron-up');
+        }
+    },
+
+    hideCompletionPanel: function (e) {
+        var $panelHeader = e;
+        if ($panelHeader && $panelHeader.next()) {
+            $panelHeader.next().hide();
+            $panelHeader.removeClass('panel-active');
+            $panelHeader.addClass('panel-inactive');
+        }
+        if ($panelHeader && $panelHeader.find('i')) {
+            $panelHeader.find('i').removeClass('fa-chevron-up');
+            $panelHeader.find('i').addClass('fa-chevron-down');
+        }
     },
 
     triggerEdit: function () {
