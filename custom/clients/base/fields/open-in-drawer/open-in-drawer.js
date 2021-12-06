@@ -60,9 +60,10 @@
                     }
                 }, _.bind(function () {
                     // On Close
-                    if (self.collection) {
-                        self.collection.fetch();
-                    }
+                    app.router.refresh();
+//                    if (self.collection) {
+//                        self.collection.fetch();
+//                    }
                 }, this), _.bind(function (renderedComponent) {
                     // On Open make the record view in edit mode.
                     renderedComponent.context.trigger('button:edit_button:click');

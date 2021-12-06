@@ -157,6 +157,10 @@
         setTimeout(_.bind(function () {
             this.handleCompletionProcessStyling();
         }, this), 2000);
+        // Execute after 3.0 seconds (2000 milliseconds):
+        setTimeout(_.bind(function () {
+            this.handleCompletionProcessStyling();
+        }, this), 3000);
     },
 
     handleCompletionProcessStyling: function () {
@@ -425,10 +429,11 @@
                      * to refresh it, for the new data be loaded.
                      */
                     setTimeout(_.bind(function () {
-                        var linkName = 'sales_and_services_revenuelineitems_1';
-                        var subpanelCollection = this.model.getRelatedCollection(linkName);
-                        subpanelCollection.fetch({relate: true});
+                        this.fetchTheRevenueLineItemSubpanel();
                     }, this), 1000);
+                    setTimeout(_.bind(function () {
+                        this.fetchTheRevenueLineItemSubpanel();
+                    }, this), 2000);
                 }, this);
 
         //Call editable to turn off key and mouse events before fields are disposed (SP-1873)
@@ -476,6 +481,12 @@
         this.model.save({}, options);
     },
 
+    fetchTheRevenueLineItemSubpanel: function () {
+        var linkName = 'sales_and_services_revenuelineitems_1';
+        var subpanelCollection = this.model.getRelatedCollection(linkName);
+        subpanelCollection.fetch({relate: true});
+    },
+
     isOnTopOfListView: function () {
         var isOnTopOfListView = false;
         if (this.options.context) {
@@ -502,6 +513,7 @@
 
     closeDrawer: function () {
         app.drawer.close();
+        app.router.refresh();
     },
 
     printPaperworkDrawer: function () {
