@@ -149,47 +149,61 @@
 
     _renderFields: function () {
         this._super('_renderFields');
-
-        var self = this;
-
         // Execute after 1.5 seconds (1500 milliseconds):
         setTimeout(_.bind(function () {
-            if (this.context) {
-                if (this.context.get('completeSales')) {
+            this.handleCompletionProcessStyling();
+        }, this), 1500);
+        // Execute after 2.0 seconds (2000 milliseconds):
+        setTimeout(_.bind(function () {
+            this.handleCompletionProcessStyling();
+        }, this), 2000);
+    },
+
+    handleCompletionProcessStyling: function () {
+        var self = this;
+        if (this.context) {
+            if (this.context.get('completeSales')) {
+                if (_.isEmpty(this.model.get('payment_status_c'))) {
                     var payment_status_c = this.getField('payment_status_c');
                     payment_status_c.$el.find('[name="payment_status_c"]').siblings('div').children('a').css('background-color', '#F4ED9C');
+                }
 
+                if (_.isEmpty(this.model.get('complete_date_c'))) {
                     var complete_date_c = this.getField('complete_date_c');
                     complete_date_c.$el.find('[name="complete_date_c"]').css('background-color', '#F4ED9C');
+                }
 
+                if (_.isEmpty(this.model.get('payment_reference_c'))) {
                     var complete_date_c = this.getField('payment_reference_c');
                     complete_date_c.$el.find('[name="payment_reference_c"]').css('background-color', '#F4ED9C');
-
-                    $.when(this.triggerEdit()).then(function () {
-                        //*** Make the Actual quantity, Unit of Measure and Unit price fields coloured.
-                        if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
-                            // simple decimal field 
-                            // $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#F4ED9C');
-                            _.each(self.model._relatedCollections.sales_and_services_revenuelineitems_1.models, function (colModel) {
-                                $('tr[name*=RevenueLineItems_' + colModel.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
-                                colModel.on('change:quantity', _.bind(self.handleRevenueLineItemsSubPanelFieldsStyle, self, 'quantity'), self);
-                            });
-                        }
-                    });
                 }
+
+                $.when(this.triggerEdit()).then(function () {
+                    //*** Make the Actual quantity, Unit of Measure and Unit price fields coloured.
+                    if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
+                        // simple decimal field 
+                        // $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#F4ED9C');
+                        _.each(self.model._relatedCollections.sales_and_services_revenuelineitems_1.models, function (colModel) {
+                            if (app.utils.isEmpty(colModel.get('quantity'))) {
+                                $('tr[name*=RevenueLineItems_' + colModel.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
+                            }
+                            colModel.on('change:quantity', _.bind(self.handleRevenueLineItemsSubPanelFieldsStyle, self, 'quantity'), self);
+                        });
+                    }
+                });
             }
-        }, this), 1500);
+        }
     },
 
     handleRevenueLineItemsSubPanelFieldsStyle: function (fieldName, model, fieldValue) {
         if (this.context) {
             if (this.context.get('completeSales')) {
-                if (!_.isEmpty(fieldValue)) {
+                if (!app.utils.isEmpty(fieldValue)) {
                     $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '');
                 }
                 /*else {
-                    $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
-                }*/
+                 $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
+                 }*/
             }
         }
     },
@@ -202,20 +216,20 @@
                 if (fieldName == 'complete_date_c' || fieldName == 'payment_reference_c') {
                     if (!_.isEmpty(fieldValue)) {
                         field.$el.find('[name="' + fieldName + '"]').css('background-color', '');
-                    } 
+                    }
                     /*else {
-                        field.$el.find('[name="' + fieldName + '"]').css('background-color', '#F4ED9C');
-                    }*/
+                     field.$el.find('[name="' + fieldName + '"]').css('background-color', '#F4ED9C');
+                     }*/
                 }
 
                 // Drop Down Field
                 if (fieldName == 'payment_status_c') {
                     if (!_.isEmpty(fieldValue)) {
                         field.$el.find('[name="' + fieldName + '"]').siblings('div').children('a').css('background-color', '');
-                    } 
+                    }
                     /*else {
-                        field.$el.find('[name="' + fieldName + '"]').siblings('div').children('a').css('background-color', '#F4ED9C');
-                    }*/
+                     field.$el.find('[name="' + fieldName + '"]').siblings('div').children('a').css('background-color', '#F4ED9C');
+                     }*/
                 }
             }
         }
@@ -401,6 +415,20 @@
                         //re-render the view if the user does not have edit access after save.
                         this.render();
                     }
+
+                    /**
+                     * Refreshes the RevenueLineItems subpanel when the save process is over
+                     * 
+                     * We are refreshing it because, at the time of Sales Completion users enters the 
+                     * Actual Quantity field in the RevenueLineItems subpanel and saves the record.
+                     * RevenueLineItems subpanel saves the data but shows the old data in it, so we want
+                     * to refresh it, for the new data be loaded.
+                     */
+                    setTimeout(_.bind(function () {
+                        var linkName = 'sales_and_services_revenuelineitems_1';
+                        var subpanelCollection = this.model.getRelatedCollection(linkName);
+                        subpanelCollection.fetch({relate: true});
+                    }, this), 1000);
                 }, this);
 
         //Call editable to turn off key and mouse events before fields are disposed (SP-1873)
