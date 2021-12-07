@@ -97,9 +97,13 @@ class ViewOnlyoffice extends SugarView {
         $command = $sugar_config['builder_path'] . " " . $inputFilePath . " 2>&1";
         exec($command, $output);
 
-        if (count($output) !== 0) {
-            throw new Exception(json_encode($output));
-        }
+        // This was working, but commented because they happen sometimes the exec command
+        // gives lot of error but still generates the output file.
+        // So we are not taking care of errors, if file is generated.
+        // So, commented this piece of code.
+//        if (count($output) !== 0) {
+//            throw new Exception(json_encode($output));
+//        }
 
         if (!file_exists($outputFilePath)) {
             throw new Exception("An error has occurred. Result File not found :" . $outputFilePath);
