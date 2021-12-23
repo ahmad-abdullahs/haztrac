@@ -3,6 +3,9 @@
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 
+// ********************************************************************************* 
+// Change this file with care, becuase this file is called from two different places
+// ********************************************************************************* 
 class DropDownFiller extends SugarApi {
 
     public function registerApiRest() {

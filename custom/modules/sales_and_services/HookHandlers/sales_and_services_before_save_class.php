@@ -49,6 +49,44 @@ SQL;
                 $db->query($sql);
             }
         }
+
+        // We are using the function because, we have added the Product Category Number 
+        // as the multienum field in the filter, now we are creating a dropdown at the 
+        // backend for the data presend in this field. 
+        global $app_list_strings;
+        if (!empty($bean->mft_part_num) && !isset($app_list_strings[$bean->mft_part_num])) {
+            $this->QueueJob($bean, $event, $arguments);
+//            require_once 'custom/clients/base/api/DropDownFiller.php';
+//            $dropDownUpdateHandler = new DropDownFiller();
+//            $dropDownUpdateHandler->addDropDownKeyValue(null, array(
+//                'list_name' => 'mft_part_num_list',
+//                'item_key' => $bean->mft_part_num,
+//                'item_value' => $bean->mft_part_num,
+//                'lang' => 'en_us',
+//            ));
+        }
+    }
+
+    function QueueJob(&$bean, $event, $arguments) {
+        $job = new SchedulersJob();
+        $job->name = "Update mft_part_num_list dropdown - {$bean->mft_part_num}";
+        //data we are passing to the job
+        $job->data = json_encode(array(
+            'list_name' => 'mft_part_num_list',
+            'item_key' => $bean->mft_part_num,
+            'item_value' => $bean->mft_part_num,
+            'lang' => 'en_us',
+        ));
+        //function to call
+        $job->target = "function::updateProductCategoryDropdown";
+
+        global $current_user;
+        //set the user the job runs as
+        $job->assigned_user_id = $current_user->id;
+
+        //push into the queue to run
+        $jq = new SugarJobQueue();
+        $jobid = $jq->submitJob($job);
     }
 
 }
