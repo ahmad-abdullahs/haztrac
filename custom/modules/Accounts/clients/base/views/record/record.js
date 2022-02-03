@@ -156,4 +156,49 @@
             this.$el.find('#recordTab').css('background-color', '#f6f6f6');
         }
     },
+
+    hasUnsavedChanges: function() {
+        var changedAttributes,
+            editableFieldNames = [],
+            unsavedFields,
+            self = this,
+            setAsEditable = function(fieldName) {
+                if (fieldName && _.indexOf(self.noEditFields, fieldName) === -1) {
+                    editableFieldNames.push(fieldName);
+                }
+            };
+
+        if (this.resavingAfterMetadataSync)
+            return false;
+
+        changedAttributes = this.model.changedAttributes(this.model.getSynced());
+
+        if (_.isEmpty(changedAttributes)) {
+            return false;
+        }
+
+        let ignoreFields = ['shipping_address_lat', 'shipping_address_lon'];
+        if (_.isEmpty(_.difference(_.keys(changedAttributes), ignoreFields))) {
+            return false;
+        }
+
+        // get names of all editable fields on the page including fields in a fieldset
+        _.each(this.meta.panels, function(panel) {
+            _.each(panel.fields, function(field) {
+                if (!field.readonly) {
+                    setAsEditable(field.name);
+                    if (field.fields && _.isArray(field.fields)) {
+                        _.each(field.fields, function(field) {
+                            setAsEditable(field.name);
+                        });
+                    }
+                }
+            });
+        });
+
+        // check whether the changed attributes are among the editable fields
+        unsavedFields = _.intersection(_.keys(changedAttributes), editableFieldNames);
+
+        return !_.isEmpty(unsavedFields);
+    }
 })
