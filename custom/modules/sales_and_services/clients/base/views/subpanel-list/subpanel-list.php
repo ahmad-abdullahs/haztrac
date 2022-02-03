@@ -52,6 +52,13 @@ $viewdefs['sales_and_services']['base']['view']['subpanel-list'] = array(
 //                'acl_action' => 'edit',
 //            ),
             array(
+                'type' => 'rowaction',
+                'name' => 'delete_button',
+                'event' => 'list:deleterow:fire',
+                'label' => 'LBL_DELETE_BUTTON',
+                'acl_action' => 'delete',
+            ),
+            array(
                 'type' => 'complete-sale-rowaction',
                 'name' => 'complete_sale_button',
                 'label' => 'LBL_COMPLETE_SALE',

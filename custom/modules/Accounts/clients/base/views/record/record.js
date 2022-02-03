@@ -157,16 +157,16 @@
         }
     },
 
-    hasUnsavedChanges: function() {
+    hasUnsavedChanges: function () {
         var changedAttributes,
-            editableFieldNames = [],
-            unsavedFields,
-            self = this,
-            setAsEditable = function(fieldName) {
-                if (fieldName && _.indexOf(self.noEditFields, fieldName) === -1) {
-                    editableFieldNames.push(fieldName);
-                }
-            };
+                editableFieldNames = [],
+                unsavedFields,
+                self = this,
+                setAsEditable = function (fieldName) {
+                    if (fieldName && _.indexOf(self.noEditFields, fieldName) === -1) {
+                        editableFieldNames.push(fieldName);
+                    }
+                };
 
         if (this.resavingAfterMetadataSync)
             return false;
@@ -177,18 +177,19 @@
             return false;
         }
 
+        // #HPMB-220 Ignore these field to avoid the a pop up comes up asking if I want to save changes
         let ignoreFields = ['shipping_address_lat', 'shipping_address_lon'];
         if (_.isEmpty(_.difference(_.keys(changedAttributes), ignoreFields))) {
             return false;
         }
 
         // get names of all editable fields on the page including fields in a fieldset
-        _.each(this.meta.panels, function(panel) {
-            _.each(panel.fields, function(field) {
+        _.each(this.meta.panels, function (panel) {
+            _.each(panel.fields, function (field) {
                 if (!field.readonly) {
                     setAsEditable(field.name);
                     if (field.fields && _.isArray(field.fields)) {
-                        _.each(field.fields, function(field) {
+                        _.each(field.fields, function (field) {
                             setAsEditable(field.name);
                         });
                     }
