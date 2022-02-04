@@ -21,7 +21,7 @@ This upper if is responsible for rendering the fields in the subpanel list...
 --}}
 {{#if rowModel}}
     {{#with rowModel}}
-        <tr name="{{module}}_{{attributes.id}}" class="single sortable">
+        <tr name="{{module}}_{{attributes.id}}" class="single">
             {{#each ../leftColumns}}
                 <td>
                     {{field ../../this model=../this template=../../viewName}}
@@ -41,7 +41,7 @@ This upper if is responsible for rendering the fields in the subpanel list...
         </tr>
     {{/with}}
 {{else}}
-    <tr name="{{module}}_{{model.id}}" class="single sortable">
+    <tr name="{{module}}_{{model.id}}" class="single">
         {{#each view.leftColumns}}
             <td>
                 {{field ../view model=../model template=../view.viewName}}

@@ -15,11 +15,11 @@
  */
 ({
     extendsFrom: 'NameField',
-    events: {
-        'click .open-in-drawer': 'openRecordInDrawer',
-    },
     initialize: function (options) {
         this._super('initialize', [options]);
+        this.events = _.extend({}, this.events, {
+            'click .open-in-drawer': 'openRecordInDrawer'
+        });
     },
     openRecordInDrawer: function () {
         var beanForDrawer = app.data.createBean(this.model.module, {
