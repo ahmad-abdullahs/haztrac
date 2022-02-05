@@ -128,6 +128,9 @@
                 'rli_as_template_c': '',
                 'account_id': parentModel.get('id'),
                 'sales_and_services_revenuelineitems_1sales_and_services_ida': '',
+                'ht_manifest_revenuelineitems_1ht_manifest_ida': '',
+                'quantity': '',
+                'estimated_quantity_c': '',
                 'revenuelineitems_revenuelineitems_1revenuelineitems_ida': _.isNull(bundleID) ? '' : bundleID
             });
         } else if (parentModel.get('_module') == 'Opportunities') {
