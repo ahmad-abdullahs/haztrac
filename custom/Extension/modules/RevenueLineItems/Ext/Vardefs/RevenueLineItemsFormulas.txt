@@ -1,0 +1,54 @@
+
+$dictionary["RevenueLineItem"]["fields"]["account_id"]['formula'] = 
+'ifElse(related($opportunities, "account_id"), related($opportunities, "account_id"), $account_id)';
+
+$dictionary["RevenueLineItem"]["fields"]["total_amount"]['formula'] = 
+'multiply($discount_price,$quantity)';
+
+$dictionary["RevenueLineItem"]["fields"]["book_value_usdollar"]['formula'] = 
+'ifElse(isNumeric($book_value), currencyDivide($book_value, $base_rate), "")';
+
+$dictionary["RevenueLineItem"]["fields"]["best_case"]['formula'] = 
+'ifElse(equal($best_case, ""), string($total_amount), $best_case)';
+
+$dictionary["RevenueLineItem"]["fields"]["likely_case"]['formula'] = 
+'ifElse(equal($likely_case,""),string($total_amount),$likely_case)';
+
+$dictionary["RevenueLineItem"]["fields"]["worst_case"]['formula'] = 
+'ifElse(equal($worst_case, ""), string($total_amount), $worst_case)';
+
+$dictionary["RevenueLineItem"]["fields"]["date_closed_timestamp"]['formula'] = 
+'timestamp($date_closed)';
+
+$dictionary["RevenueLineItem"]["fields"]["commit_stage"]['formula'] = 
+'forecastCommitStage($probability)';
+
+$dictionary["RevenueLineItem"]["fields"]["probability"]['formula'] = 
+'getDropdownValue("sales_probability_dom",$sales_stage)';
+
+$dictionary["RevenueLineItem"]["fields"]["rli_type_c"]['formula'] = 
+'ifElse(greaterThan(count($revenuelineitems_revenuelineitems_1),0),"parent",ifElse(equal(count($revenuelineitems_revenuelineitems_1_right),1),"child",""))';
+
+$dictionary["RevenueLineItem"]["fields"]["is_bundle_product_c"]['formula'] = 
+'ifElse(greaterThan(count($revenuelineitems_revenuelineitems_1),0),"parent",ifElse(or(equal(count($revenuelineitems_revenuelineitems_1_right),1),not(equal($revenuelineitems_revenuelineitems_1revenuelineitems_ida,""))),"child",""))';
+
+$dictionary["RevenueLineItem"]["fields"]["close_amount_c"]['formula'] = '';
+
+$dictionary["RevenueLineItem"]["fields"]["estimated_total_amount"]['formula'] = 
+'multiply($estimated_quantity_c,$discount_price)';
+
+$dictionary["RevenueLineItem"]["fields"]["bundle_total_c"]['formula'] = 
+'rollupSum($revenuelineitems_revenuelineitems_1,"discount_price")';
+
+$dictionary["RevenueLineItem"]["fields"]["related_rli_total_c"]['formula'] = 
+'rollupSum($revenuelineitems_revenuelineitems_1,"total_amount")';
+-- total_amount = 'multiply($discount_price,$quantity)';
+
+$dictionary["RevenueLineItem"]["fields"]["estimated_total_list_c"]['formula'] = 
+'multiply($estimated_quantity_c,$list_price)';
+
+$dictionary["RevenueLineItem"]["fields"]["estimated_total_cost"]['formula'] = 
+'multiply($estimated_quantity_c,$cost_price)';
+
+$dictionary["RevenueLineItem"]["fields"]["extended_cost"]['formula'] = 
+'multiply($quantity,$cost_price)';

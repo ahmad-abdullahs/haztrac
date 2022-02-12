@@ -30,5 +30,17 @@
                 throw e;
             }
         });
+
+        // While record creation from the Accounts module detail view subpanels 
+        // set the record Teams as it of Accounts module, so each new record creating
+        // would have the same Teams as Accounts have.
+        if (options.context) {
+            if (options.context.get('parentModel')) {
+                var parentModel = options.context.get('parentModel');
+                if (parentModel.get('_module') == 'Accounts') {
+                    this.model.set('team_name', parentModel.get('team_name'));
+                }
+            }
+        }
     },
 })

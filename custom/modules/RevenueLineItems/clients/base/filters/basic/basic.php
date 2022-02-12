@@ -17,6 +17,12 @@ $viewdefs[$module]['base']['filter']['basic'] = array(
     'create' => true,
     'quicksearch_field' => array_merge(array(
         'name',
+        'opportunity_name',
+        'account_name',
+        'sales_and_services_revenuelineitems_1_name',
+        'product_template_name',
+        'category_name',
+        'quote_name',
     )),
     'quicksearch_priority' => 1,
     'quicksearch_split_terms' => false,

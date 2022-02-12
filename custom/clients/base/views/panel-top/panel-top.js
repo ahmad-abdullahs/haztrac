@@ -31,7 +31,9 @@
                 model = this.createLinkModel(parentModel, link),
                 self = this;
 
-        // While menifest creation from the Accounts module set the Manifest team as it of Accounts
+        // While record creation from the Accounts module detail view subpanels 
+        // set the record Teams as it of Accounts module, so each new record creating
+        // would have the same Teams as Accounts have.
         if (this.parentModule == 'Accounts') {
             model.set('team_name', parentModel.get('team_name'));
         }

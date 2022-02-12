@@ -2,7 +2,7 @@
 
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_SERVICES_QUOTES'] = 'Sales/Services Quotes';
-$mod_strings['LBL_NAME'] = 'Product Svc Name';
+$mod_strings['LBL_NAME'] = 'Revenue Line Item';
 $mod_strings['LBL_MANIFEST_NUMBER'] = 'Manifest No.';
 $mod_strings['LBL_QUANTITY'] = 'Actual Quantity:';
 $mod_strings['LBL_ESTIMATED_QUANTITY'] = 'Estimated Quantity';

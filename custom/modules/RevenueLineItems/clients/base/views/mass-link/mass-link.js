@@ -45,7 +45,7 @@
             case 2:
                 app.alert[action]('copyed', {
                     level: 'success',
-                    messages: "Record Copyed",
+                    messages: "Record Copied",
                     autoClose: true, autoCloseDelay: 8000
                 });
                 break;
