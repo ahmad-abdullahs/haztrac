@@ -34,7 +34,14 @@
         }
     },
 
-    saveCurrentWidths: function(columns) {
+    /*
+     * https://app.vivifyscrum.com/boards/71541/HPMB-228
+     * This function was overrided to set the lastState of this._allListViewsFieldListKey, for instance
+     * ["name","shipping_address_city","shipping_address_state","phone_office","ac_usepa_id_c"......]
+     * @param {type} columns
+     * @returns {undefined}
+     */
+    saveCurrentWidths: function (columns) {
         // Needed in order to fix the scroll helper whenever the widths change.
         this.resize();
         if (!this._thisListViewFieldListKey) {
@@ -61,7 +68,7 @@
         }
 
         // Store new order if the order is changed #HPMB-228
-        if(!_.isEmpty(app.user.lastState.get(this._thisListViewFieldListKey))){
+        if (!_.isEmpty(app.user.lastState.get(this._thisListViewFieldListKey))) {
             var allField = _.pluck(this._fields.all, 'name');
             //Setting new order as base order to avoid messing up the widths
             app.user.lastState.set(this._allListViewsFieldListKey, allField);

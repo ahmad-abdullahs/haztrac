@@ -29,6 +29,11 @@ SUGAR.App.events.on('router:init', function () {
                                 localStorage.setItem(key, value);
                             }
                         }, this);
+                        
+                        // Added to reload the page to apply the preference because when the direct link
+                        // http://127.0.0.1/haztrac/#{module_name} is loaded, it unfortunately dont apply
+                        // the preferences and we have to reload the page.
+                        SUGAR.App.router.refresh();
                     }
                 }
             }
