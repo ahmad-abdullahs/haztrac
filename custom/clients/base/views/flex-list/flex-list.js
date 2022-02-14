@@ -33,4 +33,38 @@
             }
         }
     },
+
+    saveCurrentWidths: function(columns) {
+        // Needed in order to fix the scroll helper whenever the widths change.
+        this.resize();
+        if (!this._thisListViewFieldListKey) {
+            return;
+        }
+        var visibleFields = _.pluck(this._fields.visible, 'name');
+        var decoded = {
+            visible: visibleFields,
+            widths: columns
+        };
+        var encoded = this._encodeCacheWidthData(decoded);
+        this._toggleSettings('widths', true);
+
+        /**
+         * The list of user defined column widths for this specific view.
+         *
+         * @property {Array}
+         * @protected
+         */
+        this._thisListViewFieldSizes = encoded;
+
+        if (this._thisListViewFieldSizesKey) {
+            app.user.lastState.set(this._thisListViewFieldSizesKey, encoded);
+        }
+
+        // Store new order if the order is changed #HPMB-228
+        if(!_.isEmpty(app.user.lastState.get(this._thisListViewFieldListKey))){
+            var allField = _.pluck(this._fields.all, 'name');
+            //Setting new order as base order to avoid messing up the widths
+            app.user.lastState.set(this._allListViewsFieldListKey, allField);
+        }
+    }
 })
