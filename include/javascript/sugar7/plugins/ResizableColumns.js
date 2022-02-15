@@ -198,7 +198,7 @@
              */
             onAttach: function(component, plugin) {
                 this.before('render', this._unbindResizableColumns);
-                this.on('render', this._makeColumnResizable);
+                this.on('render', _.debounce(this._makeColumnResizable, 2000, false)); // Non-upgrade safe code to fix the columns resizing on page load
             },
 
             /**
