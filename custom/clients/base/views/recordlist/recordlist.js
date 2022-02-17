@@ -22,6 +22,35 @@
      */
     initialize: function (options) {
         this._super("initialize", [options]);
+
+        // Greyed out the rows on the Sales and Service and Manifest List View which are completed
+        // This will color the fields when they render on the list view
+        this.collection.on('data:sync:complete', function () {
+            this.highlightCompletedRecord();
+        }, this);
+        // This will color the rows when the column is added or removed from the list view.
+        // If we dont add this code it will not color the rows when a new column is added or removed from the list.
+        this.listenTo(this, 'render', function () {
+            this.highlightCompletedRecord();
+        }, this);
+    },
+
+    highlightCompletedRecord: function () {
+        if (this.module == 'sales_and_services' || this.module == 'HT_Manifest') {
+            _.each(this.fields, function (field) {
+                if (field.name == 'status_c') {
+                    if ((field.model.get(field.name) == 'Complete') || (field.model.get(field.name) == 'Completed')) {
+                        field.$el.parents('tr').css("background-color", "#f6f6f6 !important");
+                        // See the data-type must exist and should not be empty, this is added to avoid the 
+                        // row checkbox, favorite star, eye ball and dropdown not the be transparent
+                        field.$el.parents('tr').children('td[data-type!=""][data-type]').css("background-color", "transparent");
+                    } else {
+                        field.$el.parents('tr').css("background-color", "");
+                        field.$el.parents('tr').children('td[data-type!=""][data-type]').css("background-color", "");
+                    }
+                }
+            });
+        }
     },
 
     /**
