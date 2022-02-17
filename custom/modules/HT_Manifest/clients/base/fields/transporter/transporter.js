@@ -13,6 +13,7 @@
     enablePlusButton: false,
     addClass: 'addRecord',
     isPreview: false,
+    transporters: null,
 
     dateOptions: {
         hash: {
@@ -23,12 +24,35 @@
     initialize: function (options) {
         this.previewData = [];
         this.isPreview = false;
+        this.transporters = [];
         this._super('initialize', [options]);
     },
 
     format: function (value) {
         this.previewData = JSON.parse(value || "[]");
+
+        if (this.tplName == 'list') {
+            this.formatTransporterForList();
+        }
+
         return this._super("format", [value]);
+    },
+
+    formatTransporterForList: function () {
+        var self = this;
+        var transportersData = JSON.parse(this.model.get('transporter') || '[]');
+        if (_.isEmpty(transportersData)) {
+            self.transporters = [];
+        }
+        _.each(transportersData, function (transporter) {
+            if (!_.isEmpty(transporter.transporter_name)) {
+                self.transporters.push({
+                    'id': transporter.transporter_name_id || '',
+                    'name': transporter.transporter_name || '',
+                    'transfer_date': transporter.transporter_transfer_date || '',
+                });
+            }
+        }, this);
     },
 
     getCurrentNewRowUid: function () {

@@ -1,0 +1,22 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+
+{{#notEq this.transporters null}}
+    {{#each this.transporters}}
+        {{#if name}}
+            <div class="ellipsis_inline" data-placement="bottom" title="" data-original-title="{{#if name}}{{name}} ({{formatDate transfer_date ../../../dateOptions}}){{/if}}">
+                <a href="#Accounts/{{id}}">{{name}}{{#if transfer_date}} ({{formatDate transfer_date ../../../dateOptions}}){{/if}}</a>
+            </div>
+        {{/if}}
+    {{/each}}
+{{/notEq}}

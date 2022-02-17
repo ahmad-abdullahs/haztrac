@@ -158,6 +158,8 @@ $viewdefs[$module_name] = array(
                             18 =>
                             array(
                                 'name' => 'transporter',
+                                'type' => 'transporter',
+                                'readonly' => true,
                                 'label' => 'LBL_TRANSPORTER',
                                 'enabled' => true,
                                 'sortable' => false,
