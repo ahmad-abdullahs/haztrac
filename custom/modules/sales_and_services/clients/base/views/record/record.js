@@ -7,18 +7,12 @@
         this._super('initialize', [options]);
         // Add listener for custom button
         this.context.on('button:close_drawer_button:click', this.closeDrawer, this);
-        this.model.on('change:recurring_sale_c', this.takeUserToRecurringTab, this);
         this.model.on('change:status_c', this.handleCompletionPanel, this);
         this.model.on('change:complete_date_c', _.bind(this.handleCompletionPanelFieldsStyle, this, 'complete_date_c'), this);
         this.model.on('change:payment_reference_c', _.bind(this.handleCompletionPanelFieldsStyle, this, 'payment_reference_c'), this);
         this.model.on('change:payment_status_c', _.bind(this.handleCompletionPanelFieldsStyle, this, 'payment_status_c'), this);
         // Add listener for print_paperwork_button
         this.context.on('button:print_paperwork_button:click', this.printPaperworkDrawer, this);
-        /*This makes the field colored in detail view...*/
-//        this.model.on('data:sync:complete', function (options) {
-//            if (!_.isNull(this.model._relatedCollections))
-//                this.model._relatedCollections.sales_and_services_revenuelineitems_1.on('data:sync:complete', _.bind(this.colourTheFields, this));
-//        }, this);
     },
 
     duplicateClicked: function () {
@@ -63,29 +57,6 @@
         });
     },
 
-    colourTheFields: function () {
-        if (this.model._relatedCollections.sales_and_services_revenuelineitems_1.length) {
-//            var activeTab = app.user.lastState.get(app.user.lastState.key('activeTab', this));
-//            if (activeTab != '#panel_completion') {
-            // simple decimal field 
-            $('tr[name*=RevenueLineItems_] td[name=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
-            // drop down field
-            $('tr[name*=RevenueLineItems_] td[name=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
-            // simple decimal field 
-            $('tr[name*=RevenueLineItems_] td[data-column=estimated_quantity_c]').attr('style', 'background-color:#f4e429 !important');
-            // drop down field
-            $('tr[name*=RevenueLineItems_] td[data-column=product_uom_c]').attr('style', 'background-color:#f4e429 !important');
-//            }
-        }
-    },
-
-    takeUserToRecurringTab: function (model, fieldValue) {
-        // If Recurring Sale checkbox is checked, take user to that tab
-        if (fieldValue) {
-            this.$('li.tab.panel_recurring > a').click();
-        }
-    },
-
     _render: function () {
         this._super('_render');
 
@@ -98,53 +69,6 @@
                 this.model._relatedCollections[linkName].fetch();
             }, this);
         }
-
-        // Get all the tabs with class like panel_
-        // $('#recordTab > li.tab [class*=panel_]');
-
-        var self = this;
-        // Make the Revenue Line Items subpanel in non-editable mode when schedule tab is clicked
-        this.$('li.tab.panel_body > a').on('click', function () {
-            self.context.trigger('cancel:full:subpanel:cstm');
-        });
-
-        // Make the Revenue Line Items subpanel in editable mode when completion tab is clicked
-        this.$('li.tab.panel_completion > a').on('click', function () {
-            $.when(self.triggerEdit()).then(function () {
-                //*** Make the Actual quantity, Unit of Measure and Unit price fields coloured.
-                if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
-                    // simple decimal field 
-                    $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#f4e429');
-                    // drop down field
-                    $('tr[name*=RevenueLineItems_] input[name=product_uom_c]').siblings('div').children('a').css('background-color', '#f4e429');
-                    // currency field
-                    $('tr[name*=RevenueLineItems_] input[name=discount_price]').css('background-color', '#f4e429');
-                    $('tr[name*=RevenueLineItems_] input[name=discount_price]').siblings('span').children('div').children('a').css('background-color', '#f4e429');
-
-                    //*** Remove the background color from Estimated Quantity and Unit of Measure from <td>
-                    // simple decimal field 
-                    $('tr[name*=RevenueLineItems_] td[name=estimated_quantity_c]').attr('style', '');
-                    // drop down field
-                    $('tr[name*=RevenueLineItems_] td[name=product_uom_c]').attr('style', '');
-                    // simple decimal field 
-                    $('tr[name*=RevenueLineItems_] td[data-column=estimated_quantity_c]').attr('style', '');
-                    // drop down field
-                    $('tr[name*=RevenueLineItems_] td[data-column=product_uom_c]').attr('style', '');
-                }
-            });
-        });
-
-        // Make the Revenue Line Items subpanel in non editable mode when any tab 
-        // other than completion tab is clicked
-        this.$('li.tab[class*=panel_]:not(.panel_completion) > a').on('click', function () {
-            $.when(self.context.trigger('cancel:full:subpanel:cstm')).then(function () {
-                //*** Make the Estimated Quantity and Unit of Measure fields coloured.
-                /*This makes the field colored in detail view...*/
-//                if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
-//                    self.colourTheFields();
-//                }
-            });
-        });
     },
 
     _renderFields: function () {
@@ -183,7 +107,7 @@
                 }
 
                 $.when(this.triggerEdit()).then(function () {
-                    //*** Make the Actual quantity, Unit of Measure and Unit price fields coloured.
+                    //*** Make the Actual quantity, Manifest, Unit of Measure and Unit price fields coloured.
                     if (self.model._relatedCollections.sales_and_services_revenuelineitems_1) {
                         // simple decimal field 
                         // $('tr[name*=RevenueLineItems_] input[name=quantity]').css('background-color', '#F4ED9C');
@@ -191,7 +115,11 @@
                             if (app.utils.isEmpty(colModel.get('quantity'))) {
                                 $('tr[name*=RevenueLineItems_' + colModel.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
                             }
+                            if (app.utils.isEmpty(colModel.get('ht_manifest_revenuelineitems_1ht_manifest_ida'))) {
+                                $('tr[name*=RevenueLineItems_' + colModel.id + '] input[name=ht_manifest_revenuelineitems_1_name]').siblings('div').children('a').css('background-color', '#F4ED9C');
+                            }
                             colModel.on('change:quantity', _.bind(self.handleRevenueLineItemsSubPanelFieldsStyle, self, 'quantity'), self);
+                            colModel.on('change:ht_manifest_revenuelineitems_1ht_manifest_ida', _.bind(self.handleRevenueLineItemsSubPanelFieldsStyle, self, 'ht_manifest_revenuelineitems_1_name'), self);
                         });
                     }
                 });
@@ -202,12 +130,19 @@
     handleRevenueLineItemsSubPanelFieldsStyle: function (fieldName, model, fieldValue) {
         if (this.context) {
             if (this.context.get('completeSales')) {
-                if (!app.utils.isEmpty(fieldValue)) {
-                    $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '');
+                if (fieldName == 'quantity') {
+                    if (!app.utils.isEmpty(fieldValue)) {
+                        $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '');
+                    }
+                    /*else {
+                     $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
+                     }*/
                 }
-                /*else {
-                 $('tr[name*=RevenueLineItems_' + model.id + '] input[name=quantity]').css('background-color', '#F4ED9C');
-                 }*/
+                if (fieldName == 'ht_manifest_revenuelineitems_1_name') {
+                    if (!app.utils.isEmpty(fieldValue)) {
+                        $('tr[name*=RevenueLineItems_' + model.id + '] input[name=ht_manifest_revenuelineitems_1_name]').siblings('div').children('a').css('background-color', '');
+                    }
+                }
             }
         }
     },

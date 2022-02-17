@@ -35,6 +35,8 @@
             renderedComponent.context.trigger('button:edit_button:click');
             // Take user to the completion tab.
             $('li.tab.panel_completion > a').click();
+            // When you go for Service Completion, open the Completion panel automatically 
+            $('div[data-panelname="panel_completion"] > div').click();
         }, this));
     },
     getRecordId: function () {
