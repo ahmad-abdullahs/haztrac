@@ -29,5 +29,63 @@
             var $el = this.$(this.fieldTag);
             $el.siblings('div').children('a').attr('style', 'background-color:' + this.def.backcolor + '; color:' + this.def.textcolor);
         }
+
+        // Adding code for adding Create New Item Button
+        var self = this;
+        this.$(this.fieldTag).on('select2-open', function (){
+            $(".select2-results:not(:has(a))").prepend('<a href="javascript:void(0);" style="padding: 6px;height: 20px;display: inline-table;width: 100%;text-align:center;" class="dd-add-new-option" data-name="'+ self.def.name +'">Create new item</a>');
+            self.bindAddOptionHandler();
+        });
+    },
+
+    bindAddOptionHandler: function (){
+        var self = this;
+        $('.select2-results').find('.dd-add-new-option').each(function (e){
+            $(this).on('click', function (e){
+                if($(this).data('name') === self.def.name){
+                    self.openFieldPopup();
+                }
+            });
+        }, this);
+    },
+
+    openFieldPopup: function (){
+        this.$(this.fieldTag).select2('close');
+        /**add class content-overflow-visible if client has touch feature*/
+        if (Modernizr.touch) {
+            app.$contentEl.addClass('content-overflow-visible');
+        }
+
+        /**
+         * check whether the view already exists in the layout.
+         * If not we will create a new view and will add to the components list of the record layout
+         * */
+        var magnifierView = this.view.layout.getComponent('add-option-popup');
+        if (!magnifierView) {
+            /** Prepare the context object for the add-option-popup view */
+            var context = this.context.getChildContext({
+                module: this.module,
+            });
+
+            context.prepare();
+            context.originalModel = this.model;
+
+            /** Create a new view object */
+            magnifierView = app.view.createView({
+                context: context,
+                name: 'add-option-popup',
+                layout: this.view.layout,
+                module: context.module,
+                fieldDef: this.def,
+                parent: this
+            });
+
+            /** add the new view to the components list of the record layout */
+            this.view.layout._components.push(magnifierView);
+            this.view.layout.$el.append(magnifierView.$el);
+        }
+
+        /** triggers an event to show the pop up add-option-popup view */
+        this.view.layout.trigger("app:view:add-option-popup");
     },
 })
