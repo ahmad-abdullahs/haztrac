@@ -23,6 +23,7 @@
     initialize: function () {
         this._super('initialize', arguments);
     },
+
     _render: function () {
         this._super('_render');
         if (this.def.highlight) {
@@ -31,11 +32,13 @@
         }
 
         // Adding code for adding Create New Item Button
-        var self = this;
-        this.$(this.fieldTag).on('select2-open', function () {
-            $(".select2-results:not(:has(a))").prepend('<a href="javascript:void(0);" style="padding: 6px;height: 20px;display: inline-table;width: 100%;text-align:center;" class="dd-add-new-option" data-name="' + self.def.name + '">Add New Item</a>');
-            self.bindAddOptionHandler();
-        });
+        if (this.view.name == 'record' || this.view.name == 'create') {
+            var self = this;
+            this.$(this.fieldTag).on('select2-open', function () {
+                $(".select2-results:not(:has(a))").prepend('<a href="javascript:void(0);" style="padding: 6px;height: 20px;display: inline-table;width: 100%;text-align:center;" class="dd-add-new-option" data-name="' + self.def.name + '">Add New Item</a>');
+                self.bindAddOptionHandler();
+            });
+        }
     },
 
     bindAddOptionHandler: function () {
