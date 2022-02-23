@@ -54,7 +54,7 @@ SQL;
         // as the multienum field in the filter, now we are creating a dropdown at the 
         // backend for the data presend in this field. 
         global $app_list_strings;
-        if (!empty($bean->mft_part_num) && !isset($app_list_strings[$bean->mft_part_num])) {
+        if (!empty($bean->mft_part_num) && !isset($app_list_strings['mft_part_num_list'][$bean->mft_part_num])) {
             $this->QueueJob($bean, $event, $arguments);
 //            require_once 'custom/clients/base/api/DropDownFiller.php';
 //            $dropDownUpdateHandler = new DropDownFiller();
