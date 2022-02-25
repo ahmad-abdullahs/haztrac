@@ -59,14 +59,14 @@
 
     addOption: function (text, key) {
         var roleKeys = app.lang.getAppListKeys(this.fieldDef.options);
-
+        var self = this;
         if (!_.contains(roleKeys, key)) {
             app.alert.show('adding_option', {
                 level: 'warning',
                 title: 'Adding the New Option, Please wait until the Option is added and success message is delivered.'
             });
             this.parentField.items[key] = text;
-            this.render();
+            this.parentField.render();
 
             app.api.call('create', app.api.buildURL('DropdownListKey/add'), {
                 "list_name": this.fieldDef.options,
@@ -82,6 +82,9 @@
                             autoClose: true,
                             messages: 'New Option (' + text + ') is added to the list.',
                         });
+                        app.events.trigger("refresh:multi-dd:fields", [self.parentField, text, key]);
+                        self.parentField.items[key] = text;
+                        self.parentField.render();
                     });
                 },
                 error: function (e) {

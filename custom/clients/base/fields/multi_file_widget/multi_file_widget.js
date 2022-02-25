@@ -48,6 +48,24 @@
         this.timeOutCallsSyncList = [];
         this.timeOutHandle = {};
         app.events.on('lockAnnotationOnDrawerClose', this.lockAnnotationOnDrawerClose, this);
+        app.events.on('refresh:multi-dd:fields', this.refreshDropdownFields, this);
+    },
+
+    refreshDropdownFields: function (data){
+        var self = this;
+        var fieldName = 'category_id';
+        this.$('span[sfuuid]').each(function () {
+            var sfId = $(this).attr('sfuuid');
+            try {
+                var fieldToRender = self.view.fields[sfId];
+                if(fieldToRender.name.indexOf(fieldName) !== -1 && data[0].def.options == fieldToRender.def.options){
+                    fieldToRender.items[data[2]] = data[1];
+                    fieldToRender.render();
+                }
+            } catch (e) {
+                console.log("Error occurred", e);
+            }
+        });
     },
 
     loadInDashlet: function (ele) {

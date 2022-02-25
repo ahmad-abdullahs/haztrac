@@ -13,6 +13,23 @@
     initialize: function (options) {
         this._super('initialize', [options]);
         this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
+        app.events.on('refresh:multi-dd:fields', this.refreshDropdownFields, this);
+    },
+
+    refreshDropdownFields: function (data){
+        var self = this;
+        this.$('span[sfuuid]').each(function () {
+            var sfId = $(this).attr('sfuuid');
+            try {
+                var fieldToRender = self.view.fields[sfId];
+                if(typeof(fieldToRender.def.options) != "undefined" && fieldToRender.def.type == "enum" && data[0].def.options == fieldToRender.def.options){
+                    fieldToRender.items[data[2]] = data[1];
+                    fieldToRender.render();
+                }
+            } catch (e) {
+                console.log("Error occurred", e);
+            }
+        });
     },
 
     bindDataChange: function () {
