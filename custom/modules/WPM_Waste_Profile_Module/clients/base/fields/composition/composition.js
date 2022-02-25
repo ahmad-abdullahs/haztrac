@@ -19,6 +19,24 @@
         this.model.addValidationTask('composition_max_total_should_not_more_than_100_message', _.bind(this._doValidateCompositionMaxTotal, this));
         // ++
         this.context.on('render:on-autopopulate:multirow:fields', this.render, this);
+        app.events.on('refresh:multi-dd:fields', this.refreshDropdownFields, this);
+    },
+
+    refreshDropdownFields: function (data){
+        var self = this;
+        var fieldName = 'composition_uom';
+        this.$('span[sfuuid]').each(function () {
+            var sfId = $(this).attr('sfuuid');
+            try {
+                var fieldToRender = self.view.fields[sfId];
+                if(fieldToRender.name.indexOf(fieldName) !== -1 && data[0].def.options == fieldToRender.def.options){
+                    fieldToRender.items[data[2]] = data[1];
+                    fieldToRender.render();
+                }
+            } catch (e) {
+                console.log("Error occurred", e);
+            }
+        });
     },
 
     renderFooterFieldsMetaAndValues: function () {

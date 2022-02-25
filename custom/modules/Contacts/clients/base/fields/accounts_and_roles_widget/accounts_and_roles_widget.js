@@ -17,7 +17,26 @@
     initialize: function (options) {
         this.isPreview = false;
         this._super('initialize', [options]);
+        app.events.on('refresh:multi-dd:fields', this.refreshDropdownFields, this);
     },
+
+    refreshDropdownFields: function (data){
+        var self = this;
+        var fieldName = 'accounts_and_roles_widget_role';
+        this.$('span[sfuuid]').each(function () {
+            var sfId = $(this).attr('sfuuid');
+            try {
+                var fieldToRender = self.view.fields[sfId];
+                if(fieldToRender.name.indexOf(fieldName) !== -1 && data[0].def.options == fieldToRender.def.options){
+                    fieldToRender.items[data[2]] = data[1];
+                    fieldToRender.render();
+                }
+            } catch (e) {
+                console.log("Error occurred", e);
+            }
+        });
+    },
+
     getCurrentNewRowUid: function () {
         // The row with the + icon is the new row.
         return this.$('.' + this.addClass).data('uid');
