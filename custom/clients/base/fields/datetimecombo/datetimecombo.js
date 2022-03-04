@@ -42,4 +42,28 @@
             this.$(this.secondaryFieldTag).val(value['time']);
         }, this);
     },
+
+    format: function(value) {
+        if (!value) {
+            return value;
+        }
+
+        value = app.date(value);
+
+        if (!value.isValid()) {
+            return;
+        }
+
+        if ((this.action === 'edit' || this.action === 'massupdate') && _.isEmpty(this.model.get('event_id'))) { // Added event_id check to force Audit module to else condition
+            value = {
+                'date': value.format(app.date.convertFormat(this.getUserDateFormat())),
+                'time': value.format(app.date.convertFormat(this.getUserTimeFormat()))
+            };
+
+        } else {
+            value = value.formatUser(false);
+        }
+
+        return value;
+    },
 })
