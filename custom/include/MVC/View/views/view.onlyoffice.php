@@ -1,10 +1,24 @@
 <?php
 
 require_once 'custom/include/EntryPointScripts/onlyOfficeAjaxHelper.php';
+require_once 'include/Sugarpdf/SugarpdfHelper.php';
+require_once 'modules/PdfManager/PdfManagerHelper.php';
 
 class ViewOnlyoffice extends SugarView {
 
     public $script = "";
+    public $phoneFieldsList = array(
+        'phone_mobile',
+        'phone_work',
+        'phone_office',
+        'phone_alternate',
+    );
+    public $speialAddressFields = array(
+        'billingaddress_with_country',
+        'billingaddress_without_country',
+        'shippingaddress_with_country',
+        'shippingaddress_without_country',
+    );
 
     public function __construct() {
         global $sugar_config;
@@ -14,7 +28,6 @@ class ViewOnlyoffice extends SugarView {
 
     function preDisplay() {
         global $db, $current_user, $timedate, $sugar_config;
-
 //        $e = new Exception();
 //        $GLOBALS['log']->fatal("stack trace : " . print_r($e->getTraceAsString(), 1));
 //        $GLOBALS['log']->fatal('Data : ' . print_r($_REQUEST, 1));
@@ -27,7 +40,10 @@ class ViewOnlyoffice extends SugarView {
 
         $onlyOfficeAjaxHelperObj = new onlyOfficeAjaxHelper($this->bean->module_dir);
         $fieldsArrList = $onlyOfficeAjaxHelperObj->returnData();
-        $data = $this->bean->toArray();
+
+//        $GLOBALS['log']->fatal('$fieldsArrList : ' . print_r($fieldsArrList, 1));
+
+        $data = PdfManagerHelper::parseBeanFields($this->bean, true);
 
         foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
             $dataStr = $this->getCleanString($data[$key]);
@@ -41,23 +57,59 @@ class ViewOnlyoffice extends SugarView {
             if ($this->bean->load_relationship($link)) {
                 // Fetch related beans
                 $relatedBeans = $this->bean->$link->getBeans();
-                foreach ($relatedBeans as $relatedBean) {
-                    foreach ($value as $_key => $_value) {
-                        $dataStr = $this->getCleanString($relatedBean->$_key);
-                        $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $_key . '}", '
-                                . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+                // If the related bean exist, it will replace the fields with the value.
+                // For example {$fields.contacts_sales_and_services_1.first_name} --> Perterson
+                // if the related bean does not exist then we have to go in else case and replace 
+                // the field {$fields.contacts_sales_and_services_1.first_name} with empty 
+                if ($relatedBeans) {
+                    foreach ($relatedBeans as $relatedBean) {
+                        $relatedBean = PdfManagerHelper::parseBeanFields($relatedBean, false);
+
+                        foreach ($value as $_key => $_value) {
+                            $dataStr = $this->getCleanString($relatedBean[$_key]);
+                            if (in_array($_key, $this->phoneFieldsList)) {
+                                $dataStr = $this->formatPhone($dataStr);
+                            }
+                            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $_key . '}", '
+                                    . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+                        }
+                    }
+                } else {
+                    foreach ($fieldsArrList['linksArr']['pdfManagerRelateLink_' . $link] as $key => $value) {
+                        $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.' . $link . '.' . $key . '}", '
+                                . '"replaceString": ""});' . PHP_EOL;
                     }
                 }
             }
         }
 
+        if ($this->bean->module_dir == 'sales_and_services') {
+            // REVENUELINEITEMS
+            $returnData = $this->getRevenueLineItemsData();
+            $rliDataArr = $returnData['revenuelineitems'];
 
-        $rliDataArr = $this->getRevenueLineItemsData();
-        $encodedDataArr = json_encode($rliDataArr);
-        $this->script .= "var rliDataArr = {$encodedDataArr};" . PHP_EOL;
-        $this->script .= $this->getRevenueLineItemScript();
+            $encodedDataArr = json_encode($rliDataArr);
+            $this->script .= "var rliDataArr = {$encodedDataArr};" . PHP_EOL;
+            $this->script .= $this->getRevenueLineItemScript();
 
-//        $saveFileName = "{$db->quoted($sugar_config['onlyoffice_upload_dir'] . "/" . $this->bean->name . ".docx")}";
+            foreach ($returnData['certificates'] as $key => $value) {
+                $dataStr = $this->getCleanString($value);
+                $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.revenuelineitemsGroupFields.' . $key . '}", '
+                        . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+            }
+
+            $dataStr = $this->getCleanString($returnData['additionalInfoData']);
+            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.revenuelineitemsGroupFields.additional_info_ack_c}", '
+                    . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+
+            // Transporter / Carrier
+            $returnData = $this->getTransporterData();
+            $transporterDataArr = $returnData['transporters'];
+
+            $encodedDataArr = json_encode($transporterDataArr);
+            $this->script .= "var transporterData = {$encodedDataArr};" . PHP_EOL;
+            $this->script .= $this->getTransporterScript();
+        }
 
         $saveFileName = "{$sugar_config['onlyoffice_upload_dir1']}/parsed_{$_REQUEST['onlyoffice_template_id']}.docx";
 
@@ -69,6 +121,412 @@ class ViewOnlyoffice extends SugarView {
         $fileName = substr($fileName, 1 + strpos($fileName, ".", 7));
 
         $this->returnFile($filePath, $fileName);
+    }
+
+    function getTransporterData() {
+        // For json field
+        if ($this->bean->module_dir == 'sales_and_services') {
+            // Data List
+            $salesAndServiceTransporterBeanList = array();
+            $transporterDataArr = array();
+            $count = 1;
+
+            // Get fields List
+            $onlyOfficeAjaxHelperObj = new onlyOfficeAjaxHelper("Accounts");
+            $fieldsArrList = $onlyOfficeAjaxHelperObj->returnData();
+
+            $transporterCarrier = $this->bean->transporter_carrier_c;
+            // Decode the json Object and get the transporter ids
+            if (!empty($transporterCarrier)) {
+                $account_id_c = array();
+                $transporter_carrier_c = json_decode(html_entity_decode($transporterCarrier), ENT_QUOTES);
+                foreach ($transporter_carrier_c as $key => $transporter_carrier_obj) {
+                    array_push($account_id_c, $transporter_carrier_obj['id']);
+                }
+
+                // Fetch the Beans
+                if (!empty($account_id_c)) {
+                    foreach ($account_id_c as $key => $value) {
+                        $salesAndServiceTransporterBean = BeanFactory::getBean('Accounts', $value, array('disable_row_level_security' => true));
+                        array_push($salesAndServiceTransporterBeanList, $salesAndServiceTransporterBean);
+                    }
+                }
+            }
+
+            foreach ($salesAndServiceTransporterBeanList as $transporterBean) {
+                $data = PdfManagerHelper::parseBeanFields($transporterBean, false);
+
+                foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
+                    if (in_array($key, $this->speialAddressFields)) {
+                        $data[$key] = $this->getCleanString($data[$key], true);
+                    } else {
+                        $data[$key] = $this->getCleanString($data[$key]);
+                    }
+
+                    if (in_array($key, $this->phoneFieldsList)) {
+                        $data[$key] = $this->formatPhone($data[$key]);
+                    }
+                }
+
+                $data['index'] = $count;
+
+                array_push($transporterDataArr, $data);
+                $count ++;
+            }
+        }
+
+        return array(
+            'transporters' => $transporterDataArr,
+        );
+    }
+
+    function getRevenueLineItemsData() {
+        $checkboxFields = array(
+            'shipping_hazardous_materia_c',
+            'state_regulated_c',
+            'manifest_required_c',
+            'waste_profile_c',
+            'consolidated_manifest',
+        );
+
+        // For multiline rows
+        if ($this->bean->module_dir == 'sales_and_services') {
+            global $locale;
+            $certificatesList = array();
+            $customerCertificatesList = array();
+            $transporterCertificatesList = array();
+            $consigneeCertificatesList = array();
+            $shipperCertificatesList = array();
+
+            // Data List
+            $rliDataArr = array();
+            $additionalInfoDataArr = array();
+            $count = 1;
+
+            // Get fields List
+            $onlyOfficeAjaxHelperObj = new onlyOfficeAjaxHelper("RevenueLineItems");
+            $fieldsArrList = $onlyOfficeAjaxHelperObj->returnData();
+
+            // RevenueLineItems
+            $this->bean->load_relationship('sales_and_services_revenuelineitems_1');
+            $revenuelineitemsList = $this->bean->sales_and_services_revenuelineitems_1->getBeans();
+
+            foreach ($revenuelineitemsList as $revenuelineitemsBean) {
+                if ($revenuelineitemsBean->is_bundle_product_c == "parent") {
+                    continue;
+                }
+
+                $data = PdfManagerHelper::parseBeanFields($revenuelineitemsBean, false);
+
+                foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
+//                    if ($key == "product_list_name_c") {
+//                        $GLOBALS['log']->fatal('$key : ' . print_r($key, 1));
+//                        $GLOBALS['log']->fatal('before : ' . print_r($data[$key], 1));
+//                        $data[$key] = $data[$key];
+//                    } else {
+                    $data[$key] = $this->getCleanString($data[$key]);
+//                    }
+                    // Hide Price From Paperwork
+                    if ($key == 'discount_price' && $data['hide_price_from_paperwork_c'] == 1) {
+                        $data['discount_price'] = "TBD";
+                    }
+
+                    // Hazardous Material
+                    if (in_array($key, $checkboxFields)) {
+                        if ($data[$key] == 1) {
+                            $data[$key] = "X";
+                        } else {
+                            $data[$key] = "";
+                        }
+                    }
+                }
+
+                $data['index'] = $count;
+
+                // Additional Info
+                array_push($additionalInfoDataArr, $data['additional_info_ack_c']);
+
+                // Terms And Conditions
+                $customerCertificatesList = array_merge($customerCertificatesList, unencodeMultienum($data['customer_certificates']));
+                $transporterCertificatesList = array_merge($transporterCertificatesList, unencodeMultienum($data['transporter_certificates']));
+                $consigneeCertificatesList = array_merge($consigneeCertificatesList, unencodeMultienum($data['consignee_certificates']));
+                $shipperCertificatesList = array_merge($shipperCertificatesList, unencodeMultienum($data['shipper_certificates']));
+
+                array_push($rliDataArr, $data);
+                $count ++;
+            }
+
+            $customerCertificatesString = '';
+            $customerCertificatesList = array_filter(array_unique(array_values($customerCertificatesList)));
+            if (!empty($customerCertificatesList)) {
+                foreach ($customerCertificatesList as $key => $certificateId) {
+                    $certificateBean = BeanFactory::getBean('wp_terms_and_conditions', $certificateId, array('disable_row_level_security' => true));
+                    if (!empty($certificateBean->description)) {
+                        $customerCertificatesString .= $this->getCleanString(trim($certificateBean->description)) . '; ';
+                    }
+                }
+            }
+
+            $transporterCertificatesString = '';
+            $transporterCertificatesList = array_filter(array_unique(array_values($transporterCertificatesList)));
+            if (!empty($transporterCertificatesList)) {
+                foreach ($transporterCertificatesList as $key => $certificateId) {
+                    $certificateBean = BeanFactory::getBean('wp_terms_and_conditions', $certificateId, array('disable_row_level_security' => true));
+                    if (!empty($certificateBean->description)) {
+                        $transporterCertificatesString .= $this->getCleanString(trim($certificateBean->description)) . '; ';
+                    }
+                }
+            }
+
+            $consigneeCertificatesString = '';
+            $consigneeCertificatesList = array_filter(array_unique(array_values($consigneeCertificatesList)));
+            if (!empty($consigneeCertificatesList)) {
+                foreach ($consigneeCertificatesList as $key => $certificateId) {
+                    $certificateBean = BeanFactory::getBean('wp_terms_and_conditions', $certificateId, array('disable_row_level_security' => true));
+                    if (!empty($certificateBean->description)) {
+                        $consigneeCertificatesString .= $this->getCleanString(trim($certificateBean->description)) . '; ';
+                    }
+                }
+            }
+
+            $shipperCertificatesString = '';
+            $shipperCertificatesList = array_filter(array_unique(array_values($shipperCertificatesList)));
+            if (!empty($shipperCertificatesList)) {
+                foreach ($shipperCertificatesList as $key => $certificateId) {
+                    $certificateBean = BeanFactory::getBean('wp_terms_and_conditions', $certificateId, array('disable_row_level_security' => true));
+                    if (!empty($certificateBean->description)) {
+                        $shipperCertificatesString .= $this->getCleanString(trim($certificateBean->description)) . '; ';
+                    }
+                }
+            }
+
+            $additionalInfoDataArr = array_filter(array_unique(array_values($additionalInfoDataArr)));
+            $additionalInfoDataStr = implode('. ', $additionalInfoDataArr);
+
+            $certificatesList['customer_certificates'] = $customerCertificatesString;
+            $certificatesList['transporter_certificates'] = $transporterCertificatesString;
+            $certificatesList['consignee_certificates'] = $consigneeCertificatesString;
+            $certificatesList['shipper_certificates'] = $shipperCertificatesString;
+        }
+
+        return array(
+            'revenuelineitems' => $rliDataArr,
+            'certificates' => $certificatesList,
+            'additionalInfoData' => $additionalInfoDataStr,
+        );
+    }
+
+    function formatPhone($phoneValue) {
+        $phone = null;
+        if (!empty($phoneValue)) {
+            $piece1 = $piece2 = $piece3 = '';
+            $phone = $phoneValue;
+
+            $_phone = explode('(', $phone);
+            if (!empty($_phone[1])) {
+                $_phone = explode(')', $_phone[1]);
+                $piece1 = $_phone[0];
+            }
+
+            $_phone = explode('-', $phone);
+            $_phone = explode(' ', $_phone[0]);
+            $piece2 = $_phone[count($_phone) - 1];
+
+            $_phone = explode('-', $phone);
+            $_phone = explode(' ', $_phone[1]);
+            $piece3 = $_phone[0];
+
+            $phone = '(' . trim($piece1) . ')' . trim($piece2) . '-' . trim($piece3);
+            $phone = preg_replace('!\s+!', ' ', $phone);
+        }
+        return $phone;
+    }
+
+    function getTransporterScript() {
+        return ' // Transporter / Carrier
+fieldsList = [], fieldsListTemp = [];
+var fieldsListcellElement = [], transporterFieldList = [];
+// Loop through all the elements to find the tables
+for (var i = 0; i < oDocument.GetElementsCount(); i++) {
+    sClassType = oDocument.GetElement(i).GetClassType();
+
+    // If element is table
+    if (sClassType == "table") {
+        // Table Element
+        tempTable = oDocument.GetElement(i);
+
+        if (tempTable.GetRowsCount() > 0) {
+
+            for (var j = 0; j < tempTable.GetRowsCount(); j++) {
+
+                for (var k = 0; k < tempTable.GetRow(j).GetCellsCount(); k++) {
+                    oCell = tempTable.GetRow(j).GetCell(k);
+
+                    for (var l = 0; l < oCell.GetContent().GetElementsCount(); l++) {
+                        cellElement = oCell.GetContent().GetElement(l);
+                        cellText = cellElement.GetText();
+
+                        if (cellText.includes("{$fields.transporter_carrier_c.")) {
+                            fieldsList.push({[k]: cellText.trim()});
+                            fieldsListTemp.push(cellText.trim());
+                            fieldsListcellElement.push(cellElement);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+if (fieldsListcellElement) {
+    for (var i = 0; i < fieldsListcellElement.length; i++) {
+        var eachTransporterCell = fieldsListcellElement[i];
+        if (eachTransporterCell) {
+            var cellTransporterText = eachTransporterCell.GetText();
+            var transporterFieldNames = cellTransporterText.match(/\{\$fields.transporter_carrier_c.[a-zA-Z0-9|.|_|$\\}]+/ig);
+            if (transporterFieldNames) {
+                for (var j = 0; j < transporterFieldNames.length; j++) {
+                    var pieces = transporterFieldNames[j].split(".");
+                    // Greater than 1 is purposefully added, if the field name ends with dot e.g. {$fields.sales_and_services_revenuelineitems_1_c.Index}.
+                    // this check will handle
+                    if (pieces.length > 1) {
+                        fieldName = pieces[2].replace("}", "");
+                        fieldName = fieldName.replace(".", "").toLowerCase();
+                        if (fieldName != "") {
+                            transporterFieldList.push(fieldName);
+                        }
+                    }
+                }
+
+                cellTransporterTextString = "";
+                for (var k = 0; k < transporterData.length; k++) {
+                    var cellTransporterTextTemp = String(cellTransporterText);
+                    for (var l = 0; l < transporterFieldList.length; l++) {
+                        cellTransporterTextTemp = cellTransporterTextTemp.replace("{$fields.transporter_carrier_c." + transporterFieldList[l] + "}", transporterData[k][transporterFieldList[l]]);
+                    }
+
+                    if (k != 0) {
+                        cellTransporterTextString += " \n";
+                    }
+
+                    cellTransporterTextString += cellTransporterTextTemp;
+                }
+                
+oParagraph.AddText("cellTransporterTextString : " + cellTransporterTextString + ".");
+oParagraph.AddLineBreak();
+
+                cellTransporterTextString = String(cellTransporterTextString);
+                eachTransporterCell.RemoveAllElements();
+oRun = Api.CreateRun();
+oRun.AddText(cellTransporterTextString);
+eachTransporterCell.AddElement(oRun);
+//                eachTransporterCell.AddText(cellTransporterTextString);
+            }
+        }
+    }
+}' . PHP_EOL;
+    }
+
+    function getRevenueLineItemScript() {
+        return ' // Paragraph Element for display
+oParagraph = oDocument.GetElement(1);
+//oParagraph.AddText("fieldsListcellElement : " + fieldsListcellElement + ".");
+//oParagraph.AddLineBreak();
+// Desired table
+var desiredTable, tempTable;
+var fieldsList = [], fieldsListTemp = [];
+// Flag Variables
+var tableFound = false, cellFound = false;
+var desiredTableRow = -1, cellText = "";
+var cellElement = null, sClassType = null, oCell = null;
+
+// Loop through all the elements to find the tables
+for (var i = 0; i < oDocument.GetElementsCount(); i++) {
+    sClassType = oDocument.GetElement(i).GetClassType();
+
+    // If element is table
+    if (sClassType == "table") {
+        // Table Element
+        tempTable = oDocument.GetElement(i);
+
+        if (tempTable.GetRowsCount() > 0) {
+            for (var j = 0; j < tempTable.GetRowsCount(); j++) {
+                for (var k = 0; k < tempTable.GetRow(j).GetCellsCount(); k++) {
+                    oCell = tempTable.GetRow(j).GetCell(k);
+                    cellElement = oCell.GetContent().GetElement(0);
+                    cellText = cellElement.GetText();
+
+                    if (cellText.includes("[RevenueLineitem dynamic table]") && tableFound == false) {
+                        // This is the concerned table
+                        tableFound = true;
+                        break;
+                    }
+
+                    if (cellText.includes("{$fields.sales_and_services_revenuelineitems_1_c.") && tableFound == true) {
+                        fieldsList.push({[k]: cellText.trim()});
+                        fieldsListTemp.push(cellText.trim());
+
+                        desiredTable = tempTable;
+                        desiredTableRow = j;
+
+                        cellFound = true;
+                    } else if (tableFound == true && desiredTableRow == j) {
+                        fieldsList.push({[k]: cellText.trim()});
+                    }
+                }
+            }
+
+            tableFound = false;
+        }
+
+        tempTable = null;
+    }
+}
+
+if (desiredTable) {
+    oDocument.SearchAndReplace({"searchString": "[RevenueLineitem dynamic table]", "replaceString": ""});
+
+    var additionalRowCounter = 0;
+
+    for (var j = 0; j < rliDataArr.length; j++) {
+
+        if (j != 0) {
+            desiredTable.AddRow();
+            additionalRowCounter++;
+        }
+
+        for (var k = 0; k < desiredTable.GetRow(desiredTableRow).GetCellsCount(); k++) {
+
+            oCell = desiredTable.GetRow(desiredTableRow + additionalRowCounter).GetCell(k);
+            cellElement = oCell.GetContent().GetElement(0);
+            cellText = cellElement.GetText();
+
+            if (cellText == "") {
+                cellText = fieldsList[k][k] || "";
+            }
+
+            var fieldName = "";
+            var pieces = cellText.split(".");
+            // Greater than 1 is purposefully added, if the field name ends with dot e.g. {$fields.sales_and_services_revenuelineitems_1_c.Index}.
+            // this check will handle
+            if (pieces.length > 1) {
+                fieldName = pieces[2].replace("}", "");
+                fieldName = fieldName.replace(".", "").toLowerCase();
+            }
+
+            var value = rliDataArr[j][fieldName];
+            value = String(value);
+            if (fieldName != "") {
+                if (j == 0) {
+                    cellElement.RemoveAllElements();
+                    cellElement.AddText(value);
+                } else {
+                    cellElement.AddText(value);
+                }
+            }
+        }
+    }
+}' . PHP_EOL;
     }
 
     function generateDocument() {
@@ -84,8 +542,6 @@ class ViewOnlyoffice extends SugarView {
         $hash = rand();
         $inputFilePath = $sugar_config['onlyoffice_generator_inputfile_path'] . DIRECTORY_SEPARATOR . 'input.' . $hash . ".docbuilder";
         $outputFilePath = $sugar_config['onlyoffice_generator_outputfile_path'] . DIRECTORY_SEPARATOR . 'output.' . $hash . "." . $fileName;
-//        $inputFilePath = '/var/www/html/onlyoffice_document_editor/temp' . DIRECTORY_SEPARATOR . 'input.' . $hash . ".docbuilder";
-//        $outputFilePath = '/var/www/html/onlyoffice_document_editor/temp' . DIRECTORY_SEPARATOR . 'output.' . $hash . "." . $fileName;
 
         $this->script = str_replace($filePath, $outputFilePath, $this->script);
 
@@ -148,161 +604,20 @@ class ViewOnlyoffice extends SugarView {
         
     }
 
-    function getCleanString($param) {
+    function getCleanString($param, $flag = false) {
         $dataStr = from_html(html_entity_decode(htmlspecialchars_decode($param)));
-        $dataStr = str_replace(array("\r", "\n"), ' ', $dataStr);
-        $dataStr = str_replace('"', '\"', $dataStr);
+
+        // Specially added for Transfer / Carrier address, need to fix this \n problem
+        if ($flag) {
+            $dataStr = str_replace(array("\r", "\n"), ' ', $dataStr);
+            $dataStr = str_replace(array("<br />"), ' ', $dataStr);
+            $dataStr = str_replace('"', '\"', $dataStr);
+        } else {
+            $dataStr = str_replace(array("\r", "\n"), ' ', $dataStr);
+            $dataStr = str_replace(array("<br />"), ' \n', $dataStr);
+            $dataStr = str_replace('"', '\"', $dataStr);
+        }
         return $dataStr;
-    }
-
-    function getRelatedRLIs() {
-        global $db;
-        $query = "SELECT 
-    revenue_line_items.id, revenue_line_items.name
-FROM
-    revenue_line_items
-        LEFT JOIN
-    revenue_line_items_cstm revenue_line_items_cstm ON revenue_line_items_cstm.id_c = revenue_line_items.id
-        INNER JOIN
-    sales_and_services_revenuelineitems_1_c sales_and_services_revenuelineitems_1 ON (revenue_line_items.id = sales_and_services_revenuelineitems_1.sales_and_services_revenuelineitems_1revenuelineitems_idb)
-        AND (sales_and_services_revenuelineitems_1.deleted = 0)
-        INNER JOIN
-    sales_and_services jt4_sales_and_services_revenuelineitems_1 ON (jt4_sales_and_services_revenuelineitems_1.id = sales_and_services_revenuelineitems_1.sales_and_services_revenuelineitems_1sales_and_services_ida)
-        AND (jt4_sales_and_services_revenuelineitems_1.deleted = 0)
-        AND (jt4_sales_and_services_revenuelineitems_1.id = '{$_REQUEST["record"]}')
-WHERE
-    revenue_line_items.deleted = 0
-ORDER BY revenue_line_items.line_number ASC , revenue_line_items.id ASC";
-        $result = $db->query($query, false);
-        return $result;
-    }
-
-    function getRevenueLineItemsData() {
-        global $db;
-        // Get related RLIs
-        $result = $this->getRelatedRLIs();
-
-        // Get fields List
-        $onlyOfficeAjaxHelperObj = new onlyOfficeAjaxHelper("RevenueLineItems");
-        $fieldsArrList = $onlyOfficeAjaxHelperObj->returnData();
-
-        // Data List
-        $rliDataArr = array();
-
-        $count = 1;
-        while ($row = $db->fetchByAssoc($result)) {
-            $rliBean = BeanFactory::getBean('RevenueLineItems', $row['id'], array('disable_row_level_security' => true));
-            $data = $rliBean->toArray();
-
-            foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
-                $data[$key] = $this->getCleanString($data[$key]);
-            }
-
-            $data['index'] = $count;
-            array_push($rliDataArr, $data);
-            $count ++;
-        }
-
-        return $rliDataArr;
-    }
-
-    function getRevenueLineItemScript() {
-        return ' // Paragraph Element for display
-        oParagraph = oDocument.GetElement(1);
-        // Desired table
-        var desiredTable, tempTable;
-        var fieldsList = [], fieldsListTemp = [];
-        // Flag Variables
-        var tableFound = false, cellFound = false;
-        var desiredTableRow = -1;
-
-        // Loop through all the elements to find the tables
-        for (var i = 0; i < oDocument.GetElementsCount(); i++) {
-            sClassType = oDocument.GetElement(i).GetClassType();
-
-            // If element is table
-            if (sClassType == "table") {
-                // Table Element
-                tempTable = oDocument.GetElement(i);
-
-                if (tempTable.GetRowsCount() > 0) {
-                    for (var j = 0; j < tempTable.GetRowsCount(); j++) {
-                        for (var k = 0; k < tempTable.GetRow(j).GetCellsCount(); k++) {
-                            oCell = tempTable.GetRow(j).GetCell(k);
-                            cellElement = oCell.GetContent().GetElement(0);
-                            cellText = cellElement.GetText();
-
-                            if (cellText.includes("[RevenueLineitem dynamic table]") && tableFound == false) {
-                                // This is the concerned table
-                                tableFound = true;
-                                break;
-                            }
-
-                            if (cellText.includes("{$fields.sales_and_services_revenuelineitems_1_c.") && tableFound == true) {
-                                fieldsList.push({[k]: cellText.trim()});
-                                fieldsListTemp.push(cellText.trim());
-
-                                desiredTable = tempTable;
-                                desiredTableRow = j;
-
-                                cellFound = true;
-                            } else if (tableFound == true && desiredTableRow == j) {
-                                fieldsList.push({[k]: cellText.trim()});
-                            }
-                        }
-                    }
-
-                    tableFound = false;
-                }
-
-                tempTable = null;
-            }
-        }
-
-        if (desiredTable) {
-            oDocument.SearchAndReplace({"searchString": "[RevenueLineitem dynamic table]", "replaceString": ""});
-
-            var additionalRowCounter = 0;
-
-            for (var j = 0; j < rliDataArr.length; j++) {
-
-                if (j != 0) {
-                    desiredTable.AddRow();
-                    additionalRowCounter++;
-                }
-
-                for (var k = 0; k < desiredTable.GetRow(desiredTableRow).GetCellsCount(); k++) {
-
-                    oCell = desiredTable.GetRow(desiredTableRow + additionalRowCounter).GetCell(k);
-                    cellElement = oCell.GetContent().GetElement(0);
-                    cellText = cellElement.GetText();
-
-                    if(cellText == ""){
-                        cellText = fieldsList[k][k] || "";
-                    }
-
-                    var fieldName = "";
-                    var pieces = cellText.split(".");
-                    // Greater than 1 is purposefully added, if the field name ends with dot e.g. {$fields.sales_and_services_revenuelineitems_1_c.Index}.
-                    // this check will handle
-                    if(pieces.length > 1){
-                        fieldName = pieces[2].replace("}", "");
-                        fieldName = fieldName.replace(".", "").toLowerCase();
-                    }
-
-                    var value = rliDataArr[j][fieldName];
-                    value = String(value);
-                    if(fieldName != ""){
-                        if (j == 0) {
-                            cellElement.RemoveAllElements();
-                            cellElement.AddText(value);
-                        } else {
-                            cellElement.AddText(value);
-                        }
-                    }
-                }
-            }
-        }' . PHP_EOL;
     }
 
 }

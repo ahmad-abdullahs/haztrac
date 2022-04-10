@@ -1,0 +1,156 @@
+<?php
+
+// created: 2022-04-09 02:00:55
+$dictionary['Account']['fields']['billingaddress_with_country'] = array(
+    'duplicate_merge_dom_value' => 0,
+    'labelValue' => 'Billing Address with Country',
+    'full_text_search' =>
+    array(
+        'enabled' => '0',
+        'boost' => '1',
+        'searchable' => false,
+    ),
+    'calculated' => 'true',
+    'formula' => 'concat(
+ifElse(greaterThan(strlen($billing_address_third_party_name),0),concat($billing_address_third_party_name," <br />"),""),
+ifElse(greaterThan(strlen($billing_address_street),0),concat($billing_address_street," "),""),
+ifElse(greaterThan(strlen($billing_address_city),0),concat($billing_address_city,", "),""),
+ifElse(greaterThan(strlen($billing_address_state),0),concat($billing_address_state,", "),""),
+ifElse(greaterThan(strlen($billing_address_postalcode),0),concat($billing_address_postalcode," "),""),
+$billing_address_country
+)',
+    'enforced' => 'true',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'db',
+    'name' => 'billingaddress_with_country',
+    'vname' => 'LBL_BILLINGADDRESS_WITH_COUNTRY',
+    'type' => 'varchar',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'false',
+    'duplicate_merge' => 'disabled',
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 255,
+    'size' => '20',
+);
+
+$dictionary['Account']['fields']['billingaddress_without_country'] = array(
+    'duplicate_merge_dom_value' => 0,
+    'labelValue' => 'Billing Address without Country',
+    'full_text_search' =>
+    array(
+        'enabled' => '0',
+        'boost' => '1',
+        'searchable' => false,
+    ),
+    'calculated' => 'true',
+    'formula' => 'concat(
+ifElse(greaterThan(strlen($billing_address_third_party_name),0),concat($billing_address_third_party_name," <br />"),""),
+ifElse(greaterThan(strlen($billing_address_street),0),concat($billing_address_street," "),""),
+ifElse(greaterThan(strlen($billing_address_city),0),concat($billing_address_city,", "),""),
+ifElse(greaterThan(strlen($billing_address_state),0),concat($billing_address_state,", "),""),
+ifElse(greaterThan(strlen($billing_address_postalcode),0),concat($billing_address_postalcode," "),"")
+)',
+    'enforced' => 'true',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'db',
+    'name' => 'billingaddress_without_country',
+    'vname' => 'LBL_BILLINGADDRESS_WITHOUT_COUNTRY',
+    'type' => 'varchar',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'false',
+    'duplicate_merge' => 'disabled',
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 255,
+    'size' => '20',
+);
+
+$dictionary['Account']['fields']['shippingaddress_with_country'] = array(
+    'duplicate_merge_dom_value' => 0,
+    'labelValue' => 'Shipping Address with Country',
+    'full_text_search' =>
+    array(
+        'enabled' => '0',
+        'boost' => '1',
+        'searchable' => false,
+    ),
+    'calculated' => 'true',
+    'formula' => 'concat(
+ifElse(greaterThan(strlen($shipping_address_third_party_name),0),concat($shipping_address_third_party_name," <br />"),""),
+ifElse(greaterThan(strlen($shipping_address_street),0),concat($shipping_address_street," "),""),
+ifElse(greaterThan(strlen($shipping_address_city),0),concat($shipping_address_city,", "),""),
+ifElse(greaterThan(strlen($shipping_address_state),0),concat($shipping_address_state,", "),""),
+ifElse(greaterThan(strlen($shipping_address_postalcode),0),concat($shipping_address_postalcode," "),""),
+$shipping_address_country
+)',
+    'enforced' => 'true',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'db',
+    'name' => 'shippingaddress_with_country',
+    'vname' => 'LBL_SHIPPINGADDRESS_WITH_COUNTRY',
+    'type' => 'varchar',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'false',
+    'duplicate_merge' => 'disabled',
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 255,
+    'size' => '20',
+);
+
+$dictionary['Account']['fields']['shippingaddress_without_country'] = array(
+    'duplicate_merge_dom_value' => 0,
+    'labelValue' => 'Shipping Address without Country',
+    'full_text_search' =>
+    array(
+        'enabled' => '0',
+        'boost' => '1',
+        'searchable' => false,
+    ),
+    'calculated' => 'true',
+    'formula' => 'concat(
+ifElse(greaterThan(strlen($shipping_address_third_party_name),0),concat($shipping_address_third_party_name," <br />"),""),
+ifElse(greaterThan(strlen($shipping_address_street),0),concat($shipping_address_street," "),""),
+ifElse(greaterThan(strlen($shipping_address_city),0),concat($shipping_address_city,", "),""),
+ifElse(greaterThan(strlen($shipping_address_state),0),concat($shipping_address_state,", "),""),
+ifElse(greaterThan(strlen($shipping_address_postalcode),0),concat($shipping_address_postalcode," "),"")
+)',
+    'enforced' => 'true',
+    'dependency' => '',
+    'required' => false,
+    'source' => 'db',
+    'name' => 'shippingaddress_without_country',
+    'vname' => 'LBL_SHIPPINGADDRESS_WITHOUT_COUNTRY',
+    'type' => 'varchar',
+    'massupdate' => false,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'false',
+    'duplicate_merge' => 'disabled',
+    'audited' => false,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 255,
+    'size' => '20',
+);

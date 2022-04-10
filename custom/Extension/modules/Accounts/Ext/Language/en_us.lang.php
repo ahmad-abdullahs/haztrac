@@ -73,3 +73,7 @@ $mod_strings['LBL_PLUS_CODE_VAL'] = 'Plus Code';
 $mod_strings['LBL_QUOTES_BILLTO'] = 'Quotes';
 $mod_strings['LBL_EPA_DASHLET_TITLE'] = 'EPA Company Site Details';
 $mod_strings['LBL_AC_USEPA_ID_EXTERNAL_INFO'] = 'EPA Company Site Details';
+$mod_strings['LBL_BILLINGADDRESS_WITH_COUNTRY'] = 'Billing Address with Country';
+$mod_strings['LBL_BILLINGADDRESS_WITHOUT_COUNTRY'] = 'Billing Address without Country';
+$mod_strings['LBL_SHIPPINGADDRESS_WITH_COUNTRY'] = 'Shipping Address with Country';
+$mod_strings['LBL_SHIPPINGADDRESS_WITHOUT_COUNTRY'] = 'Shipping Address without Country';

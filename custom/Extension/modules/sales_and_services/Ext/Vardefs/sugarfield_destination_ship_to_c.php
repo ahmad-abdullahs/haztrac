@@ -1,8 +1,6 @@
 <?php
 
 // created: 2019-09-08 16:42:57
-$dictionary['sales_and_services']['fields']['destination_ship_to_c']['labelValue'] = 'Ship To / TSDF';
-
 // This field tsdf_ac_usepa_id_c is added to keep the EPA ID number of TSDF for PDF Templates.
 $dictionary["sales_and_services"]["fields"]["tsdf_ac_usepa_id_c"] = array(
     'labelValue' => 'EPA ID (Ship To / TSDF)',
