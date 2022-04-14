@@ -242,7 +242,7 @@ class ViewOnlyoffice extends SugarView {
                 }
 
                 $data['index'] = $count;
-
+                
                 // Additional Info
                 array_push($additionalInfoDataArr, $data['additional_info_ack_c']);
 
@@ -383,7 +383,7 @@ if (fieldsListcellElement) {
         var eachTransporterCell = fieldsListcellElement[i];
         if (eachTransporterCell) {
             var cellTransporterText = eachTransporterCell.GetText();
-            var transporterFieldNames = cellTransporterText.match(/\{\$fields.transporter_carrier_c.[a-zA-Z0-9|.|_|$\\}]+/ig);
+            var transporterFieldNames = cellTransporterText.match(/\{\$fields.transporter_carrier_c.[a-zA-Z0-9|.|_|$\}]+/ig);
             if (transporterFieldNames) {
                 for (var j = 0; j < transporterFieldNames.length; j++) {
                     var pieces = transporterFieldNames[j].split(".");
@@ -411,9 +411,7 @@ if (fieldsListcellElement) {
 
                     cellTransporterTextString += cellTransporterTextTemp;
                 }
-                
-oParagraph.AddText("cellTransporterTextString : " + cellTransporterTextString + ".");
-oParagraph.AddLineBreak();
+
 
                 cellTransporterTextString = String(cellTransporterTextString);
                 eachTransporterCell.RemoveAllElements();
@@ -436,9 +434,11 @@ oParagraph = oDocument.GetElement(1);
 var desiredTable, tempTable;
 var fieldsList = [], fieldsListTemp = [];
 // Flag Variables
-var tableFound = false, cellFound = false;
-var desiredTableRow = -1, cellText = "";
+var tableFound = false, rowFound = false, addFillerRows = false, rowFlag = false;
+var desiredTableRow = 0, cellText = "";
 var cellElement = null, sClassType = null, oCell = null;
+var rliTableStructure = [];
+var constantRow = 0;
 
 // Loop through all the elements to find the tables
 for (var i = 0; i < oDocument.GetElementsCount(); i++) {
@@ -451,27 +451,49 @@ for (var i = 0; i < oDocument.GetElementsCount(); i++) {
 
         if (tempTable.GetRowsCount() > 0) {
             for (var j = 0; j < tempTable.GetRowsCount(); j++) {
+
+                if (tableFound) {
+                    if (addFillerRows) {
+                        for (var x = 0; x < j; x++) {
+                            rliTableStructure.push({"column": []});
+                        }
+                        addFillerRows = false;
+                    }
+                    rliTableStructure.push({"column": []});
+                }
+
                 for (var k = 0; k < tempTable.GetRow(j).GetCellsCount(); k++) {
+
+                    if (tableFound) {
+                        rliTableStructure[j]["column"].push([]);
+                    }
+
                     oCell = tempTable.GetRow(j).GetCell(k);
+                    // Here its for the header [RevenueLineitem dynamic table] text finding 
                     cellElement = oCell.GetContent().GetElement(0);
                     cellText = cellElement.GetText();
 
                     if (cellText.includes("[RevenueLineitem dynamic table]") && tableFound == false) {
                         // This is the concerned table
                         tableFound = true;
+                        addFillerRows = true;
+                        rliTableStructure = [];
                         break;
                     }
 
-                    if (cellText.includes("{$fields.sales_and_services_revenuelineitems_1_c.") && tableFound == true) {
-                        fieldsList.push({[k]: cellText.trim()});
-                        fieldsListTemp.push(cellText.trim());
+                    for (var l = 0; l < oCell.GetContent().GetElementsCount(); l++) {
+                        cellElement = oCell.GetContent().GetElement(l);
+                        cellText = cellElement.GetText();
 
-                        desiredTable = tempTable;
-                        desiredTableRow = j;
-
-                        cellFound = true;
-                    } else if (tableFound == true && desiredTableRow == j) {
-                        fieldsList.push({[k]: cellText.trim()});
+                        var __key = "element" + l;
+                        if (tableFound) {
+                            desiredTable = tempTable;
+                            rliTableStructure[j]["column"][k][__key] = cellElement;
+                            if (cellText.includes("{$fields.sales_and_services_revenuelineitems_1_c.") && rowFound == false) {
+                                desiredTableRow = j;
+                                rowFound = true;
+                            }
+                        }
                     }
                 }
             }
@@ -485,46 +507,66 @@ for (var i = 0; i < oDocument.GetElementsCount(); i++) {
 
 if (desiredTable) {
     oDocument.SearchAndReplace({"searchString": "[RevenueLineitem dynamic table]", "replaceString": ""});
+    var rowCount = 0;
 
-    var additionalRowCounter = 0;
+    for (let row = desiredTableRow; row < rliTableStructure.length; row++) {
 
-    for (var j = 0; j < rliDataArr.length; j++) {
+        if (rliDataArr[rowCount] != undefined) {
+            for (let col = 0; col < rliTableStructure[row]["column"].length; col++) {
 
-        if (j != 0) {
-            desiredTable.AddRow();
-            additionalRowCounter++;
-        }
-
-        for (var k = 0; k < desiredTable.GetRow(desiredTableRow).GetCellsCount(); k++) {
-
-            oCell = desiredTable.GetRow(desiredTableRow + additionalRowCounter).GetCell(k);
-            cellElement = oCell.GetContent().GetElement(0);
-            cellText = cellElement.GetText();
-
-            if (cellText == "") {
-                cellText = fieldsList[k][k] || "";
-            }
-
-            var fieldName = "";
-            var pieces = cellText.split(".");
-            // Greater than 1 is purposefully added, if the field name ends with dot e.g. {$fields.sales_and_services_revenuelineitems_1_c.Index}.
-            // this check will handle
-            if (pieces.length > 1) {
-                fieldName = pieces[2].replace("}", "");
-                fieldName = fieldName.replace(".", "").toLowerCase();
-            }
-
-            var value = rliDataArr[j][fieldName];
-            value = String(value);
-            if (fieldName != "") {
-                if (j == 0) {
-                    cellElement.RemoveAllElements();
-                    cellElement.AddText(value);
-                } else {
-                    cellElement.AddText(value);
+                for (const cellindex in rliTableStructure[row]["column"][col]) {
+                    if (rliTableStructure[row]["column"][col] != undefined) {
+                        var text = rliTableStructure[row]["column"][col][cellindex].GetText();
+                        var rliFieldNames = text.match(/\{\$fields.sales_and_services_revenuelineitems_1_c.[a-zA-Z0-9|.|_|$\}]+/ig);
+                        if (rliFieldNames) {
+                            for (var j = 0; j < rliFieldNames.length; j++) {
+                                var pieces = rliFieldNames[j].split(".");
+                                // Greater than 1 is purposefully added, if the field name ends with dot e.g. {$fields.sales_and_services_revenuelineitems_1_c.Index}.
+                                // this check will handle
+                                if (pieces.length > 1) {
+                                    fieldName = pieces[2].replace("}", "");
+                                    fieldName = fieldName.replace(".", "").toLowerCase();
+                                    if (fieldName != "") {
+                                        if (rliDataArr[rowCount] != undefined) {
+                                            var value = rliDataArr[rowCount][fieldName] || "";
+                                            value = String(value);
+                                            var rliEle = rliTableStructure[row]["column"][col][cellindex];
+                                            var oSearch = rliEle.Search("{$fields.sales_and_services_revenuelineitems_1_c." + fieldName + "}");
+                                            if(oSearch[0]) {
+                                                oSearch[0].Select();
+                                                var arr = [value];
+                                                Api.ReplaceTextSmart(arr);
+                                            }
+//                                            var value = rliDataArr[rowCount][fieldName] || "";
+//                                            value = String(value);
+//                                            var rliEle = rliTableStructure[row]["column"][col][cellindex];
+//                                            oRange1 = rliEle.GetRange();
+//                                            oRange1.Select();
+//                                            arr = [value];
+//                                            Api.ReplaceTextSmart(arr);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
+        } else {
+            // This is technial, we happ to keep the constantRow static, because everytime a row is deleted from the document
+            // Number of rows in table reduce
+            if (rowFlag == false) {
+                constantRow = row;
+                rowFlag = true;
+            }
+            var rowToRemove = desiredTable.GetRow(constantRow);
+            if (rowToRemove) {
+                var cello = rowToRemove.GetCell(0);
+                desiredTable.RemoveRow(cello);
+            }
         }
+
+        rowCount++;
     }
 }' . PHP_EOL;
     }
@@ -606,7 +648,7 @@ if (desiredTable) {
 
     function getCleanString($param, $flag = false) {
         $dataStr = from_html(html_entity_decode(htmlspecialchars_decode($param)));
-
+        
         // Specially added for Transfer / Carrier address, need to fix this \n problem
         if ($flag) {
             $dataStr = str_replace(array("\r", "\n"), ' ', $dataStr);
