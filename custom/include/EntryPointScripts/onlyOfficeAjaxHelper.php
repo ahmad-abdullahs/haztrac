@@ -60,6 +60,16 @@ class onlyOfficeAjaxHelper {
 
         if ($_GET['base_module'] == 'sales_and_services') {
             $this->getRevenueLineItemFields();
+
+            $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_revenuelineitemsGroupFields'] = "Revenue Line Items (Group Fields)";
+            $this->fieldForLinks['pdfManagerRelateLink_revenuelineitemsGroupFields'] = array(
+                'customer_certificates' => 'Customer Certificates',
+                'transporter_certificates' => 'Transporter Certificates',
+                'consignee_certificates' => 'Consignee Certificates',
+                'shipper_certificates' => 'Shipper Certificates',
+                'additional_info_ack_c' => 'Additional Info / Acknowledgement',
+            );
+
             $this->getTransporterFields();
             $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_sales_and_services_accounts_tsdf'] = "Receiving Facility / TSDF (Account)";
         }
