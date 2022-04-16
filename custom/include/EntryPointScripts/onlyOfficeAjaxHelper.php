@@ -57,6 +57,24 @@ class onlyOfficeAjaxHelper {
                 }
             }
         }
+
+        if ($_GET['base_module'] == 'sales_and_services') {
+            $this->getRevenueLineItemFields();
+            $this->getTransporterFields();
+            $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_sales_and_services_accounts_tsdf'] = "Receiving Facility / TSDF (Account)";
+        }
+    }
+
+    public function getRevenueLineItemFields() {
+        $revenueLineItemFields = PdfManagerHelper::getFields("RevenueLineItems", true);
+        $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_sales_and_services_revenuelineitems_1_c'] = "Revenue Line Items (RevenueLineItem)";
+        $this->fieldForLinks['pdfManagerRelateLink_sales_and_services_revenuelineitems_1_c'] = $revenueLineItemFields['Fields'];
+    }
+
+    public function getTransporterFields() {
+        $transporterCarrierFields = PdfManagerHelper::getFields("Accounts", true);
+        $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_transporter_carrier_c'] = "Transporters / Carriers (Account)";
+        $this->fieldForLinks['pdfManagerRelateLink_transporter_carrier_c'] = $transporterCarrierFields['Fields'];
     }
 
     public function returnData() {

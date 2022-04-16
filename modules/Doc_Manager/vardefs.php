@@ -66,7 +66,7 @@ $dictionary['Doc_Manager'] = array(
         'doc_template' =>
         array(
             'default' => '',
-            'height' => '700',
+            'height' => '720',
             'required' => false,
             'source' => 'db',
             'name' => 'doc_template',

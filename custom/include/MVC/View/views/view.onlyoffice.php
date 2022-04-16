@@ -13,7 +13,7 @@ class ViewOnlyoffice extends SugarView {
         'phone_office',
         'phone_alternate',
     );
-    public $speialAddressFields = array(
+    public $specialAddressFields = array(
         'billingaddress_with_country',
         'billingaddress_without_country',
         'shippingaddress_with_country',
@@ -157,7 +157,7 @@ class ViewOnlyoffice extends SugarView {
                 $data = PdfManagerHelper::parseBeanFields($transporterBean, false);
 
                 foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
-                    if (in_array($key, $this->speialAddressFields)) {
+                    if (in_array($key, $this->specialAddressFields)) {
                         $data[$key] = $this->getCleanString($data[$key], true);
                     } else {
                         $data[$key] = $this->getCleanString($data[$key]);
@@ -242,7 +242,7 @@ class ViewOnlyoffice extends SugarView {
                 }
 
                 $data['index'] = $count;
-                
+
                 // Additional Info
                 array_push($additionalInfoDataArr, $data['additional_info_ack_c']);
 
@@ -553,7 +553,7 @@ if (desiredTable) {
                 }
             }
         } else {
-            // This is technial, we happ to keep the constantRow static, because everytime a row is deleted from the document
+            // This is technial, we have to keep the constantRow static, because everytime a row is deleted from the document
             // Number of rows in table reduce
             if (rowFlag == false) {
                 constantRow = row;
@@ -648,7 +648,7 @@ if (desiredTable) {
 
     function getCleanString($param, $flag = false) {
         $dataStr = from_html(html_entity_decode(htmlspecialchars_decode($param)));
-        
+
         // Specially added for Transfer / Carrier address, need to fix this \n problem
         if ($flag) {
             $dataStr = str_replace(array("\r", "\n"), ' ', $dataStr);
