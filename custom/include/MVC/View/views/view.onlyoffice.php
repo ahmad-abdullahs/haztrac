@@ -103,12 +103,7 @@ class ViewOnlyoffice extends SugarView {
                     . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
 
             // Transporter / Carrier
-            $returnData = $this->getTransporterData();
-            $transporterDataArr = $returnData['transporters'];
-
-            $encodedDataArr = json_encode($transporterDataArr);
-            $this->script .= "var transporterData = {$encodedDataArr};" . PHP_EOL;
-            $this->script .= $this->getTransporterScript();
+            $this->getTransporterData();
         }
 
         $saveFileName = "{$sugar_config['onlyoffice_upload_dir1']}/parsed_{$_REQUEST['onlyoffice_template_id']}.docx";
@@ -125,6 +120,9 @@ class ViewOnlyoffice extends SugarView {
 
     function getTransporterData() {
         // For json field
+        $data = array();
+        $fieldsArrList = array();
+
         if ($this->bean->module_dir == 'sales_and_services') {
             // Data List
             $salesAndServiceTransporterBeanList = array();
@@ -154,6 +152,10 @@ class ViewOnlyoffice extends SugarView {
             }
 
             foreach ($salesAndServiceTransporterBeanList as $transporterBean) {
+                if ($count > 1) {
+                    continue;
+                }
+
                 $data = PdfManagerHelper::parseBeanFields($transporterBean, false);
 
                 foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
@@ -170,14 +172,15 @@ class ViewOnlyoffice extends SugarView {
 
                 $data['index'] = $count;
 
-                array_push($transporterDataArr, $data);
                 $count ++;
             }
         }
 
-        return array(
-            'transporters' => $transporterDataArr,
-        );
+        foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
+            $dataStr = $this->getCleanString($data[$key]);
+            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.transporter_carrier_c.' . $key . '}", '
+                    . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+        }
     }
 
     function getRevenueLineItemsData() {
