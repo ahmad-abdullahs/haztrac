@@ -121,6 +121,7 @@ class ViewOnlyoffice extends SugarView {
     function getTransporterData() {
         // For json field
         $data = array();
+        $transporterDataArr = array();
         $fieldsArrList = array();
 
         if ($this->bean->module_dir == 'sales_and_services') {
@@ -152,10 +153,6 @@ class ViewOnlyoffice extends SugarView {
             }
 
             foreach ($salesAndServiceTransporterBeanList as $transporterBean) {
-                if ($count > 1) {
-                    continue;
-                }
-
                 $data = PdfManagerHelper::parseBeanFields($transporterBean, false);
 
                 foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
@@ -172,14 +169,26 @@ class ViewOnlyoffice extends SugarView {
 
                 $data['index'] = $count;
 
+                array_push($transporterDataArr, $data);
+
                 $count ++;
             }
         }
 
-        foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
-            $dataStr = $this->getCleanString($data[$key]);
-            $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.transporter_carrier_c.' . $key . '}", '
-                    . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+        $iterator = 0;
+        while ($iterator < 4) {
+            foreach ($fieldsArrList['fieldsArr']['Fields'] as $key => $value) {
+                // If we have the transporter $iterator [1, 2, 3, 4] exist then get the data otherwise set it empty.
+                if (is_array($transporterDataArr[$iterator])) {
+                    $dataStr = $this->getCleanString($transporterDataArr[$iterator][$key]);
+                } else {
+                    $dataStr = '';
+                }
+
+                $this->script .= 'oDocument.SearchAndReplace({"searchString": "{$fields.transporter_carrier_c' . $iterator . '.' . $key . '}", '
+                        . '"replaceString": "' . $dataStr . '"});' . PHP_EOL;
+            }
+            $iterator++;
         }
     }
 

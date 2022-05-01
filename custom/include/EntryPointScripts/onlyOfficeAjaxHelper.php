@@ -70,7 +70,12 @@ class onlyOfficeAjaxHelper {
                 'additional_info_ack_c' => 'Additional Info / Acknowledgement',
             );
 
-            $this->getTransporterFields();
+            $iterator = 0;
+            while ($iterator < 4) {
+                $this->getTransporterFields($iterator);
+                $iterator++;
+            }
+
             $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_sales_and_services_accounts_tsdf'] = "Receiving Facility / TSDF (Account)";
         }
     }
@@ -81,10 +86,10 @@ class onlyOfficeAjaxHelper {
         $this->fieldForLinks['pdfManagerRelateLink_sales_and_services_revenuelineitems_1_c'] = $revenueLineItemFields['Fields'];
     }
 
-    public function getTransporterFields() {
+    public function getTransporterFields($iterator) {
         $transporterCarrierFields = PdfManagerHelper::getFields("Accounts", true);
-        $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_transporter_carrier_c'] = "Transporters / Carriers (Account)";
-        $this->fieldForLinks['pdfManagerRelateLink_transporter_carrier_c'] = $transporterCarrierFields['Fields'];
+        $this->fieldsForSelectedModule['Links']['pdfManagerRelateLink_transporter_carrier_c' . $iterator] = "Transporters / Carriers [" . ($iterator + 1) . "] (Account)";
+        $this->fieldForLinks['pdfManagerRelateLink_transporter_carrier_c' . $iterator] = $transporterCarrierFields['Fields'];
     }
 
     public function returnData() {
