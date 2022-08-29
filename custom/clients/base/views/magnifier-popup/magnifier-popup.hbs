@@ -12,8 +12,13 @@
 --}}
 <div class="modal hide magnifier-popup">
     <div class="modal-header">
+{{!--
+        We commented this cross icon, to close the magnifier-popup view, because it just close the popup
+        but not destroy the view. Because of that, if we have multiple textareas field, it picks one field 
+        and keep showing that field in each popup.
         <a class="close" data-dismiss="modal"><i class="fa fa-times"></i></a>
-        <h3><i class="fa fa-edit"></i>  {{str "LBL_UPDATE_DESCRIPTION"}}</h3>
+--}}
+        <h3><i class="fa fa-edit"></i>  {{str "LBL_UPDATE_DESCRIPTION_TEXT"}}</h3>
     </div>
     <div class="modal-body">
         <form class="form-horizontal" enctype="multipart/form-data" method="POST">

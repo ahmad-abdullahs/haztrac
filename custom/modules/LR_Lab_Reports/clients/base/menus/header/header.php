@@ -28,6 +28,13 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'icon' => 'fa-plus',
     ),
     array(
+        'route' => "#Test_Method/create",
+        'label' => 'LNK_NEW_RECORD_TEST_METHOD',
+        'acl_action' => 'create',
+        'acl_module' => 'Test_Method',
+        'icon' => 'fa-plus',
+    ),
+    array(
         'route' => "#$moduleName",
         'label' => 'LNK_LIST',
         'acl_action' => 'list',
@@ -39,6 +46,13 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_LIST_LR_LAB_REPORTS_TEMPLATES',
         'acl_action' => 'list',
         'acl_module' => 'LR_Lab_Reports_Templates',
+        'icon' => 'fa-bars',
+    ),
+    array(
+        'route' => "#Test_Method",
+        'label' => 'LNK_LIST_TEST_METHOD',
+        'acl_action' => 'list',
+        'acl_module' => 'Test_Method',
         'icon' => 'fa-bars',
     ),
     array(

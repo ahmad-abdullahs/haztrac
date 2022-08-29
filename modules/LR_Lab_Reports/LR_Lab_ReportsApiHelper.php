@@ -74,6 +74,24 @@ SQL;
             }
         }
 
+        if ($options["args"]["module"] == "LR_Lab_Reports") {
+            $ret['labTestData'] = array();
+            $sql = "SELECT
+                    m.id as 'id',
+                    m.name as 'name',
+                    m.method_color as 'method_color'
+                FROM
+                    test_method m
+                WHERE
+                    m.deleted = '0'";
+
+            global $db, $sugar_config;
+            $res = $db->query($sql);
+            while ($row = $db->fetchByAssoc($res)) {
+                $ret['labTestData'][$row['id']] = $row;
+            }
+        }
+
         return $ret;
     }
 

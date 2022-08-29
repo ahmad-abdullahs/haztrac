@@ -43,6 +43,14 @@
             }, this);
         }
 
+        // Code is added for Test Methods to show them in the Lab Test Dashlet on LR_Lab_Reports Record View
+        var labTestData = model.get("labTestData");
+        _.each(model.get("lr_lab_reports_test_method"), function (id) {
+            if (labTestData[id]) {
+                this.tests.push({'text': labTestData[id]['name'], 'color': labTestData[id]['method_color']});
+            }
+        }, this);
+
         this._super('render');
     }
 })

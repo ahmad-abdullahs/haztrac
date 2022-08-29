@@ -100,3 +100,19 @@ function getLabReportTemplates() {
     }
     return $allLabReportTemplates;
 }
+
+function getLabReportTestMethods() {
+    $query = new SugarQuery();
+    $query->from(BeanFactory::getBean("Test_Method"), array(
+        'team_security' => false
+    ));
+    $query->select(array('id', 'name'));
+    $query->where()->equals('deleted', 0);
+    $query->orderBy('name', 'ASC');
+    $result = $query->execute();
+    $allLabTestMethods = array('' => '');
+    foreach ($result as $row) {
+        $allLabTestMethods[$row['id']] = $row['name'];
+    }
+    return $allLabTestMethods;
+}

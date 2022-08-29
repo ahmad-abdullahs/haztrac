@@ -413,6 +413,8 @@ $viewdefs['LR_Lab_Reports'] = array(
                             ),
                             1 =>
                             array(
+                                'name' => 'lr_lab_reports_test_method',
+                                'type' => 'multienum-relate-test-method',
                             ),
                             2 =>
                             array(
