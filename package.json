@@ -5,7 +5,7 @@
     "@sugarcrm/thorn": "0.6.0",
     "@sugarcrm/ventana": "1.1.0",
     "@types/node": "6.0.51",
-    "async": "0.9.0",
+    "async": "2.6.4",
     "bluebird": "3.4.1",
     "co-mocha": "^1.1.3",
     "colors": "0.6.2",
